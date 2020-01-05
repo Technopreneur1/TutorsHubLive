@@ -1,0 +1,50 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css?family=Gupter&display=swap');
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+
+@import 'partials/core/container.sass';
+@import 'partials/home/index.sass';
+@import 'partials/home/userhome.sass';
+@import 'partials/home/menu.sass';
+@import 'partials/home/freshMenu.sass';
+@import 'partials/forms/register.sass';
+@import 'partials/forms/createAd.sass';
+@import 'partials/forms/editProfile.sass';
+@import 'partials/ad/index.sass';
+@import 'partials/user/profile.sass';
+@import 'partials/user/favorites.sass';
+@import 'partials/user/sessions.sass';
+@import 'partials/search/tutors.sass';
+@import 'partials/core/components.sass';
+@import 'partials/search/ads.sass';
+@import 'partials/chat/messages.sass';
+
+
+*{
+    font-family: 'Gupter', serif;    ;
+}
+
+@-webkit-keyframes slide {
+    100% { left: 0; }
+}
+
+@keyframes slide {
+    100% { left: 0; }
+}
+
+footer{
+    background: #141414;
+    color: #fff;
+    padding: 15px 10px;
+    text-align: center;
+}
+
+body{
+    background: #fff;
+}
