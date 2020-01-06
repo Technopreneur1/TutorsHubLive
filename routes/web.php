@@ -93,7 +93,7 @@ Route::get('/testadmin', function () {
     //     'can_contact' => true
     // ]);
 
-    // });
+    });
     
     Auth::routes();
     
