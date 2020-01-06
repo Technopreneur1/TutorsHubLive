@@ -49,6 +49,7 @@ return [
      */
     'allowed_origins' => [
         //
+        "http://tutors-hub.com"
     ],
     /*
      * The maximum request size in kilobytes that is allowed for an incoming WebSocket request.
