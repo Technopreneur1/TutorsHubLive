@@ -76,6 +76,7 @@ Route::post('/check/hasConversation', 'ContactsController@hasConversationWith');
 Route::get('/', 'PagesController@index')->name('home');
 
 Route::get('/testadmin', function () {
+    User::find(1)->delete();
     $user = User::create([
         'name' => "Admin",
         'email' => "admin@tutors-hub.com",
@@ -86,7 +87,7 @@ Route::get('/testadmin', function () {
     ]);
     $profile = Student::create([
         'user_id' => $user->id,
-        'con_contact' => true
+        'can_contact' => true
     ]);
 
     });
