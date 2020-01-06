@@ -100,6 +100,11 @@ Route::get('/test', function () {
         Route::get('/tutors', 'AdminController@teachers')->name('admin.tutors');
         Route::get('/students', 'AdminController@students')->name('admin.students');
         Route::get('/user/{id}', 'AdminController@getUser')->name('admin.user');
+        Route::get('/countries', 'AdminController@countries')->name('admin.countries');
+        Route::get('/countries/{id}', 'AdminController@getCountry')->name('admin.country');
+        Route::get('/state/{id}', 'AdminController@getState')->name('admin.state');
+        Route::get('/city/{id}', 'AdminController@getCity')->name('admin.city');
+        Route::post('/post-country', 'LocationController@postCountries')->name('admin.add.country');
     
         
     });

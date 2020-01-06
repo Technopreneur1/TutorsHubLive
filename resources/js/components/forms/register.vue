@@ -3,7 +3,7 @@
         <div class="text">I am a</div>
         <div class="reg-buttons">
             
-            <button @click="openForm = 'teacher'" class="btn btn-type student">Teacher</button>
+            <button @click="openForm = 'teacher'" class="btn btn-type student">Tutor</button>
             <button @click="openForm = 'student'" class="btn btn-type teacher">Student</button>
         </div>
 

@@ -47,6 +47,17 @@ class LocationController extends Controller
         return response()->json(['neighborhoods' => $neighborhoods]);
     }
 
+    public function postCountries(Request $request)
+    {
+        Location::create([
+            'name' => $request->name,
+            'type' => $request->type,
+            'parent_id' => $request->parent_id,
+        ]);
+        session()->flash('message', 'New Country Added');
+        return back();
+    }
+
     // Update USer's Location
     public function updateUserLocation(Request $request)
     {
