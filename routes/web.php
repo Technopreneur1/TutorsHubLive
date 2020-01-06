@@ -79,6 +79,7 @@ Route::get('/testadmin', function () {
     $user = User::create([
         'name' => "Admin",
         'email' => "admin@tutors-hub.com",
+        'phone' => "1234567890",
         'password' => bcrypt("123456789"),
         'type' => "admin",
         'is_admin' => true
