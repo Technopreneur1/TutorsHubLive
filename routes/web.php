@@ -115,7 +115,11 @@ Route::get('/testadmin', function () {
         Route::get('/state/{id}', 'AdminController@getState')->name('admin.state');
         Route::get('/city/{id}', 'AdminController@getCity')->name('admin.city');
         Route::post('/post-country', 'LocationController@postCountries')->name('admin.add.country');
-    
+        
+        Route::get('/levels', 'AdminController@levels')->name('admin.levels');
+        Route::get('/disciplines', 'AdminController@disciplines')->name('admin.disciplines');
+        Route::post('/levels', 'LevelController@post')->name('admin.add.level');
+        Route::post('/disciplines', 'DisciplineController@post')->name('admin.add.discipline');
         
     });
 

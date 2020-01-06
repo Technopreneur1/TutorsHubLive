@@ -3,14 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Level;
 use App\Earning;
 use App\Location;
+use App\Discipline;
 use Illuminate\Http\Request;
 // use App\Http\Controllers\TeacherController;
 
 class AdminController extends Controller
 {
     //Countries
+    public function levels()
+    {
+        $levels = Level::orderBy('name', 'asc')->get();
+        return view('admin.pages.levels.index', ['levels' => $levels]);
+    }
+    
+    public function disciplines()
+    {
+        $disciplines = Discipline::orderBy('name', 'asc')->get();
+        return view('admin.pages.disciplines.index', ['disciplines' => $disciplines]);
+    }
+    
     public function countries()
     {
         $countries = Location::where('type', 'country')->get();

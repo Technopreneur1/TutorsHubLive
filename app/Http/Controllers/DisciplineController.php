@@ -13,4 +13,11 @@ class DisciplineController extends Controller
         $disciplines = Discipline::orderBy('name', 'asc')->get();
         return response()->json(['disciplines' => $disciplines]);
     }
+
+    public function post(Request $request)
+    {
+        Discipline::create(['name' => $request->name]);
+        session()->flash('message', 'New Discipline Added');
+        return back();
+    }
 }

@@ -13,4 +13,11 @@ class LevelController extends Controller
         $levels = Level::orderBy('name', 'asc')->get();
         return response()->json(['levels' => $levels]);
     }
+
+    public function post(Request $request)
+    {
+        Level::create(['name' => $request->name]);
+        session()->flash('message', 'New Level Added');
+        return back();
+    }
 }

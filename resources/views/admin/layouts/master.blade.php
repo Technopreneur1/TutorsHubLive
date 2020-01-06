@@ -59,6 +59,8 @@
         <li class="{{{ (Request::is('adminpanel/tutors') ? 'active' : '') }}}"><a href="{{route('admin.tutors')}}"><i class="fa fa-copy"></i> <span>Tutors</span></a></li>
         <li class="{{{ (Request::is('adminpanel/students') ? 'active' : '') }}}"><a href="{{route('admin.students')}}"><i class="fa fa-copy"></i> <span>Students</span></a></li>
         <li class="{{{ (Request::is('adminpanel/countries') ? 'active' : '') }}}"><a href="{{route('admin.countries')}}"><i class="fa fa-copy"></i> <span>Locations</span></a></li>
+        <li class="{{{ (Request::is('adminpanel/disciplines') ? 'active' : '') }}}"><a href="{{route('admin.disciplines')}}"><i class="fa fa-copy"></i> <span>Disciplines</span></a></li>
+        <li class="{{{ (Request::is('adminpanel/levels') ? 'active' : '') }}}"><a href="{{route('admin.levels')}}"><i class="fa fa-copy"></i> <span>Levels</span></a></li>
         {{-- <li {{{ (Request::is('adminpanel/topics') ? 'active' : '') }}}"><a href="{{route('topics')}}"><i class="fa fa-comments"></i> <span>Teachers</span></a></li>
         <li class="treeview  {{{ (Request::is('adminpanel/insights') ? 'active' : '') }}}">
           <a href="#">
