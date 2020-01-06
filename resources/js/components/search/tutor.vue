@@ -2,7 +2,7 @@
     <div class="result">
         <a :href="url+ '/user/' +tutor.id" class="teacher">
             <div class="avatar">
-                <img :src="url + '/img/male.jpg'" alt="">
+                <img :src="avatar(tutor)" alt="">
             </div>
             <div class="data">
                 <div class="info">
@@ -25,7 +25,21 @@
                 
            }
         },
+        
         methods: {
+            avatar(user)
+            {
+                if(user.avatar){
+                    return this.url + '/storage/images/' + user.avatar
+                }else{
+                if(user.gender)
+                {
+                    return this.url + '/img/' + user.gender + '.jpg'
+                }else{
+                    return this.url + '/img/male.jpg'
+                }
+                }
+            },
            contact(id)
            {
                 axios.post(this.url +'/check/hasConversation', {

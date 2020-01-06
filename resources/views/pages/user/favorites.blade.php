@@ -7,7 +7,6 @@
     <div class="favoritesPage" id="app">
         <div class="title">Saved Profiles</div>
         <favorites url="{{route('home')}}" :favorites="{{auth()->user()->favorites}}"></favorites>
-        
     </div>
     
 @endsection

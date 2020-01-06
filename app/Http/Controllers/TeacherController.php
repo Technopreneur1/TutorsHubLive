@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class TeacherController extends Controller
 {
 
+    
 
     public function teacherProfile($id)
     {
@@ -44,31 +45,35 @@ class TeacherController extends Controller
         if($request['neighborhood'])
         {
             $tutors = User::with(['city', 'state', 'neighborhood', 'country'])
-                ->where('type', 'teacher')
                 ->where('neighborhood_id', $request['neighborhood'])
+                ->where('type', 'teacher')
                 ->paginate(30);
         }
         else if($request['city'])
         {
             $tutors = User::with(['city', 'state', 'neighborhood', 'country'])
                 ->where('city_id', $request['city'])
+                ->where('type', 'teacher')
                 ->paginate(30);
         }
         else if($request['state'])
         {
             $tutors = User::with(['city', 'state', 'neighborhood', 'country'])
                 ->where('state_id', $request['state'])
+                ->where('type', 'teacher')
                 ->paginate(30);
         }
         else if($request['country'])
         {
             $tutors = User::with(['city', 'state', 'neighborhood', 'country'])
                 ->where('country_id', $request['country'])
+                ->where('type', 'teacher')
                 ->paginate(30);
         }
         else {
             $tutors = User::with(['city', 'state', 'neighborhood', 'country'])
                 ->where('neighborhood_id', auth()->user()->neighborhood_id)
+                ->where('type', 'teacher')
                 ->paginate(30);
         }
         return response()->json(['tutors' => $tutors]);

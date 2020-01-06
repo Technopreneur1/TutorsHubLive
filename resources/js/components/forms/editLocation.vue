@@ -29,11 +29,11 @@
             <label for="">Neighborhood</label>
             <select v-model="neighborhood" id="">
                 <option value="" disabled>Neighborhood</option>
-                <option v-for="neighborhood in neighborhoods" :key="neighborhood.id" :value="neighborhood.id">{{neighborhood.name}}</option>
-            </select>
+                <option v-for="neighborhood in neighborhoods" :key="neighborhood.id" :value="neighborhood.id" >{{neighborhood.name}}</option>
+            </select> 
         </div>
         <div class="input">
-            <button @click="update()" class="btn btn-update">Update</button>
+            <button @click="update()" class="btn btn-update" :disabled="!isReady">Update</button>
         </div>
     </div>
 </template>
@@ -49,13 +49,25 @@
                 cities: [],
                 neighborhoods: [],
 
-                country: this.user.country.id,
-                state: this.user.state.id,
-                city: this.user.city.id,
-                neighborhood: this.user.neighborhood_id,
+                country: '',
+                state: '',
+                city: '',
+                neighborhood: '',
 
                 books: []
            }
+        },
+        computed:
+        {
+            isReady()
+            {
+                if(this.state && this.country && this.city && this.neighborhood)
+                {
+                    return true
+                }else{
+                    return false
+                }
+            }
         },
         methods: {
             update()
@@ -125,6 +137,9 @@
                 this.states = []
                 this.cities = []
                 this.neighborhoods = []
+                this.state = ''
+                this.city = ''
+                this.neighborhood = ''
                 if(this.country)
                 {
                     this.getStates()
@@ -134,6 +149,8 @@
             {
                 this.cities = []
                 this.neighborhoods = []
+                this.city = ''
+                this.neighborhood = ''
                 if(this.state)
                 {
                     this.getCities()
@@ -142,6 +159,7 @@
             citySelected()
             {
                 this.neighborhoods = []
+                this.neighborhood = ''
                 if(this.city)
                 {
                     this.getNeighborhoods()
@@ -151,9 +169,9 @@
         mounted()
         {
             this.getCountries()
-            this.getStates()
-            this.getCities()
-            this.getNeighborhoods()
+            // this.getStates()
+            // this.getCities()
+            // this.getNeighborhoods()
         }
     }
 </script>

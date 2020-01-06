@@ -17,10 +17,12 @@ Route::get('/create/ad', 'AdController@create')->name('createAd');
 // Route::get('/find', 'TeacherController@find')->name('find');
 Route::get('/messages', 'PagesController@messages')->name('messages')->middleware('auth');
 
-Route::get('/profile', 'UserController@profile')->name('profile');
+Route::get('/profile', 'UserController@profile')->name('profile')->middleware('auth');
 Route::get('/my-ads', 'AdController@myAds')->name('myAds')->middleware('auth');
 Route::get('/favorites', 'FavoriteController@index')->name('favorites');
 Route::get('/sessions', 'SessionController@index')->name('sessions');
+
+Route::get('/payments', 'PaymentController@index')->name('payments')->middleware('auth');
 
 Route::get('/user/{id}', 'UserController@userProfile')->name('userProfile');
 
@@ -71,21 +73,33 @@ Route::post('/check/hasConversation', 'ContactsController@hasConversationWith');
 Route::get('/', 'PagesController@index')->name('home');
 Route::get('/test', function () {
     $location = App\Location::find(1)->posts()->get();
-
+    
     dd($location);
     // dd($post->location->parent->parent->parent);
     // $location = $post->location;
     // // dd($location);
     // while($location){
-    //     echo $location->name . "<br>";
-    //     $location = $location->parent;
-    // }
-    // echo "ok";
-});
-
-Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');
-
-
-
+        //     echo $location->name . "<br>";
+        //     $location = $location->parent;
+        // }
+        // echo "ok";
+    });
+    
+    Auth::routes();
+    
+    // Route::get('/home', 'HomeController@index')->name('home');
+    
+    
+    
+    
+    // Route::get('/adminpanel', 'AdminController@adminpanel')->name('adminpanel');
+    
+    Route::prefix('adminpanel')->middleware(['admin'])->group(function () {
+    
+        Route::get('/', 'AdminController@adminpanel')->name('adminpanel');
+        Route::get('/tutors', 'AdminController@teachers')->name('admin.tutors');
+        Route::get('/students', 'AdminController@students')->name('admin.students');
+        Route::get('/user/{id}', 'AdminController@getUser')->name('admin.user');
+    
+        
+    });

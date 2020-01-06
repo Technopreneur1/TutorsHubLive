@@ -1,0 +1,65 @@
+.payments-page
+    margin-top: $nav-height
+    padding: 50px 0
+    min-height: calc( 100vh - 55px)
+    .title
+        font-size: 30px
+        font-weight: bold
+        color: $blue
+        span
+            font-size: 16px
+            background: #e35934
+            padding: 4px 15px
+            border-radius: 18px
+            color: #fff
+    .table
+        background: #e4f3e4
+    .payment-info-box
+        margin-bottom: 30px
+        font-size: 16px
+        background: #e4f3e4
+        padding: 10px
+
+@media screen and ( max-width: 768px )
+    .payments-page
+        .earnings-row
+            display: flex
+            margin-bottom: 40px
+            flex-wrap: wrap
+            .ecol
+                background: #e4f3e4
+                width: 50%
+                text-align: center
+                padding: 10px 0
+                
+                .cdata
+                    padding: 3px 15px
+                .key
+                    font-size: 15px
+                .value
+                    font-size: 22px
+                    font-weight: bold
+
+@media screen and ( min-width: 769px )
+    .payments-page
+        .earnings-row
+            display: flex
+            background: #e4f3e4
+            justify-content: space-between
+            margin-bottom: 40px
+            .ecol
+                width: 25%
+                text-align: center
+                padding: 10px 0
+                
+                .cdata
+                    border-right: 1px solid #00000033
+                    padding: 3px 15px
+                .key
+                    font-size: 16px
+                .value
+                    font-size: 22px
+                    font-weight: bold
+                &:last-child
+                    .cdata
+                        border-right: none

@@ -1,7 +1,8 @@
 <template>
     <div class="reg-form">
+        <full-loader v-if="loading" ></full-loader>
         <span @click="closeForm()" class="btn-cancel"><i class="fas fa-long-arrow-alt-left"></i></span>
-        <div class="full-container" >
+        <div v-if="!hasRegistered" class="full-container" >
             <div class="reg-text">
                 <div class="title">Register as a student</div>
                 <div class="note">Fill the form to get started quickly</div>
@@ -101,6 +102,15 @@
                 <button v-else @click="next()" class="btn btn-next">Complete Registeration</button>
             </div>
         </div>
+        <div v-else class="full-container">
+            <div class="regmsg animated zoomIn">
+                <div class="suc">Done!</div> 
+                <div class="txt">Your account has successfully been created</div>
+                <div class="btns">
+                    <a :href="url + '/login'" class="btn btn-log">Login Now</a>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 <script>
@@ -109,7 +119,8 @@
         data()
         {
             return {
-
+                    hasRegistered: false,
+                    loading: false,
                     step: 1,
                     error: '',
                     levels: [],
@@ -155,6 +166,7 @@
             },
             postStudent()
             {
+                this.loading = true
                 axios.post(this.url +'/post/student', {
                     name: this.student.name,
                     email: this.student.email,
@@ -167,12 +179,10 @@
                     state: this.student.state,
                     city: this.student.city,
                     neighborhood: this.student.neighborhood,
-
                 })
                 .then(response => {
-                    // Redirect user
-                    window.location = this.url + "/login";
-                    console.log(response.data)
+                    this.hasRegistered = true
+                    this.loading = false
                 })
                 .catch(error => {
                     console.log(error);
@@ -326,10 +336,10 @@
             },
             getStates()
             {
-                console.log("get State")
+                this.loading = true
                 axios.post(this.url +'/get/states', {country: this.student.country})
                 .then(response => {
-                    console.log(response)
+                    this.loading = false
                     this.states = response.data.states
                 })
                 .catch(error => {
@@ -338,8 +348,10 @@
             },
             getCities()
             {
+                this.loading = true
                 axios.post(this.url +'/get/cities', {state: this.student.state})
                 .then(response => {
+                    this.loading = false
                     this.cities = response.data.cities
                 })
                 .catch(error => {
@@ -348,8 +360,10 @@
             },
             getNeighborhoods()
             {
+                this.loading = true
                 axios.post(this.url +'/get/neighborhoods', {city: this.student.city})
                 .then(response => {
+                    this.loading = false
                     this.neighborhoods = response.data.neighborhoods
                 })
                 .catch(error => {

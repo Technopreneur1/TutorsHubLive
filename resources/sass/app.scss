@@ -24,6 +24,7 @@
 @import 'partials/core/components.sass';
 @import 'partials/search/ads.sass';
 @import 'partials/chat/messages.sass';
+@import 'partials/pages/payments.sass';
 
 
 *{
@@ -39,7 +40,7 @@
 }
 
 footer{
-    background: #141414;
+    background: $blue;
     color: #fff;
     padding: 15px 10px;
     text-align: center;

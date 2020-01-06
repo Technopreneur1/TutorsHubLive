@@ -11591,14 +11591,14 @@ a.text-dark:focus {
   font-size: 25px;
 }
 
-@media screen and (max-width: 500px) {
-  .user {
+@media screen and (max-width: 600px) {
+  .menuser {
     display: none !important;
   }
 }
 
-@media screen and (max-width: 501px) {
-  .user {
+@media screen and (max-width: 601px) {
+  .menuser {
     display: -webkit-box;
     display: flex;
   }
@@ -11683,6 +11683,32 @@ a.text-dark:focus {
   right: 0;
   overflow-y: scroll;
   background: #ffffff;
+}
+
+.reg-hero .reg-form .regmsg {
+  padding: 100px 0;
+  text-align: center;
+}
+
+.reg-hero .reg-form .regmsg .suc {
+  font-size: 35px;
+  color: #53a221;
+}
+
+.reg-hero .reg-form .regmsg .txt {
+  color: #2575bc;
+  font-size: 18px;
+}
+
+.reg-hero .reg-form .regmsg .btns {
+  padding-top: 10px;
+  text-align: center;
+}
+
+.reg-hero .reg-form .regmsg .btns .btn-log {
+  border: 2px solid #2474bb;
+  border-radius: 51px;
+  background: #2575bc0f;
 }
 
 .reg-hero .reg-form .btn-cancel {
@@ -12253,6 +12279,7 @@ a.text-dark:focus {
   font-size: 16px;
   padding: 2px 15px;
   width: 50%;
+  overflow: scroll;
 }
 
 .profile-page .details .info .privacy .fa-lock {
@@ -12487,6 +12514,16 @@ a.text-dark:focus {
   border: #7df48c;
 }
 
+.btn-gradient {
+  background: linear-gradient(30deg, #2575bc, #7df48c);
+  border-radius: 50px;
+  color: #fff;
+  border: none;
+  font-weight: bold;
+  font-size: 15px;
+  padding: 5px 20px;
+}
+
 .search-page,
 .myads-page {
   margin-top: 55px;
@@ -12570,6 +12607,12 @@ a.text-dark:focus {
           flex-grow: 1;
 }
 
+.search-page .ad-results .ad-result .ad .student .data a,
+.myads-page .ad-results .ad-result .ad .student .data a {
+  color: #000000;
+  text-decoration: none;
+}
+
 .search-page .ad-results .ad-result .ad .student .data .info,
 .myads-page .ad-results .ad-result .ad .student .data .info {
   -webkit-box-flex: 1;
@@ -12626,6 +12669,101 @@ a.text-dark:focus {
   }
 }
 
+.payments-page {
+  margin-top: 55px;
+  padding: 50px 0;
+  min-height: calc( 100vh - 55px);
+}
+
+.payments-page .title {
+  font-size: 30px;
+  font-weight: bold;
+  color: #2575bc;
+}
+
+.payments-page .title span {
+  font-size: 16px;
+  background: #e35934;
+  padding: 4px 15px;
+  border-radius: 18px;
+  color: #fff;
+}
+
+.payments-page .table {
+  background: #e4f3e4;
+}
+
+.payments-page .payment-info-box {
+  margin-bottom: 30px;
+  font-size: 16px;
+  background: #e4f3e4;
+  padding: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .payments-page .earnings-row {
+    display: -webkit-box;
+    display: flex;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+
+  .payments-page .earnings-row .ecol {
+    background: #e4f3e4;
+    width: 50%;
+    text-align: center;
+    padding: 10px 0;
+  }
+
+  .payments-page .earnings-row .ecol .cdata {
+    padding: 3px 15px;
+  }
+
+  .payments-page .earnings-row .ecol .key {
+    font-size: 15px;
+  }
+
+  .payments-page .earnings-row .ecol .value {
+    font-size: 22px;
+    font-weight: bold;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .payments-page .earnings-row {
+    display: -webkit-box;
+    display: flex;
+    background: #e4f3e4;
+    -webkit-box-pack: justify;
+            justify-content: space-between;
+    margin-bottom: 40px;
+  }
+
+  .payments-page .earnings-row .ecol {
+    width: 25%;
+    text-align: center;
+    padding: 10px 0;
+  }
+
+  .payments-page .earnings-row .ecol .cdata {
+    border-right: 1px solid #00000033;
+    padding: 3px 15px;
+  }
+
+  .payments-page .earnings-row .ecol .key {
+    font-size: 16px;
+  }
+
+  .payments-page .earnings-row .ecol .value {
+    font-size: 22px;
+    font-weight: bold;
+  }
+
+  .payments-page .earnings-row .ecol:last-child .cdata {
+    border-right: none;
+  }
+}
+
 * {
   font-family: "Gupter", serif;
 }
@@ -12643,7 +12781,7 @@ a.text-dark:focus {
 }
 
 footer {
-  background: #141414;
+  background: #2575bc;
   color: #fff;
   padding: 15px 10px;
   text-align: center;

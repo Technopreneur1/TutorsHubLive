@@ -139,8 +139,8 @@
                 })
                     .then(response => {
                         console.log(response)
-                        alert("Your Ad Has Been Posted")
                         this.resetForm()
+                        window.location = this.url + '/my-ads'
                     })
                     .catch(error => {
                         console.log(error);

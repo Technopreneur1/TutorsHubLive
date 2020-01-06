@@ -22,9 +22,18 @@ class Teacher extends Model
     {
         return $this->hasMany("App\Session", "teacher_id")->with('student')->where('seen', 0);
     }
+    public function unseenPayments()
+    {
+        return $this->hasMany("App\Payment", "teacher_id")->where('seen', 0);
+    }
+    public function payments()
+    {
+        return $this->hasMany("App\Payment", "teacher_id");
+    }
 
     public function user()
     {
         return $this->belongsTo('App\User');
     }
+    
 }

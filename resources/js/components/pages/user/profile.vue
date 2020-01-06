@@ -59,7 +59,7 @@
             <div v-if="user.type == 'teacher'" class="plans-section">
                 <div class="newrow" style="background: #fff"><span>Book a Session</span></div>
                 <plans v-if="user.profile.plans.length" :url="url" :plans="user.profile.plans" :authuser="authuser"  @book="bookNow" :user="user"></plans>   
-                <div v-else class="newrow" style="background: #fff">No Plan Available. <span v-if="!isUser"> please contact the tutor</span></div>
+                <div class="text-center" v-else >No Plan Available. <span v-if="!isUser"> please contact the tutor</span></div>
             </div>
 
             <div v-if="isUser" class="newrow">

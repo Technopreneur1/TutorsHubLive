@@ -1,0 +1,260 @@
+.jobsmainhero{
+  /*height: 100vh;*/
+  background: url('../img/job2.jpeg');
+  padding: 100px 0;
+}
+.searchboxrow{
+  background: rgba(0, 0, 0, 0.5);
+  padding: 15px 0px;
+  border-radius: 8px;
+  color: #fff;
+  margin: 150px 0 55px 0;
+}
+.biginput{
+  height: 55px;
+  font-size: 20px;
+  border-radius: 4px;
+}
+
+.suggestionbox{
+  background: #fff;
+  color: #000;
+  position: absolute;
+  left: 15px;
+  right: 15px;
+  display: none;
+}
+.suggestionbox ul{
+  margin: 0;
+  padding: 0;
+}
+.suggestionbox ul li{
+  list-style: none;
+  border-bottom: 1px dotted #333;
+  padding: 5px 20px;
+}
+.btn-jobsearch{
+  height: 55px;
+    width: 100%;
+    background: #bdc034;
+    font-size: 20px;
+
+}
+
+
+.rjobbox{
+  width: 100%;
+  background: #fff;
+  padding: 10px 10px 0 10px;
+  margin-top: 30px;
+}
+.rjobbox h4{
+  color: #bdc034;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.rjobbox h4,
+.rjobbox p{
+  padding: 0;
+  margin: 0;
+}
+.rjobcol{
+  float: left;
+  padding-top: 10px;
+
+}
+.thejobcolt{
+  float: left;
+}
+.rjobcolimg{
+  float: right;
+  width: 90px;
+  height: 90px;
+  overflow: hidden;
+}
+.rjobcolimg img{
+  max-width: 100%;
+}
+.rjobbtns{
+  border-top: 1px solid #333;
+  margin: 4px -10px;
+  text-align: center;
+  height: 20px;
+  height: 35px;
+
+    line-height: 35px;
+    background: linear-gradient(#ffffff, #a9a9a9);
+}
+.btn-viewd{
+  text-decoration: none;
+  display: block;
+  color: #333333;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.recentjobs{
+  border-radius: 7px;
+background: rgba(0, 0, 0, 0.31);
+padding: 10px 10px 25px 10px;
+}
+.recentjobs h3{
+  color: #fff;
+  margin-bottom: 30px;
+}
+.viewmorebthwrap{
+  margin-top: 20px;
+  text-align: center;
+  font-size: 20px;
+  color: #fff;
+  font-weight: bold;
+}
+
+.btn-viewalljob{
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+}
+.btn-viewalljob:hover{
+  text-align: center;
+  text-decoration: none;
+  color: #bdc034;
+}
+
+.otherpart{
+  background: black;
+}
+.jobscats{
+  background: rgba(0, 0, 0, 0.7);
+  padding: 50px 20px;
+  color: #fff;
+}
+.jobscats h2{
+  margin-bottom: 40px;
+}
+.jobscats h2 span{
+  border-bottom: 5px solid #bdc034;
+  border-radius: 10px;
+  padding: 0 11px;
+}
+.jobscats a{
+  color: #bdc034;
+}
+
+
+
+/*BAG =============================*/
+.jobsbag{
+  /*margin-top: 150px;*/
+  background: #fafafa;
+  padding: 150px 0 100px 0;
+}
+.jobsin{
+  background: #fafafa;
+  padding: 150px 0;
+}
+.thejobbox{
+  box-shadow: 0px 1px 11px 0 rgba(0, 0, 0, 0.18);
+  padding: 10px 20px;
+  margin-bottom: 40px;
+  background: #fdfdfd;
+  border-radius: 4px;
+  color: #000;
+    background-image: radial-gradient(73% 147%, #EADFDF 59%, #ECE2DF 100%), radial-gradient(91% 146%, rgba(255,255,255,0.50) 47%, rgba(0,0,0,0.50) 100%);
+}
+.thejobbox h3{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.thejobcolt p{
+  padding: 0;
+  margin: 0;
+}
+
+.thetle{
+  margin: 0 0 15px 0;
+padding: 0;
+color: #333;
+
+}
+.btn-jobz{
+  background: #bdc034;
+display: block;
+text-align: center;
+padding: 6px 0;
+color: #fff;
+font-weight: bold;
+}
+
+.sinjobtitle{
+  background: #ffffff;
+    padding: 15px 20px;
+    text-align: center;
+    border-radius: 3px;
+    box-shadow: 0 2px 3px 1px #00000038;
+    margin-bottom: 2px;
+    color: #bdc034;
+}
+.sinjobheader{
+  background: #ffffff;
+    padding: 15px 20px;
+    border-radius: 3px;
+    box-shadow: 0 2px 3px 1px #00000038;
+    margin-bottom: 45px;
+}
+.sinjobbody{
+  background: #ffffff;
+  padding: 50px 20px;
+  border-radius: 3px;
+  box-shadow: 0 2px 3px 1px #00000038;
+  margin-bottom: 2px;
+}
+.sinjobfooter{
+  background: #ffffff;
+  padding: 15px 20px;
+  border-radius: 3px;
+  box-shadow: 0 2px 3px 1px #00000038;
+}
+.sinjobtitle h2{
+  margin: 0;
+}
+.sinjoblogo{
+  width: 200px;
+  height: 200px;
+}
+.sinjoblogo img{
+  max-width: 100%;
+}
+.singlejobbtns{
+  background: #f6f6f6;
+  box-shadow: 0 2px 3px 1px #00000038;
+}
+.srchjob{
+  height: 60px;
+  border-radius: 30px;
+  text-align: center;
+  font-size: 22px;
+  box-shadow: 0px 1px 11px 0 rgba(0, 0, 0, 0.18);
+}
+
+.smsrch {
+    height: 40px;
+    margin: 10px 0;
+    padding: 0 30px;
+    line-height: 30px;
+    background: #333333;
+    border-radius: 10px;
+    color: #bdc034;
+    box-shadow: 0px 1px 11px 0 rgba(0, 0, 0, 0.18);
+}
+.smsrch:hover{
+  background: #fff;
+  color: #333;
+}
+
+.we{
+  width: 80%;
+  margin: auto;
+}

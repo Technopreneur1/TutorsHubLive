@@ -1,7 +1,8 @@
 <template>
     <div class="reg-form">
+        <full-loader v-if="loading" ></full-loader>
         <span @click="closeForm()" class="btn-cancel"><i class="fas fa-long-arrow-alt-left"></i></span>
-        <div class="full-container" >
+        <div v-if="!hasRegistered" class="full-container" >
             <div class="reg-text">
                 <div class="title">Register as a teacher</div>
                 <div class="note">Fill the form to get started quickly</div>
@@ -81,6 +82,15 @@
                 <button v-else @click="next()" class="btn btn-next">Complete Registeration</button>
             </div>
         </div>
+        <div v-else class="full-container">
+            <div class="regmsg animated zoomIn">
+                <div class="suc">Done!</div> 
+                <div class="txt">Your account has successfully been created</div>
+                <div class="btns">
+                    <a :href="url + '/login'" class="btn btn-log">Login Now</a>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 <script>
@@ -89,7 +99,8 @@
         data()
         {
             return {
-
+                    hasRegistered: false,
+                    loading: false,
                     step: 1,
                     error: '',
                     levels: [],
@@ -159,8 +170,8 @@
 
                 })
                 .then(response => {
-                    window.location = this.url + "/login"
-                    console.log(response.data)
+                    this.hasRegistered = true
+                    this.loading = false
                 })
                 .catch(error => {
                     console.log(error);
@@ -208,7 +219,7 @@
                 if(this.step == 1){
                     if(this.teacher.phone && this.teacher.name && this.teacher.email && this.teacher.gender)
                     {
-                        if(this.isEmail(this.student.email))
+                        if(this.isEmail(this.teacher.email))
                         {
                             return true;
                         }else{
@@ -304,9 +315,11 @@
             },
             getStates()
             {
+                this.loading = true
                 console.log("get State")
                 axios.post(this.url +'/get/states', {country: this.teacher.country})
                 .then(response => {
+                    this.loading = false
                     console.log(response)
                     this.states = response.data.states
                 })
@@ -316,8 +329,10 @@
             },
             getCities()
             {
+                this.loading = true
                 axios.post(this.url +'/get/cities', {state: this.teacher.state})
                 .then(response => {
+                    this.loading = false
                     this.cities = response.data.cities
                 })
                 .catch(error => {
@@ -326,8 +341,10 @@
             },
             getNeighborhoods()
             {
+                this.loading = true
                 axios.post(this.url +'/get/neighborhoods', {city: this.teacher.city})
                 .then(response => {
+                    this.loading = false
                     this.neighborhoods = response.data.neighborhoods
                 })
                 .catch(error => {

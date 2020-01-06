@@ -2,16 +2,16 @@
     <div class="ad-result">
         <div class="ad">
             <div class="student">
-                <a href="#" class="avatar">
+                <a :href="url + '/user/' + ad.user.id" class="avatar">
                     <img :src="url + '/img/male.jpg'" alt="">
                 </a>
                 <div class="data">
-                    <a href="#" class="info">
+                    <a :href="url + '/user/' + ad.user.id" class="info">
                         <div class="name">{{ad.user.name}}</div>
                         <div class="location"><i class="fas fa-map-marker-alt"></i> {{ad.neighborhood ? ad.neighborhood.name + ', ' : ''}}{{ad.city ? ad.city.name + ', ' : ''}}</div>
                     </a>
                     <div class="contactbtn">
-                        <button v-if="authid == ad.user.id" @click="deleteMyAd(ad.id)" class="btn btn-danger">Delete</button>
+                        <button v-if="authid == ad.user.id" @click="deleteMyAd(ad.id)" class="btn btn-gradient">Delete</button>
                         <button  v-else @click="contact(ad.user.id)" class="btn btn-msg">Message</button>
                     </div>
                 </div>
@@ -21,7 +21,7 @@
                 <span class="level">{{ad.level.name}}</span>
             </div>
             <div class="ad-info">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus eum non aspernatur exercitationem nostrum. Aut recusandae officiis voluptate beatae, nam voluptatibus. Beatae, minima. Fugiat minus molestiae magni tenetur maxime mollitia.
+                {{ad.description}}
             </div>
         </div>
     </div>

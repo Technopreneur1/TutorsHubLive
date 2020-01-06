@@ -71,7 +71,7 @@
             .avatar
                 width: 80px
                 height: 80px
-
+                margin: 0 auto
                 img
                     border-radius: 50%
                     max-width: 100%

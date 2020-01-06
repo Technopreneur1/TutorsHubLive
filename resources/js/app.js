@@ -13,6 +13,9 @@ Vue.use(require('vue-moment'));
 
 import { Cropper } from 'vue-advanced-cropper'
 
+import VueSweetalert2 from 'vue-sweetalert2';
+
+Vue.use(VueSweetalert2);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -47,6 +50,7 @@ Vue.component('full-loader', require('./components/spinners/fullLoader.vue').def
 Vue.component('options-dropdown', require('./components/optionsDropdown.vue').default);
 Vue.component('slide-menu', require('./components/menus/slideMenu.vue').default);
 Vue.component('menu-icons', require('./components/menus/menuIcons.vue').default);
+Vue.component('payments-page', require('./components/pages/paymentsPage.vue').default);
 
 
 Vue.component('chat-app', require('./components/chat/ChatApp.vue').default);

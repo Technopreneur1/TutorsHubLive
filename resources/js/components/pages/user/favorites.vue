@@ -1,8 +1,8 @@
 <template>
    <div class="full-container">
        <full-loader v-if="loading" ></full-loader>
-       <div class="usersList">
-           <div v-for="fav in favs" :key="fav.id" class="user">
+       <div v-if="favs.length" class="usersList">
+           <div  v-for="fav in favs" :key="fav.id" class="user">
                <a :href="url + '/user/' + fav.user.id">
                 <div class="avatar">
                     <img :src="avatar(fav.user)" alt="">
@@ -14,6 +14,9 @@
                <span @click="del(fav)" class="del"><i class="fa fa-times"></i></span>
            </div>
        </div>
+        <div v-else class="nothing">
+            No Saved Profile Available
+        </div>
    </div>
 </template>
 <style lang="sass" scoped>

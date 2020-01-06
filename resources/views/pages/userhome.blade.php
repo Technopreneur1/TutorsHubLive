@@ -20,7 +20,9 @@
                         <a href="{{route('messages')}}">
                             <i class="fas fa-envelope"></i>    
                             <span>Messages</span>
+                            @if ($messages)
                             <span class="count">{{$messages}}</span>
+                            @endif
                         </a>
                     </div>
                     <div class="item">

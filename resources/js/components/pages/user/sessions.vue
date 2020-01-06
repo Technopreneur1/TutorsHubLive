@@ -1,7 +1,7 @@
 <template>
    <div class="full-container">
        <full-loader v-if="loading" ></full-loader>
-       <div class="sessionsList">
+       <div v-if="sess.length" class="sessionsList">
            <div v-for="ses in sess" :key="ses.id" class="session">
                <a v-if="authuser.type == 'student'" :href="url + '/user/' + ses.teacher.user.id" class="with">
                     <div class="avatar">
@@ -16,7 +16,7 @@
                         <img :src="avatar(ses.student.user)" alt="">
                     </div>
                     <div class="info">
-                        <div class="name">{{fses.student.user.name}}</div>
+                        <div class="name">{{ses.student.user.name}}</div>
                     </div>
                </a>
                <div class="info">
@@ -33,6 +33,9 @@
                    <span class="dt">{{ses.created_at | moment('DD MMMM, YYYY')}}</span>
                </div>
            </div>
+       </div>
+       <div v-else class="nothing">
+           No Session Available
        </div>
    </div>
 </template>

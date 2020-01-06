@@ -1,6 +1,6 @@
 <template>
         <div class="menubar">
-        <div class="link user">
+        <div class="link user menuser">
             <a :href="url + '/profile'">
                 <img :src="avatar" alt="">
                 <span>{{user.name}}</span>
