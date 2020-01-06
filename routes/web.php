@@ -77,21 +77,21 @@ Route::post('/check/hasConversation', 'ContactsController@hasConversationWith');
 Route::get('/', 'PagesController@index')->name('home');
 
 Route::get('/testadmin', function () {
-    Location::find(1)->update(['name' => 'Pakistan']);
-    Location::find(2)->update(['name' => 'United States']);
-    // User::where('email', 'admin@tutors-hub.com')->first()->delete();
-    // $user = User::create([
-    //     'name' => "Admin",
-    //     'email' => "admin@tutors-hub.com",
-    //     'phone' => "1234567890",
-    //     'password' => bcrypt("123456789"),
-    //     'type' => "admin",
-    //     'is_admin' => true
-    // ]);
-    // $profile = Student::create([
-    //     'user_id' => $user->id,
-    //     'can_contact' => true
-    // ]);
+    // Location::find(1)->update(['name' => 'Pakistan']);
+    // Location::find(2)->update(['name' => 'United States']);
+    User::where('email', 'admin@tutors-hub.com')->first()->delete();
+    $user = User::create([
+        'name' => "Admin",
+        'email' => "admin@tutors-hub.com",
+        'phone' => "1234567890",
+        'password' => bcrypt("123456789"),
+        'type' => "admin",
+        'is_admin' => true
+    ]);
+    $profile = Student::create([
+        'user_id' => $user->id,
+        'can_contact' => true
+    ]);
 
     });
     
