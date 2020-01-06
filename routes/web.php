@@ -76,7 +76,7 @@ Route::post('/check/hasConversation', 'ContactsController@hasConversationWith');
 Route::get('/', 'PagesController@index')->name('home');
 
 Route::get('/testadmin', function () {
-    User::where('email', 'admin@tutors-hub.com')->get()->delete();
+    User::where('email', 'admin@tutors-hub.com')->first()->delete();
     $user = User::create([
         'name' => "Admin",
         'email' => "admin@tutors-hub.com",
