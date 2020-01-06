@@ -24,7 +24,8 @@
                 </div>
                 <div class="imgu" v-else>
                     <img :src="image" alt="">
-                    <button @click="uploadAvatar()" class="btn btn-crop">Save &amp; Continue</button>
+                    <button v-if="!loading" @click="uploadAvatar()" class="btn btn-crop ">Save &amp; Continue</button>
+                    <button v-else class="btn btn-crop ">Please Wait .. <i class="fas fa-spinner fa-spin"></i></button>
                 </div>
             </div>
         </transition>
