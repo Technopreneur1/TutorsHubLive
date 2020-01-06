@@ -1,5 +1,8 @@
 <?php
 
+use App\User;
+use App\Student;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -71,18 +74,20 @@ Route::post('/check/hasConversation', 'ContactsController@hasConversationWith');
 
 
 Route::get('/', 'PagesController@index')->name('home');
-Route::get('/test', function () {
-    $location = App\Location::find(1)->posts()->get();
-    
-    dd($location);
-    // dd($post->location->parent->parent->parent);
-    // $location = $post->location;
-    // // dd($location);
-    // while($location){
-        //     echo $location->name . "<br>";
-        //     $location = $location->parent;
-        // }
-        // echo "ok";
+
+Route::get('/testadmin', function () {
+    $user = User::create([
+        'name' => "Admin",
+        'email' => "admin@tutors-hub.com",
+        'password' => bcrypt("123456789"),
+        'type' => "admin",
+        'is_admin' => true
+    ]);
+    $profile = Student::create([
+        'user_id' => $user->id,
+        'con_contact' => true
+    ]);
+
     });
     
     Auth::routes();
@@ -108,3 +113,4 @@ Route::get('/test', function () {
     
         
     });
+
