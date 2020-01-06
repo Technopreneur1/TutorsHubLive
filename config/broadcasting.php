@@ -41,13 +41,13 @@ return [
             // ],
             'options' => [
                 'cluster' => env('PUSHER_APP_CLUSTER'),
-                'encrypted' => true,
+                'encrypted' => false,
                 'host' => 'tutors-hub.com',
                 // 'host' => '127.0.0.1',
                 // 'host' => 'weownthefight.com',
                 'port' => 6001,
                 // 'scheme' => 'https'
-                'scheme' => 'https'
+                'scheme' => 'http'
             ],
         ],
 
