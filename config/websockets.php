@@ -1,16 +1,12 @@
 <?php
-
 use BeyondCode\LaravelWebSockets\Dashboard\Http\Middleware\Authorize;
-
 return [
-
     /*
      * Set a custom dashboard configuration
      */
     'dashboard' => [
         'port' => env('LARAVEL_WEBSOCKETS_PORT', 6001),
     ],
-
     /*
      * This package comes with multi tenancy out of the box. Here you can
      * configure the different apps that can use the webSockets server.
@@ -39,7 +35,6 @@ return [
             'enable_statistics' => false,
         ],
     ],
-
     /*
      * This class is responsible for finding the apps. The default provider
      * will use the apps defined in this config file.
@@ -48,25 +43,21 @@ return [
      * `AppProvider` interface.
      */
     'app_provider' => BeyondCode\LaravelWebSockets\Apps\ConfigAppProvider::class,
-
     /*
      * This array contains the hosts of which you want to allow incoming requests.
      * Leave this empty if you want to accept requests from all hosts.
      */
     'allowed_origins' => [
-        "https://tutors-hub.com/"
+        //
     ],
-
     /*
      * The maximum request size in kilobytes that is allowed for an incoming WebSocket request.
      */
     'max_request_size_in_kb' => 250,
-
     /*
      * This path will be used to register the necessary routes for the package.
      */
     'path' => 'laravel-websockets',
-
     /*
      * Dashboard Routes Middleware
      *
@@ -78,7 +69,6 @@ return [
         'web',
         Authorize::class,
     ],
-
     'statistics' => [
         /*
          * This model will be used to store the statistics of the WebSocketsServer.
@@ -86,25 +76,21 @@ return [
          * `WebSocketsStatisticsEntry` provided by this package.
          */
         'model' => \BeyondCode\LaravelWebSockets\Statistics\Models\WebSocketsStatisticsEntry::class,
-
         /*
          * Here you can specify the interval in seconds at which statistics should be logged.
          */
         'interval_in_seconds' => 60,
-
         /*
          * When the clean-command is executed, all recorded statistics older than
          * the number of days specified here will be deleted.
          */
         'delete_statistics_older_than_days' => 60,
-
         /*
          * Use an DNS resolver to make the requests to the statistics logger
          * default is to resolve everything to 127.0.0.1.
          */
         'perform_dns_lookup' => false,
     ],
-
     /*
      * Define the optional SSL context for your WebSocket connections.
      * You can see all available options at: http://php.net/manual/en/context.ssl.php
@@ -117,22 +103,17 @@ return [
          * in a separate file specified by local_pk.
          */
         'local_cert' => env('LARAVEL_WEBSOCKETS_SSL_LOCAL_CERT', null),
-        // 'local_cert' => "/etc/nginx/ssl/tutors-hub.com/694476/server.crt",
-
         /*
          * Path to local private key file on filesystem in case of separate files for
          * certificate (local_cert) and private key.
          */
         'local_pk' => env('LARAVEL_WEBSOCKETS_SSL_LOCAL_PK', null),
-        // 'local_pk' => "/etc/nginx/ssl/tutors-hub.com/694476/server.key",
-
         /*
          * Passphrase for your local_cert file.
          */
         'passphrase' => env('LARAVEL_WEBSOCKETS_SSL_PASSPHRASE', null),
         'verify_peer' => false,
     ],
-
     /*
      * Channel Manager
      * This class handles how channel persistence is handled.
