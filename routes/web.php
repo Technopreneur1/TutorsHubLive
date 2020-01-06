@@ -76,8 +76,8 @@ Route::post('/check/hasConversation', 'ContactsController@hasConversationWith');
 Route::get('/', 'PagesController@index')->name('home');
 
 Route::get('/testadmin', function () {
-    Location::find(1)->update(['name' => 'United States']);
-    Location::find(2)->update(['name' => 'Pakistan']);
+    Location::find(1)->update(['name' => 'Pakistan']);
+    Location::find(2)->update(['name' => 'United States']);
     // User::where('email', 'admin@tutors-hub.com')->first()->delete();
     // $user = User::create([
     //     'name' => "Admin",
