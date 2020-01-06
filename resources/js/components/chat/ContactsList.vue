@@ -3,7 +3,7 @@
         <ul>
             <li v-for="contact in sortedContacts" :key="contact.id" @click="selectContact(contact)" :class="{ 'selected': contact.id == selectedContact.id }">
                 <div class="avatar">
-                    <img :src="url + '/img/male.jpg'" :alt="contact.name">
+                    <img :src="avatar(contact)" :alt="contact.name">
                 </div>
                 <div class="contact">
                     <p class="name">{{ contact.name }}</p>
@@ -35,6 +35,19 @@ import { type } from 'os'
             };
         },
         methods: {
+            avatar(user)
+            {
+                if(user.avatar){
+                    return this.url + '/storage/images/' + user.avatar
+                }else{
+                if(user.gender)
+                {
+                    return this.url + '/img/' + user.gender.toLowerCase() + '.jpg'
+                }else{
+                    return this.url + '/img/male.jpg'
+                }
+                }
+            },
             selectContact(contact) {
                 this.selected = contact;
 

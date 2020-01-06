@@ -67,7 +67,7 @@
                 }else{
                 if(this.user.gender)
                 {
-                    return this.url + '/img/' + this.user.gender + '.jpg'
+                    return this.url + '/img/' + this.user.gender.toLowerCase() + '.jpg'
                 }else{
                     return this.url + '/img/male.jpg'
                 }

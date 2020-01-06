@@ -3,7 +3,7 @@
         <div class="ad">
             <div class="student">
                 <a :href="url + '/user/' + ad.user.id" class="avatar">
-                    <img :src="url + '/img/male.jpg'" alt="">
+                    <img :src="avatar(ad.user)" alt="">
                 </a>
                 <div class="data">
                     <a :href="url + '/user/' + ad.user.id" class="info">
@@ -36,6 +36,19 @@
            }
         },
         methods: {
+            avatar(user)
+            {
+                if(user.avatar){
+                    return this.url + '/storage/images/' + user.avatar
+                }else{
+                if(user.gender)
+                {
+                    return this.url + '/img/' + user.gender.toLowerCase() + '.jpg'
+                }else{
+                    return this.url + '/img/male.jpg'
+                }
+                }
+            },
             contact(id)
            {
                 axios.post(this.url +'/check/hasConversation', {

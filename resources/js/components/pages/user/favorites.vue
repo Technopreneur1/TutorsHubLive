@@ -91,7 +91,7 @@
                 }else{
                 if(user.gender)
                 {
-                    return this.url + '/img/' + user.gender + '.jpg'
+                    return this.url + '/img/' + user.gender.toLowerCase() + '.jpg'
                 }else{
                     return this.url + '/img/male.jpg'
                 }
