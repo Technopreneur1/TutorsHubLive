@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Meta;
 use App\User;
 use App\Level;
 use App\Earning;
@@ -13,6 +14,11 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
     //Countries
+    public function settings()
+    {
+        $fee = Meta::where('key', 'fee')->first();
+        return view('admin.pages.settings', ['fee' => $fee]);
+    }
     public function levels()
     {
         $levels = Level::orderBy('name', 'asc')->get();
@@ -71,8 +77,6 @@ class AdminController extends Controller
     {
         $user = User::with(['country', 'state', 'city', 'neighborhood'])->findOrFail($id);
         $profile = $user->profile;
-        $payments = $profile->payments->sum('amount');
-
        
         return view('admin.pages.users.single', ['user' => $user, 'type' => 'Tutor']);
         

@@ -23,6 +23,11 @@ class Earning{
     {
         return self::total($profile) - self::paid($profile);
     }
+   
+    public static function currentFee()
+    {
+        return Meta::where('key', 'fee')->pluck('value')->first();
+    }
 
         
 

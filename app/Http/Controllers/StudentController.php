@@ -11,6 +11,14 @@ class StudentController extends Controller
     //
     public function post(Request $request)
     {
+        if(User::where('email', $request->email)->count())
+        {
+            return response()->json(['error' => 'email']);
+        }
+        if(User::where('phone', $request->phone)->count())
+        {
+            return response()->json(['error' => 'phone']);
+        }
         $user = User::create([
             'name' => $request['name'],
             'email' => $request['email'],

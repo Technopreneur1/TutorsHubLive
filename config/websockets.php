@@ -27,10 +27,10 @@ return [
             // 'capacity' => null,
             // 'enable_client_messages' => false,
             // 'enable_statistics' => true,
-            'id' => env('PUSHER_APP_ID'),
+            'id' => 123456,
             'name' => env('APP_NAME'),
-            'key' => env('PUSHER_APP_KEY'),
-            'secret' => env('PUSHER_APP_SECRET'),
+            'key' => 123456,
+            'secret' => 123456,
             'enable_client_messages' => true,
             'enable_statistics' => false,
         ],
@@ -103,14 +103,14 @@ return [
          * in a separate file specified by local_pk.
          */
         // 'local_cert' => env('LARAVEL_WEBSOCKETS_SSL_LOCAL_CERT', null),
-        'local_cert' => "/etc/nginx/ssl/tutors-hub.com/694907/server.crt",
+        'local_cert' => "/etc/nginx/ssl/tutors-hub.com/695366/server.crt",
         
         /*
          * Path to local private key file on filesystem in case of separate files for
          * certificate (local_cert) and private key.
          */
         // 'local_pk' => env('LARAVEL_WEBSOCKETS_SSL_LOCAL_PK', null),
-        'local_pk' => "/etc/nginx/ssl/tutors-hub.com/694907/server.crt",
+        'local_pk' => "/etc/nginx/ssl/tutors-hub.com/695366/server.key",
         /*
          * Passphrase for your local_cert file.
          */

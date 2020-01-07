@@ -1,34 +1,37 @@
 <template>
    <div class="full-container">
+       <transition name="easy-appear" enter-active-class="animated slideInLeft" leave-active-class="animated slideOutLeft">
+            <edit-payment v-if="editPayment" @cancel="editPayment = false" :url="url" :user="authuser"></edit-payment>
+        </transition>
        <full-loader v-if="loading" ></full-loader>
-       <div class="title">My Payment Info <span>Edit <i class="fas fa-pencil"></i></span></div>
+       <div class="title">My Payment Info <span @click="editPayment = true">Edit <i class="fas fa-pencil"></i></span></div>
        <div class="payment-info-box">
-           Paypal: abcdef@ghi.com
+           {{authuser.profile.payment ? authuser.profile.payment : "No payment account added. Please add your payment deatils."}}
        </div>
        <div class="title">Earnings</div>
        <div class="earnings-row">
            <div class="ecol">
                 <div class="cdata">
                     <div class="key">Gross Total</div>
-                    <div class="value">$1000</div>
+                    <div class="value">${{gross}}</div>
                 </div>    
            </div>
            <div class="ecol">
                 <div class="cdata">
                     <div class="key">Net Earning</div>
-                    <div class="value">$1000</div>
+                    <div class="value">${{net}}</div>
                 </div>    
            </div>
            <div class="ecol">
                 <div class="cdata">
                     <div class="key">Total Withdrawn</div>
-                    <div class="value">$500</div>
+                    <div class="value">${{withdrawn}}</div>
                 </div>
            </div>
            <div class="ecol">
                 <div class="cdata">
                     <div class="key">Total Available</div>
-                    <div class="value">$500</div>
+                    <div class="value">${{balance}}</div>
                </div>
            </div>
        </div>
@@ -40,16 +43,12 @@
                     <th>Total Amount</th>
                     <th>Proff</th>
                 </tr>
-                <tr>
-                    <td>21 January 2018</td>
-                    <th style="color: red">$400</th>
-                    <td><button class="btn btn-blue"><i class="fa fa-download"></i></button></td>
+                <tr v-for="payment in payments" :key="payment.id">
+                    <td>{{payment.created_at | moment("dddd, MMMM Do YYYY") }}</td>
+                    <th style="color: red">${{payment.amount}}</th>
+                    <td><a v-if="payment.proff" :href="url + '/storage/proffs/' + payment/proff"  class="btn btn-blue"><i class="fa fa-download"></i></a></td>
                 </tr>
-                <tr>
-                    <td>21 January 2018</td>
-                    <th style="color: red">$400</th>
-                    <td><button class="btn btn-blue"><i class="fa fa-download"></i></button></td>
-                </tr>
+
             </table>
        </div>
    </div>
@@ -66,11 +65,24 @@
             authuser: {
                 type: Object
             },
+            gross: {
+                type: Number
+            },
+            balance: {
+                type: Number
+            },
+            withdrawn: {
+                type: Number
+            },
+            net: {
+                type: Number
+            },
         },
         data()
         {
            return{
                 loading: false,
+                editPayment: false
            }
         },
         methods: {

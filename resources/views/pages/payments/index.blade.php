@@ -5,7 +5,15 @@
 @section('content')
 
     <div class="payments-page" id="app">
-        <payments-page url="{{route('home')}}" :payments="{{$payments}}" :authuser="{{auth()->user()}}"></payments-page>
+        <payments-page 
+            url="{{route('home')}}" 
+            :net="{{$net}}" 
+            :withdrawn="{{$withdrawn}}" 
+            :balance="{{$balance}}" 
+            :payments="{{$payments}}" 
+            :gross="{{$gross}}" 
+            :authuser="{{auth()->user()}}"
+            ></payments-page>
     </div>
     
 @endsection

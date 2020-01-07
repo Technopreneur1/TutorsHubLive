@@ -34,17 +34,21 @@
                             </div>
                             <!-- /.col -->
                             <div class="col-sm-4 border-right">
-                                <div class="description-block">
-                                <h5 class="description-header">{{$user->profile->plans->count()}}</h5>
-                                <span class="description-text">Plans</span>
-                                </div>
+                                @if ($user->type ==  'teacher')
+                                    <div class="description-block">
+                                        <h5 class="description-header">{{$user->profile->plans->count()}}</h5>
+                                        <span class="description-text">Plans</span>
+                                    </div>
+                                @endif
                                 <!-- /.description-block -->
                             </div>
                             <div class="col-sm-4 border-right">
-                                <div class="description-block">
-                                <h5 class="description-header"> ${{App\Earning::balance($user->profile)}}</h5>
-                                <span class="description-text">Balance</span>
-                                </div>
+                                @if ($user->type ==  'teacher')
+                                    <div class="description-block">
+                                        <h5 class="description-header"> ${{App\Earning::balance($user->profile)}}</h5>
+                                        <span class="description-text">Balance</span>
+                                    </div>
+                                @endif
                                 <!-- /.description-block -->
                             </div>
                             <!-- /.col -->
@@ -99,6 +103,77 @@
                     </div>
                 </div>
             </div>
+            @if ($user->type == "teacher")
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="box">
+                            <div class="box-header">
+                                <div class="box-title">
+                                    Payments
+                                </div>
+            
+                                <div class="box-body">
+                                    <table class="table table-hover" style="background: #fff">
+                                        <tbody>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Proff</th>
+                                                <th>Total Amount Payed</th>
+                                            </tr>
+                                            @foreach ($user->profile->payments as $payment)
+                                                <tr>
+                                                    <td>{{$payment->id}}</td>
+                                                    <td>
+                                                        @if ($payment->proff)
+                                                            <a href="{{asset('storage/proffs/') . '/'. $payment->proff}}" target="_blank" class="btn"><i class="fas fa-download"></i></a>
+                                                        @else
+                                                            None
+                                                        @endif
+                                                    </td>
+                                                    <td>${{$payment->amount}}</td>
+                                                </tr>
+                                            @endforeach
+                                            
+                                        </tbody>
+                                    </table>
+            
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="box">
+                            <div class="box-header">
+                                <div class="box-title">
+                                    Add Payment
+                                </div>
+            
+                                <div class="box-body">
+                                    <form action="{{route('admin.post.payment')}}" method="post" enctype="multipart/form-data">
+                                        <div class="form-group">
+                                            <label for="name">Amount (USD) $</label>
+                                            <input type="number" class="form-control" name="amount" placeholder="Payment Amount" value="{{old('amount')}}">
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="name">Proff Attachment</label>
+                                            <input type="file" class="form-control" name="image" placeholder="Payment Amount" accept="image/png, image/jpeg, image/jpg" value="{{old('amount')}}">
+                                        </div>
+
+                                        <input type="hidden" name="teacher" value="{{$user->profile->id}}">
+                                        {{ csrf_field() }}
+                                            <button type="submit" class="btn btn-info">Submit</button>
+                                        </div>
+                                      </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+            
+
+
         </div>
        
     </div>

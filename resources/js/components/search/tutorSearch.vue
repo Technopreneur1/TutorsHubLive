@@ -35,9 +35,9 @@
                     </select>
                 </div>
                 <div v-show="states.length" class="input">
-                    <label for="">State</label>
+                    <label for="">State / Province</label>
                     <select @change="stateSelected()" v-model="state" id="">
-                        <option value="" disabled>State</option>
+                        <option value="" disabled>State / Province</option>
                         <option v-for="state in states" :key="state.id" :value="state.id">{{state.name}}</option>
                     </select>
                 </div>

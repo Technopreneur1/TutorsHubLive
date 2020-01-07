@@ -30,7 +30,6 @@
                         <option value="">Gender</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
-                        <option value="N/A">N/A</option>
                     </select>
                 </div>
             </div>
@@ -43,9 +42,9 @@
                     </select>
                 </div>
                 <div v-show="states.length" class="input">
-                    <label for="">State</label>
+                    <label for="">State / Province</label>
                     <select @change="stateSelected()" v-model="student.state" id="">
-                        <option value="" disabled>State</option>
+                        <option value="" disabled>State / Province</option>
                         <option v-for="state in states" :key="state.id" :value="state.id">{{state.name}}</option>
                     </select>
                 </div>
@@ -181,8 +180,22 @@
                     neighborhood: this.student.neighborhood,
                 })
                 .then(response => {
-                    this.hasRegistered = true
-                    this.loading = false
+                    if(response.data.error == "email")
+                    {
+                        this.error = "Email is already registered. Please Login" 
+                        this.step = 1
+                        this.loading = false
+                    }
+                    else if(response.data.error == "phone")
+                    {
+                        this.error = "Phone Number is already registered. Please Login" 
+                        this.step = 1
+                        this.loading = false
+                    }else
+                    {
+                        this.hasRegistered = true
+                        this.loading = false
+                    }
                 })
                 .catch(error => {
                     console.log(error);

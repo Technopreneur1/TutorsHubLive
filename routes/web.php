@@ -62,6 +62,8 @@ Route::post('post/avatar', 'UserController@postAvatar');
 Route::post('update/location', 'LocationController@updateUserLocation');
 Route::post('update/user', 'UserController@updateUserProfile');
 Route::post('update/password', 'UserController@updatePassword');
+Route::post('update/payment-info', 'TeacherController@updatePayment');
+
 
 // Delete
 Route::post('/delete/my-ad', 'AdController@destroy');
@@ -114,12 +116,17 @@ Route::get('/testadmin', function () {
         Route::get('/countries/{id}', 'AdminController@getCountry')->name('admin.country');
         Route::get('/state/{id}', 'AdminController@getState')->name('admin.state');
         Route::get('/city/{id}', 'AdminController@getCity')->name('admin.city');
-        Route::post('/post-country', 'LocationController@postCountries')->name('admin.add.country');
-        
+        Route::get('/settings', 'AdminController@settings')->name('admin.settings');
         Route::get('/levels', 'AdminController@levels')->name('admin.levels');
+        
+        Route::post('/post-country', 'LocationController@postCountries')->name('admin.add.country');
         Route::get('/disciplines', 'AdminController@disciplines')->name('admin.disciplines');
         Route::post('/levels', 'LevelController@post')->name('admin.add.level');
         Route::post('/disciplines', 'DisciplineController@post')->name('admin.add.discipline');
+        Route::post('/update-fee', 'MetaController@updateFee')->name('admin.update.fee');
+
+
+        Route::post('/post-payment', 'PaymentController@post')->name('admin.post.payment');
         
     });
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Earning;
 use App\Session;
 use Illuminate\Http\Request;
 
@@ -26,8 +27,6 @@ class SessionController extends Controller
 
     public function pay(Request $request)
     {
-
-    
         $session = Session::create([
             'teacher_id' => $request->teacher,
             'student_id' => auth()->user()->profile->id,
@@ -36,6 +35,8 @@ class SessionController extends Controller
             'rate' => $request->rate,
             'hours' => $request->hours,
             'total' => $request->total,
+            'fee' => ($request->total * Earning::currentFee())/100,
+
         ]);
         return response()->json(['session' => $session]);
     }

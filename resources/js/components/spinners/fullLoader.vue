@@ -1,15 +1,6 @@
 <template>
     <div class="full-pop">
-        <div class='loader'>
-            <div class='spinner yellow'></div>
-            <div class='spinner orange'></div>
-            <div class='spinner red'></div>
-            <div class='spinner pink'></div>
-            <div class='spinner violet'></div>
-            <div class='spinner mauve'></div>
-            <div class='spinner light-yellow'></div>
-        </div>
-
+        <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
     </div>
 </template>
 <script>
@@ -36,62 +27,39 @@
     background: #1950808c;
     z-index: 10;
 }
-
-.loader {
-  display: block;
-  width: 100px;
-  height: 100px;
+.lds-ring {
+  display: inline-block;
   position: relative;
-  transform-origin: 63px 63px;
-  animation: spin 1s infinite linear;
+  width: 80px;
+  height: 80px;
 }
-.loader .spinner {
+.lds-ring div {
+  box-sizing: border-box;
   display: block;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
   position: absolute;
-  z-index: 99;
-  top: 0;
-  left: 0;
-  border-width: 0px 0px 26px 26px;
-  border-style: solid;
-  border-color: transparent;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid rgb(39, 179, 51);
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: rgb(181, 255, 134) transparent transparent transparent;
 }
-.loader .spinner.yellow {
-  border-left-color: #317254;
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
 }
-.loader .spinner.orange {
-  border-left-color: #469a85;
-  transform: rotate(-45deg);
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
 }
-.loader .spinner.red {
-  border-left-color: #66ff87;
-  transform: rotate(-90deg);
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
 }
-.loader .spinner.pink {
-  border-left-color: #1f4f51;
-  transform: rotate(-135deg);
-}
-.loader .spinner.violet {
-  border-left-color: #327455;
-  transform: rotate(-180deg);
-}
-.loader .spinner.mauve {
-  border-left-color: #2e6b54;
-  transform: rotate(-225deg);
-}
-.loader .spinner.light-yellow {
-  border-left-color: #469a85;
-  transform: rotate(-270deg);
-}
-
-@keyframes spin {
-  from {
+@keyframes lds-ring {
+  0% {
     transform: rotate(0deg);
   }
-  to {
-    transform: rotate(-360deg);
+  100% {
+    transform: rotate(360deg);
   }
 }
 

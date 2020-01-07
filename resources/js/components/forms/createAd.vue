@@ -30,7 +30,7 @@
                                 </select>
                             </div>
                             <div v-if="states.length" class="input">
-                                <label for="">State</label>
+                                <label for="">State / Province</label>
                                 <select @change="getCities()" v-model="ad.state" >
                                     <option value="">-- Select State --</option>
                                     <option v-for="state in states" :value="state.id" :key="state.id">{{state.name}}</option>

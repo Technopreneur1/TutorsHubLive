@@ -21,23 +21,38 @@ class TeacherController extends Controller
     //
     public function post(Request $request)
     {
-        $user = User::create([
-            'name' => $request['name'],
-            'email' => $request['email'],
-            'phone' => $request['phone'],
-            'gender' => $request['gender'],
-            'type' => 'teacher',
-            'country_id' => $request['country'],
-            'password' => bcrypt($request['password']),
-            'city_id' => $request['city'],
-            'state_id' => $request['state'],
-            'neighborhood_id' => $request['neighborhood'],
-        ]);
-        $teacher = Teacher::create([
-            'user_id' => $user->id,
-        ]);
+        if(User::where('email', $request->email)->count())
+        {
+            return response()->json(['error' => 'email']);
+        }
+        if(User::where('phone', $request->phone)->count())
+        {
+            return response()->json(['error' => 'phone']);
+        }
+
+            $user = User::create([
+                'name' => $request['name'],
+                'email' => $request['email'],
+                'phone' => $request['phone'],
+                'gender' => $request['gender'],
+                'type' => 'teacher',
+                'country_id' => $request['country'],
+                'password' => bcrypt($request['password']),
+                'city_id' => $request['city'],
+                'state_id' => $request['state'],
+                'neighborhood_id' => $request['neighborhood'],
+            ]);
+            $teacher = Teacher::create([
+                'user_id' => $user->id,
+            ]);
         
         return response()->json(['user' => $user,'teacher' => $teacher]);
+    }
+    public function updatePayment(Request $request)
+    {
+        auth()->user()->profile()->update(['payment' => $request->payment]);
+        
+        return response()->json(['msg' =>'success']);
     }
 
     public function search(Request $request)

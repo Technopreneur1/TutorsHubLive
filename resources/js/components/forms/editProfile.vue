@@ -81,6 +81,7 @@
                     <textarea v-model="user.profile.bio" id="" cols="30" rows="4" placeholder="Bio"></textarea>
                 </div>
             </div>
+            
             <div class="field">
                 <div class="input">
                     <button @click="update" class="btn btn-update">Update</button>

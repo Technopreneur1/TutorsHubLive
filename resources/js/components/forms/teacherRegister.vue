@@ -4,7 +4,7 @@
         <span @click="closeForm()" class="btn-cancel"><i class="fas fa-long-arrow-alt-left"></i></span>
         <div v-if="!hasRegistered" class="full-container" >
             <div class="reg-text">
-                <div class="title">Register as a teacher</div>
+                <div class="title">Register as a Tutor</div>
                 <div class="note">Fill the form to get started quickly</div>
             </div>
             <div v-if="step == 1" class="newrow"><span style="background: #fff">Personal Information</span></div>
@@ -29,7 +29,6 @@
                         <option value="">Gender</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
-                        <option value="N/A">N/A</option>
                     </select>
                 </div>
             </div>
@@ -44,7 +43,7 @@
                 <div v-show="states.length" class="input">
                     <label for="">State</label>
                     <select @change="stateSelected()" v-model="teacher.state" id="">
-                        <option value="" disabled>State</option>
+                        <option value="" disabled>State / Province</option>
                         <option v-for="state in states" :key="state.id" :value="state.id">{{state.name}}</option>
                     </select>
                 </div>
@@ -170,8 +169,22 @@
 
                 })
                 .then(response => {
-                    this.hasRegistered = true
-                    this.loading = false
+                    if(response.data.error == "email")
+                    {
+                        this.error = "Email is already registered. Please Login" 
+                        this.step = 1
+                        this.loading = false
+                    }
+                    else if(response.data.error == "phone")
+                    {
+                        this.error = "Phone Number is already registered. Please Login" 
+                        this.step = 1
+                        this.loading = false
+                    }else
+                    {
+                        this.hasRegistered = true
+                        this.loading = false
+                    }
                 })
                 .catch(error => {
                     console.log(error);
