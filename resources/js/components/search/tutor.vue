@@ -1,19 +1,20 @@
 <template>
     <div class="result">
-        <a :href="url+ '/user/' +tutor.id" class="teacher">
-            <div class="avatar">
+        <div class="teacher">
+            <a :href="url+ '/user/' +tutor.id"  class="avatar">
                 <img :src="avatar(tutor)" alt="">
-            </div>
+            </a>
             <div class="data">
-                <div class="info">
+
+                <a  :href="url+ '/user/' +tutor.id" class="info">
                     <div class="name">{{tutor.name}}</div>
                     <div class="location"><i class="fas fa-map-marker-alt"></i> {{tutor.neighborhood ? tutor.neighborhood.name + ', ' : ''}}{{tutor.city ? tutor.city.name + ', ' : ''}}</div>
-                </div>
+                </a>
                 <div class="contactbtn">
                     <button @click="contact(tutor.id)" class="btn btn-success">Message</button>
                 </div>
             </div>
-        </a>
+        </div>
     </div>
 </template>
 <script>

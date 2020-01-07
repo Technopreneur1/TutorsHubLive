@@ -3149,6 +3149,8 @@ __webpack_require__.r(__webpack_exports__);
           _this.success = "New Plan Added";
 
           _this.plans.push(response.data.plan);
+
+          _this.discipline = '', _this.level = '', _this.rate = '';
         })["catch"](function (error) {
           console.log(error);
         });
@@ -5531,6 +5533,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -61449,19 +61452,24 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "result" }, [
-    _c(
-      "a",
-      {
-        staticClass: "teacher",
-        attrs: { href: _vm.url + "/user/" + _vm.tutor.id }
-      },
-      [
-        _c("div", { staticClass: "avatar" }, [
-          _c("img", { attrs: { src: _vm.avatar(_vm.tutor), alt: "" } })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "data" }, [
-          _c("div", { staticClass: "info" }, [
+    _c("div", { staticClass: "teacher" }, [
+      _c(
+        "a",
+        {
+          staticClass: "avatar",
+          attrs: { href: _vm.url + "/user/" + _vm.tutor.id }
+        },
+        [_c("img", { attrs: { src: _vm.avatar(_vm.tutor), alt: "" } })]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "data" }, [
+        _c(
+          "a",
+          {
+            staticClass: "info",
+            attrs: { href: _vm.url + "/user/" + _vm.tutor.id }
+          },
+          [
             _c("div", { staticClass: "name" }, [
               _vm._v(_vm._s(_vm.tutor.name))
             ]),
@@ -61478,25 +61486,25 @@ var render = function() {
                   _vm._s(_vm.tutor.city ? _vm.tutor.city.name + ", " : "")
               )
             ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "contactbtn" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-success",
-                on: {
-                  click: function($event) {
-                    return _vm.contact(_vm.tutor.id)
-                  }
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "contactbtn" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-success",
+              on: {
+                click: function($event) {
+                  return _vm.contact(_vm.tutor.id)
                 }
-              },
-              [_vm._v("Message")]
-            )
-          ])
+              }
+            },
+            [_vm._v("Message")]
+          )
         ])
-      ]
-    )
+      ])
+    ])
   ])
 }
 var staticRenderFns = []

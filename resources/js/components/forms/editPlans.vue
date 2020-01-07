@@ -63,6 +63,9 @@
                         console.log(response)
                         this.success  = "New Plan Added"
                         this.plans.push(response.data.plan)
+                        this.discipline = '',
+                        this.level = '',
+                        this.rate = ''
                     })
                     .catch(error => {
                         console.log(error);
