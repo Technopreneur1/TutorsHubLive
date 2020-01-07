@@ -51,7 +51,7 @@
                     <form action="{{route('admin.add.country')}}" method="POST">
                         <div class="form-group">
                             <label for="">Name*</label>
-                            <input type="text" name="name" id="" class="form-control" placeholder="Country Name" required>
+                            <input type="text" name="name" id="" class="form-control" placeholder="State Name" required>
                         </div>
                         <input type="hidden" name="type" value="state">
                         <input type="hidden" name="parent_id" value="{{$country->id}}">
