@@ -48,8 +48,7 @@ return [
      * Leave this empty if you want to accept requests from all hosts.
      */
     'allowed_origins' => [
-        //
-        "http://tutors-hub.com"
+        "https://tutors-hub.com"
     ],
     /*
      * The maximum request size in kilobytes that is allowed for an incoming WebSocket request.
@@ -103,12 +102,15 @@ return [
          * certificate chain of issuers. The private key also may be contained
          * in a separate file specified by local_pk.
          */
-        'local_cert' => env('LARAVEL_WEBSOCKETS_SSL_LOCAL_CERT', null),
+        // 'local_cert' => env('LARAVEL_WEBSOCKETS_SSL_LOCAL_CERT', null),
+        'local_cert' => "/etc/nginx/ssl/tutors-hub.com/694907/server.crt",
+        
         /*
          * Path to local private key file on filesystem in case of separate files for
          * certificate (local_cert) and private key.
          */
-        'local_pk' => env('LARAVEL_WEBSOCKETS_SSL_LOCAL_PK', null),
+        // 'local_pk' => env('LARAVEL_WEBSOCKETS_SSL_LOCAL_PK', null),
+        'local_pk' => "/etc/nginx/ssl/tutors-hub.com/694907/server.key",
         /*
          * Passphrase for your local_cert file.
          */
