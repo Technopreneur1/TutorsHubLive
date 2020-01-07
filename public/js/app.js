@@ -4370,6 +4370,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     url: {
@@ -59735,6 +59736,14 @@ var render = function() {
                 _c("li", [
                   _c("a", { attrs: { href: this.url } }, [_vm._v("Home")])
                 ]),
+                _vm._v(" "),
+                _vm.user.type == "teacher"
+                  ? _c("li", [
+                      _c("a", { attrs: { href: _vm.url + "/payments" } }, [
+                        _vm._v("Earnings & Payments")
+                      ])
+                    ])
+                  : _vm._e(),
                 _vm._v(" "),
                 _vm.user.type == "teacher"
                   ? _c("li", [
