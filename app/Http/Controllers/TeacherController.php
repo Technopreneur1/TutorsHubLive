@@ -33,7 +33,7 @@ class TeacherController extends Controller
         if(!$request->neighborhood)
         {
             $existing = Location::where('name', $request->new_neighborhood)->get()->first();
-            $neighborhood = $existing;
+            $neighborhood = $existing->id;
             if(!$existing)
             {
                 $existing = Location::where('name', 'like', '%' . $request->new_neighborhood . '%')->get();
@@ -41,13 +41,16 @@ class TeacherController extends Controller
                 {
                     $len = strlen($existing->name);
                     if($existing->name[0] == $request->new_neighborhood[0] && $existing->name[1] == $request->new_neighborhood[1] && $existing->name[$len-1] == $request->new_neighborhood[$len-1] && $existing->name[$len-2] == $request->new_neighborhood[$len-2]) {
-                        $neighborhood = $existing;
+                        $neighborhood = $existing->id;
                     }else {
-                        $neighborhood = Location::create(['name' => request->new_neighborhood, 'type' => 'neighborhood', ])
+                        $new = Location::create(['name' => $request->new_neighborhood, 'type' => 'neighborhood', 'parent_id' => $request->city]);
+                        $neighborhood = $new->id;
                     }
                 }
             }
             
+        }else {
+            $neighborhood = $request->neighborhood;
         }
             $user = User::create([
                 'name' => $request['name'],
@@ -59,7 +62,7 @@ class TeacherController extends Controller
                 'password' => bcrypt($request['password']),
                 'city_id' => $request['city'],
                 'state_id' => $request['state'],
-                'neighborhood_id' => $request['neighborhood'],
+                'neighborhood_id' => $neighborhood,
             ]);
             $teacher = Teacher::create([
                 'user_id' => $user->id,
