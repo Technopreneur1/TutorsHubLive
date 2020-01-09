@@ -3,7 +3,8 @@
         <ul v-if="contact">
             <li v-for="message in messages" :class="`message${message.to == contact.id ? ' sent' : ' received'}`" :key="message.id">
                 <div @click="toggleTime(message.id)" class="text">
-                    {{ message.text }}
+                    <!-- {{ message.text }} -->
+                    {{ outputMessage(message.text) }}
                 </div>
                 <div v-if="showTime == message.id"  class="time animated fadeIn">{{ message.created_at | moment("calendar")}}</div>
             </li>
@@ -28,6 +29,57 @@
             }
         },
         methods: {
+            outputMessage(message)
+            {
+                let msg = message
+                if(this.checkIfPhoneInString(msg))
+                {
+                    var re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+                    
+                    let phoneText = []
+                    while(this.checkIfPhoneInString(msg))
+                    {
+                        phoneText = msg.match(re)[0]
+                        msg = msg.replace(phoneText, "*****")
+                        console.log(msg)
+                    }
+                    
+                    // return "This message contains email"
+                    // console.log(this.extractEmails(message))
+                }
+                if(this.checkIfEmailInString(msg))
+                {
+                    var re = /(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
+                    let msg = message
+                    let emailText = []
+                    while(this.checkIfEmailInString(msg))
+                    {
+                        emailText = msg.match(re)[0]
+                        msg = msg.replace(emailText, "*****")
+                        console.log(msg)
+                    }
+                    return msg
+                    // return "This message contains email"
+                    // console.log(this.extractEmails(message))
+                }
+                return msg
+            },
+            
+            checkIfEmailInString(text)
+            {
+                var re = /(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
+                
+                return re.test(text);
+            },
+            checkIfPhoneInString(text)
+            {
+                var re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+                return re.test(text);
+            },
+            extractEmails (text)
+            {
+                return text.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi);
+            },
             toggleTime(id)
             {
                 if(this.showTime == id)

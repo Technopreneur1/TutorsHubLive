@@ -13,6 +13,10 @@ class PagesController extends Controller
         
         if(auth()->check())
         {
+            if(auth()->user()->type == 'admin')
+            {
+                return redirect()->route('adminpanel');
+            }
             $messages = auth()->user()->unreadMessages()->count();
             return view("pages.userhome", ['messages' => $messages]);
         }else {

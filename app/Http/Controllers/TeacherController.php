@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Teacher;
+use App\Location;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,7 +30,25 @@ class TeacherController extends Controller
         {
             return response()->json(['error' => 'phone']);
         }
-
+        if(!$request->neighborhood)
+        {
+            $existing = Location::where('name', $request->new_neighborhood)->get()->first();
+            $neighborhood = $existing;
+            if(!$existing)
+            {
+                $existing = Location::where('name', 'like', '%' . $request->new_neighborhood . '%')->get();
+                if(strlen($existing->name) == $request->new_neighborhood)
+                {
+                    $len = strlen($existing->name);
+                    if($existing->name[0] == $request->new_neighborhood[0] && $existing->name[1] == $request->new_neighborhood[1] && $existing->name[$len-1] == $request->new_neighborhood[$len-1] && $existing->name[$len-2] == $request->new_neighborhood[$len-2]) {
+                        $neighborhood = $existing;
+                    }else {
+                        $neighborhood = Location::create(['name' => request->new_neighborhood, 'type' => 'neighborhood', ])
+                    }
+                }
+            }
+            
+        }
             $user = User::create([
                 'name' => $request['name'],
                 'email' => $request['email'],

@@ -3,6 +3,7 @@
 use App\User;
 use App\Student;
 use App\Location;
+use App\TestLocation;
 
 /*
 |--------------------------------------------------------------------------
@@ -96,6 +97,109 @@ Route::get('/testadmin', function () {
     ]);
 
     });
+
+// Route::get('/lt', function () {
+    
+
+//     $jsonFile = file_get_contents(asset('locations.json'));
+//     $locations = json_decode($jsonFile);
+//     // dd($locations);
+//     foreach($locations as $country)
+//     {
+//         // $country_model = TestLocation::create(['name' => $country->name]);
+//         // echo "Intsert " . $country->name . "<br>";
+//         foreach($country->states as $state)
+//         {
+//             $state_model = TestLocation::create(['name' => $state->name, 'parent_id' => 28102]);
+//             // echo array_keys($state);
+
+//             foreach($state->cities as $city)
+//             {
+//                 TestLocation::create(['name' => $city, 'parent_id' => $state_model->id]);
+//             }
+//         }
+//         echo "DOne";
+//     }
+
+
+//     });
+
+
+Route::get('/us1', function () {
+    
+    TestLocation::create(['name' => "United States", 'type' => 'country', 'parent_id' => 0]);
+    $jsonFile = file_get_contents(asset('usaa.json'));
+    $locations = json_decode($jsonFile);
+    // dd($locations);
+    foreach($locations as $country)
+    {
+        $us = TestLocation::where("name", "United States")->get()->first();
+        $usid = $us->id;
+        foreach($country->states as $state)
+        {
+            $state_model = TestLocation::create(['name' => $state->name, 'type' => 'state', 'parent_id' => $usid]);
+            // echo array_keys($state);
+
+            foreach($state->cities as $city)
+            {
+                TestLocation::create(['name' => $city, 'type' => 'city', 'parent_id' => $state_model->id]);
+            }
+        }
+        echo "DOne";
+    }
+
+
+    });
+
+Route::get('/us2', function () {
+    
+
+    $jsonFile = file_get_contents(asset('us2.json'));
+    $locations = json_decode($jsonFile);
+    // dd($locations);
+    foreach($locations as $country)
+    {
+        $us = TestLocation::where("name", "United States")->get()->first();
+        $usid = $us->id;
+        foreach($country->states as $state)
+        {
+            $state_model = TestLocation::create(['name' => $state->name, 'type' => 'state', 'parent_id' => $usid]);
+            // echo array_keys($state);
+
+            foreach($state->cities as $city)
+            {
+                TestLocation::create(['name' => $city, 'type' => 'city', 'parent_id' => $state_model->id]);
+            }
+        }
+        echo "DOne";
+    }
+
+});
+
+Route::get('/canada', function () {
+    
+    TestLocation::create(['name' => "Canada", 'type' => 'country',  'parent_id' => 0]);
+    $jsonFile = file_get_contents(asset('canada.json'));
+    $locations = json_decode($jsonFile);
+    // dd($locations);
+    foreach($locations as $country)
+    {
+        $us = TestLocation::where("name", "Canada")->get()->first();
+        $usid = $us->id;
+        foreach($country->states as $state)
+        {
+            $state_model = TestLocation::create(['name' => $state->name, 'type' => 'state',  'parent_id' => $usid]);
+            // echo array_keys($state);
+
+            foreach($state->cities as $city)
+            {
+                TestLocation::create(['name' => $city, 'type' => 'city',  'parent_id' => $state_model->id]);
+            }
+        }
+        echo "DOne";
+    }
+
+});
     
     Auth::routes();
     
@@ -118,6 +222,12 @@ Route::get('/testadmin', function () {
         Route::get('/city/{id}', 'AdminController@getCity')->name('admin.city');
         Route::get('/settings', 'AdminController@settings')->name('admin.settings');
         Route::get('/levels', 'AdminController@levels')->name('admin.levels');
+        Route::get('/admins', 'AdminController@admins')->name('admin.admins');
+
+        Route::get('/add-admin', 'AdminController@createAdmin')->name('admin.add.admin');
+        Route::post('/add-admin', 'AdminController@postAdmin')->name('admin.post.admin');
+        Route::get('/profile', 'AdminController@showAdmin')->name('admin.show.admin');
+        Route::post('/update-password', 'AdminController@updatePassword')->name('admin.update.password');
         
         Route::post('/post-country', 'LocationController@postCountries')->name('admin.add.country');
         Route::get('/disciplines', 'AdminController@disciplines')->name('admin.disciplines');
@@ -127,6 +237,8 @@ Route::get('/testadmin', function () {
 
 
         Route::post('/post-payment', 'PaymentController@post')->name('admin.post.payment');
+        Route::post('/ban/{id}', 'UserController@ban')->name('admin.ban');
+
         
     });
 

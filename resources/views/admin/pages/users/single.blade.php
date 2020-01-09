@@ -69,6 +69,24 @@
                         <table class="table table-hover" style="background: #fff">
                             <tbody>
                                 <tr>
+                                    <td>Status</td>
+                                    <td>
+                                        @if ($user->is_banned)
+                                            <span>Banned</span>
+                                            <form action="{{route('admin.ban', $user->id)}}" style="display: inline; margin-left: 20px" method="post">
+                                               <button class="btn btn-success">UnBan</button>
+                                               @csrf
+                                            </form>
+                                        @else
+                                            <span>Active</span>
+                                            <form action="{{route('admin.ban', $user->id)}}" style="display: inline; margin-left: 20px" method="post">
+                                                @csrf
+                                               <button class="btn btn-danger">Ban</button>
+                                            </form>
+                                        @endif
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td>Name</td>
                                     <td>{{$user->name}}</td>
                                 </tr>

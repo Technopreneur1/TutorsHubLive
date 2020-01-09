@@ -111,5 +111,18 @@ class UserController extends Controller
     
     }
 
-
+    public function ban($id)
+    {
+        $user = User::findOrFail($id);
+        if($user->is_banned)
+        {
+            $user->update(['is_banned' => false]);
+        }
+        else
+        {
+            $user->update(['is_banned' => true]);
+        }
+        session()->flash('message', 'User Successfully Banned');
+        return back();
+    }
 }
