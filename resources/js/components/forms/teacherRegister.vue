@@ -173,7 +173,7 @@
                     state: this.teacher.state,
                     city: this.teacher.city,
                     neighborhood: this.teacher.neighborhood,
-                    neighborhood: this.teacher.new_neighborhood,
+                    new_neighborhood: this.teacher.new_neighborhood,
 
                 })
                 .then(response => {

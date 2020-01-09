@@ -3860,8 +3860,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 //
 //
 //
@@ -4024,7 +4022,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     postTeacher: function postTeacher() {
       var _this = this;
 
-      axios.post(this.url + '/post/teacher', _defineProperty({
+      axios.post(this.url + '/post/teacher', {
         name: this.teacher.name,
         email: this.teacher.email,
         password: this.teacher.password,
@@ -4033,8 +4031,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         gender: this.teacher.gender,
         state: this.teacher.state,
         city: this.teacher.city,
-        neighborhood: this.teacher.neighborhood
-      }, "neighborhood", this.teacher.new_neighborhood)).then(function (response) {
+        neighborhood: this.teacher.neighborhood,
+        new_neighborhood: this.teacher.new_neighborhood
+      }).then(function (response) {
         if (response.data.error == "email") {
           _this.error = "Email is already registered. Please Login";
           _this.step = 1;

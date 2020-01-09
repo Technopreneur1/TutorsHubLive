@@ -5,7 +5,10 @@ Adminpanel
 @section('content')
 
     <div class="container">
-        Adminpanel
+        <form action="{{route('logout')}}" method="post">
+            @csrf
+            <button type="submit" class="btn btn-danger">Logout</button>
+        </form>
         {{-- <div class="row">
             <div class="col-md-4 col-lg-3">
                 <div class="info-box">
