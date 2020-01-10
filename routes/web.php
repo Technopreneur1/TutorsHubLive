@@ -125,24 +125,32 @@ Route::get('/testadmin', function () {
 //     });
 
 
+Route::get('/delloc', function () {
+    
+    $locations = Location::all();
+    foreach($locations as $location)
+    {
+        $location->delete();
+    }
+
 Route::get('/us1', function () {
     
-    TestLocation::create(['name' => "United States", 'type' => 'country', 'parent_id' => 0]);
+    Location::create(['name' => "United States", 'type' => 'country', 'parent_id' => 0]);
     $jsonFile = file_get_contents(asset('usaa.json'));
     $locations = json_decode($jsonFile);
     // dd($locations);
     foreach($locations as $country)
     {
-        $us = TestLocation::where("name", "United States")->get()->first();
+        $us = Location::where("name", "United States")->get()->first();
         $usid = $us->id;
         foreach($country->states as $state)
         {
-            $state_model = TestLocation::create(['name' => $state->name, 'type' => 'state', 'parent_id' => $usid]);
+            $state_model = Location::create(['name' => $state->name, 'type' => 'state', 'parent_id' => $usid]);
             // echo array_keys($state);
 
             foreach($state->cities as $city)
             {
-                TestLocation::create(['name' => $city, 'type' => 'city', 'parent_id' => $state_model->id]);
+                Location::create(['name' => $city, 'type' => 'city', 'parent_id' => $state_model->id]);
             }
         }
         echo "DOne";
@@ -159,16 +167,16 @@ Route::get('/us2', function () {
     // dd($locations);
     foreach($locations as $country)
     {
-        $us = TestLocation::where("name", "United States")->get()->first();
+        $us = Location::where("name", "United States")->get()->first();
         $usid = $us->id;
         foreach($country->states as $state)
         {
-            $state_model = TestLocation::create(['name' => $state->name, 'type' => 'state', 'parent_id' => $usid]);
+            $state_model = Location::create(['name' => $state->name, 'type' => 'state', 'parent_id' => $usid]);
             // echo array_keys($state);
 
             foreach($state->cities as $city)
             {
-                TestLocation::create(['name' => $city, 'type' => 'city', 'parent_id' => $state_model->id]);
+                Location::create(['name' => $city, 'type' => 'city', 'parent_id' => $state_model->id]);
             }
         }
         echo "DOne";
@@ -178,22 +186,22 @@ Route::get('/us2', function () {
 
 Route::get('/canada', function () {
     
-    TestLocation::create(['name' => "Canada", 'type' => 'country',  'parent_id' => 0]);
+    Location::create(['name' => "Canada", 'type' => 'country',  'parent_id' => 0]);
     $jsonFile = file_get_contents(asset('canada.json'));
     $locations = json_decode($jsonFile);
     // dd($locations);
     foreach($locations as $country)
     {
-        $us = TestLocation::where("name", "Canada")->get()->first();
+        $us = Location::where("name", "Canada")->get()->first();
         $usid = $us->id;
         foreach($country->states as $state)
         {
-            $state_model = TestLocation::create(['name' => $state->name, 'type' => 'state',  'parent_id' => $usid]);
+            $state_model = Location::create(['name' => $state->name, 'type' => 'state',  'parent_id' => $usid]);
             // echo array_keys($state);
 
             foreach($state->cities as $city)
             {
-                TestLocation::create(['name' => $city, 'type' => 'city',  'parent_id' => $state_model->id]);
+                Location::create(['name' => $city, 'type' => 'city',  'parent_id' => $state_model->id]);
             }
         }
         echo "DOne";
