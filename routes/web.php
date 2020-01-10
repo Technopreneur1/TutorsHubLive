@@ -132,6 +132,7 @@ Route::get('/delloc', function () {
     {
         $location->delete();
     }
+});
 
 Route::get('/us1', function () {
     
