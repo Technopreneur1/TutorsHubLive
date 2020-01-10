@@ -60,7 +60,12 @@
                     <select v-model="student.neighborhood" id="">
                         <option value="" disabled>Neighborhood</option>
                         <option v-for="neighborhood in neighborhoods" :key="neighborhood.id" :value="neighborhood.id">{{neighborhood.name}}</option>
+                        <option value="-1"  >Other</option>
                     </select>
+                </div>
+                <div v-if="student.neighborhood == -1" class="input">
+                    <label for="">Neighborhood Name &nbsp; <small>Make sure neighborhood name is correct and avoid spellings mistakes</small></label>
+                    <input type="text" class="input" v-model="student.new_neighborhood" placeholder="Neighborhood">
                 </div>
             </div>
             <div v-if="step == 3" class="step step2">
@@ -178,6 +183,7 @@
                     state: this.student.state,
                     city: this.student.city,
                     neighborhood: this.student.neighborhood,
+                    new_neighborhood: this.student.new_neighborhood,
                 })
                 .then(response => {
                     if(response.data.error == "email")
@@ -257,7 +263,7 @@
                     }
                 }
                 if(this.step == 2){
-                    if(this.student.country && this.student.state && this.student.city && this.student.neighborhood)
+                    if(this.student.country && this.student.state && this.student.city && (this.student.neighborhood > 0 || this.student.new_neighborhood))
                     {
                         return true;
                     }else{
@@ -378,6 +384,10 @@
                 .then(response => {
                     this.loading = false
                     this.neighborhoods = response.data.neighborhoods
+                    if(!response.data.neighborhoods.length)
+                    {
+                        this.student.neighborhood  = -1
+                    }
                 })
                 .catch(error => {
                     console.log(error);

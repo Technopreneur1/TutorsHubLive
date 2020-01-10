@@ -48,7 +48,12 @@
                                 <select v-model="ad.neighborhood" >
                                     <option value="">-- Select Neighborhood --</option>
                                     <option v-for="neighborhood in neighborhoods" :value="neighborhood.id" :key="neighborhood.id">{{neighborhood.name}}</option>
+                                    <option value="-1"  >Other</option>
                                 </select>
+                            </div>
+                            <div v-if="ad.neighborhood == -1" class="input">
+                                <label for="">Neighborhood Name &nbsp; <small>Make sure neighborhood name is correct and avoid spellings mistakes</small></label>
+                                <input type="text" class="input" v-model="ad.new_neighborhood" placeholder="Neighborhood">
                             </div>
                         </div>
                         </transition>
@@ -116,6 +121,7 @@
                     level: '',
                     discipline: '',
                     neighborhood: '',
+                    new_neighborhood: '',
                     city: '',
                     state: '',
                     country: ''
@@ -136,14 +142,20 @@
                     country: this.ad.country,
                     city: this.ad.city,
                     state: this.ad.state,
+                    new_neighborhood: this.ad.new_neighborhood
                 })
                     .then(response => {
-                        console.log(response)
                         this.resetForm()
                         window.location = this.url + '/my-ads'
                     })
                     .catch(error => {
-                        console.log(error);
+                       if(error.response.data.errors)
+                       {
+                           alert(error.response.data.errors.title);
+                       }else
+                       {
+                           alert("OOps! Something went wrong. Can't post your ad at the moment")
+                       }
                     })
             },
             resetForm()
@@ -207,6 +219,10 @@
                 axios.post(this.url +'/get/neighborhoods', {city: this.ad.city})
                 .then(response => {
                     this.neighborhoods = response.data.neighborhoods
+                    if(!response.data.neighborhoods.length)
+                    {
+                        this.ad.neighborhood  = -1
+                    }
                 })
                 .catch(error => {
                     console.log(error);

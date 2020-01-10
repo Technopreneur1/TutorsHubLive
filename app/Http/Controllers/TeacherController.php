@@ -30,13 +30,19 @@ class TeacherController extends Controller
         {
             return response()->json(['error' => 'phone']);
         }
-        if(!$request->neighborhood)
+        if($request->neighborhood < 1)
         {
-            $existing = Location::where('name', $request->new_neighborhood)->get()->first();
+            $existing = Location::where('name', $request->new_neighborhood)
+                                        ->where('type', 'neighborhood')
+                                        ->where('parent_id', $request['city'])
+                                        ->get()->first();
             
             if(!$existing)
             {
-                $existing = Location::where('name', 'like', '%' . $request->new_neighborhood . '%')->get()->first();
+                $existing = Location::where('name', 'like', '%' . $request->new_neighborhood . '%')
+                                        ->where('type', 'neighborhood')
+                                        ->where('parent_id', $request['city'])
+                                        ->get()->first();
                 if($existing && strlen($existing->name) == $request->new_neighborhood)
                 {
                     $len = strlen($existing->name);

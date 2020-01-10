@@ -30,7 +30,12 @@
             <select v-model="neighborhood" id="">
                 <option value="" disabled>Neighborhood</option>
                 <option v-for="neighborhood in neighborhoods" :key="neighborhood.id" :value="neighborhood.id" >{{neighborhood.name}}</option>
+                <option value="-1"  >Other</option>
             </select> 
+        </div>
+        <div v-if="neighborhood == -1" class="input">
+            <label for="">Neighborhood Name &nbsp; <small>Make sure neighborhood name is correct and avoid spellings mistakes</small></label>
+            <input type="text" class="input" v-model="new_neighborhood" placeholder="Neighborhood">
         </div>
         <div class="input">
             <button @click="update()" class="btn btn-update" :disabled="!isReady">Update</button>
@@ -53,6 +58,7 @@
                 state: '',
                 city: '',
                 neighborhood: '',
+                new_neighborhood: '',
 
                 books: []
            }
@@ -61,7 +67,7 @@
         {
             isReady()
             {
-                if(this.state && this.country && this.city && this.neighborhood)
+                if(this.state && this.country && this.city &&(this.neighborhood > 0 || this.new_neighborhood.length > 2))
                 {
                     return true
                 }else{
@@ -77,7 +83,8 @@
                     country: this.country,
                     state: this.state,
                     city: this.city,
-                    neighborhood: this.neighborhood
+                    neighborhood: this.neighborhood,
+                    new_neighborhood: this.new_neighborhood
                 })
                 .then(response => {
                     console.log(response)
@@ -114,6 +121,10 @@
                 axios.post(this.url +'/get/neighborhoods', {city: this.city})
                 .then(response => {
                     this.neighborhoods = response.data.neighborhoods
+                    if(!response.data.neighborhoods.length)
+                    {
+                        this.neighborhood  = -1
+                    }
                 })
                 .catch(error => {
                     console.log(error);

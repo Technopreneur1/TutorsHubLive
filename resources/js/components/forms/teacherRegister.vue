@@ -56,13 +56,14 @@
                 </div>
                 <div v-show="neighborhoods.length" class="input">
                     <label for="">Neighborhood</label>
-                    <select v-model="teacher.neighborhood" id="">
+                    <select class="input" v-model="teacher.neighborhood" id="">
                         <option value="" disabled>Neighborhood</option>
                         <option v-for="neighborhood in neighborhoods" :key="neighborhood.id" :value="neighborhood.id">{{neighborhood.name}}</option>
+                        <option value="-1"  >Other</option>
                     </select>
                 </div>
-                <div v-show="addOther" class="input">
-                    <label for="">Neighborhood  &nbsp; <small>Make sure neighborhood name is correct and avoid spellings mistake for maxmium reach to students</small></label>
+                <div v-if="teacher.neighborhood == -1" class="input">
+                    <label for="">Neighborhood Name &nbsp; <small>Make sure neighborhood name is correct and avoid spellings mistake for maxmium reach to students</small></label>
                     <input type="text" class="input" v-model="teacher.new_neighborhood" placeholder="Neighborhood">
                 </div>
 
@@ -106,7 +107,7 @@
                     hasRegistered: false,
                     loading: false,
                     addOther: false,
-                    step: 2,
+                    step: 1,
                     error: '',
                     levels: [],
                     disciplines: [],
@@ -253,7 +254,7 @@
                     }
                 }
                 if(this.step == 2){
-                    if(this.teacher.country && this.teacher.state && this.teacher.city && (this.teacher.neighborhood || this.teacher.new_neighborhood))
+                    if(this.teacher.country && this.teacher.state && this.teacher.city && (this.teacher.neighborhood > 0 || this.teacher.new_neighborhood))
                     {
                         return true;
                     }else{
@@ -351,7 +352,6 @@
             getCities()
             {
                 this.loading = true
-                this.addOther = false
                 axios.post(this.url +'/get/cities', {state: this.teacher.state})
                 .then(response => {
                     this.loading = false
@@ -370,7 +370,7 @@
                     this.neighborhoods = response.data.neighborhoods
                     if(!response.data.neighborhoods.length)
                     {
-                        this.addOther  = true
+                        this.teacher.neighborhood  = -1
                     }
                 })
                 .catch(error => {

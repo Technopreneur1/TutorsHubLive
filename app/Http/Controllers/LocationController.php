@@ -61,11 +61,47 @@ class LocationController extends Controller
     // Update USer's Location
     public function updateUserLocation(Request $request)
     {
+        
+        if($request->neighborhood < 1)
+        {
+            $existing = Location::where('name', $request->new_neighborhood)
+                                        ->where('type', 'neighborhood')
+                                        ->where('parent_id', $request['city'])
+                                        ->get()->first();
+            
+            if(!$existing)
+            {
+                $existing = Location::where('name', 'like', '%' . $request->new_neighborhood . '%')
+                                        ->where('type', 'neighborhood')
+                                        ->where('parent_id', $request['city'])
+                                        ->get()->first();
+                if($existing && strlen($existing->name) == $request->new_neighborhood)
+                {
+                    $len = strlen($existing->name);
+                    if($existing->name[0] == $request->new_neighborhood[0] && $existing->name[1] == $request->new_neighborhood[1] && $existing->name[$len-1] == $request->new_neighborhood[$len-1] && $existing->name[$len-2] == $request->new_neighborhood[$len-2]) {
+                        $neighborhood = $existing->id;
+                    }else {
+                        $new = Location::create(['name' => $request->new_neighborhood, 'type' => 'neighborhood', 'parent_id' => $request->city]);
+                        $neighborhood = $new->id;
+                    }
+                }
+                else {
+                    $new = Location::create(['name' => $request->new_neighborhood, 'type' => 'neighborhood', 'parent_id' => $request->city]);
+                    $neighborhood = $new->id;
+                }
+            }else {
+                $neighborhood = $existing->id;
+            }
+            
+        }else {
+            $neighborhood = $request->neighborhood;
+        }
+
         auth()->user()->update([
             'country_id' => $request->country,
             'state_id' => $request->state,
             'city_id' => $request->city,
-            'neighborhood_id' => $request->neighborhood,
+            'neighborhood_id' => $neighborhood,
         ]);
         return response()->json(['message' => 'success']);
     }
