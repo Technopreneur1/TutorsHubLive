@@ -104,15 +104,15 @@
                                 </tr>
                                 <tr>
                                     <td>Country</td>
-                                    <td>{{$user->country->name}}</td>
+                                    <td>{{$user->country ? $user->country->name : ''}}</td>
                                 </tr>
                                 <tr>
                                     <td>City</td>
-                                    <td>{{$user->city->name}}</td>
+                                    <td>{{$user->city ? $user->city->name: ''}}</td>
                                 </tr>
                                 <tr>
                                     <td>Neighborhood</td>
-                                    <td>{{$user->neighborhood->name}}</td>
+                                    <td>{{$user->neighborhood ? $user->neighborhood->name : ''}}</td>
                                 </tr>
                                 
                             </tbody>
@@ -121,6 +121,33 @@
                     </div>
                 </div>
             </div>
+            @if ($user->type == "teacher")
+                <div class="box">
+                    <div class="box-header">
+                        <div class="box-title">
+                            Bank/Paypal Information
+                        </div>
+
+                        <div class="box-body">
+                            <table class="table table-hover" style="background: #fff">
+                                <tbody>
+                                    
+                                    <tr>
+                                        <td>Paypal</td>
+                                        <td>{{$user->profile->paypal}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Bank</td>
+                                        <td>{{$user->profile->payment}}</td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            @endif
             @if ($user->type == "teacher")
                 <div class="row">
                     <div class="col-md-7">

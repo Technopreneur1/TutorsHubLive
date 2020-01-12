@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 @section('title')
-Edit Category
+Edit Discipline | Adminpanel
 @endsection()
 @section('content')
     <div class="container">
@@ -8,18 +8,18 @@ Edit Category
             <div class="col-md-6 col-md-offset-3">
                 <div class="box">
                     <div class="box-header">
-                    <h3 class="box-title">Exit Category</h3>
+                    <h3 class="box-title">Edit Discipline</h3>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <form action="{{route('update.category', $category->id)}}" method="POST">
+                        <form action="{{route('admin.discipline.update', $discipline->id)}}" method="POST">
                             <div class="form-group">
                               <label for="">Name*</label>
-                              <input type="text" name="name" id="" class="form-control" placeholder="Category Name" required value="{{$category->name}}">
+                              <input type="text" name="name" id="" class="form-control" placeholder="Category Name" required value="{{$discipline->name}}">
                             </div>
                             @csrf
                             <div class="form-group">
-                                <button class="btn btn-info">Publish</button>
+                                <button class="btn btn-info">Update</button>
                             </div>
                         </form>
                     </div>

@@ -7,6 +7,7 @@ use App\Meta;
 use App\User;
 use App\Level;
 use App\Earning;
+use App\Session;
 use App\Student;
 use App\Location;
 use App\Discipline;
@@ -16,6 +17,20 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
+    //Countries
+    public function sessions()
+    {
+        $sessions = Session::orderBy('created_at', 'desc')->get();
+        return view('admin.pages.sessions.index', ['sessions' => $sessions]);
+    }
+    public function viewSession($id)
+    {
+        $session = Session::findOrFail($id);
+        if(!$session->seen){
+            $session->update(['seen' => 1]);
+        }
+        return view('admin.pages.sessions.single', ['session' => $session]);
+    }
     //Countries
     public function settings()
     {
@@ -87,6 +102,16 @@ class AdminController extends Controller
         $disciplines = Discipline::orderBy('name', 'asc')->get();
         return view('admin.pages.disciplines.index', ['disciplines' => $disciplines]);
     }
+    public function editDiscipline($id)
+    {
+        $discipline = Discipline::findOrFail($id);
+        return view('admin.pages.disciplines.edit', ['discipline' => $discipline]);
+    }
+    public function editlevels($id)
+    {
+        $level = Level::findOrFail($id);
+        return view('admin.pages.levels.edit', ['level' => $level]);
+    }
     
     public function countries()
     {
@@ -127,6 +152,16 @@ class AdminController extends Controller
     {
         $users = User::where('type', 'student')->get();
         return view('admin.pages.users.index', ['users' => $users, 'type' => 'Students']);
+    }
+    public function bannedStudents()
+    {
+        $users = User::where('type', 'student')->where('is_banned', 1)->get();
+        return view('admin.pages.users.index', ['users' => $users, 'type' => 'Banned Students']);
+    }
+    public function bannedTutors()
+    {
+        $users = User::where('type', 'teacher')->where('is_banned', 1)->get();
+        return view('admin.pages.users.index', ['users' => $users, 'type' => 'Banned Tutors']);
     }
     
     // Return Single Tutor Page

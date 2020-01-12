@@ -51,14 +51,13 @@ Categories
                             <td><b>{{$level->name}}</b></td>
                             <td>{{$level->created_at ? $level->created_at->diffForHumans() : ''}} </td>
                             <td>
-                                <a href=" class="btn btn-success">Edit</a>
-                                {{-- <a href="{{route('edit.level', $level->id)}}" class="btn btn-success">Edit</a>
-                                @if (!$level->insights->count())
-                                    <form style="display: inline"  action="{{route('destroy.level', $level->id)}}" method="post">
+                                <a href="{{route('admin.level.edit', $level->id)}}" class="btn btn-success">Edit</a>
+                                @if (!$level->students()->count() && !$level->plans()->count() && !$level->ads()->count())
+                                    <form style="display: inline"  action="{{route('admin.level.delete', $level->id)}}" method="post">
                                         @csrf
-                                        <button onclick="return confirm('Are you sure? You want to delete this Product')" class="btn btn-danger">Delete</button>
+                                        <button onclick="return confirm('Are you sure? You want to delete this Level')" class="btn btn-danger">Delete</button>
                                     </form>
-                                @endif --}}
+                                @endif
                             </td>
                         </tr>
                         @endforeach

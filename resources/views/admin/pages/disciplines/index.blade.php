@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 @section('title')
-Disciplines | Adminpane;
+Disciplines | Adminpanel
 @endsection()
 @section('content')
     <div class="container-fluid">
@@ -51,14 +51,13 @@ Disciplines | Adminpane;
                             <td><b>{{$discipline->name}}</b></td>
                             <td>{{$discipline->created_at ? $discipline->created_at->diffForHumans() : ''}} </td>
                             <td>
-                                <a href=" class="btn btn-success">Edit</a>
-                                {{-- <a href="{{route('edit.discipline', $discipline->id)}}" class="btn btn-success">Edit</a>
-                                @if (!$discipline->insights->count())
-                                    <form style="display: inline"  action="{{route('destroy.discipline', $discipline->id)}}" method="post">
+                                <a href="{{route('admin.discipline.edit', $discipline->id)}}" class="btn btn-success">Edit</a>
+                                @if (!$discipline->students()->count() && !$discipline->plans()->count() && !$discipline->ads()->count())
+                                    <form style="display: inline"  action="{{route('admin.discipline.delete', $discipline->id)}}" method="post">
                                         @csrf
-                                        <button onclick="return confirm('Are you sure? You want to delete this Product')" class="btn btn-danger">Delete</button>
+                                        <button onclick="return confirm('Are you sure? You want to delete this Discipline')" class="btn btn-danger">Delete</button>
                                     </form>
-                                @endif --}}
+                                @endif
                             </td>
                         </tr>
                         @endforeach

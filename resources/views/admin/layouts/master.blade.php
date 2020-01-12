@@ -56,16 +56,46 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">Menu</li>
         <li class="{{{ (Request::is('adminpanel') ? 'active' : '') }}}"><a href="{{route('adminpanel')}}"><i class="fa fa-copy"></i> <span>Adminpanel</span></a></li>
-        <li class="{{{ (Request::is('adminpanel/tutors') ? 'active' : '') }}}"><a href="{{route('admin.tutors')}}"><i class="fa fa-copy"></i> <span>Tutors</span></a></li>
-        <li class="{{{ (Request::is('adminpanel/students') ? 'active' : '') }}}"><a href="{{route('admin.students')}}"><i class="fa fa-copy"></i> <span>Students</span></a></li>
+        <li class="treeview  {{{ (Request::is('adminpanel/tutors') || Request::is('adminpanel/tutors') ? 'active' : '') }}}">
+          <a href="#">
+            <i class="fa fa-user"></i> <span>Tutors</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="{{{ (Request::is('adminpanel/tutors') ? 'active' : '') }}}"><a href="{{route('admin.tutors')}}"><i class="fa fa-circle-o"></i>All</a></li>
+            <li class="{{{ (Request::is('adminpanel/tutors/banned') ? 'active' : '') }}}"><a href="{{route('admin.tutors.banned')}}"><i class="fa fa-circle-o"></i>Banned</a></li>
+          </ul>
+        </li>
+        <li class="treeview  {{{ (Request::is('adminpanel/students') ? 'active' : '') }}}">
+          <a href="#">
+            <i class="fa fa-user"></i> <span>Students</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="{{{ (Request::is('adminpanel/students') ? 'active' : '') }}}"><a href="{{route('admin.students')}}"><i class="fa fa-circle-o"></i>All</a></li>
+            <li {{{ (Request::is('adminpanel/students/banned') ? 'active' : '') }}}"><a href="{{route('admin.students.banned')}}"><i class="fa fa-circle-o"></i>Banned</a></li>
+          </ul>
+        </li>
+        <li class="{{{ (Request::is('adminpanel/sessions') ? 'active' : '') }}}"><a href="{{route('admin.sessions')}}"><i class="fa fa-copy"></i> <span>Sessions</span> <span class="badge bg-aqua pull-right">{{App\Session::where('seen', 0)->count()}}</span></a></li>
         <li class="{{{ (Request::is('adminpanel/countries') ? 'active' : '') }}}"><a href="{{route('admin.countries')}}"><i class="fa fa-copy"></i> <span>Locations</span></a></li>
         <li class="{{{ (Request::is('adminpanel/disciplines') ? 'active' : '') }}}"><a href="{{route('admin.disciplines')}}"><i class="fa fa-copy"></i> <span>Disciplines</span></a></li>
         <li class="{{{ (Request::is('adminpanel/levels') ? 'active' : '') }}}"><a href="{{route('admin.levels')}}"><i class="fa fa-copy"></i> <span>Levels</span></a></li>
         <li class="{{{ (Request::is('adminpanel/settings') ? 'active' : '') }}}"><a href="{{route('admin.settings')}}"><i class="fa fa-copy"></i> <span>Settings</span></a></li>
         <li class="{{{ (Request::is('adminpanel/admins') ? 'active' : '') }}}"><a href="{{route('admin.admins')}}"><i class="fa fa-copy"></i> <span>Admins</span></a></li>
         <li class="{{{ (Request::is('adminpanel/add-admin') ? 'active' : '') }}}"><a href="{{route('admin.add.admin')}}"><i class="fa fa-copy"></i> <span>Add Admins</span></a></li>
+        <li style="padding: 5px 15px">
+          <form action="{{route('logout')}}" method="post">
+            @csrf
+            <button style="border: none;width: 100%;padding: 3px;background: #4a4747;" type="submit" class="btn btn-danger">Logout</button>
+          </form>
+        </li>
+        
         {{-- <li {{{ (Request::is('adminpanel/topics') ? 'active' : '') }}}"><a href="{{route('topics')}}"><i class="fa fa-comments"></i> <span>Teachers</span></a></li>
-        <li class="treeview  {{{ (Request::is('adminpanel/insights') ? 'active' : '') }}}">
+        {{-- <li class="treeview  {{{ (Request::is('adminpanel/insights') ? 'active' : '') }}}">
           <a href="#">
             <i class="fa fa-eye"></i> <span>Insights</span>
             <span class="pull-right-container">
@@ -76,19 +106,8 @@
             <li {{{ (Request::is('adminpanel/insights') ? 'class=active' : '') }}}><a href="{{route('insights')}}"><i class="fa fa-circle-o"></i>All</a></li>
             <li {{{ (Request::is('adminpanel/add-insight') ? 'class=active' : '') }}}><a href="{{route('add.insight')}}"><i class="fa fa-circle-o"></i>Add New</a></li>
           </ul>
-        </li>
-        <li class="treeview  {{{ (Request::is('adminpanel/series') ? 'active' : '') }}}">
-          <a href="#">
-            <i class="fa fa-calendar"></i> <span>Series</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li {{{ (Request::is('adminpanel/series') ? 'class=active' : '') }}}><a href="{{route('series')}}"><i class="fa fa-circle-o"></i>All</a></li>
-            <li {{{ (Request::is('adminpanel/add-series') ? 'class=active' : '') }}}><a href="{{route('add.series')}}"><i class="fa fa-circle-o"></i>Add New</a></li>
-          </ul>
         </li> --}}
+        
 
 
         {{-- @endif --}}

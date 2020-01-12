@@ -276,7 +276,9 @@ Route::get('/canada', function () {
     
         Route::get('/', 'AdminController@adminpanel')->name('adminpanel');
         Route::get('/tutors', 'AdminController@teachers')->name('admin.tutors');
+        Route::get('/tutors/banned', 'AdminController@bannedTutors')->name('admin.tutors.banned');
         Route::get('/students', 'AdminController@students')->name('admin.students');
+        Route::get('/students/banned', 'AdminController@bannedStudents')->name('admin.students.banned');
         Route::get('/user/{id}', 'AdminController@getUser')->name('admin.user');
         Route::get('/countries', 'AdminController@countries')->name('admin.countries');
         Route::get('/countries/{id}', 'AdminController@getCountry')->name('admin.country');
@@ -285,6 +287,8 @@ Route::get('/canada', function () {
         Route::get('/settings', 'AdminController@settings')->name('admin.settings');
         Route::get('/levels', 'AdminController@levels')->name('admin.levels');
         Route::get('/admins', 'AdminController@admins')->name('admin.admins');
+        Route::get('/sessions', 'AdminController@sessions')->name('admin.sessions');
+        Route::get('/sessions/{id}', 'AdminController@viewSession')->name('admin.session.view');
 
         Route::get('/add-admin', 'AdminController@createAdmin')->name('admin.add.admin');
         Route::post('/add-admin', 'AdminController@postAdmin')->name('admin.post.admin');
@@ -293,10 +297,16 @@ Route::get('/canada', function () {
         
         Route::post('/post-country', 'LocationController@postCountries')->name('admin.add.country');
         Route::get('/disciplines', 'AdminController@disciplines')->name('admin.disciplines');
+        Route::get('/disciplines/{id}', 'AdminController@editDiscipline')->name('admin.discipline.edit');
+        Route::post('/discipline-delete/{id}', 'DisciplineController@destroy')->name('admin.discipline.delete');
+        Route::post('/disciplines/{id}', 'DisciplineController@update')->name('admin.discipline.update');
         Route::post('/levels', 'LevelController@post')->name('admin.add.level');
         Route::post('/disciplines', 'DisciplineController@post')->name('admin.add.discipline');
         Route::post('/update-fee', 'MetaController@updateFee')->name('admin.update.fee');
-
+        
+        Route::get('/levels/{id}', 'AdminController@editlevels')->name('admin.level.edit');
+        Route::post('/levels/{id}', 'LevelController@update')->name('admin.level.update');
+        Route::post('/level-delete/{id}', 'LevelController@destroy')->name('admin.level.delete');
 
         Route::post('/post-payment', 'PaymentController@post')->name('admin.post.payment');
         Route::post('/ban/{id}', 'UserController@ban')->name('admin.ban');

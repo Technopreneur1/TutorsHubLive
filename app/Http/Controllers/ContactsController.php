@@ -100,7 +100,7 @@ class ContactsController extends Controller
             'text' => $request->text
         ]);
 
-        // broadcast(new NewMessage($message));
+        broadcast(new NewMessage($message));
 
         return response()->json($message);
     }
