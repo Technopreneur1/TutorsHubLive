@@ -1,6 +1,9 @@
 <template>
     <div class="profile-page">
          <full-loader v-if="loading" ></full-loader>
+         <transition  name="easy-appear" enter-active-class="animated slideInLeft" leave-active-class="animated slideOutLeft">
+            <start-chat v-if="chatWith = id" :url="url" :to="chatWith = id" @cancelChat="chatWith = id = null"></start-chat>
+         </transition>
         <transition name="easy-appear" enter-active-class="animated slideInLeft" leave-active-class="animated slideOutLeft">
             <edit-profile v-if="editing" @cancel="editing = false" :url="url" :user="user"></edit-profile>
         </transition>
@@ -32,7 +35,6 @@
         <div class="full-container">
             <div class="wr">
                 <div v-if="isUser" @click="editing = true" class="editprofilebtn">Edit Profile</div>
-                <span v-if="!isUser" @click="addToFav()" class="favbtn"><i  :class="[is_fav ? 'fas' : 'far']" class="fa-heart"></i></span>
                 <div class="who">
                     <div @click="selectAvatar()" class="avatar">
                         <div v-if="isUser" class="overlay"><i class="fas fa-camera"></i></div>
@@ -52,13 +54,22 @@
                     {{user.country ?user.country.name: ''}}
                 </div>
             </div>
+            <div class="actions-bar">
+                <div v-if="!isUser" @click="addToFav()" class="fav">
+                    <button  @click="addToFav()" v-if="is_fav"><i class="fas fa-heart"></i> Remove</button>
+                    <button  v-else><i class="far fa-heart"></i> Save Profile</button>
+                </div>
+                <div  v-if="!isUser" class="msg">
+                    <button @click="contact(user.id)" class="btn"><i class="fas fa-comment"></i> Message</button>
+                </div>
+            </div>
            
             <div v-if="user.profile.bio" class="bio">
                 {{user.profile.bio}}
             </div>
             
             <div v-if="user.type == 'teacher'" class="plans-section">
-                <div class="newrow" style="background: #fff"><span>Book a Session</span></div>
+                <div class="newrow" style="background: #fff"><span>My Plans</span></div>
                 <plans v-if="user.profile.plans.length" :url="url" :plans="user.profile.plans" :authuser="authuser"  @book="bookNow" :user="user"></plans>   
                 <div class="text-center" v-else >No Plan Available. <span v-if="!isUser"> please contact the tutor</span></div>
             </div>
@@ -145,8 +156,9 @@ import { type } from 'os'
                editAvatar: false,
                is_fav: this.likes,
                editing: false,
-               openForm: '',
                books: [],
+               openForm: '',
+               chatWith: null,
                img: null,
                bookPlan: null,
                coordinates: {
@@ -191,6 +203,25 @@ import { type } from 'os'
             }
         },
         methods: {
+            contact(id)
+            {
+                    this.loading = true
+                    axios.post(this.url +'/check/hasConversation', {
+                        id: id
+                    })
+                    .then(response => {
+                        this.loading = false
+                        if(response.data.has)
+                        {
+                            window.location = this.url + "/messages?u=" + id;
+                        }else{
+                            this.chatWith = id
+                        }
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+            },
             selectAvatar()
             {
                 this.image = null

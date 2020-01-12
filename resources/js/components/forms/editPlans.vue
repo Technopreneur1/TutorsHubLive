@@ -1,35 +1,87 @@
 <template>
     <div class="editPlans">
-        <div class="create">
-            <div class="input">
-                <label for="">Discipline</label>
-                <select v-model="discipline" id="">
-                    <option value="">-- Discipline --</option>
-                    <option v-for="discipline in disciplines" :value="discipline.id" :key="discipline.id">{{discipline.name}}</option>
-                </select>
+       <span id="success" @click="cancel()" class="btn-cancel"><i class="fas fa-long-arrow-alt-left"></i></span>
+       <div id="edp"></div>
+       <div v-if="success" class="success">{{success}}</div>
+        <section class="addWrap">
+            <div class="optbtn">
+                <div v-if="!addNew" @click="addNewPlan" class="gradient-btn">
+                    <button><i class="fas fa-plus"></i> Add New Plan</button>
+                </div>
+                <div v-else @click="addNew = false" class="gradient-btn">
+                    <button><i class="fas fa-times"></i> Cancel</button>
+                </div>
             </div>
-            <div class="input">
-                <label for="">Level</label>
-                <select v-model="level" id="">
-                    <option value="">-- Level --</option>
-                    <option v-for="level in levels" :value="level.id" :key="level.id">{{level.name}}</option>
-                </select>
+            <transition  name="easy-appear" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut faster">
+                <div v-if="addNew" class="create">
+                    <div class="input">
+                        <label for="">Discipline</label>
+                        <select v-model="discipline" id="">
+                            <option value="">-- Discipline --</option>
+                            <option v-for="discipline in disciplines" :value="discipline.id" :key="discipline.id">{{discipline.name}}</option>
+                        </select>
+                    </div>
+                    <div class="input">
+                        <label for="">Level</label>
+                        <select v-model="level" id="">
+                            <option value="">-- Level --</option>
+                            <option v-for="level in levels" :value="level.id" :key="level.id">{{level.name}}</option>
+                        </select>
+                    </div>
+                    <div class="input">
+                        <label for="">Hourly Rate - $$</label>
+                        <input type="number" v-model="rate" placeholder="Rate">
+                    </div>
+                    <div v-if="error" class="error">{{error}}</div>
+                    <button @click="post" class="btn btn-gradientbg">Save</button>
+                </div>
+            </transition>
+            <transition name="easy-appear" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut faster">
+                <div v-if="editPlan" class="create">
+                    <div class="input">
+                        <label for="">Discipline</label>
+                        <select v-model="editPlan.discipline_id" id="">
+                            <option value="">-- Discipline --</option>
+                            <option v-for="discipline in disciplines" :value="discipline.id" :key="discipline.id">{{discipline.name}}</option>
+                        </select>
+                    </div>
+                    <div class="input">
+                        <label for="">Level</label>
+                        <select v-model="editPlan.level_id" id="">
+                            <option value="">-- Level --</option>
+                            <option v-for="level in levels" :value="level.id" :key="level.id">{{level.name}}</option>
+                        </select>
+                    </div>
+                    <div class="input">
+                        <label for="">Hourly Rate - $$</label>
+                        <input type="number" v-model="editPlan.rate" placeholder="Rate">
+                    </div>
+                    <div v-if="error" class="error">{{error}}</div>
+                    <button @click="update" class="btn btn-gradientbg">Save</button>
+                </div>
+            </transition>
+        </section>
+        <div class="allWrap">
+            <div class="newrow">
+                <span style="background: #fff">My Active Plans</span>
             </div>
-            <div class="input">
-                <label for="">Hourly Rate - $$</label>
-                <input type="number" v-model="rate" placeholder="Rate">
-            </div>
-            <button @click="post" class="btn btn-de">Save</button>
-        </div>
-        <div class="newrow">
-            <span style="background: #fff">My Plans</span>
-        </div>
-        <div class="my-plans">
-            <div v-for="plan in plans" :key="plan.id" class="plan">
-                <div class="subject">{{plan.discipline.name}}</div>
-                <div class="level">{{plan.level.name}}</div>
-                <div class="rate">${{plan.rate}}</div>
-            </div>
+            <table class="my-plans">
+                <tr class="plan ph">
+                    <th>Subject</th>
+                    <th>Level</th>
+                    <th>Hourly Rate</th>
+                    <th>Action</th>
+                </tr>
+                <tr v-for="plan in plans" :key="plan.id" class="plan">
+                    <td class="subject">{{plan.discipline.name}}</td>
+                    <td class="level">{{plan.level.name}}</td>
+                    <td class="rate">${{plan.rate}}</td>
+                    <td class="act">
+                        <span @click="editThis(plan)" class="edit"><i class="fas fa-edit"></i></span>
+                        <span @click="deletePlan(plan)" class="del"><i class="fas fa-trash"></i></span>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 </template>
@@ -39,20 +91,55 @@
         data()
         {
            return{
+                addNew: false,
                 plans: [],
                 disciplines: [],
                 levels: [],
                 discipline: '',
                 level: '',
                 rate: '',
-                success: ''
+                success: '',
+                editPlan: '',
+                error: ''
            }
         },
         methods: {
+            addNewPlan()
+            {
+                this.editPlan = ''
+                this.addNew = true
+            },
+            cancel()
+            {
+                this.$emit('cancel')
+            },
+            editThis(plan){
+                this.addNew = false
+                this.editPlan = plan
+                document.getElementById('edp').scrollIntoView();
+            },
+            deletePlan(plan)
+            {
+                this.success = ""
+                axios.post(this.url +'/delete/plan', 
+                    {
+                        id: plan.id
+                    })
+                    .then(response => {
+                        console.log(response)
+                        this.success  = "Plan Deleted"
+                        this.plans.splice(this.plans.indexOf(plan), 1)
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+            },
             post()
             {
+                this.success = ""
                 if(this.rate && this.discipline && this.level)
                 {
+                    this.error = ''
                     axios.post(this.url +'/post/plan', 
                     {
                         discipline: this.discipline,
@@ -71,7 +158,32 @@
                         console.log(error);
                     })
                 }else{
-                    alert ("Please Complete The Form To Save")
+                    this.error = "Please Complete The Form To Save"
+                }
+            },
+            update()
+            {
+                this.success = ""
+                if(this.editPlan.rate && this.editPlan.discipline && this.editPlan.level)
+                {
+                    this.error = ''
+                    axios.post(this.url +'/update/plan', 
+                    {
+                        discipline: this.editPlan.discipline_id,
+                        level: this.editPlan.level_id,
+                        rate: this.editPlan.rate,
+                        id: this.editPlan.id,
+                    })
+                    .then(response => {
+                        console.log(response)
+                        this.success  = "Plan Updated"
+                        this.editPlan = ''
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+                }else{
+                    this.error = "Please Complete The Form To Update"
                 }
             },
            getPlans()

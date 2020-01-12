@@ -84,7 +84,7 @@ class TeacherController extends Controller
     }
     public function updatePayment(Request $request)
     {
-        auth()->user()->profile()->update(['payment' => $request->payment]);
+        auth()->user()->profile()->update(['payment' => $request->payment, 'paypal' => $request->paypal]);
         
         return response()->json(['msg' =>'success']);
     }

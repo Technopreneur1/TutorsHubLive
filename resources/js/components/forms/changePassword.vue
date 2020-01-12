@@ -1,5 +1,6 @@
 <template>
     <div class="changePassword">
+         <span id="success" @click="$emit('cancel')" class="btn-cancel"><i class="fas fa-long-arrow-alt-left"></i></span>
         <div class="ttl">Change Password</div>
         <div class="chform">
             <div class="input">

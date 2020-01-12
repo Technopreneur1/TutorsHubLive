@@ -1,6 +1,7 @@
 <template>
     <div class="ad-result">
         <div class="ad">
+            <div class="title">{{ad.title}}</div>
             <div class="student">
                 <a :href="url + '/user/' + ad.user.id" class="avatar">
                     <img :src="avatar(ad.user)" alt="">
@@ -12,6 +13,7 @@
                     </a>
                     <div class="contactbtn">
                         <button v-if="authid == ad.user.id" @click="deleteMyAd(ad.id)" class="btn btn-gradient">Delete</button>
+                        <button v-if="authid == ad.user.id" @click="editAd()" class="btn btn-gradient">Edit</button>
                         <button  v-else @click="contact(ad.user.id)" class="btn btn-msg">Message</button>
                     </div>
                 </div>
@@ -36,6 +38,10 @@
            }
         },
         methods: {
+            editAd()
+            {
+                this.$emit("editAd")
+            },
             avatar(user)
             {
                 if(user.avatar){

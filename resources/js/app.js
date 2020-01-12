@@ -31,6 +31,7 @@ Vue.component('register-form', require('./components/forms/register.vue').defaul
 Vue.component('teacher-register', require('./components/forms/teacherRegister.vue').default);
 Vue.component('student-register', require('./components/forms/studentRegister.vue').default);
 Vue.component('create-ad', require('./components/forms/createAd.vue').default);
+Vue.component('edit-ad', require('./components/forms/editAd.vue').default);
 Vue.component('profile', require('./components/pages/user/profile.vue').default);
 Vue.component('favorites', require('./components/pages/user/favorites.vue').default);
 Vue.component('sessions', require('./components/pages/user/sessions.vue').default);

@@ -1,79 +1,92 @@
-@media screen and ( max-width: 768px )
-    .create-ad-component
-        .options
+
+.create-ad-component
+    .options
+        padding: 15px
+        .btn-create
+            background: #2ab33c
+            color: #ffff
+            animation: slide 1s
+    .create-ad-slide
+        background: #ffffff
+        position: fixed
+        top: $nav-height
+        bottom: 0
+        left: 0
+        right: 0
+        overflow-y: scroll
+        padding: 15px 0 
+        
+        .btn-back
+            position: absolute
+            top: 10px
+            left: 15px
+            font-size: 25px
+            border-radius: 04px
+            text-align: center
+            color: #2575bc
+            display: flex
+            justify-content: center
+            align-items: center
+            font-weight: bold
+        .text
             padding: 15px
-            .btn-create
-                background: #2ab33c
-                color: #ffff
-                animation: slide 1s
-        .create-ad-slide
-            background: #ffffff
-            position: fixed
-            top: $nav-height
-            bottom: 0
-            left: 0
-            right: 0
-            overflow-y: scroll
-            padding: 15px 0 
-            
-            .btn-back
-                position: absolute
-                top: 10px
-                left: 15px
-                font-size: 25px
-                border-radius: 04px
-                text-align: center
-                color: #2575bc
-                display: flex
-                justify-content: center
-                align-items: center
+            text-align: center
+            .title
                 font-weight: bold
-            .text
-                padding: 15px
+                font-size: 20px
+            .info
+                font-size: 15px
+                color: #333
+        .form-box
+            padding: 0 15px
+            background: #fff
+            .error
+                background: #F44336
+                color: #fff
+                padding: 4px 15px
+                margin: 10px 0 15px
+                border-radius: 50px
                 text-align: center
-                .title
+            .success
+                background: #53a221
+                color: #fff
+                text-align: center
+                padding: 5px 20px
+                border-radius: 50px
+                margin: 10px 0 15px
+            .locations
+                display: flex
+                justify-content: space-between
+                .current
                     font-weight: bold
-                    font-size: 20px
-                .info
                     font-size: 15px
-                    color: #333
-            .form-box
-                padding: 0 15px
-                background: #fff
-                
-                .locations
-                    display: flex
-                    justify-content: space-between
-                    .current
-                        font-weight: bold
-                        font-size: 15px
-                    .change
-                        color: $blue
-                        font-weight: bold
-                     
-                .newrow
-                    border-top: 1px dotted #4a4a4a
-                    position: relative
+                .change
+                    color: $blue
+                    font-weight: bold
+                    
+            .newrow
+                border-top: 1px dotted #4a4a4a
+                position: relative
+                background: inherit
+                margin: 20px 0
+                span
+                    content: "Location"
+                    position: absolute
+                    top: 0
+                    color: #4a4a4a
                     background: inherit
-                    margin: 20px 0
-                    span
-                        content: "Location"
-                        position: absolute
-                        top: 0
-                        color: #4a4a4a
-                        background: inherit
-                        transform: translate(-50%, -50%)
-                        left: 50%
-                        padding: 0px 10px
-                .btns
-                    display: flex
-                    justify-content: space-between
-                    .btn-cancel
-                        background: #333333
-                        color: #ffffff
-                    .btn-post
-                        background: $blue
-                        color: #ffffff
+                    transform: translate(-50%, -50%)
+                    left: 50%
+                    padding: 0px 10px
+            .btns
+                display: flex
+                justify-content: space-between
+                .btn-cancel
+                    background: #333333
+                    color: #ffffff
+                .btn-post
+                    background: $blue
+                    color: #ffffff
 .btn-create
     background: #2ab33c
     color: #ffff

@@ -1,6 +1,6 @@
 <template>
     <div   class="edit-profile-slideout" :class="{full: 'editPlans'}">
-        <span id="success" v-if="!editLocation && !editPlans" @click="$emit('cancel')" class="btn-cancel"><i class="fas fa-long-arrow-alt-left"></i></span>
+       
         <!-- <transition  name="easy-appear" enter-active-class="animated slideInLeft" leave-active-class="animated slideOutLeft"> -->
         <div v-if="editLocation" class="full-container">
             <edit-location :user='user' @cancel="editLocation = false" :url="url"></edit-location>
@@ -9,11 +9,12 @@
             <edit-plans :user='user' @cancel="editPlans = false" :url="url"></edit-plans>
         </div>
         <div v-if="editPassword" class="full-container">
-            <change-password :user='user' @cancel="editPlans = false" :url="url"></change-password>
+            <change-password :user='user' @cancel="editPassword = false" :url="url"></change-password>
         </div>
         <!-- </transition> -->
         
         <div v-if="!editPlans && !editLocation && !editPassword" class="full-container">
+             <span id="success" v-if="!editLocation && !editPlans" @click="$emit('cancel')" class="btn-cancel"><i class="fas fa-long-arrow-alt-left"></i></span>
             <transition  name="easy-appear" enter-active-class="animated bounce" leave-active-class="animated fadeOut">
                 <div v-if="success"  class="input success"><span>{{success}}</span></div>
             </transition>

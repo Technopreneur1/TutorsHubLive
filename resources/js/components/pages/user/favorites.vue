@@ -10,6 +10,7 @@
                 <div class="info">
                     <div class="name">{{fav.user.name}}</div>
                 </div>
+                
                </a>
                <span @click="del(fav)" class="del"><i class="fa fa-times"></i></span>
            </div>
@@ -39,7 +40,7 @@
                 top: 3px 
                 right: 3px
                 font-size: 18px
-                color: #df4c32
+                color: #e97438
                 &:hover
                     color: #000
                     cursor: pointer
@@ -49,6 +50,7 @@
             .avatar
                 width: 75px
                 height: 75px
+                margin: 0 auto
                 img
                     max-width: 100%
                     border-radius: 50%

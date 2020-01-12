@@ -6,7 +6,19 @@
        <full-loader v-if="loading" ></full-loader>
        <div class="title">My Payment Info <span @click="editPayment = true">Edit <i class="fas fa-pencil"></i></span></div>
        <div class="payment-info-box">
-           {{authuser.profile.payment ? authuser.profile.payment : "No payment account added. Please add your payment deatils."}}
+           <div v-if="authuser.profile.paypal" class="paypal">
+               <span>Paypal: &nbsp;</span>
+               {{authuser.profile.paypal}}
+           </div>
+           <div v-if="authuser.profile.payment" class="payment">
+               <span>Bank: &nbsp; &nbsp;</span>
+               {{authuser.profile.payment}}
+           </div>
+           
+           <div v-if="!authuser.profile.payment && !authuser.profile.paypal" class="paypal">
+               No payment account added. Please add your payment deatils.
+           </div>
+
        </div>
        <div class="title">Earnings</div>
        <div class="earnings-row">

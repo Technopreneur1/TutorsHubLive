@@ -40,4 +40,32 @@ class SessionController extends Controller
         ]);
         return response()->json(['session' => $session]);
     }
+
+    public function complete(Request $request)
+    {
+        $session = Session::findOrFail($request->id);
+        if(auth()->user()->profile->id == $session->teacher_id)
+        {
+            $session->update(['completed' => true]);
+            return response()->json(['msg' => 'success']);
+        }else {
+            return response()->json(['msg' => 'error']);
+        }
+    }
+    public function postReview(Request $request)
+    {
+        $session = Session::findOrFail($request->id);
+        if($request->by == 'teacher')
+        {
+            $session->update(['student_rating' => $request->rating, 'student_review' => $request->review]);
+            return response()->json(['msg' => 'success', 'session' => $session]);
+        }
+        if($request->by == 'student')
+        {
+            $session->update(['tutor_rating' => $request->rating, 'tutor_review' => $request->review]);
+            return response()->json(['msg' => 'success', 'session' => $session]);
+        }else {
+            return response()->json(['msg' => 'error']);
+        }
+    }
 }

@@ -1,6 +1,7 @@
 .gradient-btn
     background: linear-gradient(30deg , #2575bc, #7df48c)
     padding: 2px
+    transition: all ease 0.3s
     border-radius: 50px
     button, a
         border-radius: 50px
@@ -8,8 +9,10 @@
         background: #ffffff
         color: #000000
         border: none
-        &:hover
-            background: none
+        transition: all ease 0.3s
+    &:hover
+        button, a
+            background: linear-gradient(30deg , #2575bc, #7df48c)
             color: #ffffff
             text-decoration: none
 
@@ -17,6 +20,7 @@
 .btn-lightgreen
     background: #7df48c
     border: #7df48c
+    transition: all ease 0.3s
 
 .btn-gradient
     background: linear-gradient(30deg, #2575bc, #7df48c)
@@ -24,5 +28,26 @@
     color: #fff
     border: none
     font-weight: bold
+    transition: all ease 0.3s
     font-size: 15px
     padding: 5px 20px
+    text-decoration: none
+    &:hover
+        color: #ffffff
+        background: #000
+        button
+            transition: all ease 0.3s
+            background: linear-gradient(30deg, #2575bc, #7df48c)
+
+.btn-redgradientbg
+    border: none
+    padding: 5px 25px
+    border-radius: 30px
+    transition: all ease 0.3s
+    font-size: 17px
+    color: #ffffff
+    background: linear-gradient(30deg, #d22f2a, #f3963d)
+    text-decoration: none
+    &:hover
+        background: linear-gradient(30deg, #000000, #f3963d)
+        color: #ffffff

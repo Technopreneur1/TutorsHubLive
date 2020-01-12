@@ -1,11 +1,14 @@
 <template>
     <div class="full-container">
-        <div class="ttl">My <span>Ads</span></div>
-        <div v-if="ads.length" class="ad-results">
-            <ad v-for="ad in ads" :url="url" :ad="ad" :authid="authid" :key="ad.id"></ad>
-        </div>
-        <div v-else class="nothing">
-            <p>You have no active ad</p>
+        <edit-ad @cancel="editAd = null" v-if="editAd" :url="url" :thead="editAd"></edit-ad>
+        <div v-else class="else">
+            <div class="ttl">My <span>Ads</span></div>
+            <div v-if="ads.length" class="ad-results">
+                <ad v-for="ad in ads"  @editAd="editAd = ad" :url="url" :ad="ad" :authid="authid" :key="ad.id"></ad>
+            </div>
+            <div v-else class="nothing">
+                <p>You have no active ad</p>
+            </div>
         </div>
     </div>
     <!-- <div class="ads-list">
@@ -26,6 +29,7 @@
         data()
         {
            return{
+               editAd: null,
                openForm: '',
                ads: [],
                books: []

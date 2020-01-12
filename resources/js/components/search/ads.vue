@@ -62,7 +62,7 @@
             <div v-if="ads.length" class="ad-results">
                 <ad v-for="ad in ads" @startConversation="startConversation(ad.user.id)" :url="url" :ad="ad" :key="ad.id"></ad>
             </div>
-            <div class="nothing">
+            <div v-else class="nothing">
                 <p>No Ad Found</p>
             </div>
          </div>

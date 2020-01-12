@@ -58,17 +58,22 @@ Route::post('post/teacher', 'TeacherController@post');
 Route::post('post/ad', 'AdController@post');
 Route::post('post/plan', 'PlanController@post');
 Route::post('post/avatar', 'UserController@postAvatar');
+Route::post('post/complete-session', 'SessionController@complete');
+Route::post('post/review', 'SessionController@postReview');
 
 
 Route::post('update/location', 'LocationController@updateUserLocation');
 Route::post('update/user', 'UserController@updateUserProfile');
 Route::post('update/password', 'UserController@updatePassword');
 Route::post('update/payment-info', 'TeacherController@updatePayment');
+Route::post('/update/plan', 'PlanController@update');
+Route::post('update/ad', 'AdController@update');
 
 
 // Delete
 Route::post('/delete/my-ad', 'AdController@destroy');
 Route::post('/delete/favorite', 'FavoriteController@destroy');
+Route::post('/delete/plan', 'PlanController@destroy');
 
 Route::get('/contacts', 'ContactsController@get');
 Route::get('/conversation/{id}', 'ContactsController@getMessagesFor');
@@ -138,6 +143,30 @@ Route::get('/us1', function () {
     
     Location::create(['name' => "United States", 'type' => 'country', 'parent_id' => 0]);
     $jsonFile = file_get_contents(asset('usaa.json'));
+    $locations = json_decode($jsonFile);
+    // dd($locations);
+    foreach($locations as $country)
+    {
+        $us = Location::where("name", "United States")->get()->first();
+        $usid = $us->id;
+        foreach($country->states as $state)
+        {
+            $state_model = Location::create(['name' => $state->name, 'type' => 'state', 'parent_id' => $usid]);
+            // echo array_keys($state);
+
+            foreach($state->cities as $city)
+            {
+                Location::create(['name' => $city, 'type' => 'city', 'parent_id' => $state_model->id]);
+            }
+        }
+        echo "DOne";
+    }
+
+
+    });
+Route::get('/us1a', function () {
+    
+    $jsonFile = file_get_contents(asset('usa1.json'));
     $locations = json_decode($jsonFile);
     // dd($locations);
     foreach($locations as $country)

@@ -1,6 +1,11 @@
 <template>
     <div class="conversation">
-        <h1>{{ contact ? contact.name : 'Select a Contact' }}</h1>
+        <h1 v-if="contact">
+            <a :href="url+'/user/'+contact.id">{{contact.name}}</a>
+        </h1>
+        <h1 v-else>
+            Select a contact
+        </h1>
         <MessagesFeed :contact="contact" :messages="messages"/>
         <MessageComposer @send="sendMessage"/>
     </div>
@@ -12,6 +17,9 @@
 
     export default {
         props: {
+            url: {
+                type: String
+            },
             contact: {
                 type: Object,
                 default: null

@@ -5,7 +5,7 @@
         </div> -->
             <transition name="easy-appear" enter-active-class="animated slideInLeft" leave-active-class="animated slideOutLeft">
                 <div  class="create-ad-slide ">
-                    <a :href="url" class="btn-back"><i class="fas fa-long-arrow-alt-left"></i></a>
+                    <a @click="$emit('cancel')" class="btn-back"><i class="fas fa-long-arrow-alt-left"></i></a>
                     <div class="text">
                         <div class="title">Create Ad</div>
                         <div class="info">Your ad will be visible to the tutors in selected area.</div>
@@ -59,10 +59,10 @@
                         </transition>
                         <div v-if="!editingLocation" class="locations">
                             <span class="current">
-                                {{user.neighborhood ? user.neighborhood.name : ''}}
-                                {{user.city ? ', '+user.city.name : ''}}
-                                {{user.state ? ', '+user.state.name : ''}}
-                                {{user.country ? ', '+user.country.name : ''}}
+                                {{thead.neighborhood ? thead.neighborhood.name : ''}}
+                                {{thead.city ? ', '+thead.city.name : ''}}
+                                {{thead.state ? ', '+thead.state.name : ''}}
+                                {{thead.country ? ', '+thead.country.name : ''}}
                                 </span>
                             <span @click="editingLocation = true" class="change">Change <i class="fas fa-cog"></i></span>
                         </div>
@@ -91,21 +91,45 @@
                             <textarea class="form-control" v-model="ad.description" rows="4" placeholder="Describe your requirements (optional)"></textarea>
                         </div>
                         <div v-if="error" class="error">{{error}}</div>
+                        <div v-if="success" class="success">{{success}}</div>
                         <div class="btns">
-                            <button class="btn btn-cancel">Cancel</button>
-                            <button @click="postAd" class="btn btn-post" :disabled="posting" >Post Now <i v-if="posting" class="fas fa-spinner fa-spin"></i> </button>
+                            <button @click="$emit('cancel')" class="btn btn-cancel">Cancel</button>
+                            <button @click="updateAd()" class="btn btn-post" :disabled="posting" >Post Now <i v-if="posting" class="fas fa-spinner fa-spin"></i> </button>
                         </div>
                     </div>
                 </div>
             </transition>
     </div>
 </template>
-
+<style lang="sass" scoped>
+.error
+    background: #F44336
+    color: #fff
+    padding: 4px 15px
+    margin: 10px 0 15px
+    border-radius: 50px
+    text-align: center
+.success
+    background: #53a221
+    color: #fff
+    text-align: center
+    padding: 5px 20px
+    border-radius: 50px
+    margin: 10px 0 15px
+</style>
 <script>
     export default {
-        props: ['url', 'city',],
+            props: {
+            url: {
+                type: String
+            },
+            thead: {
+                type: Object
+            },
+            },
         data(){
             return {
+                success: '',
                 error: '',
                 show: false,
                 posting: false,
@@ -118,15 +142,15 @@
                 cities: [],
                 neighborhoods: [],
                 ad: {
-                    title: '',
-                    description: '',
-                    level: '',
-                    discipline: '',
-                    neighborhood: '',
+                    title: this.thead.title,
+                    description: this.thead.description,
+                    level: this.thead.level_id,
+                    discipline: this.thead.discipline_id,
+                    neighborhood: this.thead.neighborhood_id,
                     new_neighborhood: '',
-                    city: '',
-                    state: '',
-                    country: ''
+                    city: this.thead.city_id,
+                    state: this.thead.state_id,
+                    country: this.thead.country_id
                 }
             }
         },
@@ -171,7 +195,7 @@
                     return false
                 }
             },
-            postAd()
+            updateAd()
             {
                 // console.log('ok')
                 if(!this.isReady())
@@ -180,7 +204,8 @@
                 }else
                 {
                     this.posting = true
-                    axios.post(this.url +'/post/ad', {
+                    axios.post(this.url +'/update/ad', {
+                        id: this.thead.id,
                         title: this.ad.title,
                         description: this.ad.description,
                         level: this.ad.level,
@@ -192,8 +217,8 @@
                         new_neighborhood: this.ad.new_neighborhood
                     })
                         .then(response => {
-                            this.resetForm()
-                            window.location = this.url + '/my-ads'
+                            this.posting = false
+                            this.success = "Your ad has been updated"
                         })
                         .catch(error => {
                             this.posting = false
@@ -219,21 +244,17 @@
                         console.log(response)
                         this.user = response.data.user
                         if(this.user.country){
-                            this.ad.country = this.user.country.id
                             this.getStates()
                         }
                         if(this.user.state){
-                            this.ad.state = this.user.state.id
                             this.states.push(this.user.state)
                             // this.states.push(this.user.state)
                             this.getCities()
                         }
                         if(this.user.city){
-                            this.ad.city = this.user.city.id
                             this.cities.push(this.user.city)
                         }
                         if(this.user.neighborhood){
-                            this.ad.neighborhood = this.user.neighborhood.id
                             this.neighborhoods.push(this.user.neighborhood)
                         }
                     })
@@ -243,7 +264,6 @@
             },
             getStates()
             {
-                console.log("Get States")
                 axios.post(this.url +'/get/states', {country: this.ad.country})
                 .then(response => {
                     console.log(response)
@@ -315,6 +335,9 @@
             this.getUserInfo()
             this.getLevels()
             this.getCountries()
+            this.getStates()
+            this.getCities()
+            this.getNeighborhoods()
         }
-    }
+            }
 </script>
