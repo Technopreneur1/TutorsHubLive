@@ -44,13 +44,13 @@ class SessionController extends Controller
     public function complete(Request $request)
     {
         $session = Session::findOrFail($request->id);
-        if(auth()->user()->profile->id == $session->teacher_id)
-        {
+        // if(auth()->user()->profile->id == $session->teacher_id)
+        // {
             $session->update(['completed' => true]);
             return response()->json(['msg' => 'success']);
-        }else {
-            return response()->json(['msg' => 'error']);
-        }
+        // }else {
+        //     return response()->json(['msg' => 'error']);
+        // }
     }
     public function postReview(Request $request)
     {
