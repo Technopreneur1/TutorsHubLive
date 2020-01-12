@@ -18,6 +18,10 @@ class Teacher extends Model
     {
         return $this->hasMany("App\Session", "teacher_id")->with('student');
     }
+    public function completedSessions()
+    {
+        return $this->hasMany("App\Session", "teacher_id")->where('completed', 1)->where('tutor_rating', '>', 0)->with('student');
+    }
     public function unseenSessions()
     {
         return $this->hasMany("App\Session", "teacher_id")->with('student')->where('seen', 0);

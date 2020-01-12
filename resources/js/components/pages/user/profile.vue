@@ -127,7 +127,45 @@
                     <span @click="deleteProfile()" class="key del">Delete Profile</span>
                 </div>
             </div>
+
+            <div class="reviews-section">
+                <div class="title">Reviews</div>
+                <div v-for="session in user.profile.completed_sessions" :key="session.id"  class="review">
+                    <a :href="url+ '/user/' + session.student.user.id" v-if="user.type == 'teacher'" class="avatar">
+                        <img :src="avatarF(session.student.user)" alt="">
+                        <div class="name">{{session.student.user.name}}</div>
+                    </a>
+                    <a :href="url+ '/user/' + session.teacher.user.id" v-if="user.type == 'student'" class="avatar">
+                        <img :src="avatarF(session.teacher.user.name)" alt="">
+                        <div class="name">{{session.teacher.user.name}}</div>
+                    </a>
+                    <div v-if="user.type == 'student'" class="rating">
+                        <i class="far fa-star" :class="{fas: session.student_rating >= 1}"></i>
+                        <i class="far fa-star" :class="{fas: session.student_rating >= 2}"></i>
+                        <i class="far fa-star" :class="{fas: session.student_rating >= 3}"></i>
+                        <i class="far fa-star" :class="{fas: session.student_rating >= 4}"></i>
+                        <i class="far fa-star" :class="{fas: session.student_rating >= 5}"></i>
+                    </div>
+                    <div v-if="user.type == 'teacher'" class="rating">
+                        <i class="far fa-star" :class="{fas: session.tutor_rating >= 1}"></i>
+                        <i class="far fa-star" :class="{fas: session.tutor_rating >= 2}"></i>
+                        <i class="far fa-star" :class="{fas: session.tutor_rating >= 3}"></i>
+                        <i class="far fa-star" :class="{fas: session.tutor_rating >= 4}"></i>
+                        <i class="far fa-star" :class="{fas: session.tutor_rating >= 5}"></i>
+                    </div>
+                    <div v-if="user.type == 'student'" class="feedback">
+                        <p>{{session.student_review}}</p>
+                    </div>
+                    <div v-if="user.type == 'teacher'" class="feedback">
+                        <p>{{session.tutor_review}}</p>
+                    </div>
+                </div>
+            </div>
+         
         </div>
+            
+
+
     </div>
 </template>
 <script>
@@ -173,7 +211,17 @@ import { type } from 'os'
            }
         },
         computed: {
-            
+            type()
+            {
+                if(this.user.type == 'teacher')
+                {
+                    return 'tutor'
+                }
+                if(this.user.type == 'student')
+                {
+                    return 'student'
+                }
+            },
             avatar()
             {
                 if(!this.image)
@@ -203,6 +251,19 @@ import { type } from 'os'
             }
         },
         methods: {
+             avatarF(user)
+            {
+                if(user.avatar){
+                    return this.url + '/storage/images/' + user.avatar
+                }else{
+                if(user.gender)
+                {
+                    return this.url + '/img/' + user.gender.toLowerCase() + '.jpg'
+                }else{
+                    return this.url + '/img/male.jpg'
+                }
+                }
+            },
             contact(id)
             {
                     this.loading = true
@@ -255,6 +316,7 @@ import { type } from 'os'
             console.log(coordinates, canvas)
             this.image = canvas.toDataURL()
 		    },
+           
             addToFav()
             {
                 this.loading = true
@@ -305,3 +367,27 @@ import { type } from 'os'
         },
     }
 </script>
+<style lang="sass">
+.reviews-section
+    .title
+        font-size: 30px
+        color: #2575bc
+        text-align: center
+.review
+    border-bottom: 1px solid #00000012
+    margin-bottom: 20px
+    .rating
+        i
+            color: #e76a36
+            font-size: 18px
+    .avatar
+        display: flex
+        align-items: center
+        font-weight: bold
+        font-size: 14px
+        margin-bottom: 8px
+        img
+            width: 40px
+            border-radius: 50%
+            margin-right: 10px
+</style>

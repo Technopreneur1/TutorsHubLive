@@ -49,6 +49,17 @@ class UserController extends Controller
         {
             $user = User::with(['state', 'city', 'neighborhood', 'country'])->find(auth()->id());
             $profile = $user->profile;
+
+            if($user->type == 'teacher')
+            {
+                $type = 'tutor_rating';
+            }
+            elseif($user->type == 'student')
+            {
+                $type = 'student_rating';
+            }
+            $sessions = $profile->sessions->where('completed', 1);
+            // dd($sessions);
             return view('pages.user.profile',  ['user' => $user, 'likes' => 0]);
         }
         return abort(404);
@@ -59,6 +70,16 @@ class UserController extends Controller
     {
         $user = User::with(['state', 'city', 'neighborhood', 'country'])->find($id);
         $profile = $user->profile;
+        if($user->type == 'teacher')
+        {
+            $type = 'tutor_rating';
+        }
+        elseif($user->type == 'student')
+        {
+            $type = 'student_rating';
+        }
+        $user->profile->sessions = $profile->sessions->where('completed', 1)->where($type, '!=', null);
+        // dd($user->profile->sessions);
         $likes = Favorite::where('user_id', auth()->id())->where('target_id', $user->id)->count();
         return view('pages.user.profile',  ['user' => $user, 'profile' => $profile, 'likes' => $likes]);
     }

@@ -22,6 +22,10 @@ class Student extends Model
     {
         return $this->hasMany("App\Session", 'student_id')->with('teacher');
     }
+    public function completedSessions()
+    {
+        return $this->hasMany("App\Session", 'student_id')->where('completed', 1)->where('student_rating', '>', 0)->with('teacher');
+    }
     public function unseenSessions()
     {
         return $this->hasMany("App\Session", 'student_id')->with('teacher')->where('seen', 0);

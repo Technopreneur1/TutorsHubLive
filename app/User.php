@@ -45,10 +45,10 @@ class User extends Authenticatable
 
         if($this->type == "student")
         {
-            return $this->hasOne("App\Student")->with(['level', 'discipline', 'sessions']);
+            return $this->hasOne("App\Student")->with(['level', 'discipline', 'sessions', 'completedSessions']);
         }
         elseif($this->type == "teacher") {
-            return $this->hasOne("App\Teacher")->with(['plans', 'sessions']);
+            return $this->hasOne("App\Teacher")->with(['plans', 'sessions', 'completedSessions']);
         }
         else {
             
