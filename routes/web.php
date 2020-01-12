@@ -213,6 +213,30 @@ Route::get('/us2', function () {
     }
 
 });
+Route::get('/us2b', function () {
+    
+
+    $jsonFile = file_get_contents(asset('us2b.json'));
+    $locations = json_decode($jsonFile);
+    // dd($locations);
+    foreach($locations as $country)
+    {
+        $us = Location::where("name", "United States")->get()->first();
+        $usid = $us->id;
+        foreach($country->states as $state)
+        {
+            $state_model = Location::create(['name' => $state->name, 'type' => 'state', 'parent_id' => $usid]);
+            // echo array_keys($state);
+
+            foreach($state->cities as $city)
+            {
+                Location::create(['name' => $city, 'type' => 'city', 'parent_id' => $state_model->id]);
+            }
+        }
+        echo "DOne";
+    }
+
+});
 
 Route::get('/canada', function () {
     
