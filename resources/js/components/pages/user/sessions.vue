@@ -1,27 +1,20 @@
 <template>
-    <div class="full-container" style="padding: 40px 0; position: relative">
+    <div class="full-container" style=" position: relative">
         <a v-if="viewSession" @click="viewSession = null" class="btn-back"><i class="fas fa-long-arrow-alt-left"></i></a>
         <full-loader v-if="loading" ></full-loader>
         <section v-if="viewSession" class="view-session">
-            <div  v-if="viewSession.completed" class="completed">
-                Completed
-            </div>
-            <div v-if="authuser.type == 'student' && !viewSession.completed" class="statusbar">
-                <span class="val">Incomplete</span>
-                <span class="txt">Please mark session as <b>completed</b> after it has taken place</span>
-                <button @click="markComplete" class="btn btn-gradient">Mark as completed</button>
-            </div>
-            
-            <div class="main-info">
+            <div class="sess-header">
                 <a v-if="authuser.type == 'student'" :href="url + '/user/' + viewSession.teacher.user.id" class="with">
                     <div class="avatar">
                         <img :src="avatar(viewSession.teacher.user)" alt="">
                     </div>
                     <div class="info">
                         <div class="name">{{viewSession.teacher.user.name}}</div>
+                        <div class="status">{{viewSession.completed ? 'Completed' : 'Incomplete'}}</div>
                     </div>
                 </a>
                 <a v-if="authuser.type == 'teacher'" :href="url + '/user/' + viewSession.student.user.id" class="with">
+                    <span class="t">With</span>
                     <div class="avatar">
                         <img :src="avatar(viewSession.student.user)" alt="">
                     </div>
@@ -29,13 +22,14 @@
                         <div class="name">{{viewSession.student.user.name}}</div>
                     </div>
                 </a>
-                <div class="info">
+                <div class="sess-info">
+                    <div class="status"><span>{{viewSession.completed ? 'Completed' : 'Incomplete'}}</span></div>
                     <span class="dt">{{viewSession.created_at | moment('DD MMM, YYYY')}}</span>
                     <div class="val"><span>{{viewSession.level}}</span></div>
                     <div class="val"><span>{{viewSession.subject}}</span></div>
                 </div>
             </div>
-            <div class="rates">
+             <div class="rates">
                 <div class="hours">
                     <span class="key">Hours</span>
                     <span class="value">{{viewSession.hours}}</span>
@@ -50,8 +44,16 @@
                 </div>
             </div>
 
+            <div v-if="authuser.type == 'student' && !viewSession.completed" class="statusbar">
+                <span class="val">Incomplete</span>
+                <span class="txt">Please mark session as <b>completed</b> after it has taken place</span>
+                <button @click="markComplete" class="btn btn-gradient">Mark as completed</button>
+            </div>
+            
+             
+
             <div v-if="viewSession.completed" class="review-section">
-                <div class="heading">Review Session</div>
+                <div class="heading">Session Reviews</div>
                 <div v-if="!hasReviewed" class="add">
                     <p>Rate session {{authuser.type == 'student' ? 'tutor' : 'student'}} out of 5</p>
                     <div class="rating">
@@ -69,6 +71,28 @@
                     </div>
                     <div class="act">
                         <button @click="postReview()" class="btn btn-redgradientbg" :disabled="!is_ready || reviewing">Submit Review</button>
+                    </div>
+                </div>
+
+                
+                <div v-if="viewSession.tutor_rating || viewSession.tutor_review" class="review">
+                    <div v-if="authuser.type == 'teacher'" class="avatar">
+                        <img :src="avatar(viewSession.student.user)" alt="">
+                        <div class="name">{{viewSession.student.user.name}}</div>
+                    </div>
+                    <div v-if="authuser.type == 'student'" class="avatar">
+                        <img :src="avatar(authuser)" alt="">
+                        <div class="name">{{authuser.name}}</div>
+                    </div>
+                    <div class="rating">
+                        <i class="far fa-star" :class="{fas: viewSession.tutor_rating >= 1}"></i>
+                        <i class="far fa-star" :class="{fas: viewSession.tutor_rating >= 2}"></i>
+                        <i class="far fa-star" :class="{fas: viewSession.tutor_rating >= 3}"></i>
+                        <i class="far fa-star" :class="{fas: viewSession.tutor_rating >= 4}"></i>
+                        <i class="far fa-star" :class="{fas: viewSession.tutor_rating >= 5}"></i>
+                    </div>
+                    <div class="feedback">
+                        <p>{{viewSession.tutor_review}}</p>
                     </div>
                 </div>
 
@@ -92,26 +116,6 @@
                         <p>{{viewSession.student_review}}</p>
                     </div>
                 </div>
-                <div v-if="viewSession.tutor_rating || viewSession.tutor_review" class="review">
-                    <div v-if="authuser.type == 'teacher'" class="avatar">
-                        <img :src="avatar(viewSession.student.user)" alt="">
-                        <div class="name">{{viewSession.student.user.name}}</div>
-                    </div>
-                    <div v-if="authuser.type == 'student'" class="avatar">
-                        <img :src="avatar(authuser)" alt="">
-                        <div class="name">{{authuser.name}}</div>
-                    </div>
-                    <div class="rating">
-                        <i class="far fa-star" :class="{fas: viewSession.tutor_rating >= 1}"></i>
-                        <i class="far fa-star" :class="{fas: viewSession.tutor_rating >= 2}"></i>
-                        <i class="far fa-star" :class="{fas: viewSession.tutor_rating >= 3}"></i>
-                        <i class="far fa-star" :class="{fas: viewSession.tutor_rating >= 4}"></i>
-                        <i class="far fa-star" :class="{fas: viewSession.tutor_rating >= 5}"></i>
-                    </div>
-                    <div class="feedback">
-                        <p>{{viewSession.tutor_review}}</p>
-                    </div>
-                </div>
 
             </div>
 
@@ -128,6 +132,14 @@
                             <div class="name">{{ses.teacher.user.name}}</div>
                         </div>
                     </a>
+                    <a v-if="authuser.type == 'teacher'" :href="url + '/user/' + ses.student.user.id" class="with">
+                        <div class="avatar">
+                            <img :src="avatar(ses.student.user)" alt="">
+                        </div>
+                        <div class="info">
+                            <div class="name">{{ses.student.user.name}}</div>
+                        </div>
+                    </a>
                     <div class="info">
                         <span class="dt">{{ses.created_at | moment('DD MMM, YYYY')}}</span>
                         <div class="val"><span>{{ses.level}}</span></div>
@@ -140,12 +152,67 @@
             </div>
             </div>
             <div v-else class="nothing">
-                No Session Available
+                No Session
             </div>
         </div>
    </div>
 </template>
 <style lang="sass" scoped>
+    .sess-header
+        color: #fff
+        margin: 0 -15px
+        background: linear-gradient(45deg, #54a323, #6edb95)
+        padding: 30px 15px
+        display: flex
+        align-items: center
+        justify-content: space-between
+
+        .with
+            margin: 10px 20px 0
+            color: #fff
+            .t
+                display: block
+                width: 100%
+                background: #00000014
+                border-radius: 10px
+                margin-bottom: 5px
+                text-align: center
+            .avatar
+                width: 65px
+                height: 65px
+                margin: 0 auto
+                img
+                    max-width: 100%
+                    border-radius: 50%
+            .info
+                text-align: center
+        .sess-info
+            text-align: center
+            .status
+                text-align: center
+                span
+                    padding: 2px 10px
+                    border-radius: 20px
+                    background: linear-gradient(30deg, #d22f2a, #f3963d)
+
+    .rates
+        background: linear-gradient(45deg, #2575bc, #0b61ff)
+        color: #fff
+        margin: 0 -15px
+        padding: 5px 0
+        // margin: 10px -15px
+        display: flex
+        justify-content: space-around
+        box-shadow: 0 1px 1px 0 #53a2216b
+        .hours
+            display: flex
+            flex-direction: column
+            text-align: center
+            .key
+                letter-spacing: 4px
+            .value
+                font-size: 20px
+                font-weight: bold
     .btn-back
         position: absolute
         top: 10px
@@ -153,22 +220,22 @@
         font-size: 25px
         border-radius: 04px
         text-align: center
-        color: #2575bc
+        color: #fff
+
         display: flex
         justify-content: center
         align-items: center
         cursor: pointer
         font-weight: bold
     .review-section
-        margin: 0 -15px 10px
+        margin: 0 -15px
         padding: 10px
-        background: #e4f3e4
-        box-shadow: 0 1px 1px 0 #53a2216b
         
         .heading
             text-align: center
             font-size: 24px
         .review
+            border: none
             .rating
                 i
                     color: #e76a36
@@ -227,7 +294,7 @@
                 margin-right: 15px
         .main-info
             display: flex
-            margin: 0 -15px
+            // margin: 0 -15px
             padding: 10px
             background: #e4f3e4
             justify-content: space-between
@@ -244,22 +311,22 @@
                         border-radius: 50%
                 .info
                     text-align: center
-        .rates
-            background: #e4f3e4
-            padding: 5px 0
-            margin: 10px -15px
-            display: flex
-            justify-content: space-around
-            box-shadow: 0 1px 1px 0 #53a2216b
-            .hours
-                display: flex
-                flex-direction: column
-                text-align: center
-                .key
-                    letter-spacing: 4px
-                .value
-                    font-size: 20px
-                    font-weight: bold
+        // .rates
+        //     background: #e4f3e4
+        //     padding: 5px 0
+        //     // margin: 10px -15px
+        //     display: flex
+        //     justify-content: space-around
+        //     box-shadow: 0 1px 1px 0 #53a2216b
+        //     .hours
+        //         display: flex
+        //         flex-direction: column
+        //         text-align: center
+        //         .key
+        //             letter-spacing: 4px
+        //         .value
+        //             font-size: 20px
+        //             font-weight: bold
 
     .sessionsList
         .session
@@ -398,6 +465,7 @@
                     if(response.data.msg == 'success')
                     {
                         this.viewSession.completed = true
+                        this.$store.commit('decreseSessions', 1)
                     }else{
                         alert('Oops Something Went Wrong. Please refresh the page')
                     }

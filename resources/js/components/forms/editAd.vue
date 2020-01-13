@@ -5,9 +5,10 @@
         </div> -->
             <transition name="easy-appear" enter-active-class="animated slideInLeft" leave-active-class="animated slideOutLeft">
                 <div  class="create-ad-slide ">
-                    <a @click="$emit('cancel')" class="btn-back"><i class="fas fa-long-arrow-alt-left"></i></a>
+                    <div class="full-container">
+                        <a @click="$emit('cancel')" class="btn-back"><i class="fas fa-long-arrow-alt-left"></i></a>
                     <div class="text">
-                        <div class="title">Create Ad</div>
+                        <div class="title">Edit Ad</div>
                         <div class="info">Your ad will be visible to the tutors in selected area.</div>
                     </div>
                     <div class="form-box">
@@ -20,7 +21,7 @@
                         <div class="newrow">
                             <span>Location</span>
                         </div>
-                        <transition name="custom-classes-transition" enter-active-class="animated tada" leave-active-class="animated bounceOutRight">
+                        <transition name="custom-classes-transition" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
                         <div v-if="editingLocation" class="addlocations">
                             <div class="input">
                                 <label for="">Country</label>
@@ -97,6 +98,8 @@
                             <button @click="updateAd()" class="btn btn-post" :disabled="posting" >Post Now <i v-if="posting" class="fas fa-spinner fa-spin"></i> </button>
                         </div>
                     </div>
+                    </div>
+                    
                 </div>
             </transition>
     </div>

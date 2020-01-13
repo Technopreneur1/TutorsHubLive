@@ -33,7 +33,7 @@
                                 <!-- /.description-block -->
                             </div>
                             <!-- /.col -->
-                            <div class="col-sm-4 border-right">
+                            <div class="col-sm-3 border-right">
                                 @if ($user->type ==  'teacher')
                                     <div class="description-block">
                                         <h5 class="description-header">{{$user->profile->plans->count()}}</h5>
@@ -42,7 +42,7 @@
                                 @endif
                                 <!-- /.description-block -->
                             </div>
-                            <div class="col-sm-4 border-right">
+                            <div class="col-sm-3 border-right">
                                 @if ($user->type ==  'teacher')
                                     <div class="description-block">
                                         <h5 class="description-header"> ${{App\Earning::balance($user->profile)}}</h5>
@@ -50,6 +50,11 @@
                                     </div>
                                 @endif
                                 <!-- /.description-block -->
+                            </div>
+                            <div class="col-sm-2 border-right">
+                                <div class="description-block">
+                                    <a href="{{route("admin.contact", $user->id)}}" class="btn btn-success">Message User</a>
+                                </div>
                             </div>
                             <!-- /.col -->
                             <!-- /.col -->

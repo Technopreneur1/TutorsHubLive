@@ -24,7 +24,7 @@ class Teacher extends Model
     }
     public function unseenSessions()
     {
-        return $this->hasMany("App\Session", "teacher_id")->with('student')->where('seen', 0);
+        return $this->hasMany("App\Session", "teacher_id")->with('student')->where('completed', 0);
     }
     public function unseenPayments()
     {

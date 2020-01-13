@@ -9,11 +9,11 @@
         
         <a :href="url + '/sessions'" class="link sessions">
             <i class="fas fa-calendar-alt"></i>
-            <span v-if="sessions" class="count">{{sessions}}</span>
+            <span v-if="csessions" class="count">{{csessions}}</span>
         </a>
         <a :href="url + '/messages'" class="link messages">
             <i class="fas fa-envelope"></i>
-            <span v-if="messages" class="count">{{messages}}</span>
+            <span v-if="cmessages" class="count">{{cmessages}}</span>
         </a>
         
         <slide-menu :messages="messages" :sessions="sessions" :url="url" :user="user"></slide-menu>
@@ -60,6 +60,14 @@
             }
         },
         computed: {
+            cmessages()
+            {
+                return this.$store.getters.messages
+            },
+            csessions()
+            {
+                return this.$store.getters.sessions
+            },
             avatar()
             {
                 if(this.user.avatar){
@@ -89,7 +97,11 @@
                 })
             }
         },
-        
+        created()
+        {
+            this.$store.commit('setSessions', this.sessions)
+            this.$store.commit('setMessages', this.messages)
+        }
         
     }
 </script>

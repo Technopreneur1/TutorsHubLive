@@ -16,6 +16,12 @@ import { Cropper } from 'vue-advanced-cropper'
 import VueSweetalert2 from 'vue-sweetalert2';
 
 Vue.use(VueSweetalert2);
+
+import Vuex from 'vuex'
+import StoreData from './store.js'
+
+Vue.use(Vuex)
+const store = new Vuex.Store(StoreData)
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -64,7 +70,9 @@ Vue.component('chat-app', require('./components/chat/ChatApp.vue').default);
 
 const app = new Vue({
     el: '#app',
+    store
 });
 const navapp = new Vue({
     el: '#navapp',
+    store
 });

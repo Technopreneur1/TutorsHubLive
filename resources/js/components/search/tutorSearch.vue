@@ -65,6 +65,9 @@
             <div v-else class="nothing">
                 <p>No Tutor Available</p>
             </div>
+            <div class="morebtn text-center">
+                <button v-if="nextPage" @click="getMore()" class="btn btn-gradient">Load More</button>
+            </div>
          </div>
      </div>
 </template>
@@ -90,13 +93,32 @@
                 showSearchForm: true,
                 level: '',
                 subject: '',
+                nextPage: ''
                
            }
         },
         methods: {
+            
             startConversation(id)
             {
                 this.chatWith = id
+            },
+            getMore()
+            {
+
+                axios.post(this.nextPage)
+                .then(response => {
+                    console.log(response.data.tutors.data)
+                    response.data.tutors.data.forEach(tutor => {
+                        this.tutors.push(tutor)
+                    });
+                    
+                    this.nextPage = response.data.tutors.next_page_url
+                    this.showSearchForm = false
+                })
+                .catch(error => {
+                    console.log(error);
+                })
             },
             getTutors()
             {
@@ -109,8 +131,8 @@
                     'subject': this.subject,
                 })
                 .then(response => {
-                    console.log(response.data)
                     this.tutors = response.data.tutors.data
+                    this.nextPage = response.data.tutors.next_page_url
                     this.showSearchForm = false
                 })
                 .catch(error => {
@@ -205,7 +227,10 @@
                 this.cities = []
                 this.neighborhoods = []
                 if(this.country)
-                {
+                { 
+                    this.state = ''
+                    this.city = ''
+                    this.neighborhood = ''
                     this.getStates()
                 }
             },
@@ -215,6 +240,8 @@
                 this.neighborhoods = []
                 if(this.state)
                 {
+                    this.city = ''
+                    this.neighborhood = ''
                     this.getCities()
                 }
             },
@@ -223,6 +250,7 @@
                 this.neighborhoods = []
                 if(this.city)
                 {
+                    this.neighborhood = ''
                     this.getNeighborhoods()
                 }
             },

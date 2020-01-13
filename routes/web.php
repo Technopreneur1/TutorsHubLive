@@ -17,6 +17,7 @@ use App\TestLocation;
 */
 
 Route::get('/', 'PagesController@index')->name('home');
+Route::get('/privacy-policy', 'PagesController@privacy')->name('privacy');
 Route::get('/ads', 'AdController@index')->name('ads');
 Route::get('/create/ad', 'AdController@create')->name('createAd');
 // Route::get('/find', 'TeacherController@find')->name('find');
@@ -275,6 +276,8 @@ Route::get('/canada', function () {
     Route::prefix('adminpanel')->middleware(['admin'])->group(function () {
     
         Route::get('/', 'AdminController@adminpanel')->name('adminpanel');
+        Route::get('/contact/{id}', 'AdminController@contact')->name('admin.contact');
+
         Route::get('/tutors', 'AdminController@teachers')->name('admin.tutors');
         Route::get('/tutors/banned', 'AdminController@bannedTutors')->name('admin.tutors.banned');
         Route::get('/students', 'AdminController@students')->name('admin.students');

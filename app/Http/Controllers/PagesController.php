@@ -24,6 +24,10 @@ class PagesController extends Controller
             # code...
         }
     }
+    public function privacy()
+    {
+        return view('pages.privacy');
+    }
 
     public function messages(Request $request)
     {

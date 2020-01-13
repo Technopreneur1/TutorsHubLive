@@ -7,10 +7,12 @@ use App\Meta;
 use App\User;
 use App\Level;
 use App\Earning;
+use App\Message;
 use App\Session;
 use App\Student;
 use App\Location;
 use App\Discipline;
+use App\Events\NewMessage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 // use App\Http\Controllers\TeacherController;
@@ -173,6 +175,39 @@ class AdminController extends Controller
         return view('admin.pages.users.single', ['user' => $user, 'type' => 'Tutor']);
         
     }
+
+    public function contact($id)
+    {
+        $from = Message::where('from', auth()->id())
+                        ->Where('to', $id)
+                        ->get();
+        if(count($from))
+        {
+            return redirect('/messages?u'. $id);
+        }
+        $to = Message::where('to', auth()->id())
+                        ->Where('from', $id)
+                        ->get();
+        if(count($to))
+        {
+            return redirect('/messages?u'. $id);
+        }
+        else {
+            $message = Message::create([
+                'from' => auth()->id(),
+                'to' => $id,
+                'text' => "Hello " . User::find($id)->name
+            ]);
     
+            // broadcast(new NewMessage($message));
+            
+            return redirect('/messages?u'. $id);
+            
+        }
+    }
+    // public function hasConversationWith(Request $request)
+    // {
+        
+    // }
     
 }

@@ -172,7 +172,7 @@ class AdController extends Controller
             $ads = Location::findOrFail($request['country'])->countryAds()->paginate(30);
         }
         else {
-            $ads = Location::findOrFail(auth()->user()->neighborhood_id)->neighborhoodAds()->paginate(30);
+            $ads = Location::findOrFail(auth()->user()->country_id)->countryAds()->paginate(30);
             // $ads = auth()->user()->neighborhood_id;
         }
         return response()->json(['ads' => $ads]);

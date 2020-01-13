@@ -5,13 +5,12 @@
                 <img :src="avatar(tutor)" alt="">
             </a>
             <div class="data">
-
                 <a  :href="url+ '/user/' +tutor.id" class="info">
                     <div class="name">{{tutor.name}}</div>
-                    <div class="location"><i class="fas fa-map-marker-alt"></i> {{tutor.neighborhood ? tutor.neighborhood.name + ', ' : ''}}{{tutor.city ? tutor.city.name + ', ' : ''}}</div>
+                    <div class="location"><i class="fas fa-map-marker-alt"></i> {{tutor.neighborhood ? tutor.neighborhood.name + ', ' : ''}}{{tutor.city ? tutor.city.name + ', ' : ''}}{{tutor.state ? tutor.state.name + ', ' : ''}}</div>
                 </a>
                 <div class="contactbtn">
-                    <button @click="contact(tutor.id)" class="btn btn-success">Message</button>
+                    <button @click="contact(tutor.id)" class="btn btn-gradient">Message</button>
                 </div>
             </div>
         </div>

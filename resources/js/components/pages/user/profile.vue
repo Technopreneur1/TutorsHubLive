@@ -44,7 +44,11 @@
                     <div class="namenrole">
                         <div class="name">{{user.name}}</div>
                         <div class="role">{{user.type == 'teacher' ? 'Tutor' : user.type}} {{user.gender ? ' | ' + user.gender : ''}}</div>
+                        <div class="rating">
+                        <i class="fas fa-star"></i><span> {{rating}} / 5</span> 
+                        </div>
                     </div>
+                    
                 </div>
                 <div class="location">
                     <span class="icon"><i class="fas fa-map-marker-alt"></i></span>
@@ -177,6 +181,9 @@ import { type } from 'os'
                 type: Object
             },
             url: {
+                type: String
+            },
+            rating: {
                 type: String
             },
             user: {

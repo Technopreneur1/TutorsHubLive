@@ -121,7 +121,6 @@ class TeacherController extends Controller
         }
         else {
             $tutors = User::with(['city', 'state', 'neighborhood', 'country'])
-                ->where('neighborhood_id', auth()->user()->neighborhood_id)
                 ->where('type', 'teacher')
                 ->paginate(30);
         }

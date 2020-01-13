@@ -78,7 +78,7 @@
                     <input type="password" v-model="teacher.password_confirmation" placeholder="Repeat Password">
                 </div>
                 <label for="age" style="display: block" ><input id="age" v-model="teacher.confirm_age" type="checkbox"> &nbsp; I am 18 or older</label>
-                <label for="prv"><input id="prv" v-model="teacher.agree" type="checkbox"> &nbsp; I agree to the <a>Terms &amp; services</a> &amp; <a href="">Privacy policy</a></label>
+                <label for="prv"><input id="prv" v-model="teacher.agree" type="checkbox"> &nbsp; I agree to the  <a :href="url + '/privacy-policy'">Terms &amp; services</a> &amp; <a :href="url + '/privacy-policy'">Privacy policy</a></label>
             </div>
             <div v-if="error" class="error-bar">{{error}}</div>
             <div class="options">

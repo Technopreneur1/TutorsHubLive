@@ -28,7 +28,7 @@ class Student extends Model
     }
     public function unseenSessions()
     {
-        return $this->hasMany("App\Session", 'student_id')->with('teacher')->where('seen', 0);
+        return $this->hasMany("App\Session", 'student_id')->with('teacher')->where('completed', 0);
     }
     public function user()
     {
