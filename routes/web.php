@@ -131,6 +131,10 @@ Route::get('/testadmin', function () {
 //     });
 
 
+Route::get('/delus', function () {
+    
+    Location::find(41813)->delete();
+});
 Route::get('/delloc', function () {
     
     $locations = Location::all();
