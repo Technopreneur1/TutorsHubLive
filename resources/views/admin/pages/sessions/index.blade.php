@@ -19,7 +19,7 @@ Sessions
             <th>Rate</th>
             <th>Hours</th>
             <th>Fee</th>
-            <th>Created</th>
+            <th>Date</th>
             <th>Status</th>
             <th>Action</th>
             </tr>

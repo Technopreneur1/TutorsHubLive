@@ -136,10 +136,20 @@ Route::get('/testadmin', function () {
 //     });
 
 
-// Route::get('/mailit', function () {
-//     // sendWelcomeMail::dispatch(auth()->user());
+Route::get('/mailit', function () {
     
-// });
+    $list = ["USMLE", "GRE", "Physics", "French", "Down Syndrome", "COMLEX", "LSAT", "Chemistry", "Spanish", "Autism", "Coursework", "SAT", "Biology", "Chinese", "Hearing/Visual Impearement", "Shelf Exams", "ACT", "Italian", "Other", "Admission", "SAT", "Russian", 
+                "PSAT", "Japanese",
+                "HSPT", "Arabic",
+                "ISEE", "Portuguese",
+                "SSAT", "Herbrew",
+                "MCAT", "German", "Korean",
+];
+    foreach($list as $dis)
+    {
+        Discipline::create(['name' => $dis]);
+    }
+});
 Route::get('/delus', function () {
     
     Location::find(41813)->delete();
