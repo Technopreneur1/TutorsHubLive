@@ -95,6 +95,8 @@
                 })
                 .then(response => {
                     this.success  = "Payment Info Updated"
+                    this.$store.commit('setPaypal', this.paypal)
+                    this.$store.commit('setBank', this.bank)
                     document.getElementById('success').scrollIntoView()
                 })
                 .catch(error => {

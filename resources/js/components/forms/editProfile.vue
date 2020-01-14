@@ -42,7 +42,6 @@
                         <option value="">-- Select Gener --</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
-                        <option value="N/A">N/A</option>
                     </select>
                 </div>
             </div>
@@ -53,7 +52,6 @@
                         <option value="">Gender Preference</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
-                        <option value="N/A">N/A</option>
                     </select>
                 </div>
             </div>

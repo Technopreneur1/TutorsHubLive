@@ -2,7 +2,9 @@ export default {
     state: {
       notifications: [],
       sessions: "2",
-      messages: "0"
+      messages: "0",
+      paypal: "",
+      bank: ""
     },
     mutations: {
       setCart (state, payload) {
@@ -11,6 +13,12 @@ export default {
       },
       setNotifications (state, payload) {
         state.notifications = payload
+      },
+      setPaypal (state, payload) {
+        state.paypal = payload
+      },
+      setBank (state, payload) {
+        state.bank = payload
       },
       setSessions (state, payload) {
         state.sessions = payload
@@ -40,6 +48,12 @@ export default {
       },
       messages: state => {
         return state.messages
+      },
+      paypal: state => {
+        return state.paypal
+      },
+      bank: state => {
+        return state.bank
       }
     },
   }

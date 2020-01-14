@@ -8,11 +8,11 @@
        <div class="payment-info-box">
            <div v-if="authuser.profile.paypal" class="paypal">
                <span>Paypal: &nbsp;</span>
-               {{authuser.profile.paypal}}
+               {{paypal}}
            </div>
            <div v-if="authuser.profile.payment" class="payment">
                <span>Bank: &nbsp; &nbsp;</span>
-               {{authuser.profile.payment}}
+               {{bank}}
            </div>
            
            <div v-if="!authuser.profile.payment && !authuser.profile.paypal" class="paypal">
@@ -58,7 +58,7 @@
                 <tr v-for="payment in payments" :key="payment.id">
                     <td>{{payment.created_at | moment("dddd, MMMM Do YYYY") }}</td>
                     <th style="color: red">${{payment.amount}}</th>
-                    <td><a v-if="payment.proff" :href="url + '/storage/proffs/' + payment/proff"  class="btn btn-blue"><i class="fa fa-download"></i></a></td>
+                    <td><a v-if="payment.proff" :href="url + '/storage/proffs/' + payment.proff"  class="btn btn-blue"><i class="fa fa-download"></i></a></td>
                 </tr>
 
             </table>
@@ -90,6 +90,17 @@
                 type: Number
             },
         },
+        computed: {
+            paypal()
+            {
+                return this.$store.getters.paypal
+            },
+            bank()
+            {
+                return this.$store.getters.bank
+            },
+            
+        },
         data()
         {
            return{
@@ -98,11 +109,12 @@
            }
         },
         methods: {
-         
+        
         },
-        mounted()
+        created()
         {
-           
+            this.$store.commit('setPaypal', this.authuser.profile.paypal)
+            this.$store.commit('setBank', this.authuser.profile.payment)
         }
     }
 </script>
