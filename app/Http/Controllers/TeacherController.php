@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Teacher;
 use App\Location;
+use App\Mail\WelcomeEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class TeacherController extends Controller
 {
@@ -79,7 +81,7 @@ class TeacherController extends Controller
             $teacher = Teacher::create([
                 'user_id' => $user->id,
             ]);
-        
+        Mail::to($user->email)->send(new WelcomeEmail(auth()->user()));
         return response()->json(['user' => $user,'teacher' => $teacher]);
     }
     public function updatePayment(Request $request)

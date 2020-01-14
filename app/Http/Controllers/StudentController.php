@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Student;
 use App\Location;
+use App\Mail\WelcomeEmail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class StudentController extends Controller
 {
@@ -74,6 +76,7 @@ class StudentController extends Controller
             'discipline_id' => $request['discipline'],
             'level_id' => $request['level'],
         ]);
+        Mail::to($user->email)->send(new WelcomeEmail(auth()->user()));
         return response()->json(['user' => $user,'student' => $student]);
     }
 }

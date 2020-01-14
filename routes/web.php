@@ -136,10 +136,10 @@ Route::get('/testadmin', function () {
 //     });
 
 
-Route::get('/mailit', function () {
-    // sendWelcomeMail::dispatch(auth()->user());
-    Mail::to('mudassirmaqboolofficial@gmail.com')->send(new WelcomeEmail(auth()->user()));
-});
+// Route::get('/mailit', function () {
+//     // sendWelcomeMail::dispatch(auth()->user());
+    
+// });
 Route::get('/delus', function () {
     
     Location::find(41813)->delete();
