@@ -3,6 +3,7 @@
 use App\User;
 use App\Student;
 use App\Location;
+use App\Discipline;
 use App\TestLocation;
 use App\Mail\WelcomeEmail;
 use App\Jobs\sendWelcomeMail;
