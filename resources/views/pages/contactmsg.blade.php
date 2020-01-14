@@ -1,16 +1,18 @@
 @extends('layouts.master')
 @section('title')
-    {{$message}}
+    Support Center
 @endsection
 @section('styles')
     <style>
-        .error-page{
+        .success-page{
             margin-top: 55px;
             min-height: calc(100vh - 55px);
             padding: 50px 0;
             display: flex;
             justify-content: center;
             align-items: center;
+            text-align: center;
+            flex-direction: column;
             text-align: center;
 
         }
@@ -21,7 +23,9 @@
 @endsection
 
 @section('content')
-    <div class="error-page">
-        <div class="msg">{{$message}}</div>
+    <div class="success-page">
+        <div class="msg">Thanks For Contacting Us</div>
+        <div class="msg">We will contact you shortly</div>
+        <h4 class="text-center">Ticket ID: {{$ticket}}</h4>
     </div>
 @endsection

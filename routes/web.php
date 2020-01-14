@@ -4,6 +4,9 @@ use App\User;
 use App\Student;
 use App\Location;
 use App\TestLocation;
+use App\Mail\WelcomeEmail;
+use App\Jobs\sendWelcomeMail;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +20,8 @@ use App\TestLocation;
 */
 
 Route::get('/', 'PagesController@index')->name('home');
+Route::get('/contact', 'PagesController@contact')->name('contact');
+Route::post('/contact', 'PagesController@postContact')->name('contact.post');
 Route::get('/privacy-policy', 'PagesController@privacy')->name('privacy');
 Route::get('/ads', 'AdController@index')->name('ads');
 Route::get('/create/ad', 'AdController@create')->name('createAd');
@@ -131,6 +136,10 @@ Route::get('/testadmin', function () {
 //     });
 
 
+Route::get('/mailit', function () {
+    // sendWelcomeMail::dispatch(auth()->user());
+    Mail::to('mudassirmaqboolofficial@gmail.com')->send(new WelcomeEmail(auth()->user()));
+});
 Route::get('/delus', function () {
     
     Location::find(41813)->delete();

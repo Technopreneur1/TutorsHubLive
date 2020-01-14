@@ -25,6 +25,7 @@
 @import 'partials/search/ads.sass';
 @import 'partials/chat/messages.sass';
 @import 'partials/pages/payments.sass';
+@import 'partials/pages/contact.sass';
 
 
 *{
@@ -44,6 +45,10 @@ footer{
     color: #fff;
     padding: 15px 10px;
     text-align: center;
+    
+}
+footer .links a{
+    color: #ffff;
 }
 
 body{
