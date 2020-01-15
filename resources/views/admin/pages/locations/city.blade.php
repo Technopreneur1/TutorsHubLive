@@ -28,7 +28,15 @@
                         <td>{{$location->created_at ? $location->created_at->diffForHumans() : ''}}</td>
                         <td>
                             {{-- <a href="" class="btn btn-success">View</a> --}}
-                            <a href="" class="btn btn-success">Edit</a>
+                            {{-- <a href="" class="btn btn-success">Edit</a> --}}
+                            <form action="{{route('admin.hide.location', $location->id)}}" method="POST" style="display: inline;">
+                                @csrf
+                                @if ($location->is_hidden)
+                                    <button class="btn btn-success">Unhide</button>
+                                @else
+                                    <button class="btn btn-danger">Hide</button>
+                                @endif
+                            </form>
                         </td>
                     </tr>
                     @endforeach

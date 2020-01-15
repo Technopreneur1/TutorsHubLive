@@ -73,9 +73,14 @@
         
             h1 {
                 font-size: 20px;
+                background: #2575bc;
+                color: #ffffff;
                 padding: 10px;
                 margin: 0;
                 border-bottom: 1px dashed lightgray;
+                a{
+                    color: #ffffff;
+                }
             }
         }
 }

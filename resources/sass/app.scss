@@ -47,6 +47,12 @@ footer{
     text-align: center;
     
 }
+footer .links{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+}
 footer .links a{
     color: #ffff;
 }

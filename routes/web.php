@@ -24,6 +24,7 @@ Route::get('/', 'PagesController@index')->name('home');
 Route::get('/contact', 'PagesController@contact')->name('contact');
 Route::post('/contact', 'PagesController@postContact')->name('contact.post');
 Route::get('/privacy-policy', 'PagesController@privacy')->name('privacy');
+Route::get('/terms-and-conditions', 'PagesController@terms')->name('terms');
 Route::get('/ads', 'AdController@index')->name('ads');
 Route::get('/create/ad', 'AdController@create')->name('createAd');
 // Route::get('/find', 'TeacherController@find')->name('find');
@@ -110,31 +111,7 @@ Route::get('/testadmin', function () {
 
     });
 
-// Route::get('/lt', function () {
-    
 
-//     $jsonFile = file_get_contents(asset('locations.json'));
-//     $locations = json_decode($jsonFile);
-//     // dd($locations);
-//     foreach($locations as $country)
-//     {
-//         // $country_model = TestLocation::create(['name' => $country->name]);
-//         // echo "Intsert " . $country->name . "<br>";
-//         foreach($country->states as $state)
-//         {
-//             $state_model = TestLocation::create(['name' => $state->name, 'parent_id' => 28102]);
-//             // echo array_keys($state);
-
-//             foreach($state->cities as $city)
-//             {
-//                 TestLocation::create(['name' => $city, 'parent_id' => $state_model->id]);
-//             }
-//         }
-//         echo "DOne";
-//     }
-
-
-//     });
 
 
 Route::get('/mailit', function () {
@@ -330,6 +307,7 @@ Route::get('/canada', function () {
         Route::post('/levels', 'LevelController@post')->name('admin.add.level');
         Route::post('/disciplines', 'DisciplineController@post')->name('admin.add.discipline');
         Route::post('/update-fee', 'MetaController@updateFee')->name('admin.update.fee');
+        Route::post('/location-hide/{id}', 'LocationController@hide')->name('admin.hide.location');
         
         Route::get('/levels/{id}', 'AdminController@editlevels')->name('admin.level.edit');
         Route::post('/levels/{id}', 'LevelController@update')->name('admin.level.update');

@@ -28,7 +28,14 @@ class PagesController extends Controller
     }
     public function privacy()
     {
-        return view('pages.privacy');
+        $title = "Privacy Policy";
+        return view('pages.privacy', ['title' => $title]);
+    }
+    public function terms()
+    {
+        $title = "Terms & Conditions";
+
+        return view('pages.privacy', ['title' => $title]);
     }
 
     public function contact()

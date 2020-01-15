@@ -109,7 +109,10 @@
     .chat-app {
         display: flex;
         background: #ffffff;
-        margin: 30px -15px;
+        margin: 0 -15px;
+        border-left: 1px solid #2575bc;
+        border-radius: 6px;
+        overflow: hidden;
 
     }
 }

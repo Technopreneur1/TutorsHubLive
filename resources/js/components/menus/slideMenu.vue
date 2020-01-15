@@ -24,6 +24,7 @@
                         <li><a :href="url + '/sessions'">My Sessions <span v-if="sessions" class="tag">{{sessions}}</span></a></li>
                         <li><a :href="url + '/profile'">My Account</a></li>
                         <li><a :href="url + '/favorites'">Saved Profiles</a></li>
+                        <li><a :href="url + '/contact'">Support Center</a></li>
                     </ul>
                 </div>
             </transition>

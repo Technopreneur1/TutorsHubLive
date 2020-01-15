@@ -76,7 +76,7 @@ import { type } from 'os'
         overflow-x: scroll;
         box-shadow: 0 0 4px 0 #00000030;
         background: #fff;
-
+        
         ul {
             display: flex;
             list-style: none;
@@ -116,7 +116,7 @@ import { type } from 'os'
                     }
                 }
                 &.selected {
-                    background: #52a121;
+                    background: linear-gradient(30deg,#70dd94,#53a221);
                     color: #fff;
                 }
                 span.unread {
@@ -144,10 +144,11 @@ import { type } from 'os'
 {
     .contacts-list {
         flex: 2;
+        background: #e4f3e4;
         max-height: 100%;
         height: 600px;
         overflow: scroll;
-        border-left: 1px solid #a6a6a6;
+        border-left: 1px solid #e4f3e4;
         
         ul {
             list-style-type: none;
@@ -162,11 +163,14 @@ import { type } from 'os'
                 cursor: pointer;
 
                 &.selected {
-                    background: #dfdfdf;
+                    background: linear-gradient(30deg,#70dd94,#53a221);
+                    .name{
+                        color: #ffffff !important
+                    }
                 }
 
                 span.unread {
-                    background: #82e0a8;
+                    background: #fa1515;
                     color: #fff;
                     position: absolute;
                     right: 11px;
@@ -206,7 +210,9 @@ import { type } from 'os'
                         margin: 0;
 
                         &.name {
+                            font-size: 17px;
                             font-weight: bold;
+                            color: #000;
                         }
                     }
                 }

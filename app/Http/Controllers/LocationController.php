@@ -14,6 +14,21 @@ class LocationController extends Controller
         return response()->json(['countries' => $countries]);
     }
     //get Countries
+    public function hide($id)
+    {
+        $location = Location::findOrFail($id);
+        if($location->is_hidden)
+        {
+            $location->update(['is_hidden' => 0]);
+        }
+        else
+        {
+            $location->update(['is_hidden' => 1]);
+        }
+        session('message', "Location Status Updated");
+        return back();
+    }
+    //get Countries
     public function getStates(Request $request)
     {
         if($request->country)

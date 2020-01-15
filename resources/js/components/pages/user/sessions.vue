@@ -47,7 +47,7 @@
             <div v-if="authuser.type == 'student' && !viewSession.completed" class="statusbar">
                 <span class="val">Incomplete</span>
                 <span class="txt">Please mark session as <b>completed</b> after it has taken place</span>
-                <button @click="markComplete" class="btn btn-gradient">Mark as completed</button>
+                <button @click="markComplete" class="btn btn-gradientb">Mark as completed</button>
             </div>
             
              
@@ -70,7 +70,7 @@
                         </div>
                     </div>
                     <div class="act">
-                        <button @click="postReview()" class="btn btn-redgradientbg" :disabled="!is_ready || reviewing">Submit Review</button>
+                        <button @click="postReview()" class="btn btn-gradientb" :disabled="!is_ready || reviewing">Submit Review</button>
                     </div>
                 </div>
 
@@ -193,7 +193,7 @@
                 span
                     padding: 2px 10px
                     border-radius: 20px
-                    background: linear-gradient(30deg, #d22f2a, #f3963d)
+                    background: linear-gradient(30deg, #2273c0, #0661fb)
 
     .rates
         background: linear-gradient(45deg, #2575bc, #0b61ff)
@@ -238,7 +238,7 @@
             border: none
             .rating
                 i
-                    color: #e76a36
+                    color: #5aae3a
                     font-size: 18px
             .avatar
                 display: flex
@@ -257,8 +257,7 @@
                 margin-bottom: 0
             .rating
                 i
-                    color: #e76a36
-                    cursor: pointer
+                    color: #54a323
                     font-size: 20px
             .feedback
             .act
@@ -276,7 +275,7 @@
             padding: 5px 10px
             display: flex
             align-items: center
-            background: linear-gradient(30deg, #d22f2a, #f3963d)
+            background: linear-gradient(45deg, #54a323, #6edb95)
             color: #fff
             border-radius: 3px
             flex-wrap: wrap
@@ -365,7 +364,7 @@
                 .status
                     font-weight: bold
                     text-align: center
-                    color: #df5033
+                    color: #2575bc
                     padding: 2px 5px
             
 </style>

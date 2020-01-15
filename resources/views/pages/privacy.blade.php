@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-    Home
+    {{$title}}
 @endsection
 @section('styles')
     <style>
@@ -19,7 +19,7 @@
 @section('content')
     <div class="privacy-page">
         <div class="full-container">
-            <h1>Privacy Policy</h1>
+            <h1>{{$title}}</h1>
             <div class="content">
                 <h2>INTRODUCTION</h2>
                 <p>
