@@ -3,7 +3,6 @@
     Login
 @endsection
 @section('content')
-@section('content')
     <div class="home-page">
         <div class="hero">
             {{-- Form box inside hero --}}

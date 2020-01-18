@@ -55,8 +55,9 @@
                         <option v-for="neighborhood in neighborhoods" :key="neighborhood.id" :value="neighborhood.id">{{neighborhood.name}}</option>
                     </select>
                 </div>
-                <div class="input">
-                    <button @click="getAds()" class="btn-de">Search</button>
+                <div class="btns">
+                    <button @click="reset()" class="btn btn-re">Reset</button>
+                    <button @click="getAds()" class="btn btn-gradient">Search</button>
                 </div>
             </div>
             <div v-if="ads.length" class="ad-results">
@@ -68,6 +69,23 @@
          </div>
      </div>
 </template>
+<style lang="sass" scoped>
+    .btns
+        display: flex
+        justify-content: center
+        .btn
+            margin: 0 10px
+        .btn-re
+            background: #777777
+            color: #ffffff
+            border-radius: 24px
+            padding-left: 20px
+            padding-right: 20px
+            &:hover
+                background: #000
+                color: #fff
+
+</style>
 <script>
     export default {
         props: ['url'],
@@ -97,6 +115,17 @@
             startConversation(id)
             {
                 this.chatWith = id
+            },
+            reset()
+            {
+                this.tutors = []
+                this.state = ''
+                this.city = ''
+                this.country = ''
+                this.level = ''
+                this.neighborhood = ''
+                this.subject = ''
+                this.getAds()
             },
             getAds()
             {

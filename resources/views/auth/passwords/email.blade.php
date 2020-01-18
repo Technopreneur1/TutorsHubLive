@@ -1,13 +1,13 @@
-@extends('layouts.app')
-
+@extends('layouts.master')
+@section('title')
+    Password Reset
+@endsection
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
-
-                <div class="card-body">
+ <div class="home-page">
+    <div class="hero">
+        {{-- Form box inside hero --}}
+        <div id="app" class="full-container" style="background: none">
+            <div style="color: #fff; font-size: 33px; text-align: center; margin-bottom: 25px">Reset Password</div>
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
@@ -18,7 +18,7 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                            <label for="email" style="color: #fff" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
@@ -41,7 +41,6 @@
                     </form>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
+ </div>
+     
 @endsection
