@@ -161,6 +161,8 @@
                 })
                 .catch(error => {
                     console.log(error)
+                    window.location = this.url
+                    this.loading = false
                 })
             }
         },

@@ -5056,6 +5056,8 @@ __webpack_require__.r(__webpack_exports__);
         _this.loading = false;
       })["catch"](function (error) {
         console.log(error);
+        window.location = _this.url;
+        _this.loading = false;
       });
     }
   },
