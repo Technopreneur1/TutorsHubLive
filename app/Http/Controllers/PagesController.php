@@ -14,18 +14,22 @@ class PagesController extends Controller
     //Home Page
     public function index()
     {
-        
         if(auth()->check())
         {
-            if(auth()->user()->type == 'admin')
+            if(auth()->user()->email_verified_at)
             {
-                return redirect()->route('adminpanel');
+                if(auth()->user()->type == 'admin')
+                {
+                    return redirect()->route('adminpanel');
+                }
+                $messages = auth()->user()->unreadMessages()->count();
+                return view("pages.userhome", ['messages' => $messages]);
+            }else {
+                return redirect('/email/verify');
             }
-            $messages = auth()->user()->unreadMessages()->count();
-            return view("pages.userhome", ['messages' => $messages]);
         }else {
+            
             return view("pages.home");
-            # code...
         }
     }
     public function privacy()

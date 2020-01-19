@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Mail;
 |
 */
 
+Route::get('/', 'PagesController@index')->name('home');
+
 // Route::get('/', 'PagesController@index')->name('home')->middleware('verified');
 Route::get('/contact', 'PagesController@contact')->name('contact');
 Route::post('/contact', 'PagesController@postContact')->name('contact.post');
@@ -89,7 +91,7 @@ Route::post('/conversation/send', 'ContactsController@send');
 Route::post('/check/hasConversation', 'ContactsController@hasConversationWith');
 
 
-Route::get('/', 'PagesController@index')->name('home')->middleware('verified');
+
 
 Route::get('/testadmin', function () {
     // Location::find(1)->update(['name' => 'Pakistan']);
@@ -275,7 +277,7 @@ Route::get('/canada', function () {
     
     Route::prefix('adminpanel')->middleware(['admin'])->group(function () {
     
-        Route::get('/', 'AdminController@adminpanel')->name('adminpanel');
+        // Route::get('/', 'AdminController@adminpanel')->name('adminpanel');
         Route::get('/contact/{id}', 'AdminController@contact')->name('admin.contact');
 
         Route::get('/tutors', 'AdminController@teachers')->name('admin.tutors');
