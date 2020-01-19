@@ -6,7 +6,7 @@
             </a>
             <div class="data">
                 <a  :href="url+ '/user/' +tutor.id" class="info">
-                    <div class="name">{{tutor.name}}</div>
+                    <div class="name">{{firstname(tutor.name)}}</div>
                     <div class="location"><i class="fas fa-map-marker-alt"></i> {{tutor.neighborhood ? tutor.neighborhood.name + ', ' : ''}}{{tutor.city ? tutor.city.name + ', ' : ''}}{{tutor.state ? tutor.state.name + ', ' : ''}}</div>
                 </a>
                 <div class="contactbtn">
@@ -27,6 +27,10 @@
         },
         
         methods: {
+            firstname(name){
+                console.log(name)
+                return name.split(" ")[0]
+            },
             avatar(user)
             {
                 if(user.avatar){

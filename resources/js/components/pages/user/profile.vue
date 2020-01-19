@@ -23,6 +23,7 @@
                         @change="change"
                         ref="cropper"
                     ></cropper>
+                    <button class="btn btn-crop" @click="reset()" style="margin-right: 10px">Cancel</button>
                     <button class="btn btn-crop" @click="crop">Crop &amp; Continue</button>
                 </div>
                 <div class="imgu" v-else>
@@ -42,7 +43,8 @@
                         <input style="display: none" id="avatarInput" type="file" @change="avatarSelected">
                     </div>
                     <div class="namenrole">
-                        <div class="name">{{user.name}}</div>
+                        <div v-if="!isUser" class="name">{{firstname(user.name)}}</div>
+                        <div v-else class="name">{{user.name}}</div>
                         <div class="role">{{user.type == 'teacher' ? 'Tutor' : user.type}} {{user.gender ? ' | ' + user.gender : ''}}</div>
                         <div class="rating">
                         <i class="fas fa-star"></i><span> {{rating}} / 5</span> 
@@ -258,6 +260,16 @@ import { type } from 'os'
             }
         },
         methods: {
+            firstname(name){
+                return name.split(" ")[0]
+            },
+            reset()
+            {
+                this.editAvatar = false
+                this.img = null
+                this.image = null
+                document.getElementById("avatarInput").click()
+            },
              avatarF(user)
             {
                 if(user.avatar){
