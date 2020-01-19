@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 class DisciplineController extends Controller
 {
     //
+   
     public function getDisciplines()
     {
         $disciplines = Discipline::orderBy('name', 'asc')->get();

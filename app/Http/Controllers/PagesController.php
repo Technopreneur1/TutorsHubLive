@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Mail;
 
 class PagesController extends Controller
 {
+
+   
     //Home Page
     public function index()
     {

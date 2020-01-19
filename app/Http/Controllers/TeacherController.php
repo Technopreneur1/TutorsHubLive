@@ -14,7 +14,6 @@ class TeacherController extends Controller
 {
 
     
-
     public function teacherProfile($id)
     {
         $teacher  = Teacher::with('user')->findOrFail($id);

@@ -60,8 +60,8 @@
                 <div class="input">
                     <label for="">{{user.type == 'teacher' ? 'Students' : 'Teachers'}} Can Contact</label>
                     <select v-model="user.profile.can_contact" id="">
-                        <option value="1">Yes</option>
-                        <option value="0">No</option>
+                        <option value="0">Yes</option>
+                        <option value="1">No</option>
                     </select>
                 </div>
             </div>

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Mail;
 class StudentController extends Controller
 {
     //
+  
     public function post(Request $request)
     {
         if(User::where('email', $request->email)->count())

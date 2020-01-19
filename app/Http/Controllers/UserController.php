@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Storage;
 class UserController extends Controller
 {
     //
+
+    
     public function getUserInfo()
     {
         $user = User::with(['state', 'city', 'neighborhood', 'country'])->find(auth()->id());

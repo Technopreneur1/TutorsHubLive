@@ -9,6 +9,8 @@ use App\Events\NewMessage;
 
 class ContactsController extends Controller
 {
+
+    
     public function get()
     {
         // get all users except the authenticated one

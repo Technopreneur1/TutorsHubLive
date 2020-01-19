@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 class LevelController extends Controller
 {
+
+    
     // Get Levels
     public function getAll()
     {

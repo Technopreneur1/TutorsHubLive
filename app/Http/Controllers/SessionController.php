@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class SessionController extends Controller
 {
-    //
+    
     public function index()
     {
         $sessions = auth()->user()->profile->sessions;

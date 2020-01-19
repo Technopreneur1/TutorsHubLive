@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class LocationController extends Controller
 {
+    
     //get Countries
     public function getCountries()
     {

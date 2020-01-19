@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class PlanController extends Controller
 {
     //
-
+    
     public function post(Request $request)
     {
         $plan = Plan::create([

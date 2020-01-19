@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 
 class FavoriteController extends Controller
 {
-    //
+    
+    
     public function index()
     {
         $favorites = Favorite::with('user')->where('user_id', auth()->id())->get();

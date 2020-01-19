@@ -20,30 +20,29 @@ use Illuminate\Support\Facades\Mail;
 |
 */
 
-Route::get('/', 'PagesController@index')->name('home');
+// Route::get('/', 'PagesController@index')->name('home')->middleware('verified');
 Route::get('/contact', 'PagesController@contact')->name('contact');
 Route::post('/contact', 'PagesController@postContact')->name('contact.post');
 Route::get('/privacy-policy', 'PagesController@privacy')->name('privacy');
 Route::get('/terms-and-conditions', 'PagesController@terms')->name('terms');
-Route::get('/ads', 'AdController@index')->name('ads');
-Route::get('/create/ad', 'AdController@create')->name('createAd');
+Route::get('/ads', 'AdController@index')->name('ads')->middleware('auth', 'verified');
+Route::get('/create/ad', 'AdController@create')->name('createAd')->middleware('auth', 'verified');
 // Route::get('/find', 'TeacherController@find')->name('find');
-Route::get('/messages', 'PagesController@messages')->name('messages')->middleware('auth');
+Route::get('/messages', 'PagesController@messages')->name('messages')->middleware('auth', 'verified');
 
-Route::get('/profile', 'UserController@profile')->name('profile')->middleware('auth');
-Route::get('/my-ads', 'AdController@myAds')->name('myAds')->middleware('auth');
-Route::get('/favorites', 'FavoriteController@index')->name('favorites');
-Route::get('/sessions', 'SessionController@index')->name('sessions');
+Route::get('/profile', 'UserController@profile')->name('profile')->middleware('auth', 'verified');
+Route::get('/my-ads', 'AdController@myAds')->name('myAds')->middleware('auth', 'verified');
+Route::get('/favorites', 'FavoriteController@index')->name('favorites')->middleware('auth', 'verified');
+Route::get('/sessions', 'SessionController@index')->name('sessions')->middleware('auth', 'verified');
 
-Route::get('/payments', 'PaymentController@index')->name('payments')->middleware('auth');
+Route::get('/payments', 'PaymentController@index')->name('payments')->middleware('auth', 'verified');
 
-Route::get('/user/{id}', 'UserController@userProfile')->name('userProfile');
+Route::get('/user/{id}', 'UserController@userProfile')->name('userProfile')->middleware('auth', 'verified');
 
 // Find Tutors
-Route::get('/find', 'TeacherController@index')->name('findTutors');
-Route::post('/book', 'SessionController@book');
+Route::get('/find', 'TeacherController@index')->name('findTutors')->middleware('auth', 'verified');
 
-Route::post('/complete/booking', 'SessionController@pay');
+Route::post('/complete/booking', 'SessionController@pay')->middleware('auth', 'verified');
 // ============== GET DATA =====================
 Route::post('/get/levels', 'LevelController@getAll');
 Route::post('/get/disciplines', 'DisciplineController@getDisciplines');
@@ -90,7 +89,7 @@ Route::post('/conversation/send', 'ContactsController@send');
 Route::post('/check/hasConversation', 'ContactsController@hasConversationWith');
 
 
-Route::get('/', 'PagesController@index')->name('home');
+Route::get('/', 'PagesController@index')->name('home')->middleware('verified');
 
 Route::get('/testadmin', function () {
     // Location::find(1)->update(['name' => 'Pakistan']);
@@ -319,3 +318,4 @@ Route::get('/canada', function () {
         
     });
 
+Auth::routes(['verify' => true]);

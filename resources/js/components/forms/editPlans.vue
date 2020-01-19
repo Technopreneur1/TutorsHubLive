@@ -30,10 +30,12 @@
                     </div>
                     <div class="input">
                         <label for="">Hourly Rate - $$</label>
-                        <input type="number" v-model="rate" placeholder="Rate">
+                        <input type="number" min="20" v-model="rate" placeholder="Rate">
                     </div>
                     <div v-if="error" class="error">{{error}}</div>
-                    <button @click="post" class="btn btn-gradientbg">Save</button>
+                    <div class="text-right">
+                        <button @click="post" class="btn btn-gradient">Save</button>
+                    </div>
                 </div>
             </transition>
             <transition name="easy-appear" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut faster">
@@ -57,7 +59,9 @@
                         <input type="number" v-model="editPlan.rate" placeholder="Rate">
                     </div>
                     <div v-if="error" class="error">{{error}}</div>
-                    <button @click="update" class="btn btn-gradientbg">Save</button>
+                    <div class="text-right">
+                        <button @click="update" class="btn btn-gradient">Save</button>
+                    </div>
                 </div>
             </transition>
         </section>
@@ -97,7 +101,7 @@
                 levels: [],
                 discipline: '',
                 level: '',
-                rate: '',
+                rate: 20,
                 success: '',
                 editPlan: '',
                 error: ''
@@ -139,24 +143,29 @@
                 this.success = ""
                 if(this.rate && this.discipline && this.level)
                 {
-                    this.error = ''
-                    axios.post(this.url +'/post/plan', 
+                    if(this.rate > 19)
                     {
-                        discipline: this.discipline,
-                        level: this.level,
-                        rate: this.rate,
-                    })
-                    .then(response => {
-                        console.log(response)
-                        this.success  = "New Plan Added"
-                        this.plans.push(response.data.plan)
-                        this.discipline = '',
-                        this.level = '',
-                        this.rate = ''
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    })
+                        this.error = ''
+                        axios.post(this.url +'/post/plan', 
+                        {
+                            discipline: this.discipline,
+                            level: this.level,
+                            rate: this.rate,
+                        })
+                        .then(response => {
+                            console.log(response)
+                            this.success  = "New Plan Added"
+                            this.plans.push(response.data.plan)
+                            this.discipline = '',
+                            this.level = '',
+                            this.rate = ''
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        })
+                    }else{
+                        this.error = "Hourly rate must be at-least $20"
+                    }
                 }else{
                     this.error = "Please Complete The Form To Save"
                 }
