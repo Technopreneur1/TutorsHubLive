@@ -22,6 +22,11 @@ import StoreData from './store.js'
 
 Vue.use(Vuex)
 const store = new Vuex.Store(StoreData)
+
+import * as VueGoogleMaps from "vue2-google-maps";
+Vue.use(VueGoogleMaps, {
+  load: { key: "AIzaSyBItJS5EzVJKKHUeqEqlW5zw7LSvzi0IZg"}
+});
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

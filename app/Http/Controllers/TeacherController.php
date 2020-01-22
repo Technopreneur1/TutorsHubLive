@@ -75,6 +75,8 @@ class TeacherController extends Controller
                 'password' => bcrypt($request['password']),
                 'city_id' => $request['city'],
                 'state_id' => $request['state'],
+                'latitude' => $request['lat'],
+                'longitude' => $request['lng'],
                 'neighborhood_id' => $neighborhood,
             ]);
             $teacher = Teacher::create([

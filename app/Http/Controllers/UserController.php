@@ -31,7 +31,18 @@ class UserController extends Controller
     }
 
 
+    
+    public function updateLatLng(Request $request)
+    {
+        $user = auth()->user()->update([
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude,
+        ]);
+        return response()->json(['msg' => "success"]);
+    }
 
+
+    
     public function postFavorite(Request $request)
     {
         $user = User::findOrFail($request->id);

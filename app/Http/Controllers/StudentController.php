@@ -65,6 +65,8 @@ class StudentController extends Controller
             'email' => $request['email'],
             'phone' => $request['phone'],
             'gender' => $request['gender'],
+            'latitude' => $request['lat'],
+            'longitude' => $request['lng'],
             'type' => 'student',
             'country_id' => $request['country'],
             'password' => bcrypt($request['password']),

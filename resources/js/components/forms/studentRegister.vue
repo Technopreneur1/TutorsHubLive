@@ -119,7 +119,7 @@
 </template>
 <script>
     export default {
-        props: ['url'],
+        props: ['url', 'lat', 'lng'],
         data()
         {
             return {
@@ -178,6 +178,8 @@
                     phone: this.student.phone,
                     country: this.student.country,
                     level: this.student.level,
+                    lat: this.lat,
+                    lng: this.lng,
                     discipline: this.student.discipline,
                     gender: this.student.gender,
                     state: this.student.state,

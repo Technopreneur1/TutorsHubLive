@@ -69,6 +69,7 @@ Route::post('post/plan', 'PlanController@post');
 Route::post('post/avatar', 'UserController@postAvatar');
 Route::post('post/complete-session', 'SessionController@complete');
 Route::post('post/review', 'SessionController@postReview');
+Route::post('/post/long-lat', 'UserController@updateLatLng');
 
 
 Route::post('update/location', 'LocationController@updateUserLocation');

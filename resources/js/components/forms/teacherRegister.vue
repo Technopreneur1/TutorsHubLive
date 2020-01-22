@@ -100,7 +100,7 @@
 </template>
 <script>
     export default {
-        props: ['url'],
+        props: ['url', 'lat', 'lng'],
         data()
         {
             return {
@@ -138,6 +138,7 @@
                         confirm_password: '',
                         phone: '',
                         neighborhood: '',
+                        
                         city: '',
                         state: '',
                         country: '',
@@ -172,6 +173,8 @@
                     country: this.teacher.country,
                     gender: this.teacher.gender,
                     state: this.teacher.state,
+                    lat: this.lat,
+                    lng: this.lng,
                     city: this.teacher.city,
                     neighborhood: this.teacher.neighborhood,
                     new_neighborhood: this.teacher.new_neighborhood,

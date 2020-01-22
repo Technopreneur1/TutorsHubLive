@@ -56,7 +56,8 @@
         },
         data(){
             return {
-               
+               lat: '',
+               lng: ''
             }
         },
         computed: {
@@ -95,12 +96,44 @@
                 .catch(error => {
                     console.log(error)
                 })
+            },
+            locate()
+            {
+                if(this.user)
+                {
+                    if(this.user.latitude && this.user.longitude)
+                    {
+                        
+                    }else{
+                        this.getLocation()
+                    }
+                }
+            },
+            getLocation() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(this.setLocation)
+                } 
+            },
+           setLocation(position) {
+            this.lat = position.coords.latitude
+            this.lng = position.coords.longitude
+                axios.post(this.url + '/post/long-lat', {
+                    longitude: this.lng,
+                    latitude: this.lat,
+                })
+                .then(response => {
+                   console.log(response.data)
+                })
+                .catch(error => {
+                    console.log(error)
+                })
             }
         },
         created()
         {
             this.$store.commit('setSessions', this.sessions)
             this.$store.commit('setMessages', this.messages)
+            this.locate()
         }
         
     }
