@@ -3,8 +3,25 @@
          <transition  name="easy-appear" enter-active-class="animated slideInLeft" leave-active-class="animated slideOutLeft">
             <start-chat v-if="chatWith" :url="url" :to="chatWith" @cancelChat="chatWith = null"></start-chat>
          </transition>
-         <div class="full-container">
-            <div class="row">
+         <div v-if="viewTutor" class="view-tutor">
+             <span class="clo" @click="viewTutor = null"><i class="fas fa-times"></i></span>
+             <div class="avatar">
+                 <a  :href="url+ '/user/' +viewTutor.id" class="info">
+                    <img :src="avatar(viewTutor)" alt="">
+                 </a>
+             </div>
+             <div class="data">
+                <a  :href="url+ '/user/' +viewTutor.id" class="info">
+                    <div class="name">{{firstname(viewTutor.name)}}</div>
+                    <div class="location"><i class="fas fa-map-marker-alt"></i> {{viewTutor.neighborhood ? viewTutor.neighborhood.name + ', ' : ''}}{{viewTutor.city ? viewTutor.city.name + ', ' : ''}}{{viewTutor.state ? viewTutor.state.name + ', ' : ''}}</div>
+                </a>
+                <div class="contactbtn">
+                    <button @click="contact(viewTutor.id)" class="btn btn-gradient">Message</button>
+                </div>
+            </div>
+         </div>
+         <div class="container-fluid">
+              <div class="row">
                 <div :class="showSearchForm ? 'col-md-4' : 'col-md-12' " class="mb-3" >
                     <div v-if="!showSearchForm" class="short-search-bar">
                         <div @click="showSearchForm = true" class="gradient-btn">
@@ -12,6 +29,7 @@
                         </div>
                     </div>
                     <div v-else class="searchBox">
+                        <span class="clo"><i class="fas fa-times"></i></span>
                         <div class="input">
                             <label for="">Level</label>
                             <select v-model="level" name="level" id="">
@@ -65,7 +83,7 @@
                 </div>
                 <div :class="showSearchForm ? 'col-md-8' : 'col-md-12' ">
                     <div id="map">
-                        <GmapMap :center="center" :map-type-id="mapTypeId" :zoom="5">
+                        <GmapMap :center="center" :map-type-id="mapTypeId" :zoom="7">
                         <GmapMarker
                             v-for="(item, index) in markers"
                             :key="index"
@@ -76,6 +94,9 @@
                     </div>
                 </div>
             </div>
+         </div>
+         <div class="full-container">
+           
 
             
             <div v-if="tutors.length" class="search-results">
@@ -91,6 +112,45 @@
      </div>
 </template>
 <style lang="sass" scoped>
+    #map
+        display: flex
+        justify-content: flex-end
+        margin: 0 -15px
+        .vue-map-container 
+            max-width: 100% !important
+    .view-tutor
+        
+        background: linear-gradient(45deg, white, #f9f9f9)
+        position: fixed
+        left: 0
+        z-index: 1
+        bottom: 0
+        top: 55px
+        width: 33.33%
+        max-width: 100%
+        padding: 30px 10px
+        display: flex
+        flex-direction: column
+        align-items: center
+        justify-content: center
+        text-align: center
+        .clo
+            position: absolute
+            top: 10px
+            right: 10px
+            font-size: 22px
+            cursor: pointer
+            color: #2575bc
+        .avatar
+            width: 150px
+            height: 150px
+            img
+                max-width: 100%
+                border-radius: 50%
+        .data
+            a
+                color: #000
+
     .btns
         display: flex
         justify-content: center
@@ -117,6 +177,7 @@
         {
            return{
                 chatWith: null,
+                viewTutor: null,
                 tutors: [],
                 success: '',
                 levels: [],
@@ -144,11 +205,30 @@
            }
         },
         methods: {
+            contact(id)
+            {
+                    axios.post(this.url +'/check/hasConversation', {
+                        id: id
+                    })
+                    .then(response => {
+                        console.log(response)
+                        if(response.data.has)
+                        {
+                            window.location = this.url + "/messages?u=" + id;
+                        }else{
+                            this.startConversation(id)
+                        }
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+            },
             markerClicked(item)
             {
                 this.center = item.position
-                this.activeTutor = item.tutor.id
-                window.location = this.url + '/user/' + item.tutor.id
+                this.viewTutor = item.tutor
+
+                // window.location = this.url + '/user/' + item.tutor.id
             },
             setMap()
             {
@@ -176,6 +256,7 @@
             },
             startConversation(id)
             {
+                this.viewTutor = null
                 this.chatWith = id
             },
             getMore()
@@ -209,16 +290,31 @@
                     this.tutors = response.data.tutors.data
                     this.nextPage = response.data.tutors.next_page_url
                     this.updateMap()
-                    // this.showSearchForm = false
+                    this.showSearchForm = false
                 })
                 .catch(error => {
                     console.log(error);
                 })
             },
+            avatar(user)
+            {
+                if(user.avatar){
+                    return this.url + '/storage/images/' + user.avatar
+                }else{
+                if(user.gender)
+                {
+                    return this.url + '/img/' + user.gender.toLowerCase() + '.jpg'
+                }else{
+                    return this.url + '/img/male.jpg'
+                }
+                }
+            },
+            firstname(name){
+                return name.split(" ")[0]
+            },
             updateMap()
             {
                 this.markers = []
-                this.tutors.forEach
                 this.tutors.forEach(tutor => {
                     let ulat = tutor.latitude
                     let ulng = tutor.longitude

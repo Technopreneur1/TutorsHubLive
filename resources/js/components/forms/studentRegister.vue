@@ -64,8 +64,8 @@
                     </select>
                 </div>
                 <div v-if="student.neighborhood == -1" class="input">
-                    <label for="">Neighborhood Name &nbsp; <small>Make sure neighborhood name is correct and avoid spellings mistakes</small></label>
-                    <input type="text" class="input" v-model="student.new_neighborhood" placeholder="Neighborhood">
+                    <label for="">Neighbourhood Name &nbsp; <small>Make sure neighbourhood name is correct and avoid spellings mistakes</small></label>
+                    <input type="text" class="input" v-model="student.new_neighborhood" placeholder="Neighbourhood">
                 </div>
             </div>
             <div v-if="step == 3" class="step step2">
