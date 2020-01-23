@@ -47,7 +47,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="total"> <span class="name">= </span> <span>${{total}}</span></div>
+                <div class="total"> <span class="name">= </span> <span>${{total}} <small>{{currency}}</small></span></div>
                 <div v-show="!loading" class="btns" style="width: 300px; max-with: 90%; margin: 0 auto">
                    <div  ref="paypal"></div>
                 </div>
@@ -147,6 +147,17 @@
            }
         },
         computed: {
+            currency()
+            {
+                if(this.user.country.name == "United States")
+                {
+                    return "USD"
+                }
+                else if(this.user.country.name == "Canada")
+                {
+                    return "CAD"
+                }
+            },
             total() 
             {
                 return this.plan.rate * this.hours
@@ -165,7 +176,7 @@
                             purchase_units: [
                                 {
                                     amount: {
-                                        currency_code: "USD",
+                                        currency_code: this.currency,
                                         value: this.total
                                     }
                                 }
@@ -218,7 +229,7 @@
         mounted()
         {
             const script = document.createElement("script");
-            script.src = "https://www.paypal.com/sdk/js?client-id=AdolP55UI85zKSEsnewBPQJxsrsShOEz2rDr9-f-AWMEMC0etCeP9K0EEzVjIxlfRgkBslm2yDHceBRC";
+            script.src = "https://www.paypal.com/sdk/js?client-id=AdolP55UI85zKSEsnewBPQJxsrsShOEz2rDr9-f-AWMEMC0etCeP9K0EEzVjIxlfRgkBslm2yDHceBRC&currency=" + this.currency;
             script.addEventListener("load", this.setLoaded);
             document.body.appendChild(script);
         }

@@ -201,7 +201,7 @@
                                 <div class="box-body">
                                     <form action="{{route('admin.post.payment')}}" method="post" enctype="multipart/form-data">
                                         <div class="form-group">
-                                            <label for="name">Amount (USD) $</label>
+                                            <label for="name">Amount $</label>
                                             <input type="number" class="form-control" name="amount" placeholder="Payment Amount" value="{{old('amount')}}">
                                         </div>
                                         

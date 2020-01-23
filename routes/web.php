@@ -130,9 +130,15 @@ Route::get('/mailit', function () {
         Discipline::create(['name' => $dis]);
     }
 });
-Route::get('/delus', function () {
+Route::get('/resetlat', function () {
     
-    Location::find(41813)->delete();
+    foreach(User::all() as $user)
+    {
+        $user->update([
+            'latitude' => '',
+            'longitude' => '',
+        ]);
+    }
 });
 Route::get('/delloc', function () {
     
