@@ -135,8 +135,8 @@ Route::get('/resetlat', function () {
     foreach(User::all() as $user)
     {
         $user->update([
-            'latitude' => '',
-            'longitude' => '',
+            'latitude' => null,
+            'longitude' => null,
         ]);
     }
 });
