@@ -1,5 +1,6 @@
 <template>
     <div class="edit-profile-slideout chp" :class="{full: 'editPlans'}">
+        <span @click="cancel" class="clo"><i class="fas fa-times"></i></span>
         <!-- <transition  name="easy-appear" enter-active-class="animated slideInLeft" leave-active-class="animated slideOutLeft"> -->
         <div class="startchat">
             <div class="htd">Start Conversation</div>
@@ -38,6 +39,10 @@
                     window.location = this.url + "/messages?u=" + this.to
                 })
             },
+            cancel()
+            {
+                this.$emit("cancelChat")
+            }
         },
         mounted()
         {
@@ -46,6 +51,13 @@
     }
 </script>
 <style lang="scss" scoped>
+    .clo{
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        font-size: 22px;
+        color: #ffffff
+    }
     .htd{
         text-align: center;
         font-size: 30px;

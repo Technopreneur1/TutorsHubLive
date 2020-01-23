@@ -4082,6 +4082,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['url', 'to'],
   data: function data() {
@@ -4106,6 +4107,9 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         window.location = _this.url + "/messages?u=" + _this.to;
       });
+    },
+    cancel: function cancel() {
+      this.$emit("cancelChat");
     }
   },
   mounted: function mounted() {}
@@ -5746,6 +5750,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   // props: ['url', {user}],
@@ -6733,8 +6738,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     markerClicked: function markerClicked(item) {
+      console.log(item);
       this.center = item.position;
-      this.viewAd = item.ad; // window.location = this.url + '/user/' + item.tutor.id
+      this.viewAd = item.ad;
     },
     updateMap: function updateMap() {
       var _this = this;
@@ -14158,7 +14164,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".htd[data-v-89a3b702] {\n  text-align: center;\n  font-size: 30px;\n  color: #53a221;\n}\n.chp[data-v-89a3b702] {\n  background: rgba(0, 0, 0, 0.92);\n}\n.startchat[data-v-89a3b702] {\n  margin: 0 auto;\n  max-width: 450px;\n}\n.btn-snd[data-v-89a3b702] {\n  background: #53a221;\n  color: #ffffff;\n  width: 100%;\n}", ""]);
+exports.push([module.i, ".clo[data-v-89a3b702] {\n  position: absolute;\n  top: 15px;\n  left: 15px;\n  font-size: 22px;\n  color: #ffffff;\n}\n.htd[data-v-89a3b702] {\n  text-align: center;\n  font-size: 30px;\n  color: #53a221;\n}\n.chp[data-v-89a3b702] {\n  background: rgba(0, 0, 0, 0.92);\n}\n.startchat[data-v-89a3b702] {\n  margin: 0 auto;\n  max-width: 450px;\n}\n.btn-snd[data-v-89a3b702] {\n  background: #53a221;\n  color: #ffffff;\n  width: 100%;\n}", ""]);
 
 // exports
 
@@ -61419,6 +61425,10 @@ var render = function() {
     "div",
     { staticClass: "edit-profile-slideout chp", class: { full: "editPlans" } },
     [
+      _c("span", { staticClass: "clo", on: { click: _vm.cancel } }, [
+        _c("i", { staticClass: "fas fa-times" })
+      ]),
+      _vm._v(" "),
       _c("div", { staticClass: "startchat" }, [
         _c("div", { staticClass: "htd" }, [_vm._v("Start Conversation")]),
         _vm._v(" "),
@@ -63842,12 +63852,12 @@ var render = function() {
           }
         },
         [
-          (_vm.chatWith = _vm.id)
+          _vm.chatWith
             ? _c("start-chat", {
-                attrs: { url: _vm.url, to: (_vm.chatWith = _vm.id) },
+                attrs: { url: _vm.url, to: _vm.chatWith },
                 on: {
                   cancelChat: function($event) {
-                    _vm.chatWith = _vm.id = null
+                    _vm.chatWith = null
                   }
                 }
               })

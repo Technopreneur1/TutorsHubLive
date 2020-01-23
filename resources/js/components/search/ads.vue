@@ -211,10 +211,9 @@
         methods: {
             markerClicked(item)
             {
+                console.log(item)
                 this.center = item.position
                 this.viewAd = item.ad
-
-                // window.location = this.url + '/user/' + item.tutor.id
             },
             updateMap()
             {

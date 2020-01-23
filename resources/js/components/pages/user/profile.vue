@@ -2,7 +2,8 @@
     <div class="profile-page">
          <full-loader v-if="loading" ></full-loader>
          <transition  name="easy-appear" enter-active-class="animated slideInLeft" leave-active-class="animated slideOutLeft">
-            <start-chat v-if="chatWith = id" :url="url" :to="chatWith = id" @cancelChat="chatWith = id = null"></start-chat>
+            <!-- <start-chat v-if="chatWith = id" :url="url" :to="chatWith = id" @cancelChat="chatWith = id = null"></start-chat> -->
+             <start-chat v-if="chatWith" :url="url" :to="chatWith" @cancelChat="chatWith = null"></start-chat>
          </transition>
         <transition name="easy-appear" enter-active-class="animated slideInLeft" leave-active-class="animated slideOutLeft">
             <edit-profile v-if="editing" @cancel="editing = false" :url="url" :user="user"></edit-profile>
