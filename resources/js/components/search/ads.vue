@@ -4,7 +4,9 @@
             <start-chat v-if="chatWith" :url="url" :to="chatWith" @cancelChat="chatWith = null"></start-chat>
          </transition>
          <transition  name="easy-appear" enter-active-class="animated slideInLeft" leave-active-class="animated slideOutLeft">
+            
             <div v-if="viewAd" class="view-ad">
+                <!-- <h1>dsajdnc÷</h1> -->
                 <span class="clo" @click="viewAd = null"><i class="fas fa-times"></i></span>
                 <div class="avatar">
                     <a  :href="url+ '/user/' +viewAd.user.id" class="info">
