@@ -123,13 +123,18 @@ class TeacherController extends Controller
                 ->paginate(30);
         }
         else {
-            $tutors = User::with(['city', 'state', 'neighborhood', 'country'])
+            $tutors = User::with(['city', 'state', 'neighborhood', 'country', 'profile'])
+                ->where('country_id', auth()->user()->country_id)
                 ->where('type', 'teacher')
                 ->paginate(30);
         }
         return response()->json(['tutors' => $tutors]);
     }
-
+    public function getMinWage(Request $request)
+    {
+        $wage = User::findOrFail($request->id)->profile->plans->min('rate');
+        return response()->json(['wage' => $wage ? $wage : 0]);
+    }
     //Return Find Tutor Page
 
     public function index()
@@ -137,7 +142,9 @@ class TeacherController extends Controller
         // $tutors = Teachers::orderBy('created_at', 'desc')->paginate(20);
         if(auth()->user()->type == 'student')
         {
-            return view('pages.search.tutor');
+            $user = auth()->user();
+            $country = auth()->user()->country;
+            return view('pages.search.tutor', ['user' => $user]);
         }else {
             return abort(404);
         }

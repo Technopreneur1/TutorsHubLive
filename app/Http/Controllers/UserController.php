@@ -97,6 +97,14 @@ class UserController extends Controller
         return view('pages.user.profile',  ['user' => $user, 'profile' => $profile, 'likes' => $likes]);
     }
     
+    public function doILike(Request $request)
+    {
+        
+        $likes = Favorite::where('user_id', auth()->id())->where('target_id', $request->id)->count();
+        return response()->json([
+            'status' => $likes
+        ]);
+    }
 
     public function updateUserProfile(Request $request)
     {

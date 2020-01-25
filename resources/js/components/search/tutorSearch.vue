@@ -1,104 +1,115 @@
 <template>
-     <div class="search-page">
-         <transition  name="easy-appear" enter-active-class="animated slideInLeft" leave-active-class="animated slideOutLeft">
+    <div class="search-page tutp">
+        <transition  name="easy-appear" enter-active-class="animated slideInLeft" leave-active-class="animated slideOutLeft">
             <start-chat v-if="chatWith" :url="url" :to="chatWith" @cancelChat="chatWith = null"></start-chat>
-         </transition>
-         <div v-if="viewTutor" class="view-tutor">
-             <span class="clo" @click="viewTutor = null"><i class="fas fa-times"></i></span>
-             <div class="avatar">
-                 <a  :href="url+ '/user/' +viewTutor.id" class="info">
-                    <img :src="avatar(viewTutor)" alt="">
-                 </a>
-             </div>
-             <div class="data">
+        </transition>
+        <div v-if="viewTutor" class="view-tutor">
+            <span class="clo" @click="viewTutor = null"><i class="fas fa-times"></i></span>
+            <div class="avatar">
                 <a  :href="url+ '/user/' +viewTutor.id" class="info">
-                    <div class="name">{{firstname(viewTutor.name)}}</div>
-                    <div class="location"><i class="fas fa-map-marker-alt"></i> {{viewTutor.neighborhood ? viewTutor.neighborhood.name + ', ' : ''}}{{viewTutor.city ? viewTutor.city.name + ', ' : ''}}{{viewTutor.state ? viewTutor.state.name + ', ' : ''}}</div>
+                <img :src="avatar(viewTutor)" alt="">
                 </a>
-                <div class="contactbtn">
-                    <button @click="contact(viewTutor.id)" class="btn btn-gradient">Message</button>
-                </div>
             </div>
-         </div>
+            <div class="data">
+            <a  :href="url+ '/user/' +viewTutor.id" class="info">
+                <div class="name">{{firstname(viewTutor.name)}}</div>
+                <div class="location"><i class="fas fa-map-marker-alt"></i> {{viewTutor.neighborhood ? viewTutor.neighborhood.name + ', ' : ''}}{{viewTutor.city ? viewTutor.city.name + ', ' : ''}}{{viewTutor.state ? viewTutor.state.name + ', ' : ''}}</div>
+            </a>
+            <div class="contactbtn">
+                <button @click="contact(viewTutor.id)" class="btn btn-gradient">Message</button>
+            </div>
+        </div>
+        </div>
+        <!-- <div v-if="!showSearchForm" class="short-search-bar">
+            <div @click="showSearchForm = true" class="gradient-btn">
+                <button><i class="fas fa-filter"></i> Filter Search</button>
+            </div>
+        </div> -->
+        <div class="mbar">
+            <div @click="showSearchForm = true" class="mopt">
+                <i class="fas fa-filter"></i> Filter
+            </div>
+            <div @click="viewmode = 'all'" class="mopt" :class="{active: viewmode == 'all'}">
+                <i class="fas fa-globe"></i> <span>All</span>
+            </div>
+            <div @click="viewmode = 'map'" class="mopt" :class="{active: viewmode == 'map'}">
+                <i class="fas fa-map-marker-alt"></i> <span>Map</span>
+            </div>
+            <div @click="viewmode = 'list'" class="mopt" :class="{active: viewmode == 'list'}">
+                <i class="fas fa-list-ul"></i> <span>List</span>
+            </div>
+        </div>
+         <!-- Maps -->
          <div class="container-fluid">
-              <div class="row">
-                <div :class="showSearchForm ? 'col-md-4' : 'col-md-12' " class="mb-3" >
-                    <div v-if="!showSearchForm" class="short-search-bar">
-                        <div @click="showSearchForm = true" class="gradient-btn">
-                            <button><i class="fas fa-filter"></i> Filter Search</button>
-                        </div>
+            <transition  name="easy-appear" enter-active-class="animated slideInLeft" leave-active-class="animated slideOutLeft">
+                <div v-if="showSearchForm" class="searchBox">
+                    <span @click="showSearchForm = false" class="clo"><i class="fas fa-times"></i></span>
+                    <div class="input">
+                        <label for="">Level</label>
+                        <select v-model="level" name="level" id="">
+                            <option value="">-- Level --</option>
+                            <option v-for="level in levels" :value="level.id" :key="level.id">{{level.name}}</option>
+                        </select>
                     </div>
-                    <div v-else class="searchBox">
-                        <span class="clo"><i class="fas fa-times"></i></span>
-                        <div class="input">
-                            <label for="">Level</label>
-                            <select v-model="level" name="level" id="">
-                                <option value="">-- Level --</option>
-                                <option v-for="level in levels" :value="level.id" :key="level.id">{{level.name}}</option>
-                            </select>
-                        </div>
-                        <div class="input">
-                            <label for="">Subject</label>
-                            <select v-model="subject" name="subject" id="">
-                                <option value="">-- Subject --</option>
-                                <option v-for="discipline in disciplines" :value="discipline.id" :key="discipline.id">{{discipline.name}}</option>
-                            </select>
-                        </div>
-                        <div class="newrow">
-                            <span>Location</span>
-                        </div>
-                        <div class="input">
-                            <label for="">Country</label>
-                            <select @change="countrySelected()" v-model="country" id="">
-                                <option value="" disabled>Country</option>
-                                <option v-for="country in countries" :key="country.id"  :value="country.id">{{country.name}}</option>
-                            </select>
-                        </div>
-                        <div v-show="states.length" class="input">
-                            <label for="">State / Province</label>
-                            <select @change="stateSelected()" v-model="state" id="">
-                                <option value="" disabled>State / Province</option>
-                                <option v-for="state in states" :key="state.id" :value="state.id">{{state.name}}</option>
-                            </select>
-                        </div>
-                        <div v-show="cities.length" class="input">
-                            <label for="">City</label>
-                            <select @change="citySelected()" v-model="city" id="">
-                                <option value="" disabled>City</option>
-                                <option v-for="city in cities" :key="city.id" :value="city.id">{{city.name}}</option>
-                            </select>
-                        </div>
-                        <div v-show="neighborhoods.length" class="input">
-                            <label for="">Neighborhood</label>
-                            <select v-model="neighborhood" id="">
-                                <option value="" disabled>Neighborhood</option>
-                                <option v-for="neighborhood in neighborhoods" :key="neighborhood.id" :value="neighborhood.id">{{neighborhood.name}}</option>
-                            </select>
-                        </div>
-                        <div class="btns">
-                            <button @click="reset()" class="btn btn-re">Reset</button>
-                            <button @click="getTutors()" class="btn btn-gradient">Search</button>
-                        </div>
+                    <div class="input">
+                        <label for="">Subject</label>
+                        <select v-model="subject" name="subject" id="">
+                            <option value="">-- Subject --</option>
+                            <option v-for="discipline in disciplines" :value="discipline.id" :key="discipline.id">{{discipline.name}}</option>
+                        </select>
+                    </div>
+                    <div class="newrow">
+                        <span>Location</span>
+                    </div>
+                    <div class="input">
+                        <label for="">Country</label>
+                        <select @change="countrySelected()" v-model="country" id="">
+                            <option value="" disabled>Country</option>
+                            <option v-for="country in countries" :key="country.id"  :value="country.id">{{country.name}}</option>
+                        </select>
+                    </div>
+                    <div v-show="states.length" class="input">
+                        <label for="">State / Province</label>
+                        <select @change="stateSelected()" v-model="state" id="">
+                            <option value="" disabled>State / Province</option>
+                            <option v-for="state in states" :key="state.id" :value="state.id">{{state.name}}</option>
+                        </select>
+                    </div>
+                    <div v-show="cities.length" class="input">
+                        <label for="">City</label>
+                        <select @change="citySelected()" v-model="city" id="">
+                            <option value="" disabled>City</option>
+                            <option v-for="city in cities" :key="city.id" :value="city.id">{{city.name}}</option>
+                        </select>
+                    </div>
+                    <div v-show="neighborhoods.length" class="input">
+                        <label for="">Neighborhood</label>
+                        <select v-model="neighborhood" id="">
+                            <option value="" disabled>Neighborhood</option>
+                            <option v-for="neighborhood in neighborhoods" :key="neighborhood.id" :value="neighborhood.id">{{neighborhood.name}}</option>
+                        </select>
+                    </div>
+                    <div class="btns">
+                        <button @click="reset()" class="btn btn-re">Reset</button>
+                        <button @click="getTutors()" class="btn btn-gradient">Search</button>
                     </div>
                 </div>
-                <div :class="showSearchForm ? 'col-md-8' : 'col-md-12' ">
-                    <div id="map">
-                        <GmapMap :center="center" :map-type-id="mapTypeId" :zoom="3">
-                        <GmapMarker
-                            v-for="(item, index) in markers"
-                            :key="index"
-                            :position="item.position"
-                            @click="markerClicked(item)"
-                        />
-                        </GmapMap>
-                    </div>
-                </div>
+            </transition>
+        </div>
+        <div v-if="viewmode == 'map' || viewmode == 'all'" >
+            <div id="map">
+                <GmapMap :center="centerLoc" :map-type-id="mapTypeId" :zoom="theZoom">
+                <GmapMarker
+                    v-for="(item, index) in markers"
+                    :key="index"
+                    :position="item.position"
+                    @click="markerClicked(item)"
+                />
+                </GmapMap>
             </div>
          </div>
-         <div class="full-container">
-           
-
-            
+         <!-- List -->
+         <div v-if="viewmode == 'list' || viewmode == 'all'" class="full-container">
             <div v-if="tutors.length" class="search-results">
                 <tutor v-for="tutor in tutors"  @startConversation="startConversation(tutor.id)" :url="url" :tutor="tutor" :key="tutor.id"></tutor>
             </div>
@@ -115,7 +126,7 @@
     #map
         display: flex
         justify-content: flex-end
-        margin: 0 -15px
+        margin: 0
         .vue-map-container 
             max-width: 100% !important
     .view-tutor
@@ -173,12 +184,20 @@
 </style>
 <script>
     export default {
-        props: ['url'],
+        props: {
+            url : {
+                type: String
+            },
+            authuser : {
+                type: Object
+            }
+        },
         data()
         {
            return{
                 chatWith: null,
                 viewTutor: null,
+                viewmode: 'all',
                 tutors: [],
                 success: '',
                 levels: [],
@@ -204,6 +223,33 @@
                 ]
                
            }
+        },
+        computed:
+        {
+            centerLoc(){
+                if(this.country)
+                {
+                    return { lat: 40.73061, lng: -73.935242 }
+                }else if(this.authuser.latitude && this.authuser.longitude)
+                {
+                    return { lat: this.authuser.latitude, lng: this.authuser.longitude }
+                }else
+                {
+                    return { lat: 40.73061, lng: -73.935242 }
+                }
+            },
+            theZoom(){
+                if(this.country)
+                {
+                    return 3
+                }else if(this.authuser.latitude && this.authuser.longitude)
+                {
+                    return 7
+                }else
+                {
+                    return 4
+                }
+            }
         },
         methods: {
             contact(id)

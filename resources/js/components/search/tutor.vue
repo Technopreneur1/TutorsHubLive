@@ -1,5 +1,8 @@
 <template>
     <div class="result">
+        <div v-if="loading || loadingwage" class="loader">
+            <i class="fas fa-spinner fa-spin"></i>
+        </div>
         <div class="teacher">
             <a :href="url+ '/user/' +tutor.id"  class="avatar">
                 <img :src="avatar(tutor)" alt="">
@@ -9,8 +12,15 @@
                     <div class="name">{{firstname(tutor.name)}}</div>
                     <div class="location"><i class="fas fa-map-marker-alt"></i> {{tutor.neighborhood ? tutor.neighborhood.name + ', ' : ''}}{{tutor.city ? tutor.city.name + ', ' : ''}}{{tutor.state ? tutor.state.name + ', ' : ''}}</div>
                 </a>
-                <div class="contactbtn">
-                    <button @click="contact(tutor.id)" class="btn btn-gradient">Message</button>
+                <div class="rightinfo">
+                    <div class="price">
+                        <span v-if="!this.wage && !loadingwage">No Plans</span>
+                        <span v-else>${{wage}}/hour</span>
+                    </div>
+                    <div class="contactbtn">
+                        <div @click="addToFav" class="btn-t" ><i class="far fa-heart" :class="{fas: is_fav}"></i></div>
+                        <div @click="contact(tutor.id)" class="btn-t"><i class="fas fa-envelope"></i></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -22,11 +32,66 @@
         data()
         {
            return{
-                
+                is_fav: false,
+                loading: false,
+                loadingwage: false,
+                wage: ''
            }
         },
         
         methods: {
+            doILike()
+            {
+                this.loading = true
+                axios.post(this.url +'/check/doILike', {
+                    id: this.tutor.id
+                })
+                .then(response => {
+                    if(response.data.status)
+                    {
+                        this.is_fav = true
+                    }else{
+                        this.is_fav = false
+                    }
+                    this.loading = false
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+            },
+            getMinWage()
+            {
+                this.loadingwage = true
+                axios.post(this.url +'/get/min-wage', {
+                    id: this.tutor.id
+                })
+                .then(response => {
+                   this.wage = response.data.wage
+                   this.loadingwage = false
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+            },
+            addToFav()
+            {
+                this.loading = true
+                axios.post(this.url +'/post/favorite', {
+                    id: this.tutor.id
+                })
+                .then(response => {
+                    if(response.data.status == 'liked')
+                    {
+                        this.is_fav = true
+                    }else{
+                        this.is_fav = false
+                    }
+                    this.loading = false
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+            },
             firstname(name){
                 console.log(name)
                 return name.split(" ")[0]
@@ -64,6 +129,8 @@
         },
         mounted()
         {
+           this.doILike()
+           this.getMinWage()
            
         }
     }

@@ -1,6 +1,25 @@
-.search-page
+.search-page, .tutp
     margin-top: $nav-height
-    padding: 30px 0
+    padding:  0 !important
+    .mbar
+        display: flex
+        justify-content: space-between
+        .mopt
+            padding: 10px
+            width: 25%
+            text-align: center
+            border-right: 1px solid #e4f3e4
+            cursor: pointer
+            display: flex
+            flex-direction: column
+            justify-content: center
+            align-items: center
+            text-align: center
+            font-size: 18px
+            color: $blue
+        .active
+            border-radius: 2px
+            color: $green
     .short-search-bar
         display: flex
     .searchBox
@@ -17,15 +36,29 @@
         margin: 0 -15px
 
         .result
-            margin-bottom: 10px
+            position: relative
+            .loader
+                background: rgba(0,0, 0, 0.4)
+                position: absolute
+                top: 0
+                bottom: 0
+                left: 0
+                z-index: 3
+                right: 0
+                color: #ffffff
+                display: flex
+                justify-content: center
+                align-items: center
             .teacher
                 display: flex
+                -webkit-box-align: center
                 align-items: center
-                background: #e4f3e4
+                background: #ffffff
                 color: #000000
+                border: 1px solid #f1f1f1
                 padding: 10px
                 border-radius: 3px
-                box-shadow: 0 1px 1px 0 #53a2216b
+                
                 .avatar
                     width: 80px
                     height: 80px
@@ -46,6 +79,25 @@
                             font-size: 18px
                         .location
                             font-size: 13px
+                    .rightinfo
+                        color: #333333
+                        .price
+                            font-size: 21px
+                            color: #333333
+                            text-align: center
+                            border-bottom: 1px solid #00000021
+                        .contactbtn
+                            display: flex
+                            justify-content: center
+                            align-items: center
+                            .btn-t
+                                font-size: 20px
+                                background: none
+                                display: flex
+                                align-items: center
+                                justify-content: center
+                                padding: 5px 10px
+                                border: none
 .btn-de
     background: none
     border: 2px solid #2575bc
@@ -55,24 +107,25 @@
     font-size: 17px
     color: #2575bc
     
-@media screen and ( max-width: 767px )
-    .searchBox
-        position: fixed
-        left: 0
-        z-index: 2
-        bottom: 0
-        top: 55px
-        padding: 30px 10px
-        width: 300px
-        max-width: 100%
-        .clo
-            position: absolute
-            top: 10px
-            right: 10px
-            color: #2575bc
-            font-size: 22px
-@media screen and ( min-width: 768px )
-    .searchBox
-        position: relative
-        .clo
-            display: none
+// @media screen and ( max-width: 767px )
+.searchBox
+    position: fixed
+    left: 0
+    z-index: 2
+    bottom: 0
+    top: 55px
+    padding: 30px 10px
+    width: 300px
+    max-width: 100%
+    .clo
+        position: absolute
+        top: 10px
+        right: 10px
+        color: #2575bc
+        font-size: 22px
+        cursor: pointer
+// @media screen and ( min-width: 768px )
+//     .searchBox
+//         position: relative
+//         .clo
+//             display: none

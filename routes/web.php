@@ -57,6 +57,8 @@ Route::post('/get/states', 'LocationController@getStates');
 Route::post('/get/cities', 'LocationController@getCities');
 Route::post('/get/neighborhoods', 'LocationController@getNeighborhoods');
 
+Route::post('/get/min-wage', 'TeacherController@getMinWage');
+
 Route::post('/search/tutors', 'TeacherController@search');
 Route::post('/search/ads', 'AdController@search');
 
@@ -90,6 +92,7 @@ Route::get('/conversation/{id}', 'ContactsController@getMessagesFor');
 Route::post('/conversation/send', 'ContactsController@send');
 
 Route::post('/check/hasConversation', 'ContactsController@hasConversationWith');
+Route::post('/check/doILike', 'UserController@doILike');
 
 
 

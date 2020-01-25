@@ -4,6 +4,6 @@
 @endsection
 @section('content')
     <div id="app">
-        <tutor-search url="{{route('home')}}"></tutor-search>
+        <tutor-search url="{{route('home')}}" :authuser="{{$user}}"></tutor-search>
     </div>
 @endsection
