@@ -126,7 +126,7 @@
                 subject: '',
                 nextPage: '',
                 activeTutor: null,
-                center: { lat: -3.350235, lng: 111.995865 },
+                center: { lat: 40.73061, lng: -73.935242 },
                 mapTypeId: "roadmap",
                 markers: [
                     // { position: { lat: -0.48585, lng: 117.1466 } },
@@ -216,7 +216,7 @@
                     if(ulat && ulng)
                     {
                         this.markers.push({ position: { lat: ulat, lng: ulng }, tutor: tutor })
-                        this.center = { lat: ulat, lng: ulng }
+                        // this.center = { lat: ulat, lng: ulng }
                     }
                 })
             },

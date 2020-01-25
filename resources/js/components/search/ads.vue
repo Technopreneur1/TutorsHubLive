@@ -92,7 +92,7 @@
                  </div>
                  <div :class="showSearchForm ? 'col-md-8' : 'col-md-12' ">
                      <div id="map">
-                        <GmapMap :center="center" :map-type-id="mapTypeId" :zoom="7">
+                        <GmapMap :center="center" :map-type-id="mapTypeId" :zoom="3">
                         <GmapMarker
                             v-for="(item, index) in markers"
                             :key="index"
@@ -201,7 +201,7 @@
                 viewAd: null,
                 level: '',
                 subject: '',
-                center: { lat: -3.350235, lng: 111.995865 },
+                center: { lat: 40.73061, lng: -73.935242 },
                 mapTypeId: "roadmap",
                 markers: [
                     // { position: { lat: -0.48585, lng: 117.1466 } },
@@ -226,7 +226,7 @@
                     if(ulat && ulng)
                     {
                         this.markers.push({ position: { lat: ulat, lng: ulng }, ad: ad })
-                        this.center = { lat: ulat, lng: ulng }
+                        // this.center = { lat: ulat, lng: ulng }
                     }
                 })
             },
