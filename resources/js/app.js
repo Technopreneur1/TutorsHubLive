@@ -54,6 +54,7 @@ Vue.component('edit-plans', require('./components/forms/editPlans.vue').default)
 Vue.component('edit-payment', require('./components/forms/editPayment.vue').default);
 Vue.component('tutor-search', require('./components/search/tutorSearch.vue').default);
 Vue.component('tutor', require('./components/search/tutor.vue').default);
+Vue.component('tutor-view', require('./components/search/tutorView.vue').default);
 Vue.component('ads', require('./components/search/ads.vue').default);
 Vue.component('ad', require('./components/search/ad.vue').default);
 Vue.component('my-ads', require('./components/ad/my.vue').default);

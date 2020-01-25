@@ -3,7 +3,7 @@
         <transition  name="easy-appear" enter-active-class="animated slideInLeft" leave-active-class="animated slideOutLeft">
             <start-chat v-if="chatWith" :url="url" :to="chatWith" @cancelChat="chatWith = null"></start-chat>
         </transition>
-        <div v-if="viewTutor" class="view-tutor">
+        <!-- <div  class="view-tutor">
             <span class="clo" @click="viewTutor = null"><i class="fas fa-times"></i></span>
             <div class="avatar">
                 <a  :href="url+ '/user/' +viewTutor.id" class="info">
@@ -11,15 +11,16 @@
                 </a>
             </div>
             <div class="data">
-            <a  :href="url+ '/user/' +viewTutor.id" class="info">
-                <div class="name">{{firstname(viewTutor.name)}}</div>
-                <div class="location"><i class="fas fa-map-marker-alt"></i> {{viewTutor.neighborhood ? viewTutor.neighborhood.name + ', ' : ''}}{{viewTutor.city ? viewTutor.city.name + ', ' : ''}}{{viewTutor.state ? viewTutor.state.name + ', ' : ''}}</div>
-            </a>
-            <div class="contactbtn">
-                <button @click="contact(viewTutor.id)" class="btn btn-gradient">Message</button>
+                <a  :href="url+ '/user/' +viewTutor.id" class="info">
+                    <div class="name">{{firstname(viewTutor.name)}}</div>
+                    <div class="location"><i class="fas fa-map-marker-alt"></i> {{viewTutor.neighborhood ? viewTutor.neighborhood.name + ', ' : ''}}{{viewTutor.city ? viewTutor.city.name + ', ' : ''}}{{viewTutor.state ? viewTutor.state.name + ', ' : ''}}</div>
+                </a>
+                <div class="contactbtn">
+                    <button @click="contact(viewTutor.id)" class="btn btn-gradient">Message</button>
+                </div>
             </div>
-        </div>
-        </div>
+        </div> -->
+        <tutor-view @contact="contact" v-if="viewTutor" :url="url" :vtutor="viewTutor"></tutor-view>
         <!-- <div v-if="!showSearchForm" class="short-search-bar">
             <div @click="showSearchForm = true" class="gradient-btn">
                 <button><i class="fas fa-filter"></i> Filter Search</button>
@@ -129,39 +130,7 @@
         margin: 0
         .vue-map-container 
             max-width: 100% !important
-    .view-tutor
-        
-        background: linear-gradient(45deg, white, #f9f9f9)
-        position: fixed
-        left: 0
-        z-index: 1
-        bottom: 0
-        top: 55px
-        width: 33.33%
-        min-width: 400px
-        max-width: 100%
-        padding: 30px 10px
-        display: flex
-        flex-direction: column
-        align-items: center
-        justify-content: center
-        text-align: center
-        .clo
-            position: absolute
-            top: 10px
-            right: 10px
-            font-size: 22px
-            cursor: pointer
-            color: #2575bc
-        .avatar
-            width: 150px
-            height: 150px
-            img
-                max-width: 100%
-                border-radius: 50%
-        .data
-            a
-                color: #000
+    
 
     .btns
         display: flex
@@ -181,6 +150,8 @@
         height: 450px
         max-width: 992px
         width: 100%
+
+
 </style>
 <script>
     export default {
