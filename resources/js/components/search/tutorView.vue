@@ -27,7 +27,6 @@
 </template>
 <style lang="sass" scoped>
 .view-tutor
-    
     background: linear-gradient(45deg, #fffffff0, #f9f9f9e8)
     position: fixed
     left: 0
@@ -35,7 +34,7 @@
     bottom: 0
     top: 55px
     width: 33.33%
-    min-width: 400px
+    
     max-width: 100%
     padding: 30px 10px
     display: flex
@@ -78,7 +77,20 @@
             font-size: 22px
             border-top: 1px solid #e4f3e4
             .btn-t
-                margin: 0 10px
+                margin: 0 5px
+                width: 50%
+                text-align: center
+                display: flex
+                justify-content: center
+                align-items: center
+                padding: 7px
+                border: 2px solid #212529
+                border-radius: 50px
+                cursor: pointer
+                &:hover
+                    background: #333
+                    color: #fff
+
         .info
             .name
                 font-size: 22px
@@ -91,6 +103,9 @@
 @media screen and ( max-width: 767px )
     .view-tutor
         width: 100%
+@media screen and ( min-width: 768px )
+    .view-tutor
+        min-width: 400px
 </style>
 <script>
     export default {

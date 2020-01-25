@@ -132,7 +132,7 @@ class TeacherController extends Controller
     }
     public function getMinWage(Request $request)
     {
-        $wage = User::findOrFail($request->id)->profile->plans->min('rate');
+        $wage = User::findOrFail($request->id)->profile->plans->where('rate', '>', 0)->min('rate');
         return response()->json(['wage' => $wage ? $wage : 0]);
     }
     //Return Find Tutor Page

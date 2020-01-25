@@ -20,7 +20,9 @@
                 </div>
             </div>
         </div> -->
-        <tutor-view @contact="contact" v-if="viewTutor" :url="url" :vtutor="viewTutor"></tutor-view>
+        <transition  name="easy-appear" enter-active-class="animated slideInLeft" leave-active-class="animated slideOutLeft">
+            <tutor-view @contact="contact" @cancel="viewTutor = null" v-if="viewTutor" :url="url" :vtutor="viewTutor"></tutor-view>
+        </transition>
         <!-- <div v-if="!showSearchForm" class="short-search-bar">
             <div @click="showSearchForm = true" class="gradient-btn">
                 <button><i class="fas fa-filter"></i> Filter Search</button>
