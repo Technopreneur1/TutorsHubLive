@@ -127,6 +127,7 @@
         bottom: 0
         top: 55px
         width: 33.33%
+        min-width: 400px
         max-width: 100%
         padding: 30px 10px
         display: flex

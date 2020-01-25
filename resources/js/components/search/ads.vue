@@ -125,6 +125,7 @@
         top: 55px
         width: 33.33%
         max-width: 100%
+        min-width: 400px
         padding: 30px 10px
         display: flex
         flex-direction: column
