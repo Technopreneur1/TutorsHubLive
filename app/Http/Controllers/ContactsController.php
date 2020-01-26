@@ -96,6 +96,11 @@ class ContactsController extends Controller
 
     public function send(Request $request)
     {
+        $us = User::find($request->contact_id);
+        if(!$us->can_contact || $us->is_banned)
+        {
+            return response()->json(['err' => true]);
+        };
         $message = Message::create([
             'from' => auth()->id(),
             'to' => $request->contact_id,

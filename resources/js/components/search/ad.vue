@@ -17,7 +17,7 @@
                     <div class="contactbtn">
                         <button v-if="authid == ad.user.id" @click="deleteMyAd(ad.id)" class="btn btn-gradient">Delete</button>
                         <div @click="addToFav" class="btn-t" ><i class="far fa-heart" :class="{fas: is_fav}"></i></div>
-                        <div @click="contact(tutor.id)" class="btn-t"><i class="fas fa-envelope"></i></div>
+                        <div v-if="ad.user.can_contact" @click="contact(ad.user.id)" class="btn-t"><i class="fas fa-envelope"></i></div>
                     </div>
                 </div>
             </div>

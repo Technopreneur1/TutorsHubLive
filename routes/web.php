@@ -22,29 +22,29 @@ use Illuminate\Support\Facades\Mail;
 
 Route::get('/', 'PagesController@index')->name('home');
 
-// Route::get('/', 'PagesController@index')->name('home')->middleware('verified');
+// Route::get('/', 'PagesController@index')->name('home')->middleware('verified', 'CheckBanned');
 Route::get('/contact', 'PagesController@contact')->name('contact');
 Route::post('/contact', 'PagesController@postContact')->name('contact.post');
 Route::get('/privacy-policy', 'PagesController@privacy')->name('privacy');
 Route::get('/terms-and-conditions', 'PagesController@terms')->name('terms');
-Route::get('/ads', 'AdController@index')->name('ads')->middleware('auth', 'verified');
-Route::get('/create/ad', 'AdController@create')->name('createAd')->middleware('auth', 'verified');
+Route::get('/ads', 'AdController@index')->name('ads')->middleware('auth', 'verified', 'CheckBanned');
+Route::get('/create/ad', 'AdController@create')->name('createAd')->middleware('auth', 'verified', 'CheckBanned');
 // Route::get('/find', 'TeacherController@find')->name('find');
-Route::get('/messages', 'PagesController@messages')->name('messages')->middleware('auth', 'verified');
+Route::get('/messages', 'PagesController@messages')->name('messages')->middleware('auth', 'verified', 'CheckBanned');
 
-Route::get('/profile', 'UserController@profile')->name('profile')->middleware('auth', 'verified');
-Route::get('/my-ads', 'AdController@myAds')->name('myAds')->middleware('auth', 'verified');
-Route::get('/favorites', 'FavoriteController@index')->name('favorites')->middleware('auth', 'verified');
-Route::get('/sessions', 'SessionController@index')->name('sessions')->middleware('auth', 'verified');
+Route::get('/profile', 'UserController@profile')->name('profile')->middleware('auth', 'verified', 'CheckBanned');
+Route::get('/my-ads', 'AdController@myAds')->name('myAds')->middleware('auth', 'verified', 'CheckBanned');
+Route::get('/favorites', 'FavoriteController@index')->name('favorites')->middleware('auth', 'verified', 'CheckBanned');
+Route::get('/sessions', 'SessionController@index')->name('sessions')->middleware('auth', 'verified', 'CheckBanned');
 
-Route::get('/payments', 'PaymentController@index')->name('payments')->middleware('auth', 'verified');
+Route::get('/payments', 'PaymentController@index')->name('payments')->middleware('auth', 'verified', 'CheckBanned');
 
-Route::get('/user/{id}', 'UserController@userProfile')->name('userProfile')->middleware('auth', 'verified');
+Route::get('/user/{id}', 'UserController@userProfile')->name('userProfile')->middleware('auth', 'verified', 'CheckBanned');
 
 // Find Tutors
-Route::get('/find', 'TeacherController@index')->name('findTutors')->middleware('auth', 'verified');
+Route::get('/find', 'TeacherController@index')->name('findTutors')->middleware('auth', 'verified', 'CheckBanned');
 
-Route::post('/complete/booking', 'SessionController@pay')->middleware('auth', 'verified');
+Route::post('/complete/booking', 'SessionController@pay')->middleware('auth', 'verified', 'CheckBanned');
 // ============== GET DATA =====================
 Route::post('/get/levels', 'LevelController@getAll');
 Route::post('/get/disciplines', 'DisciplineController@getDisciplines');
@@ -288,7 +288,7 @@ Route::get('/canada', function () {
 Route::prefix('adminpanel')->middleware(['admin'])->group(function () {
 
     Route::get('/', 'AdminController@adminpanel')->name('adminpanel');
-    Route::get('/contact/{id}', 'AdminController@contact')->name('admin.contact');
+    Route::get('/contact/{id}/{ticket}', 'AdminController@contact')->name('admin.contact');
 
     Route::get('/tutors', 'AdminController@teachers')->name('admin.tutors');
     Route::get('/tutors/banned', 'AdminController@bannedTutors')->name('admin.tutors.banned');

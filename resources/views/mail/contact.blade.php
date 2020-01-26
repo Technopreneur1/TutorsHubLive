@@ -84,7 +84,7 @@
         </table>
         @if ($user)
             <div class="replyopt">
-                <a href="{{route('admin.contact', $user->id)}}" class="btn">Message User</a>
+                <a href="{{route('admin.contact', [$user->id, $ticket])}}" class="btn">Message User</a>
             </div>
         @endif
 

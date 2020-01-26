@@ -82,6 +82,10 @@ class UserController extends Controller
     public function userProfile($id)
     {
         $user = User::with(['state', 'city', 'neighborhood', 'country'])->find($id);
+        if($user->is_hidden || $user->is_banned)
+        {
+            return view("pages.user.unavailable");
+        }
         $profile = $user->profile;
         if($user->type == 'teacher')
         {
@@ -113,10 +117,10 @@ class UserController extends Controller
         $user->phone =$request->phone;
         $user->gender =$request->gender;
         $user->is_hidden =$request->is_hidden;
+        $user->can_contact =$request->can_contact;
         $user->update();
         $profile = auth()->user()->profile;
         $profile->gender_preference =$request->gender_preference;
-        $profile->can_contact = $request->can_contact;
         $profile->bio =$request->bio;
         $profile->update();
         return response()->json(['user' => $user]);

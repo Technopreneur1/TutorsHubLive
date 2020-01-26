@@ -1,6 +1,6 @@
 <template>
     <div class="view-tutor">
-        <div v-if="loading || loadingwage" class="loader">
+        <div v-if="loading" class="loader">
             <i class="fas fa-spinner fa-spin"></i>
         </div>
         <span class="clo" @click="cancel"><i class="fas fa-times"></i></span>
@@ -16,7 +16,7 @@
             </a>
             <div class="contactbtn">
                 <div @click="addToFav" class="btn-t" ><i class="far fa-heart" :class="{fas: is_fav}"></i></div>
-                <div @click="contact(ad.user.id)" class="btn-t"><i class="fas fa-envelope"></i></div>
+                <div v-if="ad.user.can_contact" @click="contact(ad.user.id)" class="btn-t"><i class="fas fa-envelope"></i></div>
             </div>
         </div>
         <hr>
@@ -124,7 +124,14 @@
                 type: String
             },
             vad: {
-                vtutor: Object
+                type: Object
+            },
+            
+        },
+        watch: { 
+            vad: function(newval, oldVal) { // watch it
+            this.ad = newval
+            this.doILike()
             }
         },
         data()
@@ -132,8 +139,7 @@
            return{
                 is_fav: false,
                 loading: false,
-                loadingwage: false,
-                wage: '',
+                
                 ad: this.vad
 
            }
@@ -209,6 +215,7 @@
         mounted()
         {
            this.doILike()
+           console.log("og")
         }
     }
 </script>

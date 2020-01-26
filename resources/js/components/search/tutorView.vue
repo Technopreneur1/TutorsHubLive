@@ -20,7 +20,7 @@
             </div>
             <div class="contactbtn">
                 <div @click="addToFav" class="btn-t" ><i class="far fa-heart" :class="{fas: is_fav}"></i></div>
-                <div @click="contact(tutor.id)" class="btn-t"><i class="fas fa-envelope"></i></div>
+                <div v-if="tutor.can_contact" @click="contact(tutor.id)" class="btn-t"><i class="fas fa-envelope"></i></div>
             </div>
         </div>
     </div>
@@ -115,6 +115,13 @@
             },
             vtutor: {
                 vtutor: Object
+            }
+        },
+        watch: { 
+            vtutor: function(newval, oldVal) { // watch it
+            this.tutor = newval
+            this.doILike()
+            this.getMinWage()
             }
         },
         data()

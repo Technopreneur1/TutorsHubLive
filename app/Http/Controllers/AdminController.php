@@ -178,7 +178,7 @@ class AdminController extends Controller
         
     }
 
-    public function contact($id)
+    public function contact($id, $ticket)
     {
         $from = Message::where('from', auth()->id())
                         ->Where('to', $id)
@@ -198,7 +198,7 @@ class AdminController extends Controller
             $message = Message::create([
                 'from' => auth()->id(),
                 'to' => $id,
-                'text' => "Hello " . User::find($id)->name
+                'text' => "Hello " . User::find($id)->name . " thanks reaching out. I am sending this message in regards to your ticket " . $ticket . " How can I help you?"
             ]);
     
             // broadcast(new NewMessage($message));

@@ -59,9 +59,9 @@
             <div class="field">
                 <div class="input">
                     <label for="">{{user.type == 'teacher' ? 'Students' : 'Teachers'}} Can Contact</label>
-                    <select v-model="user.profile.can_contact" id="">
-                        <option value="0">Yes</option>
-                        <option value="1">No</option>
+                    <select v-model="user.can_contact" id="">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
                     </select>
                 </div>
             </div>
@@ -114,7 +114,7 @@
                     phone: this.user.phone,
                     gender: this.user.gender,
                     gender_preference: this.user.profile.gender_preference,
-                    can_contact: this.user.profile.can_contact,
+                    can_contact: this.user.can_contact,
                     is_hidden: this.user.is_hidden,
                     bio: this.user.profile.bio,
                 })

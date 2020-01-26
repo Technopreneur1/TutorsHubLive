@@ -98,6 +98,8 @@ class TeacherController extends Controller
         if($request['neighborhood'])
         {
             $tutors = User::with(['city', 'state', 'neighborhood', 'country'])
+                ->where('is_hidden', 0)
+                ->where('is_banned', 0)
                 ->where('neighborhood_id', $request['neighborhood'])
                 ->where('type', 'teacher')
                 ->paginate(30);
@@ -105,6 +107,8 @@ class TeacherController extends Controller
         else if($request['city'])
         {
             $tutors = User::with(['city', 'state', 'neighborhood', 'country'])
+                ->where('is_hidden', 0)
+                ->where('is_banned', 0)
                 ->where('city_id', $request['city'])
                 ->where('type', 'teacher')
                 ->paginate(30);
@@ -112,6 +116,8 @@ class TeacherController extends Controller
         else if($request['state'])
         {
             $tutors = User::with(['city', 'state', 'neighborhood', 'country'])
+                ->where('is_hidden', 0)
+                ->where('is_banned', 0)
                 ->where('state_id', $request['state'])
                 ->where('type', 'teacher')
                 ->paginate(30);
@@ -119,12 +125,17 @@ class TeacherController extends Controller
         else if($request['country'])
         {
             $tutors = User::with(['city', 'state', 'neighborhood', 'country'])
+                ->where('is_hidden', 0)
+                ->where('is_banned', 0)
                 ->where('country_id', $request['country'])
                 ->where('type', 'teacher')
                 ->paginate(30);
         }
         else {
             $tutors = User::with(['city', 'state', 'neighborhood', 'country', 'profile'])
+            
+                ->where('is_hidden', 0)
+                ->where('is_banned', 0)
                 ->where('country_id', auth()->user()->country_id)
                 ->where('type', 'teacher')
                 ->paginate(30);

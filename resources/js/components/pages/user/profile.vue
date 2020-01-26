@@ -66,7 +66,7 @@
                     <button  @click="addToFav()" v-if="is_fav"><i class="fas fa-heart"></i> Remove</button>
                     <button  v-else><i class="far fa-heart"></i> Save Profile</button>
                 </div>
-                <div  v-if="!isUser" class="msg">
+                <div  v-if="!isUser && user.can_contact" class="msg">
                     <button @click="contact(user.id)" class="btn"><i class="fas fa-comment"></i> Message</button>
                 </div>
             </div>

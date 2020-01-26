@@ -18,6 +18,11 @@ class PagesController extends Controller
         {
             if(auth()->user()->email_verified_at)
             {
+                if(auth()->user()->is_banned)
+                {
+                    auth()->logout();
+                    return redirect()->route('login')->withMessage("Your account is banned.");
+                }
                 if(auth()->user()->type == 'admin')
                 {
                     return redirect()->route('adminpanel');

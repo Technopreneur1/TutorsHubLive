@@ -8,31 +8,7 @@
         <transition  name="easy-appear" enter-active-class="animated slideInLeft" leave-active-class="animated slideOutLeft">
             <ad-view @contact="contact" @cancel="viewAd = null" v-if="viewAd" :url="url" :vad="viewAd"></ad-view>
         </transition>
-         <!-- <transition  name="easy-appear" enter-active-class="animated slideInLeft" leave-active-class="animated slideOutLeft">
-            <div v-if="viewAd" class="view-ad">
-                <span class="clo" @click="viewAd = null"><i class="fas fa-times"></i></span>
-                <div class="avatar">
-                    <a  :href="url+ '/user/' +viewAd.user.id" class="info">
-                        <img :src="avatar(viewAd.user)" alt="">
-                    </a>
-                </div>
-                <div class="data">
-                    <a  :href="url+ '/user/' +viewAd.user.id" class="info">
-                        <div class="name">{{viewAd.user.name}}</div>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> {{viewAd.user.neighborhood ? viewAd.user.neighborhood.name + ', ' : ''}}{{viewAd.user.city ? viewAd.user.city.name + ', ' : ''}}{{viewAd.user.state ? viewAd.user.state.name + ', ' : ''}}</div>
-                    </a>
-                    <div class="contactbtn">
-                        <button @click="contact(viewAd.user.id)" class="btn btn-gradient">Message</button>
-                    </div>
-                </div>
-                <div class="adData">
-                    <div class="title">{{viewAd.title}}</div>
-                </div>
-                <div class="adDescription">
-                    <div class="title">{{viewAd.description}}</div>
-                </div>
-            </div>
-         </transition> -->
+        
 
         <div class="mbar">
             <div @click="showSearchForm = true" class="mopt">
@@ -106,7 +82,7 @@
      
                  <div  v-if="viewmode == 'map' || viewmode == 'all'" >
                      <div id="map">
-                        <GmapMap :center="center" :map-type-id="mapTypeId" :zoom="3">
+                        <GmapMap :center="centerLoc" :map-type-id="mapTypeId" :zoom="theZoom">
                         <GmapMarker
                             v-for="(item, index) in markers"
                             :key="index"
@@ -274,7 +250,7 @@
             },
             markerClicked(item)
             {
-                console.log(item)
+                this.viewAd = null
                 this.center = item.position
                 this.viewAd = item.ad
             },
