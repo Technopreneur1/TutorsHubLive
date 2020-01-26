@@ -14,9 +14,11 @@
                         <div class="name">{{ad.user.name}}</div>
                         <div class="location"><i class="fas fa-map-marker-alt"></i> {{ad.neighborhood ? ad.neighborhood.name + ', ' : ''}}{{ad.city ? ad.city.name + ', ' : ''}}{{ad.state ? ad.state.name + ', ' : ''}}</div>
                     </a>
-                    <div class="contactbtn">
-                        <button v-if="authid == ad.user.id" @click="deleteMyAd(ad.id)" class="btn btn-gradient">Delete</button>
-                        <div @click="addToFav" class="btn-t" ><i class="far fa-heart" :class="{fas: is_fav}"></i></div>
+                    <div v-if="authid == ad.user.id" class="contactbtn">
+                        <button  @click="deleteMyAd(ad.id)" class="btn btn-gradient">Delete</button>
+                    </div>
+                    <div v-else class="contactbtn">
+                        <div  @click="addToFav" class="btn-t" ><i class="far fa-heart" :class="{fas: is_fav}"></i></div>
                         <div v-if="ad.user.can_contact" @click="contact(ad.user.id)" class="btn-t"><i class="fas fa-envelope"></i></div>
                     </div>
                 </div>
