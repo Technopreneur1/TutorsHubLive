@@ -122,7 +122,7 @@
             <div v-if="isUser" class="privacy-settings">
                 <div class="option">
                     <span class="key">{{user.type == 'teacher' ? "Student" : "Tutor"}} can contact me</span>
-                    <span v-if="user.profile && !user.profile.can_contact" class="val"><i class="fas fa-check"></i></span>
+                    <span v-if="user.can_contact" class="val"><i class="fas fa-check"></i></span>
                     <span v-else class="nval"><i class="fas fa-times"></i></span>
                 </div>
                 <div class="option">
