@@ -29,26 +29,60 @@
             }
         },
         methods: {
+            // outputMessage(message)
+            // {
+            //     let msg = message
+            //     if(this.checkIfPhoneInString(msg))
+            //     {
+            //         var re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+                    
+            //         let phoneText = []
+            //         while(this.checkIfPhoneInString(msg))
+            //         {
+            //             phoneText = msg.match(re)[0]
+            //             msg = msg.replace(phoneText, "*****")
+            //             console.log(msg)
+            //         }
+                    
+            //         // return "This message contains email"
+            //         // console.log(this.extractEmails(message))
+            //     }
+            //     if(this.checkIfEmailInString(msg))
+            //     {
+            //         var re = /(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
+            //         let msg = message
+            //         let emailText = []
+            //         while(this.checkIfEmailInString(msg))
+            //         {
+            //             emailText = msg.match(re)[0]
+            //             msg = msg.replace(emailText, "*****")
+            //             console.log(msg)
+            //         }
+            //         return msg
+            //         // return "This message contains email"
+            //         // console.log(this.extractEmails(message))
+            //     }
+            //     return msg
+            // },
             outputMessage(message)
             {
-                let msg = message
-                if(this.checkIfPhoneInString(msg))
-                {
-                    var re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
-                    
+            
+                    var re = /\b[\+]?[(]?[0-9]{2,6}[)]?[-\s\.]?[-\s\/\.0-9]{3,15}\b/m;;
+                    let msg = message
                     let phoneText = []
                     while(this.checkIfPhoneInString(msg))
                     {
                         phoneText = msg.match(re)[0]
                         msg = msg.replace(phoneText, "*****")
-                        console.log(msg)
+                        console.log('bio: ' + msg)
                     }
+                    return this.finalBio(msg)
                     
-                    // return "This message contains email"
-                    // console.log(this.extractEmails(message))
-                }
-                if(this.checkIfEmailInString(msg))
-                {
+            },
+            finalBio(message)
+            {
+                // if(this.checkIfEmailInString(msg))
+                // {
                     var re = /(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
                     let msg = message
                     let emailText = []
@@ -61,19 +95,17 @@
                     return msg
                     // return "This message contains email"
                     // console.log(this.extractEmails(message))
-                }
-                return msg
+                // }
             },
             
             checkIfEmailInString(text)
             {
                 var re = /(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
-                
                 return re.test(text);
             },
             checkIfPhoneInString(text)
             {
-                var re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+                var re = /\b[\+]?[(]?[0-9]{2,6}[)]?[-\s\.]?[-\s\/\.0-9]{3,15}\b/m;;
                 return re.test(text);
             },
             extractEmails (text)

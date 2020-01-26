@@ -1,5 +1,8 @@
 <template>
     <div class="ad-result">
+        <div v-if="loading" class="loader">
+            <i class="fas fa-spinner fa-spin"></i>
+        </div>
         <div class="ad">
             <div class="title">{{ad.title}}</div>
             <div class="student">
@@ -13,8 +16,8 @@
                     </a>
                     <div class="contactbtn">
                         <button v-if="authid == ad.user.id" @click="deleteMyAd(ad.id)" class="btn btn-gradient">Delete</button>
-                        <button v-if="authid == ad.user.id" @click="editAd()" class="btn btn-gradient">Edit</button>
-                        <button  v-else @click="contact(ad.user.id)" class="btn btn-msg">Message</button>
+                        <div @click="addToFav" class="btn-t" ><i class="far fa-heart" :class="{fas: is_fav}"></i></div>
+                        <div @click="contact(tutor.id)" class="btn-t"><i class="fas fa-envelope"></i></div>
                     </div>
                 </div>
             </div>
@@ -34,7 +37,8 @@
         data()
         {
            return{
-                
+                is_fav: false,
+                loading: false,
            }
         },
         methods: {
@@ -80,6 +84,25 @@
                 .then(response => {
                     console.log(response.data)
                     window.location = this.url + '/my-ads'
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+            },
+             addToFav()
+            {
+                this.loading = true
+                axios.post(this.url +'/post/favorite', {
+                    id: this.ad.user.id
+                })
+                .then(response => {
+                    if(response.data.status == 'liked')
+                    {
+                        this.is_fav = true
+                    }else{
+                        this.is_fav = false
+                    }
+                    this.loading = false
                 })
                 .catch(error => {
                     console.log(error);

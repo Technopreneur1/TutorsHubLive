@@ -4,6 +4,6 @@
 @endsection
 @section('content')
     <div id="app" class="ads-page">
-        <ads url="{{route('home')}}" ></ads>
+        <ads url="{{route('home')}}" :authuser="{{$user}}"></ads>
     </div>
 @endsection

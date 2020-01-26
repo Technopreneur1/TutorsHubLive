@@ -79,6 +79,7 @@ class StudentController extends Controller
             'discipline_id' => $request['discipline'],
             'level_id' => $request['level'],
         ]);
+        $user->sendEmailVerificationNotification();
         Mail::to($user->email)->send(new WelcomeEmail(auth()->user()));
         return response()->json(['user' => $user,'student' => $student]);
     }

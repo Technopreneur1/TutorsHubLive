@@ -30,7 +30,9 @@ class AdController extends Controller
     //
     public function index()
     {
-        return view('pages.ad.index');
+        $user = auth()->user();
+        $country = auth()->user()->country;
+        return view('pages.ad.index', ['user' => $user]);
     }
     //
     public function create()

@@ -82,6 +82,7 @@ class TeacherController extends Controller
             $teacher = Teacher::create([
                 'user_id' => $user->id,
             ]);
+        $user->sendEmailVerificationNotification();
         Mail::to($user->email)->send(new WelcomeEmail(auth()->user()));
         return response()->json(['user' => $user,'teacher' => $teacher]);
     }

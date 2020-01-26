@@ -15,20 +15,33 @@
         flex-direction: column
         margin: 0 -15px
 
+
         .ad-result
             margin-bottom: 10px
+            .loader
+                background: rgba(0,0, 0, 0.4)
+                position: absolute
+                top: 0
+                bottom: 0
+                left: 0
+                z-index: 3
+                right: 0
+                color: #ffffff
+                display: flex
+                justify-content: center
+                align-items: center
             .ad
-
-                background: #e4f3e4
+                border: 1px solid #e4f3e499
+                background: #ffffff
                 color: #000000
                 padding: 0 10px
                 margin-bottom: 15px
                 line-height: 25px
+                border-radius: 3px
                 .title
                     padding: 10px
                     font-size: 20px
                     font-weight: bold
-                    border-bottom: 1px solid #0000001f
                     margin-bottom: 10px
                     text-align: center
 
@@ -58,18 +71,21 @@
                             .location
                                 font-size: 13px
                         .contactbtn
-                            .btn-msg
-                                padding: 5px 20px
-                                border-radius: 50px
-                                border: 2px solid #2575bc
-                                color: #2575bc
-                                font-weight: bold
-                                background: #2575bc1c
-                                font-size: 14px
+                            display: flex
+                            justify-content: center
+                            align-items: center
+                            .btn-t
+                                font-size: 20px
+                                background: none
+                                display: flex
+                                align-items: center
+                                justify-content: center
+                                padding: 5px 10px
+                                border: none
                 .meta
                     display: flex
                     width: 100%
-                    background: #2575bc21
+                    background: #e4f3e4
                     border-radius: 20px
                     padding: 3px 10px
                     margin: 8px 0 4px

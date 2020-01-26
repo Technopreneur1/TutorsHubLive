@@ -72,7 +72,7 @@
             </div>
            
             <div v-if="user.profile.bio" class="bio">
-                {{user.profile.bio}}
+                {{outputBio(user.profile.bio)}}
             </div>
             
             <div v-if="user.type == 'teacher'" class="plans-section">
@@ -137,7 +137,8 @@
 
             <div class="reviews-section">
                 <div class="title">Reviews</div>
-                <div v-for="session in user.profile.completed_sessions" :key="session.id"  class="review">
+                <div v-if="!user.profile.completed_sessions.length" class="nothing">No Reviews</div>
+                <div  v-for="session in user.profile.completed_sessions" :key="session.id"  class="review">
                     <a :href="url+ '/user/' + session.student.user.id" v-if="user.type == 'teacher'" class="avatar">
                         <img :src="avatarF(session.student.user)" alt="">
                         <div class="name">{{session.student.user.name}}</div>
@@ -221,6 +222,7 @@ import { type } from 'os'
            }
         },
         computed: {
+            
             type()
             {
                 if(this.user.type == 'teacher')
@@ -261,6 +263,57 @@ import { type } from 'os'
             }
         },
         methods: {
+            outputBio(message)
+            {
+            
+                    var re = /\b[\+]?[(]?[0-9]{2,6}[)]?[-\s\.]?[-\s\/\.0-9]{3,15}\b/m;;
+                    let msg = message
+                    let phoneText = []
+                    while(this.checkIfPhoneInString(msg))
+                    {
+                        phoneText = msg.match(re)[0]
+                        msg = msg.replace(phoneText, "*****")
+                        console.log('bio: ' + msg)
+                    }
+                    return this.finalBio(msg)
+                    
+            },
+            finalBio(message)
+            {
+                // if(this.checkIfEmailInString(msg))
+                // {
+                    var re = /(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
+                    let msg = message
+                    let emailText = []
+                    while(this.checkIfEmailInString(msg))
+                    {
+                        emailText = msg.match(re)[0]
+                        msg = msg.replace(emailText, "*****")
+                        console.log(msg)
+                    }
+                    return msg
+                    // return "This message contains email"
+                    // console.log(this.extractEmails(message))
+                // }
+            },
+            checkIfEmailInString(text)
+            {
+                var re = /(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
+                return re.test(text);
+            },
+            checkIfPhoneInString(text)
+            {
+                var re = /\b[\+]?[(]?[0-9]{2,6}[)]?[-\s\.]?[-\s\/\.0-9]{3,15}\b/m;;
+                return re.test(text);
+            },
+            extractEmails (text)
+            {
+                return text.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi);
+            },
+            extractPhones (text)
+            {
+                return text.match(/(((\d{2})(\s)){4}(\d){2})|(\((\d){4}\)(\s)(\d){6})/g);
+            },
             firstname(name){
                 return name.split(" ")[0]
             },
