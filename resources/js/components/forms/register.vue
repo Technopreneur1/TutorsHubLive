@@ -1,10 +1,12 @@
 <template>
-    <div class="reg-hero">
-        <div class="text">I am a</div>
-        <div class="reg-buttons">
-            
-            <button @click="openRegForm('teacher')" class="btn btn-type student">Tutor</button>
-            <button @click="openRegForm('student')" class="btn btn-type teacher">Student</button>
+    <div class="hero">
+        <div @click="openRegForm('teacher')" class="col tcol">
+            <div class="lbl">Register As</div>
+            <div  class="nm">Tutor</div>
+        </div>
+        <div @click="openRegForm('student')" class="col scol">
+            <div class="lbl">Register As</div>
+            <div  class="nm">Student</div>
         </div>
         <div v-if="showLocationAlert" class="locPop">
             <div class="localert">
@@ -16,14 +18,14 @@
                 </div>
             </div>
         </div>
-
-        <transition name="easy-appear" enter-active-class="animated slideInLeft" leave-active-class="animated slideOutLeft">
+         <transition name="easy-appear" enter-active-class="animated slideInLeft" leave-active-class="animated slideOutLeft">
             <teacher-register v-show="openForm == 'teacher'" :lat="lat" :lng="lng" @closeForm="openForm = ''" :url="url"></teacher-register>
         </transition>
         <transition name="easy-appear" enter-active-class="animated slideInLeft" leave-active-class="animated slideOutLeft">
             <student-register v-show="openForm == 'student'" :lat="lat" :lng="lng" @closeForm="openForm = ''" :url="url"></student-register>
         </transition>
     </div>
+    
 </template>
 <style lang="sass" scoped>
     .locPop
@@ -97,6 +99,7 @@
                 else
                 {
                     this.openForm = type;
+                    this.showLocationAlert = false
                 }
             },
             continueAnyway()

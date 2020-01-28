@@ -122,13 +122,13 @@
             <div v-if="isUser" class="privacy-settings">
                 <div class="option">
                     <span class="key">{{user.type == 'teacher' ? "Student" : "Tutor"}} can contact me</span>
-                    <span v-if="user.can_contact" class="val"><i class="fas fa-check"></i></span>
-                    <span v-else class="nval"><i class="fas fa-times"></i></span>
+                    <span v-if="user.can_contact" class="val">Yes</i></span>
+                    <span v-else class="nval">No</span>
                 </div>
                 <div class="option">
                     <span class="key">Hidden Profile</span>
-                    <span v-if="!user.is_hidden" class="val"><i class="fas fa-times"></i></span>
-                    <span v-else class="nval"><i class="fas fa-check"></i></span>
+                    <span v-if="!user.is_hidden" class="val">No</i></span>
+                    <span v-else class="nval">Yes</span>
                 </div>
                 <div class="option">
                     <span @click="deleteProfile()" class="key del">Delete Profile</span>
