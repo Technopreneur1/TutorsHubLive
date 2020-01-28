@@ -113,7 +113,7 @@
                             <div class="data">
                                 {{-- <div class="step">Step 5</div> --}}
                                 <div class="title">Rate & Leave Feedback</div>
-                                <div class="text">After a session, student and tutor can rate and leave a revew for eachother. All reviews and feedbacks will be visible on user's profile</div>
+                                <div class="text">After a session, student and tutor can rate and leave a review for eachother. All reviews and feedbacks will be visible on user's profile</div>
                             </div>
                         </div>
                     </div>
