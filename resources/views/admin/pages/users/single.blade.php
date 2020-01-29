@@ -195,7 +195,7 @@
                         <div class="box">
                             <div class="box-header">
                                 <div class="box-title">
-                                    Add Payment
+                                    Add Payment {{$user->country->name == "United States" ? "USD" : "CAD"}}
                                 </div>
             
                                 <div class="box-body">
