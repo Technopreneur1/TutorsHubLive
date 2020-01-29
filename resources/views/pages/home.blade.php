@@ -53,7 +53,7 @@
                             <div class="data">
                                 {{-- <div class="step">Step 2.2</div> --}}
                                 <div class="title">Post an Ad</div>
-                                <div class="text">Students can also post ad that will be visible to tutors within selected area.</div>
+                                <div class="text">Students can also post an ad that will be visible to tutors within selected area.</div>
                             </div>
                         </div>
                         <div class="col-md-5">
@@ -76,7 +76,7 @@
                             <div class="data">
                                 {{-- <div class="step">Step 3</div> --}}
                                 <div class="title">Contact Tutor</div>
-                                <div class="text">Tutors-Hub offer real-time chat service for free. Students and tutors can communicate with eachother on the website.</div>
+                                <div class="text">Tutors-Hub offers real-time chat service for free. Students and tutors can communicate with one anoter on the platform.</div>
                             </div>
                         </div>
                     </div>
@@ -90,7 +90,7 @@
                             <div class="data">
                                 {{-- <div class="step">Step 4</div> --}}
                                 <div class="title">Book a Session Online</div>
-                                <div class="text">Student can book sessions with tutors on the website by selecting a plan offered by tutor and number of hours. Student will pay the booking amount online.</div>
+                                <div class="text">Students can book sessions with tutors on the website by selecting a plan offered by a tutor along with the number of hours for the session. Student can pay the booking amount online.</div>
                             </div>
                         </div>
                         <div class="col-md-5">
@@ -113,7 +113,7 @@
                             <div class="data">
                                 {{-- <div class="step">Step 5</div> --}}
                                 <div class="title">Rate & Leave Feedback</div>
-                                <div class="text">After a session, student and tutor can rate and leave a review for eachother. All reviews and feedbacks will be visible on user's profile</div>
+                                <div class="text">After a session, student and tutor can rate and leave a review for other to see.</div>
                             </div>
                         </div>
                     </div>
