@@ -39,7 +39,7 @@
         right: 0
         background: rgba(0,0,0,0.6)
         color: #fff
-
+        z-index: 4
         .localert
             padding: 15px
             border-radius: 4px
