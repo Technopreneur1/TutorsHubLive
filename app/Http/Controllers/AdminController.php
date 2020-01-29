@@ -185,14 +185,14 @@ class AdminController extends Controller
                         ->get();
         if(count($from))
         {
-            return redirect('/messages?u'. $id);
+            return redirect('/messages?u='. $id);
         }
         $to = Message::where('to', auth()->id())
                         ->Where('from', $id)
                         ->get();
         if(count($to))
         {
-            return redirect('/messages?u'. $id);
+            return redirect('/messages?u='. $id);
         }
         else {
             $message = Message::create([
@@ -203,7 +203,7 @@ class AdminController extends Controller
     
             // broadcast(new NewMessage($message));
             
-            return redirect('/messages?u'. $id);
+            return redirect('/messages?u='. $id);
             
         }
     }
