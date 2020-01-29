@@ -53,7 +53,7 @@
                             </div>
                             <div class="col-sm-2 border-right">
                                 <div class="description-block">
-                                    <a href="{{route("admin.contact", $user->id, "000")}}" class="btn btn-success">Message User</a>
+                                    <a href="{{route("admin.contact",[ $user->id, "000"])}}" class="btn btn-success">Message User</a>
                                 </div>
                             </div>
                             <!-- /.col -->
