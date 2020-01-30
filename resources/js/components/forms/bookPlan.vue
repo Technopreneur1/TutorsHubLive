@@ -229,7 +229,7 @@
         mounted()
         {
             const script = document.createElement("script");
-            script.src = "https://www.paypal.com/sdk/js?client-id=AdolP55UI85zKSEsnewBPQJxsrsShOEz2rDr9-f-AWMEMC0etCeP9K0EEzVjIxlfRgkBslm2yDHceBRC&currency=" + this.currency;
+            script.src = "https://www.paypal.com/sdk/js?client-id=AU1qSrl-VvM9r15F6lhSITnPRtJvJwFJfd__J5cMP8FvpXCDcEloTOysg8exK1DZN8rMCsgBXCOUbPFd&currency=" + this.currency;
             script.addEventListener("load", this.setLoaded);
             document.body.appendChild(script);
         }
