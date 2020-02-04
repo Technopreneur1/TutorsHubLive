@@ -11492,10 +11492,11 @@ a.text-dark:focus {
   text-align: center;
   margin: 2px;
   padding: 25px 10px;
-  background: linear-gradient(30deg, #2575bc, #7df48c);
+  background: #2575bc;
   color: #fff;
   font-size: 20px;
   text-decoration: none;
+  border-radius: 7px;
 }
 
 .user-home .usergrid .item a i {
@@ -11503,8 +11504,8 @@ a.text-dark:focus {
 }
 
 .user-home .usergrid .item a:hover {
-  background: #2575bc;
-  color: #ffffff;
+  background: #e4f3e4;
+  color: #2575bc;
 }
 
 .user-home .usergrid .item a .count {
@@ -11584,7 +11585,7 @@ a.text-dark:focus {
 }
 
 .topnav .menubar .hamburger {
-  background: linear-gradient(30deg, #2575bc, #7df48c);
+  background: #2575bc;
   margin-right: -15px;
   color: #fff;
   margin-left: 20px;
@@ -12270,7 +12271,7 @@ a.text-dark:focus {
 
 .profile-page .wr {
   margin: 0 -15px;
-  background: radial-gradient(#7df48cad, #236fb2);
+  background: linear-gradient(45deg, #2575bc, #0b61ff);
   color: #fff;
   position: relative;
 }
@@ -12776,7 +12777,7 @@ a.text-dark:focus {
 }
 
 .btn-gradient {
-  background: linear-gradient(30deg, #2575bc, #7df48c);
+  background: #2575bc;
   border-radius: 50px;
   color: #fff;
   border: none;
@@ -12800,7 +12801,7 @@ a.text-dark:focus {
 }
 
 .btn-gradientb {
-  background: linear-gradient(45deg, #2575bc, #0b61ff);
+  background: #2575bc;
   border-radius: 50px;
   color: #fff;
   border: none;

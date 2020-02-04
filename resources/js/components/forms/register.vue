@@ -10,7 +10,6 @@
         </div>
         <div v-if="showLocationAlert" class="locPop">
             <div class="localert">
-                <div class="hd">Unable to access your location.</div>
                 <div class="text">Please Allow Tutors-Hub to Access Your Location For Precise Search Results</div>
                 <div class="actions">
                     <button @click="continueAnyway()" class="btn btn-anyway">Continue anyway</button>
@@ -43,25 +42,32 @@
         .localert
             padding: 15px
             border-radius: 4px
-            background: #fff
+            background: #141414
             width: 500px
             text-align: center
             max-width: 95%
             margin: 0 auto
+            color: #fff
             .hd
                 font-size: 25px
-                color: #e60f0e
+                color: #fff
                 font-weight: bold
             .text
                 font-size: 22px
-                color: #000
+                color: #fff
                 font-weight: bold
             .actions
                 .btn-enb
-                    background: #52a121
-                    color: #fff
+                    border: 2px solid #7df48c
+                    color: #7df48c
+                    border-radius: 30px
+                    background: none
+                    &:hover
+                        background: #7df48c
+                        color: #000
+                        
                 .btn-anyway
-                    color: #e60f0e
+                    color: #fff
 </style>
 <script>
     export default {

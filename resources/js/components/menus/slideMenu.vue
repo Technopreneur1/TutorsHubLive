@@ -32,7 +32,7 @@
 </template>
 <style lang="sass" scoped>
     .slideMenu
-        background: linear-gradient(30deg, #2575bc, #7df48cf2)
+        background: #e4f3e4
         color: #fff
         position: fixed
         width: 300px
@@ -87,7 +87,7 @@
             li
                 a
                     display: block
-                    background: rgba(0, 0, 0, 0.16862745098039217)
+                    background: rgba(0, 0, 0, 0.37)
                     color: #fff
                     padding: 3px 15px
                     text-decoration: none

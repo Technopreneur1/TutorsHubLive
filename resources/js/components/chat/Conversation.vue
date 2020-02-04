@@ -114,8 +114,11 @@
             font-weight: bold;
             text-align: center;
             padding: 10px 0 10px;
-            background: #52a121;
+            background: #2575bc;
             color: #fff;
+            a{
+                color: #fff;
+            }
         }
     }
 }

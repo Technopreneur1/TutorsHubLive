@@ -116,7 +116,7 @@ import { type } from 'os'
                     }
                 }
                 &.selected {
-                    background: linear-gradient(30deg,#70dd94,#53a221);
+                    background: #2575bc;
                     color: #fff;
                 }
                 span.unread {
@@ -163,7 +163,7 @@ import { type } from 'os'
                 cursor: pointer;
 
                 &.selected {
-                    background: linear-gradient(30deg,#70dd94,#53a221);
+                    background: #2575bc;
                     .name{
                         color: #ffffff !important
                     }
