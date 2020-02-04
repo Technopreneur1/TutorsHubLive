@@ -80,7 +80,6 @@ class StudentController extends Controller
             'level_id' => $request['level'],
         ]);
         $user->sendEmailVerificationNotification();
-        Mail::to($user->email)->send(new WelcomeEmail(auth()->user()));
         return response()->json(['user' => $user,'student' => $student]);
     }
 }

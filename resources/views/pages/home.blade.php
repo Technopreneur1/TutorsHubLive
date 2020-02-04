@@ -179,7 +179,7 @@
                             <div class="data">
                                 {{-- <div class="step">Step 5</div> --}}
                                 <div class="title">Rate & Leave Feedback</div>
-                                <div class="text">After a session, students and tutor scan rate and leave a review for others to see.</div>
+                                <div class="text">After a session, students and tutors can rate and leave a review for others to see.</div>
                             </div>
                         </div>
                     </div>

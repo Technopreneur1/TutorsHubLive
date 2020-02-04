@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use auth;
+use App\Ad;
 use App\Meta;
 use App\User;
 use App\Level;
@@ -22,6 +23,11 @@ class AdminController extends Controller
 
     
     //Countries
+    public function ads()
+    {
+        $ads = Ad::orderBy('created_at', 'desc')->get();
+        return view('admin.pages.ads.index', ['ads' => $ads]);
+    }
     public function sessions()
     {
         $sessions = Session::orderBy('created_at', 'desc')->get();
@@ -34,6 +40,11 @@ class AdminController extends Controller
             $session->update(['seen' => 1]);
         }
         return view('admin.pages.sessions.single', ['session' => $session]);
+    }
+    public function viewAd($id)
+    {
+        $ad = Ad::findOrFail($id);
+        return view('admin.pages.ads.single', ['ad' => $ad]);
     }
     //Countries
     public function settings()

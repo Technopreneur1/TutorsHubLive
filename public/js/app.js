@@ -2341,7 +2341,7 @@ __webpack_require__.r(__webpack_exports__);
       return re.test(text);
     },
     checkIfPhoneInString: function checkIfPhoneInString(text) {
-      var re = /\b[\+]?[(]?[0-9]{2,6}[)]?[-\s\.]?[-\s\/\.0-9]{3,15}\b/m;
+      var re = /\b[\+]?[(]?[0-9]{4,10}[)]?[-\s\.]?[-\s\/\.0-9]{3,15}\b/m;
       ;
       return re.test(text);
     },
@@ -3446,7 +3446,7 @@ __webpack_require__.r(__webpack_exports__);
         new_neighborhood: this.new_neighborhood
       }).then(function (response) {
         console.log(response);
-        _this.success = "Adress Updated";
+        _this.success = "Address Updated";
         document.getElementById('success').scrollIntoView();
       })["catch"](function (error) {
         console.log(error);
@@ -3992,6 +3992,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['url', 'user'],
   data: function data() {
@@ -4230,6 +4232,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -4615,6 +4618,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -14889,7 +14893,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".slideout[data-v-424393fe] {\n  position: fixed;\n  top: 55px;\n  padding: 20px 0;\n  bottom: 0;\n  left: 0;\n  width: 400px;\n  max-width: 100%;\n  overflow-y: scroll;\n  background: linear-gradient(30deg, #2575bc, #7df48cf2);\n  z-index: 11;\n  color: #fff;\n}\n.slideout .text[data-v-424393fe] {\n  text-align: center;\n  font-size: 18px;\n  border-bottom: 1px solid #e4f3e4;\n  margin-bottom: 15px;\n  padding-bottom: 5px;\n}\n.slideout .success[data-v-424393fe] {\n  background: #e35934;\n  padding: 5px 10px;\n  border-radius: 22px;\n}\n.slideout .btn-cancel[data-v-424393fe] {\n  font-size: 25px;\n  margin-bottom: 30px;\n}\n.slideout .btn-update[data-v-424393fe] {\n  background: #fff;\n  width: 100%;\n}\n.slideout .cont[data-v-424393fe] {\n  padding: 20px 10px;\n}", ""]);
+exports.push([module.i, ".slideout[data-v-424393fe] {\n  position: fixed;\n  top: 55px;\n  padding: 20px 0;\n  bottom: 0;\n  left: 0;\n  width: 400px;\n  max-width: 100%;\n  overflow-y: scroll;\n  background: #2575bc;\n  z-index: 11;\n  color: #fff;\n}\n.slideout .text[data-v-424393fe] {\n  text-align: center;\n  font-size: 18px;\n  border-bottom: 1px solid #e4f3e4;\n  margin-bottom: 15px;\n  padding-bottom: 5px;\n}\n.slideout .success[data-v-424393fe] {\n  background: #e35934;\n  padding: 5px 10px;\n  border-radius: 22px;\n}\n.slideout .btn-cancel[data-v-424393fe] {\n  font-size: 25px;\n  margin-bottom: 30px;\n}\n.slideout .btn-update[data-v-424393fe] {\n  background: #fff;\n  width: 100%;\n}\n.slideout .cont[data-v-424393fe] {\n  padding: 20px 10px;\n}", ""]);
 
 // exports
 
@@ -61176,7 +61180,7 @@ var staticRenderFns = [
         staticStyle: { "border-top": "1px dotted #fff" }
       },
       [
-        _c("span", { staticStyle: { background: "#52aba9", color: "#fff" } }, [
+        _c("span", { staticStyle: { background: "#2575bc", color: "#fff" } }, [
           _vm._v("OR")
         ])
       ]
@@ -61943,6 +61947,10 @@ var render = function() {
                       _vm._v(" "),
                       _c("option", { attrs: { value: "Female" } }, [
                         _vm._v("Female")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Prefer Not To Say" } }, [
+                        _vm._v("Prefer Not To Say")
                       ])
                     ]
                   )
@@ -61998,6 +62006,10 @@ var render = function() {
                       _vm._v(" "),
                       _c("option", { attrs: { value: "Female" } }, [
                         _vm._v("Female")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Prefer Not To Say" } }, [
+                        _vm._v("Prefer Not To Say")
                       ])
                     ]
                   )
@@ -62589,7 +62601,13 @@ var render = function() {
                         _vm._v(" "),
                         _c("option", { attrs: { value: "Female" } }, [
                           _vm._v("Female")
-                        ])
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "option",
+                          { attrs: { value: "Prefer Not To Say" } },
+                          [_vm._v("Prefer Not To Say")]
+                        )
                       ]
                     )
                   ])
@@ -63506,7 +63524,13 @@ var render = function() {
                         _vm._v(" "),
                         _c("option", { attrs: { value: "Female" } }, [
                           _vm._v("Female")
-                        ])
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "option",
+                          { attrs: { value: "Prefer Not To Say" } },
+                          [_vm._v("Prefer Not To Say")]
+                        )
                       ]
                     )
                   ])

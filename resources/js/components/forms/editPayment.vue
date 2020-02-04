@@ -12,7 +12,7 @@
                 <label for="">Paypal account address (email) </label>
                 <input type="email" v-model="paypal" id="" cols="30" rows="3">
             </div>
-            <div class="newrow" style="border-top: 1px dotted #fff"><span style="background: #52aba9; color: #fff">OR</span></div>
+            <div class="newrow" style="border-top: 1px dotted #fff"><span style="background: #2575bc; color: #fff">OR</span></div>
             <div class="input">
                 <label for="">Bank Account Details (Please enter all the necessary information)</label>
                 <textarea v-model="bank"  cols="30" rows="6" placeholder="Bank Details"></textarea>
@@ -33,7 +33,7 @@
         width: 400px
         max-width: 100%
         overflow-y: scroll
-        background: linear-gradient(30deg, #2575bc, #7df48cf2)
+        background: #2575bc
         z-index: 11
         color: #fff
         .text

@@ -88,7 +88,7 @@
                 })
                 .then(response => {
                     console.log(response)
-                    this.success  = "Adress Updated"
+                    this.success  = "Address Updated"
                     document.getElementById('success').scrollIntoView();
                 })
                 .catch(error => {
