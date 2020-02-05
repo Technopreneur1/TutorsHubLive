@@ -35,7 +35,7 @@ Route::get('/messages', 'PagesController@messages')->name('messages')->middlewar
 Route::get('/profile', 'UserController@profile')->name('profile')->middleware('auth', 'verified', 'CheckBanned');
 Route::get('/my-ads', 'AdController@myAds')->name('myAds')->middleware('auth', 'verified', 'CheckBanned');
 Route::get('/favorites', 'FavoriteController@index')->name('favorites')->middleware('auth', 'verified', 'CheckBanned');
-Route::get('/ads', 'SessionController@index')->name('sessions')->middleware('auth', 'verified', 'CheckBanned');
+Route::get('/sessions', 'SessionController@index')->name('sessions')->middleware('auth', 'verified', 'CheckBanned');
 
 Route::get('/payments', 'PaymentController@index')->name('payments')->middleware('auth', 'verified', 'CheckBanned');
 
