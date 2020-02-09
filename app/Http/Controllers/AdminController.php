@@ -28,6 +28,12 @@ class AdminController extends Controller
         $ads = Ad::orderBy('created_at', 'desc')->get();
         return view('admin.pages.ads.index', ['ads' => $ads]);
     }
+    public function adminLoginAs(Request $request)
+    {
+        $user = User::findOrFail($request->id);
+        auth::login($user);
+        return redirect()->route('home');
+    }
     public function sessions()
     {
         $sessions = Session::orderBy('created_at', 'desc')->get();

@@ -70,6 +70,7 @@ Route::post('post/ad', 'AdController@post');
 Route::post('post/plan', 'PlanController@post');
 Route::post('post/avatar', 'UserController@postAvatar');
 Route::post('post/complete-session', 'SessionController@complete');
+Route::post('post/cancel-session', 'SessionController@postCancel');
 Route::post('post/review', 'SessionController@postReview');
 Route::post('/post/long-lat', 'UserController@updateLatLng');
 
@@ -306,6 +307,8 @@ Route::prefix('adminpanel')->middleware(['admin'])->group(function () {
     Route::get('/sessions/{id}', 'AdminController@viewSession')->name('admin.session.view');
     Route::get('/ads', 'AdminController@ads')->name('admin.ads');
     Route::get('/ads/{id}', 'AdminController@viewAd')->name('admin.ad.view');
+    Route::post('/delete-ad/{id}', 'AdController@deleteByAdmin')->name('admin.delete.ad');
+    Route::post('/cancel-session', 'SessionController@cancel')->name('admin.cancel.session');
 
     Route::get('/add-admin', 'AdminController@createAdmin')->name('admin.add.admin');
     Route::post('/add-admin', 'AdminController@postAdmin')->name('admin.post.admin');
@@ -328,7 +331,8 @@ Route::prefix('adminpanel')->middleware(['admin'])->group(function () {
 
     Route::post('/post-payment', 'PaymentController@post')->name('admin.post.payment');
     Route::post('/ban/{id}', 'UserController@ban')->name('admin.ban');
-
+    
+    Route::post('/login-as', 'AdminController@adminLoginAs')->name('admin.loginas');
     
 });
 

@@ -56,6 +56,15 @@
                                     <a href="{{route("admin.contact",[ $user->id, "000"])}}" class="btn btn-success">Message User</a>
                                 </div>
                             </div>
+                            <div class="col-sm-2 border-right">
+                                <div class="description-block">
+                                    <form action="{{route('admin.loginas')}}" method="POST" style="display: inline; tex">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{$user->id}}">
+                                        <button onclick="confirm('Are you sure you want to login to user\'s account)" class="btn btn-info">Login as {{$user->name}}</button>
+                                    </form>
+                                </div>
+                            </div>
                             <!-- /.col -->
                             <!-- /.col -->
                             </div>

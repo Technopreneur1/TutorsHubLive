@@ -47,8 +47,9 @@
             <div v-if="authuser.type == 'student' && !viewSession.completed" class="statusbar">
                 <span class="val">Incomplete</span>
                 <span class="txt">Please mark session as <b>completed</b> after it has taken place</span>
-                <button @click="markComplete" class="btn btn-gradientb">Mark as completed</button>
+                <button @click="markComplete" class="btn btn-gradientb">Mark as completed</button> &nbsp; OR &nbsp; 
             </div>
+            <button v-if="!viewSession.cancel_request && !viewSession.completed" @click="requestCancel" class="btn btn-danger" style="border-radius: 30px">Request To Cancel Session</button>
             
              
 
@@ -468,6 +469,20 @@
                     }else{
                         alert('Oops Something Went Wrong. Please refresh the page')
                     }
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+            },
+            requestCancel()
+            {
+                confirm("Are you sure you want to cancel this session?")
+                axios.post(this.url +'/post/cancel-session', {
+                    id: this.viewSession.id
+                })
+                .then(response => {
+                    this.viewSession.cancel_request = this.authuser.type
+                    alert("You have successfully requested for session cancelation.")
                 })
                 .catch(error => {
                     console.log(error)

@@ -188,4 +188,10 @@ class AdController extends Controller
         Ad::findOrFail($request->id)->delete();
         return response()->json(['msg' => 'success']);
     }
+    public function deleteByAdmin($id)
+    {
+        session()->flash("success", "Ad has been deleted");
+        Ad::findOrFail($id)->delete();
+        return back();
+    }
 }

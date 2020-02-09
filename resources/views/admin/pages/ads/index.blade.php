@@ -30,6 +30,10 @@ ads
                 <td>
                     {{-- {{-- <a href="{{route('admin.ad', $ad->id)}}" class="btn btn-success">Open</a> --}}
                     <a href="{{route('admin.ad.view', $ad->id)}}" class="btn btn-info">View</a>
+                    <form action="{{route('admin.delete.ad', $ad->id)}}" method="POST" style="display: inline;">
+                        @csrf
+                        <button onclick="confirm('Are you sure you want to delete this ad')" class="btn btn-danger">Delete</button>
+                    </form>
                 </td>
             </tr>
             @endforeach

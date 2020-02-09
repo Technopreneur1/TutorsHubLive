@@ -6,7 +6,13 @@ Session  | Admin Panel
     <div class="container">
         <div class="col-md-12">
 
-                
+            @if (!$session->completed)
+                <form action="{{route('admin.cancel.session')}}" method="post">
+                    <input type="hidden" name="id" value="{{$session->id}}">
+                    @csrf
+                    <button class="btn btn-danger">Cancel Session</button>
+                </form>
+            @endif
             <div class="box">
                 <div class="box-header">
                     <div class="box-title">
@@ -61,6 +67,7 @@ Session  | Admin Panel
                     </div>
                 </div>
             </div>
+            
             @if ($session->completed)
                 <div class="box">
                     <div class="box-header">

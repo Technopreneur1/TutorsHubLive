@@ -124,21 +124,28 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-
-    @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
+    <div class="container" style="padding-top: 10px">
+      @if ($errors->any())
+      <div class="alert alert-danger">
+          <ul>
+              @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+              @endforeach
+          </ul>
+      </div>
+      @endif
+      @if (session()->has('message'))
+      <div class="alert alert-danger">
+        {{session()->get('message')}}
+      </div>
+      @endif
+      @if (session()->has('success'))
+      <div class="alert alert-success">
+        {{session()->get('success')}}
+      </div>
+      @endif
+      
     </div>
-    @endif
-    @if (session()->has('message'))
-    <div class="alert alert-danger">
-      {{session()->get('message')}}
-    </div>
-    @endif
     <!-- Main content -->
     <section class="content">
 
