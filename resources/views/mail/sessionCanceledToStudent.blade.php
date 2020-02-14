@@ -58,7 +58,7 @@
         <div class="mailbody">
             <div class="logo"><img src="https://tutors-hub.com/img/logotext.png" alt=""></div>
             <h2>Your Session Has Been Cancelled</h2>
-            <p>Your Session with <b>{{$teacher}}</b> has been Cancelled. The amount will be refunded to you soon. Please contact  at <a href="{{route('contact')}}">Support center</a> for more details. </p>
+            <p>Your Session with <b>{{$teacher}}</b> has been Cancelled. The amount will be refunded to you soon. Please send us your payment details for refund by going to <a href="{{route('contact')}}">Support center</a> or email us at info@tutors-hub.com. </p>
         </div>
     
     </body>

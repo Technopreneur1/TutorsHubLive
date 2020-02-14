@@ -54,7 +54,7 @@
                             <option value="" disabled>Counstry</option>
                             <option v-for="country in countries" :key="country.id"  :value="country.id">{{country.name}}</option>
                         </select> -->
-                        <Select2 v-model="country" :options="countries" @change="countrySelected()" />
+                    <Select2 v-model="country" :options="countries" @change="countrySelected()" />
                     </div>
                     <div v-show="states.length" class="input">
                         <label for="">State / Province</label>

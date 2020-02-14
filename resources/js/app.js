@@ -23,6 +23,9 @@ import StoreData from './store.js'
 Vue.use(Vuex)
 const store = new Vuex.Store(StoreData)
 
+import Select2 from 'v-select2-component';
+Vue.component('Select2', Select2);
+
 import * as VueGoogleMaps from "vue2-google-maps";
 Vue.use(VueGoogleMaps, {
   load: { key: "AIzaSyBItJS5EzVJKKHUeqEqlW5zw7LSvzi0IZg"}
