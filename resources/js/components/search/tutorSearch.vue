@@ -58,10 +58,11 @@
                     </div>
                     <div v-show="states.length" class="input">
                         <label for="">State / Province</label>
-                        <select @change="stateSelected()" v-model="state" id="">
+                        <!-- <select @change="stateSelected()" v-model="state" id="">
                             <option value="" disabled>State / Province</option>
                             <option v-for="state in states" :key="state.id" :value="state.id">{{state.name}}</option>
-                        </select>
+                        </select> -->
+                        <Select2 v-model="state" :options="states" @change="stateSelected()"  />
                     </div>
                     <div v-show="cities.length" class="input">
                         <label for="">City</label>
@@ -385,6 +386,9 @@
                 .then(response => {
                     console.log(response)
                     this.states = response.data.states
+                    this.states.map(function (obj) {
+                    obj.text =  obj.name; // replace name with the property used for the text
+                    });
                 })
                 .catch(error => {
                     console.log(error);
@@ -420,7 +424,6 @@
                     this.countries = response.data.countries
                     this.countries.map(function (obj) {
                     obj.text =  obj.name; // replace name with the property used for the text
-
                     });
                 })
                 .catch(error => {
