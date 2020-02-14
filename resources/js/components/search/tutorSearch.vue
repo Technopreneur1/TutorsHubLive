@@ -66,17 +66,19 @@
                     </div>
                     <div v-show="cities.length" class="input">
                         <label for="">City</label>
-                        <select @change="citySelected()" v-model="city" id="">
+                        <!-- <select @change="citySelected()" v-model="city" id="">
                             <option value="" disabled>City</option>
                             <option v-for="city in cities" :key="city.id" :value="city.id">{{city.name}}</option>
-                        </select>
+                        </select> -->
+                        <Select2 v-model="city" :options="cities" @change="citySelected()"  />
                     </div>
                     <div v-show="neighborhoods.length" class="input">
                         <label for="">Neighborhood</label>
-                        <select v-model="neighborhood" id="">
+                        <!-- <select v-model="neighborhood" id="">
                             <option value="" disabled>Neighborhood</option>
                             <option v-for="neighborhood in neighborhoods" :key="neighborhood.id" :value="neighborhood.id">{{neighborhood.name}}</option>
-                        </select>
+                        </select> -->
+                        <Select2 v-model="neighborhood" :options="neighborhoods"   />
                     </div>
                     <div class="btns">
                         <button @click="reset()" class="btn btn-re">Reset</button>
@@ -387,7 +389,7 @@
                     console.log(response)
                     this.states = response.data.states
                     this.states.map(function (obj) {
-                    obj.text =  obj.name; // replace name with the property used for the text
+                        obj.text =  obj.name; // replace name with the property used for the text
                     });
                 })
                 .catch(error => {
@@ -399,6 +401,9 @@
                 axios.post(this.url +'/get/cities', {state: this.state})
                 .then(response => {
                     this.cities = response.data.cities
+                    this.cities.map(function (obj) {
+                        obj.text =  obj.name; // replace name with the property used for the text
+                    });
                 })
                 .catch(error => {
                     console.log(error);
@@ -409,6 +414,9 @@
                 axios.post(this.url +'/get/neighborhoods', {city: this.city})
                 .then(response => {
                     this.neighborhoods = response.data.neighborhoods
+                    this.neighborhoods.map(function (obj) {
+                        obj.text =  obj.name; // replace name with the property used for the text
+                    });
                 })
                 .catch(error => {
                     console.log(error);
