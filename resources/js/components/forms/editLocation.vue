@@ -4,34 +4,21 @@
         <transition  name="easy-appear" enter-active-class="animated bounce" leave-active-class="animated fadeOut">
             <div v-if="success" class="input success"><span>{{success}}</span></div>
         </transition>
-        <div class="input">
+       <div class="input">
             <label for="">Country</label>
-            <select @change="countrySelected()" v-model="country" id="">
-                <option value="" disabled>Country</option>
-                <option v-for="country in countries" :key="country.id"  :value="country.id">{{country.name}}</option>
-            </select>
+            <Select2 v-model="country" :options="countries" @change="countrySelected()" />
         </div>
         <div v-show="states.length" class="input">
             <label for="">State / Province</label>
-            <select @change="stateSelected()" v-model="state" id="">
-                <option value="" disabled>State / Province</option>
-                <option v-for="state in states" :key="state.id" :value="state.id">{{state.name}}</option>
-            </select>
+            <Select2 v-model="state" :options="states" @change="stateSelected()"  />
         </div>
         <div v-show="cities.length" class="input">
             <label for="">City</label>
-            <select @change="citySelected()" v-model="city" id="">
-                <option value="" disabled>City</option>
-                <option v-for="city in cities" :key="city.id" :value="city.id">{{city.name}}</option>
-            </select>
+            <Select2 v-model="city" :options="cities" @change="citySelected()"  />
         </div>
         <div v-show="neighborhoods.length" class="input">
             <label for="">Neighborhood</label>
-            <select v-model="neighborhood" id="">
-                <option value="" disabled>Neighborhood</option>
-                <option v-for="neighborhood in neighborhoods" :key="neighborhood.id" :value="neighborhood.id" >{{neighborhood.name}}</option>
-                <option value="-1"  >Other</option>
-            </select> 
+            <Select2 v-model="neighborhood" :options="neighborhoods"   />
         </div>
         <div v-if="neighborhood == -1" class="input">
             <label for="">Neighborhood Name &nbsp; <small>Make sure neighborhood name is correct and avoid spellings mistakes</small></label>
@@ -95,12 +82,33 @@
                     console.log(error);
                 })
             },
+            getCountries()
+            {
+                this.states = []
+                this.cities = []
+                this.neighborhoods = []
+                axios.post(this.url +'/get/countries')
+                .then(response => {
+                    this.countries = response.data.countries
+                    this.countries.map(function (obj) {
+                    obj.text =  obj.name; // replace name with the property used for the text
+                    });
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+            },
+            
             getStates()
             {
+
                 axios.post(this.url +'/get/states', {country: this.country})
                 .then(response => {
                     console.log(response)
                     this.states = response.data.states
+                    this.states.map(function (obj) {
+                        obj.text =  obj.name; // replace name with the property used for the text
+                    });
                 })
                 .catch(error => {
                     console.log(error);
@@ -111,6 +119,9 @@
                 axios.post(this.url +'/get/cities', {state: this.state})
                 .then(response => {
                     this.cities = response.data.cities
+                    this.cities.map(function (obj) {
+                        obj.text =  obj.name; // replace name with the property used for the text
+                    });
                 })
                 .catch(error => {
                     console.log(error);
@@ -121,23 +132,13 @@
                 axios.post(this.url +'/get/neighborhoods', {city: this.city})
                 .then(response => {
                     this.neighborhoods = response.data.neighborhoods
+                    this.neighborhoods.map(function (obj) {
+                        obj.text =  obj.name; // replace name with the property used for the text
+                    });
                     if(!response.data.neighborhoods.length)
                     {
                         this.neighborhood  = -1
                     }
-                })
-                .catch(error => {
-                    console.log(error);
-                })
-            },
-            getCountries()
-            {
-                this.states = []
-                this.cities = []
-                this.neighborhoods = []
-                axios.post(this.url +'/get/countries')
-                .then(response => {
-                    this.countries = response.data.countries
                 })
                 .catch(error => {
                     console.log(error);

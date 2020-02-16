@@ -36,6 +36,27 @@
             <div v-if="step == 2" class="step step2">
                 <div class="input">
                     <label for="">Country</label>
+                    <Select2 v-model="teacher.country" :options="countries" @change="countrySelected()" />
+                </div>
+                <div v-show="states.length" class="input">
+                    <label for="">State / Province</label>
+                    <Select2 v-model="teacher.state" :options="states" @change="stateSelected()"  />
+                </div>
+                <div v-show="cities.length" class="input">
+                    <label for="">City</label>
+                    <Select2 v-model="teacher.city" :options="cities" @change="citySelected()"  />
+                </div>
+                <div v-show="neighborhoods.length" class="input">
+                    <label for="">Neighborhood</label>
+                    <Select2 v-model="teacher.neighborhood" :options="neighborhoods"   />
+                </div>
+                
+                <div v-if="teacher.neighborhood == -1" class="input">
+                    <label for="">Neighbourhood Name &nbsp; <small>Make sure neighbourhood name is correct and avoid spellings mistakes</small></label>
+                    <input type="text" class="input" v-model="teacher.new_neighborhood" placeholder="Neighbourhood">
+                </div>
+                <!-- <div class="input">
+                    <label for="">Country</label>
                     <select @change="countrySelected()" v-model="teacher.country" id="">
                         <option value="" disabled>Country</option>
                         <option v-for="country in countries" :key="country.id"  :value="country.id">{{country.name}}</option>
@@ -64,9 +85,9 @@
                     </select>
                 </div>
                 <div v-if="teacher.neighborhood == -1" class="input">
-                    <label for="">Neighborhood Name &nbsp; <small>Make sure neighborhood name is correct and avoid spellings mistake for maxmium reach to students</small></label>
+                    <label for="">Neighborhood Name &nbsp; <small>Make sure neighborhood name is correct and avoid spellings mistake for maxmium reach to teachers</small></label>
                     <input type="text" class="input" v-model="teacher.new_neighborhood" placeholder="Neighborhood">
-                </div>
+                </div> -->
 
             </div>
             <div v-if="step == 3" class="step step3">
@@ -99,7 +120,13 @@
         </div>
     </div>
 </template>
+<style lang="sass" scoped>
+    .step
+        text-align: left
+        color: #000
+</style>
 <script>
+import Select2 from 'v-select2-component';
     export default {
         props: ['url', 'lat', 'lng'],
         data()
@@ -149,6 +176,7 @@
                     }
             }
         },
+        components: {Select2},
         methods: {
             isEmail(email) 
             {
@@ -206,6 +234,10 @@
             
             countrySelected()
             {
+                this.states = []
+                this.cities = []
+                this.neighborhoods = []
+                this.teacher.neighborhood = ""
                 if(this.teacher.country)
                 {
                     this.getStates()
@@ -213,6 +245,9 @@
             },
             stateSelected()
             {
+                this.cities = []
+                this.neighborhoods = []
+                this.teacher.neighborhood = ""
                 if(this.teacher.state)
                 {
                     this.getCities()
@@ -220,6 +255,7 @@
             },
             citySelected()
             {
+                this.neighborhoods = []
                 if(this.teacher.city)
                 {
                     this.getNeighborhoods()
@@ -331,23 +367,31 @@
             },
             getCountries()
             {
+                this.states = []
+                this.cities = []
+                this.neighborhoods = []
                 axios.post(this.url +'/get/countries')
                 .then(response => {
                     this.countries = response.data.countries
+                    this.countries.map(function (obj) {
+                    obj.text =  obj.name; // replace name with the property used for the text
+                    });
                 })
                 .catch(error => {
                     console.log(error);
                 })
             },
+            
             getStates()
             {
-                this.loading = true
-                console.log("get State")
+
                 axios.post(this.url +'/get/states', {country: this.teacher.country})
                 .then(response => {
-                    this.loading = false
                     console.log(response)
                     this.states = response.data.states
+                    this.states.map(function (obj) {
+                        obj.text =  obj.name; // replace name with the property used for the text
+                    });
                 })
                 .catch(error => {
                     console.log(error);
@@ -355,11 +399,12 @@
             },
             getCities()
             {
-                this.loading = true
                 axios.post(this.url +'/get/cities', {state: this.teacher.state})
                 .then(response => {
-                    this.loading = false
                     this.cities = response.data.cities
+                    this.cities.map(function (obj) {
+                        obj.text =  obj.name; // replace name with the property used for the text
+                    });
                 })
                 .catch(error => {
                     console.log(error);
@@ -367,11 +412,12 @@
             },
             getNeighborhoods()
             {
-                this.loading = true
                 axios.post(this.url +'/get/neighborhoods', {city: this.teacher.city})
                 .then(response => {
-                    this.loading = false
                     this.neighborhoods = response.data.neighborhoods
+                    this.neighborhoods.map(function (obj) {
+                        obj.text =  obj.name; // replace name with the property used for the text
+                    });
                     if(!response.data.neighborhoods.length)
                     {
                         this.teacher.neighborhood  = -1

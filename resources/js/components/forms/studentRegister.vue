@@ -37,33 +37,21 @@
             <div v-if="step == 2" class="step step2">
                 <div class="input">
                     <label for="">Country</label>
-                    <select @change="countrySelected()" v-model="student.country" id="">
-                        <option value="" disabled>Country</option>
-                        <option v-for="country in countries" :key="country.id"  :value="country.id">{{country.name}}</option>
-                    </select>
+                    <Select2 v-model="student.country" :options="countries" @change="countrySelected()" />
                 </div>
                 <div v-show="states.length" class="input">
                     <label for="">State / Province</label>
-                    <select @change="stateSelected()" v-model="student.state" id="">
-                        <option value="" disabled>State / Province</option>
-                        <option v-for="state in states" :key="state.id" :value="state.id">{{state.name}}</option>
-                    </select>
+                    <Select2 v-model="student.state" :options="states" @change="stateSelected()"  />
                 </div>
                 <div v-show="cities.length" class="input">
                     <label for="">City</label>
-                    <select @change="citySelected()" v-model="student.city" id="">
-                        <option value="" disabled>City</option>
-                        <option v-for="city in cities" :key="city.id" :value="city.id">{{city.name}}</option>
-                    </select>
+                    <Select2 v-model="student.city" :options="cities" @change="citySelected()"  />
                 </div>
                 <div v-show="neighborhoods.length" class="input">
                     <label for="">Neighborhood</label>
-                    <select v-model="student.neighborhood" id="">
-                        <option value="" disabled>Neighborhood</option>
-                        <option v-for="neighborhood in neighborhoods" :key="neighborhood.id" :value="neighborhood.id">{{neighborhood.name}}</option>
-                        <option value="-1"  >Other</option>
-                    </select>
+                    <Select2 v-model="student.neighborhood" :options="neighborhoods"   />
                 </div>
+                
                 <div v-if="student.neighborhood == -1" class="input">
                     <label for="">Neighbourhood Name &nbsp; <small>Make sure neighbourhood name is correct and avoid spellings mistakes</small></label>
                     <input type="text" class="input" v-model="student.new_neighborhood" placeholder="Neighbourhood">
@@ -118,7 +106,22 @@
         </div>
     </div>
 </template>
+<style lang="sass" scoped>
+    // .step
+    //     text-align: left
+    //     color: #000
+
+    .input
+        text-align: left
+        label
+            color: #000   
+</style>
+<style lang="sass">
+    .select2-container
+        width: 100% !important
+</style>
 <script>
+import Select2 from 'v-select2-component';
     export default {
         props: ['url', 'lat', 'lng'],
         data()
@@ -126,7 +129,7 @@
             return {
                     hasRegistered: false,
                     loading: false,
-                    step: 1,
+                    step: 2,
                     error: '',
                     levels: [],
                     disciplines: [],
@@ -154,6 +157,7 @@
                     },
             }
         },
+        components: {Select2},
         methods: {
             isEmail(email) 
             {
@@ -212,8 +216,10 @@
             },
             countrySelected()
             {
-                
-
+                this.states = []
+                this.cities = []
+                this.neighborhoods = []
+                this.student.neighborhood = ""
                 if(this.student.country)
                 {
                     this.getStates()
@@ -221,6 +227,9 @@
             },
             stateSelected()
             {
+                this.cities = []
+                this.neighborhoods = []
+                this.student.neighborhood = ""
                 if(this.student.state)
                 {
                     this.getCities()
@@ -228,6 +237,7 @@
             },
             citySelected()
             {
+                this.neighborhoods = []
                 if(this.student.city)
                 {
                     this.getNeighborhoods()
@@ -348,21 +358,31 @@
             },
             getCountries()
             {
+                this.states = []
+                this.cities = []
+                this.neighborhoods = []
                 axios.post(this.url +'/get/countries')
                 .then(response => {
                     this.countries = response.data.countries
+                    this.countries.map(function (obj) {
+                    obj.text =  obj.name; // replace name with the property used for the text
+                    });
                 })
                 .catch(error => {
                     console.log(error);
                 })
             },
+            
             getStates()
             {
-                this.loading = true
+
                 axios.post(this.url +'/get/states', {country: this.student.country})
                 .then(response => {
-                    this.loading = false
+                    console.log(response)
                     this.states = response.data.states
+                    this.states.map(function (obj) {
+                        obj.text =  obj.name; // replace name with the property used for the text
+                    });
                 })
                 .catch(error => {
                     console.log(error);
@@ -370,11 +390,12 @@
             },
             getCities()
             {
-                this.loading = true
                 axios.post(this.url +'/get/cities', {state: this.student.state})
                 .then(response => {
-                    this.loading = false
                     this.cities = response.data.cities
+                    this.cities.map(function (obj) {
+                        obj.text =  obj.name; // replace name with the property used for the text
+                    });
                 })
                 .catch(error => {
                     console.log(error);
@@ -382,11 +403,12 @@
             },
             getNeighborhoods()
             {
-                this.loading = true
                 axios.post(this.url +'/get/neighborhoods', {city: this.student.city})
                 .then(response => {
-                    this.loading = false
                     this.neighborhoods = response.data.neighborhoods
+                    this.neighborhoods.map(function (obj) {
+                        obj.text =  obj.name; // replace name with the property used for the text
+                    });
                     if(!response.data.neighborhoods.length)
                     {
                         this.student.neighborhood  = -1
