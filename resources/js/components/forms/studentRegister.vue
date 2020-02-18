@@ -129,7 +129,7 @@ import Select2 from 'v-select2-component';
             return {
                     hasRegistered: false,
                     loading: false,
-                    step: 2,
+                    step: 1,
                     error: '',
                     levels: [],
                     disciplines: [],
