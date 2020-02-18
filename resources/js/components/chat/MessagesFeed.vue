@@ -105,7 +105,8 @@
             },
             checkIfPhoneInString(text)
             {
-                var re = /\b[\+]?[(]?[0-9]{4,10}[)]?[-\s\.]?[-\s\/\.0-9]{3,15}\b/m;;
+                var re = /\b[\+]?[(]?[0-9]{3,10}[)]?[-\s\.]?[-\s\/\.0-9]{3,15}\b/m;;
+                // var re = /\b[\+]?[(]?[0-9]{4,10}[)]?[-\s\.]?[-\s\/\.0-9]{3,15}\b/m;;
                 return re.test(text);
             },
             extractEmails (text)
