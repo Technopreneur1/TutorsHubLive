@@ -65,6 +65,17 @@
                                     </form>
                                 </div>
                             </div>
+                            @if (!$user->email_verified_at)
+                                <div class="col-sm-2 border-right">
+                                    <div class="description-block">
+                                        <form action="{{route('admin.verifyemail')}}" method="POST" style="display: inline; tex">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{$user->id}}">
+                                            <button onclick="confirm('Are you sure you want to manually verify user\'s email)" class="btn btn-success">Verify Email</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            @endif
                             <!-- /.col -->
                             <!-- /.col -->
                             </div>

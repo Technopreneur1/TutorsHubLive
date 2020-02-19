@@ -12,6 +12,7 @@ use App\Message;
 use App\Session;
 use App\Student;
 use App\Location;
+use Carbon\Carbon;
 use App\Discipline;
 use App\Events\NewMessage;
 use Illuminate\Http\Request;
@@ -23,6 +24,13 @@ class AdminController extends Controller
 
     
     //Countries
+    public function verifyEmail(Request $request)
+    {
+        $date =Carbon::now();
+        User::findOrFail($request->id)->update(['email_verified_at' => $date]);
+        session()->flash("message", "Updated");
+        return back();
+    }
     public function ads()
     {
         $ads = Ad::orderBy('created_at', 'desc')->get();

@@ -309,6 +309,7 @@ Route::prefix('adminpanel')->middleware(['admin'])->group(function () {
     Route::get('/ads/{id}', 'AdminController@viewAd')->name('admin.ad.view');
     Route::post('/delete-ad/{id}', 'AdController@deleteByAdmin')->name('admin.delete.ad');
     Route::post('/cancel-session', 'SessionController@cancel')->name('admin.cancel.session');
+    Route::post('/verify-email', 'AdminController@verifyEmail')->name('admin.verifyemail');
 
     Route::get('/add-admin', 'AdminController@createAdmin')->name('admin.add.admin');
     Route::post('/add-admin', 'AdminController@postAdmin')->name('admin.post.admin');
