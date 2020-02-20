@@ -82,7 +82,7 @@
                 <td>{{$ticket}}</td>
             </tr>
         </table>
-        @if ($user)
+        @if ($user && $user->email_verified_at)
             <div class="replyopt">
                 <a href="{{route('admin.contact', [$user->id, $ticket])}}" class="btn">Message User</a>
             </div>
