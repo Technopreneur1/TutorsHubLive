@@ -60,9 +60,10 @@ class PagesController extends Controller
         $ticket = "TS" . rand(1000, 99999);
         if(auth()->check())
         {
-            Mail::to('info@tutors-hub.com')->send(new ContactEmail(auth()->user(), "Existing User", auth()->user()->email, $request->qry, $ticket));
+            Mail::to('mudassirmaqboolofficial@gmail.com')->send(new ContactEmail(auth()->user(), "Existing User", auth()->user()->email, $request->qry, $ticket));
+            // Mail::to('info@tutors-hub.com')->send(new ContactEmail(auth()->user(), "Existing User", auth()->user()->email, $request->qry, $ticket));
         }else {
-            Mail::to('info@tutors-hub.com')->send(new ContactEmail(null, $request->type, $request->email, $request->qry, $ticket));
+            Mail::to('mudassirmaqboolofficial@gmail.com')->send(new ContactEmail(null, $request->type, $request->email, $request->qry, $ticket));
         }
         return view('pages.contactmsg', ['ticket' => $ticket]);
     }
