@@ -84,7 +84,7 @@
         </table>
         @if ($user && $user->email_verified_at)
             <div class="replyopt">
-                <a href="{{route('admin.contact', [$user->id, $ticket])}}" class="btn">Message User</a>
+                <a href="https://tutors-hub.com/adminpanel/contact/{{$user->id}}/{{$ticket}}" class="btn">Message User</a>
             </div>
         @endif
 
