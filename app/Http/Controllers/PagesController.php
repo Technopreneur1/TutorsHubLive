@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Ticket;
 use App\Mail\ContactEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -60,8 +61,22 @@ class PagesController extends Controller
         $ticket = "TS" . rand(1000, 99999);
         if(auth()->check())
         {
+            Ticket::create([
+                'user_id' => auth()->id(),
+                'user_type' => 'Existing User',
+                'email' => auth()->user()->email,
+                'query' => $request->qry,
+                'ticket_id' => $ticket,
+            ]);
             Mail::to('info@tutors-hub.com')->send(new ContactEmail(auth()->user(), "Existing User", auth()->user()->email, $request->qry, $ticket));
         }else {
+            Ticket::create([
+                'user_id' => 0,
+                'user_type' => $request->type,
+                'email' => $request->email,
+                'query' => $request->qry,
+                'ticket_id' => $ticket,
+            ]);
             Mail::to('info@tutors-hub.com')->send(new ContactEmail(null, $request->type, $request->email, $request->qry, $ticket));
         }
         return view('pages.contactmsg', ['ticket' => $ticket]);
@@ -78,4 +93,5 @@ class PagesController extends Controller
         }
         return view("pages.messages", ['with' => $with]);
     }
+
 }

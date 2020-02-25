@@ -82,6 +82,7 @@
         </li>
         <li class="{{{ (Request::is('adminpanel/sessions') ? 'active' : '') }}}"><a href="{{route('admin.sessions')}}"><i class="fa fa-copy"></i> <span>Sessions</span> <span class="badge bg-aqua pull-right">{{App\Session::where('seen', 0)->count()}}</span></a></li>
         <li class="{{{ (Request::is('adminpanel/ads') ? 'active' : '') }}}"><a href="{{route('admin.ads')}}"><i class="fa fa-ad"></i> <span>Ads</span> </a></li>
+        <li class="{{{ (Request::is('adminpanel/tickets') ? 'active' : '') }}}"><a href="{{route('admin.tickets')}}"><i class="fa fa-ticket-alt"></i> <span>Tickets</span> </a></li>
         <li class="{{{ (Request::is('adminpanel/countries') ? 'active' : '') }}}"><a href="{{route('admin.countries')}}"><i class="fa fa-copy"></i> <span>Locations</span></a></li>
         <li class="{{{ (Request::is('adminpanel/disciplines') ? 'active' : '') }}}"><a href="{{route('admin.disciplines')}}"><i class="fa fa-copy"></i> <span>Disciplines</span></a></li>
         <li class="{{{ (Request::is('adminpanel/levels') ? 'active' : '') }}}"><a href="{{route('admin.levels')}}"><i class="fa fa-copy"></i> <span>Levels</span></a></li>
