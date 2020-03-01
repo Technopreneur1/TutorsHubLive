@@ -1,12 +1,12 @@
 @extends('admin.layouts.master')
 @section('title')
-Tickets
+{{$page}}
 @endsection()
 @section('content')
 
     <div class="box">
         <div class="box-header">
-        <h3 class="box-title">Tickets</h3>
+        <h3 class="box-title">{{$page}}</h3>
         </div>
         <!-- /.box-header -->
         <div class="box-body">
@@ -35,10 +35,14 @@ Tickets
               <td>{{$ticket->created_at->diffForHumans()}}</td>
               <td>
                 @if ($ticket->user_id)
-                  <a href="{{route("admin.contact",[ $ticket->user->id, $ticket->ticket_id])}}" class="btn btn-success">Message User</a>
+                  <a href="{{route("admin.contact",[ $ticket->user->id, $ticket->ticket_id])}}" style="margin-bottom: 2px" class="btn btn-success">Message User</a>
                 @endif
-                  {{-- <a href="{{route('admin.ticket', $ticket->id)}}" class="btn btn-success">Open</a>
-                  <a href="{{route('ticketProfile', $ticket->id)}}" target="_blank" class="btn btn-info">Profile</a> --}}
+                @if (!$ticket->resolved)
+                  <form action="{{route('admin.close.ticket', $ticket->id)}}" method="post">
+                    @csrf
+                    <button class="btn btn-danger">Close <i class="fas fa-lock"></i></button>                
+                  </form>
+                @endif
               </td>
             </tr>
             @endforeach

@@ -67,6 +67,18 @@ Adminpanel
                     <!-- /.info-box-content -->
                 </div>
             </div>
+            <div class="col-md-4 col-lg-3">
+                <div class="info-box">
+                    <a href="{{route('admin.tickets')}}">
+                        <span class="info-box-icon bg-red"><i class="fa fa-ticket-alt"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Open Tickets</span>
+                            <span class="info-box-number">{{App\Ticket::where('resolved', 0)->count()}}</span>
+                        </div>
+                    </a>
+                    <!-- /.info-box-content -->
+                </div>
+            </div>
             
         </div>
     </div>

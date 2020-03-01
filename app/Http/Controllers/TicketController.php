@@ -10,8 +10,21 @@ class TicketController extends Controller
  
     public function index()
     {
-        $tickets = Ticket::orderBy('created_at', 'desc')->get();
-        return view("admin.pages.tickets.index", ['tickets' => $tickets]);
+        $tickets = Ticket::where('resolved', '0')->orderBy('created_at', 'desc')->get();
+        return view("admin.pages.tickets.index", ['tickets' => $tickets, 'page' => 'Open Tickets']);
+    }
+    public function closed()
+    {
+        $tickets = Ticket::where('resolved', '1')->orderBy('created_at', 'desc')->get();
+        return view("admin.pages.tickets.index", ['tickets' => $tickets, 'page' => 'Closed Tickets']);
+    }
+    public function close(Request $request, $id)
+    {
+        $tickets = Ticket::findOrFail($id)->update([
+            'resolved' => 1
+        ]);
+        session()->flash('success', 'Session Closed');
+        return back();
     }
 
 }

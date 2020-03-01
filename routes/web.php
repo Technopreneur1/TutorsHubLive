@@ -316,6 +316,8 @@ Route::prefix('adminpanel')->middleware(['admin'])->group(function () {
     Route::get('/profile', 'AdminController@showAdmin')->name('admin.show.admin');
     Route::post('/update-password', 'AdminController@updatePassword')->name('admin.update.password');
     Route::get('/tickets', 'TicketController@index')->name('admin.tickets');
+    Route::get('/tickets/closed', 'TicketController@closed')->name('admin.tickets.closed');
+    Route::post('/close/ticket/{id}', 'TicketController@close')->name('admin.close.ticket');
     
     Route::post('/post-country', 'LocationController@postCountries')->name('admin.add.country');
     Route::get('/disciplines', 'AdminController@disciplines')->name('admin.disciplines');
