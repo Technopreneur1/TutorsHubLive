@@ -14,7 +14,7 @@
             <thead>
             <tr>
             <th>ID</th>
-            <th>User</th>
+            <th>User </th>
             <th>Email</th>
             <th>query</th>
             <th>Posted</th>
