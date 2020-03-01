@@ -85,7 +85,7 @@
         <li class="treeview  {{{ (Request::is('adminpanel/tickets') ? 'active' : '') }}}">
           <a href="#">
             <i class="fa fa-ticket-alt"></i> <span>Tickets</span>
-            <span class="badge bg-aqua pull-right">{{App\Ticket::where('resolved', 0)->count()}}</span></a>
+            {{-- <span class="badge bg-aqua pull-right">{{App\Ticket::where('resolved', 0)->count()}}</span></a> --}}
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
