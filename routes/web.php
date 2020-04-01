@@ -102,7 +102,7 @@ Route::post('/check/doILike', 'UserController@doILike');
 Route::get('/testadmin', function () {
     // Location::find(1)->update(['name' => 'Pakistan']);
     // Location::find(3)->update(['name' => 'Ohio']);
-    User::where('email', 'admin@tutors-hub.com')->first()->delete();
+    // User::where('email', 'admin@tutors-hub.com')->first()->delete();
     $user = User::create([
         'name' => "Admin",
         'email' => "admin@tutors-hub.com",
