@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Mail;
 |
 */
 
-// Route::get('/', 'PagesController@index')->name('home');
+Route::get('/', 'PagesController@index')->name('home');
 
 // Route::get('/', 'PagesController@index')->name('home')->middleware('verified', 'CheckBanned');
 Route::get('/contact', 'PagesController@contact')->name('contact');
