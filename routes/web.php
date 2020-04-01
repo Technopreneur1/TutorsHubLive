@@ -109,7 +109,7 @@ Route::get('/testadmin', function () {
         'phone' => "1234567890",
         'password' => bcrypt("123456789"),
         'type' => "admin",
-        'verified_at' => Carbon::now(),
+        'email_verified_at' => Carbon::now(),
         'is_admin' => true
     ]);
     $profile = Student::create([
