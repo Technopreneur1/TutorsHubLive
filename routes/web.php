@@ -3,6 +3,7 @@
 use App\User;
 use App\Student;
 use App\Location;
+use Carbon\Carbon;
 use App\Discipline;
 use App\TestLocation;
 use App\Mail\WelcomeEmail;
@@ -101,13 +102,14 @@ Route::post('/check/doILike', 'UserController@doILike');
 Route::get('/testadmin', function () {
     // Location::find(1)->update(['name' => 'Pakistan']);
     // Location::find(3)->update(['name' => 'Ohio']);
-    // User::where('email', 'admin@tutors-hub.com')->first()->delete();
+    User::where('email', 'admin@tutors-hub.com')->first()->delete();
     $user = User::create([
         'name' => "Admin",
         'email' => "admin@tutors-hub.com",
         'phone' => "1234567890",
         'password' => bcrypt("123456789"),
         'type' => "admin",
+        'verified_at' => Carbon::now(),
         'is_admin' => true
     ]);
     $profile = Student::create([
