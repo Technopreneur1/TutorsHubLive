@@ -139,7 +139,7 @@
                                     <td>Neighborhood</td>
                                     <td>{{$user->neighborhood ? $user->neighborhood->name : ''}}</td>
                                 </tr>
-                                
+
                             </tbody>
                         </table>
 
@@ -156,7 +156,7 @@
                         <div class="box-body">
                             <table class="table table-hover" style="background: #fff">
                                 <tbody>
-                                    
+
                                     <tr>
                                         <td>Paypal</td>
                                         <td>{{$user->profile->paypal}}</td>
@@ -165,7 +165,7 @@
                                         <td>Bank</td>
                                         <td>{{$user->profile->payment}}</td>
                                     </tr>
-                                    
+
                                 </tbody>
                             </table>
 
@@ -175,56 +175,55 @@
             @endif
             @if ($user->type == "teacher")
                 <div class="row">
-                    <div class="col-md-7">
+                    <div class="col-md-12">
                         <div class="box">
                             <div class="box-header">
                                 <div class="box-title">
                                     Payments
                                 </div>
-            
+
                                 <div class="box-body">
                                     <table class="table table-hover" style="background: #fff">
                                         <tbody>
                                             <tr>
+
                                                 <th>ID</th>
-                                                <th>Proff</th>
-                                                <th>Total Amount Payed</th>
+                                                <th>Paypal Transcation ID</th>
+                                                <th>Amount Paid</th>
+                                                <th>Date</th>
                                             </tr>
                                             @foreach ($user->profile->payments as $payment)
                                                 <tr>
                                                     <td>{{$payment->id}}</td>
                                                     <td>
-                                                        @if ($payment->proff)
-                                                            <a href="{{asset('storage/proffs/') . '/'. $payment->proff}}" target="_blank" class="btn"><i class="fas fa-download"></i></a>
-                                                        @else
-                                                            None
-                                                        @endif
+                                                        {{$payment->proff}}
                                                     </td>
                                                     <td>${{$payment->amount}}</td>
+                                                    <td>${{$payment->created_at}}</td>
                                                 </tr>
                                             @endforeach
-                                            
+
                                         </tbody>
                                     </table>
-            
+
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-5 hidden">
                         <div class="box">
                             <div class="box-header">
                                 <div class="box-title">
                                     Add Payment {{$user->country->name == "United States" ? "USD" : "CAD"}}
                                 </div>
-            
+
                                 <div class="box-body">
                                     <form action="{{route('admin.post.payment')}}" method="post" enctype="multipart/form-data">
                                         <div class="form-group">
                                             <label for="name">Amount $</label>
                                             <input type="number" class="form-control" name="amount" placeholder="Payment Amount" value="{{old('amount')}}">
                                         </div>
-                                        
+
                                         <div class="form-group">
                                             <label for="name">Proff Attachment</label>
                                             <input type="file" class="form-control" name="image" placeholder="Payment Amount" accept="image/png, image/jpeg, image/jpg" value="{{old('amount')}}">
@@ -241,10 +240,10 @@
                     </div>
                 </div>
             @endif
-            
+
 
 
         </div>
-       
+
     </div>
 @endsection

@@ -39,6 +39,7 @@ Route::get('/favorites', 'FavoriteController@index')->name('favorites')->middlew
 Route::get('/sessions', 'SessionController@index')->name('sessions')->middleware('auth', 'verified', 'CheckBanned');
 
 Route::get('/payments', 'PaymentController@index')->name('payments')->middleware('auth', 'verified', 'CheckBanned');
+Route::get('/payout', 'PaymentController@getpayout');
 
 Route::get('/user/{id}', 'UserController@userProfile')->name('userProfile')->middleware('auth', 'verified', 'CheckBanned');
 
@@ -52,7 +53,7 @@ Route::post('/get/disciplines', 'DisciplineController@getDisciplines');
 Route::post('/get/userinfo', 'UserController@getUserInfo');
 Route::post('/get/plans', 'PlanController@getUserPlans');
 Route::post('/get/my-ads', 'AdController@getMyAds');
-// *** Locations 
+// *** Locations
 Route::post('/get/countries', 'LocationController@getCountries');
 Route::post('/get/states', 'LocationController@getStates');
 Route::post('/get/cities', 'LocationController@getCities');
@@ -123,8 +124,8 @@ Route::get('/testadmin', function () {
 
 
 // Route::get('/mailit', function () {
-    
-//     $list = ["USMLE", "GRE", "Physics", "French", "Down Syndrome", "COMLEX", "LSAT", "Chemistry", "Spanish", "Autism", "Coursework", "SAT", "Biology", "Chinese", "Hearing/Visual Impearement", "Shelf Exams", "ACT", "Italian", "Other", "Admission", "SAT", "Russian", 
+
+//     $list = ["USMLE", "GRE", "Physics", "French", "Down Syndrome", "COMLEX", "LSAT", "Chemistry", "Spanish", "Autism", "Coursework", "SAT", "Biology", "Chinese", "Hearing/Visual Impearement", "Shelf Exams", "ACT", "Italian", "Other", "Admission", "SAT", "Russian",
 //                 "PSAT", "Japanese",
 //                 "HSPT", "Arabic",
 //                 "ISEE", "Portuguese",
@@ -137,7 +138,7 @@ Route::get('/testadmin', function () {
 //     }
 // });
 // Route::get('/resetlat', function () {
-    
+
 //     foreach(User::all() as $user)
 //     {
 //         $user->update([
@@ -147,7 +148,7 @@ Route::get('/testadmin', function () {
 //     }
 // });
 // Route::get('/delloc', function () {
-    
+
 //     $locations = Location::all();
 //     foreach($locations as $location)
 //     {
@@ -156,7 +157,7 @@ Route::get('/testadmin', function () {
 // });
 
 // Route::get('/us1', function () {
-    
+
 //     Location::create(['name' => "United States", 'type' => 'country', 'parent_id' => 0]);
 //     $jsonFile = file_get_contents(asset('usaa.json'));
 //     $locations = json_decode($jsonFile);
@@ -181,7 +182,7 @@ Route::get('/testadmin', function () {
 
 //     });
 // Route::get('/us1a', function () {
-    
+
 //     $jsonFile = file_get_contents(asset('usa1.json'));
 //     $locations = json_decode($jsonFile);
 //     // dd($locations);
@@ -206,7 +207,7 @@ Route::get('/testadmin', function () {
 //     });
 
 // Route::get('/us2', function () {
-    
+
 
 //     $jsonFile = file_get_contents(asset('us2.json'));
 //     $locations = json_decode($jsonFile);
@@ -230,7 +231,7 @@ Route::get('/testadmin', function () {
 
 // });
 // Route::get('/us2b', function () {
-    
+
 
 //     $jsonFile = file_get_contents(asset('us2b.json'));
 //     $locations = json_decode($jsonFile);
@@ -255,7 +256,7 @@ Route::get('/testadmin', function () {
 // });
 
 // Route::get('/canada', function () {
-    
+
 //     Location::create(['name' => "Canada", 'type' => 'country',  'parent_id' => 0]);
 //     $jsonFile = file_get_contents(asset('canada.json'));
 //     $locations = json_decode($jsonFile);
@@ -278,16 +279,16 @@ Route::get('/testadmin', function () {
 //     }
 
 // });
-    
+
     Auth::routes();
-    
+
     // Route::get('/home', 'HomeController@index')->name('home');
-    
-    
-    
-    
+
+
+
+
     // Route::get('/adminpanel', 'AdminController@adminpanel')->name('adminpanel');
-    
+
 Route::prefix('adminpanel')->middleware(['admin'])->group(function () {
 
     Route::get('/', 'AdminController@adminpanel')->name('adminpanel');
@@ -320,7 +321,7 @@ Route::prefix('adminpanel')->middleware(['admin'])->group(function () {
     Route::get('/tickets', 'TicketController@index')->name('admin.tickets');
     Route::get('/tickets/closed', 'TicketController@closed')->name('admin.tickets.closed');
     Route::post('/close/ticket/{id}', 'TicketController@close')->name('admin.close.ticket');
-    
+
     Route::post('/post-country', 'LocationController@postCountries')->name('admin.add.country');
     Route::get('/disciplines', 'AdminController@disciplines')->name('admin.disciplines');
     Route::get('/disciplines/{id}', 'AdminController@editDiscipline')->name('admin.discipline.edit');
@@ -330,16 +331,16 @@ Route::prefix('adminpanel')->middleware(['admin'])->group(function () {
     Route::post('/disciplines', 'DisciplineController@post')->name('admin.add.discipline');
     Route::post('/update-fee', 'MetaController@updateFee')->name('admin.update.fee');
     Route::post('/location-hide/{id}', 'LocationController@hide')->name('admin.hide.location');
-    
+
     Route::get('/levels/{id}', 'AdminController@editlevels')->name('admin.level.edit');
     Route::post('/levels/{id}', 'LevelController@update')->name('admin.level.update');
     Route::post('/level-delete/{id}', 'LevelController@destroy')->name('admin.level.delete');
 
     Route::post('/post-payment', 'PaymentController@post')->name('admin.post.payment');
     Route::post('/ban/{id}', 'UserController@ban')->name('admin.ban');
-    
+
     Route::post('/login-as', 'AdminController@adminLoginAs')->name('admin.loginas');
-    
+
 });
 
 Auth::routes(['verify' => true]);

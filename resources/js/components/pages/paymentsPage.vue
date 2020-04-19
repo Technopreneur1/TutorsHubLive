@@ -14,7 +14,7 @@
                <span>Bank: &nbsp; &nbsp;</span>
                {{bank}}
            </div>
-           
+
            <div v-if="!authuser.profile.payment && !authuser.profile.paypal" class="paypal">
                No payment account added. Please add your payment deatils.
            </div>
@@ -26,13 +26,13 @@
                 <div class="cdata">
                     <div class="key">Gross Total</div>
                     <div class="value">${{gross}}</div>
-                </div>    
+                </div>
            </div>
            <div class="ecol">
                 <div class="cdata">
                     <div class="key">Net Earning</div>
                     <div class="value">${{net}}</div>
-                </div>    
+                </div>
            </div>
            <div class="ecol">
                 <div class="cdata">
@@ -47,18 +47,39 @@
                </div>
            </div>
        </div>
-       <div class="title">Payments</div>
+       <div class="earning-wrapper">
+           <div class="title">Available to Withdraw</div>
+           <div class="table-responsive">
+               <table class="table table-hover modren-table">
+                   <thead>
+                   <tr class="tblhead">
+                       <th>Status</th>
+                       <th>Amount</th>
+                       <th>Withdraw</th>
+                   </tr>
+                   </thead>
+                   <tbody>
+                   <tr v-if="!balance == 0">
+                       <td >Unpaid</td>
+                       <td style="color: red">${{balance}}</td>
+                       <td><a :href="url + '/payout'"  class="btn btn-bd" style="min-width: 40px"><i class="fa fa-download"></i></a></td>
+                   </tr>
+                   </tbody>
+               </table>
+           </div>
+       </div>
+       <div class="title">Payments History</div>
        <div class="table-responsive">
             <table class="table table-sm">
                 <tr>
                     <th>Date</th>
                     <th>Total Amount</th>
-                    <th>Proff</th>
+                    <th>Paypal Transcation ID</th>
                 </tr>
                 <tr v-for="payment in payments" :key="payment.id">
                     <td>{{payment.created_at | moment("dddd, MMMM Do YYYY") }}</td>
                     <th style="color: red">${{payment.amount}}</th>
-                    <td><a v-if="payment.proff" :href="url + '/storage/proffs/' + payment.proff"  class="btn btn-blue"><i class="fa fa-download"></i></a></td>
+                    <td>{{payment.proff}}</td>
                 </tr>
 
             </table>
@@ -99,7 +120,7 @@
             {
                 return this.$store.getters.bank
             },
-            
+
         },
         data()
         {
@@ -109,7 +130,7 @@
            }
         },
         methods: {
-        
+
         },
         created()
         {
