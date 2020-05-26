@@ -26,7 +26,7 @@ product
                 <td>{{$product->title}}</td>
                 <td>{{$product->category->name}}</td>
                 <td>₦{{$product->price}}</td>
-                <td>{{$product->created_at->diffForHumans()}} </td>
+                <td>{{$product->created_at->format("Y-m-d")}} </td>
                 <td>
                     <a href="{{route('product.show.front', $product->slug)}}" target="_blank" class="btn btn-info">view</a>
                     <a href="{{route('edit.product', $product->id)}}" class="btn btn-success">Edit</a>

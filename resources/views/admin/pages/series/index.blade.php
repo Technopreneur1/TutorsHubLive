@@ -24,7 +24,7 @@ Series
             <tr>
                 <td>{{$series->title}}</td>
                 <td>{{$series->date->format("d, M Y")}} </td>
-                <td>{{$series->created_at->diffForHumans()}} </td>
+                <td>{{$series->created_at->format("Y-m-d")}} </td>
                 <td>
                     <a href="{{route('series.show.front', $series->slug)}}" target="_blank" class="btn btn-info">view</a>
                     <a href="{{route('edit.series', $series->id)}}" target="_blank" class="btn btn-success">Edit</a>

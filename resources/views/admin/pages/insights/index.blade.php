@@ -24,7 +24,7 @@ Insights
             <tr>
                 <td>{{$insight->title}}</td>
                 <td>{{$insight->category->name}}</td>
-                <td>{{$insight->created_at->diffForHumans()}} </td>
+                <td>{{$insight->created_at->format("Y-m-d")}} </td>
                 <td>
                     <a href="{{route('insight.show.front', $insight->slug)}}" target="_blank" class="btn btn-info">view</a>
                     <a href="{{route('edit.insight', $insight->id)}}" class="btn btn-success">Edit</a>

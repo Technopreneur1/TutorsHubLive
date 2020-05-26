@@ -8,6 +8,7 @@ Admins
         <div class="box-header">
         <h3 class="box-title">Admins</h3>
         </div>
+        
         <!-- /.box-header -->
         <div class="box-body">
         <table id="table" class="table table-bordered table-striped">
@@ -26,7 +27,7 @@ Admins
                 <td>{{$user->name}}</td>
                 <td>{{$user->email}}</td>
                 <td>{{$user->phone}} </td>
-                <td>{{$user->created_at->diffForHumans()}}</td>
+                <td>{{$user->created_at->format("Y-m-d")}}</td>
                 <td>
                   @if (auth()->id() == $user->id)
                     <a href="{{route('admin.show.admin')}}" class="btn btn-success">Edit</a>  

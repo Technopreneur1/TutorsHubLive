@@ -25,7 +25,7 @@
                     <tr>
                         <td>{{$location->id}}</td>
                         <td>{{$location->name}}</td>
-                        <td>{{$location->created_at ? $location->created_at->diffForHumans() : ''}}</td>
+                        <td>{{$location->created_at ? $location->created_at->format("Y-m-d") : ''}}</td>
                         <td>
                             {{-- <a href="" class="btn btn-success">View</a> --}}
                             <a href="{{route('admin.country', $location->id)}}" class="btn btn-success">View</a>

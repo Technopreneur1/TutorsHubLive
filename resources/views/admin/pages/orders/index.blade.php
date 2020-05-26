@@ -28,7 +28,7 @@ Orders
                 <td><a href="{{route('user', $order->user->id)}}">{{$order->user->firstname . " " . $order->user->lastname}}</a></td>
                 <td>{{$order->items->count() == 1 ? $order->items[0]->product->title  : $order->items[0]->product->title . " (" .$order->items->count() . " more)"}}</td>
                 <td>{{$order->status}} </td>
-                <td>{{$order->created_at->diffForHumans()}}</td>
+                <td>{{$order->created_at->format("Y-m-d")}}</td>
                 <td>
                     <a href="{{route('order', $order->id)}}" class="btn btn-info">view</a>
                 </td>

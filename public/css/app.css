@@ -12577,6 +12577,7 @@ a.text-dark:focus {
 .search-page .searchBox,
 .tutp .searchBox {
   background: #fff;
+  overflow-y: scroll;
 }
 
 .search-page .nothing,

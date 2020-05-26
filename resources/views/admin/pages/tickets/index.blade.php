@@ -32,7 +32,7 @@
                 @endif
               <td>{{$ticket->email}} </td>
               <td>{{$ticket->query}} </td>
-              <td>{{$ticket->created_at->diffForHumans()}}</td>
+              <td>{{$ticket->created_at->format("Y-m-d")}}</td>
               <td>
                 @if ($ticket->user_id)
                   <a href="{{route("admin.contact",[ $ticket->user->id, $ticket->ticket_id])}}" style="margin-bottom: 2px" class="btn btn-success">Message User</a>

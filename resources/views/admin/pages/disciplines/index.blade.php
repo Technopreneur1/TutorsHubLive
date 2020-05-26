@@ -49,7 +49,7 @@ Disciplines | Adminpanel
                         @foreach ($disciplines as $discipline)
                         <tr>
                             <td><b>{{$discipline->name}}</b></td>
-                            <td>{{$discipline->created_at ? $discipline->created_at->diffForHumans() : ''}} </td>
+                            <td>{{$discipline->created_at ? $discipline->created_at->format("Y-m-d") : ''}} </td>
                             <td>
                                 <a href="{{route('admin.discipline.edit', $discipline->id)}}" class="btn btn-success">Edit</a>
                                 @if (!$discipline->students()->count() && !$discipline->plans()->count() && !$discipline->ads()->count())

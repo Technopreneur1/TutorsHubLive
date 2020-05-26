@@ -49,7 +49,7 @@ Categories
                         @foreach ($levels as $level)
                         <tr>
                             <td><b>{{$level->name}}</b></td>
-                            <td>{{$level->created_at ? $level->created_at->diffForHumans() : ''}} </td>
+                            <td>{{$level->created_at ? $level->created_at->format("Y-m-d") : ''}} </td>
                             <td>
                                 <a href="{{route('admin.level.edit', $level->id)}}" class="btn btn-success">Edit</a>
                                 @if (!$level->students()->count() && !$level->plans()->count() && !$level->ads()->count())

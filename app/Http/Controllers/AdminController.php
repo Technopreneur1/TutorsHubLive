@@ -33,7 +33,26 @@ class AdminController extends Controller
     }
     public function ads()
     {
-        $ads = Ad::orderBy('created_at', 'desc')->get();
+        if(request()->country)
+        {
+            $ads = Ad::where('country_id', request()->country)->get();
+        }
+        elseif(request()->state)
+        {
+            $ads = Ad::where('state_id', request()->state)->get();
+        }
+        elseif(request()->city)
+        {
+            $ads = Ad::where('city_id', request()->city)->get();
+        }
+        elseif(request()->neighborhood)
+        {
+            $ads = Ad::where('neighborhood_id', request()->city)->get();
+        }
+        else
+        {
+            $ads = Ad::orderBy('created_at', 'desc')->get();
+        }
         return view('admin.pages.ads.index', ['ads' => $ads]);
     }
     public function adminLoginAs(Request $request)
@@ -174,12 +193,50 @@ class AdminController extends Controller
     }
     public function teachers()
     {
-        $users = User::where('type', 'teacher')->get();
+        if(request()->country)
+        {
+            $users = User::where('type', 'teacher')->where('country_id', request()->country)->get();
+        }
+        elseif(request()->state)
+        {
+            $users = User::where('type', 'teacher')->where('state_id', request()->state)->get();
+        }
+        elseif(request()->city)
+        {
+            $users = User::where('type', 'teacher')->where('city_id', request()->city)->get();
+        }
+        elseif(request()->neighborhood)
+        {
+            $users = User::where('type', 'teacher')->where('neighborhood_id', request()->city)->get();
+        }
+        else
+        {
+            $users = User::where('type', 'teacher')->get();
+        }
         return view('admin.pages.users.index', ['users' => $users, 'type' => 'Tutors']);
     }
     public function students()
     {
-        $users = User::where('type', 'student')->get();
+        if(request()->country)
+        {
+            $users = User::where('type', 'student')->where('country_id', request()->country)->get();
+        }
+        elseif(request()->state)
+        {
+            $users = User::where('type', 'student')->where('state_id', request()->state)->get();
+        }
+        elseif(request()->city)
+        {
+            $users = User::where('type', 'student')->where('city_id', request()->city)->get();
+        }
+        elseif(request()->neighborhood)
+        {
+            $users = User::where('type', 'student')->where('neighborhood_id', request()->city)->get();
+        }
+        else
+        {
+            $users = User::where('type', 'student')->get();
+        }
         return view('admin.pages.users.index', ['users' => $users, 'type' => 'Students']);
     }
     public function bannedStudents()
@@ -220,11 +277,21 @@ class AdminController extends Controller
             return redirect('/messages?u='. $id);
         }
         else {
-            $message = Message::create([
-                'from' => auth()->id(),
-                'to' => $id,
-                'text' => "Hello " . User::find($id)->name . " thanks reaching out. I am sending this message in regards to your ticket " . $ticket . " How can I help you?"
-            ]);
+            if($ticket == "NO")
+            {
+                $message = Message::create([
+                    'from' => auth()->id(),
+                    'to' => $id,
+                    'text' => "Hello " . User::find($id)->name
+                ]);
+            }
+            else{
+                $message = Message::create([
+                    'from' => auth()->id(),
+                    'to' => $id,
+                    'text' => "Hello " . User::find($id)->name . " thanks reaching out. I am sending this message in regards to your ticket " . $ticket . " How can I help you?"
+                ]);
+            }
     
             // broadcast(new NewMessage($message));
             

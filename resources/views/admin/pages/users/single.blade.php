@@ -14,7 +14,7 @@
                         <!-- Add the bg color to the header using any of the bg-* classes -->
                         <div class="widget-user-header bg-info">
                             <h3 class="widget-user-username">{{$user->name}}</h3>
-                             <p>{{$user->type == 'teacher' ? 'Tutor' : 'Student'}}</p>
+                             <p>{{$user->type == 'Tutors' ? 'Tutor' : 'Student'}}</p>
                         </div>
                         <div class="widget-user-image">
                             @if ($user->avatar)
@@ -53,7 +53,7 @@
                             </div>
                             <div class="col-sm-2 border-right">
                                 <div class="description-block">
-                                    <a href="{{route("admin.contact",[ $user->id, "TS0000"])}}" class="btn btn-success">Message User</a>
+                                    <a href="{{route("admin.contact",[ $user->id, "NO"])}}" class="btn btn-success">Message User</a>
                                 </div>
                             </div>
                             <div class="col-sm-2 border-right">
@@ -130,6 +130,10 @@
                                 <tr>
                                     <td>Country</td>
                                     <td>{{$user->country ? $user->country->name : ''}}</td>
+                                </tr>
+                                <tr>
+                                    <td>State</td>
+                                    <td>{{$user->state ? $user->state->name: ''}}</td>
                                 </tr>
                                 <tr>
                                     <td>City</td>
@@ -214,8 +218,12 @@
                     <div class="col-md-5">
                         <div class="box">
                             <div class="box-header">
+
                                 <div class="box-title">
-                                    Add Payment {{$user->country->name == "United States" ? "USD" : "CAD"}}
+                                    Add Payment
+                                         @if ($user->country)
+                                            {{$user->country->name == "United States" ? "USD" : "CAD"}}
+                                        @endif
                                 </div>
             
                                 <div class="box-body">

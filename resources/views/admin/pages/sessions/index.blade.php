@@ -33,7 +33,7 @@ Sessions
                 <td>${{$session->rate}} </td>
                 <td>{{$session->hours}} </td>
                 <td>${{$session->fee}} </td>
-                <td>{{$session->created_at->diffForHumans()}}</td>
+                <td>{{$session->created_at->format("Y-m-d")}}</td>
                 <td>{{$session->completed ? "Completed" : "Incomplete"}} </td>
                 <td>
                     {{-- {{-- <a href="{{route('admin.session', $session->id)}}" class="btn btn-success">Open</a> --}}

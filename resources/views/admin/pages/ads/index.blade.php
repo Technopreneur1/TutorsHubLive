@@ -1,8 +1,60 @@
 @extends('admin.layouts.master')
 @section('title')
-ads 
+Ads
 @endsection()
 @section('content')
+
+<div class="search">
+  <div class="row">
+    <div class="col-md-4 col-xs-8">
+      <form action="{{ route('admin.ads')}}">
+        <div class="form-group">
+          @if (!request()->country &&  !request()->state && !request()->city)
+            {{-- <label for="">Country</label> --}}
+            <select class="form-control" name="country" onchange="form.submit()" id="">
+              <option value="">Country</option>
+              @foreach (App\Location::where('type', 'country')->get() as $loc)
+                <option value="{{$loc->id}}">{{$loc->name}}</option>
+              @endforeach
+            </select>
+          @endif
+          @if (request()->country && !request()->state && !request()->city)
+            {{-- <label for="">City</label> --}}
+            <select class="form-control" name="state" onchange="form.submit()" id="">
+              <option value="">State/Province</option>
+              @foreach (App\Location::where('type', 'state')->get() as $loc)
+                <option value="{{$loc->id}}">{{$loc->name}}</option>
+              @endforeach
+            </select>
+          @endif
+          @if (request()->state && !request()->city)
+            {{-- <label for="">State</label> --}}
+            <select class="form-control" name="city" onchange="form.submit()" id="">
+              <option value="">City</option>
+              @foreach (App\Location::where('type', 'city')->get() as $loc)
+                <option value="{{$loc->id}}">{{$loc->name}}</option>
+              @endforeach
+            </select>
+          @endif
+          @if (request()->city)
+            {{-- <label for="">City</label> --}}
+            <select class="form-control" name="state" onchange="form.submit()" id="">
+              <option value="">Neighborhood</option>
+              @foreach (App\Location::where('type', 'neighborgood')->get() as $loc)
+                <option value="{{$loc->id}}">{{$loc->name}}</option>
+              @endforeach
+            </select>
+          @endif
+      </div>
+      </form>
+    </div>
+    @if (request()->all())
+      <div class="col-4">
+        <a href="{{route('admin.ads')}}" class="btn btn-info">Reset</a>
+      </div>
+    @endif
+  </div>
+</div>
 
     <div class="box">
         <div class="box-header">
@@ -26,7 +78,7 @@ ads
                 <td>{{$ad->id}}</td>
                 <td>{{$ad->title}}</td>
                 <td><a href="{{route('admin.user', $ad->user->id)}}">{{$ad->user->name}}</a></td>
-                <td>{{$ad->created_at->diffForHumans()}}</td>
+                <td>{{$ad->created_at->format("Y-m-d")}}</td>
                 <td>
                     {{-- {{-- <a href="{{route('admin.ad', $ad->id)}}" class="btn btn-success">Open</a> --}}
                     <a href="{{route('admin.ad.view', $ad->id)}}" class="btn btn-info">View</a>
