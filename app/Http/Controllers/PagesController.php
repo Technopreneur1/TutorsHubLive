@@ -38,6 +38,10 @@ class PagesController extends Controller
             return view("pages.home");
         }
     }
+    public function myFiles()
+    {
+        return view('pages.files');
+    }
     public function privacy()
     {
         $title = "Privacy Policy";

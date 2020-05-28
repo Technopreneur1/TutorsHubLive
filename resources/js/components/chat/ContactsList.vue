@@ -6,7 +6,7 @@
                     <img :src="avatar(contact)" :alt="contact.name">
                 </div>
                 <div class="contact">
-                    <p class="name">{{ contact.name }}</p>
+                    <p class="name">{{ contact.name }}  <span v-if="contact.verified" class="verified"><i class="fas fa-check"></i></span></p>
                 </div>
                 <span class="unread" v-if="contact.unread">{{ contact.unread }}</span>
             </li>

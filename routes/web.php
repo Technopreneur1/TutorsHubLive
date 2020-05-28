@@ -25,6 +25,7 @@ Route::get('/', 'PagesController@index')->name('home');
 
 // Route::get('/', 'PagesController@index')->name('home')->middleware('verified', 'CheckBanned');
 Route::get('/contact', 'PagesController@contact')->name('contact');
+Route::get('/my-files', 'PagesController@myFiles')->name('myfiles');
 Route::post('/contact', 'PagesController@postContact')->name('contact.post');
 Route::get('/privacy-policy', 'PagesController@privacy')->name('privacy');
 Route::get('/terms-and-conditions', 'PagesController@terms')->name('terms');
@@ -65,6 +66,8 @@ Route::post('/search/tutors', 'TeacherController@search');
 Route::post('/search/ads', 'AdController@search');
 
 // POST Data
+Route::post('post/file/{type}', 'UserController@postFile')->name('upload.file');
+Route::post('delete/file/{type}', 'UserController@deleteFile')->name('delete.file');
 Route::post('post/favorite', 'UserController@postFavorite');
 Route::post('post/student', 'StudentController@post');
 Route::post('post/teacher', 'TeacherController@post');
@@ -100,25 +103,25 @@ Route::post('/check/doILike', 'UserController@doILike');
 
 
 
-Route::get('/testadmin', function () {
-    // Location::find(1)->update(['name' => 'Pakistan']);
-    // Location::find(3)->update(['name' => 'Ohio']);
-    // User::where('email', 'admin@tutors-hub.com')->first()->delete();
-    $user = User::create([
-        'name' => "Admin",
-        'email' => "admin@tutors-hub.com",
-        'phone' => "1234567890",
-        'password' => bcrypt("123456789"),
-        'type' => "admin",
-        'email_verified_at' => Carbon::now(),
-        'is_admin' => true
-    ]);
-    $profile = Student::create([
-        'user_id' => $user->id,
-        'can_contact' => true
-    ]);
+// Route::get('/testadmin', function () {
+//     // Location::find(1)->update(['name' => 'Pakistan']);
+//     // Location::find(3)->update(['name' => 'Ohio']);
+//     // User::where('email', 'admin@tutors-hub.com')->first()->delete();
+//     $user = User::create([
+//         'name' => "Admin",
+//         'email' => "admin@tutors-hub.com",
+//         'phone' => "1234567890",
+//         'password' => bcrypt("123456789"),
+//         'type' => "admin",
+//         'email_verified_at' => Carbon::now(),
+//         'is_admin' => true
+//     ]);
+//     $profile = Student::create([
+//         'user_id' => $user->id,
+//         'can_contact' => true
+//     ]);
 
-    });
+//     });
 
 
 
@@ -338,6 +341,8 @@ Route::prefix('adminpanel')->middleware(['admin'])->group(function () {
 
     Route::post('/post-payment', 'PaymentController@post')->name('admin.post.payment');
     Route::post('/ban/{id}', 'UserController@ban')->name('admin.ban');
+    Route::post('/verify/{id}', 'UserController@verify')->name('admin.verify.user');
+
 
     Route::post('/login-as', 'AdminController@adminLoginAs')->name('admin.loginas');
 

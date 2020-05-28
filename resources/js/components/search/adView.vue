@@ -11,7 +11,7 @@
         </div>
         <div class="data">
             <a  :href="url+ '/user/' +ad.user.id" class="info">
-                <div class="name">{{firstname(ad.user.name)}}</div>
+                <div class="name">{{firstname(ad.user.name)}} <span v-if="ad.user.verified" class="verified"><i class="fas fa-check"></i></span></div>
                 <div class="location"><i class="fas fa-map-marker-alt"></i> {{ad.neighborhood ? ad.neighborhood.name + ', ' : ''}}{{ad.city ? ad.city.name + ', ' : ''}}{{ad.state ? ad.state.name + ', ' : ''}}</div>
             </a>
             <div class="contactbtn">

@@ -27,6 +27,7 @@
 @import 'partials/pages/payments.sass';
 @import 'partials/pages/contact.sass';
 @import 'partials/pages/home.sass';
+@import 'partials/pages/files.sass';
 
 
 *{
@@ -61,4 +62,16 @@ footer .links a{
 
 body{
     background: #fff;
+}
+
+.verified{
+    font-size: 15px;
+    width: 25px;
+    height: 25px;
+    background: #59a935;
+    display: inline-block;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 28px;
+    color: #fff;
 }

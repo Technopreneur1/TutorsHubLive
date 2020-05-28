@@ -44,8 +44,8 @@
                         <input style="display: none" id="avatarInput" type="file" @change="avatarSelected">
                     </div>
                     <div class="namenrole">
-                        <div v-if="!isUser" class="name">{{firstname(user.name)}}</div>
-                        <div v-else class="name">{{user.name}}</div>
+                        <div v-if="!isUser" class="name">{{firstname(user.name)}} <span v-if="user.verified" class="verified"><i class="fas fa-check"></i></span> </div>
+                        <div v-else class="name">{{user.name}}  <span v-if="user.verified" class="verified"><i class="fas fa-check"></i></span> <span></span> </div>
                         <div class="role">{{user.type == 'teacher' ? 'Tutor' : user.type}} {{user.gender ? ' | ' + user.gender : ''}}</div>
                         <div class="rating">
                         <i class="fas fa-star"></i><span> {{rating}} / 5</span> 
@@ -141,11 +141,11 @@
                 <div  v-for="session in user.profile.completed_sessions" :key="session.id"  class="review">
                     <a :href="url+ '/user/' + session.student.user.id" v-if="user.type == 'teacher'" class="avatar">
                         <img :src="avatarF(session.student.user)" alt="">
-                        <div class="name">{{session.student.user.name}}</div>
+                        <div class="name">{{session.student.user.name}} <span v-if="user.verified" class="verified"><i class="fas fa-check"></i></span> </div>
                     </a>
                     <a :href="url+ '/user/' + session.teacher.user.id" v-if="user.type == 'student'" class="avatar">
-                        <img :src="avatarF(session.teacher.user.name)" alt="">
-                        <div class="name">{{session.teacher.user.name}}</div>
+                        <img :src="avatarF(session.teacher.user)" alt="">
+                        <div class="name">{{session.teacher.user.name}} <span v-if="user.verified" class="verified"><i class="fas fa-check"></i></span> </div>
                     </a>
                     <div v-if="user.type == 'student'" class="rating">
                         <i class="far fa-star" :class="{fas: session.student_rating >= 1}"></i>

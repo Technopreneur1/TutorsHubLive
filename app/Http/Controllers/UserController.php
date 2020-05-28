@@ -171,4 +171,42 @@ class UserController extends Controller
         session()->flash('message', 'User Successfully Banned');
         return back();
     }
+
+    public function verify($id)
+    {
+        $user = User::findOrFail($id);
+        if($user->verified)
+        {
+            $user->update(['verified' => false]);
+        }
+        else
+        {
+            $user->update(['verified' => true]);
+        }
+        session()->flash('message', 'Verification status updated');
+        return back();
+    }
+    public function postFile(Request $request, $type)
+    {
+        if($request->hasFile('file'))
+        {
+            $file = $request->file;
+            $name = uniqid(true) . 'fl' . rand(99, 9999) . "." . $file->getClientOriginalExtension();
+            $file->storeAs('public/files', $name);
+        }
+        auth()->user()->profile->update([
+            $type => $name
+        ]);
+        session()->flash('File has been uploaded');
+        return back();
+    }
+    public function deleteFile(Request $request, $type)
+    {
+
+        auth()->user()->profile->update([
+            $type => ''
+        ]);
+        session()->flash('File has been Deleted');
+        return back();
+    }
 }

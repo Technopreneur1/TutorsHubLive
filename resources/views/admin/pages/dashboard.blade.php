@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 @section('title')
-Adminpanel
+Dashboard
 @endsection()
 @section('content')
 

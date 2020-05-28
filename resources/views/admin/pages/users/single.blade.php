@@ -112,6 +112,24 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td>Verification Status</td>
+                                    <td>
+                                        @if ($user->verified)
+                                            <span>Verified</span>
+                                            <form action="{{route('admin.verify.user', $user->id)}}" style="display: inline; margin-left: 20px" method="post">
+                                               <button class="btn btn-danger">Mark non-verified</button>
+                                               @csrf
+                                            </form>
+                                        @else
+                                            <span>Active</span>
+                                            <form action="{{route('admin.verify.user', $user->id)}}" style="display: inline; margin-left: 20px" method="post">
+                                                @csrf
+                                               <button class="btn btn-success">Mark as verified</button>
+                                            </form>
+                                        @endif
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td>Name</td>
                                     <td>{{$user->name}}</td>
                                 </tr>
@@ -143,6 +161,35 @@
                                     <td>Neighborhood</td>
                                     <td>{{$user->neighborhood ? $user->neighborhood->name : ''}}</td>
                                 </tr>
+                                {{-- {{dd($user->profile)}} --}}
+                                @if ($user->type == 'teacher')
+                                    <tr>
+                                        <td>Resume</td>
+                                        @if (!is_null($user->profile->resume))
+                                            <td><a href="{{asset('storage/files') . '/'. $user->profile->resume}}"  target="_blank" class="btn btn-primary"><i class="fas fa-eye"></i></a></td>
+                                        @else
+                                             <td>No File Available</td>
+                                        @endif
+                                    </tr>
+                                    <tr>
+                                        <td>Background Check</td>
+                                       {{-- {{ dd($user->profile)}} --}}
+                                        @if ($user->profile->background_check)
+                                            <td><a href="{{asset('storage/files') . '/'. $user->profile->background_check}}"  target="_blank" class="btn btn-primary"><i class="fas fa-eye"></i></a></td>
+                                        @else
+                                            <td>No File Available</td>
+                                        @endif
+                                    </tr>
+                                    <tr>
+                                        <td>ID FIle</td>
+                                       {{-- {{ dd($user->profile)}} --}}
+                                        @if ($user->profile->identity)
+                                            <td><a href="{{asset('storage/files') . '/'. $user->profile->identity}}"  target="_blank" class="btn btn-primary"><i class="fas fa-eye"></i></a></td>
+                                        @else
+                                             <td>No File Available</td>
+                                        @endif
+                                    </tr>
+                                @endif
 
                             </tbody>
                         </table>

@@ -41,7 +41,6 @@
                 </select>
               @endif
               @if (request()->city)
-                {{-- <label for="">City</label> --}}
                 <select class="form-control" name="state" onchange="form.submit()" id="">
                   <option value="">Neighborhood</option>
                   @foreach (App\Location::where('type', 'neighborgood')->get() as $loc)

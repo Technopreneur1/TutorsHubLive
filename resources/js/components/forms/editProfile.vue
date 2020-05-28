@@ -22,6 +22,7 @@
                 <button @click="editPlans = true"  v-if="user.type == 'teacher'" class="btn">Manage Plans</button>
                 <button @click="editLocation = true" class="btn">Change Address</button>
                 <button @click="editPassword = true" class="btn">Change Password</button>
+                <a :href="url+ '/my-files'" class="btn">Manage Files</a>
             </div>
             <div class="name">
                 <div class="input">

@@ -9,7 +9,7 @@
                         <img :src="avatar(ses.teacher.user)" alt="">
                     </div>
                     <div class="info">
-                        <div class="name">{{ses.teacher.user.name}}</div>
+                        <div class="name">{{ses.teacher.user.name}} <span v-if="ses.teacher.user.verified" class="verified"><i class="fas fa-check"></i></span></div>
                     </div>
                 </a>
                 <a v-if="authuser.type == 'teacher'" :href="url + '/user/' + ses.student.user.id" class="with">
@@ -17,7 +17,7 @@
                         <img :src="avatar(ses.student.user)" alt="">
                     </div>
                     <div class="info">
-                        <div class="name">{{ses.student.user.name}}</div>
+                        <div class="name">{{ses.student.user.name}} <span v-if="ses.student.user.verified" class="verified"><i class="fas fa-check"></i></span></div>
                     </div>
                 </a>
                 <div class="info">
