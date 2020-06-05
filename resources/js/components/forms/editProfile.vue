@@ -38,32 +38,7 @@
             </div>
             <div class="field">
 
-            <div class="input">
-                <label for="paypal">Paypal Account</label>
-                    <input type="text" v-model="user.paypal" placeholder="Paypal email to recieve your payments">
-                </div>
-            </div>
-            <div class="field">
-
-            <div class="input">
-                <label for="bank_name">Bank Name</label>
-                    <input type="text" v-model="user.bank_name" placeholder="Bank Name">
-                </div>
-            </div>
-            <div class="field">
-
-            <div class="input">
-                <label for="paypal">Account Number</label>
-                    <input type="text" v-model="user.account_number" placeholder="Bank Account Number">
-                </div>
-            </div>
-            <div class="field">
-
-            <div class="input">
-                <label for="routing_number">Routing Number</label>
-                    <input type="text" v-model="user.routing_number" placeholder="Routing Number">
-                </div>
-            </div>
+           
 
             <div class="field">
                 <div class="input">
@@ -93,7 +68,32 @@
                     </select>
                 </div>
             </div>
-            
+             <div class="input">
+                <label for="paypal">Paypal Account</label>
+                    <input type="text" v-model="user.paypal" placeholder="Paypal email to recieve your payments">
+                </div>
+            </div>
+            <div class="field">
+
+            <div class="input">
+                <label for="bank_name">Bank Name</label>
+                    <input type="text" v-model="user.bank_name" placeholder="Bank Name">
+                </div>
+            </div>
+            <div class="field">
+
+            <div class="input">
+                <label for="paypal">Account Number</label>
+                    <input type="text" v-model="user.account_number" placeholder="Bank Account Number">
+                </div>
+            </div>
+            <div class="field">
+
+            <div class="input">
+                <label for="routing_number">Routing Number</label>
+                    <input type="text" v-model="user.routing_number" placeholder="Routing Number">
+                </div>
+            </div>
             <div class="field">
                 <div class="input">
                     <label for="">{{user.type == 'teacher' ? 'Students' : 'Teachers'}} Can Contact</label>

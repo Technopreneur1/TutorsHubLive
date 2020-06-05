@@ -1,18 +1,26 @@
 <template>
    <div class="full-container">
-       <transition name="easy-appear" enter-active-class="animated slideInLeft" leave-active-class="animated slideOutLeft">
+       <!-- <transition name="easy-appear" enter-active-class="animated slideInLeft" leave-active-class="animated slideOutLeft">
             <edit-payment v-if="editPayment" @cancel="editPayment = false" :url="url" :user="authuser"></edit-payment>
-        </transition>
+        </transition> -->
        <full-loader v-if="loading" ></full-loader>
-       <div class="title">My Payment Info <span @click="editPayment = true">Edit <i class="fas fa-pencil"></i></span></div>
+       <div class="title">My Payment Info</div>
        <div class="payment-info-box">
-           <div v-if="authuser.profile.paypal" class="paypal">
+           <div v-if="authuser.paypal" class="paypal">
                <span>Paypal: &nbsp;</span>
-               {{paypal}}
+               {{authuser.paypal}}
            </div>
-           <div v-if="authuser.profile.payment" class="payment">
-               <span>Bank: &nbsp; &nbsp;</span>
-               {{bank}}
+           <div v-if="authuser.bank_name" class="payment">
+               <span>Bank Name: &nbsp;</span>
+               {{authuser.bank_name}}
+           </div>
+           <div v-if="authuser.account_number" class="payment">
+               <span>Account Number: &nbsp;</span>
+               {{authuser.account_number}}
+           </div>
+           <div v-if="authuser.routing_number" class="payment">
+               <span>Routing Number: &nbsp;</span>
+               {{authuser.routing_number}}
            </div>
 
            <div v-if="!authuser.profile.payment && !authuser.profile.paypal" class="paypal">

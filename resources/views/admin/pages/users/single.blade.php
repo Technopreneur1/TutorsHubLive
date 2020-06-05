@@ -233,6 +233,9 @@
                 </div>
             @endif
             @if ($user->type == "teacher")
+                <div style="margin-bottom: 20px">
+                    <a class="btn btn-primary" href="{{route('export.userPayments', $user->profile->id)}}">Export</a>
+                </div>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="box">
@@ -282,7 +285,7 @@
                     <div class="col-md-5 ">
                         <div class="box">
                             <div class="box-header">
-
+                                
                                 <div class="box-title">
                                     Add Payment
                                          @if ($user->country)
