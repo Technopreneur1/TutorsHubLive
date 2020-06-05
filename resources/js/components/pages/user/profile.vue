@@ -131,6 +131,9 @@
                     <span v-else class="nval">Yes</span>
                 </div>
                 <div class="option">
+                    <span class="key del"><a :href="url+ '/my-files'">Manage Files</a></span>
+                </div>
+                <div class="option">
                     <span @click="deleteProfile()" class="key del">Delete Profile</span>
                 </div>
             </div>

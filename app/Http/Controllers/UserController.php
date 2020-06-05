@@ -118,6 +118,10 @@ class UserController extends Controller
         $user->gender =$request->gender;
         $user->is_hidden =$request->is_hidden;
         $user->can_contact =$request->can_contact;
+        $user->paypal = $request->paypal;
+        $user->bank_name = $request->bank_name;
+        $user->routing_number = $request->routing_number;
+        $user->account_number = $request->account_number;
         $user->update();
         $profile = auth()->user()->profile;
         $profile->gender_preference =$request->gender_preference;

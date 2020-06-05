@@ -37,6 +37,35 @@
                 </div>
             </div>
             <div class="field">
+
+            <div class="input">
+                <label for="paypal">Paypal Account</label>
+                    <input type="text" v-model="user.paypal" placeholder="Paypal email to recieve your payments">
+                </div>
+            </div>
+            <div class="field">
+
+            <div class="input">
+                <label for="bank_name">Bank Name</label>
+                    <input type="text" v-model="user.bank_name" placeholder="Bank Name">
+                </div>
+            </div>
+            <div class="field">
+
+            <div class="input">
+                <label for="paypal">Account Number</label>
+                    <input type="text" v-model="user.account_number" placeholder="Bank Account Number">
+                </div>
+            </div>
+            <div class="field">
+
+            <div class="input">
+                <label for="routing_number">Routing Number</label>
+                    <input type="text" v-model="user.routing_number" placeholder="Routing Number">
+                </div>
+            </div>
+
+            <div class="field">
                 <div class="input">
                     <label for="">Gender</label>
                     <select v-model="user.gender" id="">
@@ -45,6 +74,12 @@
                         <option value="Female">Female</option>
                         <option value="Prefer Not To Say">Prefer Not To Say</option>
                     </select>
+                </div>
+            </div>
+            <div class="field">
+                <div class="input">
+                    <label for="">Bio</label>
+                    <textarea v-model="user.profile.bio" id="" cols="30" rows="4" placeholder="Bio"></textarea>
                 </div>
             </div>
             <div class="field">
@@ -77,12 +112,7 @@
                     </select>
                 </div>
             </div>
-            <div class="field">
-                <div class="input">
-                    <label for="">Bio</label>
-                    <textarea v-model="user.profile.bio" id="" cols="30" rows="4" placeholder="Bio"></textarea>
-                </div>
-            </div>
+            
             
             <div class="field">
                 <div class="input">
@@ -119,6 +149,10 @@
                     gender_preference: this.user.profile.gender_preference,
                     can_contact: this.user.can_contact,
                     is_hidden: this.user.is_hidden,
+                    paypal: this.user.paypal,
+                    bank_name: this.user.bank_name,
+                    account_number: this.user.account_number,
+                    routing_number: this.user.routing_number,
                     bio: this.user.profile.bio,
                 })
                 .then(response => {

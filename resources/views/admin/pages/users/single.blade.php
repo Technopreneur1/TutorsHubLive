@@ -210,11 +210,19 @@
 
                                     <tr>
                                         <td>Paypal</td>
-                                        <td>{{$user->profile->paypal}}</td>
+                                        <td>{{$user->paypal}}</td>
                                     </tr>
                                     <tr>
-                                        <td>Bank</td>
-                                        <td>{{$user->profile->payment}}</td>
+                                        <td>Bank Name</td>
+                                        <td>{{$user->bank_name}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Account Number</td>
+                                        <td>{{$user->account_number}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Routing Number</td>
+                                        <td>{{$user->routing_number}}</td>
                                     </tr>
 
                                 </tbody>
@@ -239,18 +247,27 @@
                                             <tr>
 
                                                 <th>ID</th>
-                                                <th>Paypal Transcation ID</th>
+                                                <th>Via</th>
+                                                <th>Paypal ID / Proff</th>
                                                 <th>Amount Paid</th>
                                                 <th>Date</th>
                                             </tr>
                                             @foreach ($user->profile->payments as $payment)
+
                                                 <tr>
                                                     <td>{{$payment->id}}</td>
-                                                    <td>
-                                                        {{$payment->proff}}
-                                                    </td>
+                                                    @if ($payment->type == "Bank Transfer")
+                                                        <td><i class="fas fa-university"></i> Bank</td>
+                                                    @else
+                                                        <td><i class="fab fa-paypal"></i> Paypal</td>
+                                                    @endif
+                                                    @if ($payment->type == "Bank Transfer")
+                                                        <td><a href="{{asset('storage/proffs') . "/" . $payment->proff}}" target="_blank" class="btn btn-info"><i class="fas fa-eye"></i></a></td>
+                                                    @else
+                                                        <td>{{$payment->proff}}</td>
+                                                    @endif
                                                     <td>${{$payment->amount}}</td>
-                                                    <td>${{$payment->created_at}}</td>
+                                                    <td>{{$payment->created_at->format("d M, Y")}}</td>
                                                 </tr>
                                             @endforeach
 

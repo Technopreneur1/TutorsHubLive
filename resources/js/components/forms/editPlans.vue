@@ -1,6 +1,6 @@
 <template>
     <div class="editPlans">
-       <span id="success" @click="cancel()" class="btn-cancel"><i class="fas fa-long-arrow-alt-left"></i></span>
+       <span v-if="type != 'page'" id="success" @click="cancel()" class="btn-cancel"><i class="fas fa-long-arrow-alt-left"></i></span>
        <div id="edp"></div>
        <div v-if="success" class="success">{{success}}</div>
         <section class="addWrap">
@@ -91,7 +91,18 @@
 </template>
 <script>
     export default {
-        props: ['url', 'user'],
+
+        props: {
+            url: {
+                type: String
+            },
+            user: {
+                type: Object
+            },
+            type: {
+                user: String
+            }
+        },
         data()
         {
            return{

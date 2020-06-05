@@ -5,6 +5,9 @@ Ads
 @section('content')
 
 <div class="search">
+  <div style="margin: 10px 0" >
+    <a class="btn btn-primary" href="{{route('export.ads')}}">Export</a>
+  </div>
   <div class="row">
     <div class="col-md-4 col-xs-8">
       <form action="{{ route('admin.ads')}}">

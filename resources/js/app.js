@@ -13,10 +13,6 @@ Vue.use(require('vue-moment'));
 
 import { Cropper } from 'vue-advanced-cropper'
 
-import VueSweetalert2 from 'vue-sweetalert2';
-
-Vue.use(VueSweetalert2);
-
 import Vuex from 'vuex'
 import StoreData from './store.js'
 
@@ -30,6 +26,9 @@ import * as VueGoogleMaps from "vue2-google-maps";
 Vue.use(VueGoogleMaps, {
   load: { key: "AIzaSyBItJS5EzVJKKHUeqEqlW5zw7LSvzi0IZg"}
 });
+
+import VueSweetalert2 from 'vue-sweetalert2';
+Vue.use(VueSweetalert2);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

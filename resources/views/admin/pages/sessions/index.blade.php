@@ -3,7 +3,9 @@
 Sessions 
 @endsection()
 @section('content')
-
+    <div style="margin: 10px 0" >
+      <a class="btn btn-primary" href="{{route('export.sessions')}}">Export</a>
+    </div>
     <div class="box">
         <div class="box-header">
         <h3 class="box-title">All Sessions</h3>

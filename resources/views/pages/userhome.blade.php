@@ -9,13 +9,22 @@
                 <div class="text">
                     <div class="title">Dash<span>board</span></div>
                 </div>
-                <div class="usergrid">
-                    <div class="item">
-                        <a href="{{route('home')}}">
-                            <i class="fas fa-home"></i>    
-                            <span>Home</span>
+                @if (auth()->user()->type == 'teacher' && !auth()->user()->verified && (!auth()->user()->profile->background_check || !auth()->user()->profile->resume || !auth()->user()->profile->identity))
+                    <a href="{{route('myfiles')}}" style="display: block">
+                        <div  class="alert alert-info text-center">
+                        Please upload your document files to get verified badge.
                         </a>
                     </div>
+                @endif
+                <div class="usergrid">
+                    @if (auth()->user()->type == 'teacher')
+                        <div class="item">
+                            <a href="{{route('plans')}}">
+                                <i class="fas fa-dollar-sign"></i>    
+                                <span>Plans</span>
+                            </a>
+                        </div>
+                    @endif
                     <div class="item">
                         <a href="{{route('messages')}}">
                             <i class="fas fa-envelope"></i>    

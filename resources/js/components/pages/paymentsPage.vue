@@ -49,39 +49,54 @@
        </div>
        <div class="earning-wrapper">
            <div class="title">Available to Withdraw</div>
+           <div v-if="bankinfomissing" class="alert alert-danger">Please add bank account details in your profile settings to request payout via bank</div>
            <div class="table-responsive">
                <table class="table table-hover modren-table">
                    <thead>
                    <tr class="tblhead">
                        <th>Status</th>
                        <th>Amount</th>
-                       <th>Withdraw</th>
+                       <th class="text-right" >Withdraw</th>
                    </tr>
                    </thead>
                    <tbody>
                    <tr v-if="!balance == 0">
                        <td >Unpaid</td>
                        <td style="color: red">${{balance}}</td>
-                       <td><a :href="url + '/payout'"  class="btn btn-bd" style="min-width: 40px"><i class="fa fa-download"></i></a></td>
+                       <!-- <td><a :href="url + '/payout'"  class="btn btn-bd" style="min-width: 40px"><i class="fa fa-download"></i></a></td> -->
+                        <td class="text-right" v-if="balance > 0">
+                            <a :href="url + '/payout'"  class="btn btn-bd" style="min-width: 40px"><i class="fab fa-paypal"></i> Via Paypal</a>
+                            <button @click="payoutBank()" class="btn btn-bd" style="min-width: 40px"><i class="fas fa-university"></i> Via Bank</button>
+                        </td>
+                        <td v-else></td>
                    </tr>
+                   
                    </tbody>
                </table>
            </div>
        </div>
-       <div class="title">Payments History</div>
+       <div class="flexit">
+        <div class="title">Payments History</div>
+        <a :href="url+ '/export/payments/' + authuser.profile.id" class="btn btn-bd">Export To Excel</a>
+       </div>
+
        <div class="table-responsive">
             <table class="table table-sm">
                 <tr>
+                    <th>Via</th>
                     <th>Date</th>
                     <th>Total Amount</th>
                     <th>Paypal Transcation ID</th>
                 </tr>
                 <tr v-for="payment in payments" :key="payment.id">
+                    <td v-if="payment.type == 'Paypal'"> <i class="fab fa-paypal"></i> Paypal</td>
+                    <td v-else><i class="fas fa-university"></i> Bank</td>
                     <td>{{payment.created_at | moment("dddd, MMMM Do YYYY") }}</td>
                     <th style="color: red">${{payment.amount}}</th>
-                    <td>{{payment.proff}}</td>
+                    <td v-if="payment.type == 'Paypal'">{{payment.proff}}</td>
+                    <td v-else><a :href="url + '/storage/proffs/' + payment.proff"  class="btn btn-bd" download style="min-width: 40px"><i class="fas fa-download"></i></a></td>
                 </tr>
-
+               
             </table>
        </div>
    </div>
@@ -126,12 +141,38 @@
         {
            return{
                 loading: false,
-                editPayment: false
+                editPayment: false,
+                bankinfomissing: false
            }
         },
         methods: {
+            payoutBank()
+            {
+                if(!this.authuser.bank_name || !this.authuser.account_number || !this.authuser.routing_number)
+                {
+                        this.bankinfomissing = true
+                }
+                else
+                {
+                    this.loading = true
+                    axios.post(this.url +'/post/payout-via-bank')
+                    .then(response => {
+                        this.loading = false
+                        this.$swal({
+                            position: 'bottom-end',
+                            icon: 'success',
+                            title: 'Your Request has successfully been recieved. We will notify you once your payment is sent.',
+                            showConfirmButton: false,
+                            timer: 2500
+                        });
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
 
-        },
+                }
+            }
+        },  
         created()
         {
             this.$store.commit('setPaypal', this.authuser.profile.paypal)
@@ -139,3 +180,15 @@
         }
     }
 </script>
+<style lang="sass" scoped>
+    .btn-bd
+        border: 1px solid red
+        border: 2px solid #2574bc
+        border-radius: 20px
+        color: #2574bc
+    .flexit
+        display: flex
+        justify-content: space-between
+        flex-wrap: wrap
+        align-items: center
+</style>

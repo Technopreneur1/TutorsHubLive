@@ -10,8 +10,11 @@
 
     <div class="search">
       <div class="row">
+        <div style="margin: 10px 15px" >
+            <a class="btn btn-primary" href="{{ $type == 'Tutors' ?  route('export.tutors') : route('export.students')}}">Export</a>
+        </div>
         <div class="col-md-4 col-xs-8">
-          <form action="{{ $type == 'tutors' ?  route('admin.tutors') : route('admin.students')}}">
+          <form action="{{ $type == 'Tutors' ?  route('admin.tutors') : route('admin.students')}}">
             <div class="form-group">
               @if (!request()->country &&  !request()->state && !request()->city)
                 {{-- <label for="">Country</label> --}}

@@ -16,7 +16,25 @@
 </template>
 <script>
     export default {
-        props: ['url', 'plans', 'authuser', 'user'],
+        // props: ['url', 'plans', 'authuser', 'user'],
+        props: {
+            url: 
+            {
+              type: String
+            },    
+            plans: 
+            {
+              type: Array
+            },    
+            authuser: 
+            {
+              type: Object
+            },    
+            user: 
+            {
+              type: Object
+            },    
+        },
         data()
         {
            return{

@@ -4,18 +4,34 @@ namespace App\Http\Controllers;
 
 use App\Earning;
 use App\Payment;
-use Illuminate\Http\Request;
-use PayPal\Auth\OAuthTokenCredential;
-use PayPal\Rest\ApiContext;
 use PayPal\Api\Payout;
-use PayPal\Api\PayoutSenderBatchHeader;
-use PayPal\Api\PayoutItem;
 use PayPal\Api\Currency;
+use PayPal\Api\PayoutItem;
+use PayPal\Rest\ApiContext;
+use App\Mail\PaymentRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use PayPal\Auth\OAuthTokenCredential;
+use PayPal\Api\PayoutSenderBatchHeader;
+use App\Mail\PaymentRequestConfirmation;
 
 class PaymentController extends Controller
 {
     //
 
+
+    public function requestBank()
+    {
+        if(auth()->user()->country->name == 'United States')
+        {
+                $currency = "USD";
+        }else{
+                 $currency = "CAD";
+        }
+        Mail::to('info@tutors-hub.com')->send(new PaymentRequest(auth()->user(), Earning::balance(auth()->user()->profile), $currency));
+        Mail::to(auth()->user()->email)->send(new PaymentRequestConfirmation(auth()->user(), Earning::balance(auth()->user()->profile), $currency));
+        return response()->json(['msg' => 'success']);
+    }
 
     public function index()
     {
@@ -38,10 +54,10 @@ class PaymentController extends Controller
     {
 
 
-        $profile = auth()->user()->profile;
-        $id = $profile->id;
-        $paypal_id = $profile->paypal;
-        $balance = Earning::balance($profile);
+        $user = auth()->user();
+        $id = $user->profile->id;
+        $paypal_id = $user->paypal;
+        $balance = Earning::balance($user->profile);
 
         if(!$paypal_id)
         {
@@ -112,7 +128,8 @@ class PaymentController extends Controller
                 Payment::create([
                     'teacher_id' => $id,
                     'amount' => $balance,
-                    'proff' => $activityid
+                    'proff' => $activityid,
+                    'type' => 'Paypal'
                 ]);
 
                 return redirect()->back()->with(['message' => ' Transaction Successful .. ! Payment has been sent to your PayPal Account.']);
@@ -142,7 +159,8 @@ class PaymentController extends Controller
         Payment::create([
             'teacher_id' => $request->teacher,
             'amount' => $request->amount,
-            'proff' => $name
+            'proff' => $name,
+            'type' => 'Bank Transfer'
         ]);
 
 

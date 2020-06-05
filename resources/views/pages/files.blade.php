@@ -8,6 +8,13 @@ My Files
             <div class="title">My Files</div>
             <div class="row">
                 <div class="col-lg-8 offset-lg-2">
+                    @if (auth()->user()->type == 'teacher' && !auth()->user()->verified && (auth()->user()->profile->background_check || auth()->user()->profile->resume || auth()->user()->profile->identity))
+                        <a href="{{route('myfiles')}}" style="display: block">
+                            <div  class="alert alert-info text-center">
+                                Thanks For uploading all files. After verifying your documents we will assign you the verified badge.
+                            </a>
+                        </div>
+                    @endif
                     <table class="table">
                         <tbody>
                             <tr>

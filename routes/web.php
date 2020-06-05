@@ -25,6 +25,7 @@ Route::get('/', 'PagesController@index')->name('home');
 
 // Route::get('/', 'PagesController@index')->name('home')->middleware('verified', 'CheckBanned');
 Route::get('/contact', 'PagesController@contact')->name('contact');
+Route::get('/plans', 'PagesController@plans')->name('plans')->middleware('auth', 'verified', 'CheckBanned');
 Route::get('/my-files', 'PagesController@myFiles')->name('myfiles');
 Route::post('/contact', 'PagesController@postContact')->name('contact.post');
 Route::get('/privacy-policy', 'PagesController@privacy')->name('privacy');
@@ -100,7 +101,7 @@ Route::post('/conversation/send', 'ContactsController@send');
 Route::post('/check/hasConversation', 'ContactsController@hasConversationWith');
 Route::post('/check/doILike', 'UserController@doILike');
 
-
+Route::post('/post/payout-via-bank', 'PaymentController@requestBank');
 
 
 // Route::get('/testadmin', function () {
@@ -292,11 +293,16 @@ Route::post('/check/doILike', 'UserController@doILike');
 
     // Route::get('/adminpanel', 'AdminController@adminpanel')->name('adminpanel');
 
+Route::get('/export/payments/{id}', 'ExportController@userPayments')->name('export.userPayments')->middleware('auth');
 Route::prefix('adminpanel')->middleware(['admin'])->group(function () {
 
     Route::get('/', 'AdminController@adminpanel')->name('adminpanel');
     Route::get('/contact/{id}/{ticket}', 'AdminController@contact')->name('admin.contact');
-
+    
+    Route::get('/export/tutors', 'ExportController@tutors')->name('export.tutors');
+    Route::get('/export/students', 'ExportController@students')->name('export.students');
+    Route::get('/export/sessions', 'ExportController@sessions')->name('export.sessions');
+    Route::get('/export/ads', 'ExportController@ads')->name('export.ads');
     Route::get('/tutors', 'AdminController@teachers')->name('admin.tutors');
     Route::get('/tutors/banned', 'AdminController@bannedTutors')->name('admin.tutors.banned');
     Route::get('/students', 'AdminController@students')->name('admin.students');

@@ -86,6 +86,16 @@ class PagesController extends Controller
         return view('pages.contactmsg', ['ticket' => $ticket]);
     }
 
+    public function plans()
+    {
+        if(auth()->user()->type == 'teacher')
+        {
+            
+            return view('pages.user.plans');
+        }else {
+            abort(404);
+        }
+    }
 
     public function messages(Request $request)
     {
