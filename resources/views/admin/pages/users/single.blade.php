@@ -278,7 +278,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-5 hidden">
+
+                    <div class="col-md-5 ">
                         <div class="box">
                             <div class="box-header">
 
