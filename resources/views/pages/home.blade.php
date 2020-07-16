@@ -70,7 +70,7 @@
     </div>
     <div id="app"  class="homepage">
         <register-form url="{{route('home')}}" ></register-form>
-        
+
         <section class="hiw">
             <div class="fsec">
                 <div class="container">
@@ -93,7 +93,7 @@
             </div>
             <div class="fsec">
                 <div class="container">
-                    
+
                     <div class="row rev">
                         <div class="col-md-5">
                             <div class="image">
@@ -112,7 +112,7 @@
             </div>
             <div class="fsec">
                 <div class="container">
-                    
+
                     <div class="row">
                         <div class="col-md-7">
                             <div class="data">
@@ -150,7 +150,7 @@
             </div>
             <div class="fsec">
                 <div class="container">
-                    
+
                     <div class="row">
                         <div class="col-md-7">
                             <div class="data">
@@ -185,7 +185,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </section>
     </div>
 @endsection

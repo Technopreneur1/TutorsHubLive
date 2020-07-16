@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use auth;
 use App\User;
+use App\Plan;
+use App\Location;
+use App\Discipline;
+use App\Level;
 use App\Favorite;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -13,7 +17,7 @@ class UserController extends Controller
 {
     //
 
-    
+
     public function getUserInfo()
     {
         $user = User::with(['state', 'city', 'neighborhood', 'country'])->find(auth()->id());
@@ -31,7 +35,7 @@ class UserController extends Controller
     }
 
 
-    
+
     public function updateLatLng(Request $request)
     {
         $user = auth()->user()->update([
@@ -41,8 +45,15 @@ class UserController extends Controller
         return response()->json(['msg' => "success"]);
     }
 
+    public function updateLocation(Request $request)
+    {
+        $user = auth()->user()->update([
+            'latitude' => $request->lat,
+            'longitude' => $request->lng,
+        ]);
+        return response()->json(['msg' => "success"]);
+    }
 
-    
     public function postFavorite(Request $request)
     {
         $user = User::findOrFail($request->id);
@@ -54,7 +65,7 @@ class UserController extends Controller
         }
         $like = Favorite::create(['user_id' => auth()->id(), 'target_id' => $request->id]);
         return response()->json(['status' => 'liked']);
-        
+
     }
     public function profile()
     {
@@ -76,7 +87,7 @@ class UserController extends Controller
             return view('pages.user.profile',  ['user' => $user, 'likes' => 0]);
         }
         return abort(404);
-        
+
     }
 
     public function userProfile($id)
@@ -100,10 +111,10 @@ class UserController extends Controller
         $likes = Favorite::where('user_id', auth()->id())->where('target_id', $user->id)->count();
         return view('pages.user.profile',  ['user' => $user, 'profile' => $profile, 'likes' => $likes]);
     }
-    
+
     public function doILike(Request $request)
     {
-        
+
         $likes = Favorite::where('user_id', auth()->id())->where('target_id', $request->id)->count();
         return response()->json([
             'status' => $likes
@@ -141,8 +152,8 @@ class UserController extends Controller
         {
             $message = "Incorrect Password";
         }
-        
-        
+
+
         return response()->json(['message' => $message]);
 
     }
@@ -154,11 +165,11 @@ class UserController extends Controller
         // store locally
         $name =  auth()->id() . "_avatar" . auth()->id() . uniqid(true) . '.jpg';
         Storage::put('public/images/' . $name, $image);
-        
+
         $user = User::findOrFail(auth()->id())->update(['avatar' => $name]);
 
         return response()->json(['avatar' => $name]);
-    
+
     }
 
     public function ban($id)
@@ -174,6 +185,100 @@ class UserController extends Controller
         }
         session()->flash('message', 'User Successfully Banned');
         return back();
+    }
+     public function search_locations(Request $request){
+        // dd($request->all());
+
+       $subject = $request->get('subject');
+       $location = $request->get('location');
+       $lat = $request->get('lat');
+       $lng = $request->get('lng');
+
+
+       if ($subject== 'All') {
+            $results =  Plan::join('disciplines', 'plans.discipline_id', '=', 'disciplines.id')
+            ->join('teachers', 'plans.teacher_id', '=', 'teachers.id')
+            ->join('users', 'teachers.user_id', '=', 'users.id')
+            ->select('plans.*',  'disciplines.name AS subject_name', 'teachers.*', 'users.*')
+            ->where('users.longitude', $lng)
+            ->where('users.latitude', $lat)
+            ->get();
+        }else {
+            $results =  Plan::join('disciplines', 'plans.discipline_id', '=', 'disciplines.id')
+            ->join('teachers', 'plans.teacher_id', '=', 'teachers.id')
+            ->join('users', 'teachers.user_id', '=', 'users.id')
+            ->select('plans.*',  'disciplines.name AS subject_name', 'teachers.*', 'users.*')
+            ->where('users.longitude', $lng)
+            ->where('users.latitude', $lat)
+            ->where('plans.discipline_id', $subject)
+            ->get();
+       }
+       $data = json_decode($results);
+
+            return view('pages.search.tutor1')->with('data', $data);
+
+    }
+
+
+    function Viewtutor($id)
+    {
+        $locations =  Location::
+        select('locations.name AS location_name','locations.id AS location_id' )
+        ->get();
+        $disciplines =  Discipline::
+        select('disciplines.name AS disciplines_name','disciplines.id AS disciplines_id' )
+        ->get();
+
+        $levels =  Level::
+        select('levels.name AS levels_name','levels.id AS levels_id' )
+        ->get();
+
+        $results =  Plan::where('users.id', $id)->join('disciplines', 'plans.discipline_id', '=', 'disciplines.id')
+        ->join('teachers', 'plans.teacher_id', '=', 'teachers.id')
+        ->join('users', 'teachers.user_id', '=', 'users.id')
+        ->select('plans.*',  'disciplines.name AS subject_name', 'teachers.*', 'users.*')
+        ->get();
+
+        $data = json_decode($results);
+        $location = json_decode($locations);
+
+        return view('pages.search.viewtutor')->with('data', $data)->with('location',$location)->with('disciplines',$disciplines)->with('levels',$levels);
+
+
+    }
+
+    public function profiles(Request $request, User $users){
+
+        // $this->validate($request,array(
+        //     'name'       => 'required',
+        //     'email'         =>'required',
+        //     'phone'       => 'required',
+        //     'gender'         =>'required',
+        //     'location_id'       => 'required',
+        //     'levels_id'         =>'required',
+        //     'disciplines_name'       => 'required',
+        //     'password'         =>'required',
+        //     'cnfrm_password'       => 'required|same:password',
+
+        // ));
+
+        $users->name = $request->get('name');
+        $users->email = $request->get('email');
+        $users->phone = $request->get('phone');
+        $users->gender = $request->get('gender');
+        $users->country_id = $request->get('location_id');
+       // $users->level_id = $request->get('levels_id');
+        $users->type = $request->get('disciplines_id');
+        $users->password = Hash::make($request->get('password'));
+
+        $data = $users->save();
+        if (!empty($data)) {
+            return Redirect()->back()->with('message','Record has been updated successfully!');
+        }else
+        {
+            return Redirect()->back()->with('message','Failed! Try Again');
+        }
+
     }
 
     public function verify($id)

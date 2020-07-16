@@ -39,16 +39,26 @@ Route::get('/profile', 'UserController@profile')->name('profile')->middleware('a
 Route::get('/my-ads', 'AdController@myAds')->name('myAds')->middleware('auth', 'verified', 'CheckBanned');
 Route::get('/favorites', 'FavoriteController@index')->name('favorites')->middleware('auth', 'verified', 'CheckBanned');
 Route::get('/sessions', 'SessionController@index')->name('sessions')->middleware('auth', 'verified', 'CheckBanned');
+Route::get('/request-agora-session/{id}', 'SessionController@requestagorasession');
+Route::get('/request-agora-session-student/{id}', 'SessionController@requestagorasessionstudent');
+Route::get('/request-agora-session-hours/{id}', 'SessionController@requestagorasessionhours');
+Route::get('/class-status/{id}', 'SessionController@update_class_status');
 
 Route::get('/payments', 'PaymentController@index')->name('payments')->middleware('auth', 'verified', 'CheckBanned');
 Route::get('/payout', 'PaymentController@getpayout');
 
 Route::get('/user/{id}', 'UserController@userProfile')->name('userProfile')->middleware('auth', 'verified', 'CheckBanned');
+Route::post('/search_location', 'UserController@search_locations');
+Route::get('/search_location', 'UserController@search_locations');
+// Route::get('/', 'UserController@get_subject')->name('subject');
+Route::get('/Viewtutor/{id}', 'UserController@Viewtutor')->name('Viewtutor');
+Route::post('/add-register', 'UserController@profiles')->name('add-register');
 
 // Find Tutors
 Route::get('/find', 'TeacherController@index')->name('findTutors')->middleware('auth', 'verified', 'CheckBanned');
 
 Route::post('/complete/booking', 'SessionController@pay')->middleware('auth', 'verified', 'CheckBanned');
+Route::post('/complete/sessionrequest', 'SessionController@sessionrequest')->middleware('auth', 'verified', 'CheckBanned');
 // ============== GET DATA =====================
 Route::post('/get/levels', 'LevelController@getAll');
 Route::post('/get/disciplines', 'DisciplineController@getDisciplines');
@@ -60,6 +70,7 @@ Route::post('/get/countries', 'LocationController@getCountries');
 Route::post('/get/states', 'LocationController@getStates');
 Route::post('/get/cities', 'LocationController@getCities');
 Route::post('/get/neighborhoods', 'LocationController@getNeighborhoods');
+Route::get('/settings', 'PagesController@settings')->name('settings')->middleware('auth', 'verified');
 
 Route::post('/get/min-wage', 'TeacherController@getMinWage');
 
@@ -77,8 +88,11 @@ Route::post('post/plan', 'PlanController@post');
 Route::post('post/avatar', 'UserController@postAvatar');
 Route::post('post/complete-session', 'SessionController@complete');
 Route::post('post/cancel-session', 'SessionController@postCancel');
+Route::post('post/accept-session', 'SessionController@postaccept');
+Route::post('post/start-session', 'SessionController@startsession');
 Route::post('post/review', 'SessionController@postReview');
 Route::post('/post/long-lat', 'UserController@updateLatLng');
+Route::post('/update/long-lat', 'UserController@updateLocation');
 
 
 Route::post('update/location', 'LocationController@updateUserLocation');

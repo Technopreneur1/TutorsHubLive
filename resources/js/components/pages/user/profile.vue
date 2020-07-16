@@ -15,7 +15,7 @@
             <div v-if="editAvatar" class="cropbox">
                 <div class="title">Update Profile Picture</div>
                 <div v-if="!cropped" class="canv">
-                    <cropper 
+                    <cropper
                         classname="cropper"
                         :src="img"
                         :stencil-props="{
@@ -48,10 +48,10 @@
                         <div v-else class="name">{{user.name}}  <span v-if="user.verified" class="verified"><i class="fas fa-check"></i></span> <span></span> </div>
                         <div class="role">{{user.type == 'teacher' ? 'Tutor' : user.type}} {{user.gender ? ' | ' + user.gender : ''}}</div>
                         <div class="rating">
-                        <i class="fas fa-star"></i><span> {{rating}} / 5</span> 
+                        <i class="fas fa-star"></i><span> {{rating}} / 5</span>
                         </div>
                     </div>
-                    
+
                 </div>
                 <div class="location">
                     <span class="icon"><i class="fas fa-map-marker-alt"></i></span>
@@ -70,14 +70,14 @@
                     <button @click="contact(user.id)" class="btn"><i class="fas fa-comment"></i> Message</button>
                 </div>
             </div>
-           
+
             <div v-if="user.profile.bio" class="bio">
                 {{outputBio(user.profile.bio)}}
             </div>
-            
+
             <div v-if="user.type == 'teacher'" class="plans-section">
                 <div class="newrow" style="background: #fff"><span>My Plans</span></div>
-                <plans v-if="user.profile.plans.length" :url="url" :plans="user.profile.plans" :authuser="authuser"  @book="bookNow" :user="user"></plans>   
+                <plans v-if="user.profile.plans.length" :url="url" :plans="user.profile.plans" :authuser="authuser"  @book="bookNow" :user="user"></plans>
                 <div class="text-center" v-else >No Plan Available. <span v-if="!isUser"> please contact the tutor</span></div>
             </div>
 
@@ -172,9 +172,9 @@
                     </div>
                 </div>
             </div>
-         
+
         </div>
-            
+
 
 
     </div>
@@ -225,7 +225,7 @@ import { type } from 'os'
            }
         },
         computed: {
-            
+
             type()
             {
                 if(this.user.type == 'teacher')
@@ -268,7 +268,7 @@ import { type } from 'os'
         methods: {
             outputBio(message)
             {
-            
+
                     var re = /\b[\+]?[(]?[0-9]{2,6}[)]?[-\s\.]?[-\s\/\.0-9]{3,15}\b/m;;
                     let msg = message
                     let phoneText = []
@@ -279,7 +279,7 @@ import { type } from 'os'
                         console.log('bio: ' + msg)
                     }
                     return this.finalBio(msg)
-                    
+
             },
             finalBio(message)
             {
@@ -392,7 +392,7 @@ import { type } from 'os'
             console.log(coordinates, canvas)
             this.image = canvas.toDataURL()
 		    },
-           
+
             addToFav()
             {
                 this.loading = true
@@ -424,7 +424,7 @@ import { type } from 'os'
         //         .then(response => {
         //             console.log(response)
         //             this.user = response.data.user
-                    
+
         //         })
         //         .catch(error => {
         //             console.log(error);
@@ -435,11 +435,11 @@ import { type } from 'os'
                 alert("You will able to delete profile when website is public")
             }
         },
-        
+
         mounted()
         {
             // this.getUserInfo()
-                
+
         },
     }
 </script>

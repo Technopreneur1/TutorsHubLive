@@ -7,11 +7,11 @@
                 <div class="title">Register as a student</div>
                 <div class="note">Fill the form to get started quickly</div>
             </div>
-            <div v-if="step == 1" class="newrow"><span style="background: #fff">Personal Information</span></div>
-            <div v-if="step == 2" class="newrow"><span style="background: #fff">Location</span></div>
-            <div v-if="step == 3" class="newrow"><span style="background: #fff">Study Information</span></div>
-            
-            <div v-if="step == 1" class="step step1">
+            <div v-if="step == 2" class="newrow"><span style="background: #fff">Personal Information</span></div>
+            <div v-if="step == 3" class="newrow"><span style="background: #fff">Location</span></div>
+            <div v-if="step == 4" class="newrow"><span style="background: #fff">Study Information</span></div>
+
+            <div v-if="step == 2" class="step step1">
                 <div class="input">
                     <label for="">Full Name</label>
                     <input type="text" v-model="student.name" placeholder="John Doe.">
@@ -33,30 +33,34 @@
                         <option value="Prefer Not To Say">Prefer Not To Say</option>
                     </select>
                 </div>
-            </div>
-            <div v-if="step == 2" class="step step2">
                 <div class="input">
                     <label for="">Country</label>
                     <Select2 v-model="student.country" :options="countries" @change="countrySelected()" />
                 </div>
-                <div v-show="states.length" class="input">
-                    <label for="">State / Province</label>
-                    <Select2 v-model="student.state" :options="states" @change="stateSelected()"  />
-                </div>
-                <div v-show="cities.length" class="input">
-                    <label for="">City</label>
-                    <Select2 v-model="student.city" :options="cities" @change="citySelected()"  />
-                </div>
-                <div v-show="neighborhoods.length" class="input">
-                    <label for="">Neighborhood</label>
-                    <Select2 v-model="student.neighborhood" :options="neighborhoods"   />
-                </div>
-                
-                <div v-if="student.neighborhood == -1" class="input">
-                    <label for="">Neighbourhood Name &nbsp; <small>Make sure neighbourhood name is correct and avoid spellings mistakes</small></label>
-                    <input type="text" class="input" v-model="student.new_neighborhood" placeholder="Neighbourhood">
-                </div>
             </div>
+<!--            <div v-if="step == 2" class="step step2">-->
+<!--                <div class="input">-->
+<!--                    <label for="">Country</label>-->
+<!--                    <Select2 v-model="student.country" :options="countries" @change="countrySelected()" />-->
+<!--                </div>-->
+<!--&lt;!&ndash;                <div v-show="states.length" class="input">&ndash;&gt;-->
+<!--                    <label for="">State / Province</label>-->
+<!--                    <Select2 v-model="student.state" :options="states" @change="stateSelected()"  />-->
+<!--                </div>-->
+<!--                <div v-show="cities.length" class="input">-->
+<!--                    <label for="">City</label>-->
+<!--                    <Select2 v-model="student.city" :options="cities" @change="citySelected()"  />-->
+<!--                </div>-->
+<!--                <div v-show="neighborhoods.length" class="input">-->
+<!--                    <label for="">Neighborhood</label>-->
+<!--                    <Select2 v-model="student.neighborhood" :options="neighborhoods"   />-->
+<!--                </div>-->
+
+<!--                <div v-if="student.neighborhood == -1" class="input">-->
+<!--                    <label for="">Neighbourhood Name &nbsp; <small>Make sure neighbourhood name is correct and avoid spellings mistakes</small></label>-->
+<!--                    <input type="text" class="input" v-model="student.new_neighborhood" placeholder="Neighbourhood">-->
+<!--                </div>-->
+<!--            </div>-->
             <div v-if="step == 3" class="step step2">
                 <div class="input">
                     <label for="">Level</label>
@@ -65,7 +69,7 @@
                         <option v-for="level in levels" :key="level.id"  :value="level.id">{{level.name}}</option>
                     </select>
                 </div>
-                
+
                 <div class="input">
                     <label for="">Discipline</label>
                     <select v-model="student.discipline" id="">
@@ -73,8 +77,8 @@
                         <option v-for="discipline in disciplines" :key="discipline.id"  :value="discipline.id">{{discipline.name}}</option>
                     </select>
                 </div>
-                
-                
+
+
             </div>
             <div v-if="step == 4" class="step step3">
                 <div class="input">
@@ -86,7 +90,7 @@
                     <input  type="password" v-model="student.password_confirmation" placeholder="Repeat Password">
                 </div>
                 <label for="age" style="display: block; text-align: left; color: #000;" ><input id="age" v-model="student.confirm_age" type="checkbox"> &nbsp; I am 18 or older</label>
-                <label for="prv" style="display: block; text-align: left; color: #000;"><input id="prv" v-model="student.agree" type="checkbox"> &nbsp; I agree to the <a :href="url + '/terms-and-conditions'" target="_blank">Terms &amp; services</a> &amp; <a :href="url + '/privacy-policy'"  target="_blank">Privacy policy</a></label>
+                <label for="prv" style="display: block; text-align: left; color: #000;"><input id="prv" v-model="student.agree" type="checkbox"> &nbsp; I agree to the <a :href="'https://tutors-hub.com/terms-and-conditions'" target="_blank">Terms &amp; services</a> &amp; <a :href="'https://tutors-hub.com/privacy-policy'"  target="_blank">Privacy policy</a></label>
             </div>
             <div v-if="error" class="error-bar">{{error}}</div>
             <div class="options">
@@ -97,10 +101,10 @@
         </div>
         <div v-else class="full-container">
             <div class="regmsg animated zoomIn">
-                <div class="suc">Done!</div> 
+                <div class="suc">Done!</div>
                 <div class="txt">Your account has successfully been created</div>
                 <div class="btns">
-                    <a :href="url + '/login'" class="btn btn-log">Login Now</a>
+                    <a :href="'http://localhost:8000/login'" class="btn btn-log">Login Now</a>
                 </div>
             </div>
         </div>
@@ -114,7 +118,7 @@
     .input
         text-align: left
         label
-            color: #000   
+            color: #000
 </style>
 <style lang="sass">
     .select2-container
@@ -129,7 +133,7 @@ import Select2 from 'v-select2-component';
             return {
                     hasRegistered: false,
                     loading: false,
-                    step: 1,
+                    step: 2,
                     error: '',
                     levels: [],
                     disciplines: [],
@@ -159,7 +163,7 @@ import Select2 from 'v-select2-component';
         },
         components: {Select2},
         methods: {
-            isEmail(email) 
+            isEmail(email)
             {
                 var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,5})+$/;
                 if(email.match(mailformat))
@@ -176,33 +180,33 @@ import Select2 from 'v-select2-component';
             postStudent()
             {
                 this.loading = true
-                axios.post(this.url +'/post/student', {
+                axios.post('https://tutors-hub.com/post/student', {
                     name: this.student.name,
                     email: this.student.email,
                     password: this.student.password,
                     phone: this.student.phone,
                     country: this.student.country,
                     level: this.student.level,
-                    lat: this.lat,
-                    lng: this.lng,
+                   // lat: this.lat,
+                    //lng: this.lng,
                     discipline: this.student.discipline,
                     gender: this.student.gender,
-                    state: this.student.state,
-                    city: this.student.city,
-                    neighborhood: this.student.neighborhood,
-                    new_neighborhood: this.student.new_neighborhood,
+                    state: '111',
+                    city: '111',
+                    neighborhood: '111',
+                    new_neighborhood: '222',
                 })
                 .then(response => {
                     if(response.data.error == "email")
                     {
-                        this.error = "Email is already registered. Please Login" 
-                        this.step = 1
+                        this.error = "Email is already registered. Please Login"
+                        this.step = 2
                         this.loading = false
                     }
                     else if(response.data.error == "phone")
                     {
-                        this.error = "Phone Number is already registered. Please Login" 
-                        this.step = 1
+                        this.error = "Phone Number is already registered. Please Login"
+                        this.step = 2
                         this.loading = false
                     }else
                     {
@@ -260,7 +264,7 @@ import Select2 from 'v-select2-component';
             },
             canContinue()
             {
-                if(this.step == 1){
+                if(this.step == 2){
                     if(this.student.phone && this.student.name && this.student.email && this.student.gender)
                     {
                         if(this.isEmail(this.student.email))
@@ -275,15 +279,15 @@ import Select2 from 'v-select2-component';
                         return false
                     }
                 }
-                if(this.step == 2){
-                    if(this.student.country && this.student.state && this.student.city && (this.student.neighborhood > 0 || this.student.new_neighborhood))
-                    {
-                        return true;
-                    }else{
-                        this.error = "Please complete your address to continue"
-                        return false
-                    }
-                }
+                // if(this.step == 2){
+                //     if(this.student.country && this.student.state && this.student.city && (this.student.neighborhood > 0 || this.student.new_neighborhood))
+                //     {
+                //         return true;
+                //     }else{
+                //         this.error = "Please complete your address to continue"
+                //         return false
+                //     }
+                // }
                 if(this.step == 3){
                     if(this.student.level && this.student.discipline)
                     {
@@ -325,7 +329,7 @@ import Select2 from 'v-select2-component';
             {
                 // if(this.type == 'student')
                 // {
-                    if(this.step > 1)
+                    if(this.step > 2)
                     {
                         this.step--;
                     }
@@ -338,7 +342,7 @@ import Select2 from 'v-select2-component';
             },
             getLevels()
             {
-                axios.post(this.url +'/get/levels')
+                axios.post('https://tutors-hub.com/get/levels')
                 .then(response => {
                     this.levels = response.data.levels
                 })
@@ -348,7 +352,7 @@ import Select2 from 'v-select2-component';
             },
             getDisciplines()
             {
-                axios.post(this.url +'/get/disciplines')
+                axios.post('https://tutors-hub.com/get/disciplines')
                 .then(response => {
                     this.disciplines = response.data.disciplines
                 })
@@ -361,7 +365,7 @@ import Select2 from 'v-select2-component';
                 this.states = []
                 this.cities = []
                 this.neighborhoods = []
-                axios.post(this.url +'/get/countries')
+                axios.post('https://tutors-hub.com/get/countries')
                 .then(response => {
                     this.countries = response.data.countries
                     this.countries.map(function (obj) {
@@ -372,11 +376,11 @@ import Select2 from 'v-select2-component';
                     console.log(error);
                 })
             },
-            
+
             getStates()
             {
 
-                axios.post(this.url +'/get/states', {country: this.student.country})
+                axios.post('https://tutors-hub.com/get/states', {country: this.student.country})
                 .then(response => {
                     console.log(response)
                     this.states = response.data.states
@@ -390,7 +394,7 @@ import Select2 from 'v-select2-component';
             },
             getCities()
             {
-                axios.post(this.url +'/get/cities', {state: this.student.state})
+                axios.post('https://tutors-hub.com/get/cities', {state: this.student.state})
                 .then(response => {
                     this.cities = response.data.cities
                     this.cities.map(function (obj) {
@@ -403,7 +407,7 @@ import Select2 from 'v-select2-component';
             },
             getNeighborhoods()
             {
-                axios.post(this.url +'/get/neighborhoods', {city: this.student.city})
+                axios.post('https://tutors-hub.com/get/neighborhoods', {city: this.student.city})
                 .then(response => {
                     this.neighborhoods = response.data.neighborhoods
                     this.neighborhoods.map(function (obj) {
@@ -421,10 +425,10 @@ import Select2 from 'v-select2-component';
         },
         mounted()
         {
+
             this.getDisciplines()
             this.getLevels()
             this.getCountries()
-            // this.getNeighborhoods()
         }
     }
 </script>

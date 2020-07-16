@@ -5,7 +5,7 @@
         <!-- <transition  name="easy-appear" enter-active-class="animated slideInLeft" leave-active-class="animated slideOutLeft"> -->
         <div v-if="showThanks" class="showThanks">
             <div class="thnaku">Thanks</div>
-            <div class="pleaced">Your session has successfuly been booked with <a :href="url+ '/user/' + user.id">{{user.name}}</a></div>
+            <div class="pleaced">Your session has successfuly been requested with <a :href="url+ '/user/' + user.id">{{user.name}}</a></div>
             <div class="adv">You can <a :href="url + '/messages?u=' + user.id">message</a> {{user.name}} for more details.</div>
             <div class="links">
                 <div class="gradient-btn"><a :href="url"><i class="fas fa-Home"></i> Back To Home</a></div>
@@ -47,9 +47,28 @@
                         </select>
                     </div>
                 </div>
+                <div class="dte">
+                    <div class="input">
+                        <label for="">Select Date & Time</label>
+                        <datetime type="datetime" v-model="dte" format="yyyy-MM-dd HH:mm:ss"></datetime>
+
+                    </div>
+                </div>
+                <div class="sessiontype">
+                    <div class="input">
+                        <label for="">Select Type</label>
+                        <select v-model="sessiontype">
+                            <option value="Online">Online</option>
+                            <option value="In Person">In Person</option>
+
+                        </select>
+                    </div>
+                </div>
                 <div class="total"> <span class="name">= </span> <span>${{total}} <small>{{currency}}</small></span></div>
                 <div v-show="!loading" class="btns" style="width: 300px; max-with: 90%; margin: 0 auto">
-                   <div  ref="paypal"></div>
+<!--                              <div  ref="paypal"></div>-->
+                    <button @click="requestSession()" class="btn-book">Request Session</button>
+
                 </div>
             </div>
 
@@ -57,64 +76,70 @@
     </div>
 </template>
 <style lang="sass" scoped>
-    .showThanks
-        padding: 10px
-        text-align: center
-        .thnaku
-            font-size: 35px
-        .pleaced
-            font-size: 22px
-        .adv
-            font-size: 14px
-        .links
+    .btn-book
+        border: none
+        width: 125px
+        background: #2575bc
+        color: #ffffff
+        border-radius: 4px
+        .showThanks
+            padding: 10px
+            text-align: center
+            .thnaku
+                font-size: 35px
+            .pleaced
+                font-size: 22px
+            .adv
+                font-size: 14px
+            .links
+                display: flex
+                justify-content: center
+                padding: 20px 0
+                .btn-opt
+                    background: red
+                    color: #fff
+
+        .book-section
             display: flex
             justify-content: center
-            padding: 20px 0
-            .btn-opt
-                background: red
-                color: #fff
 
-    .book-section
-        display: flex
-        justify-content: center
-        
 
-        .bookingform
-            width: 500px
-            max-width: 100%
-            .heading
-                margin-bottom: 20px
-                font-size: 25px
-                text-align: center
-                font-weight: bold
-            .info
-                table
-                    background: #fdfdfd
-                    width: 100%
-                    tr
-                        td
-                            padding: 5px 15px
-            .hours
-                margin: 20px 0 10px
-                text-align: center
-                .input
-                    max-width: 300px
-                    margin: 0 auto
-            .total
-                font-size: 40px
-                font-weight: bold
-                text-align: center
-                display: flex
-                flex-direction: column
-                align-items: center
-                justify-content: center
-                .name
-                    margin-bottom: -10px
-                    font-size: 47px
+            .bookingform
+                width: 500px
+                max-width: 100%
+                .heading
+                    margin-bottom: 20px
+                    font-size: 25px
+                    text-align: center
                     font-weight: bold
-                    line-height: 26px
+                .info
+                    table
+                        background: #fdfdfd
+                        width: 100%
+                        tr
+                            td
+                                padding: 5px 15px
+                .hours,.dte, .sessiontype
+                    margin: 20px 0 10px
+                    text-align: center
+                    .input
+                        max-width: 300px
+                        margin: 0 auto
+                .total
+                    font-size: 40px
+                    font-weight: bold
+                    text-align: center
+                    display: flex
+                    flex-direction: column
+                    align-items: center
+                    justify-content: center
+                    .name
+                        margin-bottom: -10px
+                        font-size: 47px
+                        font-weight: bold
+                        line-height: 26px
 
-                    
+
 </style>
 
 <script>
@@ -132,19 +157,20 @@
 
         },
         data()
-        { 
-           return{
-               loading: false,
-               showThanks: false,
-               success: '',
-               hours: 1,
-               loaded: false,
-               paidFor: false,
-               product: {
-                   price: 777.77
-               },
+        {
+            return{
+                loading: false,
+                showThanks: false,
+                success: '',
+                hours: 1,
+                sessiontype:'Online',
+                loaded: false,
+                paidFor: false,
+                product: {
+                    price: 777.77
+                },
 
-           }
+            }
         },
         computed: {
             currency()
@@ -158,7 +184,7 @@
                     return "CAD"
                 }
             },
-            total() 
+            total()
             {
                 return this.plan.rate * this.hours
             }
@@ -172,7 +198,7 @@
                 window.paypal.Buttons({
                     createOrder: (data, actions) => {
                         return actions.order.create({
-                            
+
                             purchase_units: [
                                 {
                                     amount: {
@@ -188,30 +214,30 @@
                     },
                     onApprove: function(data, actions) {
                         vob.loading = true
-                    // This function captures the funds from the transaction.
+                        // This function captures the funds from the transaction.
                         return actions.order.capture().then(function(details) {
-                            
-                            axios.post(vob.url +'/complete/booking', 
-                            {
-                                data: data,
-                                subject: vob.plan.discipline.name,
-                                level: vob.plan.level.name,
-                                rate: vob.plan.rate,
-                                hours: vob.hours,
-                                total: vob.total,
-                                teacher: vob.user.profile.id,
-                            })
-                            .then(response => {
-                                vob.showThanks = true;
-                                vob.loading = false
-                            })
-                            .catch(error => {
-                                console.log(error);
-                            })
+
+                            axios.post(vob.url +'/complete/booking',
+                                {
+                                    data: data,
+                                    subject: vob.plan.discipline.name,
+                                    level: vob.plan.level.name,
+                                    rate: vob.plan.rate,
+                                    hours: vob.hours,
+                                    total: vob.total,
+                                    teacher: vob.user.profile.id,
+                                })
+                                .then(response => {
+                                    vob.showThanks = true;
+                                    vob.loading = false
+                                })
+                                .catch(error => {
+                                    console.log(error);
+                                })
                         });
                         // This function shows a transaction success message to your buyer.
-                           
-                    // });
+
+                        // });
                     },
                     style: {
                         layout:  'vertical',
@@ -221,9 +247,31 @@
                     }
                 }).render(this.$refs.paypal)
             },
-           post(data)
+            requestSession(){
+                this.loading = true
+                axios.post(this.url +'/complete/sessionrequest',
+                    {
+                        subject: this.plan.discipline.name,
+                        level: this.plan.level.name,
+                        rate: this.plan.rate,
+                        hours: this.hours,
+                        date: this.dte,
+                        sessiontype: this.sessiontype,
+                        total: this.total,
+                        teacher: this.user.profile.id,
+                    })
+                    .then(response => {
+                        this.showThanks = true;
+                        this.loading = false
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+
+            },
+            post(data)
             {
-               
+
             },
         },
         mounted()

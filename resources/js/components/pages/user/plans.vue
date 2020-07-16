@@ -38,7 +38,7 @@
         data()
         {
            return{
-                
+
            }
         },
         methods: {
@@ -88,7 +88,7 @@
         },
         mounted()
         {
-           
+
         }
     }
 </script>

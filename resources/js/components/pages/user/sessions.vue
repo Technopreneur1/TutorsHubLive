@@ -47,11 +47,16 @@
             <div v-if="authuser.type == 'student' && !viewSession.completed" class="statusbar">
                 <span class="val">Incomplete</span>
                 <span class="txt">Please mark session as <b>completed</b> after it has taken place</span>
-                <button @click="markComplete" class="btn btn-gradientb">Mark as completed</button> &nbsp; OR &nbsp; 
+                <button @click="markComplete" class="btn btn-gradientb">Mark as completed</button> &nbsp; OR &nbsp;
             </div>
             <button v-if="!viewSession.cancel_request && !viewSession.completed" @click="requestCancel" class="btn btn-danger" style="border-radius: 30px">Request To Cancel Session</button>
-            
-             
+            <button v-if="viewSession.accept != '1' && !viewSession.completed && authuser.type != 'student'" @click="requestaccept" class="btn btn-success" style="border-radius: 30px">Accept Session Request</button>
+            <button v-if="viewSession.payment_status == '1' && viewSession.accept == '1' && viewSession.class_status == '0' && !viewSession.cancel_request && !viewSession.startsession && authuser.type != 'student'" @click="startsession" class="btn btn-success" style="border-radius: 30px">Start Session</button>
+            <button v-if="viewSession.payment_status == 1 && viewSession.accept == '1' && viewSession.class_status == 0 && !viewSession.cancel_request && authuser.type == 'student'" @click="startsession" class="btn btn-success" style="border-radius: 30px">Join Session</button>
+
+            <div  ref="paypal"></div>
+
+
 
             <div v-if="viewSession.completed" class="review-section">
                 <div class="heading">Session Reviews</div>
@@ -75,7 +80,7 @@
                     </div>
                 </div>
 
-                
+
                 <div v-if="viewSession.tutor_rating || viewSession.tutor_review" class="review">
                     <div v-if="authuser.type == 'teacher'" class="avatar">
                         <img :src="avatar(viewSession.student.user)" alt="">
@@ -121,6 +126,7 @@
             </div>
 
         </section>
+
         <div v-else class="else">
             <div class="title">My Sessions</div>
             <div v-if="sess.length" class="sessionsList">
@@ -142,7 +148,7 @@
                         </div>
                     </a>
                     <div class="info">
-                        <span class="dt">{{ses.created_at | moment('DD MMM, YYYY')}}</span>
+                        <span class="dt">{{ses.date | moment('DD MMM, YYYY')}}</span>
                         <div class="val"><span>{{ses.level}}</span></div>
                         <div class="val"><span>{{ses.subject}}</span></div>
                     </div>
@@ -150,13 +156,17 @@
                         <div class="status">{{ses.completed ? "Completed" : 'Incomplete'}}</div>
                         <button @click="viewSession = ses" class="btn btn-gradient">Open</button>
                     </div>
+                </div>
+
             </div>
-            </div>
+
             <div v-else class="nothing">
                 No Session
             </div>
         </div>
-   </div>
+
+
+    </div>
 </template>
 <style lang="sass" scoped>
     .sess-header
@@ -231,7 +241,7 @@
     .review-section
         margin: 0 -15px
         padding: 10px
-        
+
         .heading
             text-align: center
             font-size: 24px
@@ -347,14 +357,14 @@
                     img
                         max-width: 100%
                         border-radius: 50%
-            
+
             .info
                 padding: 0 5px
                 margin: 5px 0
                 display: flex
                 flex-direction: column
                 justify-content: center
-                align-items: center 
+                align-items: center
             .actions
                 margin: 10px 0
                 padding: 0 5px
@@ -367,7 +377,7 @@
                     text-align: center
                     color: #2575bc
                     padding: 2px 5px
-            
+
 </style>
 <script>
     export default {
@@ -384,16 +394,24 @@
         },
         data()
         {
-           return{
+            return{
                 reviewing: false,
                 rating: 0,
                 review: '',
                 loading: false,
                 viewSession : null,
                 sess: this.sessions
-           }
+            }
         },
         computed: {
+            currency()
+            {
+                if (this.authuser.country == 1) {
+                    return "USD"
+                } else {
+                    return "CAD"
+                }
+            },
             is_ready()
             {
                 if(this.rating && this.review)
@@ -427,33 +445,87 @@
                 }
             }
         },
-       
+
         methods: {
+            setLoaded: function() {
+
+                this.loaded = true;
+                console.log(window.paypal)
+                let vob = this
+                window.paypal.Buttons({
+                    createOrder: (data, actions) => {
+                        return actions.order.create({
+
+                            purchase_units: [
+                                {
+                                    amount: {
+                                        currency_code: this.currency,
+                                        value: this.viewSession.total
+                                    }
+                                }
+                            ],
+                            application_context: {
+                                shipping_preference: 'NO_SHIPPING'
+                            }
+                        })
+                    },
+                    onApprove: function(data, actions) {
+                        vob.loading = true
+                        // This function captures the funds from the transaction.
+                        return actions.order.capture().then(function(details) {
+
+                            axios.post(vob.url +'/complete/booking',
+                                {
+                                    data: data,
+                                    sessionpid:this.viewSession.id,
+                                    total: vob.total,
+                                    teacher: this.authuser.id,
+                                })
+                                .then(response => {
+                                    vob.showThanks = true;
+                                    vob.loading = false
+                                })
+                                .catch(error => {
+                                    console.log(error);
+                                })
+                        });
+                        // This function shows a transaction success message to your buyer.
+
+                        // });
+                    },
+                    style: {
+                        layout:  'vertical',
+                        color:   'blue',
+                        shape:   'rect',
+                        label:   'paypal'
+                    }
+                }).render(this.$refs.paypal)
+            },
             postReview()
             {
-                let index = 
-                axios.post(this.url +'/post/review', {
-                    id: this.viewSession.id,
-                    by: this.authuser.type,
-                    rating: this.rating,
-                    review: this.review,
-                    
-                })
-                .then(response => {
-                    if(response.data.msg == 'success')
-                    {
-                        this.sessions[this.sessions.indexOf(this.viewSession)] = response.data.session
-                        this.viewSession.tutor_rating = response.data.session.tutor_rating
-                        this.viewSession.tutor_review = response.data.session.tutor_review
-                        this.viewSession.student_rating = response.data.session.student_rating
-                        this.viewSession.student_review = response.data.session.student_review
-                    }else{
-                        alert('Oops Something Went Wrong. Please refresh the page')
-                    }
-                })
-                .catch(error => {
-                    console.log(error)
-                })
+                let index =
+                    axios.post(this.url +'/post/review', {
+                        id: this.viewSession.id,
+                        by: this.authuser.type,
+                        rating: this.rating,
+                        review: this.review,
+
+                    })
+                        .then(response => {
+                            if(response.data.msg == 'success')
+                            {
+                                this.sessions[this.sessions.indexOf(this.viewSession)] = response.data.session
+                                this.viewSession.tutor_rating = response.data.session.tutor_rating
+                                this.viewSession.tutor_review = response.data.session.tutor_review
+                                this.viewSession.student_rating = response.data.session.student_rating
+                                this.viewSession.student_review = response.data.session.student_review
+                            }else{
+                                alert('Oops Something Went Wrong. Please refresh the page')
+                            }
+                        })
+                        .catch(error => {
+                            console.log(error)
+                        })
             },
             markComplete()
             {
@@ -461,18 +533,18 @@
                 axios.post(this.url +'/post/complete-session', {
                     id: this.viewSession.id
                 })
-                .then(response => {
-                    if(response.data.msg == 'success')
-                    {
-                        this.viewSession.completed = true
-                        this.$store.commit('decreseSessions', 1)
-                    }else{
-                        alert('Oops Something Went Wrong. Please refresh the page')
-                    }
-                })
-                .catch(error => {
-                    console.log(error)
-                })
+                    .then(response => {
+                        if(response.data.msg == 'success')
+                        {
+                            this.viewSession.completed = true
+                            this.$store.commit('decreseSessions', 1)
+                        }else{
+                            alert('Oops Something Went Wrong. Please refresh the page')
+                        }
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
             },
             requestCancel()
             {
@@ -480,32 +552,72 @@
                 axios.post(this.url +'/post/cancel-session', {
                     id: this.viewSession.id
                 })
-                .then(response => {
-                    this.viewSession.cancel_request = this.authuser.type
-                    alert("You have successfully requested for session cancelation.")
-                })
-                .catch(error => {
-                    console.log(error)
-                })
+                    .then(response => {
+                        this.viewSession.cancel_request = this.authuser.type
+                        alert("You have successfully requested for session cancelation.")
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
             },
-            
-           avatar(user)
+            requestaccept()
+            {
+                confirm("Are you sure you want to accept this session?")
+                axios.post(this.url +'/post/accept-session', {
+                    id: this.viewSession.id
+                })
+                    .then(response => {
+                        this.viewSession.accept = '1'
+                        alert("You have successfully accepted for session.")
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+            },
+            startsession()
+            {
+                this.loading = true
+                confirm("Are you sure you want to start this session?")
+                axios.post(this.url +'/post/start-session', {
+                    id: this.viewSession.id
+                })
+                    .then(response => {
+                        console.log(response)
+                        this.viewSession.startsession = this.authuser.type
+                        if(this.authuser.type == 'teacher')
+                        {
+                            window.open("https://connect.tutors-hub.com#/?teacherid="+this.viewSession.agora_session, "_blank");
+
+                        }else{
+                            window.open("https://connect.tutors-hub.com#/?studentid="+this.viewSession.agora_session, "_blank");
+
+                        }
+                        //alert("You have successfully started for session.")
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+            },
+            avatar(user)
             {
                 if(user.avatar){
                     return this.url + '/storage/images/' + user.avatar
                 }else{
-                if(user.gender)
-                {
-                    return this.url + '/img/' + user.gender.toLowerCase() + '.jpg'
-                }else{
-                    return this.url + '/img/male.jpg'
-                }
+                    if(user.gender)
+                    {
+                        return this.url + '/img/' + user.gender.toLowerCase() + '.jpg'
+                    }else{
+                        return this.url + '/img/male.jpg'
+                    }
                 }
             },
         },
-        mounted()
+        updated()
         {
-           
+                const script = document.createElement("script");
+                script.src = "https://www.paypal.com/sdk/js?client-id=AU1qSrl-VvM9r15F6lhSITnPRtJvJwFJfd__J5cMP8FvpXCDcEloTOysg8exK1DZN8rMCsgBXCOUbPFd&currency=" + this.currency;
+                script.addEventListener("load", this.setLoaded);
+                document.body.appendChild(script);
         }
     }
 </script>

@@ -13,7 +13,7 @@ use App\Mail\sessionCanceledToStudent;
 
 class SessionController extends Controller
 {
-    
+
     public function index()
     {
         $sessions = auth()->user()->profile->sessions;
@@ -46,6 +46,24 @@ class SessionController extends Controller
         return response()->json(['session' => $session]);
     }
 
+    public function sessionrequest(Request $request)
+    {
+        $session = Session::create([
+            'teacher_id' => $request->teacher,
+            'student_id' => auth()->user()->profile->id,
+            'subject' => $request->subject,
+            'level' => $request->level,
+            'rate' => $request->rate,
+            'hours' => $request->hours,
+            'date' => $request->date,
+            'sessiontype' => $request->sessiontype,
+            'total' => $request->total,
+            'accept' => '0',
+            'fee' => ($request->total * Earning::currentFee())/100,
+
+        ]);
+        return response()->json(['session' => $session]);
+    }
     public function complete(Request $request)
     {
         $session = Session::findOrFail($request->id);
@@ -104,5 +122,149 @@ class SessionController extends Controller
         $session->update(['cancel_request' => auth()->user()->type]);
         Mail::to('info@tutors-hub.com')->send(new cancelRequest($session, auth()->user()));
         return  response()->json(['msg' => 'success']);
+    }
+
+    public function postaccept(Request $request)
+    {
+        $session = Session::findOrFail($request->id);
+        $roomname = substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0, 9).$request->id;
+        $agorasession = substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0, 32).$request->id;
+        $session->update(['accept' => '1', 'roomname' => $roomname, 'agora_session' => $agorasession]);
+        Mail::to('info@tutors-hub.com')->send(new cancelRequest($session, auth()->user()));
+        return  response()->json(['msg' => 'success']);
+    }
+
+    public function startsession(Request $request)
+    {
+        $session = Session::findOrFail($request->id);
+        $hr = json_decode($session->hours);
+        $startsession = date("Y-m-d H:i:s");
+        $endsession = date("Y-m-d H:i:s", strtotime("+".$hr." hours"));
+        $session->update(['startsession' => $startsession, 'endsession' => $endsession]);
+        //Mail::to('info@tutors-hub.com')->send(new cancelRequest($session, auth()->user()));
+        return  response()->json(['msg' => 'success']);
+    }
+    public function requestagorasession($agora_id)
+    {
+        $result = Session::where('agora_session', $agora_id)
+            ->where('class_status', 0)
+            ->join('teachers','sessions.teacher_id','=','teachers.id')
+            ->join('users','teachers.user_id','=','users.id')
+            ->select('sessions.*','users.name')
+            ->get();
+        //Mail::to('info@tutors-hub.com')->send(new cancelRequest($session, auth()->user()));
+        $res = json_decode($result);
+        if(!empty($res)) {
+            //dd($res[0]);
+            header('Access-Control-Allow-Origin: *');
+            header('Content-type: application/json');
+            return response()->json([
+                'result' => 'success',
+                'roomName' => $res[0]->roomname,
+                'roomType' => 0,
+                'yourName' => $res[0]->name,
+                'role' => 'teacher',
+                'formId' => $agora_id
+            ]);
+        }else{
+            //dd($res[0]);
+            header('Access-Control-Allow-Origin: *');
+            header('Content-type: application/json');
+            return response()->json([
+                'result' => 'failed',
+                'roomName' => '',
+                'roomType' => 0,
+                'yourName' => '',
+                'role' => 'teacher',
+                'formId' => $agora_id
+            ]);
+        }
+    }
+    public function requestagorasessionstudent($agora_id)
+    {
+        $result = Session::where('agora_session', $agora_id)
+            ->where('class_status', 0)
+            ->join('students','sessions.student_id','=','students.id')
+            ->join('users','students.user_id','=','users.id')
+            ->select('sessions.*','users.name')
+            ->get();
+        //Mail::to('info@tutors-hub.com')->send(new cancelRequest($session, auth()->user()));
+        $res = json_decode($result);
+        if(!empty($res)) {
+            //dd($res[0]);
+            header('Access-Control-Allow-Origin: *');
+            header('Content-type: application/json');
+            return response()->json([
+                'result' => 'success',
+                'roomName' => $res[0]->roomname,
+                'roomType' => 0,
+                'yourName' => $res[0]->name,
+                'role' => 'student',
+                'hours' => $res[0]->hours,
+                'formId' => $agora_id
+            ]);
+        }else{
+            //dd($res[0]);
+            header('Access-Control-Allow-Origin: *');
+            header('Content-type: application/json');
+            return response()->json([
+                'result' => 'failed',
+                'roomName' => '',
+                'roomType' => 0,
+                'yourName' => '',
+                'role' => 'student',
+                'formId' => $agora_id
+            ]);
+        }
+    }
+    public function requestagorasessionhours($agora_id)
+    {
+        $result = Session::where('agora_session', $agora_id)
+            ->where('class_status', 0)
+            ->join('teachers','sessions.teacher_id','=','teachers.id')
+            ->join('users','teachers.user_id','=','users.id')
+            ->select('sessions.*','users.name')
+            ->get();
+//dd($result);
+        $res = json_decode($result);
+
+        if(!empty($res))
+{
+        //Mail::to('info@tutors-hub.com')->send(new cancelRequest($session, auth()->user()));
+        //dd($res[0]);
+        header('Access-Control-Allow-Origin: *');
+        header('Content-type: application/json');
+        return  response()->json([
+            'result' => 'success',
+            'roomName' => $res[0]->roomname,
+            'roomType' => 0,
+            'yourName' => $res[0]->name,
+            'role' => 'teacher',
+            'formId' => $agora_id,
+            'hours' => $res[0]->hours
+        ]);
+}else{
+    header('Access-Control-Allow-Origin: *');
+    header('Content-type: application/json');
+    return  response()->json([
+        'result' => 'failed',
+        'roomName' => '',
+        'roomType' => 0,
+        'yourName' => '',
+        'role' => 'teacher',
+        'formId' => $agora_id,
+        'hours' => 0
+    ]);
+}
+    }
+
+    public function update_class_status($status_id)
+    {
+        $result = Session::where('agora_session', $status_id)
+            ->update(['class_status' => 1]);
+        //Mail::to('info@tutors-hub.com')->send(new cancelRequest($session, auth()->user()));
+        header('Access-Control-Allow-Origin: *');
+        header('Content-type: application/json');
+        return  response()->json(['result' => 'success']);
     }
 }

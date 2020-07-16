@@ -22,9 +22,20 @@ const store = new Vuex.Store(StoreData)
 import Select2 from 'v-select2-component';
 Vue.component('Select2', Select2);
 
+
+import { Datetime } from 'vue-datetime';
+import 'vue-datetime/dist/vue-datetime.css';
+Vue.component('datetime', Datetime);
+
 import * as VueGoogleMaps from "vue2-google-maps";
 Vue.use(VueGoogleMaps, {
-  load: { key: "AIzaSyBItJS5EzVJKKHUeqEqlW5zw7LSvzi0IZg"}
+
+    load: {
+        //   key: "AIzaSyDZY3cXMHPDhTzmzcCy-jMRpleM8wtRDWo",
+        key: "AIzaSyBItJS5EzVJKKHUeqEqlW5zw7LSvzi0IZg",
+        libraries: 'places',
+    },
+
 });
 
 import VueSweetalert2 from 'vue-sweetalert2';
@@ -44,6 +55,7 @@ Vue.component('register-form', require('./components/forms/register.vue').defaul
 Vue.component('teacher-register', require('./components/forms/teacherRegister.vue').default);
 Vue.component('student-register', require('./components/forms/studentRegister.vue').default);
 Vue.component('create-ad', require('./components/forms/createAd.vue').default);
+Vue.component('map-input', require('./components/partials/mapInput.vue').default);
 Vue.component('edit-ad', require('./components/forms/editAd.vue').default);
 Vue.component('profile', require('./components/pages/user/profile.vue').default);
 Vue.component('favorites', require('./components/pages/user/favorites.vue').default);

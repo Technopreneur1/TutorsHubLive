@@ -19,9 +19,11 @@
     
 </head>
 <body>
-    
+
     @include('partials/_nav')
-    
+    <div class="text">
+        <div class="title">@yield('page')</div>
+    </div>
     @yield('content')
 
     @include('partials/_footer')

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Discipline;
 use App\User;
 use App\Ticket;
 use App\Mail\ContactEmail;
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\Mail;
 class PagesController extends Controller
 {
 
-   
+
     //Home Page
     public function index()
     {
@@ -31,11 +32,13 @@ class PagesController extends Controller
                 $messages = auth()->user()->unreadMessages()->count();
                 return view("pages.userhome", ['messages' => $messages]);
             }else {
+
                 return redirect('/email/verify');
             }
         }else {
-            
-            return view("pages.home");
+            $subject = Discipline::get();
+            $subjects = json_decode($subject);
+            return view("pages.home1")->with('subjects',$subjects);
         }
     }
     public function myFiles()
@@ -46,6 +49,10 @@ class PagesController extends Controller
     {
         $title = "Privacy Policy";
         return view('pages.privacy', ['title' => $title]);
+    }
+    public function settings()
+    {
+        return view('pages.settings');
     }
     public function terms()
     {
@@ -102,7 +109,7 @@ class PagesController extends Controller
         $with = null;
         if($request->has('u'))
         {
-            
+
             $with = User::findOrFail($request->u);
         }
         return view("pages.messages", ['with' => $with]);

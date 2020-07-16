@@ -1,7 +1,7 @@
 <template>
     <div class="full-container">
         <full-loader v-if="loading" ></full-loader>
-        
+
         <div v-if="sess.length" class="sessionsList">
             <div v-for="ses in sess" :key="ses.id" class="session">
                 <a v-if="authuser.type == 'student'" :href="url + '/user/' + ses.teacher.user.id" class="with">
@@ -53,14 +53,14 @@
                     img
                         max-width: 100%
                         border-radius: 50%
-            
+
             .info
                 padding: 0 5px
                 margin: 5px 0
                 display: flex
                 flex-direction: column
                 justify-content: center
-                align-items: center 
+                align-items: center
             .actions
                 margin: 10px 0
                 padding: 0 5px
@@ -73,7 +73,7 @@
                     text-align: center
                     color: #df5033
                     padding: 2px 5px
-            
+
 </style>
 <script>
     export default {
@@ -125,7 +125,7 @@
         },
         mounted()
         {
-           
+
         }
     }
 </script>
