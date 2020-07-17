@@ -301,7 +301,7 @@
 
 
                         <div class="tp-columns-container">
-                            @if (!empty($result))
+                            @if (!empty($data))
                             @foreach ($data as $record)
 
                                 <div class="tutor-plugin column-1-2" style="float:left;">
