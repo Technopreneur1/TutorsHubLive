@@ -55,7 +55,7 @@ class SessionController extends Controller
             'level' => $request->level,
             'rate' => $request->rate,
             'hours' => $request->hours,
-            'date' => $request->date,
+            'date' => Carbon::parse($request->date)->format('Y-m-d H:i:s'),
             'sessiontype' => $request->sessiontype,
             'total' => $request->total,
             'accept' => '0',
