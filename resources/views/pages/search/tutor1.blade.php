@@ -198,7 +198,7 @@
                                 <div class="sc_layouts_item"><a class="sc_layouts_logo" href="https://tutors-hub.com/"><img src="{{url('wp-content/uploads/2016/12/logotxt.png')}}"  width="440" height="90"></a></div>
                             </div><div class="sc_layouts_column sc_layouts_column_align_right sc_layouts_column_icons_position_left column-3_4">
                                 <div class="sc_layouts_item">
-                                    <nav class="menu_main_nav_area sc_layouts_hide_on_mobile"><ul id="menu_main" class="sc_layouts_menu_nav menu_main_nav"><li id="menu-item-105" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-105"><a href="tutors.html#"><span>Home</span></a>
+                                    <nav class="menu_main_nav_area sc_layouts_hide_on_mobile"><ul id="menu_main" class="sc_layouts_menu_nav menu_main_nav"><li id="menu-item-105" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-105"><a href="https://tutors-hub.com/"><span>Home</span></a>
                                             </li><li id="menu-item-106" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-106">
                                                 <ul class="sub-menu"><li id="menu-item-107" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-107"><a href="tutors.html#"><span>Tools</span></a>
                                                         <ul class="sub-menu"><li id="menu-item-112" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-112"><a href="../shortcodes.html"><span>Shortcodes</span></a></li><li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="../typography.html"><span>Typography</span></a></li></ul>
@@ -280,16 +280,31 @@
                             <h4 class="tp-form-title">Tutor</h4>
                         </div>
                         <div class="tp-form">
-                            <form role="search" action="../smarthead_ancorathemes_default.html" method="get" id="tutor-search-form" class="tutor-plugin tutor-plugin-form-search">
+                            <form  action="{{url('search_location')}}" method="post"  >
+                                @csrf
                                 <input type="hidden" name="post_type" value="tutor" />
-                                <input type="hidden" name="s" value="" />
-                                <input type="text" name="n" placeholder="Enter a Subject" value="" autocomplete="off"/>
-                                <input type="text" name="z" min="0" placeholder="Zipcode"  value="" autocomplete="off"/>
-                                <select name="g">
+                                <input type="hidden" name="" value="" />
+                                <select name="subject">
+                                    <option value="All" selected>All Subjects</option>
+
+                                    @foreach ($subjects as $records)
+                                        <option value="{{$records->id}}" >{{$records->name}}</option>
+                                    @endforeach
+
+                                </select>
+
+                                <input id="pac-input" type="text" name="location" placeholder="Enter a location">
+                                <input type="text" id="lat" name="lat" value="" hidden>
+                                <input type="text" id="lng" name="lng" value="" hidden>
+
+
+                                <select name="groups">
                                     <option value="all" selected>All Groups</option>
-                                    <option value="online">Online</option><option value="personal">Personal</option>                    </select>
+                                    <option value="online">Online</option><option value="personal">Personal</option>
+                                </select>
+                                <div id="map" hidden></div>
                                 <div class="tp-form-button">
-                                    <button type="submit" value="Find Now">Find Now</button>
+                                    <button type="submit" value="">Find Now</button>
                                 </div>
                             </form>
                         </div>
