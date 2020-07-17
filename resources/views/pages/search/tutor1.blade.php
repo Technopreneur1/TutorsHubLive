@@ -195,11 +195,10 @@
                     <div class="content_wrap">
                         <div class="columns_wrap">
                             <div class="sc_layouts_column sc_layouts_column_align_left sc_layouts_column_icons_position_left column-1_4">
-                                <div class="sc_layouts_item"><a class="sc_layouts_logo" href="../smarthead_ancorathemes_default.html"><img src="{{url('wp-content/uploads/2016/12/logotxt.png')}}"  width="440" height="90"></a></div>
+                                <div class="sc_layouts_item"><a class="sc_layouts_logo" href="https://tutors-hub.com/"><img src="{{url('wp-content/uploads/2016/12/logotxt.png')}}"  width="440" height="90"></a></div>
                             </div><div class="sc_layouts_column sc_layouts_column_align_right sc_layouts_column_icons_position_left column-3_4">
                                 <div class="sc_layouts_item">
                                     <nav class="menu_main_nav_area sc_layouts_hide_on_mobile"><ul id="menu_main" class="sc_layouts_menu_nav menu_main_nav"><li id="menu-item-105" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-105"><a href="tutors.html#"><span>Home</span></a>
-                                                <ul class="sub-menu"><li id="menu-item-235" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-235"><a href="../smarthead_ancorathemes_default.html"><span>Home 1</span></a></li><li id="menu-item-234" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-234"><a href="../home-2.html"><span>Home 2</span></a></li><li id="menu-item-519" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-519"><a href="../home-3.html"><span>Home 3</span></a></li><li id="menu-item-518" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-518"><a href="../home-4.html"><span>Home 4</span></a></li></ul>
                                             </li><li id="menu-item-106" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-106">
                                                 <ul class="sub-menu"><li id="menu-item-107" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-107"><a href="tutors.html#"><span>Tools</span></a>
                                                         <ul class="sub-menu"><li id="menu-item-112" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-112"><a href="../shortcodes.html"><span>Shortcodes</span></a></li><li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="../typography.html"><span>Typography</span></a></li></ul>
@@ -213,11 +212,7 @@
                                                             </li></ul>
                                                     </li><li id="menu-item-549" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-549"><a href="../shop.html"><span>Shop</span></a></li></ul>
                                             </li><li id="menu-item-164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164"><a href="../become-a-tutor.html"><span>Become a Tutor</span></a></li><li id="menu-item-119" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-119"><a href="tutors.html#"><span>News</span></a>
-                                                <ul class="sub-menu"><li id="menu-item-123" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-123"><a href="../blog-streampage/blog-streampage.html"><span>Blog Streampage</span></a></li><li id="menu-item-120" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-120"><a href="tutors.html#"><span>Classic Style</span></a>
-                                                        <ul class="sub-menu"><li id="menu-item-122" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-122"><a href="../blog-classic-2-columns/blog-classic-2-columns.html"><span>2 Columns</span></a></li><li id="menu-item-121" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-121"><a href="../blog-classic-3-columns/blog-classic-3-columns.html"><span>3 Columns</span></a></li></ul>
-                                                    </li><li id="menu-item-124" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-124"><a href="tutors.html#"><span>Chess Style</span></a>
-                                                        <ul class="sub-menu"><li id="menu-item-127" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-127"><a href="../blog-chess-2-columns/blog-chess-2-columns.html"><span>2 Columns</span></a></li><li id="menu-item-126" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-126"><a href="../blog-chess-4-columns/blog-chess-4-columns.html"><span>4 Columns</span></a></li><li id="menu-item-125" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-125"><a href="../blog-chess-6-columns/blog-chess-6-columns.html"><span>6 Columns</span></a></li></ul>
-                                                    </li></ul>
+
                                             </li><li id="menu-item-165" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-165"><a href="../contacts.html"><span>Contacts</span></a></li></ul></nav>					<div class="sc_layouts_iconed_text sc_layouts_menu_mobile_button">
                                         <a class="sc_layouts_item_link sc_layouts_iconed_text_link" href="tutors.html#">
                                             <span class="sc_layouts_item_icon sc_layouts_iconed_text_icon trx_addons_icon-menu"></span>
@@ -306,6 +301,7 @@
 
 
                         <div class="tp-columns-container">
+                            @if (!empty($result))
                             @foreach ($data as $record)
 
                                 <div class="tutor-plugin column-1-2" style="float:left;">
@@ -313,7 +309,7 @@
                                     <div id="post-577" class="post-577 tutor type-tutor status-publish has-post-thumbnail hentry tutor_group-online tutor_group-personal tutor_tag-biology tutor_tag-business-study tutor_tag-chemistry">
                                         <div class="tp-single tp-post">
                                             <div class="tp-featured">
-                                                <img width="740" height="792" src="../wp-content/uploads/2016/11/tutor7-740x792.jpg" class="attachment-tutor-archive size-tutor-archive wp-post-image" alt="" srcset="http://smarthead.ancorathemes.com/wp-content/uploads/2016/11/tutor7-740x792.jpg 740w, http://smarthead.ancorathemes.com/wp-content/uploads/2016/11/tutor7-280x300.jpg 280w, http://smarthead.ancorathemes.com/wp-content/uploads/2016/11/tutor7-370x397.jpg 370w" sizes="(max-width: 740px) 100vw, 740px" />                        <div class="tp-featured-overlay">
+                                                <img width="740" height="792" src="https://tutors-hub.com/wp-content/uploads/2016/11/tutor7-740x792.jpg" class="attachment-tutor-archive size-tutor-archive wp-post-image" alt="" srcset="https://tutors-hub.com/wp-content/uploads/2016/11/tutor7-740x792.jpg 740w, https://tutors-hub.com/wp-content/uploads/2016/11/tutor7-280x300.jpg 280w, https://tutors-hub.com/wp-content/uploads/2016/11/tutor7-370x397.jpg 370w" sizes="(max-width: 740px) 100vw, 740px" />                        <div class="tp-featured-overlay">
                                                     <div class="tp-price">
                                                         <span class="tp-present-price"> 24<span class="small">$</span>                                              </span>
                                                         <span class="tp-period-price">hour </span>
@@ -344,6 +340,9 @@
                                 </div>
 
                             @endforeach
+                            @else
+                            <h3>No Tutor Found </h3>
+                            @endif
                         </div>
 
                     </div><!-- </.content> -->
