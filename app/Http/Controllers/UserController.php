@@ -214,9 +214,10 @@ class UserController extends Controller
             ->get();
        }
        $data = json_decode($results);
+       $subject =   Discipline::get();
+       $subjects = json_decode($subject);
 
-            return view('pages.search.tutor1')->with('data', $data);
-
+         return view('pages.search.tutor1',compact('subjects','data'));
     }
 
 
