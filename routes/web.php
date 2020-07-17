@@ -51,7 +51,7 @@ Route::get('/user/{id}', 'UserController@userProfile')->name('userProfile')->mid
 Route::post('/search_location', 'UserController@search_locations');
 Route::get('/search_location', 'UserController@search_locations');
 // Route::get('/', 'UserController@get_subject')->name('subject');
-Route::get('/Viewtutor/{id}', 'UserController@Viewtutor')->name('Viewtutor');
+Route::post('/viewtutor', 'UserController@viewtutor')->name('viewtutor');
 Route::post('/add-register', 'UserController@profiles')->name('add-register');
 
 // Find Tutors
@@ -312,7 +312,7 @@ Route::prefix('adminpanel')->middleware(['admin'])->group(function () {
 
     Route::get('/', 'AdminController@adminpanel')->name('adminpanel');
     Route::get('/contact/{id}/{ticket}', 'AdminController@contact')->name('admin.contact');
-    
+
     Route::get('/export/tutors', 'ExportController@tutors')->name('export.tutors');
     Route::get('/export/students', 'ExportController@students')->name('export.students');
     Route::get('/export/sessions', 'ExportController@sessions')->name('export.sessions');

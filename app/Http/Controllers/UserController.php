@@ -222,8 +222,9 @@ class UserController extends Controller
     }
 
 
-    function Viewtutor($id)
+    function viewtutor(Request $request)
     {
+        $id = $request->id;
         $locations =  Location::
         select('locations.name AS location_name','locations.id AS location_id' )
         ->get();

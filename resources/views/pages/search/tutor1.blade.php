@@ -338,10 +338,10 @@
                                                 </div>
                                                 <div class="tp-read-more">
 
-                                                    <form   action="{{route('Viewtutor',$record->id)}}"  method="POST" >
+                                                    <form   action="{{route('viewtutor')}}"  method="POST" >
                                                         @csrf
-                                                        {{method_field('GET')}}
 
+                                                        <input type="hidden" name="id" value="{{$record->id}}">
                                                         <button type="submit" class="tp-title-read-more sc_button_hover_slide_left" >View Tutor</button>
 
                                                     </form>
