@@ -350,9 +350,13 @@
                     <div class="sidebar left widget_area scheme_default" role="complementary">
                         <div class="sidebar_inner">
                             <aside id="tag_cloud-3" class="widget widget_tag_cloud"><h5 class="widget_title">Subjects</h5><div class="tagcloud">
-
+                                    @if (!empty($data))
+                                        @foreach ($data as $record)
                                     <a href="" class="tag-cloud-link tag-link-65 tag-link-position-1" style="font-size: 22pt;" aria-label="Architecture (2 items)">{{$record->subject_name}}</a>
-
+                                    @endforeach
+                                    @else
+                                        <p>No Tutor Found </p>
+                                    @endif
 
                                 </div>
                             </aside><aside id="categories-3" class="widget widget_categories"><h5 class="widget_title">Categories</h5>		<ul>
