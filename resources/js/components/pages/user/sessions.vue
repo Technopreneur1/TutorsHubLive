@@ -474,12 +474,9 @@
                         // This function captures the funds from the transaction.
                         return actions.order.capture().then(function(details) {
 
-                            axios.post(vob.url +'/complete/booking',
+                            axios.post(vob.url +'/complete/bookingpay',
                                 {
-                                    data: data,
                                     sessionpid:this.viewSession.id,
-                                    total: vob.total,
-                                    teacher: this.authuser.id,
                                 })
                                 .then(response => {
                                     vob.showThanks = true;

@@ -58,6 +58,7 @@ Route::post('/add-register', 'UserController@profiles')->name('add-register');
 Route::get('/find', 'TeacherController@index')->name('findTutors')->middleware('auth', 'verified', 'CheckBanned');
 
 Route::post('/complete/booking', 'SessionController@pay')->middleware('auth', 'verified', 'CheckBanned');
+Route::post('/complete/bookingpay', 'SessionController@paynow')->middleware('auth', 'verified', 'CheckBanned');
 Route::post('/complete/sessionrequest', 'SessionController@sessionrequest')->middleware('auth', 'verified', 'CheckBanned');
 // ============== GET DATA =====================
 Route::post('/get/levels', 'LevelController@getAll');
