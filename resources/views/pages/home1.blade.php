@@ -130,7 +130,7 @@
                                                                         data-frame_1="tp:600;e:Power4.easeOut;st:3770;sp:1000;sR:3770;"
                                                                         data-frame_999="o:0;tp:600;st:w;sR:4230;"
                                                                         style="z-index:7;font-family:Open Sans;"
-                                                                    ><div class="sc_item_button sc_button_wrap"><a href="/tutors/" id="sc_button_212681052" class="sc_button sc_button_default sc_button_size_large sc_button_icon_left"><span class="sc_button_text"><span class="sc_button_title">Find tutor now</span></span><!-- /.sc_button_text --></a><!-- /.sc_button --></div><!-- /.sc_item_button -->
+                                                                    ><div class="sc_item_button sc_button_wrap"><a href="https://tutors-hub.com/student-registration" id="sc_button_212681052" class="sc_button sc_button_default sc_button_size_large sc_button_icon_left"><span class="sc_button_text"><span class="sc_button_title">Find tutor now</span></span><!-- /.sc_button_text --></a><!-- /.sc_button --></div><!-- /.sc_item_button -->
                                                                     </rs-layer><!--
 -->						</rs-slide>
                                                                 <rs-slide data-key="rs-4" data-title="Slide" data-thumb="{{url('wp-content/uploads/2017/01/slide3.jpg')}}" data-anim="ei:d;eo:d;s:600;r:0;t:fade;sl:d;">
@@ -619,7 +619,7 @@ There are more than 5,000 tutors in this area" data-arrowposition="top"><i class
 
                                                     </div>
                                                 </div>
-                                                <div class="vc_empty_space"   style="height: 1.75em"><span class="vc_empty_space_inner"></span></div><div class="sc_item_button sc_button_wrap"><a href="/about-style-1/" id="sc_button_1956565427" class="sc_button sc_button_default sc_button_size_normal sc_button_icon_left"><span class="sc_button_text"><span class="sc_button_title">Read More</span></span><!-- /.sc_button_text --></a><!-- /.sc_button --></div><!-- /.sc_item_button --></div></div></div></div>
+                                                </div></div></div></div>
                             </div><!-- .entry-content -->
 
                         </article>
