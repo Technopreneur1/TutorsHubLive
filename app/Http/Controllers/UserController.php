@@ -323,10 +323,12 @@ class UserController extends Controller
     }
 
     function teacherregistration(){
+
         return view('pages.search.studentregistration');
 
     }
     function studentregistration(){
+
         return view('pages.search.teacherregistration');
 
     }
