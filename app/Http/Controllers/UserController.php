@@ -321,4 +321,13 @@ class UserController extends Controller
         session()->flash('File has been Deleted');
         return back();
     }
+
+    function teacherregistration(){
+        return view('search.studentregistration');
+
+    }
+    function studentregistration(){
+        return view('search.teacherregistration');
+
+    }
 }

@@ -43,6 +43,8 @@ Route::get('/request-agora-session/{id}', 'SessionController@requestagorasession
 Route::get('/request-agora-session-student/{id}', 'SessionController@requestagorasessionstudent');
 Route::get('/request-agora-session-hours/{id}', 'SessionController@requestagorasessionhours');
 Route::get('/class-status/{id}', 'SessionController@update_class_status');
+Route::get('/student-registration', 'UserController@teacherregistration');
+Route::get('/teacher-registration', 'UserController@studentregistration');
 
 Route::get('/payments', 'PaymentController@index')->name('payments')->middleware('auth', 'verified', 'CheckBanned');
 Route::get('/payout', 'PaymentController@getpayout');
