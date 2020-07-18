@@ -334,7 +334,7 @@
 
                                             <div class="tp-content"><div class="tp-subjects"><span class="tp-tutor-subjects">{{$record->subject_name}}</span></div>
                                                 <div class="tp-title">
-                                                    <a class="tp-title-link" href="">{{$record->name}}</a>
+                                                    <a class="tp-title-link" href="#">{{$record->name}}</a>
                                                 </div>
                                                 <div class="tp-read-more">
 
@@ -343,9 +343,6 @@
 
                                                         <input type="hidden" name="id" value="{{$record->id}}">
                                                         <button type="submit" class="tp-title-read-more sc_button_hover_slide_left" >View Tutor</button>
-
-                                                        trx_addons_login_link                                                   </form>
-
 
 
                                                 </div>
