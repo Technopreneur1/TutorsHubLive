@@ -371,19 +371,6 @@
                                     @endif
 
                                 </div>
-                            </aside><aside id="categories-3" class="widget widget_categories"><h5 class="widget_title">Categories</h5>		<ul>
-                                    <li class="cat-item cat-item-10"><a href="../category/distance-learning/distance-learning.html">Distance Learning</a>
-                                    </li>
-                                    <li class="cat-item cat-item-7"><a href="../category/lesson-planning/lesson-planning.html">Lesson Planning</a>
-                                    </li>
-                                    <li class="cat-item cat-item-8"><a href="../category/online-tutoring/online-tutoring.html">Online Tutoring</a>
-                                    </li>
-                                    <li class="cat-item cat-item-9"><a href="../category/resources/resources.html">Resources</a>
-                                    </li>
-                                    <li class="cat-item cat-item-6"><a href="../category/tutoring/tutoring.html">Tutoring</a>
-                                    </li>
-                                </ul>
-
                             </aside>
 
 
