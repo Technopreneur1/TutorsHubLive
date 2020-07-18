@@ -3,8 +3,7 @@
 
         <!-- <transition  name="easy-appear" enter-active-class="animated slideInLeft" leave-active-class="animated slideOutLeft"> -->
         <div v-if="editLocation" class="full-container">
-<!--            <edit-location :user='user' @cancel="editLocation = false" :url="url"></edit-location>-->
-            <a :href="url+ '/settings'" class="btn">Manage Files</a>
+            <edit-location :user='user' @cancel="editLocation = false" :url="url"></edit-location>
 
         </div>
         <div v-if="editPlans" class="full-container">
@@ -22,7 +21,7 @@
             </transition>
             <div class="editbtns">
                 <button @click="editPlans = true"  v-if="user.type == 'teacher'" class="btn">Manage Plans</button>
-                <button @click="editLocation = true" class="btn">Change Address</button>
+                <a :href="url+ '/settings'" class="btn">Change Address</a>
                 <button @click="editPassword = true" class="btn">Change Password</button>
                 <a :href="url+ '/my-files'" class="btn">Manage Files</a>
             </div>
