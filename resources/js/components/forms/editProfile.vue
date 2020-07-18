@@ -1,9 +1,11 @@
 <template>
     <div   class="edit-profile-slideout" :class="{full: 'editPlans'}">
-       
+
         <!-- <transition  name="easy-appear" enter-active-class="animated slideInLeft" leave-active-class="animated slideOutLeft"> -->
         <div v-if="editLocation" class="full-container">
-            <edit-location :user='user' @cancel="editLocation = false" :url="url"></edit-location>
+<!--            <edit-location :user='user' @cancel="editLocation = false" :url="url"></edit-location>-->
+            <a :href="url+ '/settings'" class="btn">Manage Files</a>
+
         </div>
         <div v-if="editPlans" class="full-container">
             <edit-plans :user='user' @cancel="editPlans = false" :url="url"></edit-plans>
@@ -12,7 +14,7 @@
             <change-password :user='user' @cancel="editPassword = false" :url="url"></change-password>
         </div>
         <!-- </transition> -->
-        
+
         <div v-if="!editPlans && !editLocation && !editPassword" class="full-container">
              <span id="success" v-if="!editLocation && !editPlans" @click="$emit('cancel')" class="btn-cancel"><i class="fas fa-long-arrow-alt-left"></i></span>
             <transition  name="easy-appear" enter-active-class="animated bounce" leave-active-class="animated fadeOut">
@@ -38,7 +40,7 @@
             </div>
             <div class="field">
 
-           
+
 
             <div class="field">
                 <div class="input">
@@ -112,14 +114,14 @@
                     </select>
                 </div>
             </div>
-            
-            
+
+
             <div class="field">
                 <div class="input">
                     <button @click="update" class="btn btn-update">Update</button>
                 </div>
             </div>
-            
+
         </div>
     </div>
 </template>
@@ -141,7 +143,7 @@
         methods: {
            update()
             {
-                axios.post(this.url +'/update/user', 
+                axios.post(this.url +'/update/user',
                 {
                     name: this.user.name,
                     phone: this.user.phone,
@@ -167,7 +169,7 @@
         },
         mounted()
         {
-            
+
         }
     }
 </script>
