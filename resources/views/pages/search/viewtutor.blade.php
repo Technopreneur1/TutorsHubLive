@@ -186,7 +186,7 @@
                     <div class="content_wrap">
                         <div class="custom_button_language">
                         </div>
-                        <a href="../../josh-summers.html#trx_addons_login_popup" class="trx_addons_popup_link trx_addons_login_link "><span class="sc_layouts_item_icon sc_layouts_login_icon trx_addons_icon-user-alt"></span><span class="sc_layouts_item_details sc_layouts_login_details">Login</span></a>        </div>
+                        <a href="{{route('login')}}" class=" trx_addons_login_link "><span class="sc_layouts_item_icon sc_layouts_login_icon trx_addons_icon-user-alt"></span><span class="sc_layouts_item_details sc_layouts_login_details">Login</span></a>        </div>
                 </div>
                 <div class="top_panel_navi sc_layouts_row sc_layouts_row_type_normal sc_layouts_row_fixed
     scheme_default">
