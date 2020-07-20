@@ -22,6 +22,9 @@
         .book-section tr {
             font-size: 18px;
         }
+        .book-section .btns{
+            width: 130px;
+        }
         </style>
     @php
         if($user->type == 'teacher')
