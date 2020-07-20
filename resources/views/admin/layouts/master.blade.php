@@ -19,7 +19,8 @@
   <link rel="icon" type="image/png" sizes="16x16" href="{{asset('fav/favicon-16x16.png')}}">
   <link rel="manifest" href="{{asset('fav/site.webmanifest')}}">
   <!-- Google Font -->
-  
+
+
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
   @yield('styles')
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
@@ -109,7 +110,7 @@
             <button style="border: none;width: 100%;padding: 3px;background: #4a4747;" type="submit" class="btn btn-danger">Logout</button>
           </form>
         </li>
-        
+
         {{-- <li {{{ (Request::is('adminpanel/topics') ? 'active' : '') }}}"><a href="{{route('topics')}}"><i class="fa fa-comments"></i> <span>Teachers</span></a></li>
         {{-- <li class="treeview  {{{ (Request::is('adminpanel/insights') ? 'active' : '') }}}">
           <a href="#">
@@ -123,7 +124,7 @@
             <li {{{ (Request::is('adminpanel/add-insight') ? 'class=active' : '') }}}><a href="{{route('add.insight')}}"><i class="fa fa-circle-o"></i>Add New</a></li>
           </ul>
         </li> --}}
-        
+
 
 
         {{-- @endif --}}
@@ -159,7 +160,7 @@
         {{session()->get('success')}}
       </div>
       @endif
-      
+
     </div>
     <!-- Main content -->
     <section class="content">

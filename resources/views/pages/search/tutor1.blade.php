@@ -230,6 +230,7 @@
                     </div>
                 </div>
             </header><div class="menu_mobile_overlay"></div>
+
             <div class="menu_mobile menu_mobile_fullscreen scheme_dark">
                 <div class="menu_mobile_inner">
                     <a class="menu_mobile_close icon-cancel"></a><a class="sc_layouts_logo" href="https://tutors-hub.com/"><img src="../wp-content/uploads/2016/12/logotype.png"  width="440" height="90"></a>
@@ -300,9 +301,14 @@
                                     <div id="post-577" class="post-577 tutor type-tutor status-publish has-post-thumbnail hentry tutor_group-online tutor_group-personal tutor_tag-biology tutor_tag-business-study tutor_tag-chemistry">
                                         <div class="tp-single tp-post">
                                             <div class="tp-featured">
-                                                <img width="740" height="792" src="https://tutors-hub.com/wp-content/uploads/2016/11/tutor7-740x792.jpg" class="attachment-tutor-archive size-tutor-archive wp-post-image" alt="" srcset="https://tutors-hub.com/wp-content/uploads/2016/11/tutor7-740x792.jpg 740w, https://tutors-hub.com/wp-content/uploads/2016/11/tutor7-280x300.jpg 280w, https://tutors-hub.com/wp-content/uploads/2016/11/tutor7-370x397.jpg 370w" sizes="(max-width: 740px) 100vw, 740px" />                        <div class="tp-featured-overlay">
-                                                    <div class="tp-price">
-                                                        <span class="tp-present-price"> 24<span class="small">$</span>                                              </span>
+                                                @if(isset($record->avatar))
+                                                    <img  src="https://tutors-hub.com/storage/images/{{$record->avatar}}" class="attachment-tutor-archive size-tutor-archive wp-post-image" alt="" srcset="https://tutors-hub.com/storage/images/{{$record->avatar}} 740w, https://tutors-hub.com/storage/images/{{$record->avatar}} 280w, https://tutors-hub.com/storage/images/{{$record->avatar}} 370w"  style="height:310px"/>                        <div class="tp-featured-overlay">
+                                                        @else
+
+                                                            <img width="740" height="792" src="https://tutors-hub.com/wp-content/uploads/2016/11/tutor7-740x792.jpg" class="attachment-tutor-archive size-tutor-archive wp-post-image" alt="" srcset="https://tutors-hub.com/wp-content/uploads/2016/11/tutor7-740x792.jpg 740w, https://tutors-hub.com/wp-content/uploads/2016/11/tutor7-280x300.jpg 280w, https://tutors-hub.com/wp-content/uploads/2016/11/tutor7-370x397.jpg 370w" sizes="(max-width: 740px) 100vw, 740px" />                        <div class="tp-featured-overlay">
+                                                            @endif
+                                                        <div class="tp-price">
+                                                        <span class="tp-present-price"> {{$record->rate}}<span class="small">$</span>                                              </span>
                                                         <span class="tp-period-price">hour </span>
                                                     </div>
                                                 </div>
@@ -318,7 +324,13 @@
                                                         @csrf
 
                                                         <input type="hidden" name="id" value="{{$record->id}}">
-                                                        <button type="submit" class="tp-title-read-more sc_button_hover_slide_left" >View Tutor</button>
+                                                        <input type="hidden" name="name" value="{{$record->name}}">
+                                                        <input type="hidden" name="subject" value="{{$record->subject_name}}">
+                                                        <input type="hidden" name="rate" value="{{$record->rate}}">
+                                                        <input type="hidden" name="avatar" value="{{$record->avatar}}">
+                                                        <input type="hidden" name="created_at" value="{{$record->created_at}}">
+                                                        <input type="hidden" name="bio" value="{{$record->bio}}">
+                                                        <button type="submit" class="tp-title-read-more sc_button_hover_slide_left" name="form-{{$record->id}}">View Tutor</button>
 
 
                                                 </div>
@@ -338,9 +350,9 @@
                     <div class="sidebar left widget_area scheme_default" role="complementary">
                         <div class="sidebar_inner">
                             <aside id="tag_cloud-3" class="widget widget_tag_cloud"><h5 class="widget_title">Subjects</h5><div class="tagcloud">
-                                    @if (!empty($data))
-                                        @foreach ($data as $record)
-                                    <a href="" class="tag-cloud-link tag-link-65 tag-link-position-1" style="font-size: 22pt;" aria-label="Architecture (2 items)">{{$record->subject_name}}</a>
+                                    @if (!empty($subjects))
+                                        @foreach ($subjects as $record)
+                                    <a href="" class="tag-cloud-link tag-link-65 tag-link-position-1" style="font-size: 22pt;" aria-label="{{$record->name}}">{{$record->name}}</a>
                                     @endforeach
                                     @else
                                         <p>No Tutor Found </p>

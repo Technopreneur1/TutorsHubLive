@@ -20,7 +20,7 @@
         </GmapMap>
         <br>
         <div class="text-right">
-            <button @click="post()" class="btn btn-prime">Update</button>
+            <button @click="post()" class="btn btn-success">Update</button>
         </div>
     </div>
 </template>
@@ -61,7 +61,7 @@
                     .then(response => {
                         //    alert("Updated");
                         this.$swal({
-                            position: 'bottom-end',
+                            position: 'top-end',
                             icon: 'success',
                             title: 'Location has been updated',
                             showConfirmButton: false,

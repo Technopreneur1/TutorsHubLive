@@ -206,7 +206,7 @@
 
                                     </nav>
                                     <div class="sc_layouts_iconed_text sc_layouts_menu_mobile_button">
-                                        <a class="sc_layouts_item_link sc_layouts_iconed_text_link" href="../../josh-summers.html#">
+                                        <a class="sc_layouts_item_link sc_layouts_iconed_text_link" href="#">
                                             <span class="sc_layouts_item_icon sc_layouts_iconed_text_icon trx_addons_icon-menu"></span>
                                         </a>
                                     </div>
@@ -219,13 +219,17 @@
                         <div class="sc_layouts_column sc_layouts_column_align_center">
                             <div class="sc_layouts_item">
                                 <div class="sc_layouts_title">
-                                    <div class="sc_layouts_title_meta"><div class="post_meta">					<span class="post_meta_item post_date date updated" itemprop="datePublished"><a href="#">{{$data[0]->created_at}}</a></span>
-                                        </div><!-- .post_meta --></div><div class="sc_layouts_title_title">							<h1 class="sc_layouts_title_caption">{{$data[0]->name}}</h1>
-                                    </div><div class="sc_layouts_title_breadcrumbs"><div class="breadcrumbs"><a class="breadcrumbs_item home" href="#">Home</a><span class="breadcrumbs_delimiter"></span><a href="#">All Tutors</a><span class="breadcrumbs_delimiter"></span><a class="breadcrumbs_item cat_post" href="#">Details</a><span class="breadcrumbs_delimiter"></span><span class="breadcrumbs_item current">{{$data[0]->name}}</span></div></div>
+                                    <div class="sc_layouts_title_meta"><div class="post_meta">
+{{--                                            {{dd($data)}}--}}
+                                            <span class="post_meta_item post_date date updated" itemprop="datePublished"><a href="#">{{$data['created_at']}}</a></span>
+
+                                        </div><!-- .post_meta --></div><div class="sc_layouts_title_title">							<h1 class="sc_layouts_title_caption">{{$data['name']}}</h1>
+                                    </div><div class="sc_layouts_title_breadcrumbs"><div class="breadcrumbs"><a class="breadcrumbs_item home" href="#">Home</a><span class="breadcrumbs_delimiter"></span><a href="#">All Tutors</a><span class="breadcrumbs_delimiter"></span><a class="breadcrumbs_item cat_post" href="#">Details</a><span class="breadcrumbs_delimiter"></span><span class="breadcrumbs_item current">{{$data['name']}}</span></div></div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
 
                 </div>
             </header><div class="menu_mobile_overlay"></div>
@@ -253,11 +257,19 @@
 
                         <div class="tp-single-wrap">
 
-                            <div class="tp-featured"><img width="964" height="996" src="{{url('wp-content/uploads/2016/11/tutor8-964x996.jpg')}}" class="attachment-tutor-single size-tutor-single wp-post-image" alt="Josh Summers" itemprop="image" /></div><div class="tp-info">
-                                <h2 class="tp-single-title">{{$data[0]->name}}</h2><div class="tp-price">
-                                    <span class="tp-present-price"><span class="small">$</span>24                        </span>
+                            <div class="tp-featured"><img width="964" height="996" src="https://tutors-hub.com/storage/images/{{$data['avatar']}}" class="attachment-tutor-single size-tutor-single wp-post-image" alt="Josh Summers" itemprop="image" /></div><div class="tp-info">
+                                <h2 class="tp-single-title">{{$data['name']}}</h2><div class="tp-price">
+                                    <span class="tp-present-price"><span class="small">$</span>{{$data['rate']}}                        </span>
                                     <span class="tp-period-price">hour                        </span>
-                                </div>                    <div class="tp-rating"><span class="tp-rating-star tutor-icon-bookmark-star"></span><span class="tp-rating-star tutor-icon-bookmark-star"></span><span class="tp-rating-star tutor-icon-bookmark-star"></span><span class="tp-rating-star tutor-icon-bookmark-star"></span><span class="tp-rating-star tutor-icon-bookmark-star"></span></div><div class="tp-biography">{{$data[0]->bio}}</div><div class="tp-subjects"><span class="label">Subjects: </span>{{$data[0]->subject_name}}</div><div class="tp-single-contact-form">
+                                </div>
+{{--                                <div class="tp-rating">--}}
+{{--                                    <span class="tp-rating-star tutor-icon-bookmark-star"></span>--}}
+{{--                                    <span class="tp-rating-star tutor-icon-bookmark-star"></span>--}}
+{{--                                    <span class="tp-rating-star tutor-icon-bookmark-star"></span>--}}
+{{--                                    <span class="tp-rating-star tutor-icon-bookmark-star"></span>--}}
+{{--                                    <span class="tp-rating-star tutor-icon-bookmark-star"></span>--}}
+{{--                                </div>--}}
+                                <div class="tp-biography">{{$data['bio']}}</div><div class="tp-subjects"><span class="label">Subjects: </span>{{$data['subject']}}</div><div class="tp-single-contact-form">
 
 
                                 </div>

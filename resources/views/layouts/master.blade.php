@@ -16,7 +16,7 @@
 
 
     @yield('styles')
-    
+
 </head>
 <body>
 

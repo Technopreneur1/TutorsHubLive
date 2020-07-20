@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
 
 
+
     @yield('styles')
 </head>
 <body>

@@ -95,7 +95,14 @@
 
             div.wpgdprc .wpgdprc-switch .wpgdprc-switch-inner:before { content: 'Yes'; }
             div.wpgdprc .wpgdprc-switch .wpgdprc-switch-inner:after { content: 'No'; }
-
+            .reg-form {
+                position: relative;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: #fff;
+                z-index: 4;
+            }
         </style>
 
         <link rel='stylesheet' id='smarthead-font-google_fonts-css'  href='http://fonts.googleapis.com/css?family=Titillium+Web%3A400%2C600%2C700%7CSanchez%3A400%2C400italic%2C700%2C700italic&#038;subset=latin%2Clatin-ext&#038;ver=5.4' type='text/css' media='all' />

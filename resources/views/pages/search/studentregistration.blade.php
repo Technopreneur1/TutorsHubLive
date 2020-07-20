@@ -173,7 +173,14 @@
                     console.log("Failure at Presize of Slider:" + e)
                 }
             };</script>
-        <noscript><style> .wpb_animate_when_almost_visible { opacity: 1; }</style></noscript></head>
+        <noscript><style> .wpb_animate_when_almost_visible { opacity: 1; } .reg-form {
+                                                                               position: relative;
+                                                                               bottom: 0;
+                                                                               left: 0;
+                                                                               right: 0;
+                                                                               background: #fff;
+                                                                               z-index: 4;
+                                                                           }</style></noscript></head>
 
     <body class="tutor-template-default single single-tutor postid-578 theme-smarthead woocommerce-no-js body_tag scheme_default blog_mode_tutor_single body_style_wide  is_stream blog_style_excerpt sidebar_hide expand_content header_style_header-default header_position_default menu_style_top no_layout wpb-js-composer js-comp-ver-6.1 vc_responsive">
 

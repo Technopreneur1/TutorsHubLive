@@ -224,28 +224,11 @@ class UserController extends Controller
 
     function viewtutor(Request $request)
     {
-        $id = $request->id;
-        $locations =  Location::
-        select('locations.name AS location_name','locations.id AS location_id' )
-        ->get();
-        $disciplines =  Discipline::
-        select('disciplines.name AS disciplines_name','disciplines.id AS disciplines_id' )
-        ->get();
 
-        $levels =  Level::
-        select('levels.name AS levels_name','levels.id AS levels_id' )
-        ->get();
+        $res = array('id' => $request->id, 'name' =>$request->name, 'subject' => $request->subject,'bio' => $request->bio,'rate' => $request->rate,'avatar' => $request->avatar,'created_at' => $request->created_at);
 
-        $results =  Plan::where('users.id', $id)->join('disciplines', 'plans.discipline_id', '=', 'disciplines.id')
-        ->join('teachers', 'plans.teacher_id', '=', 'teachers.id')
-        ->join('users', 'teachers.user_id', '=', 'users.id')
-        ->select('plans.*',  'disciplines.name AS subject_name', 'teachers.*', 'users.*')
-        ->get();
-
-        $data = json_decode($results);
-        $location = json_decode($locations);
-
-        return view('pages.search.viewtutor')->with('data', $data)->with('location',$location)->with('disciplines',$disciplines)->with('levels',$levels);
+        //dd($res);
+        return view('pages.search.viewtutor')->with('data', $res);
 
 
     }
