@@ -474,9 +474,9 @@
                         // This function captures the funds from the transaction.
                         return actions.order.capture().then(function(details) {
 
-                            axios.post('http://localhost:8000/complete/bookingpay',
+                            axios.post('https://tutors-hub.com/complete/bookingpay',
                                 {
-                                    sessionpid:15
+                                    sessionpid:this.sessions.id
                                 })
                                 .then(response => {
                                     alert("Thank you for your Payment");

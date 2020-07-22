@@ -190,7 +190,7 @@ import { type } from 'os'
             url: {
                 type: String
             },
-            rating: {
+                rating: {
                 type: String
             },
             user: {
