@@ -476,7 +476,7 @@
 
                             axios.post('https://tutors-hub.com/complete/bookingpay',
                                 {
-                                    sessionpid:this.sessions.id
+                                    sessionpid:this.viewSession.id
                                 })
                                 .then(response => {
                                     alert("Thank you for your Payment");
