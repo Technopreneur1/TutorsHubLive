@@ -4,13 +4,13 @@
 @endsection
 @section('content')
     <style>
-        .book-section {
+        .book-section, .edit-profile-slideout {
             display: -webkit-box;
             display: flex;
             -webkit-box-pack: center;
             justify-content: center;
         }
-        .book-section .bookingform {
+        .book-section .bookingform, .edit-profile-slideout .showThanks {
             width: 500px;
             max-width: 100%;
         }
