@@ -452,6 +452,8 @@
                 this.loaded = true;
                 console.log(window.paypal)
                 let vob = this
+                let sesoid = this.viewSession.id
+                cosole.log(sesoid)
                 window.paypal.Buttons({
                     createOrder: (data, actions) => {
                         return actions.order.create({
@@ -476,7 +478,7 @@
 
                             axios.post('https://tutors-hub.com/complete/bookingpay',
                                 {
-                                    sessionpid:this.viewSession.id
+                                    sessionpid:this.sesoid
                                 })
                                 .then(response => {
                                     alert("Thank you for your Payment");
