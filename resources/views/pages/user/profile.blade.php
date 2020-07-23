@@ -4,6 +4,12 @@
 @endsection
 @section('content')
     <style>
+        .book-section {
+            display: -webkit-box;
+            display: flex;
+            -webkit-box-pack: center;
+            justify-content: center;
+        }
         .book-section .bookingform {
             width: 500px;
             max-width: 100%;
@@ -42,6 +48,15 @@
             align-items: center;
             -webkit-box-pack: center;
             justify-content: center;
+        }
+        .btn-book {
+            border: none;
+            width: 125px;
+            background: #2575bc;
+            color: #ffffff;
+            border-radius: 4px;
+            width: 300px;
+            margin: 0px auto;
         }
     </style>
     @php
