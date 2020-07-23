@@ -473,12 +473,13 @@
                     },
                     onApprove: function(data, actions) {
                         //vob.loading = true
+
                         // This function captures the funds from the transaction.
                         return actions.order.capture().then(function(details) {
 
                             axios.post('https://tutors-hub.com/complete/bookingpay',
                                 {
-                                    sessionpid:this.sesoid
+                                    sessionpid: 6 //this.sesoid
                                 })
                                 .then(response => {
                                     alert("Thank you for your Payment");
