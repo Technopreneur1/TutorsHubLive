@@ -3,6 +3,47 @@
     {{auth()->user()->name}}
 @endsection
 @section('content')
+    <style>
+        .book-section .bookingform {
+            width: 500px;
+            max-width: 100%;
+        }
+        .book-section .bookingform .heading {
+            margin-bottom: 20px;
+            font-size: 25px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .book-section .bookingform .info table {
+            background: #fdfdfd;
+            width: 100%;
+        }
+        .book-section .bookingform .info table tr td {
+            padding: 5px 15px;
+        }
+        .book-section .bookingform .hours {
+            margin: 20px 0 10px;
+            text-align: center;
+        }
+        .book-section .bookingform .hours .input {
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        .book-section .bookingform .total {
+            font-size: 40px;
+            font-weight: bold;
+            text-align: center;
+            display: -webkit-box;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            flex-direction: column;
+            -webkit-box-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            justify-content: center;
+        }
+    </style>
     @php
         if($user->type == 'teacher')
         {
