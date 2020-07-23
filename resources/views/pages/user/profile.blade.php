@@ -31,7 +31,7 @@
             margin: 20px 0 10px;
             text-align: center;
         }
-        .book-section .bookingform .hours .input {
+        .book-section .bookingform .hours .input, .book-section .bookingform .dte .input, .book-section .bookingform .sessiontype .input {
             max-width: 300px;
             margin: 0 auto;
         }
