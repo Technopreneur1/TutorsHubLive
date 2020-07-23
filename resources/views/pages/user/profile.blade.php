@@ -49,7 +49,7 @@
             -webkit-box-pack: center;
             justify-content: center;
         }
-        .btn-book {
+        .book-section .bookingform .btn-book {
             border: none;
             width: 125px;
             background: #2575bc;
