@@ -2,6 +2,13 @@
     <div class="full-container" style=" position: relative">
         <a v-if="viewSession" @click="viewSession = null" class="btn-back"><i class="fas fa-long-arrow-alt-left"></i></a>
         <full-loader v-if="loading" ></full-loader>
+        <div v-if="showThanks" class="showThanks">
+            <div class="thnaku">Thanks</div>
+            <div class="pleaced">Your session has successfuly been Paid</div>
+            <div class="links">
+                <div class="gradient-btn"><a :href="sessions"><i class="fas fa-Home"></i> Back To Session</a></div>
+            </div>
+        </div>
         <section v-if="viewSession" class="view-session">
             <div class="sess-header">
                 <a v-if="authuser.type == 'student'" :href="url + '/user/' + viewSession.teacher.user.id" class="with">
@@ -10,7 +17,8 @@
                     </div>
                     <div class="info">
                         <div class="name">{{viewSession.teacher.user.name}}</div>
-                        <div class="status">{{viewSession.completed ? 'Completed' : 'Incomplete'}}</div>
+                        <div class="status"    v-if="viewSession.payment_status != 1  && viewSession.accept == '1'">{{viewSession.completed ? 'Completed' : 'Pending'}}</div>
+                        <div class="status"   v-if="viewSession.payment_status == 1  && viewSession.accept == '1'">{{viewSession.completed ? 'Completed' : 'Paid'}}</div>
                     </div>
                 </a>
                 <a v-if="authuser.type == 'teacher'" :href="url + '/user/' + viewSession.student.user.id" class="with">
@@ -23,7 +31,8 @@
                     </div>
                 </a>
                 <div class="sess-info">
-                    <div class="status"><span>{{viewSession.completed ? 'Completed' : 'Incomplete'}}</span></div>
+                    <div class="status"    v-if="viewSession.payment_status != 1  && viewSession.accept == '1'"><span>{{viewSession.completed ? 'Completed' : 'Pending'}}</span></div>
+                    <div class="status"    v-if="viewSession.payment_status == 1  && viewSession.accept == '1'"><span>{{viewSession.completed ? 'Completed' : 'Paid'}}</span></div>
                     <span class="dt">{{viewSession.created_at | moment('DD MMM, YYYY')}}</span>
                     <div class="val"><span>{{viewSession.level}}</span></div>
                     <div class="val"><span>{{viewSession.subject}}</span></div>
@@ -45,7 +54,8 @@
             </div>
 
             <div v-if="authuser.type == 'student' && !viewSession.completed && viewSession.class_status == 1" class="statusbar">
-                <span class="val">Pending</span>
+                <span class="val"   v-if="viewSession.payment_status != 1  && viewSession.accept == '1'">Pending</span>
+                <span class="val"   v-if="viewSession.payment_status == 1  && viewSession.accept == '1'">Paid</span>
                 <span class="txt">Please mark session as <b>completed</b> after it has taken place</span>
                 <button @click="markComplete" class="btn btn-gradientb">Mark as completed</button> &nbsp; OR &nbsp;
             </div>
@@ -53,13 +63,7 @@
             <button v-if="viewSession.accept != '1' && !viewSession.completed && authuser.type != 'student'" @click="requestaccept" class="btn btn-success" style="border-radius: 30px">Accept Session Request</button>
             <button v-if="viewSession.payment_status == '1' && viewSession.accept == '1' && viewSession.class_status == '0' && !viewSession.cancel_request && !viewSession.startsession && authuser.type != 'student'" @click="startsession" class="btn btn-success" style="border-radius: 30px">Start Session</button>
             <button v-if="viewSession.payment_status == 1 && viewSession.accept == '1' && viewSession.class_status == 0 && !viewSession.cancel_request && authuser.type == 'student'" @click="startsession" class="btn btn-success" style="border-radius: 30px">Join Session</button>
-            <div v-if="showThanks" class="showThanks">
-                <div class="thnaku">Thanks</div>
-                <div class="pleaced">Your session has successfuly been Paid</div>
-                <div class="links">
-                    <div class="gradient-btn"><a :href="sessions"><i class="fas fa-Home"></i> Back To Session</a></div>
-                </div>
-            </div>
+
             <div  v-if="viewSession.payment_status != 1  && viewSession.accept == '1' && authuser.type == 'student'" ref="paypal"></div>
 
 
@@ -159,7 +163,8 @@
                         <div class="val"><span>{{ses.subject}}</span></div>
                     </div>
                     <div class="actions">
-                        <div class="status">{{ses.completed ? "Completed" : 'Pending'}}</div>
+                        <div class="status" v-if="viewSession.payment_status != 1  && viewSession.accept == '1'">{{ses.completed ? "Completed" : 'Pending'}}</div>
+                        <div class="status" v-if="viewSession.payment_status == 1  && viewSession.accept == '1'">{{ses.completed ? "Completed" : 'Paid'}}</div>
                         <button @click="viewSession = ses" class="btn btn-gradient">Open</button>
                     </div>
                 </div>
