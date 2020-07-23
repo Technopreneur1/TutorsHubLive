@@ -475,6 +475,8 @@
                         //vob.loading = true
                         // This function captures the funds from the transaction.
                         return actions.order.capture().then(function(details) {
+                            console.log(data);
+                            console.log(this.sesoid);
 
                             axios.post('https://tutors-hub.com/complete/bookingpay',
                                 {
