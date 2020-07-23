@@ -53,7 +53,13 @@
             <button v-if="viewSession.accept != '1' && !viewSession.completed && authuser.type != 'student'" @click="requestaccept" class="btn btn-success" style="border-radius: 30px">Accept Session Request</button>
             <button v-if="viewSession.payment_status == '1' && viewSession.accept == '1' && viewSession.class_status == '0' && !viewSession.cancel_request && !viewSession.startsession && authuser.type != 'student'" @click="startsession" class="btn btn-success" style="border-radius: 30px">Start Session</button>
             <button v-if="viewSession.payment_status == 1 && viewSession.accept == '1' && viewSession.class_status == 0 && !viewSession.cancel_request && authuser.type == 'student'" @click="startsession" class="btn btn-success" style="border-radius: 30px">Join Session</button>
-
+            <div v-if="showThanks" class="showThanks">
+                <div class="thnaku">Thanks</div>
+                <div class="pleaced">Your session has successfuly been Paid</div>
+                <div class="links">
+                    <div class="gradient-btn"><a :href="sessions"><i class="fas fa-Home"></i> Back To Session</a></div>
+                </div>
+            </div>
             <div  v-if="viewSession.payment_status != 1  && viewSession.accept == '1' && authuser.type == 'student'" ref="paypal"></div>
 
 
