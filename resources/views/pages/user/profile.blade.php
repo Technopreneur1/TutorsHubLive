@@ -14,7 +14,7 @@
             width: 500px;
             max-width: 100%;
         }
-        .book-section .bookingform .heading {
+        .book-section .bookingform .heading, .edit-profile-slideout .thnaku {
             margin-bottom: 20px;
             font-size: 25px;
             text-align: center;
@@ -24,7 +24,12 @@
             background: #fdfdfd;
             width: 100%;
         }
-        .book-section .bookingform .info table tr td {
+        .edit-profile-slideout .links {
+            width: 160px;
+            padding: 5px 15px;
+            text-align: center;
+        }
+        .book-section .bookingform .info table tr td , .edit-profile-slideout .pleaced , .edit-profile-slideout .adv{
             padding: 5px 15px;
         }
         .book-section .bookingform .hours {
