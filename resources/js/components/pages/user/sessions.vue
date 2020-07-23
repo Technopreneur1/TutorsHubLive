@@ -452,9 +452,8 @@
                 this.loaded = true;
                 console.log(window.paypal)
                 let vob = this
-                let sesoid = this.viewSession.id
-                console.log(sesoid)
                 window.paypal.Buttons({
+
                     createOrder: (data, actions) => {
                         return actions.order.create({
 
@@ -472,18 +471,15 @@
                         })
                     },
                     onApprove: function(data, actions) {
-                        //vob.loading = true
+                        vob.loading = true
                         // This function captures the funds from the transaction.
                         return actions.order.capture().then(function(details) {
-                            console.log(data);
-                            console.log(this.sesoid);
 
                             axios.post('https://tutors-hub.com/complete/bookingpay',
                                 {
-                                    sessionpid:this.sesoid
+                                    sessionpid:vob.viewSession.id
                                 })
                                 .then(response => {
-                                    alert("Thank you for your Payment");
                                     vob.showThanks = true;
                                     vob.loading = false
                                 })
@@ -618,7 +614,8 @@
         {
 
             const script = document.createElement("script");
-            script.src = "https://www.paypal.com/sdk/js?client-id=AU1qSrl-VvM9r15F6lhSITnPRtJvJwFJfd__J5cMP8FvpXCDcEloTOysg8exK1DZN8rMCsgBXCOUbPFd&currency=" + this.currency;
+            script.src = "https://www.paypal.com/sdk/js?client-id=AYSq3RDGsmBLJE-otTkBtM-jBRd1TCQwFf9RGfwddNXWz0uFU9ztymylOhRS&currency=" + this.currency;
+            //script.src = "https://www.paypal.com/sdk/js?client-id=AU1qSrl-VvM9r15F6lhSITnPRtJvJwFJfd__J5cMP8FvpXCDcEloTOysg8exK1DZN8rMCsgBXCOUbPFd&currency=" + this.currency;
             script.addEventListener("load", this.setLoaded);
             document.body.appendChild(script);
         }

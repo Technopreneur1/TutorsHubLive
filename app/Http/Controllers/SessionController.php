@@ -50,7 +50,9 @@ class SessionController extends Controller
     {
         $session = Session::findOrFail($request->sessionpid);
         $session->update(['payment_status' => 1]);
-        return response()->json(['msg' => 'success']);
+        //return response()->json(['msg' => 'success']);
+        return response()->json(['session' => $session]);
+
     }
     public function sessionrequest(Request $request)
     {
