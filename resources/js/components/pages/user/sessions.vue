@@ -471,7 +471,7 @@
                         })
                     },
                     onApprove: function(data, actions) {
-                        vob.loading = true
+                        //vob.loading = true
                         // This function captures the funds from the transaction.
                         return actions.order.capture().then(function(details) {
 
