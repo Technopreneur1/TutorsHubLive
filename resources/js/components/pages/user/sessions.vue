@@ -17,7 +17,7 @@
                     </div>
                     <div class="info">
                         <div class="name">{{viewSession.teacher.user.name}}</div>
-                        <div class="status">{{viewSession.completed ? 'Completed' : 'Incomplete'}}</div>
+                        <div class="status">{{viewSession.completed ? 'Completed' : 'Pending'}}</div>
                     </div>
                 </a>
                 <a v-if="authuser.type == 'teacher'" :href="url + '/user/' + viewSession.student.user.id" class="with">
@@ -30,7 +30,7 @@
                     </div>
                 </a>
                 <div class="sess-info">
-                    <div class="status"><span>{{viewSession.completed ? 'Completed' : 'Incomplete'}}</span></div>
+                    <div class="status"><span>{{viewSession.completed ? 'Completed' : 'Pending'}}</span></div>
                     <span class="dt">{{viewSession.created_at | moment('DD MMM, YYYY')}}</span>
                     <div class="val"><span>{{viewSession.level}}</span></div>
                     <div class="val"><span>{{viewSession.subject}}</span></div>
@@ -56,11 +56,14 @@
                 <span class="txt">Please mark session as <b>completed</b> after it has taken place</span>
                 <button @click="markComplete" class="btn btn-gradientb">Mark as completed</button> &nbsp; OR &nbsp;
             </div>
-            <button v-if="!viewSession.cancel_request && !viewSession.completed" @click="requestCancel" class="btn btn-danger" style="border-radius: 30px">Request To Cancel Session</button>
+            <button v-if="!viewSession.cancel_request && !viewSession.completed" @click="requestCancel" class="btn btn-danger" style="border-radius: 30px;     text-align: center;
+    display: block;">Request To Cancel Session</button>
             <button v-if="viewSession.accept != '1' && !viewSession.completed && authuser.type != 'student'" @click="requestaccept" class="btn btn-success" style="border-radius: 30px">Accept Session Request</button>
             <button v-if="viewSession.payment_status == '1' && viewSession.accept == '1' && viewSession.class_status == '0' && !viewSession.cancel_request && !viewSession.startsession && authuser.type != 'student'" @click="startsession" class="btn btn-success" style="border-radius: 30px">Start Session</button>
             <button v-if="viewSession.payment_status == 1 && viewSession.accept == '1' && viewSession.class_status == 0 && !viewSession.cancel_request && authuser.type == 'student'" @click="startsession" class="btn btn-success" style="border-radius: 30px">Join Session</button>
-
+            <div v-if="viewSession.payment_status != 1  && viewSession.accept == '1' && authuser.type == 'student'" class="rates" >
+                Please Pay to confirm this Session
+            </div>
             <div  v-if="viewSession.payment_status != 1  && viewSession.accept == '1' && authuser.type == 'student'" ref="paypal"></div>
 
 
@@ -402,6 +405,7 @@
         data()
         {
             return{
+                showThanks: false,
                 reviewing: false,
                 rating: 0,
                 review: '',
@@ -489,6 +493,7 @@
                                 .then(response => {
                                     vob.showThanks = true;
                                     vob.loading = false
+                                    location.reload();
                                 })
                                 .catch(error => {
                                     console.log(error);

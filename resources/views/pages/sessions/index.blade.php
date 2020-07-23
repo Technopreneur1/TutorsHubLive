@@ -118,6 +118,14 @@
         font-weight: bold;
         margin-right: 15px;
     }
+    .view-session .paypal-buttons, .view-session .btn {
+        width: 200px !important;
+        margin: auto;
+        text-align: center;
+        margin-bottom: 25px;
+        margin-top: 25px;
+        display: block !important;
+    }
 </style>
     <div class="sessionsPage" id="app">
         <sessions url="{{route('home')}}" :sessions="{{$sessions}}" :authuser="{{auth()->user()}}"></sessions>
