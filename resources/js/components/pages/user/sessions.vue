@@ -453,7 +453,7 @@
                 console.log(window.paypal)
                 let vob = this
                 let sesoid = this.viewSession.id
-                cosole.log(sesoid)
+                console.log(sesoid)
                 window.paypal.Buttons({
                     createOrder: (data, actions) => {
                         return actions.order.create({
