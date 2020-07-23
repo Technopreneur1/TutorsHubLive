@@ -163,8 +163,7 @@
                         <div class="val"><span>{{ses.subject}}</span></div>
                     </div>
                     <div class="actions">
-                        <div class="status" v-if="viewSession.payment_status != 1  && viewSession.accept == '1'">{{ses.completed ? "Completed" : 'Pending'}}</div>
-                        <div class="status" v-if="viewSession.payment_status == 1  && viewSession.accept == '1'">{{ses.completed ? "Completed" : 'Paid'}}</div>
+                        <div class="status">{{ses.completed ? "Completed" : 'Pending'}}</div>
                         <button @click="viewSession = ses" class="btn btn-gradient">Open</button>
                     </div>
                 </div>
