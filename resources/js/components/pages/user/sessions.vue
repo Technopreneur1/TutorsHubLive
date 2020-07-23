@@ -54,7 +54,7 @@
             <button v-if="viewSession.payment_status == '1' && viewSession.accept == '1' && viewSession.class_status == '0' && !viewSession.cancel_request && !viewSession.startsession && authuser.type != 'student'" @click="startsession" class="btn btn-success" style="border-radius: 30px">Start Session</button>
             <button v-if="viewSession.payment_status == 1 && viewSession.accept == '1' && viewSession.class_status == 0 && !viewSession.cancel_request && authuser.type == 'student'" @click="startsession" class="btn btn-success" style="border-radius: 30px">Join Session</button>
 
-            <div  v-if="viewSession.payment_status != 1  && viewSession.accept == '1' && authuser.type == 'student'"ref="paypal"></div>
+            <div  v-if="viewSession.payment_status != 1  && viewSession.accept == '1' && authuser.type == 'student'" ref="paypal"></div>
 
 
 
