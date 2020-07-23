@@ -17,8 +17,7 @@
                     </div>
                     <div class="info">
                         <div class="name">{{viewSession.teacher.user.name}}</div>
-                        <div class="status"    v-if="viewSession.payment_status != 1  && viewSession.accept == '1'">{{viewSession.completed ? 'Completed' : 'Pending'}}</div>
-                        <div class="status"   v-if="viewSession.payment_status == 1  && viewSession.accept == '1'">{{viewSession.completed ? 'Completed' : 'Paid'}}</div>
+                        <div class="status">{{viewSession.completed ? 'Completed' : 'Incomplete'}}</div>
                     </div>
                 </a>
                 <a v-if="authuser.type == 'teacher'" :href="url + '/user/' + viewSession.student.user.id" class="with">
@@ -31,8 +30,7 @@
                     </div>
                 </a>
                 <div class="sess-info">
-                    <div class="status"    v-if="viewSession.payment_status != 1  && viewSession.accept == '1'"><span>{{viewSession.completed ? 'Completed' : 'Pending'}}</span></div>
-                    <div class="status"    v-if="viewSession.payment_status == 1  && viewSession.accept == '1'"><span>{{viewSession.completed ? 'Completed' : 'Paid'}}</span></div>
+                    <div class="status"><span>{{viewSession.completed ? 'Completed' : 'Incomplete'}}</span></div>
                     <span class="dt">{{viewSession.created_at | moment('DD MMM, YYYY')}}</span>
                     <div class="val"><span>{{viewSession.level}}</span></div>
                     <div class="val"><span>{{viewSession.subject}}</span></div>
@@ -54,8 +52,7 @@
             </div>
 
             <div v-if="authuser.type == 'student' && !viewSession.completed && viewSession.class_status == 1" class="statusbar">
-                <span class="val"   v-if="viewSession.payment_status != 1  && viewSession.accept == '1'">Pending</span>
-                <span class="val"   v-if="viewSession.payment_status == 1  && viewSession.accept == '1'">Paid</span>
+                <span class="val">Pending</span>
                 <span class="txt">Please mark session as <b>completed</b> after it has taken place</span>
                 <button @click="markComplete" class="btn btn-gradientb">Mark as completed</button> &nbsp; OR &nbsp;
             </div>
