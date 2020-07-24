@@ -166,9 +166,13 @@
                         <div class="val"><span>{{ses.subject}}</span></div>
                     </div>
                     <div class="info">
-                        <span class="dt">{{ses.sessiontype | moment('DD MMM, YYYY')}}</span>
-                        <div class="val"><span>{{ses.startsession}}</span></div>
-                        <div class="val"><span>{{ses.endsession}}</span></div>
+                        <span class="dt">Session Type{{ses.sessiontype}}</span>
+                        <div class="val"><span>Start Session: {{ses.startsession}}</span></div>
+                        <div class="val"><span>End Session: {{ses.endsession}}</span></div>
+                    </div>
+                    <div class="info">
+                        <span class="dt">Hours: {{ses.hours}}</span>
+                        <div class="val"><span>Total: {{ses.total}}</span></div>
                     </div>
                     <div class="actions">
                         <div v-if="ses.payment_status != 1 && ses.accept != '1' && ses.class_status == 0" class="status">Requested</div>
