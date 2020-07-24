@@ -165,6 +165,11 @@
                         <div class="val"><span>{{ses.level}}</span></div>
                         <div class="val"><span>{{ses.subject}}</span></div>
                     </div>
+                    <div class="info">
+                        <span class="dt">{{ses.sessiontype | moment('DD MMM, YYYY')}}</span>
+                        <div class="val"><span>{{ses.startsession}}</span></div>
+                        <div class="val"><span>{{ses.endsession}}</span></div>
+                    </div>
                     <div class="actions">
                         <div v-if="ses.payment_status != 1 && ses.accept != '1' && ses.class_status == 0" class="status">Requested</div>
                         <div v-if="ses.payment_status != 1 && ses.accept == '1' && ses.class_status == 0" class="status">Pending</div>
