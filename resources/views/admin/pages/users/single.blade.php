@@ -111,6 +111,26 @@
                                         @endif
                                     </td>
                                 </tr>
+                                @if ($user->type ==  'teacher')
+                                <tr>
+                                    <td>Feature</td>
+                                    <td>
+                                        @if ($user->is_featured)
+                                            <span>Featured</span>
+                                            <form action="{{route('admin.feature', $user->id)}}" style="display: inline; margin-left: 20px" method="post">
+                                                <button class="btn btn-success">Normal</button>
+                                                @csrf
+                                            </form>
+                                        @else
+                                            <span>Normal</span>
+                                            <form action="{{route('admin.feature', $user->id)}}" style="display: inline; margin-left: 20px" method="post">
+                                                @csrf
+                                                <button class="btn btn-danger">Feature</button>
+                                            </form>
+                                        @endif
+                                    </td>
+                                </tr>
+                                @endif
                                 <tr>
                                     <td>Verification Status</td>
                                     <td>
@@ -285,7 +305,7 @@
                     <div class="col-md-5 ">
                         <div class="box">
                             <div class="box-header">
-                                
+
                                 <div class="box-title">
                                     Add Payment
                                          @if ($user->country)

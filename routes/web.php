@@ -369,6 +369,7 @@ Route::prefix('adminpanel')->middleware(['admin'])->group(function () {
 
     Route::post('/post-payment', 'PaymentController@post')->name('admin.post.payment');
     Route::post('/ban/{id}', 'UserController@ban')->name('admin.ban');
+    Route::post('/feature/{id}', 'UserController@feature')->name('admin.feature');
     Route::post('/verify/{id}', 'UserController@verify')->name('admin.verify.user');
 
 

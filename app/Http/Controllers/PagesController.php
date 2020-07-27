@@ -39,8 +39,9 @@ class PagesController extends Controller
         }else {
             $subject = Discipline::get();
             $testimonials = Testimonial::get();
+            $teachers = User::where('type', 'teacher')->where('is_featured', 1)->get();
             $subjects = json_decode($subject);
-            return view("pages.home1")->with('subjects',$subjects)->with('testimonials',$testimonials);
+            return view("pages.home1")->with('subjects',$subjects)->with('testimonials',$testimonials)->with('teachers',$teachers);
         }
     }
     public function myFiles()

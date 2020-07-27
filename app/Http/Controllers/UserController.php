@@ -186,7 +186,22 @@ class UserController extends Controller
         session()->flash('message', 'User Successfully Banned');
         return back();
     }
-     public function search_locations(Request $request){
+    public function feature($id)
+    {
+        $user = User::findOrFail($id);
+        if($user->is_featured)
+        {
+            $user->update(['is_featured' => false]);
+        }
+        else
+        {
+            $user->update(['is_featured' => true]);
+        }
+        session()->flash('message', 'User Successfully Featured');
+        return back();
+    }
+
+    public function search_locations(Request $request){
         // dd($request->all());
 
        $subject = $request->get('subject');
