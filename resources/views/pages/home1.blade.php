@@ -433,61 +433,49 @@
 
 
                                 <div class="vc_row wpb_row vc_row-fluid vc_custom_1484220977347"><div class="wpb_column vc_column_container vc_col-sm-12 sc_layouts_column_icons_position_left"><div class="vc_column-inner vc_custom_1486382076421"><div class="wpb_wrapper"><div id="sc_title_1914006197"
-                                                                                                                                                                                                                                                                                   class="sc_title sc_title_default  vc_custom_1484220999465"><h6 class="sc_item_subtitle sc_title_subtitle sc_align_default sc_item_title_style_default">Find the Right Tutor for You</h6><h2 class="sc_item_title sc_title_title sc_align_default sc_item_title_style_default">Featured Tutors</h2></div><!-- /.sc_title --><div class="tp-container" data-slides="3"><div class="tp-columns-container"><div class="tutor-plugin column-1-3"><div id="post-572" class="post-572 tutor type-tutor status-publish has-post-thumbnail hentry tutor_group-personal tutor_tag-chemistry tutor_tag-coding tutor_tag-communication">
+                                                <div class="tp-container" data-slides="3">
+                                                    <div class="tp-columns-container">
+                                                        <?php $count = 0; ?>
+                                                    @foreach($teachers as $teacher)
+                                                                <?php if($count == 3) break; ?>
+                                                                <div class="tutor-plugin column-1-3" style="float: left;">
+                                                            <div id="post-572" class="post-572 tutor type-tutor status-publish has-post-thumbnail hentry tutor_group-personal tutor_tag-chemistry tutor_tag-coding tutor_tag-communication">
                                                                 <div class="tp-single tp-post">
                                                                     <div class="tp-featured">
-                                                                        <img width="740" height="792" src="smarthead.ancorathemes.com/wp-content/uploads/2016/11/tutor2-740x792.jpg" class="attachment-tutor-archive size-tutor-archive wp-post-image" alt="" srcset="http://smarthead.ancorathemes.com/wp-content/uploads/2016/11/tutor2-740x792.jpg 740w, http://smarthead.ancorathemes.com/wp-content/uploads/2016/11/tutor2-280x300.jpg 280w, http://smarthead.ancorathemes.com/wp-content/uploads/2016/11/tutor2-370x397.jpg 370w" sizes="(max-width: 740px) 100vw, 740px" />                            <div class="tp-featured-overlay">
+                                                                        @if(isset($record->avatar))
+                                                                        <img width="740" height="792" src="https://tutors-hub.com/storage/images/{{$teacher->avatar}}" class="attachment-tutor-archive size-tutor-archive wp-post-image" alt="" srcset="https://tutors-hub.com/storage/images/{{$teacher->avatar}} 740w, https://tutors-hub.com/storage/images/{{$teacher->avatar}} 280w, https://tutors-hub.com/storage/images/{{$teacher->avatar}} 370w" sizes="(max-width: 740px) 100vw, 740px" />                            <div class="tp-featured-overlay">
+                                                                         @else
+                                                                                    <img width="740" height="792" src="https://tutors-hub.com/wp-content/uploads/2016/11/tutor7-740x792.jpg" class="attachment-tutor-archive size-tutor-archive wp-post-image" alt="" srcset="https://tutors-hub.com/wp-content/uploads/2016/11/tutor7-740x792.jpg 740w, https://tutors-hub.com/wp-content/uploads/2016/11/tutor7-280x300.jpg 280w, https://tutors-hub.com/wp-content/uploads/2016/11/tutor7-370x397.jpg 370w" sizes="(max-width: 740px) 100vw, 740px" />                        <div class="tp-featured-overlay">
+                                                                           @endif
                                                                             <div class="tp-price">
-                                                                                <span class="tp-present-price"><span class="small">$</span>34                                            </span>
+                                                                                <span class="tp-present-price"><span class="small">$</span>{{$teacher->rate}}                                            </span>
                                                                                 <span class="tp-period-price">hour                                                </span>
                                                                             </div>                            </div>
                                                                     </div>
-                                                                    <div class="tp-content"><div class="tp-subjects"><a href="smarthead.ancorathemes.com/tutor_tag/chemistry/" class="tp-tutor-subjects">Chemistry</a>, <a href="http://smarthead.ancorathemes.com/tutor_tag/coding/" class="tp-tutor-subjects">Coding</a>, <a href="http://smarthead.ancorathemes.com/tutor_tag/communication/" class="tp-tutor-subjects">Communication</a></div>
+                                                                    <div class="tp-content"><div class="tp-subjects"><a href="#" class="tp-tutor-subjects">{{$teacher->subject_name}}</a> </div>
                                                                         <div class="tp-title">
-                                                                            <a class="tp-title-link" href="smarthead.ancorathemes.com/tutors/taylor-jones/">Taylor Jones</a>
+                                                                            <a class="tp-title-link" href="#">{{$teacher->name}}</a>
                                                                         </div>
                                                                         <div class="tp-read-more">
-                                                                            <a class="tp-title-read-more sc_button_hover_slide_left" href="smarthead.ancorathemes.com/tutors/taylor-jones/">View Tutor</a>
-                                                                        </div>
+                                                                            <form   action="{{route('viewtutor')}}"  method="POST" >
+                                                                                @csrf
+
+                                                                                <input type="hidden" name="id" value="{{$teacher->id}}">
+                                                                                <input type="hidden" name="name" value="{{$teacher->name}}">
+                                                                                <input type="hidden" name="subject" value="{{$teacher->subject_name}}">
+                                                                                <input type="hidden" name="rate" value="{{$teacher->rate}}">
+                                                                                <input type="hidden" name="avatar" value="{{$teacher->avatar}}">
+                                                                                <input type="hidden" name="created_at" value="{{$teacher->created_at}}">
+                                                                                <input type="hidden" name="bio" value="{{$teacher->bio}}">
+                                                                                <button type="submit" class="tp-title-read-more sc_button_hover_slide_left" name="form-{{$teacher->id}}">View Tutor</button>
+                                                                            </form>                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div></div><div class="tutor-plugin column-1-3"><div id="post-574" class="post-574 tutor type-tutor status-publish has-post-thumbnail hentry tutor_group-personal tutor_tag-english tutor_tag-marketing tutor_tag-mathematics">
-                                                                <div class="tp-single tp-post">
-                                                                    <div class="tp-featured">
-                                                                        <img width="740" height="792" src="smarthead.ancorathemes.com/wp-content/uploads/2016/11/tutor4-740x792.jpg" class="attachment-tutor-archive size-tutor-archive wp-post-image" alt="" srcset="http://smarthead.ancorathemes.com/wp-content/uploads/2016/11/tutor4-740x792.jpg 740w, http://smarthead.ancorathemes.com/wp-content/uploads/2016/11/tutor4-280x300.jpg 280w, http://smarthead.ancorathemes.com/wp-content/uploads/2016/11/tutor4-370x397.jpg 370w" sizes="(max-width: 740px) 100vw, 740px" />                            <div class="tp-featured-overlay">
-                                                                            <div class="tp-price">
-                                                                                <span class="tp-present-price"><span class="small">$</span>34                                            </span>
-                                                                                <span class="tp-period-price">hour                                                </span>
-                                                                            </div>                            </div>
-                                                                    </div>
-                                                                    <div class="tp-content"><div class="tp-subjects"><a href="smarthead.ancorathemes.com/tutor_tag/english/" class="tp-tutor-subjects">English</a>, <a href="http://smarthead.ancorathemes.com/tutor_tag/marketing/" class="tp-tutor-subjects">Marketing</a>, <a href="http://smarthead.ancorathemes.com/tutor_tag/mathematics/" class="tp-tutor-subjects">Mathematics</a></div>
-                                                                        <div class="tp-title">
-                                                                            <a class="tp-title-link" href="smarthead.ancorathemes.com/tutors/steven-collins/">Steven Collins</a>
-                                                                        </div>
-                                                                        <div class="tp-read-more">
-                                                                            <a class="tp-title-read-more sc_button_hover_slide_left" href="smarthead.ancorathemes.com/tutors/steven-collins/">View Tutor</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div></div><div class="tutor-plugin column-1-3"><div id="post-576" class="post-576 tutor type-tutor status-publish has-post-thumbnail hentry tutor_group-personal tutor_tag-architecture tutor_tag-spanish tutor_tag-world-history">
-                                                                <div class="tp-single tp-post">
-                                                                    <div class="tp-featured">
-                                                                        <img width="740" height="792" src="smarthead.ancorathemes.com/wp-content/uploads/2016/11/tutor6-740x792.jpg" class="attachment-tutor-archive size-tutor-archive wp-post-image" alt="" srcset="http://smarthead.ancorathemes.com/wp-content/uploads/2016/11/tutor6-740x792.jpg 740w, http://smarthead.ancorathemes.com/wp-content/uploads/2016/11/tutor6-280x300.jpg 280w, http://smarthead.ancorathemes.com/wp-content/uploads/2016/11/tutor6-370x397.jpg 370w" sizes="(max-width: 740px) 100vw, 740px" />                            <div class="tp-featured-overlay">
-                                                                            <div class="tp-price">
-                                                                                <span class="tp-present-price"><span class="small">$</span>30                                            </span>
-                                                                                <span class="tp-period-price">hour                                                </span>
-                                                                            </div>                            </div>
-                                                                    </div>
-                                                                    <div class="tp-content"><div class="tp-subjects"><a href="smarthead.ancorathemes.com/tutor_tag/architecture/" class="tp-tutor-subjects">Architecture</a>, <a href="http://smarthead.ancorathemes.com/tutor_tag/spanish/" class="tp-tutor-subjects">Spanish</a>, <a href="http://smarthead.ancorathemes.com/tutor_tag/world-history/" class="tp-tutor-subjects">World History</a></div>
-                                                                        <div class="tp-title">
-                                                                            <a class="tp-title-link" href="smarthead.ancorathemes.com/tutors/sharon-brown/">Sharon Brown</a>
-                                                                        </div>
-                                                                        <div class="tp-read-more">
-                                                                            <a class="tp-title-read-more sc_button_hover_slide_left" href="smarthead.ancorathemes.com/tutors/sharon-brown/">View Tutor</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div></div></div></div></div></div></div><div class="wpb_column vc_column_container vc_col-sm-12 sc_layouts_column_icons_position_left"><div class="vc_column-inner"><div class="wpb_wrapper"><div  id="sc_action_1338897222"
+                                                            </div></div>
+                                                                    <?php $count++; ?>
+
+                                                        @endforeach
+                                                      </div></div></div></div></div><div class="wpb_column vc_column_container vc_col-sm-12 sc_layouts_column_icons_position_left"><div class="vc_column-inner"><div class="wpb_wrapper"><div  id="sc_action_1338897222"
                                                                                                                                                                                                                                                                  class="sc_action sc_action_simple  vc_custom_1495537959265" data-slides-min-width="250"	><div class="sc_action_content sc_item_content"><div class="sc_action_item sc_action_item_simple sc_action_item_ml">
                                                             <h3 class="sc_action_item_title"><span>Want to become a tutor in Tutor-Hub?</span></h3><div class="sc_action_item_description"><span>Tutor-Hub collaborate professional and talented tutors from all over the world! Join us right now!</span></div>
                                                             <a href="https://tutors-hub.com/teacher-registration" class="sc_action_item_link">register now</a></div></div></div><!-- /.sc_action --></div></div></div></div><div data-vc-full-width="true" data-vc-full-width-init="false" class="vc_row wpb_row vc_row-fluid vc_custom_1485435081882 vc_row-has-fill inverse_colors"><div class="wpb_column vc_column_container vc_col-sm-12 sc_layouts_column_icons_position_left"><div class="vc_column-inner"><div class="wpb_wrapper"><div id="sc_content_729558933"

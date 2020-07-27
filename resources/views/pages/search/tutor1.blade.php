@@ -331,7 +331,7 @@
                                                         <input type="hidden" name="created_at" value="{{$record->created_at}}">
                                                         <input type="hidden" name="bio" value="{{$record->bio}}">
                                                         <button type="submit" class="tp-title-read-more sc_button_hover_slide_left" name="form-{{$record->id}}">View Tutor</button>
-
+                                                    </form>
 
                                                 </div>
                                             </div>

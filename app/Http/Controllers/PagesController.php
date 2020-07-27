@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Discipline;
+use App\Plan;
 use App\Testimonial;
 use App\User;
 use App\Ticket;
@@ -39,8 +40,18 @@ class PagesController extends Controller
         }else {
             $subject = Discipline::get();
             $testimonials = Testimonial::get();
-            $teachers = User::where('type', 'teacher')->where('is_featured', 1)->get();
+            $teachers = Plan::join('disciplines', 'plans.discipline_id', '=', 'disciplines.id')
+                ->join('teachers', 'plans.teacher_id', '=', 'teachers.id')
+                ->join('users', 'teachers.user_id', '=', 'users.id')
+                ->select('plans.*',  'disciplines.name AS subject_name', 'teachers.*', 'users.*')
+                ->where('users.type', 'teacher')->where('users.is_featured', 1)
+                ->groupBy('users.id')
+                ->get();
+
+            //dd($teachers);                                                                                                                                                                                                class="sc_title sc_title_default  vc_custom_1484220999465"><h6 class="sc_item_subtitle sc_title_subtitle sc_align_default sc_item_title_style_default">Find the Right Tutor for You</h6><h2 class="sc_item_title sc_title_title sc_align_default sc_item_title_style_default">Featured Tutors</h2></div><!-- /.sc_title -->
+
             $subjects = json_decode($subject);
+            //dd($teachers);
             return view("pages.home1")->with('subjects',$subjects)->with('testimonials',$testimonials)->with('teachers',$teachers);
         }
     }
