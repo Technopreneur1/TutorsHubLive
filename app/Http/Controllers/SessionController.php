@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Earning;
+use App\Mail\PaymentReceived;
+use App\Mail\sessionAccepted;
+use App\Mail\sessionRequested;
 use App\Session;
 use Carbon\Carbon;
 use App\Mail\cancelRequest;
@@ -50,6 +53,9 @@ class SessionController extends Controller
     {
         $session = Session::findOrFail($request->sessionpid);
         $session->update(['payment_status' => 1]);
+        Mail::to('info@tutors-hub.com')->send(new PaymentReceived($session, auth()->user()));
+        Mail::to(auth()->user()->email)->send(new PaymentReceived($session, auth()->user()));
+
         //return response()->json(['msg' => 'success']);
         return response()->json(['session' => $session]);
 
@@ -70,6 +76,12 @@ class SessionController extends Controller
             'fee' => ($request->total * Earning::currentFee())/100,
 
         ]);
+        $smail = $session->student->user->email;
+        $tmail = $session->teacher->user->email;
+        Mail::to('info@tutors-hub.com')->send(new sessionRequested($session, auth()->user()));
+        Mail::to($smail)->send(new sessionRequested($session, auth()->user()));
+        Mail::to($tmail)->send(new sessionRequested($session, auth()->user()));
+
         return response()->json(['session' => $session]);
     }
     public function complete(Request $request)
@@ -138,7 +150,12 @@ class SessionController extends Controller
         $roomname = substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0, 9).$request->id;
         $agorasession = substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0, 32).$request->id;
         $session->update(['accept' => '1', 'roomname' => $roomname, 'agora_session' => $agorasession]);
-        Mail::to('info@tutors-hub.com')->send(new cancelRequest($session, auth()->user()));
+        $smail = $session->student->user->email;
+        $tmail = $session->teacher->user->email;
+        Mail::to('info@tutors-hub.com')->send(new sessionAccepted($session, auth()->user()));
+        Mail::to($smail)->send(new sessionAccepted($session, auth()->user()));
+        Mail::to($tmail)->send(new sessionAccepted($session, auth()->user()));
+
         return  response()->json(['msg' => 'success']);
     }
 
@@ -149,7 +166,7 @@ class SessionController extends Controller
         $startsession = date("Y-m-d H:i:s");
         $endsession = date("Y-m-d H:i:s", strtotime("+".$hr." hours"));
         $session->update(['startsession' => $startsession, 'endsession' => $endsession]);
-        //Mail::to('info@tutors-hub.com')->send(new cancelRequest($session, auth()->user()));
+//        Mail::to('info@tutors-hub.com')->send(new cancelRequest($session, auth()->user()));
         return  response()->json(['msg' => 'success']);
     }
     public function requestagorasession($agora_id)
