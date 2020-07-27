@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Discipline;
+use App\Testimonial;
 use App\User;
 use App\Ticket;
 use App\Mail\ContactEmail;
@@ -37,8 +38,9 @@ class PagesController extends Controller
             }
         }else {
             $subject = Discipline::get();
+            $testimonials = Testimonial::get();
             $subjects = json_decode($subject);
-            return view("pages.home1")->with('subjects',$subjects);
+            return view("pages.home1")->with('subjects',$subjects)->with('testimonials',$testimonials);
         }
     }
     public function myFiles()
@@ -97,7 +99,7 @@ class PagesController extends Controller
     {
         if(auth()->user()->type == 'teacher')
         {
-            
+
             return view('pages.user.plans');
         }else {
             abort(404);

@@ -326,6 +326,11 @@ Route::prefix('adminpanel')->middleware(['admin'])->group(function () {
     Route::get('/students/banned', 'AdminController@bannedStudents')->name('admin.students.banned');
     Route::get('/user/{id}', 'AdminController@getUser')->name('admin.user');
     Route::get('/countries', 'AdminController@countries')->name('admin.countries');
+    Route::get('/testimonials', 'AdminController@testimonials')->name('admin.testimonials');
+    Route::post('/testimonials', 'TestimonialController@post')->name('admin.add.testimonials');
+    Route::get('/testimonials/{id}', 'AdminController@editTestimonial')->name('admin.testimonial.edit');
+    Route::post('/testimonials/{id}', 'TestimonialController@update')->name('admin.testimonial.update');
+    Route::post('/testimonial-delete/{id}', 'TestimonialController@destroy')->name('admin.testimonial.delete');
     Route::get('/countries/{id}', 'AdminController@getCountry')->name('admin.country');
     Route::get('/state/{id}', 'AdminController@getState')->name('admin.state');
     Route::get('/city/{id}', 'AdminController@getCity')->name('admin.city');

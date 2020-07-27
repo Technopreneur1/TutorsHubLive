@@ -172,7 +172,6 @@
                     </div>
                     <div class="info">
                         <span class="dt">Hours: {{ses.hours}}</span>
-                        <div class="val"><span>Total: {{ses.total}}</span></div>
                     </div>
                     <div class="actions">
                         <div v-if="ses.payment_status != 1 && ses.accept != '1' && ses.class_status == 0" class="status">Requested</div>

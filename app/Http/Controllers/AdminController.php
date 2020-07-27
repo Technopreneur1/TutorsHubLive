@@ -14,6 +14,7 @@ use App\Student;
 use App\Location;
 use Carbon\Carbon;
 use App\Discipline;
+use App\Testimonial;
 use App\Events\NewMessage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -22,7 +23,7 @@ use Illuminate\Support\Facades\Hash;
 class AdminController extends Controller
 {
 
-    
+
     //Countries
     public function verifyEmail(Request $request)
     {
@@ -97,7 +98,7 @@ class AdminController extends Controller
     }
     public function createAdmin()
     {
-        
+
         return view('admin.pages.admins.add');
     }
     public function updatePassword(Request $request)
@@ -144,7 +145,7 @@ class AdminController extends Controller
         $levels = Level::orderBy('name', 'asc')->get();
         return view('admin.pages.levels.index', ['levels' => $levels]);
     }
-    
+
     public function disciplines()
     {
         $disciplines = Discipline::orderBy('name', 'asc')->get();
@@ -160,11 +161,22 @@ class AdminController extends Controller
         $level = Level::findOrFail($id);
         return view('admin.pages.levels.edit', ['level' => $level]);
     }
-    
+
     public function countries()
     {
         $countries = Location::where('type', 'country')->get();
         return view('admin.pages.locations.index', ['locations' => $countries, 'type' => 'Countries']);
+    }
+
+    public function testimonials()
+    {
+        $testimonials = Testimonial::orderBy('name', 'asc')->get();
+        return view('admin.pages.testimonials.index', ['testimonials' => $testimonials]);
+    }
+    public function editTestimonial($id)
+    {
+        $testimonial = Testimonial::findOrFail($id);
+        return view('admin.pages.testimonials.edit', ['testimonial' => $testimonial]);
     }
     public function getCountry($id)
     {
@@ -249,15 +261,15 @@ class AdminController extends Controller
         $users = User::where('type', 'teacher')->where('is_banned', 1)->get();
         return view('admin.pages.users.index', ['users' => $users, 'type' => 'Banned Tutors']);
     }
-    
+
     // Return Single Tutor Page
     public function getUser($id)
     {
         $user = User::with(['country', 'state', 'city', 'neighborhood'])->findOrFail($id);
         $profile = $user->profile;
-       
+
         return view('admin.pages.users.single', ['user' => $user, 'type' => 'Tutor']);
-        
+
     }
 
     public function contact($id, $ticket)
@@ -292,16 +304,16 @@ class AdminController extends Controller
                     'text' => "Hello " . User::find($id)->name . " thanks reaching out. I am sending this message in regards to your ticket " . $ticket . " How can I help you?"
                 ]);
             }
-    
+
             // broadcast(new NewMessage($message));
-            
+
             return redirect('/messages?u='. $id);
-            
+
         }
     }
     // public function hasConversationWith(Request $request)
     // {
-        
+
     // }
-    
+
 }

@@ -98,7 +98,9 @@
             <li {{{ (Request::is('adminpanel/tickets/closed') ? 'active' : '') }}}"><a href="{{route('admin.tickets.closed')}}"><i class="fa fa-circle-o"></i>Closed</a></li>
           </ul>
         </li>
-        <li class="{{{ (Request::is('adminpanel/countries') ? 'active' : '') }}}"><a href="{{route('admin.countries')}}"><i class="fa fa-copy"></i> <span>Locations</span></a></li>
+          <li class="{{{ (Request::is('adminpanel/testimonials') ? 'active' : '') }}}"><a href="{{route('admin.testimonials')}}"><i class="fa fa-copy"></i> <span>Testimonilas</span></a></li>
+
+          <li class="{{{ (Request::is('adminpanel/countries') ? 'active' : '') }}}"><a href="{{route('admin.countries')}}"><i class="fa fa-copy"></i> <span>Locations</span></a></li>
         <li class="{{{ (Request::is('adminpanel/disciplines') ? 'active' : '') }}}"><a href="{{route('admin.disciplines')}}"><i class="fa fa-copy"></i> <span>Disciplines</span></a></li>
         <li class="{{{ (Request::is('adminpanel/levels') ? 'active' : '') }}}"><a href="{{route('admin.levels')}}"><i class="fa fa-copy"></i> <span>Levels</span></a></li>
         <li class="{{{ (Request::is('adminpanel/settings') ? 'active' : '') }}}"><a href="{{route('admin.settings')}}"><i class="fa fa-copy"></i> <span>Settings</span></a></li>
