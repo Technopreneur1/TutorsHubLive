@@ -189,7 +189,7 @@
 
         <div class="page_wrap">
 
-            <header class="top_panel top_panel_default without_bg_image with_featured_image header-dark scheme_default">    <div class="top_panel_top">
+            <header style="margin-bottom: 7rem;" class="top_panel top_panel_default without_bg_image with_featured_image header-dark scheme_default">    <div class="top_panel_top">
                     <div class="content_wrap">
                         <div class="custom_button_language">
                         </div>
