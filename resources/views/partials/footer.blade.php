@@ -3,19 +3,23 @@
 <footer class="footer_wrap footer_default scheme_default">
     <div class="footer_widgets_wrap widget_area">
     <div class="footer_widgets_inner widget_area_inner">
-                    <div class="content_wrap"><div class="columns_wrap"><aside id="trx_addons_widget_contacts-2" class="column-1_3 widget widget_contacts"><div class="contacts_logo"><img src="{{url('wp-content/uploads/2016/12/logotxt.png')}}" alt="" width="220" height="46"></div><div class="contacts_description"><p>Et scaevola delicata vix, mea ei invidunt quodsi eripuit definiebas at pri. Placerat voluptaria meleos malis civibus an dolor </p>
-    </div></aside><aside id="nav_menu-2" class="column-1_3 widget widget_nav_menu"><h5 class="widget_title">Quick Links</h5><div class="menu-footer-menu-container"><ul id="menu-footer-menu" class="menu"><li id="menu-item-240" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-240"><a href="">About Us</a></li>
-    <li id="menu-item-242" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-242"><a href="">Become a Tutor</a></li>
-    <li id="menu-item-243" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-243"><a href="">Our News</a></li>
-    <li id="menu-item-244" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-244"><a href="">Portfolio</a></li>
-    <li id="menu-item-245" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-245"><a href="">Contact Us</a></li>
-    </ul></div></aside><aside id="trx_addons_widget_contacts-3" class="column-1_3 widget widget_contacts"><h5 class="widget_title">Our Contacts</h5><div class="contacts_info"><div class="contacts_left"><span class="contacts_address">350 Avenue, New York, NY 10001</span></div><div class="contacts_right"><span class="contacts_email"><a href="mailto:"><a href="/cdn-cgi/l/email-protection#4f262129200f2a372e223f232a612c2022"><span class="__cf_email__" data-cfemail="a5cccbc3cae5c0ddc4c8d5c9c08bc6cac8">[email&#160;protected]</span></a></a></span><span class="contacts_phone"><a href="tel:8001234567">800-123-4567</a></span></div></div><div class="contacts_socials socials_wrap"><span class="social_item"><a href="" target="_blank" class="social_icons social_twitter"><span class="trx_addons_icon-twitter"></span></a></span><span class="social_item"><a href="" target="_blank" class="social_icons social_facebook"><span class="trx_addons_icon-facebook"></span></a></span><span class="social_item"><a href="" target="_blank" class="social_icons social_instagram"><span class="trx_addons_icon-instagram"></span></a></span><span class="social_item"><a href="" target="_blank" class="social_icons social_dribbble"><span class="trx_addons_icon-dribbble"></span></a></span></div></aside></div><!-- /.columns_wrap --></div><!-- /.content_wrap -->			</div><!-- /.footer_widgets_inner -->
+                    <div class="content_wrap"><div class="columns_wrap"><aside id="trx_addons_widget_contacts-2" class="column-1_3 widget widget_contacts"><div class="contacts_logo"><img src="{{url('wp-content/uploads/2016/12/logotxt.png')}}" alt="" width="220" height="46"></div><div class="contacts_description"><p>This is platform that provides  a flexible and safe environment for students to connect with tutors  online or in-person</p>
+    </div></aside><aside id="nav_menu-2" class="column-1_3 widget widget_nav_menu"><h5 class="widget_title">Quick Links</h5><div class="menu-footer-menu-container"><ul id="menu-footer-menu" class="menu">
+                                        <li id="menu-item-240" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-240"><a href="">About Us</a></li>
+    <li id="menu-item-243" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-243"><a href="">Terms & conditions</a></li>
+    <li id="menu-item-245" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-245"><a href="">Privacy</a></li>
+    </ul></div></aside><aside id="trx_addons_widget_contacts-3" class="column-1_3 widget widget_contacts"><h5 class="widget_title">Our Contacts</h5><div class="contacts_info"><div class="contacts_left"><span class="contacts_address">Tutors Hub Learning Platform Inc.
+1 Yonge Street , Suite 1801
+Toronto ON M5E 1W7
+Canada
+</span></div><div class="contacts_right"><span class="contacts_email"></span><span class="contacts_phone"><a href="tel:8001234567">289-901-4000
+</a></span></div></div><div class="contacts_socials socials_wrap"><span class="social_item"><a href="" target="_blank" class="social_icons social_twitter"><span class="trx_addons_icon-twitter"></span></a></span><span class="social_item"><a href="" target="_blank" class="social_icons social_facebook"><span class="trx_addons_icon-facebook"></span></a></span><span class="social_item"><a href="" target="_blank" class="social_icons social_instagram"><span class="trx_addons_icon-instagram"></span></a></span><span class="social_item"><a href="" target="_blank" class="social_icons social_dribbble"><span class="trx_addons_icon-dribbble"></span></a></span></div></aside></div><!-- /.columns_wrap --></div><!-- /.content_wrap -->			</div><!-- /.footer_widgets_inner -->
             </div><!-- /.footer_widgets_wrap -->
-             
+
     <div class="footer_copyright_wrap scheme_">
         <div class="footer_copyright_inner">
             <div class="content_wrap">
-                <div class="copyright_text"><a target="_blank" href="#">AncoraThemes</a> © 2020. All Rights Reserved.</div>
+                <div class="copyright_text"><a target="_blank" href="#">Tutors-hub.com </a> © 2020. All Rights Reserved.</div>
             </div>
         </div>
     </div>
@@ -33,9 +37,9 @@
     <script type='text/javascript' src='{{url('wp-content/plugins/booked/assets/js/spin.min.js')}}'></script>
     <script type='text/javascript' src='{{url('wp-content/plugins/booked/assets/js/spin.jquery.js')}}'></script>
     <script type='text/javascript' src='{{url('wp-content/plugins/booked/assets/js/tooltipster/js/jquery.tooltipster.min.js')}}'></script>
-    
+
     <script type='text/javascript' src='{{url('wp-content/plugins/booked/assets/js/functions.js')}}'></script>
-    
+
     <script type='text/javascript' src='{{url('wp-content/plugins/contact-form-7/includes/js/scripts.js')}}'></script>
     <script type='text/javascript' src='{{url('wp-content/plugins/contact-form-7-datepicker/js/jquery-ui-timepicker/jquery-ui-timepicker-addon.min.js')}}'></script>
     <script type='text/javascript' src='{{url('wp-includes/js/jquery/ui/widget.min.js')}}'></script>
@@ -46,7 +50,7 @@
     <script type='text/javascript' src='{{url('wp-content/plugins/trx_addons/js/swiper/swiper.jquery.min.js')}}'></script>
     <script type='text/javascript' src='{{url('wp-content/plugins/trx_addons/js/magnific/jquery.magnific-popup.min.js')}}'></script>
     <script type='text/javascript'>
-    
+
     /* <![CDATA[ */
     var TRX_ADDONS_STORAGE = {"ajax_url":"wp-admin\/admin-ajax.php')}}","ajax_nonce":"f5aff148f9","site_url":"","vc_edit_mode":"0","popup_engine":"magnific","animate_inner_links":"0","user_logged_in":"0","email_mask":"^([a-zA-Z0-9_\\-]+\\.)*[a-zA-Z0-9_\\-]+@[a-z0-9_\\-]+(\\.[a-z0-9_\\-]+)*\\.[a-z]{2,6}$","msg_ajax_error":"Invalid server answer!","msg_magnific_loading":"Loading image","msg_magnific_error":"Error loading image","msg_error_like":"Error saving your like! Please, try again later.","msg_field_name_empty":"The name can't be empty","msg_field_email_empty":"Too short (or empty) email address","msg_field_email_not_valid":"Invalid email address","msg_field_text_empty":"The message text can't be empty","msg_search_error":"Search error! Try again later.","msg_send_complete":"Send message complete!","msg_send_error":"Transmit failed!","menu_cache":[],"login_via_ajax":"1","msg_login_empty":"The Login field can't be empty","msg_login_long":"The Login field is too long","msg_password_empty":"The password can't be empty and shorter then 4 characters","msg_password_long":"The password is too long","msg_login_success":"Login success! The page should be reloaded in 3 sec.","msg_login_error":"Login failed!","msg_not_agree":"Please, read and check 'Terms and Conditions'","msg_email_long":"E-mail address is too long","msg_email_not_valid":"E-mail address is invalid","msg_password_not_equal":"The passwords in both fields are not equal","msg_registration_success":"Registration success! Please log in!","msg_registration_error":"Registration failed!","scroll_to_anchor":"1","update_location_from_anchor":"0","msg_sc_googlemap_not_avail":"Googlemap service is not available","msg_sc_googlemap_geocoder_error":"Error while geocode address"};
     /* ]]> */
@@ -109,6 +113,5 @@
     <script type='text/javascript' src='{{url('wp-includes/js/jquery/ui/effect.min.js')}}'></script>
 
     <script type='text/javascript' src='{{url('wp-includes/js/jquery/ui/effect-fade.min.js')}}'></script>
-    <a href="#" class="trx_addons_scroll_to_top trx_addons_icon-up" title="Scroll to top"></a>  
+    <a href="#" class="trx_addons_scroll_to_top trx_addons_icon-up" title="Scroll to top"></a>
 
-   
