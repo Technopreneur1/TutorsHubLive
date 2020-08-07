@@ -370,7 +370,7 @@
                                                                                 <?php $count = 1; ?>
                                                                                 @foreach ($subjects as $records)
                                                                                     <?php if($count == 14) break; ?>
-                                                                                    <li id="menu-item-175" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-175"><a href="/tutors/">{{$records->name}}</a></li>
+                                                                                    <li id="menu-item-175" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-175"><a href="/student-registration/">{{$records->name}}</a></li>
                                                                                         <?php $count++; ?>
                                                                                 @endforeach
                                                                              </ul></div></div></div></div>
@@ -385,7 +385,7 @@
                                                                        class="sc_services_item_icon icon-prof"
                                                                     ></a>	</div>
                                                                 <div class="sc_services_item_content">
-                                                                    <h6 class="sc_services_item_title"><a href="#">Professional Tutors</a></h6>
+                                                                    <h6 class="sc_services_item_title">Professional Tutors</h6>
                                                                     <div class="sc_services_item_subtitle"><a href="#" title="View all posts in Guarantee">Guarantee</a></div>
                                                                     <div class="sc_services_item_text"><p>We screen and interview our tutors. We strive to provide a safe, friendly and professional environment.
                                                                         </p>
@@ -400,7 +400,7 @@
                                                                        class="sc_services_item_icon icon-real-results"
                                                                     ></a>	</div>
                                                                 <div class="sc_services_item_content">
-                                                                    <h6 class="sc_services_item_title"><a href="#">Talent and Expertise</a></h6>
+                                                                    <h6 class="sc_services_item_title">Talent and Expertise</h6>
                                                                     <div class="sc_services_item_subtitle"><a href="#" title="View all posts in Guarantee">Guarantee</a></div>
                                                                     <div class="sc_services_item_text"><p>Native speakers and experienced teachers at your service to help you improve your language skills and
                                                                             succeed in you exams (Math, MCAT, ...).
@@ -416,7 +416,7 @@
                                                                        class="sc_services_item_icon icon-university"
                                                                     ></a>	</div>
                                                                 <div class="sc_services_item_content">
-                                                                    <h6 class="sc_services_item_title"><a href="#">Flexible & No Commitment</a></h6>
+                                                                    <h6 class="sc_services_item_title">Flexible & No Commitment</h6>
                                                                     <div class="sc_services_item_subtitle"><a href="#" title="View all posts in Guarantee">Guarantee</a></div>
                                                                     <div class="sc_services_item_text"><p>Chose the right tutor for you, who will work according to your pace and your schedule.
                                                                         </p>
