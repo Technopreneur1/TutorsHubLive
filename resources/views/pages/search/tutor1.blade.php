@@ -223,7 +223,7 @@
                             <div class="sc_layouts_item">
                                 <div class="sc_layouts_title">
                                     <div class="sc_layouts_title_title">							<h1 class="sc_layouts_title_caption">All Tutors</h1>
-                                    </div><div class="sc_layouts_title_breadcrumbs"><div class="breadcrumbs"><a class="breadcrumbs_item home" href="../smarthead_ancorathemes_default.html">Home</a><span class="breadcrumbs_delimiter"></span><span class="breadcrumbs_item current">All Tutors</span></div></div>
+                                    </div><div class="sc_layouts_title_breadcrumbs"><div class="breadcrumbs"><a class="breadcrumbs_item home" href="https://tutors-hub.com/">Home</a><span class="breadcrumbs_delimiter"></span><span class="breadcrumbs_item current">All Tutors</span></div></div>
                                 </div>
                             </div>
                         </div>

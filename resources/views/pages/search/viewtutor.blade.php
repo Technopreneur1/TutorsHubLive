@@ -224,7 +224,7 @@
                                             <span class="post_meta_item post_date date updated" itemprop="datePublished"><a href="#">{{$data['created_at']}}</a></span>
 
                                         </div><!-- .post_meta --></div><div class="sc_layouts_title_title">							<h1 class="sc_layouts_title_caption">{{$data['name']}}</h1>
-                                    </div><div class="sc_layouts_title_breadcrumbs"><div class="breadcrumbs"><a class="breadcrumbs_item home" href="#">Home</a><span class="breadcrumbs_delimiter"></span><a href="#">All Tutors</a><span class="breadcrumbs_delimiter"></span><a class="breadcrumbs_item cat_post" href="#">Details</a><span class="breadcrumbs_delimiter"></span><span class="breadcrumbs_item current">{{$data['name']}}</span></div></div>
+                                    </div><div class="sc_layouts_title_breadcrumbs"><div class="breadcrumbs"><a class="breadcrumbs_item home" href="https://tutors-hub.com/">Home</a><span class="breadcrumbs_delimiter"></span><a href="#">All Tutors</a><span class="breadcrumbs_delimiter"></span><a class="breadcrumbs_item cat_post" href="#">Details</a><span class="breadcrumbs_delimiter"></span><span class="breadcrumbs_item current">{{$data['name']}}</span></div></div>
                                 </div>
                             </div>
                         </div>
