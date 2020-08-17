@@ -1268,12 +1268,14 @@ body:not(.expand_content):not(.body_style_fullwide):not(.body_style_fullscreen) 
 	margin-bottom:7.4rem;
 }
 .top_panel.without_bg_image {
-	margin-bottom: 7rem;
+	margin-bottom: 4rem;
 }
 .remove_margins .top_panel {
 	margin-bottom:0 !important;
 }
-
+.reg-form {
+    position: relative !important;
+}
 .top_panel.with_bg_image:before {
 	content:' ';
 	position:absolute;
