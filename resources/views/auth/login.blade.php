@@ -42,7 +42,7 @@
                     <div style="font-size: 33px; text-align: center; margin-bottom: 25px">Login</div>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
-    
+
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Email">
@@ -52,7 +52,7 @@
                                 </span>
                             @enderror
                         </div>
-    
+
                         <div class="form-group">
                             <label for="password">Password</label>
                             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="password">
@@ -63,7 +63,7 @@
                                 </span>
                             @enderror
                         </div>
-    
+
                         <div class="form-group">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
@@ -73,7 +73,7 @@
                                 </label>
                             </div>
                         </div>
-    
+
                         <div class="form-group text-center">
                                 <button type="submit" class="btn btn-log">
                                     {{ __('Login') }}
@@ -84,8 +84,11 @@
                                 {{ __('Forgot Your Password?') }}
                             </a>
                         @endif
-                        <a class="btn btn-link" href="{{ route('home') }}">
-                            {{ __('Sign Up') }}
+                        <a class="btn btn-link" href="https://tutors-hub.com/student-registration">
+                            {{ __('Sign Up Student') }}
+                        </a>
+                        <a class="btn btn-link" href="https://tutors-hub.com/teacher-registration">
+                            {{ __('Sign Up Teacher') }}
                         </a>
                     </form>
                 </div>
