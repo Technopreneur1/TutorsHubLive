@@ -378,8 +378,8 @@
 
                                                             <!-- /.sc_item_button sc_item_button_default sc_promo_button sc_align_left --></div>
                                                     </div><!-- /.sc_promo_text --></div><!-- /.sc_promo --></div></div></div></div><div class="vc_row-full-width vc_clearfix"></div><div data-vc-full-width="true" data-vc-full-width-init="false" class="vc_row wpb_row vc_row-fluid vc_custom_1484230061946 vc_row-has-fill inverse_colors special_class_1"><div class="wpb_column vc_column_container vc_col-sm-12 sc_layouts_column_icons_position_left"><div class="vc_column-inner"><div class="wpb_wrapper"><div class="sc_services sc_services_iconed" data-slides-per-view="3" data-slides-min-width="250"		>
-                                                    <h6 class="sc_item_subtitle sc_services_subtitle sc_align_default sc_item_title_style_default">Find the right tutors for you</h6>
-                                                    <h2 class="sc_item_title sc_services_title sc_align_default sc_item_title_style_default"></h2>
+                                                    <h6 class="sc_item_subtitle sc_services_subtitle sc_align_default sc_item_title_style_default"></h6>
+                                                    <h2 class="sc_item_title sc_services_title sc_align_default sc_item_title_style_default">Find the right tutors for you</h2>
                                                     <div class="sc_services_columns sc_item_columns sc_item_columns_3 trx_addons_columns_wrap columns_padding_bottom">
                                                         <div class="trx_addons_column-1_3 "><div class="sc_services_item with_content with_icon sc_services_item_featured_top">
                                                                 <div class="sc_services_item_header">
