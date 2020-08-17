@@ -605,7 +605,7 @@ There are more than 5,000 tutors in this area" data-arrowposition="top"><i class
 
                                                 <div class="wpb_text_column wpb_content_element  vc_custom_1571411058727" >
                                                     <div class="wpb_wrapper">
-                                                        <p style="text-align: center;">Our network covers a large number of tutors and it is not restricted by any borders. Students can search for tutors near them wherever they are. .</p>
+                                                        <p style="text-align: center;">Our network covers a large number of tutors and it is not restricted by any borders. Students can search for tutors near them wherever they are.</p>
 
                                                     </div>
                                                 </div>
