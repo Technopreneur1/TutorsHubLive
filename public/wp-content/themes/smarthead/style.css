@@ -3841,7 +3841,8 @@ footer .widget_contacts[class*="column-"] .contacts_description{
 .menu-footer-menu-container .menu li{
     font-size: 0.938rem;
     display: inline-block;
-    width: 48%;
+    width: 100%;
+    text-align: left;
     float:none;
 }
 

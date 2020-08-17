@@ -8,11 +8,18 @@
                                         <li id="menu-item-240" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-240"><a href="">About Us</a></li>
     <li id="menu-item-243" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-243"><a href="">Terms & conditions</a></li>
     <li id="menu-item-245" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-245"><a href="">Privacy</a></li>
-    </ul></div></aside><aside id="trx_addons_widget_contacts-3" class="column-1_3 widget widget_contacts"><h5 class="widget_title">Our Contacts</h5><div class="contacts_info"><div class="contacts_left"><span class="contacts_address">Tutors Hub Learning Platform Inc.
+    </ul></div></aside>
+                            <aside id="trx_addons_widget_contacts-3" class="column-1_3 widget widget_contacts">
+                                <h5 class="widget_title">Our Contacts</h5>
+                                <div class="contacts_info">
+                                    <div class="contacts_left">
+                                        <span class="contacts_address">
+                                            Tutors Hub Learning Platform Inc.
 1 Yonge Street , Suite 1801
 Toronto ON M5E 1W7
 Canada
-</span></div><div class="contacts_right"><span class="contacts_email"></span><span class="contacts_phone"><a href="tel:8001234567">289-901-4000
+</span></div>
+                                    <div class="contacts_right"><span class="contacts_email">info@tutorshub.com</span><span class="contacts_phone"><a href="tel:8001234567">289-901-4000
 </a></span></div></div><div class="contacts_socials socials_wrap"><span class="social_item"><a href="" target="_blank" class="social_icons social_twitter"><span class="trx_addons_icon-twitter"></span></a></span><span class="social_item"><a href="" target="_blank" class="social_icons social_facebook"><span class="trx_addons_icon-facebook"></span></a></span><span class="social_item"><a href="" target="_blank" class="social_icons social_instagram"><span class="trx_addons_icon-instagram"></span></a></span><span class="social_item"><a href="" target="_blank" class="social_icons social_dribbble"><span class="trx_addons_icon-dribbble"></span></a></span></div></aside></div><!-- /.columns_wrap --></div><!-- /.content_wrap -->			</div><!-- /.footer_widgets_inner -->
             </div><!-- /.footer_widgets_wrap -->
 
