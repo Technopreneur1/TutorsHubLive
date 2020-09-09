@@ -235,7 +235,7 @@
             </header><div class="menu_mobile_overlay"></div>
             <div class="menu_mobile menu_mobile_fullscreen scheme_dark">
                 <div class="menu_mobile_inner">
-                    <a class="menu_mobile_close icon-cancel"></a><a class="sc_layouts_logo" href="https://tutors-hub.com/"><img src="{{url('wp-content/uploads/2016/12/logotext.png')}}"  width="440" height="90"></a>
+                    <a class="menu_mobile_close icon-cancel"></a><a class="sc_layouts_logo" href="https://tutors-hub.com/"><img src="{{url('wp-content/uploads/2016/12/logotxt.png')}}"  width="440" height="90"></a>
                     <nav class="menu_mobile_nav_area ">
                         <ul id="menu_mobile" class=" menu_mobile_nav">
                             <li id="menu_mobile-item-105" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-105"><a href="https://tutors-hub.com/"><span>Home</span></a>
