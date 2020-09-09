@@ -48,6 +48,9 @@
                 border-top-color: #d9dfe5 !important;
                 border-top-style: dashed !important;
             }
+            input[type="text"],select.form-control.filled {
+                color: #333 !important;
+            }
         </style>
 
         <link rel='stylesheet' id='vc_extensions_cqbundle_adminicon-css'  href='{{url('wp-content/plugins/vc-extensions-bundle/css/admin_icon.css')}}' type='text/css' media='all' />
