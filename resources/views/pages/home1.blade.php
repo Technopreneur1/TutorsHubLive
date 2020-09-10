@@ -2,7 +2,9 @@
 @section('title')
     Home
 @endsection
-
+@section('styles')
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+@endsection
 @section('content')
 
 
@@ -17,7 +19,11 @@
                     <div class="content_wrap">
                         <div class="custom_button_language">
                         </div>
-                        <a href="{{route('login')}}" class=" trx_addons_login_link "><span class="sc_layouts_item_icon sc_layouts_login_icon trx_addons_icon-user-alt"></span><span class="sc_layouts_item_details sc_layouts_login_details">Login</span></a>        </div>
+                        <a href="{{route('login')}}" class=" trx_addons_login_link ">
+                            <span class="sc_layouts_item_icon sc_layouts_login_icon trx_addons_icon-user-alt"></span>
+                            <span class="sc_layouts_item_details sc_layouts_login_details login-btn-n"> Login <i class="fas fa-sign-in-alt"></i></span>
+                        </a>        
+                    </div>
                 </div>
                 <div class="top_panel_navi sc_layouts_row sc_layouts_row_type_normal sc_layouts_row_fixed
 			scheme_default">
@@ -31,7 +37,7 @@
                                             <li id="menu-item-105" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-105"><a href="https://tutors-hub.com"><span>Home</span></a></li>
                                             <li id="menu-item-548" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-548"><a href="https://tutors-hub.com/student-registration"><span>Find a Tutor</span></a></li>
                                             <li id="menu-item-164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164"><a href="https://tutors-hub.com/teacher-registration"><span>Become a Tutor</span></a></li>
-                                            <li id="menu-item-119" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-119"><a href="#"><span>News</span></a></li>
+                                            <li id="menu-item-119" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-119"><a href="#news"><span>News</span></a></li>
                                             <li id="menu-item-165" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-165"><a href="https://tutors-hub.com/contact"><span>Contacts</span></a></li></ul>
 
                                     </nav>
@@ -84,6 +90,7 @@
                                                                     <!--
                                                                                                 --><rs-layer
                                                                         id="slider-1-slide-1-layer-1"
+                                                                        class="slider-small-text"
                                                                         data-type="text"
                                                                         data-color="rgba(255, 255, 255, 1)"
                                                                         data-xy="x:c;y:c;yo:-73px;"
@@ -140,6 +147,7 @@
                                                                     <!--
                                                                                                 --><rs-layer
                                                                         id="slider-1-slide-4-layer-1"
+                                                                        class="slider-small-text"
                                                                         data-type="text"
                                                                         data-color="rgba(255, 255, 255, 1)"
                                                                         data-xy="x:c;y:c;yo:-73px;"
@@ -195,6 +203,7 @@
                                                                     <!--
                                                                                                 --><rs-layer
                                                                         id="slider-1-slide-3-layer-1"
+                                                                        class="slider-small-text"
                                                                         data-type="text"
                                                                         data-color="rgba(255, 255, 255, 1)"
                                                                         data-xy="x:c;y:c;yo:-73px;"
@@ -232,18 +241,18 @@
                                                                     </rs-layer><!--
 
 							--><rs-layer
-                                                                        id="slider-1-slide-3-layer-3"
-                                                                        data-type="text"
-                                                                        data-color="rgba(255, 255, 255, 1)"
-                                                                        data-xy="x:c;y:c;yo:95px;"
-                                                                        data-text="l:22;a:inherit;"
-                                                                        data-frame_0="sX:0.8;sY:0.8;tp:600;"
-                                                                        data-frame_1="tp:600;e:Power4.easeOut;st:3770;sp:1000;sR:3770;"
-                                                                        data-frame_999="o:0;tp:600;st:w;sR:4230;"
-                                                                        style="z-index:7;font-family:Open Sans;"
-                                                                    ><div class="{{url('sc_item_button sc_button_wrap')}}"><a href="/tutors/" id="sc_button_459468683" class="sc_button sc_button_default sc_button_size_large sc_button_icon_left"><span class="sc_button_text"><span class="sc_button_title">FIND A TUTOR NOW
+                            id="slider-1-slide-1-layer-3"
+                            data-type="text"
+                            data-color="rgba(255, 255, 255, 1)"
+                            data-xy="x:c;y:c;yo:95px;"
+                            data-text="l:22;a:inherit;"
+                            data-frame_0="sX:0.8;sY:0.8;tp:600;"
+                            data-frame_1="tp:600;e:Power4.easeOut;st:3770;sp:1000;sR:3770;"
+                            data-frame_999="o:0;tp:600;st:w;sR:4230;"
+                            style="z-index:7;font-family:Open Sans;"
+                        ><div class="sc_item_button sc_button_wrap"><a href="https://tutors-hub.com/student-registration" id="sc_button_212681052" class="sc_button sc_button_default sc_button_size_large sc_button_icon_left"><span class="sc_button_text"><span class="sc_button_title">FIND A TUTOR NOW
 </span></span><!-- /.sc_button_text --></a><!-- /.sc_button --></div><!-- /.sc_item_button -->
-                                                                    </rs-layer><!--
+                        </rs-layer><!--
 -->						</rs-slide>
                                                             </rs-slides>
                                                             <rs-progress class="rs-bottom" style="visibility: hidden !important;"></rs-progress>
@@ -362,7 +371,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div></div></div></div></div></div></div></div><div class="vc_row-full-width vc_clearfix"></div><div data-vc-full-width="true" data-vc-full-width-init="false" class="vc_row wpb_row vc_row-fluid vc_custom_1485445777014 vc_row-has-fill"><div class="wpb_column vc_column_container vc_col-sm-12 sc_layouts_column_icons_position_left"><div class="vc_column-inner"><div class="wpb_wrapper"><div id="sc_title_2054305088"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                  class="sc_title sc_title_default  vc_custom_1484220986265"><h6 class="sc_item_subtitle sc_title_subtitle sc_align_default sc_item_title_style_default">Find the best tutors around you</h6><h2 class="sc_item_title sc_title_title sc_align_default sc_item_title_style_default">Find tutors and message them directly
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                  class="sc_title sc_title_default  vc_custom_1484220986265"><h6 class="sc_item_subtitle sc_title_subtitle sc_align_default sc_item_title_style_default clr-green">Find the best tutors around you</h6><h2 class="sc_item_title sc_title_title sc_align_default sc_item_title_style_default">Find tutors and message them directly
                                                     </h2></div><!-- /.sc_title --><div  id="sc_promo_1988157650"
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               class="sc_promo sc_promo_default sc_promo_size_normal sc_promo_no_paddings sc_promo_image_position_right"><div class="sc_promo_image" style="background-image:url(https://smarthead.ancorathemes.com/wp-content/uploads/2016/12/photo11.jpg);width:51%;right: 0;"></div><a href="https://vimeo.com/10638339" class="sc_promo_link_on_image" target="_blank">View Our Video Presentation<span class="icon-play"></span>
                                                     </a><div class="sc_promo_text" style="width: 49%;float: left;">
@@ -388,7 +397,7 @@
                                                                        class="sc_services_item_icon icon-prof"
                                                                     ></a>	</div>
                                                                 <div class="sc_services_item_content">
-                                                                    <h6 class="sc_services_item_title">Professional Tutors</h6>
+                                                                    <a href="#"><h6 class="sc_services_item_title">Professional Tutors</h6> </a>
                                                                     <div class="sc_services_item_subtitle"><a href="#" title="View all posts in Guarantee">Guarantee</a></div>
                                                                     <div class="sc_services_item_text"><p>We screen and interview our tutors. We strive to provide a safe, friendly and professional environment.
                                                                         </p>
@@ -403,7 +412,7 @@
                                                                        class="sc_services_item_icon icon-real-results"
                                                                     ></a>	</div>
                                                                 <div class="sc_services_item_content">
-                                                                    <h6 class="sc_services_item_title">Talent and Expertise</h6>
+                                                                    <a href="#"><h6 class="sc_services_item_title">Talent and Expertise</h6> </a>
                                                                     <div class="sc_services_item_subtitle"><a href="#" title="View all posts in Guarantee">Guarantee</a></div>
                                                                     <div class="sc_services_item_text"><p>Native speakers and experienced teachers at your service to help you improve your language skills and
                                                                             succeed in you exams (Math, MCAT...).
@@ -419,7 +428,7 @@
                                                                        class="sc_services_item_icon icon-university"
                                                                     ></a>	</div>
                                                                 <div class="sc_services_item_content">
-                                                                    <h6 class="sc_services_item_title">Flexible & No Commitment</h6>
+                                                                    <a href="#"><h6 class="sc_services_item_title">Flexible & No Commitment</h6> </a>
                                                                     <div class="sc_services_item_subtitle"><a href="#" title="View all posts in Guarantee">Guarantee</a></div>
                                                                     <div class="sc_services_item_text"><p>Chose the right tutor for you, who will work according to your pace and your schedule.
                                                                         </p>
@@ -487,14 +496,16 @@
                                                                     <?php $count++; ?>
 
                                                         @endforeach
-                                                      </div></div></div></div></div><div class="wpb_column vc_column_container vc_col-sm-12 sc_layouts_column_icons_position_left"><div class="vc_column-inner"><div class="wpb_wrapper"><div  id="sc_action_1338897222"
-                                                                                                                                                                                                                                                                 class="sc_action sc_action_simple  vc_custom_1495537959265" data-slides-min-width="250"	><div class="sc_action_content sc_item_content"><div class="sc_action_item sc_action_item_simple sc_action_item_ml">
-                                                            <h3 class="sc_action_item_title"><span>Want to become a tutor at TutorS-Hub</span></h3><div class="sc_action_item_description"><span>Tutors-Hub Collaborates  with professional and talented tutors from all over the world! Join us right now!</span></div>
+                                                      </div></div></div></div></div><div class="wpb_column vc_column_container vc_col-sm-12 sc_layouts_column_icons_position_left"><div class="vc_column-inner"><div class="wpb_wrapper">
+                                                          <div  id="sc_action_1338897222" class="sc_action sc_action_simple  vc_custom_1495537959265" data-slides-min-width="250">
+                                                              <div class="sc_action_content sc_item_content">
+                                                              <div class="sc_action_item sc_action_item_simple sc_action_item_ml">
+                                                            <h3 class="sc_action_item_title"><span>Want to become a tutor at Tutors-Hub</span><span>?</span></h3><div class="sc_action_item_description"><span>Tutors-Hub collaborates  with professional and talented tutors from all over the world! Join us right now!</span></div>
                                                             <a href="https://tutors-hub.com/teacher-registration" class="sc_action_item_link">register now</a></div></div></div><!-- /.sc_action --></div></div></div></div><div data-vc-full-width="true" data-vc-full-width-init="false" class="vc_row wpb_row vc_row-fluid vc_custom_1485435081882 vc_row-has-fill inverse_colors"><div class="wpb_column vc_column_container vc_col-sm-12 sc_layouts_column_icons_position_left"><div class="vc_column-inner"><div class="wpb_wrapper"><div id="sc_content_729558933"
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   class="sc_content sc_content_default sc_align_center"><div class="sc_content_container"><div  id="sc_action_839234"
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 class="sc_action sc_action_default" data-slides-min-width="250"	><div class="sc_action_content sc_item_content"><div class="sc_action_item sc_action_item_default sc_action_item_mc">
                                                                     <h6 class="sc_action_item_subtitle"><span>Call Us <a href="tel:289-901-4000">289-901-4000</a></span></h6><h3 class="sc_action_item_title"><span>Do You Need Help?</span></h3><div class="sc_action_item_description"><span>Our specialists can help you find the right tutor for you or your kids</span></div><a href="https://tutors-hub.com/contact" class="sc_action_item_link">CONTACT US NOW</a></div></div></div><!-- /.sc_action --></div></div><!-- /.sc_content --></div></div></div></div><div class="vc_row-full-width vc_clearfix"></div><div data-vc-full-width="true" data-vc-full-width-init="false" class="vc_row wpb_row vc_row-fluid vc_custom_1484231990562 vc_row-has-fill"><div class="wpb_column vc_column_container vc_col-sm-12 sc_layouts_column_icons_position_left"><div class="vc_column-inner"><div class="wpb_wrapper"><div id="sc_title_225094306"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          class="sc_title sc_title_default  vc_custom_1484231980126"><h6 class="sc_item_subtitle sc_title_subtitle sc_align_default sc_item_title_style_default">Enjoy Online or In-Person Lessons with Tutors</h6><h2 class="sc_item_title sc_title_title sc_align_default sc_item_title_style_default">Online Lessons & <span class="accent_color">In-Person Lessons</span> </h2></div><!-- /.sc_title --><div  id="sc_promo_418702708"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          class="sc_title sc_title_default  vc_custom_1484231980126"><h6 class="sc_item_subtitle sc_title_subtitle sc_align_default sc_item_title_style_default">Enjoy Online or In-Person Lessons with Tutors</h6><h2 class="sc_item_title sc_title_title sc_align_default sc_item_title_style_default">Online Lessons & <span class="clr-green">In-Person <span class="clr-green"> Lessons</span></span></h2></div><!-- /.sc_title --><div  id="sc_promo_418702708"
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               class="sc_promo sc_promo_default sc_promo_size_normal sc_promo_no_paddings sc_promo_image_position_left"><div class="sc_promo_image" style="background-image:url(https://smarthead.ancorathemes.com/wp-content/uploads/2016/12/promo-bg-2.jpg);width:51%;left: 0;"></div><div class="sc_promo_text" style="width: 49%;float: right;">
                                                         <div class="sc_promo_text_inner" style=""><h6 class="sc_item_subtitle sc_promo_subtitle sc_align_left sc_item_title_style_default">Your needs are too specific? Don’t worry!</h6><h3 class="sc_item_title sc_promo_title sc_align_left sc_item_title_style_default">Post an Add</h3><div class="sc_promo_content sc_item_content">
                                                                 <div class="wpb_text_column wpb_content_element " >
@@ -535,9 +546,9 @@
                                                             </div>
                                                         </div>
                                                     @endforeach
-                                                    </div><div class="slider_pagination_wrap swiper-pagination"></div></div><!-- /.sc_testimonials --></div></div></div></div><div class="vc_row-full-width vc_clearfix"></div><div data-vc-full-width="true" data-vc-full-width-init="false" class="vc_row wpb_row vc_row-fluid vc_custom_1484233865553 vc_row-has-fill"><div class="wpb_column vc_column_container vc_col-sm-12 sc_layouts_column_icons_position_left"><div class="vc_column-inner"><div class="wpb_wrapper"><div id="sc_title_901123084"
+                                                    </div><div class="slider_pagination_wrap swiper-pagination"></div></div><!-- /.sc_testimonials --></div></div></div></div><div id="news" class="vc_row-full-width vc_clearfix"></div><div data-vc-full-width="true" data-vc-full-width-init="false" class="vc_row wpb_row vc_row-fluid vc_custom_1484233865553 vc_row-has-fill"><div class="wpb_column vc_column_container vc_col-sm-12 sc_layouts_column_icons_position_left"><div class="vc_column-inner"><div class="wpb_wrapper"><div id="sc_title_901123084"
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               class="sc_title sc_title_default  vc_custom_1529413624943"><h6 class="sc_item_subtitle sc_title_subtitle sc_align_default sc_item_title_style_default">Enjoy Online Lessons with Tutors</h6><h2 class="sc_item_title sc_title_title sc_align_default sc_item_title_style_default">Latest News</h2></div><!-- /.sc_title --><div class="vc_row wpb_row vc_inner vc_row-fluid"><div class="wpb_column vc_column_container vc_col-sm-8 sc_layouts_column_icons_position_left"><div class="vc_column-inner"><div class="wpb_wrapper"><div class="sc_blogger sc_blogger_classic" data-slides-per-view="2" data-slides-min-width="150"		>
-                                                                    <div class="sc_blogger_columns sc_item_columns trx_addons_columns_wrap columns_padding_bottom"><div class="trx_addons_column-1_2"><div id="post-75"	class="sc_blogger_item post_format_standard post-75 post type-post status-publish format-standard has-post-thumbnail hentry category-distance-learning category-tutoring tag-class tag-learning"><div class="post_featured with_thumb hover_dots sc_blogger_item_featured"><img width="740" height="792" src="https://smarthead.ancorathemes.com/wp-content/uploads/2016/11/post-11-740x792.jpg" class="attachment-smarthead-thumb-big-vertical size-smarthead-thumb-big-vertical wp-post-image" alt="Back-to-School: Tutoring as a Proactive Tool" /><div class="mask"></div><a href="" aria-hidden="true" class="icons"><span></span><span></span><span></span></a></div><div class="sc_blogger_item_content entry-content"><div class="sc_blogger_item_header entry-header"><div class="post_meta">					<span class="post_meta_item post_date"><a href="">July 28, 2016</a></span>
+                                                                    <div  class="sc_blogger_columns sc_item_columns trx_addons_columns_wrap columns_padding_bottom"><div class="trx_addons_column-1_2"><div id="post-75"	class="sc_blogger_item post_format_standard post-75 post type-post status-publish format-standard has-post-thumbnail hentry category-distance-learning category-tutoring tag-class tag-learning"><div class="post_featured with_thumb hover_dots sc_blogger_item_featured"><img width="740" height="792" src="https://smarthead.ancorathemes.com/wp-content/uploads/2016/11/post-11-740x792.jpg" class="attachment-smarthead-thumb-big-vertical size-smarthead-thumb-big-vertical wp-post-image" alt="Back-to-School: Tutoring as a Proactive Tool" /><div class="mask"></div><a href="" aria-hidden="true" class="icons"><span></span><span></span><span></span></a></div><div class="sc_blogger_item_content entry-content"><div class="sc_blogger_item_header entry-header"><div class="post_meta">					<span class="post_meta_item post_date"><a href="">July 28, 2016</a></span>
                                                                                             <a class="post_meta_item post_author" rel="author" href="smarthead.ancorathemes.com/author/anc_admin/">
                                                                                                 Cindy Jefferson				</a>
                                                                                             <a href="smarthead.ancorathemes.com/back-to-school-tutoring-as-a-proactive-tool/#comments" class="post_meta_item post_counters_item post_counters_comments trx_addons_icon-comment"><span class="post_counters_number">2</span><span class="post_counters_label">Comments</span></a> </div><!-- .post_meta --><h6 class="sc_blogger_item_title entry-title"><a href="" rel="bookmark">Back-to-School: Tutoring as a Proactive Tool</a></h6></div><!-- .entry-header --><div class="sc_blogger_item_excerpt">
@@ -550,6 +561,16 @@
                                                                     <div class="wpb_wrapper">
                                                                         <h4 class="trx_addons_no_margin" style="text-align: center;">Subscribe On Our<br />
                                                                             News</h4>
+
+                                                                            <!-- Begin Mailchimp Signup Form -->
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+
+
+<!--End mc_embed_signup-->
 
                                                                     </div>
                                                                 </div>
@@ -571,9 +592,10 @@
                                                                                     }
                                                                                 }
                                                                             })();
-                                                                        </script><!-- Mailchimp for WordPress v4.7.6 - https://wordpress.org/plugins/mailchimp-for-wp/ --><form id="mc4wp-form-1" class="mc4wp-form mc4wp-form-470" method="post" data-id="470" data-name="Subscribe On Our News" ><div class="mc4wp-form-fields"><div class="mailchimp_form">
+
+                                                                        </script><!-- Mailchimp for WordPress v4.7.6 - https://wordpress.org/plugins/mailchimp-for-wp/ --><form id="mc4wp-form-1" action="https://tutors-hub.us2.list-manage.com/subscribe/post?u=923d058028bf062e7d5abe405&amp;id=784b0e7c13" class="mc4wp-form mc4wp-form-470" method="post" data-id="470" data-name="Subscribe On Our News" ><div class="mc4wp-form-fields"><div class="mailchimp_form">
                                                                                     <div class="mailchimp_inputs">
-                                                                                        <input type="email" id="email_mailchimp" name="email_mailchimp" placeholder="Your Email" required />
+                                                                                        <input type="email" id="email_mailchimp" name="EMAIL" placeholder="Your Email" required />
                                                                                         <button class="icon-arrow-right-alt" type="submit"></button>
                                                                                     </div>
                                                                                     <p class="terms_agree_checkbox_wrap"><label class="terms_agree_checkbox"><input name="AGREE_TO_TERMS" type="checkbox" value="1" required="">I agree that my submitted data is being collected and stored.</label></p>
