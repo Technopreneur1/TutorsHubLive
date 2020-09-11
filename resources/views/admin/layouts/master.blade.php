@@ -98,6 +98,19 @@
             <li {{{ (Request::is('adminpanel/tickets/closed') ? 'active' : '') }}}"><a href="{{route('admin.tickets.closed')}}"><i class="fa fa-circle-o"></i>Closed</a></li>
           </ul>
         </li>
+        <li class="treeview  {{{ (Request::is('adminpanel/tickets') ? 'active' : '') }}}">
+          <a href="#">
+            <i class="fa fa-file-alt"></i> <span>Blogs</span>
+            {{-- <span class="badge bg-aqua pull-right">{{App\Ticket::where('resolved', 0)->count()}}</span></a> --}}
+             <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="{{{ (Request::is('adminpanel/tickets') ? 'active' : '') }}}"><a href="{{route('admin.blogs')}}"><i class="fa fa-circle-o"></i>All</a></li>
+            <li {{{ (Request::is('adminpanel/tickets/closed') ? 'active' : '') }}}"><a href="{{route('admin.blogs.create')}}"><i class="fa fa-circle-o"></i>Add New</a></li>
+          </ul>
+        </li>
           <li class="{{{ (Request::is('adminpanel/testimonials') ? 'active' : '') }}}"><a href="{{route('admin.testimonials')}}"><i class="fa fa-copy"></i> <span>Testimonilas</span></a></li>
 
           <li class="{{{ (Request::is('adminpanel/countries') ? 'active' : '') }}}"><a href="{{route('admin.countries')}}"><i class="fa fa-copy"></i> <span>Locations</span></a></li>
