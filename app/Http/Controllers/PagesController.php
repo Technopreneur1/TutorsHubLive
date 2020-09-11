@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Blog;
 use App\Discipline;
 use App\Plan;
 use App\Testimonial;
@@ -54,6 +55,16 @@ class PagesController extends Controller
             //dd($teachers);
             return view("pages.home1")->with('subjects',$subjects)->with('testimonials',$testimonials)->with('teachers',$teachers);
         }
+    }
+    public function blog()
+    {
+        $blogs = Blog::orderBy('created_at', 'desc')->get();
+        return view('pages.blog', ['blog' => $blogs]);
+    }
+    public function viewBlog($id)
+    {
+        $post = Blog::findOrFail($id);
+        return view('pages.post', ['post' => $post]);
     }
     public function myFiles()
     {

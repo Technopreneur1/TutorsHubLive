@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use auth;
 use App\Ad;
 use App\Meta;
+use App\Blog;
 use App\User;
 use App\Level;
 use App\Earning;
@@ -85,6 +86,26 @@ class AdminController extends Controller
     {
         $fee = Meta::where('key', 'fee')->first();
         return view('admin.pages.settings', ['fee' => $fee]);
+    }
+    public function blogs()
+    {
+        $blogs = Blog::orderBy('created_at', 'desc')->get();
+        // dd($blogs);
+        return view('admin.pages.blogs.index', ['blogs' => $blogs]);
+    }
+    public function addBlog()
+    {
+        return view('admin.pages.blogs.add');
+    }
+    public function editBlog($id)
+    {
+        $blog = Blog::findOrFail($id);
+        return view('admin.pages.blogs.edit', ['blog' => $blog]);
+    }
+    public function showBlog($id)
+    {
+        $blog = Blog::findOrFail($id);
+        return view('admin.pages.blogs.single', ['blog', $blog]);
     }
     public function admins()
     {

@@ -24,6 +24,9 @@ use Illuminate\Support\Facades\Mail;
 Route::get('/', 'PagesController@index')->name('home');
 
 // Route::get('/', 'PagesController@index')->name('home')->middleware('verified', 'CheckBanned');
+Route::get('/blog', 'PagesController@blog')->name('blog');
+Route::get('/blog/{id}', 'PagesController@viewBlog')->name('blog.view');
+
 Route::get('/contact', 'PagesController@contact')->name('contact');
 Route::get('/plans', 'PagesController@plans')->name('plans')->middleware('auth', 'verified', 'CheckBanned');
 Route::get('/my-files', 'PagesController@myFiles')->name('myfiles');
@@ -335,6 +338,15 @@ Route::prefix('adminpanel')->middleware(['admin'])->group(function () {
     Route::get('/state/{id}', 'AdminController@getState')->name('admin.state');
     Route::get('/city/{id}', 'AdminController@getCity')->name('admin.city');
     Route::get('/settings', 'AdminController@settings')->name('admin.settings');
+    
+    Route::get('/blogs', 'AdminController@blogs')->name('admin.blogs');
+    Route::get('/add-blog', 'AdminController@addBlog')->name('admin.blogs.create');
+    Route::post('/add-blog', 'BlogController@post')->name('admin.blogs.post');
+    Route::post('/delete-blog/{id}', 'BlogController@destroy')->name('admin.blogs.destroy');
+    Route::get('/blogs/{id}', 'AdminController@showBlog')->name('admin.blogs.view');
+    Route::get('/edit-blog/{id}', 'AdminController@editBlog')->name('admin.blogs.edit');
+    Route::post('/edit-blog/{id}', 'BlogController@Update')->name('admin.blogs.update');
+
     Route::get('/levels', 'AdminController@levels')->name('admin.levels');
     Route::get('/admins', 'AdminController@admins')->name('admin.admins');
     Route::get('/sessions', 'AdminController@sessions')->name('admin.sessions');
