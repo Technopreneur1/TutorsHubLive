@@ -82914,7 +82914,6 @@ var render = function() {
             _vm.viewSession.accept == "1" &&
             _vm.viewSession.class_status == "0" &&
             !_vm.viewSession.cancel_request &&
-            !_vm.viewSession.startsession &&
             _vm.authuser.type != "student"
               ? _c(
                   "button",
