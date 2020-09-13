@@ -52,7 +52,7 @@
 <link rel='stylesheet' id='booked-styles-css'  href='{{url('wp-content/plugins/booked/assets/css/styles.css')}}' type='text/css' media='all' />
 <link rel='stylesheet' id='booked-responsive-css'  href='{{url('wp-content/plugins/booked/assets/css/responsive.css')}}' type='text/css' media='all' />
 <link rel='stylesheet' id='contact-form-7-css'  href='{{url('wp-content/plugins/contact-form-7/includes/css/styles.css')}}' type='text/css' media='all' />
-<link rel='stylesheet' id='jquery-ui-theme-css'  href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.min.css?ver=1.11.4' type='text/css' media='all' />
+<link rel='stylesheet' id='jquery-ui-theme-css'  href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.min.css?ver=1.11.4' type='text/css' media='all' />
 <link rel='stylesheet' id='jquery-ui-timepicker-css'  href='{{url('wp-content/plugins/contact-form-7-datepicker/js/jquery-ui-timepicker/jquery-ui-timepicker-addon.min.css')}}' type='text/css' media='all' />
 <link rel='stylesheet' id='essential-grid-plugin-settings-css'  href='{{url('wp-content/plugins/essential-grid/public/assets/css/settings.css')}}' type='text/css' media='all' />
 <link rel='stylesheet' id='tp-fontello-css'  href='{{url('wp-content/plugins/essential-grid/public/assets/font/fontello/css/fontello.css')}}' type='text/css' media='all' />
@@ -91,7 +91,7 @@
 </style>
 
 
-<link rel='stylesheet' id='smarthead-font-google_fonts-css'  href='http://fonts.googleapis.com/css?family=Titillium+Web%3A400%2C600%2C700%7CSanchez%3A400%2C400italic%2C700%2C700italic&#038;subset=latin%2Clatin-ext&#038;ver=5.4' type='text/css' media='all' />
+<link rel='stylesheet' id='smarthead-font-google_fonts-css'  href='https://fonts.googleapis.com/css?family=Titillium+Web%3A400%2C600%2C700%7CSanchez%3A400%2C400italic%2C700%2C700italic&#038;subset=latin%2Clatin-ext&#038;ver=5.4' type='text/css' media='all' />
 <link rel='stylesheet' id='fontello-style-css'  href='{{url('wp-content/themes/smarthead/css/fontello/css/fontello-embedded.css')}}' type='text/css' media='all' />
 <link rel='stylesheet' id='smarthead-main-css'  href='{{url('wp-content/themes/smarthead/style.css')}}' type='text/css' media='all' />
 <link rel='stylesheet' id='smarthead-colors-css'  href='{{url('wp-content/themes/smarthead/css/__colors.css')}}' type='text/css' media='all' />
