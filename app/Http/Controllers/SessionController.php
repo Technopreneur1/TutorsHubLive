@@ -62,6 +62,8 @@ class SessionController extends Controller
     }
     public function sessionrequest(Request $request)
     {
+        $hr = json_decode($request->hours);
+
         $session = Session::create([
             'teacher_id' => $request->teacher,
             'student_id' => auth()->user()->profile->id,
@@ -74,6 +76,8 @@ class SessionController extends Controller
             'total' => $request->total,
             'accept' => '0',
             'fee' => ($request->total * Earning::currentFee())/100,
+            'startsession' => Carbon::parse($request->date)->format('Y-m-d H:i:s'),
+            'endsession' => date("Y-m-d H:i:s", strtotime("+".$hr." hours")),
 
         ]);
         $smail = $session->student->user->email;
@@ -158,14 +162,22 @@ class SessionController extends Controller
 
         return  response()->json(['msg' => 'success']);
     }
+//button of payment
+    public function payment(Request $request)
+    {
 
+        $session = Session::findOrFail($request->id);
+
+        $session->update(['payment_status' => '1']);
+        return  response()->json(['msg' => 'success']);
+    }
     public function startsession(Request $request)
     {
         $session = Session::findOrFail($request->id);
         $hr = json_decode($session->hours);
         $startsession = date("Y-m-d H:i:s");
         $endsession = date("Y-m-d H:i:s", strtotime("+".$hr." hours"));
-        $session->update(['startsession' => $startsession, 'endsession' => $endsession]);
+        //$session->update(['startsession' => $startsession, 'endsession' => $endsession]);
 //        Mail::to('info@tutors-hub.com')->send(new cancelRequest($session, auth()->user()));
         return  response()->json(['msg' => 'success']);
     }

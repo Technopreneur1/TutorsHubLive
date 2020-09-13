@@ -40,8 +40,8 @@
     border-top-style: dashed !important;
     }
     </style>
- 
-    
+
+
 <link rel='stylesheet' id='vc_extensions_cqbundle_adminicon-css'  href='{{url('wp-content/plugins/vc-extensions-bundle/css/admin_icon.css')}}' type='text/css' media='all' />
 <link rel='stylesheet' id='wp-block-library-css'  href='{{url('wp-includes/css/dist/block-library/style.min.css')}}' type='text/css' media='all' />
 <link rel='stylesheet' id='wc-block-style-css'  href='{{url('wp-content/plugins/woocommerce/packages/woocommerce-blocks/build/style.css')}}' type='text/css' media='all' />
@@ -52,7 +52,7 @@
 <link rel='stylesheet' id='booked-styles-css'  href='{{url('wp-content/plugins/booked/assets/css/styles.css')}}' type='text/css' media='all' />
 <link rel='stylesheet' id='booked-responsive-css'  href='{{url('wp-content/plugins/booked/assets/css/responsive.css')}}' type='text/css' media='all' />
 <link rel='stylesheet' id='contact-form-7-css'  href='{{url('wp-content/plugins/contact-form-7/includes/css/styles.css')}}' type='text/css' media='all' />
-<link rel='stylesheet' id='jquery-ui-theme-css'  href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.min.css?ver=1.11.4' type='text/css' media='all' />
+<link rel='stylesheet' id='jquery-ui-theme-css'  href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.min.css?ver=1.11.4' type='text/css' media='all' />
 <link rel='stylesheet' id='jquery-ui-timepicker-css'  href='{{url('wp-content/plugins/contact-form-7-datepicker/js/jquery-ui-timepicker/jquery-ui-timepicker-addon.min.css')}}' type='text/css' media='all' />
 <link rel='stylesheet' id='essential-grid-plugin-settings-css'  href='{{url('wp-content/plugins/essential-grid/public/assets/css/settings.css')}}' type='text/css' media='all' />
 <link rel='stylesheet' id='tp-fontello-css'  href='{{url('wp-content/plugins/essential-grid/public/assets/font/fontello/css/fontello.css')}}' type='text/css' media='all' />
@@ -91,7 +91,7 @@
 </style>
 
 
-<link rel='stylesheet' id='smarthead-font-google_fonts-css'  href='http://fonts.googleapis.com/css?family=Titillium+Web%3A400%2C600%2C700%7CSanchez%3A400%2C400italic%2C700%2C700italic&#038;subset=latin%2Clatin-ext&#038;ver=5.4' type='text/css' media='all' />
+<link rel='stylesheet' id='smarthead-font-google_fonts-css'  href='https://fonts.googleapis.com/css?family=Titillium+Web%3A400%2C600%2C700%7CSanchez%3A400%2C400italic%2C700%2C700italic&#038;subset=latin%2Clatin-ext&#038;ver=5.4' type='text/css' media='all' />
 <link rel='stylesheet' id='fontello-style-css'  href='{{url('wp-content/themes/smarthead/css/fontello/css/fontello-embedded.css')}}' type='text/css' media='all' />
 <link rel='stylesheet' id='smarthead-main-css'  href='{{url('wp-content/themes/smarthead/style.css')}}' type='text/css' media='all' />
 <link rel='stylesheet' id='smarthead-colors-css'  href='{{url('wp-content/themes/smarthead/css/__colors.css')}}' type='text/css' media='all' />
@@ -112,7 +112,7 @@ var wc_add_to_cart_params = {"ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_ur
 </script>
 <script type='text/javascript' src='{{url('wp-content/plugins/woocommerce/assets/js/frontend/add-to-cart.min.js')}}'></script>
 <script type='text/javascript' src='{{url('wp-content/plugins/js_composer/assets/js/vendors/woocommerce-add-to-cart.js')}}'></script>
-<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="{{url('wp-includes/wlwmanifest.xml')}}" /> 
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="{{url('wp-includes/wlwmanifest.xml')}}" />
 <meta name="generator" content="WordPress 5.4" />
 <meta name="generator" content="WooCommerce 4.0.1" />
 <meta name="generator" content="WPML ver:4.0.8 stt:1,3;" />
@@ -123,8 +123,8 @@ var wc_add_to_cart_params = {"ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_ur
 <link rel="icon" href="{{url('wp-content/uploads/2016/12/cropped-favicon-222x222.jpg')}}" sizes="192x192" />
 <link rel="apple-touch-icon" href="{{url('wp-content/uploads/2016/12/cropped-favicon-222x222.jpg')}}" />
 
-<script type="text/javascript">function setREVStartSize(e){			
-    try {								
+<script type="text/javascript">function setREVStartSize(e){
+    try {
         var pw = document.getElementById(e.c).parentNode.offsetWidth,
             newh;
         pw = pw===0 || isNaN(pw) ? window.innerWidth : pw;
@@ -134,39 +134,39 @@ var wc_add_to_cart_params = {"ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_ur
         e.thumbh = e.thumbh===undefined ? 0 : parseInt(e.thumbh);
         e.tabhide = e.tabhide===undefined ? 0 : parseInt(e.tabhide);
         e.thumbhide = e.thumbhide===undefined ? 0 : parseInt(e.thumbhide);
-        e.mh = e.mh===undefined || e.mh=="" || e.mh==="auto" ? 0 : parseInt(e.mh,0);		
-        if(e.layout==="fullscreen" || e.l==="fullscreen") 						
-            newh = Math.max(e.mh,window.innerHeight);				
-        else{					
+        e.mh = e.mh===undefined || e.mh=="" || e.mh==="auto" ? 0 : parseInt(e.mh,0);
+        if(e.layout==="fullscreen" || e.l==="fullscreen")
+            newh = Math.max(e.mh,window.innerHeight);
+        else{
             e.gw = Array.isArray(e.gw) ? e.gw : [e.gw];
-            for (var i in e.rl) if (e.gw[i]===undefined || e.gw[i]===0) e.gw[i] = e.gw[i-1];					
+            for (var i in e.rl) if (e.gw[i]===undefined || e.gw[i]===0) e.gw[i] = e.gw[i-1];
             e.gh = e.el===undefined || e.el==="" || (Array.isArray(e.el) && e.el.length==0)? e.gh : e.el;
             e.gh = Array.isArray(e.gh) ? e.gh : [e.gh];
             for (var i in e.rl) if (e.gh[i]===undefined || e.gh[i]===0) e.gh[i] = e.gh[i-1];
-                                
+
             var nl = new Array(e.rl.length),
-                ix = 0,						
-                sl;					
+                ix = 0,
+                sl;
             e.tabw = e.tabhide>=pw ? 0 : e.tabw;
             e.thumbw = e.thumbhide>=pw ? 0 : e.thumbw;
             e.tabh = e.tabhide>=pw ? 0 : e.tabh;
-            e.thumbh = e.thumbhide>=pw ? 0 : e.thumbh;					
+            e.thumbh = e.thumbhide>=pw ? 0 : e.thumbh;
             for (var i in e.rl) nl[i] = e.rl[i]<window.innerWidth ? 0 : e.rl[i];
-            sl = nl[0];									
-            for (var i in nl) if (sl>nl[i] && nl[i]>0) { sl = nl[i]; ix=i;}															
-            var m = pw>(e.gw[ix]+e.tabw+e.thumbw) ? 1 : (pw-(e.tabw+e.thumbw)) / (e.gw[ix]);					
+            sl = nl[0];
+            for (var i in nl) if (sl>nl[i] && nl[i]>0) { sl = nl[i]; ix=i;}
+            var m = pw>(e.gw[ix]+e.tabw+e.thumbw) ? 1 : (pw-(e.tabw+e.thumbw)) / (e.gw[ix]);
 
             newh =  (e.type==="carousel" && e.justify==="true" ? e.gh[ix] : (e.gh[ix] * m)) + (e.tabh + e.thumbh);
-        }			
-        
-        if(window.rs_init_css===undefined) window.rs_init_css = document.head.appendChild(document.createElement("style"));					
+        }
+
+        if(window.rs_init_css===undefined) window.rs_init_css = document.head.appendChild(document.createElement("style"));
         document.getElementById(e.c).height = newh;
-        window.rs_init_css.innerHTML += "#"+e.c+"_wrapper { height: "+newh+"px }";				
+        window.rs_init_css.innerHTML += "#"+e.c+"_wrapper { height: "+newh+"px }";
     } catch(e){
         console.log("Failure at Presize of Slider:" + e)
-    }					   
+    }
   };</script>
-<style type="text/css" data-type="vc_shortcodes-custom-css">.vc_custom_1485519561591{padding-top: 3rem !important;padding-bottom: 7rem !important;}.vc_custom_1484231990562{padding-top: 7rem !important;padding-bottom: 7rem !important;background-color: #f1f4f7 !important;}.vc_custom_1484230061946{margin-bottom: 40px !important;padding-top: 7rem !important;padding-bottom: 1rem !important;background: #092746 url(http://smarthead.ancorathemes.com/wp-content/uploads/2016/12/bg_guarantee.jpg?id=211) !important;background-position: center !important;background-repeat: no-repeat !important;background-size: cover !important;}.vc_custom_1484220977347{padding-top: 7rem !important;}.vc_custom_1485435081882{padding-top: 12rem !important;padding-bottom: 12rem !important;background-image: url(http://smarthead.ancorathemes.com/wp-content/uploads/2016/12/bg_cta.jpg?id=224) !important;background-position: center !important;background-repeat: no-repeat !important;background-size: cover !important;}.vc_custom_1484233865553{padding-top: 7rem !important;padding-bottom: 7rem !important;background-color: #f1f4f7 !important;}.vc_custom_1484233720219{padding-top: 7rem !important;padding-bottom: 7rem !important;background-image: url(http://smarthead.ancorathemes.com/wp-content/uploads/2016/12/bg5.jpg?id=192) !important;}.vc_custom_1571398623580{padding-top: 7rem !important;padding-bottom: 7rem !important;}.vc_custom_1485784696044{background-color: #f6f8f9 !important;}.vc_custom_1485784703350{background-color: #ecf0f5 !important;}.vc_custom_1485784807090{background-image: url(http://smarthead.ancorathemes.com/wp-content/uploads/2016/12/bg_info.jpg?id=229) !important;background-position: center !important;background-repeat: no-repeat !important;background-size: cover !important;}.vc_custom_1485519814406{margin-bottom: 5.5rem !important;}.vc_custom_1484231980126{margin-bottom: 5.5rem !important;}.vc_custom_1484232663769{margin-top: 3.2em !important;}.vc_custom_1484143305148{background-image: url(http://smarthead.ancorathemes.com/wp-content/uploads/2016/12/banner.jpg?id=214) !important;background-position: center !important;background-repeat: no-repeat !important;background-size: cover !important;}.vc_custom_1486382153651{padding-bottom: 5.5rem !important;}.vc_custom_1484220999465{margin-bottom: 5.5rem !important;}.vc_custom_1495538013583{border-top-width: 1px !important;padding-top: 2.5rem !important;padding-bottom: 3rem !important;border-top-color: #d9dfe5 !important;border-top-style: dashed !important;}.vc_custom_1529413741245{margin-bottom: 5.5rem !important;}.vc_custom_1484578313285{background-image: url(http://smarthead.ancorathemes.com/wp-content/uploads/2016/11/subscribe.jpg?id=142) !important;background-position: center !important;background-repeat: no-repeat !important;background-size: cover !important;}.vc_custom_1484315074540{margin-bottom: 5.5rem !important;}.vc_custom_1484233898539{margin-bottom: 5.5rem !important;}.vc_custom_1484753191719{margin-bottom: 20px !important;}.vc_custom_1484753210376{margin-top: 18px !important;margin-bottom: 28px !important;}</style><noscript><style> .wpb_animate_when_almost_visible { opacity: 1; }</style></noscript>
+<style type="text/css" data-type="vc_shortcodes-custom-css">.vc_custom_1485519561591{padding-top: 3rem !important;padding-bottom: 7rem !important;}.vc_custom_1484231990562{padding-top: 7rem !important;padding-bottom: 7rem !important;background-color: #f1f4f7 !important;}.vc_custom_1484230061946{margin-bottom: 40px !important;padding-top: 7rem !important;padding-bottom: 1rem !important;background: #092746 url(https://tutors-hub.com/wp-content/uploads/2016/12/bg_guarantee.webp?id=211) !important;background-position: center !important;background-repeat: no-repeat !important;background-size: cover !important;}.vc_custom_1484220977347{padding-top: 7rem !important;}.vc_custom_1485435081882{padding-top: 12rem !important;padding-bottom: 12rem !important;background-image: url(https://tutors-hub.com/wp-content/uploads/2016/12/bg_cta.webp?id=224) !important;background-position: center !important;background-repeat: no-repeat !important;background-size: cover !important;}.vc_custom_1484233865553{padding-top: 7rem !important;padding-bottom: 7rem !important;background-color: #f1f4f7 !important;}.vc_custom_1484233720219{padding-top: 7rem !important;padding-bottom: 7rem !important;background-image: url(http://smarthead.ancorathemes.com/wp-content/uploads/2016/12/bg5.jpg?id=192) !important;}.vc_custom_1571398623580{padding-top: 7rem !important;padding-bottom: 7rem !important;}.vc_custom_1485784696044{background-color: #f6f8f9 !important;}.vc_custom_1485784703350{background-color: #ecf0f5 !important;}.vc_custom_1485784807090{background-image: url(http://smarthead.ancorathemes.com/wp-content/uploads/2016/12/bg_info.jpg?id=229) !important;background-position: center !important;background-repeat: no-repeat !important;background-size: cover !important;}.vc_custom_1485519814406{margin-bottom: 5.5rem !important;}.vc_custom_1484231980126{margin-bottom: 5.5rem !important;}.vc_custom_1484232663769{margin-top: 3.2em !important;}.vc_custom_1484143305148{background-image: url(https://tutors-hub.com/wp-content/uploads/2016/12/banner.webp?id=214) !important;background-position: center !important;background-repeat: no-repeat !important;background-size: cover !important;}.vc_custom_1486382153651{padding-bottom: 5.5rem !important;}.vc_custom_1484220999465{margin-bottom: 5.5rem !important;}.vc_custom_1495538013583{border-top-width: 1px !important;padding-top: 2.5rem !important;padding-bottom: 3rem !important;border-top-color: #d9dfe5 !important;border-top-style: dashed !important;}.vc_custom_1529413741245{margin-bottom: 5.5rem !important;}.vc_custom_1484578313285{background-image: url(https://tutors-hub.com/wp-content/uploads/2016/12/subscribe.webp?id=142) !important;background-position: center !important;background-repeat: no-repeat !important;background-size: cover !important;}.vc_custom_1484315074540{margin-bottom: 5.5rem !important;}.vc_custom_1484233898539{margin-bottom: 5.5rem !important;}.vc_custom_1484753191719{margin-bottom: 20px !important;}.vc_custom_1484753210376{margin-top: 18px !important;margin-bottom: 28px !important;}</style><noscript><style> .wpb_animate_when_almost_visible { opacity: 1; }</style></noscript>
 
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 <script
@@ -238,11 +238,11 @@ var wc_add_to_cart_params = {"ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_ur
                 icon: icon,
                 title: place.name,
                 position: place.geometry.location
-               
+
 
               })
             );
-        
+
             if (place.geometry.viewport) {
               // Only geocodes have viewport.
               bounds.union(place.geometry.viewport);

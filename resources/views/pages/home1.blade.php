@@ -392,7 +392,7 @@
                                                     <div class="sc_services_columns sc_item_columns sc_item_columns_3 trx_addons_columns_wrap columns_padding_bottom">
                                                         <div class="trx_addons_column-1_3 "><div class="sc_services_item with_content with_icon sc_services_item_featured_top">
                                                                 <div class="sc_services_item_header">
-                                                                    <a href="#"
+                                                                    <a href=
                                                                        id="sc_services_192864280_icon-prof"
                                                                        class="sc_services_item_icon icon-prof"
                                                                     ></a>	</div>
@@ -407,7 +407,7 @@
                                                             </div>
                                                         </div><div class="trx_addons_column-1_3 "><div class="sc_services_item with_content with_icon sc_services_item_featured_top">
                                                                 <div class="sc_services_item_header">
-                                                                    <a href="#"
+                                                                    <a href=
                                                                        id="sc_services_192864280_icon-real-results"
                                                                        class="sc_services_item_icon icon-real-results"
                                                                     ></a>	</div>
@@ -423,7 +423,7 @@
                                                             </div>
                                                         </div><div class="trx_addons_column-1_3 "><div class="sc_services_item with_content with_icon sc_services_item_featured_top">
                                                                 <div class="sc_services_item_header">
-                                                                    <a href="#"
+                                                                    <a href=
                                                                        id="sc_services_192864280_icon-university"
                                                                        class="sc_services_item_icon icon-university"
                                                                     ></a>	</div>

@@ -99,6 +99,8 @@ Route::post('post/start-session', 'SessionController@startsession');
 Route::post('post/review', 'SessionController@postReview');
 Route::post('/post/long-lat', 'UserController@updateLatLng');
 Route::post('/update/long-lat', 'UserController@updateLocation');
+Route::post('post/accept-payment', 'SessionController@payment');
+Route::post('post/accept-payment', 'SessionController@payment');
 
 
 Route::post('update/location', 'LocationController@updateUserLocation');

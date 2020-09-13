@@ -35,6 +35,8 @@
                     <div v-if="viewSession.payment_status == 1 && viewSession.accept == '1' && viewSession.class_status == 0"  class="status"><span>Upcoming</span></div>
                     <div v-if="viewSession.payment_status == 1 && viewSession.accept == '1' && viewSession.class_status == 1"  class="status"><span>Completed</span></div>
                     <span class="dt">{{viewSession.created_at | moment('DD MMM, YYYY')}}</span>
+                    <div class="val"><span>Start Session: {{viewSession.startsession}}</span></div>
+                    <div class="val"><span>End Session: {{viewSession.endsession}}</span></div>
                     <div class="val"><span>{{viewSession.level}}</span></div>
                     <div class="val"><span>{{viewSession.subject}}</span></div>
                 </div>
@@ -62,13 +64,14 @@
             <button v-if="!viewSession.cancel_request && !viewSession.completed" @click="requestCancel" class="btn btn-danger" style="border-radius: 30px;     text-align: center;
     display: block;">Request To Cancel Session</button>
             <button v-if="viewSession.accept != '1' && !viewSession.completed && authuser.type != 'student'" @click="requestaccept" class="btn btn-success" style="border-radius: 30px">Accept Session Request</button>
-            <button v-if="viewSession.payment_status == '1' && viewSession.accept == '1' && viewSession.class_status == '0' && !viewSession.cancel_request && !viewSession.startsession && authuser.type != 'student'" @click="startsession" class="btn btn-success" style="border-radius: 30px">Start Session</button>
+            <button v-if="viewSession.payment_status == '1' && viewSession.accept == '1' && viewSession.class_status == '0' && !viewSession.cancel_requestgit && authuser.type != 'student'" @click="startsession" class="btn btn-success" style="border-radius: 30px">Start Session</button>
             <button v-if="viewSession.payment_status == 1 && viewSession.accept == '1' && viewSession.class_status == 0 && !viewSession.cancel_request && authuser.type == 'student'" @click="startsession" class="btn btn-success" style="border-radius: 30px">Join Session</button>
             <div v-if="viewSession.payment_status != 1  && viewSession.accept == '1' && authuser.type == 'student'" class="rates" >
                 Please Pay to confirm this Session
             </div>
             <div  v-if="viewSession.payment_status != 1  && viewSession.accept == '1' && authuser.type == 'student'" ref="paypal"></div>
 
+            <button @click="requestpayment" value="add task" class="btn btn-gradient">PayPal</button>
 
 
             <div v-if="viewSession.completed" class="review-section">
@@ -598,6 +601,15 @@
                     .catch(error => {
                         console.log(error)
                     })
+            },
+            requestpayment()
+            {
+                confirm("Are you sure you want to accept this session?")
+                axios.post(this.url +'/post/accept-payment', {
+                    id: this.viewSession.id
+
+                })
+
             },
             startsession()
             {
