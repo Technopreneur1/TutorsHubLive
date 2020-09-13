@@ -565,7 +565,7 @@
                                                                             <div class="sc_blogger sc_blogger_classic" data-slides-per-view="2" data-slides-min-width="150"		>
                                                                     <div  class="sc_blogger_columns sc_item_columns trx_addons_columns_wrap columns_padding_bottom">
                                                                         <div class="row">
-                                                                        @if (App\Meta::where('key', 'display_blog')->pluck('value')->first() == 'yes')
+                                                                        {{-- @if (App\Meta::where('key', 'display_blog')->pluck('value')->first() == 'yes') --}}
                                                                         @php $k = 1; @endphp
                                                                         @foreach (App\Blog::orderBy('created_at', 'desc')->take(2)->get() as $blog)
                                                                         <div class="trx_addons_column-1_2 col-md-6 col-lg-6 col-12 ">
@@ -589,7 +589,7 @@
                                                                         </div>
                                                                         @php $k++; @endphp
                                                                         @endforeach
-                                                                        @endif 
+                                                                        {{-- @endif  --}}
                                                                     </div>         
                                                                                         
                                                             </div></div><!-- /.sc_blogger --></div></div></div><div class="wpb_column vc_column_container vc_col-sm-4 vc_col-has-fill sc_layouts_column_icons_position_left special_class_5"><div class="vc_column-inner vc_custom_1484578313285"><div class="wpb_wrapper"><div class="vc_icon_element vc_icon_element-outer vc_icon_element-align-center"><div class="vc_icon_element-inner vc_icon_element-color-green vc_icon_element-size-md vc_icon_element-style- vc_icon_element-background-color-grey" ><span class="vc_icon_element-icon fa fa-paper-plane" ></span></div></div>
