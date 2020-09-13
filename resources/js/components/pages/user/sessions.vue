@@ -35,6 +35,8 @@
                     <div v-if="viewSession.payment_status == 1 && viewSession.accept == '1' && viewSession.class_status == 0"  class="status"><span>Upcoming</span></div>
                     <div v-if="viewSession.payment_status == 1 && viewSession.accept == '1' && viewSession.class_status == 1"  class="status"><span>Completed</span></div>
                     <span class="dt">{{viewSession.created_at | moment('DD MMM, YYYY')}}</span>
+                    <div class="val"><span>Start Session: {{viewSession.startsession}}</span></div>
+                    <div class="val"><span>End Session: {{viewSession.endsession}}</span></div>
                     <div class="val"><span>{{viewSession.level}}</span></div>
                     <div class="val"><span>{{viewSession.subject}}</span></div>
                 </div>

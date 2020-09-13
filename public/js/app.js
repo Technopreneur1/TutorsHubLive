@@ -6857,6 +6857,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     url: {
@@ -82799,6 +82801,20 @@ var render = function() {
                       )
                     )
                   )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "val" }, [
+                  _c("span", [
+                    _vm._v(
+                      "Start Session: " + _vm._s(_vm.viewSession.startsession)
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "val" }, [
+                  _c("span", [
+                    _vm._v("End Session: " + _vm._s(_vm.viewSession.endsession))
+                  ])
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "val" }, [
