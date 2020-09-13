@@ -158,7 +158,15 @@ class SessionController extends Controller
 
         return  response()->json(['msg' => 'success']);
     }
+//button of payment
+    public function payment(Request $request)
+    {
 
+        $session = Session::findOrFail($request->id);
+
+        $session->update(['payment_status' => '1']);
+        return  response()->json(['msg' => 'success']);
+    }
     public function startsession(Request $request)
     {
         $session = Session::findOrFail($request->id);

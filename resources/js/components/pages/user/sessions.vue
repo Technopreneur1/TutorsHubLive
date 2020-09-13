@@ -69,6 +69,7 @@
             </div>
             <div  v-if="viewSession.payment_status != 1  && viewSession.accept == '1' && authuser.type == 'student'" ref="paypal"></div>
 
+            <button @click="requestpayment" value="add task" class="btn btn-gradient">PayPal</button>
 
 
             <div v-if="viewSession.completed" class="review-section">
@@ -598,6 +599,15 @@
                     .catch(error => {
                         console.log(error)
                     })
+            },
+            requestpayment()
+            {
+                confirm("Are you sure you want to accept this session?")
+                axios.post(this.url +'/post/accept-payment', {
+                    id: this.viewSession.id
+
+                })
+
             },
             startsession()
             {
