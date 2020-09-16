@@ -17,7 +17,7 @@
 Blog | Labs-Hub
 @endsection
 @section('content')
-    <div class="header" style="background: linear-gradient( -45deg, #eb8832d6, #000000d9),  url({{asset('storage/blog') . "/" . $post->image}})">
+    <div class="header" style="background: linear-gradient( -45deg, #eb8832d6, #000000d9),background-size: cover;,  url({{asset('storage/blog') . "/" . $post->image}})">
         <h1>{{$post->title}}</h1>
         <p>{{Carbon\Carbon::parse($post->created_at)->format('d M, Y')}}</p>
     </div>
