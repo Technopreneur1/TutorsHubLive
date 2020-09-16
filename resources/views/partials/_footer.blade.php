@@ -1,4 +1,4 @@
-<footer>
+<footer id="footer">
     <div class="copyrights">
         &copy; All Rights Reserved {{date('Y')}}
     </div>
