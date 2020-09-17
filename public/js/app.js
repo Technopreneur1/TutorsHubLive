@@ -81063,18 +81063,20 @@ var render = function() {
               : _vm._e(),
             _vm._v(" "),
             _c("div", { staticClass: "options" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-back",
-                  on: {
-                    click: function($event) {
-                      return _vm.back()
-                    }
-                  }
-                },
-                [_vm._v("Back")]
-              ),
+              _vm.step != 2
+                ? _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-back",
+                      on: {
+                        click: function($event) {
+                          return _vm.back()
+                        }
+                      }
+                    },
+                    [_vm._v("Back")]
+                  )
+                : _vm._e(),
               _vm._v(" "),
               _vm.step != 3
                 ? _c(
