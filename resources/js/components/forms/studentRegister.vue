@@ -1,7 +1,9 @@
 <template>
     <div class="reg-form">
         <full-loader v-if="loading" ></full-loader>
-        <span @click="closeForm()" class="btn-cancel"><i class="fas fa-long-arrow-alt-left"></i></span>
+<!--        <span @click="closeForm()" class="btn-cancel"><i class="fas fa-long-arrow-alt-left"></i></span>-->
+        <a href="https://tutors-hub.com/" class="btn-cancel"><i class="fas fa-long-arrow-alt-left"></i></a>
+
         <div v-if="!hasRegistered" class="full-container" >
             <div class="reg-text">
                 <div class="title">Register as a student</div>

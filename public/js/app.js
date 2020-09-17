@@ -4525,6 +4525,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['url', 'lat', 'lng'],
@@ -4821,6 +4823,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var v_select2_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! v-select2-component */ "./node_modules/v-select2-component/dist/Select2.esm.js");
+//
 //
 //
 //
@@ -80055,22 +80058,11 @@ var render = function() {
     [
       _vm.loading ? _c("full-loader") : _vm._e(),
       _vm._v(" "),
-      _c(
-        "span",
-        {
-          staticClass: "btn-cancel",
-          on: {
-            click: function($event) {
-              return _vm.closeForm()
-            }
-          }
-        },
-        [_c("i", { staticClass: "fas fa-long-arrow-alt-left" })]
-      ),
+      _vm._m(0),
       _vm._v(" "),
       !_vm.hasRegistered
         ? _c("div", { staticClass: "full-container" }, [
-            _vm._m(0),
+            _vm._m(1),
             _vm._v(" "),
             _vm.step == 2
               ? _c("div", { staticClass: "newrow" }, [
@@ -80647,6 +80639,16 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      { staticClass: "btn-cancel", attrs: { href: "https://tutors-hub.com/" } },
+      [_c("i", { staticClass: "fas fa-long-arrow-alt-left" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "reg-text" }, [
       _c("div", { staticClass: "title" }, [_vm._v("Register as a student")]),
       _vm._v(" "),
@@ -80683,22 +80685,11 @@ var render = function() {
     [
       _vm.loading ? _c("full-loader") : _vm._e(),
       _vm._v(" "),
-      _c(
-        "span",
-        {
-          staticClass: "btn-cancel",
-          on: {
-            click: function($event) {
-              return _vm.closeForm()
-            }
-          }
-        },
-        [_c("i", { staticClass: "fas fa-long-arrow-alt-left" })]
-      ),
+      _vm._m(0),
       _vm._v(" "),
       !_vm.hasRegistered
         ? _c("div", { staticClass: "full-container" }, [
-            _vm._m(0),
+            _vm._m(1),
             _vm._v(" "),
             _vm.step == 2
               ? _c("div", { staticClass: "newrow" }, [
@@ -81137,6 +81128,16 @@ var render = function() {
   )
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      { staticClass: "btn-cancel", attrs: { href: "https://tutors-hub.com/" } },
+      [_c("i", { staticClass: "fas fa-long-arrow-alt-left" })]
+    )
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
