@@ -66,8 +66,11 @@
             <button v-if="viewSession.accept != '1' && !viewSession.completed && authuser.type != 'student'" @click="requestaccept" class="btn btn-success" style="border-radius: 30px">Accept Session Request</button>
             <button v-if="viewSession.payment_status == '1' && viewSession.accept == '1' && viewSession.class_status == '0' && !viewSession.cancel_requestgit && authuser.type != 'student'" @click="startsession" class="btn btn-success" style="border-radius: 30px">Start Session</button>
             <button v-if="viewSession.payment_status == 1 && viewSession.accept == '1' && viewSession.class_status == 0 && !viewSession.cancel_request && authuser.type == 'student'" @click="startsession" class="btn btn-success" style="border-radius: 30px">Join Session</button>
-            <div v-if="viewSession.payment_status != 1  && viewSession.accept == '1' && authuser.type == 'student'" class="rates" >
+            <div v-if="viewSession.payment_status != 1  && viewSession.cancel_request != '1' && viewSession.accept == '1' && authuser.type == 'student'" class="rates" >
                 Please Pay to confirm this Session
+            </div>
+            <div v-if="viewSession.cancel_request == '1'" class="rates" >
+                This session has been cancelled.
             </div>
             <div  v-if="viewSession.payment_status != 1  && viewSession.accept == '1' && authuser.type == 'student'" ref="paypal"></div>
 
@@ -179,6 +182,7 @@
                     <div class="actions">
                         <div v-if="ses.payment_status != 1 && ses.accept != '1' && ses.class_status == 0" class="status">Requested</div>
                         <div v-if="ses.payment_status != 1 && ses.accept == '1' && ses.class_status == 0" class="status">Pending</div>
+                        <div v-if="ses.cancel_request == '1'" class="status">Cancelled</div>
                         <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.class_status == 0"  class="status">Upcoming</div>
                         <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.class_status == 1"  class="status">Completed</div>
 

@@ -6862,6 +6862,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     url: {
@@ -80570,18 +80574,20 @@ var render = function() {
               : _vm._e(),
             _vm._v(" "),
             _c("div", { staticClass: "options" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-back",
-                  on: {
-                    click: function($event) {
-                      return _vm.back()
-                    }
-                  }
-                },
-                [_vm._v("Back")]
-              ),
+              _vm.step != 2
+                ? _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-back",
+                      on: {
+                        click: function($event) {
+                          return _vm.back()
+                        }
+                      }
+                    },
+                    [_vm._v("Back")]
+                  )
+                : _vm._e(),
               _vm._v(" "),
               _vm.step != 4
                 ? _c(
@@ -82946,11 +82952,20 @@ var render = function() {
               : _vm._e(),
             _vm._v(" "),
             _vm.viewSession.payment_status != 1 &&
+            _vm.viewSession.cancel_request != "1" &&
             _vm.viewSession.accept == "1" &&
             _vm.authuser.type == "student"
               ? _c("div", { staticClass: "rates" }, [
                   _vm._v(
                     "\n                Please Pay to confirm this Session\n            "
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.viewSession.cancel_request == "1"
+              ? _c("div", { staticClass: "rates" }, [
+                  _vm._v(
+                    "\n                This session has been cancelled.\n            "
                   )
                 ])
               : _vm._e(),
@@ -83346,6 +83361,12 @@ var render = function() {
                         ses.class_status == 0
                           ? _c("div", { staticClass: "status" }, [
                               _vm._v("Pending")
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        ses.cancel_request == "1"
+                          ? _c("div", { staticClass: "status" }, [
+                              _vm._v("Cancelled")
                             ])
                           : _vm._e(),
                         _vm._v(" "),

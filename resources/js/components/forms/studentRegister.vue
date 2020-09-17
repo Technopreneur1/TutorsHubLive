@@ -96,7 +96,7 @@
             </div>
             <div v-if="error" class="error-bar">{{error}}</div>
             <div class="options">
-                <button @click="back()" class="btn btn-back">Back</button>
+                <button v-if="step != 2" @click="back()" class="btn btn-back">Back</button>
                 <button v-if="step != 4" @click="next()" class="btn btn-next">Next</button>
                 <button v-else @click="next()" class="btn btn-next">Complete Registeration</button>
             </div>
