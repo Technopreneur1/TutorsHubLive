@@ -21,6 +21,7 @@ class SessionController extends Controller
     public function index()
     {
         $sessions = auth()->user()->profile->sessions;
+        dd($sessions);
         return view("pages.sessions.index", ['sessions' => $sessions]);
     }
 
