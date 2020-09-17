@@ -6866,6 +6866,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     url: {
@@ -82779,10 +82780,15 @@ var render = function() {
                 _vm._v(" "),
                 _vm.viewSession.payment_status != 1 &&
                 _vm.viewSession.accept == "1" &&
-                _vm.viewSession.class_status == 0
+                _vm.viewSession.class_status == 0 &&
+                _vm.ses.cancel_request != "1"
                   ? _c("div", { staticClass: "status" }, [
                       _c("span", [_vm._v("Pending")])
                     ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.ses.cancel_request == "1"
+                  ? _c("div", { staticClass: "status" }, [_vm._v("Cancelled")])
                   : _vm._e(),
                 _vm._v(" "),
                 _vm.viewSession.payment_status == 1 &&
@@ -83358,7 +83364,8 @@ var render = function() {
                         _vm._v(" "),
                         ses.payment_status != 1 &&
                         ses.accept == "1" &&
-                        ses.class_status == 0
+                        ses.class_status == 0 &&
+                        ses.cancel_request != "1"
                           ? _c("div", { staticClass: "status" }, [
                               _vm._v("Pending")
                             ])
