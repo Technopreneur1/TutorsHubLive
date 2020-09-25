@@ -46,18 +46,27 @@
                 console.log(place)
                 this.location = {
                     lat: place.geometry.location.lat(),
-                    lng: place.geometry.location.lng()
+                    lng: place.geometry.location.lng(),
+                    formatted_address: place.formatted_address
                 }
             },
             marketDrag(position)
             {
                 this.location.lat = position.lat(),
-                    this.location.lng = position.lng()
+                this.location.lng = position.lng()
 
+                const geocoder = new google.maps.Geocoder()
+                geocoder.geocode({ 'latLng': position }, (result, status) => {
+                    if (status === google.maps.GeocoderStatus.OK) {
+                        // set the input field value with address:
+                        console.log(result[0].formatted_address)
+                        this.location.formatted_address = result[0].formatted_address;
+                    }
+                })
             },
             post()
             {
-                axios.post('/update/long-lat', {lat: this.location.lat, lng: this.location.lng})
+                axios.post('/update/long-lat', {lat: this.location.lat, lng: this.location.lng, address: this.location.formatted_address})
                     .then(response => {
                         //    alert("Updated");
                         this.$swal({
@@ -86,7 +95,6 @@
                 //    console.log('getloc')
             },
             showPosition(position) {
-
                 this.location.lat = position.coords.latitude
                 this.location.lng = position.coords.longitude
             }

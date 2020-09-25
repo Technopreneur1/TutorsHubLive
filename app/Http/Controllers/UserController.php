@@ -50,6 +50,7 @@ class UserController extends Controller
         $user = auth()->user()->update([
             'latitude' => $request->lat,
             'longitude' => $request->lng,
+            'address' => $request->address
         ]);
         return response()->json(['msg' => "success"]);
     }

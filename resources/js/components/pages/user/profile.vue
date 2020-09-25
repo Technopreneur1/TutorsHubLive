@@ -55,10 +55,11 @@
                 </div>
                 <div class="location">
                     <span class="icon"><i class="fas fa-map-marker-alt"></i></span>
-                    {{user.neighborhood ?user.neighborhood.name + ', ': ''}}
+                    <!-- {{user.neighborhood ?user.neighborhood.name + ', ': ''}}
                     {{user.city ?user.city.name + ', ': ''}}
                     {{user.state ?user.state.name + ', ': ''}}
-                    {{user.country ?user.country.name: ''}}
+                    {{user.country ?user.country.name: ''}} -->
+                    {{user.address}}
                 </div>
             </div>
             <div class="actions-bar">
