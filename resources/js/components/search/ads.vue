@@ -45,7 +45,12 @@
                 <div class="newrow">
                     <span>Location</span>
                 </div>
-                 <div class="input">
+                <div class="input">
+                    <label for="">Radius</label>
+                    <input type="range" min="1" max="1000" v-model="radius" name="radius" id="">
+                    <!-- <input type="number" v-model="radius" id=""> -->
+                </div>
+                 <!-- <div class="input">
                         <label for="">Country</label>
                         <Select2 v-model="country" :options="countries" @change="countrySelected()" />
                     </div>
@@ -60,7 +65,7 @@
                     <div v-show="neighborhoods.length" class="input">
                         <label for="">Neighborhood</label>
                         <Select2 v-model="neighborhood" :options="neighborhoods"   />
-                    </div>
+                    </div> -->
                 <div class="btns">
                     <button @click="reset()" class="btn btn-re">Reset</button>
                     <button @click="getAds()" class="btn btn-gradient">Search</button>

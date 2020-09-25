@@ -49,37 +49,26 @@
                         <span>Location</span>
                     </div>
                     <div class="input">
+                        <label for="">Radius</label>
+                        <input type="range" min="1" max="1000" v-model="radius" name="radius" id="">
+                        <!-- <input type="number" v-model="radius" id=""> -->
+                    </div>
+                    <!-- <div class="input">
                         <label for="">Country</label>
-                        <!-- <select @change="countrySelected()" v-model="country" id="">
-                            <option value="" disabled>Counstry</option>
-                            <option v-for="country in countries" :key="country.id"  :value="country.id">{{country.name}}</option>
-                        </select> -->
                         <Select2 v-model="country" :options="countries" @change="countrySelected()" />
                     </div>
                     <div v-show="states.length" class="input">
                         <label for="">State / Province</label>
-                        <!-- <select @change="stateSelected()" v-model="state" id="">
-                            <option value="" disabled>State / Province</option>
-                            <option v-for="state in states" :key="state.id" :value="state.id">{{state.name}}</option>
-                        </select> -->
                         <Select2 v-model="state" :options="states" @change="stateSelected()"  />
                     </div>
                     <div v-show="cities.length" class="input">
                         <label for="">City</label>
-                        <!-- <select @change="citySelected()" v-model="city" id="">
-                            <option value="" disabled>City</option>
-                            <option v-for="city in cities" :key="city.id" :value="city.id">{{city.name}}</option>
-                        </select> -->
                         <Select2 v-model="city" :options="cities" @change="citySelected()"  />
                     </div>
                     <div v-show="neighborhoods.length" class="input">
                         <label for="">Neighborhood</label>
-                        <!-- <select v-model="neighborhood" id="">
-                            <option value="" disabled>Neighborhood</option>
-                            <option v-for="neighborhood in neighborhoods" :key="neighborhood.id" :value="neighborhood.id">{{neighborhood.name}}</option>
-                        </select> -->
                         <Select2 v-model="neighborhood" :options="neighborhoods"   />
-                    </div>
+                    </div> -->
                     <div class="btns">
                         <button @click="reset()" class="btn btn-re">Reset</button>
                         <button @click="getTutors()" class="btn btn-gradient">Search</button>

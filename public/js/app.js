@@ -7709,6 +7709,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -8147,17 +8152,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var v_select2_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! v-select2-component */ "./node_modules/v-select2-component/dist/Select2.esm.js");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -84135,132 +84129,33 @@ var render = function() {
               _vm._v(" "),
               _vm._m(0),
               _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "input" },
-                [
-                  _c("label", { attrs: { for: "" } }, [_vm._v("Country")]),
-                  _vm._v(" "),
-                  _c("Select2", {
-                    attrs: { options: _vm.countries },
-                    on: {
-                      change: function($event) {
-                        return _vm.countrySelected()
-                      }
-                    },
-                    model: {
-                      value: _vm.country,
-                      callback: function($$v) {
-                        _vm.country = $$v
-                      },
-                      expression: "country"
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
+              _c("div", { staticClass: "input" }, [
+                _c("label", { attrs: { for: "" } }, [_vm._v("Radius")]),
+                _vm._v(" "),
+                _c("input", {
                   directives: [
                     {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm.states.length,
-                      expression: "states.length"
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.radius,
+                      expression: "radius"
                     }
                   ],
-                  staticClass: "input"
-                },
-                [
-                  _c("label", { attrs: { for: "" } }, [
-                    _vm._v("State / Province")
-                  ]),
-                  _vm._v(" "),
-                  _c("Select2", {
-                    attrs: { options: _vm.states },
-                    on: {
-                      change: function($event) {
-                        return _vm.stateSelected()
-                      }
-                    },
-                    model: {
-                      value: _vm.state,
-                      callback: function($$v) {
-                        _vm.state = $$v
-                      },
-                      expression: "state"
+                  attrs: {
+                    type: "range",
+                    min: "1",
+                    max: "1000",
+                    name: "radius",
+                    id: ""
+                  },
+                  domProps: { value: _vm.radius },
+                  on: {
+                    __r: function($event) {
+                      _vm.radius = $event.target.value
                     }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm.cities.length,
-                      expression: "cities.length"
-                    }
-                  ],
-                  staticClass: "input"
-                },
-                [
-                  _c("label", { attrs: { for: "" } }, [_vm._v("City")]),
-                  _vm._v(" "),
-                  _c("Select2", {
-                    attrs: { options: _vm.cities },
-                    on: {
-                      change: function($event) {
-                        return _vm.citySelected()
-                      }
-                    },
-                    model: {
-                      value: _vm.city,
-                      callback: function($$v) {
-                        _vm.city = $$v
-                      },
-                      expression: "city"
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm.neighborhoods.length,
-                      expression: "neighborhoods.length"
-                    }
-                  ],
-                  staticClass: "input"
-                },
-                [
-                  _c("label", { attrs: { for: "" } }, [_vm._v("Neighborhood")]),
-                  _vm._v(" "),
-                  _c("Select2", {
-                    attrs: { options: _vm.neighborhoods },
-                    model: {
-                      value: _vm.neighborhood,
-                      callback: function($$v) {
-                        _vm.neighborhood = $$v
-                      },
-                      expression: "neighborhood"
-                    }
-                  })
-                ],
-                1
-              ),
+                  }
+                })
+              ]),
               _vm._v(" "),
               _c("div", { staticClass: "btns" }, [
                 _c(
@@ -84750,136 +84645,33 @@ var render = function() {
                       _c("span", [_vm._v("Location")])
                     ]),
                     _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "input" },
-                      [
-                        _c("label", { attrs: { for: "" } }, [
-                          _vm._v("Country")
-                        ]),
-                        _vm._v(" "),
-                        _c("Select2", {
-                          attrs: { options: _vm.countries },
-                          on: {
-                            change: function($event) {
-                              return _vm.countrySelected()
-                            }
-                          },
-                          model: {
-                            value: _vm.country,
-                            callback: function($$v) {
-                              _vm.country = $$v
-                            },
-                            expression: "country"
-                          }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
+                    _c("div", { staticClass: "input" }, [
+                      _c("label", { attrs: { for: "" } }, [_vm._v("Radius")]),
+                      _vm._v(" "),
+                      _c("input", {
                         directives: [
                           {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.states.length,
-                            expression: "states.length"
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.radius,
+                            expression: "radius"
                           }
                         ],
-                        staticClass: "input"
-                      },
-                      [
-                        _c("label", { attrs: { for: "" } }, [
-                          _vm._v("State / Province")
-                        ]),
-                        _vm._v(" "),
-                        _c("Select2", {
-                          attrs: { options: _vm.states },
-                          on: {
-                            change: function($event) {
-                              return _vm.stateSelected()
-                            }
-                          },
-                          model: {
-                            value: _vm.state,
-                            callback: function($$v) {
-                              _vm.state = $$v
-                            },
-                            expression: "state"
+                        attrs: {
+                          type: "range",
+                          min: "1",
+                          max: "1000",
+                          name: "radius",
+                          id: ""
+                        },
+                        domProps: { value: _vm.radius },
+                        on: {
+                          __r: function($event) {
+                            _vm.radius = $event.target.value
                           }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.cities.length,
-                            expression: "cities.length"
-                          }
-                        ],
-                        staticClass: "input"
-                      },
-                      [
-                        _c("label", { attrs: { for: "" } }, [_vm._v("City")]),
-                        _vm._v(" "),
-                        _c("Select2", {
-                          attrs: { options: _vm.cities },
-                          on: {
-                            change: function($event) {
-                              return _vm.citySelected()
-                            }
-                          },
-                          model: {
-                            value: _vm.city,
-                            callback: function($$v) {
-                              _vm.city = $$v
-                            },
-                            expression: "city"
-                          }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.neighborhoods.length,
-                            expression: "neighborhoods.length"
-                          }
-                        ],
-                        staticClass: "input"
-                      },
-                      [
-                        _c("label", { attrs: { for: "" } }, [
-                          _vm._v("Neighborhood")
-                        ]),
-                        _vm._v(" "),
-                        _c("Select2", {
-                          attrs: { options: _vm.neighborhoods },
-                          model: {
-                            value: _vm.neighborhood,
-                            callback: function($$v) {
-                              _vm.neighborhood = $$v
-                            },
-                            expression: "neighborhood"
-                          }
-                        })
-                      ],
-                      1
-                    ),
+                        }
+                      })
+                    ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "btns" }, [
                       _c(
