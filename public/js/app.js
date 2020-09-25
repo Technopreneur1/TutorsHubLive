@@ -7047,8 +7047,20 @@ __webpack_require__.r(__webpack_exports__);
         _this6.viewSession.startsession = _this6.authuser.type;
 
         if (_this6.authuser.type == 'teacher') {
+          token = btoa("5a5d883cdebd4423b00c2a6a746ed77a:bf47f67b69694479be3739c5ca470c34");
+
+          headers: {
+            Authorization: 'Basic ' + token;
+          }
+
           window.open("https://connect.tutors-hub.com#/?teacherid=" + _this6.viewSession.agora_session, "_blank");
         } else {
+          token = btoa("5a5d883cdebd4423b00c2a6a746ed77a:bf47f67b69694479be3739c5ca470c34");
+
+          headers: {
+            Authorization: 'Basic ' + token;
+          }
+
           window.open("https://connect.tutors-hub.com#/?studentid=" + _this6.viewSession.agora_session, "_blank");
         } //alert("You have successfully started for session.")
 
