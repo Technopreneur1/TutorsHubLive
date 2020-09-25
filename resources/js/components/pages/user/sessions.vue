@@ -623,9 +623,17 @@
                         this.viewSession.startsession = this.authuser.type
                         if(this.authuser.type == 'teacher')
                         {
+                            token = btoa("5a5d883cdebd4423b00c2a6a746ed77a:bf47f67b69694479be3739c5ca470c34");
+                            headers: {
+                                Authorization: 'Basic ' + token
+                            }
                             window.open("https://connect.tutors-hub.com#/?teacherid="+this.viewSession.agora_session, "_blank");
 
                         }else{
+                            token = btoa("5a5d883cdebd4423b00c2a6a746ed77a:bf47f67b69694479be3739c5ca470c34");
+                            headers: {
+                                Authorization: 'Basic ' + token
+                            }
                             window.open("https://connect.tutors-hub.com#/?studentid="+this.viewSession.agora_session, "_blank");
 
                         }
