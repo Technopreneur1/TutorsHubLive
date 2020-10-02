@@ -195,8 +195,8 @@ class SessionController extends Controller
             //dd($res[0]);
             header('Access-Control-Allow-Origin: *');
             header('Content-type: application/json');
-            $base64Credentials = base64_encode("5a5d883cdebd4423b00c2a6a746ed77a:bf47f67b69694479be3739c5ca470c34");
-            header("Authorization: Basic " . $base64Credentials);
+//            $base64Credentials = base64_encode("5a5d883cdebd4423b00c2a6a746ed77a:bf47f67b69694479be3739c5ca470c34");
+//            header("Authorization: Basic " . $base64Credentials);
 
 
             return response()->json([
@@ -211,8 +211,8 @@ class SessionController extends Controller
             //dd($res[0]);
             header('Access-Control-Allow-Origin: *');
             header('Content-type: application/json');
-            $base64Credentials = base64_encode("5a5d883cdebd4423b00c2a6a746ed77a:bf47f67b69694479be3739c5ca470c34");
-            header("Authorization: Basic " . $base64Credentials);
+          //  $base64Credentials = base64_encode("5a5d883cdebd4423b00c2a6a746ed77a:bf47f67b69694479be3739c5ca470c34");
+          //  header("Authorization: Basic " . $base64Credentials);
             return response()->json([
                 'result' => 'failed',
                 'roomName' => '',
@@ -237,8 +237,8 @@ class SessionController extends Controller
             //dd($res[0]);
             header('Access-Control-Allow-Origin: *');
             header('Content-type: application/json');
-            $base64Credentials = base64_encode("5a5d883cdebd4423b00c2a6a746ed77a:bf47f67b69694479be3739c5ca470c34");
-            header("Authorization: Basic " . $base64Credentials);
+          //  $base64Credentials = base64_encode("5a5d883cdebd4423b00c2a6a746ed77a:bf47f67b69694479be3739c5ca470c34");
+           // header("Authorization: Basic " . $base64Credentials);
             return response()->json([
                 'result' => 'success',
                 'roomName' => $res[0]->roomname,
@@ -252,8 +252,8 @@ class SessionController extends Controller
             //dd($res[0]);
             header('Access-Control-Allow-Origin: *');
             header('Content-type: application/json');
-            $base64Credentials = base64_encode("5a5d883cdebd4423b00c2a6a746ed77a:bf47f67b69694479be3739c5ca470c34");
-            header("Authorization: Basic " . $base64Credentials);
+          //  $base64Credentials = base64_encode("5a5d883cdebd4423b00c2a6a746ed77a:bf47f67b69694479be3739c5ca470c34");
+           // header("Authorization: Basic " . $base64Credentials);
             return response()->json([
                 'result' => 'failed',
                 'roomName' => '',
@@ -281,8 +281,8 @@ class SessionController extends Controller
         //dd($res[0]);
         header('Access-Control-Allow-Origin: *');
         header('Content-type: application/json');
-    $base64Credentials = base64_encode("5a5d883cdebd4423b00c2a6a746ed77a:bf47f67b69694479be3739c5ca470c34");
-    header("Authorization: Basic " . $base64Credentials);
+  //  $base64Credentials = base64_encode("5a5d883cdebd4423b00c2a6a746ed77a:bf47f67b69694479be3739c5ca470c34");
+   // header("Authorization: Basic " . $base64Credentials);
         return  response()->json([
             'result' => 'success',
             'roomName' => $res[0]->roomname,
@@ -295,8 +295,8 @@ class SessionController extends Controller
 }else{
     header('Access-Control-Allow-Origin: *');
     header('Content-type: application/json');
-            $base64Credentials = base64_encode("5a5d883cdebd4423b00c2a6a746ed77a:bf47f67b69694479be3739c5ca470c34");
-            header("Authorization: Basic " . $base64Credentials);
+          //  $base64Credentials = base64_encode("5a5d883cdebd4423b00c2a6a746ed77a:bf47f67b69694479be3739c5ca470c34");
+           // header("Authorization: Basic " . $base64Credentials);
     return  response()->json([
         'result' => 'failed',
         'roomName' => '',
@@ -316,8 +316,8 @@ class SessionController extends Controller
         //Mail::to('info@tutors-hub.com')->send(new cancelRequest($session, auth()->user()));
         header('Access-Control-Allow-Origin: *');
         header('Content-type: application/json');
-        $base64Credentials = base64_encode("5a5d883cdebd4423b00c2a6a746ed77a:bf47f67b69694479be3739c5ca470c34");
-        header("Authorization: Basic " . $base64Credentials);
+//        $base64Credentials = base64_encode("5a5d883cdebd4423b00c2a6a746ed77a:bf47f67b69694479be3739c5ca470c34");
+//        header("Authorization: Basic " . $base64Credentials);
         return  response()->json(['result' => 'success']);
     }
 }
