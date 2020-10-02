@@ -7,8 +7,10 @@ use App\Teacher;
 use App\Location;
 use App\Mail\WelcomeEmail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\DB;
 
 class TeacherController extends Controller
 {
@@ -91,8 +93,70 @@ class TeacherController extends Controller
         
         return response()->json(['msg' =>'success']);
     }
-
     public function search(Request $request)
+    {
+        // $requests = Req::with('user')->get();
+
+        $lat = auth()->user()->latitude;
+        $lng = auth()->user()->longitude;
+        /*
+        if($request->level && $request->subject)
+        {
+            $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) * 
+                cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) ) 
+                AS distance FROM users WHERE sector_id = ? And type= 'teacher' AND type = ? HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
+            $args = [$lat,$lng, $lat, $request->level, $request->subject, $request->radius];
+        }
+        elseif($request->level)
+        {
+            $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) * 
+                cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) ) 
+                AS distance FROM users WHERE type = ?  And type= 'teacher' HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
+            $args = [$lat,$lng, $lat, $request->level, $request->radius];
+        }
+        elseif($request->subject)
+        {
+            $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) * 
+                cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) ) 
+                AS distance FROM users WHERE sector_id = ? And type= 'teacher' HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
+            $args = [$lat,$lng, $lat, $request->subject, $request->radius];
+        }
+        else{
+            $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) * 
+                cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) ) 
+                AS distance FROM users WHERE type= 'teacher' HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
+            $args = [$lat,$lng, $lat, $request->radius];
+            
+        } */
+
+        if($request->radius)
+        {
+            $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) * 
+                cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) ) 
+                AS distance FROM users WHERE type= 'teacher' HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
+            $args = [$lat, $lng, $lat, $request->radius];
+        }
+        else{
+            $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) * 
+                cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) ) 
+                AS distance FROM users WHERE type= 'teacher' HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
+            $args = [$lat,$lng, $lat, 10];
+            
+        }
+        
+        $ids = DB::select($string, $args);
+        $ids = Arr::pluck($ids, "id");
+
+        $tutors = User::with(['city', 'state', 'neighborhood', 'country', 'profile'])
+                    ->where('is_hidden', 0)
+                    ->where('is_banned', 0)
+                    ->where('type', 'teacher')
+                    ->whereIn('id', $ids)
+                    ->paginate(30);
+
+        return response()->json(['tutors' => $tutors]);
+    }
+    public function search_(Request $request)
     {
         if($request['neighborhood'])
         {
