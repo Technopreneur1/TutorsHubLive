@@ -624,14 +624,14 @@
                         if(this.authuser.type == 'teacher')
                         {
                             var XMLReq = new XMLHttpRequest();
-                            XMLReq.open("GET", "https://connect.tutors-hub.com#/?teacherid="+this.viewSession.agora_session, false);
+                            XMLReq.open("GET", "https://connect.tutors-hub.com#/?teacherid="+this.viewSession.agora_session, true);
                             XMLReq.setRequestHeader("Authorization", "Basic " + btoa("5a5d883cdebd4423b00c2a6a746ed77a:bf47f67b69694479be3739c5ca470c34"));
                             XMLReq.send(null);
                             //window.open("https://connect.tutors-hub.com#/?teacherid="+this.viewSession.agora_session, "_blank");
 
                         }else{
                             var XMLReq = new XMLHttpRequest();
-                            XMLReq.open("GET", "https://connect.tutors-hub.com#/?studentid="+this.viewSession.agora_session, false);
+                            XMLReq.open("GET", "https://connect.tutors-hub.com#/?studentid="+this.viewSession.agora_session, true);
                             XMLReq.setRequestHeader("Authorization", "Basic " + btoa("5a5d883cdebd4423b00c2a6a746ed77a:bf47f67b69694479be3739c5ca470c34"));
                             XMLReq.send(null);
                             //window.open("https://connect.tutors-hub.com#/?studentid="+this.viewSession.agora_session, "_blank");
