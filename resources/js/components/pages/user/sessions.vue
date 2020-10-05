@@ -64,14 +64,14 @@
             <button v-if="!viewSession.cancel_request && !viewSession.completed" @click="requestCancel" class="btn btn-danger" style="border-radius: 30px;     text-align: center;
     display: block;">Request To Cancel Session</button>
             <button v-if="viewSession.accept != '1' && !viewSession.completed && authuser.type != 'student'" @click="requestaccept" class="btn btn-success" style="border-radius: 30px">Accept Session Request</button>
-            <button v-if="viewSession.payment_status == '1' && viewSession.accept == '1' && viewSession.class_status == '0' && !viewSession.cancel_requestgit && authuser.type != 'student'" @click="startsession" class="btn btn-success" style="border-radius: 30px">Start Session</button>
+            <button v-if="viewSession.payment_status == '1' && viewSession.accept == '1' && viewSession.class_status == '0' && !viewSession.cancel_request && authuser.type != 'student'" @click="startsession" class="btn btn-success" style="border-radius: 30px">Start Session</button>
             <button v-if="viewSession.payment_status == 1 && viewSession.accept == '1' && viewSession.class_status == 0 && !viewSession.cancel_request && authuser.type == 'student'" @click="startsession" class="btn btn-success" style="border-radius: 30px">Join Session</button>
             <div v-if="viewSession.payment_status != 1  && viewSession.accept == '1' && authuser.type == 'student'" class="rates" >
                 Please Pay to confirm this Session
             </div>
             <div  v-if="viewSession.payment_status != 1  && viewSession.accept == '1' && authuser.type == 'student'" ref="paypal"></div>
 
-<!--            <button @click="git" value="add task" class="btn btn-gradient">PayPal</button>-->
+            <button @click="requestpayment()" value="add task" class="btn btn-gradient">PayPal</button>
 
 
             <div v-if="viewSession.completed" class="review-section">
@@ -623,17 +623,17 @@
                         this.viewSession.startsession = this.authuser.type
                         if(this.authuser.type == 'teacher')
                         {
-                            token = btoa("5a5d883cdebd4423b00c2a6a746ed77a:bf47f67b69694479be3739c5ca470c34");
-                            headers: {
-                                Authorization: 'Basic ' + token
-                            }
+                            // let token = btoa("5a5d883cdebd4423b00c2a6a746ed77a:bf47f67b69694479be3739c5ca470c34");
+                            // headers: {
+                            //     Authorization: 'Basic ' + token
+                            // }
                             window.open("https://connect.tutors-hub.com#/?teacherid="+this.viewSession.agora_session, "_blank");
 
                         }else{
-                            token = btoa("5a5d883cdebd4423b00c2a6a746ed77a:bf47f67b69694479be3739c5ca470c34");
-                            headers: {
-                                Authorization: 'Basic ' + token
-                            }
+                            // let token = btoa("5a5d883cdebd4423b00c2a6a746ed77a:bf47f67b69694479be3739c5ca470c34");
+                            // headers: {
+                            //     Authorization: 'Basic ' + token
+                            // }
                             window.open("https://connect.tutors-hub.com#/?studentid="+this.viewSession.agora_session, "_blank");
 
                         }

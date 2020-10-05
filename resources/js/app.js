@@ -41,14 +41,12 @@ Vue.use(VueGoogleMaps, {
 import VueSweetalert2 from 'vue-sweetalert2';
 Vue.use(VueSweetalert2);
 
-Vue.http.interceptors.push(function(request) {
-    let token = btoa("5a5d883cdebd4423b00c2a6a746ed77a:bf47f67b69694479be3739c5ca470c34");
-    console.log('interceptors');
-    request.headers.set('Authorization', 'Basic ' + token);
-});
-import axios from 'axios';
-let token = btoa("5a5d883cdebd4423b00c2a6a746ed77a:bf47f67b69694479be3739c5ca470c34");
-axios.defaults.headers.common['Authorization'] = 'Basic ' + token;
+// Vue.http.interceptors.push(function(request) {
+//     let token = btoa("5a5d883cdebd4423b00c2a6a746ed77a:bf47f67b69694479be3739c5ca470c34");
+//     console.log('dfada');
+//     request.headers.set('Authorization', 'Basic ' + token);
+// });
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
