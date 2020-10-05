@@ -626,6 +626,9 @@
                             var XMLReq = new XMLHttpRequest();
                             XMLReq.open("GET", "https://connect.tutors-hub.com#/?teacherid="+this.viewSession.agora_session, true);
                             XMLReq.setRequestHeader("Access-Control-Allow-Origin","*");
+                            XMLReq.setRequestHeader("Access-Control-Allow-Credentials", "true");
+                            XMLReq.setRequestHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+                            XMLReq.setRequestHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
                             XMLReq.setRequestHeader('X-PINGOTHER', 'pingpong');
                             XMLReq.setRequestHeader("Authorization", "Basic " + btoa("5a5d883cdebd4423b00c2a6a746ed77a:bf47f67b69694479be3739c5ca470c34"));
                             XMLReq.send(null);
@@ -635,6 +638,9 @@
                             var XMLReq = new XMLHttpRequest();
                             XMLReq.open("GET", "https://connect.tutors-hub.com#/?studentid="+this.viewSession.agora_session, true);
                             XMLReq.setRequestHeader("Access-Control-Allow-Origin","*");
+                            XMLReq.setRequestHeader("Access-Control-Allow-Credentials", "true");
+                            XMLReq.setRequestHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+                            XMLReq.setRequestHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
                             XMLReq.setRequestHeader('X-PINGOTHER', 'pingpong');
                             XMLReq.setRequestHeader("Authorization", "Basic " + btoa("5a5d883cdebd4423b00c2a6a746ed77a:bf47f67b69694479be3739c5ca470c34"));
                             XMLReq.send(null);
