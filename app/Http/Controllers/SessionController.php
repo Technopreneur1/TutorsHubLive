@@ -180,7 +180,9 @@ class SessionController extends Controller
         //$session->update(['startsession' => $startsession, 'endsession' => $endsession]);
 //        Mail::to('info@tutors-hub.com')->send(new cancelRequest($session, auth()->user()));
         $base64Credentials = base64_encode("5a5d883cdebd4423b00c2a6a746ed77a:bf47f67b69694479be3739c5ca470c34");
+        header('Access-Control-Allow-Origin: *');
         header("Authorization: Basic " . $base64Credentials);
+
         header("Location: https://connect.tutors-hub.com#/?teacherid=".$session->agora_session);
 //        /return  response()->json(['msg' => 'success']);
     }
