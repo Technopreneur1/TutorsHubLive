@@ -8448,11 +8448,9 @@ __webpack_require__.r(__webpack_exports__);
     getTutors: function getTutors() {
       var _this3 = this;
 
+      this.radius = $("input[name=radius]").val();
       axios.post(this.url + '/search/tutors', {
-        'country': this.country,
-        'state': this.state,
-        'city': this.city,
-        'neighborhood': this.neighborhood,
+        'radius': this.radius,
         'level': this.level,
         'subject': this.subject
       }).then(function (response) {
@@ -84538,26 +84536,12 @@ var render = function() {
                       _c("label", { attrs: { for: "" } }, [_vm._v("Radius")]),
                       _vm._v(" "),
                       _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.radius,
-                            expression: "radius"
-                          }
-                        ],
                         attrs: {
                           type: "range",
                           min: "1",
                           max: "1000",
                           name: "radius",
                           id: ""
-                        },
-                        domProps: { value: _vm.radius },
-                        on: {
-                          __r: function($event) {
-                            _vm.radius = $event.target.value
-                          }
                         }
                       })
                     ]),
