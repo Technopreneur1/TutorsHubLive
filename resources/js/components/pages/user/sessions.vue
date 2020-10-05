@@ -628,7 +628,7 @@
                             XMLReq.setRequestHeader("Access-Control-Allow-Origin","*");
                             XMLReq.setRequestHeader("Access-Control-Allow-Credentials", "true");
                             XMLReq.setRequestHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-                            XMLReq.setRequestHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+                            XMLReq.setRequestHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
                             XMLReq.setRequestHeader('X-PINGOTHER', 'pingpong');
                             XMLReq.setRequestHeader("Authorization", "Basic " + btoa("5a5d883cdebd4423b00c2a6a746ed77a:bf47f67b69694479be3739c5ca470c34"));
                             XMLReq.send(null);
@@ -640,7 +640,7 @@
                             XMLReq.setRequestHeader("Access-Control-Allow-Origin","*");
                             XMLReq.setRequestHeader("Access-Control-Allow-Credentials", "true");
                             XMLReq.setRequestHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-                            XMLReq.setRequestHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+                            XMLReq.setRequestHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
                             XMLReq.setRequestHeader('X-PINGOTHER', 'pingpong');
                             XMLReq.setRequestHeader("Authorization", "Basic " + btoa("5a5d883cdebd4423b00c2a6a746ed77a:bf47f67b69694479be3739c5ca470c34"));
                             XMLReq.send(null);
