@@ -306,14 +306,14 @@ Route::post('/post/payout-via-bank', 'PaymentController@requestBank');
 
 // });
 
-    Auth::routes();
+Auth::routes();
 
-    // Route::get('/home', 'HomeController@index')->name('home');
-
-
+// Route::get('/home', 'HomeController@index')->name('home');
 
 
-    // Route::get('/adminpanel', 'AdminController@adminpanel')->name('adminpanel');
+
+
+// Route::get('/adminpanel', 'AdminController@adminpanel')->name('adminpanel');
 
 Route::get('/export/payments/{id}', 'ExportController@userPayments')->name('export.userPayments')->middleware('auth');
 Route::prefix('adminpanel')->middleware(['admin'])->group(function () {
@@ -340,7 +340,7 @@ Route::prefix('adminpanel')->middleware(['admin'])->group(function () {
     Route::get('/state/{id}', 'AdminController@getState')->name('admin.state');
     Route::get('/city/{id}', 'AdminController@getCity')->name('admin.city');
     Route::get('/settings', 'AdminController@settings')->name('admin.settings');
-    
+
     Route::get('/blogs', 'AdminController@blogs')->name('admin.blogs');
     Route::get('/add-blog', 'AdminController@addBlog')->name('admin.blogs.create');
     Route::post('/add-blog', 'BlogController@post')->name('admin.blogs.post');
@@ -390,5 +390,8 @@ Route::prefix('adminpanel')->middleware(['admin'])->group(function () {
     Route::post('/login-as', 'AdminController@adminLoginAs')->name('admin.loginas');
 
 });
+
+Route::get('/start-online-class/{id}', 'MeetingController@startMeeting')->name('start online class');
+
 
 Auth::routes(['verify' => true]);
