@@ -12,6 +12,7 @@ use BigBlueButton\Parameters\CreateMeetingParameters;
 use BigBlueButton\Parameters\GetRecordingsParameters;
 use BigBlueButton\Parameters\IsMeetingRunningParameters;
 use BigBlueButton\Parameters\JoinMeetingParameters;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use mysql_xdevapi\Exception;
 
@@ -31,6 +32,8 @@ class MeetingController extends Controller
     public function startMeeting($id)
     {
         $session=Session::find($id);
+        $session->session_created_at = Carbon::now()->toDateTimeString();
+        $session->save();
         $this->createOnlineClass($session);
         return redirect()->away($this->joinClass($session));
 
@@ -131,10 +134,6 @@ class MeetingController extends Controller
             foreach ($response->getRawXml()->recordings->recording as $recording) {
                 header( "Content-type: application/json" );
                 return json_encode(array('url' => $recording->playback->format->url, 'id' => $id, 'result' => true, 'record_id' => $recording->recordID));
-//                if ($recording->metadata->meetingId == $meeting->id) {
-//                    header( "Content-type: application/json" );
-//                    return json_encode(array('url' => $recording->playback->format->url, 'id' => $meeting->id,'result'=>true,'record_id'=>$recording->recordID) );
-//                } ;
             }
             return json_encode(array('result'=>false,'id' => $id)) ;
 

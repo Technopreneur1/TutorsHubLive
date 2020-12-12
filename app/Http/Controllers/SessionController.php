@@ -21,6 +21,21 @@ class SessionController extends Controller
     public function index()
     {
         $sessions = auth()->user()->profile->sessions;
+
+
+        //check for completed session & update the status
+        foreach ($sessions as $session) {
+//            dd($session);
+            if ($session->session_created_at && $session->class_status==0) {
+                $now=Carbon::now();
+                $hrs=$now->diffInHours($session->session_created_at);
+                if ($hrs>=$session->hours) {
+                    $session->class_status = 1;
+                    $session->completed = 1;
+                    $session->save();
+                }
+            }
+        }
         return view("pages.sessions.index", ['sessions' => $sessions]);
     }
 

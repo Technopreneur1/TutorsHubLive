@@ -21,6 +21,15 @@ use Illuminate\Support\Facades\Mail;
 |
 */
 
+Route::get('/clear', function() {
+    Artisan::call('cache:clear');
+    Artisan::call('view:clear');
+    Artisan::call('config:cache');
+    return 'All Cleared';
+});
+
+
+
 Route::get('/', 'PagesController@index')->name('home');
 
 // Route::get('/', 'PagesController@index')->name('home')->middleware('verified', 'CheckBanned');
