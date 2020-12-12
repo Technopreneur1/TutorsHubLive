@@ -71,6 +71,7 @@
             </div>
             <div  v-if="viewSession.payment_status != 1  && viewSession.accept == '1' && authuser.type == 'student'" ref="paypal"></div>
 
+            <div id="record" ></div>
             <button @click="requestpayment()" value="add task" class="btn btn-gradient">PayPal</button>
 
 
@@ -182,7 +183,7 @@
                         <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.class_status == 0"  class="status">Upcoming</div>
                         <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.class_status == 1"  class="status">Completed</div>
 
-                        <button @click="viewSession = ses" class="btn btn-gradient">Open</button>
+                        <button @click="showSession(ses)" class="btn btn-gradient">Open</button>
                     </div>
                 </div>
 
@@ -408,6 +409,7 @@
 
 </style>
 <script>
+
 export default {
     props: {
         url: {
@@ -609,6 +611,25 @@ export default {
                 id: this.viewSession.id
 
             })
+
+        },
+        showSession(ses) {
+            this.viewSession = ses;
+            axios.get(this.url +'/getrecording/'+ses.id, )
+                .then(response => {
+                    if(response.data.result) {
+                        // data = JSON.parse(data);
+
+
+                        if (response.data.result) {
+                            var html = '<a class="btn btn-gradient"  target="_blank" href="' + response.data.url[0] + '" > View Recorded Session </a>';
+                            $('#record').append(html);
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.log(error)
+                })
 
         },
         startsession()
