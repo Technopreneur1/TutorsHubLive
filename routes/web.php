@@ -392,6 +392,7 @@ Route::prefix('adminpanel')->middleware(['admin'])->group(function () {
 });
 
 Route::get('/start-online-class/{id}', 'MeetingController@startMeeting')->name('start online class');
+Route::get('/getrecording/{id}', 'MeetingController@getRecordings')->name('get recording');
 
 
 Auth::routes(['verify' => true]);

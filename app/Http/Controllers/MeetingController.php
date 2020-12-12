@@ -4,10 +4,12 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\service\MeetingService;
 use App\OnlineClass;
 use App\Session;
 use BigBlueButton\BigBlueButton;
 use BigBlueButton\Parameters\CreateMeetingParameters;
+use BigBlueButton\Parameters\GetRecordingsParameters;
 use BigBlueButton\Parameters\IsMeetingRunningParameters;
 use BigBlueButton\Parameters\JoinMeetingParameters;
 use Illuminate\Support\Facades\Auth;
@@ -113,6 +115,32 @@ class MeetingController extends Controller
         $url = $bbb->getJoinMeetingURL($joinMeetingParams);
 
         return $url;
+    }
+
+    public  function getRecordings($id)
+    {
+
+        $recordingParams = new GetRecordingsParameters();
+        $recordingParams->setMeetingId($id);
+        $bbb = new BigBlueButton();
+        $response = $bbb->getRecordings($recordingParams);
+//        echo $id;die();
+
+        if ($response->getReturnCode() == 'SUCCESS') {
+//                echo json_encode($response->getRawXml()->recordings);die();
+            foreach ($response->getRawXml()->recordings->recording as $recording) {
+                header( "Content-type: application/json" );
+                return json_encode(array('url' => $recording->playback->format->url, 'id' => $id, 'result' => true, 'record_id' => $recording->recordID));
+//                if ($recording->metadata->meetingId == $meeting->id) {
+//                    header( "Content-type: application/json" );
+//                    return json_encode(array('url' => $recording->playback->format->url, 'id' => $meeting->id,'result'=>true,'record_id'=>$recording->recordID) );
+//                } ;
+            }
+            return json_encode(array('result'=>false,'id' => $id)) ;
+
+        }
+        return json_encode(array('result'=>false,'id' => $id)) ;
+
     }
 
 }

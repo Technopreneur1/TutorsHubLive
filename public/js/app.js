@@ -6863,6 +6863,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     url: {
@@ -7034,6 +7035,20 @@ __webpack_require__.r(__webpack_exports__);
       confirm("Are you sure you want to accept this session?");
       axios.post(this.url + '/post/accept-payment', {
         id: this.viewSession.id
+      });
+    },
+    showSession: function showSession(ses) {
+      this.viewSession = ses;
+      axios.get(this.url + '/getrecording/' + ses.id).then(function (response) {
+        if (response.data.result) {
+          // data = JSON.parse(data);
+          if (response.data.result) {
+            var html = '<a class="btn btn-gradient"  target="_blank" href="' + response.data.url[0] + '" > View Recorded Session </a>';
+            $('#record').append(html);
+          }
+        }
+      })["catch"](function (error) {
+        console.log(error);
       });
     },
     startsession: function startsession() {
@@ -83086,6 +83101,8 @@ var render = function() {
               ? _c("div", { ref: "paypal" })
               : _vm._e(),
             _vm._v(" "),
+            _c("div", { attrs: { id: "record" } }),
+            _vm._v(" "),
             _c(
               "button",
               {
@@ -83510,7 +83527,7 @@ var render = function() {
                             staticClass: "btn btn-gradient",
                             on: {
                               click: function($event) {
-                                _vm.viewSession = ses
+                                return _vm.showSession(ses)
                               }
                             }
                           },
