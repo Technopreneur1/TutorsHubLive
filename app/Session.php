@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Session extends Model
 {
+    protected $dates = ['session_started_at'];
     //
     protected $guarded = [
     ];
@@ -18,4 +19,6 @@ class Session extends Model
     {
         return $this->belongsTo('App\Student', 'student_id')->with('user');
     }
+
+
 }
