@@ -166,7 +166,6 @@
                 <div class="tab-pane fade show active" id="requested" role="tabpanel" aria-labelledby="home-tab">
                     <div v-if="requestedSessions.length" class="sessionsList">
                         <div v-for="ses in requestedSessions" :key="ses.id" class="session">
-                            <div v-if="ses.payment_status != 1 && ses.accept != '1' && ses.class_status == 0">
                                 <a v-if="authuser.type == 'student'" :href="url + '/user/' + ses.teacher.user.id" class="with">
                                     <div class="avatar">
                                         <img :src="avatar(ses.teacher.user)" alt="">
@@ -204,7 +203,6 @@
 
                                     <button @click="showSession(ses)" class="btn btn-gradient">Open</button>
                                 </div>
-                            </div>
 
                         </div>
 
@@ -217,7 +215,6 @@
                 <div class="tab-pane fade" id="pending" role="tabpanel" aria-labelledby="profile-tab">
                     <div v-if="pendingSessions.length" class="sessionsList">
                         <div v-for="ses in pendingSessions" :key="ses.id" class="session">
-                            <div v-if="ses.payment_status != 1 && ses.accept == '1' && ses.class_status == 0">
                                 <a v-if="authuser.type == 'student'" :href="url + '/user/' + ses.teacher.user.id" class="with">
                                     <div class="avatar">
                                         <img :src="avatar(ses.teacher.user)" alt="">
@@ -255,7 +252,6 @@
 
                                     <button @click="showSession(ses)" class="btn btn-gradient">Open</button>
                                 </div>
-                            </div>
                         </div>
 
                     </div>
@@ -267,7 +263,6 @@
                 <div class="tab-pane fade" id="upcoming" role="tabpanel" aria-labelledby="contact-tab">
                     <div v-if="upcomingSessions.length" class="sessionsList">
                         <div v-for="ses in upcomingSessions" :key="ses.id" class="session">
-                            <div v-if="ses.payment_status != 1 && ses.accept == '1' && ses.class_status == 0">
                                 <a v-if="authuser.type == 'student'" :href="url + '/user/' + ses.teacher.user.id" class="with">
                                     <div class="avatar">
                                         <img :src="avatar(ses.teacher.user)" alt="">
@@ -306,7 +301,6 @@
                                     <button @click="showSession(ses)" class="btn btn-gradient">Open</button>
                                 </div>
                             </div>
-                        </div>
 
                     </div>
 
@@ -316,8 +310,7 @@
                 </div>
                 <div class="tab-pane fade" id="completed" role="tabpanel" aria-labelledby="contact-tab">
                     <div v-if="completedsessions.length " class="sessionsList">
-                        <div v-for="ses in completedsessions" :key="ses.id" >
-                            <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.class_status == 1" class="session">
+                        <div v-for="ses in completedsessions" :key="ses.id" class="session" >
                                 <a v-if="authuser.type == 'student'" :href="url + '/user/' + ses.teacher.user.id" class="with">
                                     <div class="avatar">
                                         <img :src="avatar(ses.teacher.user)" alt="">
@@ -358,7 +351,6 @@
                             </div>
                         </div>
 
-                    </div>
 
                     <div v-else class="nothing">
                         No Session
