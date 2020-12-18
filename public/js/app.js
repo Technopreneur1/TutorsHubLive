@@ -6864,6 +6864,180 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     url: {
@@ -6888,6 +7062,62 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   computed: {
+    requestedSessions: function requestedSessions() {
+      var session;
+      var requests = [];
+
+      for (var i = 0; i < this.sessions.length; i++) {
+        session = this.sessions[i];
+
+        if (session.payment_status != 1 && session.accept != '1' && session.class_status == 0) {
+          requests.push(session);
+        }
+      }
+
+      return requests;
+    },
+    pendingSessions: function pendingSessions() {
+      var session;
+      var requests = [];
+
+      for (var i = 0; i < this.sessions.length; i++) {
+        session = this.sessions[i];
+
+        if (session.payment_status != 1 && session.accept == '1' && session.class_status == 0) {
+          requests.push(session);
+        }
+      }
+
+      return requests;
+    },
+    upcomingSessions: function upcomingSessions() {
+      var session;
+      var requests = [];
+
+      for (var i = 0; i < this.sessions.length; i++) {
+        session = this.sessions[i];
+
+        if (session.payment_status == 1 && session.accept == '1' && session.class_status == 0) {
+          requests.push(session);
+        }
+      }
+
+      return requests;
+    },
+    completedsessions: function completedsessions() {
+      var session;
+      var requests = [];
+
+      for (var i = 0; i < this.sessions.length; i++) {
+        session = this.sessions[i];
+
+        if (session.payment_status == 1 && session.accept == '1' && session.class_status == 1) {
+          requests.push(session);
+        }
+      }
+
+      return requests;
+    },
     currency: function currency() {
       if (this.authuser.country == 1) {
         return "USD";
@@ -83386,161 +83616,987 @@ var render = function() {
         : _c("div", { staticClass: "else" }, [
             _c("div", { staticClass: "title" }, [_vm._v("My Sessions")]),
             _vm._v(" "),
-            _vm.sess.length
-              ? _c(
+            _vm._m(1),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "tab-content", attrs: { id: "myTabContent" } },
+              [
+                _c(
                   "div",
-                  { staticClass: "sessionsList" },
-                  _vm._l(_vm.sess, function(ses) {
-                    return _c("div", { key: ses.id, staticClass: "session" }, [
-                      _vm.authuser.type == "student"
-                        ? _c(
-                            "a",
-                            {
-                              staticClass: "with",
-                              attrs: {
-                                href: _vm.url + "/user/" + ses.teacher.user.id
-                              }
-                            },
-                            [
-                              _c("div", { staticClass: "avatar" }, [
-                                _c("img", {
-                                  attrs: {
-                                    src: _vm.avatar(ses.teacher.user),
-                                    alt: ""
-                                  }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "info" }, [
-                                _c("div", { staticClass: "name" }, [
-                                  _vm._v(_vm._s(ses.teacher.user.name))
-                                ])
-                              ])
-                            ]
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.authuser.type == "teacher"
-                        ? _c(
-                            "a",
-                            {
-                              staticClass: "with",
-                              attrs: {
-                                href: _vm.url + "/user/" + ses.student.user.id
-                              }
-                            },
-                            [
-                              _c("div", { staticClass: "avatar" }, [
-                                _c("img", {
-                                  attrs: {
-                                    src: _vm.avatar(ses.student.user),
-                                    alt: ""
-                                  }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "info" }, [
-                                _c("div", { staticClass: "name" }, [
-                                  _vm._v(_vm._s(ses.student.user.name))
-                                ])
-                              ])
-                            ]
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "info" }, [
-                        _c("span", { staticClass: "dt" }, [
-                          _vm._v(
-                            _vm._s(_vm._f("moment")(ses.date, "DD MMM, YYYY"))
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "val" }, [
-                          _c("span", [_vm._v(_vm._s(ses.level))])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "val" }, [
-                          _c("span", [_vm._v(_vm._s(ses.subject))])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "info" }, [
-                        _c("span", { staticClass: "dt" }, [
-                          _vm._v("Session Type" + _vm._s(ses.sessiontype))
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "val" }, [
-                          _c("span", [
-                            _vm._v("Start Session: " + _vm._s(ses.startsession))
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "val" }, [
-                          _c("span", [
-                            _vm._v("End Session: " + _vm._s(ses.endsession))
-                          ])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "info" }, [
-                        _c("span", { staticClass: "dt" }, [
-                          _vm._v("Hours: " + _vm._s(ses.hours))
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "actions" }, [
-                        ses.payment_status != 1 &&
-                        ses.accept != "1" &&
-                        ses.class_status == 0
-                          ? _c("div", { staticClass: "status" }, [
-                              _vm._v("Requested")
-                            ])
-                          : _vm._e(),
-                        _vm._v(" "),
-                        ses.payment_status != 1 &&
-                        ses.accept == "1" &&
-                        ses.class_status == 0
-                          ? _c("div", { staticClass: "status" }, [
-                              _vm._v("Pending")
-                            ])
-                          : _vm._e(),
-                        _vm._v(" "),
-                        ses.payment_status == 1 &&
-                        ses.accept == "1" &&
-                        ses.class_status == 0
-                          ? _c("div", { staticClass: "status" }, [
-                              _vm._v("Upcoming")
-                            ])
-                          : _vm._e(),
-                        _vm._v(" "),
-                        ses.payment_status == 1 &&
-                        ses.accept == "1" &&
-                        ses.class_status == 1
-                          ? _c("div", { staticClass: "status" }, [
-                              _vm._v("Completed")
-                            ])
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-gradient",
-                            on: {
-                              click: function($event) {
-                                return _vm.showSession(ses)
-                              }
-                            }
-                          },
-                          [_vm._v("Open")]
+                  {
+                    staticClass: "tab-pane fade show active",
+                    attrs: {
+                      id: "requested",
+                      role: "tabpanel",
+                      "aria-labelledby": "home-tab"
+                    }
+                  },
+                  [
+                    _vm.requestedSessions.length
+                      ? _c(
+                          "div",
+                          { staticClass: "sessionsList" },
+                          _vm._l(_vm.requestedSessions, function(ses) {
+                            return _c(
+                              "div",
+                              { key: ses.id, staticClass: "session" },
+                              [
+                                ses.payment_status != 1 &&
+                                ses.accept != "1" &&
+                                ses.class_status == 0
+                                  ? _c("div", [
+                                      _vm.authuser.type == "student"
+                                        ? _c(
+                                            "a",
+                                            {
+                                              staticClass: "with",
+                                              attrs: {
+                                                href:
+                                                  _vm.url +
+                                                  "/user/" +
+                                                  ses.teacher.user.id
+                                              }
+                                            },
+                                            [
+                                              _c(
+                                                "div",
+                                                { staticClass: "avatar" },
+                                                [
+                                                  _c("img", {
+                                                    attrs: {
+                                                      src: _vm.avatar(
+                                                        ses.teacher.user
+                                                      ),
+                                                      alt: ""
+                                                    }
+                                                  })
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                { staticClass: "info" },
+                                                [
+                                                  _c(
+                                                    "div",
+                                                    { staticClass: "name" },
+                                                    [
+                                                      _vm._v(
+                                                        _vm._s(
+                                                          ses.teacher.user.name
+                                                        )
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      _vm.authuser.type == "teacher"
+                                        ? _c(
+                                            "a",
+                                            {
+                                              staticClass: "with",
+                                              attrs: {
+                                                href:
+                                                  _vm.url +
+                                                  "/user/" +
+                                                  ses.student.user.id
+                                              }
+                                            },
+                                            [
+                                              _c(
+                                                "div",
+                                                { staticClass: "avatar" },
+                                                [
+                                                  _c("img", {
+                                                    attrs: {
+                                                      src: _vm.avatar(
+                                                        ses.student.user
+                                                      ),
+                                                      alt: ""
+                                                    }
+                                                  })
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                { staticClass: "info" },
+                                                [
+                                                  _c(
+                                                    "div",
+                                                    { staticClass: "name" },
+                                                    [
+                                                      _vm._v(
+                                                        _vm._s(
+                                                          ses.student.user.name
+                                                        )
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "info" }, [
+                                        _c("span", { staticClass: "dt" }, [
+                                          _vm._v(
+                                            _vm._s(
+                                              _vm._f("moment")(
+                                                ses.date,
+                                                "DD MMM, YYYY"
+                                              )
+                                            )
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("div", { staticClass: "val" }, [
+                                          _c("span", [
+                                            _vm._v(_vm._s(ses.level))
+                                          ])
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("div", { staticClass: "val" }, [
+                                          _c("span", [
+                                            _vm._v(_vm._s(ses.subject))
+                                          ])
+                                        ])
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "info" }, [
+                                        _c("span", { staticClass: "dt" }, [
+                                          _vm._v(
+                                            "Session Type" +
+                                              _vm._s(ses.sessiontype)
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("div", { staticClass: "val" }, [
+                                          _c("span", [
+                                            _vm._v(
+                                              "Start Session: " +
+                                                _vm._s(ses.startsession)
+                                            )
+                                          ])
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("div", { staticClass: "val" }, [
+                                          _c("span", [
+                                            _vm._v(
+                                              "End Session: " +
+                                                _vm._s(ses.endsession)
+                                            )
+                                          ])
+                                        ])
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "info" }, [
+                                        _c("span", { staticClass: "dt" }, [
+                                          _vm._v("Hours: " + _vm._s(ses.hours))
+                                        ])
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "actions" }, [
+                                        ses.payment_status != 1 &&
+                                        ses.accept != "1" &&
+                                        ses.class_status == 0
+                                          ? _c(
+                                              "div",
+                                              { staticClass: "status" },
+                                              [_vm._v("Requested")]
+                                            )
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        ses.payment_status != 1 &&
+                                        ses.accept == "1" &&
+                                        ses.class_status == 0
+                                          ? _c(
+                                              "div",
+                                              { staticClass: "status" },
+                                              [_vm._v("Pending")]
+                                            )
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        ses.payment_status == 1 &&
+                                        ses.accept == "1" &&
+                                        ses.class_status == 0
+                                          ? _c(
+                                              "div",
+                                              { staticClass: "status" },
+                                              [_vm._v("Upcoming")]
+                                            )
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        ses.payment_status == 1 &&
+                                        ses.accept == "1" &&
+                                        ses.class_status == 1
+                                          ? _c(
+                                              "div",
+                                              { staticClass: "status" },
+                                              [_vm._v("Completed")]
+                                            )
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass: "btn btn-gradient",
+                                            on: {
+                                              click: function($event) {
+                                                return _vm.showSession(ses)
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("Open")]
+                                        )
+                                      ])
+                                    ])
+                                  : _vm._e()
+                              ]
+                            )
+                          }),
+                          0
                         )
-                      ])
-                    ])
-                  }),
-                  0
+                      : _c("div", { staticClass: "nothing" }, [
+                          _vm._v(
+                            "\n                    No Session\n                "
+                          )
+                        ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "tab-pane fade",
+                    attrs: {
+                      id: "pending",
+                      role: "tabpanel",
+                      "aria-labelledby": "profile-tab"
+                    }
+                  },
+                  [
+                    _vm.pendingSessions.length
+                      ? _c(
+                          "div",
+                          { staticClass: "sessionsList" },
+                          _vm._l(_vm.pendingSessions, function(ses) {
+                            return _c(
+                              "div",
+                              { key: ses.id, staticClass: "session" },
+                              [
+                                ses.payment_status != 1 &&
+                                ses.accept == "1" &&
+                                ses.class_status == 0
+                                  ? _c("div", [
+                                      _vm.authuser.type == "student"
+                                        ? _c(
+                                            "a",
+                                            {
+                                              staticClass: "with",
+                                              attrs: {
+                                                href:
+                                                  _vm.url +
+                                                  "/user/" +
+                                                  ses.teacher.user.id
+                                              }
+                                            },
+                                            [
+                                              _c(
+                                                "div",
+                                                { staticClass: "avatar" },
+                                                [
+                                                  _c("img", {
+                                                    attrs: {
+                                                      src: _vm.avatar(
+                                                        ses.teacher.user
+                                                      ),
+                                                      alt: ""
+                                                    }
+                                                  })
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                { staticClass: "info" },
+                                                [
+                                                  _c(
+                                                    "div",
+                                                    { staticClass: "name" },
+                                                    [
+                                                      _vm._v(
+                                                        _vm._s(
+                                                          ses.teacher.user.name
+                                                        )
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      _vm.authuser.type == "teacher"
+                                        ? _c(
+                                            "a",
+                                            {
+                                              staticClass: "with",
+                                              attrs: {
+                                                href:
+                                                  _vm.url +
+                                                  "/user/" +
+                                                  ses.student.user.id
+                                              }
+                                            },
+                                            [
+                                              _c(
+                                                "div",
+                                                { staticClass: "avatar" },
+                                                [
+                                                  _c("img", {
+                                                    attrs: {
+                                                      src: _vm.avatar(
+                                                        ses.student.user
+                                                      ),
+                                                      alt: ""
+                                                    }
+                                                  })
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                { staticClass: "info" },
+                                                [
+                                                  _c(
+                                                    "div",
+                                                    { staticClass: "name" },
+                                                    [
+                                                      _vm._v(
+                                                        _vm._s(
+                                                          ses.student.user.name
+                                                        )
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "info" }, [
+                                        _c("span", { staticClass: "dt" }, [
+                                          _vm._v(
+                                            _vm._s(
+                                              _vm._f("moment")(
+                                                ses.date,
+                                                "DD MMM, YYYY"
+                                              )
+                                            )
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("div", { staticClass: "val" }, [
+                                          _c("span", [
+                                            _vm._v(_vm._s(ses.level))
+                                          ])
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("div", { staticClass: "val" }, [
+                                          _c("span", [
+                                            _vm._v(_vm._s(ses.subject))
+                                          ])
+                                        ])
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "info" }, [
+                                        _c("span", { staticClass: "dt" }, [
+                                          _vm._v(
+                                            "Session Type" +
+                                              _vm._s(ses.sessiontype)
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("div", { staticClass: "val" }, [
+                                          _c("span", [
+                                            _vm._v(
+                                              "Start Session: " +
+                                                _vm._s(ses.startsession)
+                                            )
+                                          ])
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("div", { staticClass: "val" }, [
+                                          _c("span", [
+                                            _vm._v(
+                                              "End Session: " +
+                                                _vm._s(ses.endsession)
+                                            )
+                                          ])
+                                        ])
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "info" }, [
+                                        _c("span", { staticClass: "dt" }, [
+                                          _vm._v("Hours: " + _vm._s(ses.hours))
+                                        ])
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "actions" }, [
+                                        ses.payment_status != 1 &&
+                                        ses.accept != "1" &&
+                                        ses.class_status == 0
+                                          ? _c(
+                                              "div",
+                                              { staticClass: "status" },
+                                              [_vm._v("Requested")]
+                                            )
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        ses.payment_status != 1 &&
+                                        ses.accept == "1" &&
+                                        ses.class_status == 0
+                                          ? _c(
+                                              "div",
+                                              { staticClass: "status" },
+                                              [_vm._v("Pending")]
+                                            )
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        ses.payment_status == 1 &&
+                                        ses.accept == "1" &&
+                                        ses.class_status == 0
+                                          ? _c(
+                                              "div",
+                                              { staticClass: "status" },
+                                              [_vm._v("Upcoming")]
+                                            )
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        ses.payment_status == 1 &&
+                                        ses.accept == "1" &&
+                                        ses.class_status == 1
+                                          ? _c(
+                                              "div",
+                                              { staticClass: "status" },
+                                              [_vm._v("Completed")]
+                                            )
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass: "btn btn-gradient",
+                                            on: {
+                                              click: function($event) {
+                                                return _vm.showSession(ses)
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("Open")]
+                                        )
+                                      ])
+                                    ])
+                                  : _vm._e()
+                              ]
+                            )
+                          }),
+                          0
+                        )
+                      : _c("div", { staticClass: "nothing" }, [
+                          _vm._v(
+                            "\n                    No Session\n                "
+                          )
+                        ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "tab-pane fade",
+                    attrs: {
+                      id: "upcoming",
+                      role: "tabpanel",
+                      "aria-labelledby": "contact-tab"
+                    }
+                  },
+                  [
+                    _vm.upcomingSessions.length
+                      ? _c(
+                          "div",
+                          { staticClass: "sessionsList" },
+                          _vm._l(_vm.upcomingSessions, function(ses) {
+                            return _c(
+                              "div",
+                              { key: ses.id, staticClass: "session" },
+                              [
+                                ses.payment_status != 1 &&
+                                ses.accept == "1" &&
+                                ses.class_status == 0
+                                  ? _c("div", [
+                                      _vm.authuser.type == "student"
+                                        ? _c(
+                                            "a",
+                                            {
+                                              staticClass: "with",
+                                              attrs: {
+                                                href:
+                                                  _vm.url +
+                                                  "/user/" +
+                                                  ses.teacher.user.id
+                                              }
+                                            },
+                                            [
+                                              _c(
+                                                "div",
+                                                { staticClass: "avatar" },
+                                                [
+                                                  _c("img", {
+                                                    attrs: {
+                                                      src: _vm.avatar(
+                                                        ses.teacher.user
+                                                      ),
+                                                      alt: ""
+                                                    }
+                                                  })
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                { staticClass: "info" },
+                                                [
+                                                  _c(
+                                                    "div",
+                                                    { staticClass: "name" },
+                                                    [
+                                                      _vm._v(
+                                                        _vm._s(
+                                                          ses.teacher.user.name
+                                                        )
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      _vm.authuser.type == "teacher"
+                                        ? _c(
+                                            "a",
+                                            {
+                                              staticClass: "with",
+                                              attrs: {
+                                                href:
+                                                  _vm.url +
+                                                  "/user/" +
+                                                  ses.student.user.id
+                                              }
+                                            },
+                                            [
+                                              _c(
+                                                "div",
+                                                { staticClass: "avatar" },
+                                                [
+                                                  _c("img", {
+                                                    attrs: {
+                                                      src: _vm.avatar(
+                                                        ses.student.user
+                                                      ),
+                                                      alt: ""
+                                                    }
+                                                  })
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                { staticClass: "info" },
+                                                [
+                                                  _c(
+                                                    "div",
+                                                    { staticClass: "name" },
+                                                    [
+                                                      _vm._v(
+                                                        _vm._s(
+                                                          ses.student.user.name
+                                                        )
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "info" }, [
+                                        _c("span", { staticClass: "dt" }, [
+                                          _vm._v(
+                                            _vm._s(
+                                              _vm._f("moment")(
+                                                ses.date,
+                                                "DD MMM, YYYY"
+                                              )
+                                            )
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("div", { staticClass: "val" }, [
+                                          _c("span", [
+                                            _vm._v(_vm._s(ses.level))
+                                          ])
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("div", { staticClass: "val" }, [
+                                          _c("span", [
+                                            _vm._v(_vm._s(ses.subject))
+                                          ])
+                                        ])
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "info" }, [
+                                        _c("span", { staticClass: "dt" }, [
+                                          _vm._v(
+                                            "Session Type" +
+                                              _vm._s(ses.sessiontype)
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("div", { staticClass: "val" }, [
+                                          _c("span", [
+                                            _vm._v(
+                                              "Start Session: " +
+                                                _vm._s(ses.startsession)
+                                            )
+                                          ])
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("div", { staticClass: "val" }, [
+                                          _c("span", [
+                                            _vm._v(
+                                              "End Session: " +
+                                                _vm._s(ses.endsession)
+                                            )
+                                          ])
+                                        ])
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "info" }, [
+                                        _c("span", { staticClass: "dt" }, [
+                                          _vm._v("Hours: " + _vm._s(ses.hours))
+                                        ])
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "actions" }, [
+                                        ses.payment_status != 1 &&
+                                        ses.accept != "1" &&
+                                        ses.class_status == 0
+                                          ? _c(
+                                              "div",
+                                              { staticClass: "status" },
+                                              [_vm._v("Requested")]
+                                            )
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        ses.payment_status != 1 &&
+                                        ses.accept == "1" &&
+                                        ses.class_status == 0
+                                          ? _c(
+                                              "div",
+                                              { staticClass: "status" },
+                                              [_vm._v("Pending")]
+                                            )
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        ses.payment_status == 1 &&
+                                        ses.accept == "1" &&
+                                        ses.class_status == 0
+                                          ? _c(
+                                              "div",
+                                              { staticClass: "status" },
+                                              [_vm._v("Upcoming")]
+                                            )
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        ses.payment_status == 1 &&
+                                        ses.accept == "1" &&
+                                        ses.class_status == 1
+                                          ? _c(
+                                              "div",
+                                              { staticClass: "status" },
+                                              [_vm._v("Completed")]
+                                            )
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass: "btn btn-gradient",
+                                            on: {
+                                              click: function($event) {
+                                                return _vm.showSession(ses)
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("Open")]
+                                        )
+                                      ])
+                                    ])
+                                  : _vm._e()
+                              ]
+                            )
+                          }),
+                          0
+                        )
+                      : _c("div", { staticClass: "nothing" }, [
+                          _vm._v(
+                            "\n                    No Session\n                "
+                          )
+                        ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "tab-pane fade",
+                    attrs: {
+                      id: "completed",
+                      role: "tabpanel",
+                      "aria-labelledby": "contact-tab"
+                    }
+                  },
+                  [
+                    _vm.completedsessions.length
+                      ? _c(
+                          "div",
+                          { staticClass: "sessionsList" },
+                          _vm._l(_vm.completedsessions, function(ses) {
+                            return _c("div", { key: ses.id }, [
+                              ses.payment_status == 1 &&
+                              ses.accept == "1" &&
+                              ses.class_status == 1
+                                ? _c("div", { staticClass: "session" }, [
+                                    _vm.authuser.type == "student"
+                                      ? _c(
+                                          "a",
+                                          {
+                                            staticClass: "with",
+                                            attrs: {
+                                              href:
+                                                _vm.url +
+                                                "/user/" +
+                                                ses.teacher.user.id
+                                            }
+                                          },
+                                          [
+                                            _c(
+                                              "div",
+                                              { staticClass: "avatar" },
+                                              [
+                                                _c("img", {
+                                                  attrs: {
+                                                    src: _vm.avatar(
+                                                      ses.teacher.user
+                                                    ),
+                                                    alt: ""
+                                                  }
+                                                })
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c("div", { staticClass: "info" }, [
+                                              _c(
+                                                "div",
+                                                { staticClass: "name" },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      ses.teacher.user.name
+                                                    )
+                                                  )
+                                                ]
+                                              )
+                                            ])
+                                          ]
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _vm.authuser.type == "teacher"
+                                      ? _c(
+                                          "a",
+                                          {
+                                            staticClass: "with",
+                                            attrs: {
+                                              href:
+                                                _vm.url +
+                                                "/user/" +
+                                                ses.student.user.id
+                                            }
+                                          },
+                                          [
+                                            _c(
+                                              "div",
+                                              { staticClass: "avatar" },
+                                              [
+                                                _c("img", {
+                                                  attrs: {
+                                                    src: _vm.avatar(
+                                                      ses.student.user
+                                                    ),
+                                                    alt: ""
+                                                  }
+                                                })
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c("div", { staticClass: "info" }, [
+                                              _c(
+                                                "div",
+                                                { staticClass: "name" },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      ses.student.user.name
+                                                    )
+                                                  )
+                                                ]
+                                              )
+                                            ])
+                                          ]
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "info" }, [
+                                      _c("span", { staticClass: "dt" }, [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm._f("moment")(
+                                              ses.date,
+                                              "DD MMM, YYYY"
+                                            )
+                                          )
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "val" }, [
+                                        _c("span", [_vm._v(_vm._s(ses.level))])
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "val" }, [
+                                        _c("span", [
+                                          _vm._v(_vm._s(ses.subject))
+                                        ])
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "info" }, [
+                                      _c("span", { staticClass: "dt" }, [
+                                        _vm._v(
+                                          "Session Type" +
+                                            _vm._s(ses.sessiontype)
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "val" }, [
+                                        _c("span", [
+                                          _vm._v(
+                                            "Start Session: " +
+                                              _vm._s(ses.startsession)
+                                          )
+                                        ])
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "val" }, [
+                                        _c("span", [
+                                          _vm._v(
+                                            "End Session: " +
+                                              _vm._s(ses.endsession)
+                                          )
+                                        ])
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "info" }, [
+                                      _c("span", { staticClass: "dt" }, [
+                                        _vm._v("Hours: " + _vm._s(ses.hours))
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "actions" }, [
+                                      ses.payment_status != 1 &&
+                                      ses.accept != "1" &&
+                                      ses.class_status == 0
+                                        ? _c("div", { staticClass: "status" }, [
+                                            _vm._v("Requested")
+                                          ])
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      ses.payment_status != 1 &&
+                                      ses.accept == "1" &&
+                                      ses.class_status == 0
+                                        ? _c("div", { staticClass: "status" }, [
+                                            _vm._v("Pending")
+                                          ])
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      ses.payment_status == 1 &&
+                                      ses.accept == "1" &&
+                                      ses.class_status == 0
+                                        ? _c("div", { staticClass: "status" }, [
+                                            _vm._v("Upcoming")
+                                          ])
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      ses.payment_status == 1 &&
+                                      ses.accept == "1" &&
+                                      ses.class_status == 1
+                                        ? _c("div", { staticClass: "status" }, [
+                                            _vm._v("Completed")
+                                          ])
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-gradient",
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.showSession(ses)
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("Open")]
+                                      )
+                                    ])
+                                  ])
+                                : _vm._e()
+                            ])
+                          }),
+                          0
+                        )
+                      : _c("div", { staticClass: "nothing" }, [
+                          _vm._v(
+                            "\n                    No Session\n                "
+                          )
+                        ])
+                  ]
                 )
-              : _c("div", { staticClass: "nothing" }, [
-                  _vm._v("\n            No Session\n        ")
-                ])
+              ]
+            )
           ])
     ],
     1
@@ -83556,6 +84612,88 @@ var staticRenderFns = [
       _c("b", [_vm._v("completed")]),
       _vm._v(" after it has taken place")
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "ul",
+      { staticClass: "nav nav-tabs", attrs: { id: "myTab", role: "tablist" } },
+      [
+        _c("li", { staticClass: "nav-item" }, [
+          _c(
+            "a",
+            {
+              staticClass: "nav-link active",
+              attrs: {
+                id: "requested-tab",
+                "data-toggle": "tab",
+                href: "#requested",
+                role: "tab",
+                "aria-controls": "home",
+                "aria-selected": "true"
+              }
+            },
+            [_vm._v("Requested")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "nav-item" }, [
+          _c(
+            "a",
+            {
+              staticClass: "nav-link",
+              attrs: {
+                id: "pending-tab",
+                "data-toggle": "tab",
+                href: "#pending",
+                role: "tab",
+                "aria-controls": "profile",
+                "aria-selected": "false"
+              }
+            },
+            [_vm._v("Pending")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "nav-item" }, [
+          _c(
+            "a",
+            {
+              staticClass: "nav-link",
+              attrs: {
+                id: "upcoming-tab",
+                "data-toggle": "tab",
+                href: "#upcoming",
+                role: "tab",
+                "aria-controls": "contact",
+                "aria-selected": "false"
+              }
+            },
+            [_vm._v("Upcoming")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "nav-item" }, [
+          _c(
+            "a",
+            {
+              staticClass: "nav-link",
+              attrs: {
+                id: "completed-tab",
+                "data-toggle": "tab",
+                href: "#completed",
+                role: "tab",
+                "aria-controls": "contact",
+                "aria-selected": "false"
+              }
+            },
+            [_vm._v("Completed")]
+          )
+        ])
+      ]
+    )
   }
 ]
 render._withStripped = true
