@@ -83325,7 +83325,6 @@ var render = function() {
             _vm._v(" "),
             _c("div", { attrs: { id: "record" } }),
             _vm._v(" "),
-            _vm._v("\n    q\n\n            "),
             _vm.viewSession.completed
               ? _c("div", { staticClass: "review-section" }, [
                   _c("div", { staticClass: "heading" }, [

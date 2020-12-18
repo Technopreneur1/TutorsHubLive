@@ -73,7 +73,7 @@
 
             <div id="record" ></div>
 <!--            <button @click="requestpayment()" value="add task" class="btn btn-gradient">PayPal</button>-->
-    q
+
 
             <div v-if="viewSession.completed" class="review-section">
                 <div class="heading">Session Reviews</div>
