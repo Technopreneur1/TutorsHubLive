@@ -72,7 +72,7 @@
             <div  v-if="viewSession.payment_status != 1  && viewSession.accept == '1' && authuser.type == 'student'" ref="paypal"></div>
 
             <div id="record" ></div>
-            <button @click="requestpayment()" value="add task" class="btn btn-gradient">PayPal</button>
+<!--            <button @click="requestpayment()" value="add task" class="btn btn-gradient">PayPal</button>-->
 
 
             <div v-if="viewSession.completed" class="review-section">

@@ -83241,7 +83241,7 @@ var render = function() {
                     },
                     [_vm._v("Mark as completed")]
                   ),
-                  _vm._v("   OR  \n        ")
+                  _vm._v("   OR  \n            ")
                 ])
               : _vm._e(),
             _vm._v(" "),
@@ -83312,7 +83312,7 @@ var render = function() {
             _vm.authuser.type == "student"
               ? _c("div", { staticClass: "rates" }, [
                   _vm._v(
-                    "\n            Please Pay to confirm this Session\n        "
+                    "\n                Please Pay to confirm this Session\n            "
                   )
                 ])
               : _vm._e(),
@@ -83324,20 +83324,6 @@ var render = function() {
               : _vm._e(),
             _vm._v(" "),
             _c("div", { attrs: { id: "record" } }),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-gradient",
-                attrs: { value: "add task" },
-                on: {
-                  click: function($event) {
-                    return _vm.requestpayment()
-                  }
-                }
-              },
-              [_vm._v("PayPal")]
-            ),
             _vm._v(" "),
             _vm.viewSession.completed
               ? _c("div", { staticClass: "review-section" }, [
@@ -83805,7 +83791,7 @@ var render = function() {
                         )
                       : _c("div", { staticClass: "nothing" }, [
                           _vm._v(
-                            "\n                    No Session\n                "
+                            "\n                        No Session\n                    "
                           )
                         ])
                   ]
@@ -84002,7 +83988,7 @@ var render = function() {
                         )
                       : _c("div", { staticClass: "nothing" }, [
                           _vm._v(
-                            "\n                    No Session\n                "
+                            "\n                        No Session\n                    "
                           )
                         ])
                   ]
@@ -84199,7 +84185,7 @@ var render = function() {
                         )
                       : _c("div", { staticClass: "nothing" }, [
                           _vm._v(
-                            "\n                    No Session\n                "
+                            "\n                        No Session\n                    "
                           )
                         ])
                   ]
@@ -84396,7 +84382,7 @@ var render = function() {
                         )
                       : _c("div", { staticClass: "nothing" }, [
                           _vm._v(
-                            "\n                    No Session\n                "
+                            "\n                        No Session\n                    "
                           )
                         ])
                   ]
