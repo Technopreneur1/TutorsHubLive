@@ -126,6 +126,27 @@
         margin-top: 25px;
         display: block !important;
     }
+    .nav-tabs{
+        background-color: #2575BC!important;
+        border-radius: 6px;
+
+        box-shadow: 0 1px 1px 0 #31a4e3;
+
+    }
+    .nav-link, .nav-link:hover{
+        color: white;
+
+    }
+    .nav-link.active
+  {
+        background-color: green!important;
+        color: white !important;
+    }
+    .session-tabs{
+        margin-bottom: 20px!important;
+
+
+    }
 </style>
     <div class="sessionsPage" id="app">
         <sessions url="{{route('home')}}" :sessions="{{$sessions}}" :authuser="{{auth()->user()}}"></sessions>

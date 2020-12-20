@@ -33,10 +33,23 @@
                         <option value="Prefer Not To Say">Prefer Not To Say</option>
                     </select>
                 </div>
+                <div class=input>
+                    <label class="">Timezone:</label>
+                    <select v-model="teacher.timezone"   >
+                        <option v-for="(item, key) in timezones" :value="key">
+                            {{item}}
+                        </option>
+
+                    </select>
+
+
+                </div>
                 <div class="input">
                     <label for="">Country</label>
                     <Select2 v-model="teacher.country" :options="countries" @change="countrySelected()" />
                 </div>
+
+
             </div>
             <!--            <div v-if="step == 2" class="step step2">-->
             <!--                <div class="input">-->
@@ -133,7 +146,7 @@
 <script>
     import Select2 from 'v-select2-component';
     export default {
-        props: ['url', 'lat', 'lng'],
+        props: ['url', 'lat', 'lng','tz'],
         data()
         {
             return {
@@ -162,6 +175,8 @@
                     city: '',
                     state: '',
                     country: '',
+                    timezone: '',
+
                 },
                 teacher: {
                     name: '',
@@ -175,12 +190,19 @@
                     city: '',
                     state: '',
                     country: '',
+                    timezone: '',
                     confirm_age: false,
                     agree: false,
                     new_neighborhood: ''
                 }
             }
         },
+        computed:
+            {
+              timezones(){
+                  return this.tz;
+              }
+            },
         components: {Select2},
         methods: {
             isEmail(email)
@@ -207,6 +229,7 @@
                     country: this.teacher.country,
                     gender: this.teacher.gender,
                     state: '333',
+                    timezone: this.teacher.timezone,
                     // lat: this.lat,
                     // lng: this.lng,
                     city: '333',

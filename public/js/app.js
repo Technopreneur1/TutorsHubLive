@@ -4955,9 +4955,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['url', 'lat', 'lng'],
+  props: ['url', 'lat', 'lng', 'tz'],
   data: function data() {
     return {
       hasRegistered: false,
@@ -4984,7 +4997,8 @@ __webpack_require__.r(__webpack_exports__);
         neighborhood: '',
         city: '',
         state: '',
-        country: ''
+        country: '',
+        timezone: ''
       },
       teacher: {
         name: '',
@@ -4997,11 +5011,17 @@ __webpack_require__.r(__webpack_exports__);
         city: '',
         state: '',
         country: '',
+        timezone: '',
         confirm_age: false,
         agree: false,
         new_neighborhood: ''
       }
     };
+  },
+  computed: {
+    timezones: function timezones() {
+      return this.tz;
+    }
   },
   components: {
     Select2: v_select2_component__WEBPACK_IMPORTED_MODULE_0__["default"]
@@ -5030,6 +5050,7 @@ __webpack_require__.r(__webpack_exports__);
         country: this.teacher.country,
         gender: this.teacher.gender,
         state: '333',
+        timezone: this.teacher.timezone,
         // lat: this.lat,
         // lng: this.lng,
         city: '333',
@@ -6454,6 +6475,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -81213,6 +81235,53 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
+                  _c("div", { staticClass: "input" }, [
+                    _c("label", {}, [_vm._v("Timezone:")]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.teacher.timezone,
+                            expression: "teacher.timezone"
+                          }
+                        ],
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.teacher,
+                              "timezone",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      _vm._l(_vm.timezones, function(item, key) {
+                        return _c("option", { domProps: { value: key } }, [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(item) +
+                              "\n                    "
+                          )
+                        ])
+                      }),
+                      0
+                    )
+                  ]),
+                  _vm._v(" "),
                   _c(
                     "div",
                     { staticClass: "input" },
@@ -83323,7 +83392,13 @@ var render = function() {
               ? _c("div", { ref: "paypal" })
               : _vm._e(),
             _vm._v(" "),
-            _c("div", { attrs: { id: "record" } }),
+            _vm.viewSession.payment_status == 1 &&
+            _vm.viewSession.accept == "1" &&
+            _vm.viewSession.class_status == 1
+              ? _c("div", { staticClass: "status" }, [
+                  _c("div", { attrs: { id: "record" } })
+                ])
+              : _vm._e(),
             _vm._v(" "),
             _vm.viewSession.completed
               ? _c("div", { staticClass: "review-section" }, [
@@ -84411,7 +84486,11 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "ul",
-      { staticClass: "nav nav-tabs", attrs: { id: "myTab", role: "tablist" } },
+      {
+        staticClass:
+          "nav nav-tabs green-bg flex justify-content-around bg-gray session-tabs",
+        attrs: { id: "myTab", role: "tablist" }
+      },
       [
         _c("li", { staticClass: "nav-item" }, [
           _c(

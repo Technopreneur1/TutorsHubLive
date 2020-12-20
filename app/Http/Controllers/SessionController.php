@@ -78,6 +78,7 @@ class SessionController extends Controller
     public function sessionrequest(Request $request)
     {
         $hr = json_decode($request->hours);
+        $date = Carbon::parse($request->date);
 
         $session = Session::create([
             'teacher_id' => $request->teacher,
@@ -91,8 +92,11 @@ class SessionController extends Controller
             'total' => $request->total,
             'accept' => '0',
             'fee' => ($request->total * Earning::currentFee())/100,
-            'startsession' => Carbon::parse($request->date)->format('Y-m-d H:i:s'),
-            'endsession' => date("Y-m-d H:i:s", strtotime("+".$hr." hours")),
+
+            'startsession' => $date->toDateTimeString(),
+
+            'endsession' => $date->addHour($hr)->toDateTimeString(),
+
 
         ]);
         $smail = $session->student->user->email;
