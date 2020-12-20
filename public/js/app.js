@@ -4156,8 +4156,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['url', 'user'],
+  props: ['url', 'user', 'tz'],
   data: function data() {
     return {
       success: '',
@@ -4169,6 +4181,11 @@ __webpack_require__.r(__webpack_exports__);
       editLocation: false
     };
   },
+  computed: {
+    timezones: function timezones() {
+      return this.tz;
+    }
+  },
   methods: {
     update: function update() {
       var _this = this;
@@ -4176,6 +4193,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.post(this.url + '/update/user', {
         name: this.user.name,
         phone: this.user.phone,
+        timezone: this.user.timezone,
         gender: this.user.gender,
         gender_preference: this.user.profile.gender_preference,
         can_contact: this.user.can_contact,
@@ -4527,9 +4545,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['url', 'lat', 'lng'],
+  props: ['url', 'lat', 'lng', 'tz'],
   data: function data() {
     return {
       hasRegistered: false,
@@ -4556,10 +4585,16 @@ __webpack_require__.r(__webpack_exports__);
         city: '',
         state: '',
         country: '',
+        timezone: 'timezone',
         confirm_age: false,
         agree: false
       }
     };
+  },
+  computed: {
+    timezones: function timezones() {
+      return this.tz;
+    }
   },
   components: {
     Select2: v_select2_component__WEBPACK_IMPORTED_MODULE_0__["default"]
@@ -4592,6 +4627,7 @@ __webpack_require__.r(__webpack_exports__);
         //lng: this.lng,
         discipline: this.student.discipline,
         gender: this.student.gender,
+        timezone: this.student.timezone,
         state: '111',
         city: '111',
         neighborhood: '111',
@@ -6248,6 +6284,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     likes: {
       type: Number
+    },
+    tz: {
+      type: Object
     }
   },
   data: function data() {
@@ -79821,7 +79860,7 @@ var render = function() {
                       },
                       [
                         _c("option", { attrs: { value: "" } }, [
-                          _vm._v("-- Select Gener --")
+                          _vm._v("-- Select Gender --")
                         ]),
                         _vm._v(" "),
                         _c("option", { attrs: { value: "Male" } }, [
@@ -79838,6 +79877,57 @@ var render = function() {
                           [_vm._v("Prefer Not To Say")]
                         )
                       ]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "field" }, [
+                  _c("div", { staticClass: "input" }, [
+                    _c("label", { attrs: { for: "" } }, [
+                      _vm._v("Please select your preferred timezone")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.user.timezone,
+                            expression: "user.timezone"
+                          }
+                        ],
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.user,
+                              "timezone",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      _vm._l(_vm.timezones, function(item, key) {
+                        return _c("option", { domProps: { value: key } }, [
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(item) +
+                              "\n                        "
+                          )
+                        ])
+                      }),
+                      0
                     )
                   ])
                 ]),
@@ -80611,6 +80701,54 @@ var render = function() {
                           [_vm._v("Prefer Not To Say")]
                         )
                       ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input" }, [
+                    _c("label", {}, [_vm._v("Timezone:")]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.teacher.timezone,
+                            expression: "teacher.timezone"
+                          }
+                        ],
+                        attrs: { required: "" },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.teacher,
+                              "timezone",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      _vm._l(_vm.timezones, function(item, key) {
+                        return _c("option", { domProps: { value: key } }, [
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(item) +
+                              "\n                        "
+                          )
+                        ])
+                      }),
+                      0
                     )
                   ]),
                   _vm._v(" "),
@@ -82385,7 +82523,7 @@ var render = function() {
         [
           _vm.editing
             ? _c("edit-profile", {
-                attrs: { url: _vm.url, user: _vm.user },
+                attrs: { url: _vm.url, user: _vm.user, tz: _vm.tz },
                 on: {
                   cancel: function($event) {
                     _vm.editing = false

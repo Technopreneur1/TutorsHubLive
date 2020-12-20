@@ -6,7 +6,7 @@
              <start-chat v-if="chatWith" :url="url" :to="chatWith" @cancelChat="chatWith = null"></start-chat>
          </transition>
         <transition name="easy-appear" enter-active-class="animated slideInLeft" leave-active-class="animated slideOutLeft">
-            <edit-profile v-if="editing" @cancel="editing = false" :url="url" :user="user"></edit-profile>
+            <edit-profile v-if="editing" @cancel="editing = false" :url="url" :user="user" :tz="tz"></edit-profile>
         </transition>
         <transition name="easy-appear" enter-active-class="animated slideInLeft" leave-active-class="animated slideOutLeft">
             <book-plan v-if="bookPlan" @cancel="bookPlan = null" :url="url" :user="user" :plan="bookPlan"></book-plan>
@@ -199,6 +199,8 @@ import { type } from 'os'
             },
             likes: {
                 type: Number
+            },tz:{
+                type: Object
             }
         },
         data()

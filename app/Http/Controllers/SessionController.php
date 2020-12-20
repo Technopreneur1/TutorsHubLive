@@ -12,6 +12,7 @@ use App\Mail\cancelRequest;
 use Illuminate\Http\Request;
 use App\Mail\sessionCanceled;
 use App\Mail\sessionCanceledToAdmin;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\sessionCanceledToStudent;
 
@@ -21,10 +22,11 @@ class SessionController extends Controller
     public function index()
     {
         $sessions = auth()->user()->profile->sessions;
+        $user=Auth::user();
 
 
         //check for completed session & update the status
-        foreach ($sessions as $session) {
+        foreach ($sessions as &$session) {
 //            dd($session);
             if ($session->session_created_at && $session->class_status==0) {
                 $now=Carbon::now();
@@ -35,7 +37,12 @@ class SessionController extends Controller
                     $session->save();
                 }
             }
+//            if ($user->timezone) {
+//
+//                $session->startsession=Carbon::parse($session->startsession)->timezone($user->timezone)->toDateTimeString();
+//            }
         }
+//        dd($sessions);
         return view("pages.sessions.index", ['sessions' => $sessions]);
     }
 
