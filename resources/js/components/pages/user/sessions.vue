@@ -70,8 +70,9 @@
                 Please Pay to confirm this Session
             </div>
             <div  v-if="viewSession.payment_status != 1  && viewSession.accept == '1' && authuser.type == 'student'" ref="paypal"></div>
-
-            <div id="record" ></div>
+            <div v-if="viewSession.payment_status == 1 && viewSession.accept == '1' && viewSession.class_status == 1"  class="status">
+                <div id="record" ></div>
+            </div>
 <!--            <button @click="requestpayment()" value="add task" class="btn btn-gradient">PayPal</button>-->
 
 
@@ -147,7 +148,7 @@
         <div v-else class="else">
             <div class="title">My Sessions</div>
 
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <ul class="nav nav-tabs green-bg flex justify-content-around bg-gray session-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active" id="requested-tab" data-toggle="tab" href="#requested" role="tab" aria-controls="home" aria-selected="true">Requested</a>
                 </li>

@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\DB;
 class TeacherController extends Controller
 {
 
-    
+
     public function teacherProfile($id)
     {
         $teacher  = Teacher::with('user')->findOrFail($id);
@@ -39,7 +39,7 @@ class TeacherController extends Controller
                                         ->where('type', 'neighborhood')
                                         ->where('parent_id', $request['city'])
                                         ->get()->first();
-            
+
             if(!$existing)
             {
                 $existing = Location::where('name', 'like', '%' . $request->new_neighborhood . '%')
@@ -63,7 +63,7 @@ class TeacherController extends Controller
             }else {
                 $neighborhood = $existing->id;
             }
-            
+
         }else {
             $neighborhood = $request->neighborhood;
         }
@@ -79,6 +79,7 @@ class TeacherController extends Controller
                 'state_id' => $request['state'],
                 'latitude' => $request['lat'],
                 'longitude' => $request['lng'],
+                'timezone' => $request['timezone'],
                 'neighborhood_id' => $neighborhood,
             ]);
             $teacher = Teacher::create([
@@ -90,7 +91,7 @@ class TeacherController extends Controller
     public function updatePayment(Request $request)
     {
         auth()->user()->profile()->update(['payment' => $request->payment, 'paypal' => $request->paypal]);
-        
+
         return response()->json(['msg' =>'success']);
     }
     public function search(Request $request)
@@ -102,48 +103,48 @@ class TeacherController extends Controller
         /*
         if($request->level && $request->subject)
         {
-            $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) * 
-                cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) ) 
+            $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) *
+                cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) )
                 AS distance FROM users WHERE sector_id = ? And type= 'teacher' AND type = ? HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
             $args = [$lat,$lng, $lat, $request->level, $request->subject, $request->radius];
         }
         elseif($request->level)
         {
-            $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) * 
-                cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) ) 
+            $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) *
+                cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) )
                 AS distance FROM users WHERE type = ?  And type= 'teacher' HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
             $args = [$lat,$lng, $lat, $request->level, $request->radius];
         }
         elseif($request->subject)
         {
-            $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) * 
-                cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) ) 
+            $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) *
+                cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) )
                 AS distance FROM users WHERE sector_id = ? And type= 'teacher' HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
             $args = [$lat,$lng, $lat, $request->subject, $request->radius];
         }
         else{
-            $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) * 
-                cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) ) 
+            $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) *
+                cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) )
                 AS distance FROM users WHERE type= 'teacher' HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
             $args = [$lat,$lng, $lat, $request->radius];
-            
+
         } */
 
         if($request->radius)
         {
-            $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) * 
-                cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) ) 
+            $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) *
+                cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) )
                 AS distance FROM users WHERE type= 'teacher' HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
             $args = [$lat, $lng, $lat, $request->radius];
         }
         else{
-            $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) * 
-                cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) ) 
+            $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) *
+                cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) )
                 AS distance FROM users WHERE type= 'teacher' HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
             $args = [$lat,$lng, $lat, 10];
-            
+
         }
-        
+
         $ids = DB::select($string, $args);
         $ids = Arr::pluck($ids, "id");
 
@@ -196,7 +197,7 @@ class TeacherController extends Controller
         }
         else {
             $tutors = User::with(['city', 'state', 'neighborhood', 'country', 'profile'])
-            
+
                 ->where('is_hidden', 0)
                 ->where('is_banned', 0)
                 ->where('country_id', auth()->user()->country_id)

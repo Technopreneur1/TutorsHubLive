@@ -254,7 +254,7 @@
 
                         <div id="app"  class="homepage">
 
-                            <teacher-register></teacher-register>
+                            <teacher-register :tz="{{json_encode($timezones)}}"></teacher-register>
 
 
                         </div>
