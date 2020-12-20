@@ -45,13 +45,25 @@
                 <div class="input">
                     <label for="">Gender</label>
                     <select v-model="user.gender" id="">
-                        <option value="">-- Select Gener --</option>
+                        <option value="">-- Select Gender --</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                         <option value="Prefer Not To Say">Prefer Not To Say</option>
                     </select>
                 </div>
             </div>
+                <div class="field">
+                    <div class="input">
+                        <label for="">Please select your preferred timezone</label>
+                        <select v-model="user.timezone"   >
+                            <option v-for="(item, key) in timezones" :value="key">
+                                {{item}}
+                            </option>
+
+                        </select>
+                    </div>
+                </div>
+
             <div class="field">
                 <div class="input">
                     <label for="">Bio</label>
@@ -126,7 +138,7 @@
 </template>
 <script>
     export default {
-        props: ['url', 'user'],
+        props: ['url', 'user','tz'],
         data()
         {
            return{
@@ -138,7 +150,12 @@
                editPassword: false,
                editLocation: false,
            }
-        },
+        }, computed:
+            {
+                timezones(){
+                    return this.tz;
+                }
+            },
         methods: {
            update()
             {
@@ -146,6 +163,7 @@
                 {
                     name: this.user.name,
                     phone: this.user.phone,
+                    timezone: this.user.timezone,
                     gender: this.user.gender,
                     gender_preference: this.user.profile.gender_preference,
                     can_contact: this.user.can_contact,

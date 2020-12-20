@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Mail;
 class StudentController extends Controller
 {
     //
-  
+
     public function post(Request $request)
     {
         if(User::where('email', $request->email)->count())
@@ -30,7 +30,7 @@ class StudentController extends Controller
                                          ->where('type', 'neighborhood')
                                         ->where('parent_id', $request['city'])
                                         ->get()->first();
-            
+
             if(!$existing)
             {
                 $existing = Location::where('name', 'like', '%' . $request->new_neighborhood . '%')
@@ -54,7 +54,7 @@ class StudentController extends Controller
             }else {
                 $neighborhood = $existing->id;
             }
-            
+
         }else {
             $neighborhood = $request->neighborhood;
         }
@@ -67,6 +67,7 @@ class StudentController extends Controller
             'gender' => $request['gender'],
             'latitude' => $request['lat'],
             'longitude' => $request['lng'],
+            'timezone' => $request['timezone'],
             'type' => 'student',
             'country_id' => $request['country'],
             'password' => bcrypt($request['password']),

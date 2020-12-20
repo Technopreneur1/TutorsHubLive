@@ -198,7 +198,9 @@ class UserController extends Controller
             }
             $sessions = $profile->sessions->where('completed', 1);
             // dd($sessions);
-            return view('pages.user.profile',  ['user' => $user, 'likes' => 0]);
+            $timezones = $this->timezones;
+
+            return view('pages.user.profile',  ['user' => $user, 'likes' => 0,'timezones'=>$timezones]);
         }
         return abort(404);
 

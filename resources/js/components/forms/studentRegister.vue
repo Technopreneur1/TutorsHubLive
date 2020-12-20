@@ -35,6 +35,17 @@
                         <option value="Prefer Not To Say">Prefer Not To Say</option>
                     </select>
                 </div>
+                <div class=input>
+                    <label class="">Timezone:</label>
+                    <select required v-model="teacher.timezone"   >
+                        <option v-for="(item, key) in timezones" :value="key">
+                            {{item}}
+                        </option>
+
+                    </select>
+
+
+                </div>
                 <div class="input">
                     <label for="">Country</label>
                     <Select2 v-model="student.country" :options="countries" @change="countrySelected()" />
@@ -129,7 +140,7 @@
 <script>
 import Select2 from 'v-select2-component';
     export default {
-        props: ['url', 'lat', 'lng'],
+        props: ['url', 'lat', 'lng','tz'],
         data()
         {
             return {
@@ -157,12 +168,19 @@ import Select2 from 'v-select2-component';
                         city: '',
                         state: '',
                         country: '',
+                        timezone:'timezone',
                         confirm_age: false,
                         agree: false,
 
                     },
             }
         },
+        computed:
+            {
+                timezones(){
+                    return this.tz;
+                }
+            },
         components: {Select2},
         methods: {
             isEmail(email)
@@ -193,6 +211,7 @@ import Select2 from 'v-select2-component';
                     //lng: this.lng,
                     discipline: this.student.discipline,
                     gender: this.student.gender,
+                    timezone: this.student.timezone,
                     state: '111',
                     city: '111',
                     neighborhood: '111',

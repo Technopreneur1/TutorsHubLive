@@ -73,7 +73,7 @@
         }
     @endphp
     <div id="app">
-    <profile url="{{route('home')}}" :likes="{{$likes}}" :user="{{$user}}" :authuser="{{auth()->user()}}" rating="{{$user->profile->completedSessions->average($type)}}"></profile>
+    <profile :tz="{{json_encode($timezones)}}" url="{{route('home')}}" :likes="{{$likes}}" :user="{{$user}}" :authuser="{{auth()->user()}}" rating="{{$user->profile->completedSessions->average($type)}}"></profile>
     </div>
 
 @endsection
