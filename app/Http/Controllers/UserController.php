@@ -225,7 +225,9 @@ class UserController extends Controller
         $user->profile->sessions = $profile->sessions->where('completed', 1)->where($type, '!=', null);
         // dd($user->profile->sessions);
         $likes = Favorite::where('user_id', auth()->id())->where('target_id', $user->id)->count();
-        return view('pages.user.profile',  ['user' => $user, 'profile' => $profile, 'likes' => $likes]);
+        $timezones = $this->timezones;
+
+        return view('pages.user.profile',  ['user' => $user, 'profile' => $profile, 'likes' => $likes,'timezones'=>$timezones]);
     }
 
     public function doILike(Request $request)
@@ -345,6 +347,7 @@ class UserController extends Controller
             ->get();
        }
        $data = json_decode($results);
+//       dd($data);
        $subject =   Discipline::get();
        $subjects = json_decode($subject);
 
