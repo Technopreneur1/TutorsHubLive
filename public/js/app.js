@@ -80714,8 +80714,8 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.teacher.timezone,
-                            expression: "teacher.timezone"
+                            value: _vm.student.timezone,
+                            expression: "student.timezone"
                           }
                         ],
                         attrs: { required: "" },
@@ -80730,7 +80730,7 @@ var render = function() {
                                 return val
                               })
                             _vm.$set(
-                              _vm.teacher,
+                              _vm.student,
                               "timezone",
                               $event.target.multiple
                                 ? $$selectedVal
