@@ -37,7 +37,7 @@
                 </div>
                 <div class=input>
                     <label class="">Timezone:</label>
-                    <select required v-model="teacher.timezone"   >
+                    <select required v-model="student.timezone"   >
                         <option v-for="(item, key) in timezones" :value="key">
                             {{item}}
                         </option>
