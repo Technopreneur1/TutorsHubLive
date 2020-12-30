@@ -166,41 +166,54 @@ class AdController extends Controller
         $lat = auth()->user()->latitude;
         $lng = auth()->user()->longitude;
         
-        if($request->level && $request->subject)
+        // if($request->level && $request->subject)
+        // {
+        //     // return response()->json(['requests' => "os"]);
+        //     $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) * 
+        //         cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) ) 
+        //         AS distance FROM users WHERE sector_id = ? And is_banned = 0 AND type= 'student' AND type = ? HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
+        //     $args = [$lat,$lng, $lat, $request->level, $request->subject, $request->radius];
+        // }
+        // elseif($request->level)
+        // {
+        //     // return response()->json(['requests' => "os"]);
+        //     $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) * 
+        //         cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) ) 
+        //         AS distance FROM users WHERE type = ?  And is_banned = 0 AND type= 'student' HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
+        //     $args = [$lat,$lng, $lat, $request->level, $request->radius];
+        // }
+        // elseif($request->subject)
+        // {
+        //     // return response()->json(['requests' => "os"]);
+        //     $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) * 
+        //         cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) ) 
+        //         AS distance FROM users WHERE sector_id = ? And is_banned = 0 AND type= 'student' HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
+        //     $args = [$lat,$lng, $lat, $request->subject, $request->radius];
+        // }
+        // else{
+        //     $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) * 
+        //         cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) ) 
+        //         AS distance FROM users WHERE is_banned = 0 AND type= 'student' HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
+        //     $args = [$lat,$lng, $lat, $request->radius];
+
+        // }
+        if($request->radius)
         {
-            // return response()->json(['requests' => "os"]);
-            $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) * 
-                cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) ) 
-                AS distance FROM users WHERE sector_id = ? And is_banned = 0 AND type= 'student' AND type = ? HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
-            $args = [$lat,$lng, $lat, $request->level, $request->subject, $request->radius];
-        }
-        elseif($request->level)
-        {
-            // return response()->json(['requests' => "os"]);
-            $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) * 
-                cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) ) 
-                AS distance FROM users WHERE type = ?  And is_banned = 0 AND type= 'student' HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
-            $args = [$lat,$lng, $lat, $request->level, $request->radius];
-        }
-        elseif($request->subject)
-        {
-            // return response()->json(['requests' => "os"]);
-            $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) * 
-                cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) ) 
-                AS distance FROM users WHERE sector_id = ? And is_banned = 0 AND type= 'student' HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
-            $args = [$lat,$lng, $lat, $request->subject, $request->radius];
+            $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) *
+                cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) )
+                AS distance FROM users WHERE type= 'student' HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
+            $args = [$lat, $lng, $lat, $request->radius];
         }
         else{
-            $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) * 
-                cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) ) 
-                AS distance FROM users WHERE is_banned = 0 AND type= 'student' HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
-            $args = [$lat,$lng, $lat, $request->radius];
+            $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) *
+                cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) )
+                AS distance FROM users WHERE type= 'student' HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
+            $args = [$lat,$lng, $lat, 10];
 
         }
-        
+
         $ids = DB::select($string, $args);
         $ids = Arr::pluck($ids, "id");
-        array_push($ids, 11);
 
         $ads = User::with(['city', 'state', 'neighborhood', 'country', 'profile'])
                     ->where('is_hidden', 0)
