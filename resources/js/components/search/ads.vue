@@ -88,7 +88,7 @@
              
         <div v-if="viewmode == 'list' || viewmode == 'all'"  class="full-container">
             <div v-if="ads.length" class="ad-results">
-                <ad v-for="ad in ads" @startConversation="startConversation(ad.user.id)" :url="url" :ad="ad" :key="ad.id"></ad>
+                <ad v-for="ad in ads" @startConversation="startConversation(ad.id)" :url="url" :ad="ad" :key="ad.id"></ad>
             </div>
             <div v-else class="nothing">
                 <p>No Ad Found</p>
@@ -253,8 +253,8 @@ import Select2 from 'v-select2-component';
             {
                 this.markers = []
                 this.ads.forEach(ad => {
-                    let ulat = ad.user.latitude
-                    let ulng =  ad.user.longitude
+                    let ulat = ad.latitude
+                    let ulng =  ad.longitude
                     if(ulat && ulng)
                     {
                         this.markers.push({ position: { lat: ulat, lng: ulng }, ad: ad })
@@ -292,16 +292,14 @@ import Select2 from 'v-select2-component';
             },
             getAds()
             {
+                this.radius = $("input[name=radius]").val();
                 axios.post(this.url +'/search/ads', {
-                    'country': this.country,
-                    'state': this.state,
-                    'city': this.city,
-                    'neighborhood': this.neighborhood,
+                    'radius': this.radius,
                     'level': this.level,
                     'subject': this.subject,
                 })
                 .then(response => {
-                    console.log(response.data)
+                    // console.log(response.data)
                     this.ads = response.data.ads.data
                     this.updateMap()
                     this.showSearchForm = false
@@ -435,7 +433,7 @@ import Select2 from 'v-select2-component';
         },
         mounted()
         {
-            this.getCountries()
+            // this.getCountries()
             // this.getStates()
             // this.getCities()
             this.getAds()
