@@ -47,7 +47,7 @@
                 </div>
                 <div class="input">
                     <label for="">Radius</label>
-                    <input type="range" min="1" max="1000" v-model="radius" name="radius" id="">
+                    <input type="range" min="1" max="1000" name="radius" id="">
                     <!-- <input type="number" v-model="radius" id=""> -->
                 </div>
                  <!-- <div class="input">

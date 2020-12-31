@@ -64,6 +64,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany('App\Ad')->with(['user','country', 'state', 'neighborhood', 'city', 'discipline', 'level'])->orderBy('created_at', 'desc');;
     }
 
+    public function ad_detail()
+    {
+        return $this->hasOne('App\Ad', 'user_id')->with('discipline','level');  
+    }
+
     public function city()
     {
        return $this->belongsTo('App\Location', 'city_id')->where('type', 'city');  

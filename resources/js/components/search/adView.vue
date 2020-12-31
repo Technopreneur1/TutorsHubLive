@@ -5,26 +5,26 @@
         </div>
         <span class="clo" @click="cancel"><i class="fas fa-times"></i></span>
         <div class="avatar">
-            <a  :href="url+ '/user/' +ad.user.id" class="info">
-                <img :src="avatar(ad.user)" alt="">
+            <a  :href="url+ '/user/' +ad.id" class="info">
+                <img :src="avatar(ad)" alt="">
             </a>
         </div>
         <div class="data">
-            <a  :href="url+ '/user/' +ad.user.id" class="info">
-                <div class="name">{{firstname(ad.user.name)}} <span v-if="ad.user.verified" class="verified"><i class="fas fa-check"></i></span></div>
+            <a  :href="url+ '/user/' +ad.id" class="info">
+                <div class="name">{{firstname(ad.name)}} <span v-if="ad.verified" class="verified"><i class="fas fa-check"></i></span></div>
                 <div class="location"><i class="fas fa-map-marker-alt"></i> {{ad.neighborhood ? ad.neighborhood.name + ', ' : ''}}{{ad.city ? ad.city.name + ', ' : ''}}{{ad.state ? ad.state.name + ', ' : ''}}</div>
             </a>
             <div class="contactbtn">
                 <div @click="addToFav" class="btn-t" ><i class="far fa-heart" :class="{fas: is_fav}"></i></div>
-                <div v-if="ad.user.can_contact" @click="contact(ad.user.id)" class="btn-t"><i class="fas fa-envelope"></i></div>
+                <div v-if="ad.can_contact" @click="contact(ad.id)" class="btn-t"><i class="fas fa-envelope"></i></div>
             </div>
         </div>
         <hr>
          <div class="adData">
-                    <div class="title">{{ad.title}}</div>
+                    <div class="title">{{ad.ad_detail.title}}</div>
                 </div>
                 <div class="adDescription">
-                    <div class="title">{{ad.description}}</div>
+                    <div class="title">{{ad.ad_detail.description}}</div>
                 </div>
     </div>
 </template>
@@ -158,7 +158,7 @@
             {
                 this.loading = true
                 axios.post(this.url +'/check/doILike', {
-                    id: this.ad.user.id
+                    id: this.ad.id
                 })
                 .then(response => {
                     if(response.data.status)
@@ -178,7 +178,7 @@
             {
                 this.loading = true
                 axios.post(this.url +'/post/favorite', {
-                    id: this.ad.user.id
+                    id: this.ad.id
                 })
                 .then(response => {
                     if(response.data.status == 'liked')
