@@ -6,29 +6,29 @@
         <div class="ad">
             <div class="title">{{ad.title}}</div>
             <div class="student">
-                <a :href="url + '/user/' + ad.user.id" class="avatar">
-                    <img :src="avatar(ad.user)" alt="">
+                <a :href="url + '/user/' + ad.id" class="avatar">
+                    <img :src="avatar(ad)" alt="">
                 </a>
                 <div class="data">
-                    <a :href="url + '/user/' + ad.user.id" class="info">
-                        <div class="name">{{ad.user.name}} <span v-if="ad.user.verified" class="verified"><i class="fas fa-check"></i></span></div>
+                    <a :href="url + '/user/' + ad.id" class="info">
+                        <div class="name">{{ad.name}} <span v-if="ad.verified" class="verified"><i class="fas fa-check"></i></span></div>
                         <div class="location"><i class="fas fa-map-marker-alt"></i> {{ad.neighborhood ? ad.neighborhood.name + ', ' : ''}}{{ad.city ? ad.city.name + ', ' : ''}}{{ad.state ? ad.state.name + ', ' : ''}}</div>
                     </a>
-                    <div v-if="authid == ad.user.id" class="contactbtn">
+                    <div v-if="authid == ad.id" class="contactbtn">
                         <button  @click="deleteMyAd(ad.id)" class="btn btn-gradient">Delete</button>
                     </div>
                     <div v-else class="contactbtn">
                         <div  @click="addToFav" class="btn-t" ><i class="far fa-heart" :class="{fas: is_fav}"></i></div>
-                        <div v-if="ad.user.can_contact" @click="contact(ad.user.id)" class="btn-t"><i class="fas fa-envelope"></i></div>
+                        <div v-if="ad.can_contact" @click="contact(ad.id)" class="btn-t"><i class="fas fa-envelope"></i></div>
                     </div>
                 </div>
             </div>
-            <div class="meta">
-                <span class="subject">{{ad.discipline.name}}</span>
-                <span class="level">{{ad.level.name}}</span>
+            <div class="meta" v-if="ad.ad_detail">
+                <span class="subject">{{ad.ad_detail? ad.ad_detail.discipline.name : ''}}</span>
+                <span class="level">{{ad.ad_detail? ad.ad_detail.level.name : ''}}</span>
             </div>
             <div class="ad-info">
-                {{ad.description}}
+                {{ ad.ad_detail ? ad.ad_detail.description : '' }}
             </div>
         </div>
     </div>
@@ -95,7 +95,7 @@
             {
                 this.loading = true
                 axios.post(this.url +'/post/favorite', {
-                    id: this.ad.user.id
+                    id: this.ad.id
                 })
                 .then(response => {
                     if(response.data.status == 'liked')
@@ -113,7 +113,7 @@
         },
         mounted()
         {
-           
+        //    console.log(this.ad)
         }
     }
 </script>

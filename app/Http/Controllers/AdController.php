@@ -215,7 +215,7 @@ class AdController extends Controller
         $ids = DB::select($string, $args);
         $ids = Arr::pluck($ids, "id");
 
-        $ads = User::with(['city', 'state', 'neighborhood', 'country', 'profile'])
+        $ads = User::with(['city', 'state', 'neighborhood', 'country', 'profile','ad_detail'])
                     ->where('is_hidden', 0)
                     ->where('is_banned', 0)
                     ->where('type', 'student')
