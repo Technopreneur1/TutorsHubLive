@@ -6,15 +6,15 @@
         <div class="ad">
             <div class="title">{{ad.title}}</div>
             <div class="student">
-                <a :href="url + '/user/' + ad.id" class="avatar">
+                <a :href="url + '/user/' + ad.user_id" class="avatar">
                     <img :src="avatar(ad)" alt="">
                 </a>
                 <div class="data">
-                    <a :href="url + '/user/' + ad.id" class="info">
+                    <a :href="url + '/user/' + ad.user_id" class="info">
                         <div class="name">{{ad.name}} <span v-if="ad.verified" class="verified"><i class="fas fa-check"></i></span></div>
                         <div class="location"><i class="fas fa-map-marker-alt"></i> {{ad.neighborhood ? ad.neighborhood.name + ', ' : ''}}{{ad.city ? ad.city.name + ', ' : ''}}{{ad.state ? ad.state.name + ', ' : ''}}</div>
                     </a>
-                    <div v-if="authid == ad.id" class="contactbtn">
+                    <div v-if="authid == ad.user_id" class="contactbtn">
                         <button  @click="deleteMyAd(ad.id)" class="btn btn-gradient">Delete</button>
                     </div>
                     <div v-else class="contactbtn">
