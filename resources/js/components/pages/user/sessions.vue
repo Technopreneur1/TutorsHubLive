@@ -591,6 +591,7 @@ export default {
     },
     data()
     {
+        console.log(this.sessions)
         return{
             showThanks: false,
             reviewing: false,
