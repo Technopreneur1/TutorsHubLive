@@ -42,7 +42,7 @@ class SessionController extends Controller
 //                $session->startsession=Carbon::parse($session->startsession)->timezone($user->timezone)->toDateTimeString();
 //            }
         }
-//        dd($sessions);
+    //    dd($sessions);
         return view("pages.sessions.index", ['sessions' => $sessions]);
     }
 
