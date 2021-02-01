@@ -209,25 +209,30 @@ class UserController extends Controller
     public function userProfile($id)
     {
         $user = User::with(['state', 'city', 'neighborhood', 'country'])->find($id);
-        if($user->is_hidden || $user->is_banned)
-        {
+        if($user) {
+            if($user->is_hidden || $user->is_banned)
+            {
+                return view("pages.user.unavailable");
+            }
+            $profile = $user->profile;
+            if($user->type == 'teacher')
+            {
+                $type = 'tutor_rating';
+            }
+            elseif($user->type == 'student')
+            {
+                $type = 'student_rating';
+            }
+            $user->profile->sessions = $profile->sessions->where('completed', 1)->where($type, '!=', null);
+            // dd($user->profile->sessions);
+            $likes = Favorite::where('user_id', auth()->id())->where('target_id', $user->id)->count();
+            $timezones = $this->timezones;
+
+            return view('pages.user.profile',  ['user' => $user, 'profile' => $profile, 'likes' => $likes,'timezones'=>$timezones]);
+        } else {
             return view("pages.user.unavailable");
         }
-        $profile = $user->profile;
-        if($user->type == 'teacher')
-        {
-            $type = 'tutor_rating';
-        }
-        elseif($user->type == 'student')
-        {
-            $type = 'student_rating';
-        }
-        $user->profile->sessions = $profile->sessions->where('completed', 1)->where($type, '!=', null);
-        // dd($user->profile->sessions);
-        $likes = Favorite::where('user_id', auth()->id())->where('target_id', $user->id)->count();
-        $timezones = $this->timezones;
-
-        return view('pages.user.profile',  ['user' => $user, 'profile' => $profile, 'likes' => $likes,'timezones'=>$timezones]);
+        
     }
 
     public function doILike(Request $request)
