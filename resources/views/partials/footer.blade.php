@@ -5,7 +5,7 @@
     <div class="footer_widgets_inner widget_area_inner">
                     <div class="content_wrap"><div class="columns_wrap"><aside id="trx_addons_widget_contacts-2" class="column-1_3 widget widget_contacts"><div class="contacts_logo"><img src="{{url('wp-content/uploads/2016/12/logotxt.png')}}" alt="" width="220" height="46"></div><div class="contacts_description"><p>This is platform that provides  a flexible and safe environment for students to connect with tutors  online or in-person</p>
     </div></aside><aside id="nav_menu-2" class="column-1_3 widget widget_nav_menu"><h5 class="widget_title">Quick Links</h5><div class="menu-footer-menu-container"><ul id="menu-footer-menu" class="menu">
-                                        <li id="menu-item-240" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-240"><a href="">About Us</a></li>
+                                        <li id="menu-item-240" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-240"><a href="/about-us">About Us</a></li>
     <li id="menu-item-243" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-243"><a href="">Terms & conditions</a></li>
     <li id="menu-item-245" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-245"><a href="">Privacy</a></li>
     </ul></div></aside><aside id="trx_addons_widget_contacts-3" class="column-1_3 widget widget_contacts"><h5 class="widget_title">Our Contacts</h5><div class="contacts_info"><div class="contacts_left"><span class="contacts_address">Tutors Hub Learning Platform Inc.

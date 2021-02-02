@@ -85,6 +85,12 @@ class PagesController extends Controller
 
         return view('pages.privacy', ['title' => $title]);
     }
+    public function about()
+    {
+        $title = "About US";
+
+        return view('pages.about', ['title' => $title]);
+    }
 
     public function contact()
     {
