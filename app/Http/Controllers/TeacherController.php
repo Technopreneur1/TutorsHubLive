@@ -141,7 +141,7 @@ class TeacherController extends Controller
             $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) *
                 cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) )
                 AS distance FROM users WHERE type= 'teacher' HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
-            $args = [$lat,$lng, $lat, 10];
+            $args = [$lat,$lng, $lat, 1000];
 
         }
 

@@ -42,6 +42,7 @@ Route::get('/my-files', 'PagesController@myFiles')->name('myfiles');
 Route::post('/contact', 'PagesController@postContact')->name('contact.post');
 Route::get('/privacy-policy', 'PagesController@privacy')->name('privacy');
 Route::get('/terms-and-conditions', 'PagesController@terms')->name('terms');
+Route::get('/about-us', 'PagesController@about')->name('about');
 Route::get('/ads', 'AdController@index')->name('ads')->middleware('auth', 'verified', 'CheckBanned');
 Route::get('/create/ad', 'AdController@create')->name('createAd')->middleware('auth', 'verified', 'CheckBanned');
 // Route::get('/find', 'TeacherController@find')->name('find');
