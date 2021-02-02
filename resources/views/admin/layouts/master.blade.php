@@ -111,6 +111,19 @@
             <li {{{ (Request::is('adminpanel/tickets/closed') ? 'active' : '') }}}"><a href="{{route('admin.blogs.create')}}"><i class="fa fa-circle-o"></i>Add New</a></li>
           </ul>
         </li>
+        <li class="treeview menu-open">
+          <a href="#">
+            <i class="fa fa-file-alt" aria-hidden="true"></i> <span>Policies</span>
+            
+             <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right" aria-hidden="true"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu" style="display: block;">
+            <li class=""><a href="http://127.0.0.1:8000/adminpanel/cms"><i class="fa fa-circle-o" aria-hidden="true"></i>All</a></li>
+            <li "=""><a href="http://127.0.0.1:8000/adminpanel/add-blog"><i class="fa fa-circle-o" aria-hidden="true"></i>Add New</a></li>
+          </ul>
+        </li>
           <li class="{{{ (Request::is('adminpanel/testimonials') ? 'active' : '') }}}"><a href="{{route('admin.testimonials')}}"><i class="fa fa-copy"></i> <span>Testimonilas</span></a></li>
 
           <li class="{{{ (Request::is('adminpanel/countries') ? 'active' : '') }}}"><a href="{{route('admin.countries')}}"><i class="fa fa-copy"></i> <span>Locations</span></a></li>
