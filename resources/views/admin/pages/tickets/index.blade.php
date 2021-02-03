@@ -25,7 +25,7 @@
             @foreach ($tickets as $ticket)
             <tr>
                 <td>{{$ticket->ticket_id}}</td>
-                @if ($ticket->user_id)
+                @if($ticket->user)
                   <td><a href="{{route("admin.user", $ticket->user_id)}}">{{$ticket->user->name}}</a></td>
                 @else
                   <td>{{$ticket->user_type}}</td>

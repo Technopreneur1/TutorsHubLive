@@ -131,7 +131,7 @@
                     <span v-if="!user.is_hidden" class="val">No</i></span>
                     <span v-else class="nval">Yes</span>
                 </div>
-                <div class="option">
+                <div class="option" v-if="user.type == 'teacher'">
                     <span class="key del"><a :href="url+ '/my-files'">Manage Files</a></span>
                 </div>
                 <div class="option">
