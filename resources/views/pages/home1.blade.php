@@ -452,7 +452,7 @@
 
                                 <div class="vc_row-full-width vc_clearfix"></div>
 
-                                <h2 class="">Featured <span style="color: #aece61;">Teachers</span></h2>
+                                <h2 class="">Featured <span style="color: #aece61;">Tutors</span></h2>
                                 <div class="vc_row wpb_row vc_row-fluid vc_custom_1484220977347"><div class="wpb_column vc_column_container vc_col-sm-12 sc_layouts_column_icons_position_left"><div class="vc_column-inner vc_custom_1486382076421"><div class="wpb_wrapper"><div id="sc_title_1914006197"
                                                 <div class="tp-container" data-slides="3">
                                                     <div class="tp-columns-container">
