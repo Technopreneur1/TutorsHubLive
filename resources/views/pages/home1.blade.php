@@ -452,7 +452,7 @@
 
                                 <div class="vc_row-full-width vc_clearfix"></div>
 
-
+                                <h2 class="">Featured <span style="color: #aece61;">Teachers</span></h2>
                                 <div class="vc_row wpb_row vc_row-fluid vc_custom_1484220977347"><div class="wpb_column vc_column_container vc_col-sm-12 sc_layouts_column_icons_position_left"><div class="vc_column-inner vc_custom_1486382076421"><div class="wpb_wrapper"><div id="sc_title_1914006197"
                                                 <div class="tp-container" data-slides="3">
                                                     <div class="tp-columns-container">
@@ -463,7 +463,7 @@
                                                             <div id="post-572" class="post-572 tutor type-tutor status-publish has-post-thumbnail hentry tutor_group-personal tutor_tag-chemistry tutor_tag-coding tutor_tag-communication">
                                                                 <div class="tp-single tp-post">
                                                                     <div class="tp-featured">
-                                                                        @if(isset($record->avatar))
+                                                                        @if(isset($teacher->avatar))
                                                                         <img width="740" height="792" src="https://tutors-hub.com/storage/images/{{$teacher->avatar}}" class="attachment-tutor-archive size-tutor-archive wp-post-image" alt="" srcset="https://tutors-hub.com/storage/images/{{$teacher->avatar}} 740w, https://tutors-hub.com/storage/images/{{$teacher->avatar}} 280w, https://tutors-hub.com/storage/images/{{$teacher->avatar}} 370w" sizes="(max-width: 740px) 100vw, 740px" />                            <div class="tp-featured-overlay">
                                                                          @else
                                                                                     <img width="740" height="792" src="https://tutors-hub.com/wp-content/uploads/2016/11/tutor7-740x792.jpg" class="attachment-tutor-archive size-tutor-archive wp-post-image" alt="" srcset="https://tutors-hub.com/wp-content/uploads/2016/11/tutor7-740x792.jpg 740w, https://tutors-hub.com/wp-content/uploads/2016/11/tutor7-280x300.jpg 280w, https://tutors-hub.com/wp-content/uploads/2016/11/tutor7-370x397.jpg 370w" sizes="(max-width: 740px) 100vw, 740px" />                        <div class="tp-featured-overlay">
