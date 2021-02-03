@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use auth;
 use App\Ad;
 use App\Meta;
+use App\Cms;
 use App\Blog;
 use App\User;
 use App\Level;
@@ -99,14 +100,28 @@ class AdminController extends Controller
         // dd($blogs);
         return view('admin.pages.blogs.index', ['blogs' => $blogs]);
     }
+    public function cms()
+    {
+        $cmsArray = Cms::orderBy('created_at', 'desc')->get();
+        return view('admin.pages.cms.index', ['cmsArray' => $cmsArray]);
+    }
     public function addBlog()
     {
         return view('admin.pages.blogs.add');
+    }
+    public function addCms()
+    {
+        return view('admin.pages.cms.add');
     }
     public function editBlog($id)
     {
         $blog = Blog::findOrFail($id);
         return view('admin.pages.blogs.edit', ['blog' => $blog]);
+    }
+    public function editCms($id)
+    {
+        $cms = Cms::findOrFail($id);
+        return view('admin.pages.cms.edit', ['cms' => $cms]);
     }
     public function showBlog($id)
     {

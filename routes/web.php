@@ -331,6 +331,13 @@ Route::prefix('adminpanel')->middleware(['admin'])->group(function () {
     Route::get('/', 'AdminController@adminpanel')->name('adminpanel');
     Route::get('/contact/{id}/{ticket}', 'AdminController@contact')->name('admin.contact');
 
+    Route::get('/cms', 'AdminController@cms')->name('admin.cms');
+    Route::get('/add-cms', 'AdminController@addCms')->name('admin.cms.create');
+    Route::post('/add-cms', 'CmsController@post')->name('admin.cms.post');
+    Route::get('/cms/{id}', 'AdminController@showCms')->name('admin.cms.view');
+    Route::get('/edit-cms/{id}', 'AdminController@editCms')->name('admin.cms.edit');
+    Route::post('/edit-cms/{id}', 'CmsController@Update')->name('admin.cms.update');
+
     Route::get('/export/tutors', 'ExportController@tutors')->name('export.tutors');
     Route::get('/export/students', 'ExportController@students')->name('export.students');
     Route::get('/export/sessions', 'ExportController@sessions')->name('export.sessions');
