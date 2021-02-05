@@ -84,10 +84,10 @@
                                 {{ __('Forgot Your Password?') }}
                             </a>
                         @endif
-                        <a class="btn btn-link" href="https://tutors-hub.com/student-registration">
+                        <a class="btn btn-link" href="/student-registration">
                             {{ __('Sign Up Student') }}
                         </a>
-                        <a class="btn btn-link" href="https://tutors-hub.com/teacher-registration">
+                        <a class="btn btn-link" href="/teacher-registration">
                             {{ __('Sign Up Teacher') }}
                         </a>
                     </form>

@@ -79,6 +79,7 @@ class TeacherController extends Controller
                 'state_id' => $request['state'],
                 'latitude' => $request['lat'],
                 'longitude' => $request['lng'],
+                'address' => $request['address'],
                 'timezone' => $request['timezone'],
                 'neighborhood_id' => $neighborhood,
             ]);

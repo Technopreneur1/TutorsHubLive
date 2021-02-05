@@ -73,6 +73,9 @@ class StudentController extends Controller
             'password' => bcrypt($request['password']),
             'city_id' => $request['city'],
             'state_id' => $request['state'],
+            'longitude' => $request['lng'],
+            'latitude' => $request['lat'],
+            'address' => $request['address'],
             'neighborhood_id' => $neighborhood,
         ]);
         $student = Student::create([

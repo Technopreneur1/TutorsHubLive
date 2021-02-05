@@ -2,7 +2,7 @@
     <div class="reg-form">
         <full-loader v-if="loading" ></full-loader>
 <!--        <span @click="closeForm()" class="btn-cancel"><i class="fas fa-long-arrow-alt-left"></i></span>-->
-        <a href="https://tutors-hub.com/" class="btn-cancel"><i class="fas fa-long-arrow-alt-left"></i></a>
+        <a href="/" class="btn-cancel"><i class="fas fa-long-arrow-alt-left"></i></a>
 
         <div v-if="!hasRegistered" class="full-container" >
             <div class="reg-text">
@@ -46,10 +46,14 @@
 
 
                 </div>
-                <div class="input">
+                <!-- <div class="input">
                     <label for="">Country</label>
                     <Select2 v-model="student.country" :options="countries" @change="countrySelected()" />
-                </div>
+                </div> -->
+                <div class="input">
+                    <label for="">Location</label>
+                    <gmap-autocomplete class="form-control" @place_changed="setPlace"></gmap-autocomplete>
+                </div> 
             </div>
 <!--            <div v-if="step == 2" class="step step2">-->
 <!--                <div class="input">-->
@@ -103,7 +107,7 @@
                     <input  type="password" v-model="student.password_confirmation" placeholder="Repeat Password">
                 </div>
                 <label for="age" style="display: block; text-align: left; color: #000;" ><input id="age" v-model="student.confirm_age" type="checkbox"> &nbsp; I am 18 or older</label>
-                <label for="prv" style="display: block; text-align: left; color: #000;"><input id="prv" v-model="student.agree" type="checkbox"> &nbsp; I agree to the <a :href="'https://tutors-hub.com/terms-and-conditions'" target="_blank">Terms &amp; services</a> &amp; <a :href="'https://tutors-hub.com/privacy-policy'"  target="_blank">Privacy policy</a></label>
+                <label for="prv" style="display: block; text-align: left; color: #000;"><input id="prv" v-model="student.agree" type="checkbox"> &nbsp; I agree to the <a :href="'/terms-and-conditions'" target="_blank">Terms &amp; services</a> &amp; <a :href="'/privacy-policy'"  target="_blank">Privacy policy</a></label>
             </div>
             <div v-if="error" class="error-bar">{{error}}</div>
             <div class="options">
@@ -155,6 +159,9 @@ import Select2 from 'v-select2-component';
                     cities: [],
                     neighborhoods: [],
                     type: 'student',
+                    lat: 40.7831,
+                    lng: -73.9712,
+                    address: '',
                     student: {
                         name: '',
                         email: '',
@@ -183,6 +190,12 @@ import Select2 from 'v-select2-component';
             },
         components: {Select2},
         methods: {
+            setPlace(place)
+            {
+                this.lat = place.geometry.location.lat();
+                this.lng = place.geometry.location.lng();
+                this.address = place.formatted_address
+            },
             isEmail(email)
             {
                 var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,5})+$/;
@@ -200,15 +213,16 @@ import Select2 from 'v-select2-component';
             postStudent()
             {
                 this.loading = true
-                axios.post('https://tutors-hub.com/post/student', {
+                axios.post('/post/student', {
                     name: this.student.name,
                     email: this.student.email,
                     password: this.student.password,
                     phone: this.student.phone,
                     country: this.student.country,
                     level: this.student.level,
-                   // lat: this.lat,
-                    //lng: this.lng,
+                    lat: this.lat,
+                    lng: this.lng,
+                    address: this.address,
                     discipline: this.student.discipline,
                     gender: this.student.gender,
                     timezone: this.student.timezone,
@@ -363,7 +377,7 @@ import Select2 from 'v-select2-component';
             },
             getLevels()
             {
-                axios.post('https://tutors-hub.com/get/levels')
+                axios.post('/get/levels')
                 .then(response => {
                     this.levels = response.data.levels
                 })
@@ -373,7 +387,7 @@ import Select2 from 'v-select2-component';
             },
             getDisciplines()
             {
-                axios.post('https://tutors-hub.com/get/disciplines')
+                axios.post('/get/disciplines')
                 .then(response => {
                     this.disciplines = response.data.disciplines
                 })
@@ -386,7 +400,7 @@ import Select2 from 'v-select2-component';
                 this.states = []
                 this.cities = []
                 this.neighborhoods = []
-                axios.post('https://tutors-hub.com/get/countries')
+                axios.post('/get/countries')
                 .then(response => {
                     this.countries = response.data.countries
                     this.countries.map(function (obj) {
@@ -401,7 +415,7 @@ import Select2 from 'v-select2-component';
             getStates()
             {
 
-                axios.post('https://tutors-hub.com/get/states', {country: this.student.country})
+                axios.post('/get/states', {country: this.student.country})
                 .then(response => {
                     console.log(response)
                     this.states = response.data.states
@@ -415,7 +429,7 @@ import Select2 from 'v-select2-component';
             },
             getCities()
             {
-                axios.post('https://tutors-hub.com/get/cities', {state: this.student.state})
+                axios.post('/get/cities', {state: this.student.state})
                 .then(response => {
                     this.cities = response.data.cities
                     this.cities.map(function (obj) {
@@ -428,7 +442,7 @@ import Select2 from 'v-select2-component';
             },
             getNeighborhoods()
             {
-                axios.post('https://tutors-hub.com/get/neighborhoods', {city: this.student.city})
+                axios.post('/get/neighborhoods', {city: this.student.city})
                 .then(response => {
                     this.neighborhoods = response.data.neighborhoods
                     this.neighborhoods.map(function (obj) {
