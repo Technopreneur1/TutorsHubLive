@@ -1,6 +1,6 @@
 
 
-<footer class="footer_wrap footer_default scheme_default" style="margin: -10px;">
+<footer class="footer_wrap footer_default scheme_default" style="margin: -10px;padding-bottom: 0px;">
     <div class="footer_widgets_wrap widget_area">
     <div class="footer_widgets_inner widget_area_inner">
                     <div class="content_wrap"><div class="columns_wrap"><aside id="trx_addons_widget_contacts-2" class="column-1_3 widget widget_contacts"><div class="contacts_logo"><img src="{{url('wp-content/uploads/2016/12/logotxt.png')}}" alt="" width="220" height="46"></div><div class="contacts_description"><p>This is platform that provides  a flexible and safe environment for students to connect with tutors  online or in-person</p>
