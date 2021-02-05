@@ -16,7 +16,7 @@
         <div class="page_wrap">
 
             <header class="top_panel top_panel_default without_bg_image header-dark scheme_default">    <div class="top_panel_top">
-                    <div class="content_wrap">
+                    <div class="content_wrap" style="padding:10px;">
                         <div class="custom_button_language">
                         </div>
                         <a href="{{route('login')}}" class=" trx_addons_login_link ">
