@@ -121,7 +121,7 @@
                 <div class="suc">Done!</div>
                 <div class="txt">Your account has successfully been created</div>
                 <div class="btns">
-                    <a :href="'http://localhost:8000/login'" class="btn btn-log">Login Now</a>
+                    <a :href="'/login'" class="btn btn-log">Login Now</a>
                 </div>
             </div>
         </div>
