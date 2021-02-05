@@ -153,6 +153,9 @@ class AdController extends Controller
             'state_id' => $request['state'],
             'city_id' => $request['city'],
             'neighborhood_id' => $neighborhood,
+            'longitude' => $request['lng'],
+            'latitude' => $request['lat'],
+            'address' => $request['address'],
             'discipline_id' => $request['discipline'],
             'level_id' => $request['level'],
         ]);

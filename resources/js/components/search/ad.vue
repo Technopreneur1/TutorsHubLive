@@ -6,13 +6,21 @@
         <div class="ad">
             <div class="title">{{ad.title}}</div>
             <div class="student">
-                <a :href="url + '/user/' + ad.user_id" class="avatar">
+                
+                <a v-if="ad.user_id != undefined" :href="url + '/user/' + ad.user_id" class="avatar">
+                    <img :src="avatar(ad)" alt="">
+                </a>
+                <a v-if="ad.user_id == undefined" :href="url + '/user/' + ad.id" class="avatar">
                     <img :src="avatar(ad)" alt="">
                 </a>
                 <div class="data">
-                    <a :href="url + '/user/' + ad.user_id" class="info">
+                    <a v-if="ad.user_id != undefined" :href="url + '/user/' + ad.user_id" class="info">
                         <div class="name">{{ad.name}} <span v-if="ad.verified" class="verified"><i class="fas fa-check"></i></span></div>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> {{ad.neighborhood ? ad.neighborhood.name + ', ' : ''}}{{ad.city ? ad.city.name + ', ' : ''}}{{ad.state ? ad.state.name + ', ' : ''}}</div>
+                        <div class="location"><i class="fas fa-map-marker-alt"></i> {{ ad.address }}</div>
+                    </a>
+                    <a v-if="ad.user_id == undefined" :href="url + '/user/' + ad.id" class="info">
+                        <div class="name">{{ad.name}} <span v-if="ad.verified" class="verified"><i class="fas fa-check"></i></span></div>
+                        <div class="location"><i class="fas fa-map-marker-alt"></i> {{ ad.address }}</div>
                     </a>
                     <div v-if="authid == ad.user_id" class="contactbtn">
                         <button  @click="deleteMyAd(ad.id)" class="btn btn-gradient">Delete</button>

@@ -24,6 +24,10 @@
                         <transition name="custom-classes-transition" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
                         <div v-if="editingLocation" class="addlocations">
                             <div class="input">
+                                <label for="">Address</label>
+                                <gmap-autocomplete class="form-control" @place_changed="setPlace"></gmap-autocomplete>
+                            </div> 
+                            <!-- <div class="input">
                                 <label for="">Country</label>
                                 <select @change="getStates()" v-model="ad.country" >
                                     <option value="">-- Select Country --</option>
@@ -55,16 +59,13 @@
                             <div v-if="ad.neighborhood == -1" class="input">
                                 <label for="">Neighborhood Name &nbsp; <small>Make sure neighborhood name is correct and avoid spellings mistakes</small></label>
                                 <input type="text" class="input" v-model="ad.new_neighborhood" placeholder="Neighborhood">
-                            </div>
+                            </div> -->
                         </div>
                         </transition>
                         <div v-if="!editingLocation" class="locations">
                             <span class="current">
-                                {{user.neighborhood ? user.neighborhood.name : ''}}
-                                {{user.city ? ', '+user.city.name : ''}}
-                                {{user.state ? ', '+user.state.name : ''}}
-                                {{user.country ? ', '+user.country.name : ''}}
-                                </span>
+                                {{user.address}}
+                            </span>
                             <span @click="editingLocation = true" class="change">Change <i class="fas fa-cog"></i></span>
                         </div>
 
@@ -119,6 +120,9 @@
                 countries: [],
                 states: [],
                 cities: [],
+                lat: 40.7831,
+                lng: -73.9712,
+                address: '',
                 neighborhoods: [],
                 ad: {
                     title: '',
@@ -174,6 +178,12 @@
                     return false
                 }
             },
+            setPlace(place)
+            {
+                this.lat = place.geometry.location.lat();
+                this.lng = place.geometry.location.lng();
+                this.address = place.formatted_address
+            },
             postAd()
             {
                 // console.log('ok')
@@ -187,6 +197,9 @@
                         title: this.ad.title,
                         description: this.ad.description,
                         level: this.ad.level,
+                        lat: this.lat,
+                        lng: this.lng,
+                        address: this.address,
                         discipline: this.ad.discipline,
                         neighborhood: this.ad.neighborhood,
                         country: this.ad.country,

@@ -24,6 +24,10 @@
                         <transition name="custom-classes-transition" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
                         <div v-if="editingLocation" class="addlocations">
                             <div class="input">
+                                <label for="">Address</label>
+                                <gmap-autocomplete class="form-control" @place_changed="setPlace"></gmap-autocomplete>
+                            </div> 
+                            <!-- <div class="input">
                                 <label for="">Country</label>
                                 <select @change="getStates()" v-model="ad.country" >
                                     <option value="">-- Select Country --</option>
@@ -55,15 +59,12 @@
                             <div v-if="ad.neighborhood == -1" class="input">
                                 <label for="">Neighborhood Name &nbsp; <small>Make sure neighborhood name is correct and avoid spellings mistakes</small></label>
                                 <input type="text" class="input" v-model="ad.new_neighborhood" placeholder="Neighborhood">
-                            </div>
+                            </div> -->
                         </div>
                         </transition>
                         <div v-if="!editingLocation" class="locations">
                             <span class="current">
-                                {{thead.neighborhood ? thead.neighborhood.name : ''}}
-                                {{thead.city ? ', '+thead.city.name : ''}}
-                                {{thead.state ? ', '+thead.state.name : ''}}
-                                {{thead.country ? ', '+thead.country.name : ''}}
+                                {{thead.address}}
                                 </span>
                             <span @click="editingLocation = true" class="change">Change <i class="fas fa-cog"></i></span>
                         </div>
@@ -144,6 +145,9 @@
                 states: [],
                 cities: [],
                 neighborhoods: [],
+                lat: 40.7831,
+                lng: -73.9712,
+                address: '',
                 ad: {
                     title: this.thead.title,
                     description: this.thead.description,
@@ -198,6 +202,12 @@
                     return false
                 }
             },
+            setPlace(place)
+            {
+                this.lat = place.geometry.location.lat();
+                this.lng = place.geometry.location.lng();
+                this.address = place.formatted_address
+            },
             updateAd()
             {
                 // console.log('ok')
@@ -216,6 +226,9 @@
                         neighborhood: this.ad.neighborhood,
                         country: this.ad.country,
                         city: this.ad.city,
+                        lat: this.lat,
+                        lng: this.lng,
+                        address: this.address,
                         state: this.ad.state,
                         new_neighborhood: this.ad.new_neighborhood
                     })
