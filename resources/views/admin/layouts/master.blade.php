@@ -84,7 +84,18 @@
             <li {{{ (Request::is('adminpanel/students/banned') ? 'active' : '') }}}"><a href="{{route('admin.students.banned')}}"><i class="fa fa-circle-o"></i>Banned</a></li>
           </ul>
         </li>
-        <li class="{{{ (Request::is('adminpanel/sessions') ? 'active' : '') }}}"><a href="{{route('admin.sessions')}}"><i class="fa fa-copy"></i> <span>Sessions</span> <span class="badge bg-aqua pull-right">{{App\Session::where('seen', 0)->count()}}</span></a></li>
+        <li class="treeview  {{ ((Request::is('adminpanel/sessions/*')) ? 'active' : '') }}">
+          <a href="#">
+            <i class="fa fa-user"></i> <span>Sessions</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+        <li class="{{ (Request::is('adminpanel/sessions/new') ? 'active' : '') }}"><a href="{{route('admin.sessions')}}"><i class="fa fa-copy"></i> <span>New Sessions</span> <span class="badge bg-aqua pull-right">{{App\Session::where('seen', 0)->count()}}</span></a></li>
+        <li class="{{ (Request::is('adminpanel/sessions/completed') ? 'active' : '') }}"><a href="{{route('admin.sessions1')}}"><i class="fa fa-copy"></i> <span>Completed Sessions</span></a></li>
+          </ul>
+        </li>
         <li class="{{{ (Request::is('adminpanel/ads') ? 'active' : '') }}}"><a href="{{route('admin.ads')}}"><i class="fa fa-ad"></i> <span>Ads</span> </a></li>
         <li class="treeview  {{{ (Request::is('adminpanel/tickets') ? 'active' : '') }}}">
           <a href="#">
