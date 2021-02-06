@@ -174,6 +174,8 @@ class AdController extends Controller
         $lng = auth()->user()->longitude;
         if ($request->availability && $request->availability!='Both') {
             $av = "AND users.availability='". $request->availability."'";
+        } else {
+            $av = "";
         }
         if($request->level && $request->subject)
         {
@@ -188,7 +190,7 @@ class AdController extends Controller
             // return response()->json(['requests' => "os"]);
             $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) *
                 cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) )
-                AS distance FROM users WHERE type = ?  And is_banned = 0 AND type= 'student' HAVING ".$av." distance < ? ORDER BY distance LIMIT 0 , 20;";
+                AS distance FROM users WHERE type = ?  And is_banned = 0 AND type= 'student' ".$av." HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
             $args = [$lat,$lng, $lat, $request->level, $request->radius];
         }
         elseif($request->subject)
@@ -196,13 +198,13 @@ class AdController extends Controller
             // return response()->json(['requests' => "os"]);
             $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) *
                 cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) )
-                AS distance FROM users WHERE sector_id = ? And is_banned = 0 AND type= 'student' HAVING ".$av." distance < ? ORDER BY distance LIMIT 0 , 20;";
+                AS distance FROM users WHERE sector_id = ? And is_banned = 0 AND type= 'student' ".$av." HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
             $args = [$lat,$lng, $lat, $request->subject, $request->radius];
         }
         else{
             $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) *
                 cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) )
-                AS distance FROM users WHERE is_banned = 0 AND type= 'student' HAVING ".$av." distance < ? ORDER BY distance LIMIT 0 , 20;";
+                AS distance FROM users WHERE is_banned = 0 AND type= 'student' ".$av." HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
             $args = [$lat,$lng, $lat, $request->radius];
 
         }
@@ -210,7 +212,7 @@ class AdController extends Controller
 
         $ids = DB::select($string, $args);
         $ids = Arr::pluck($ids, "id");
-        array_push($ids, 11);
+        // array_push($ids, 11);
 
         $ads = User::with(['city', 'state', 'neighborhood', 'country', 'profile','ad_detail'])
                     ->where('is_hidden', 0)
