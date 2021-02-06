@@ -166,6 +166,10 @@
                                     <td>{{$user->gender}}</td>
                                 </tr>
                                 <tr>
+                                    <td>Address</td>
+                                    <td>{{$user->address}}</td>
+                                </tr>
+                                <!-- <tr>
                                     <td>Country</td>
                                     <td>{{$user->country ? $user->country->name : ''}}</td>
                                 </tr>
@@ -180,7 +184,7 @@
                                 <tr>
                                     <td>Neighborhood</td>
                                     <td>{{$user->neighborhood ? $user->neighborhood->name : ''}}</td>
-                                </tr>
+                                </tr> -->
                                 {{-- {{dd($user->profile)}} --}}
                                 @if ($user->type == 'teacher')
                                     <tr>
