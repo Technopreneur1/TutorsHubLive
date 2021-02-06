@@ -106,6 +106,11 @@
                     <span class="value">{{user.profile && user.profile.gender_preference ? user.profile.gender_preference : 'None'}}</span>
                     <span class="privacy"><i class="fas fa-unlock-alt"></i></span>
                 </div>
+                <div class="info" v-if="user.type=='teacher'">
+                    <span class="key">Currency</span>
+                    <span class="value">{{user.currency  ? user.currency : 'Not Set'}}</span>
+                    <span class="privacy"><i class="fas fa-unlock-alt"></i></span>
+                </div>
                 <div v-if="user.type == 'student'" class="info">
                     <span class="key">Level: </span>
                     <span class="value">{{user.profile && user.profile.level ?  user.profile.level.name: ''}}</span>
@@ -131,7 +136,7 @@
                     <span v-if="!user.is_hidden" class="val">No</i></span>
                     <span v-else class="nval">Yes</span>
                 </div>
-                <div class="option" v-if="user.type == 'teacher'">
+                <div class="option">
                     <span class="key del"><a :href="url+ '/my-files'">Manage Files</a></span>
                 </div>
                 <div class="option">

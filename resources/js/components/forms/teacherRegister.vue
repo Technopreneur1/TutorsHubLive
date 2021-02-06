@@ -2,7 +2,7 @@
     <div class="reg-form">
         <full-loader v-if="loading" ></full-loader>
         <!--        <span @click="closeForm()" class="btn-cancel"><i class="fas fa-long-arrow-alt-left"></i></span>-->
-        <a href="/" class="btn-cancel"><i class="fas fa-long-arrow-alt-left"></i></a>
+        <a href="https://tutors-hub.com/" class="btn-cancel"><i class="fas fa-long-arrow-alt-left"></i></a>
         <div v-if="!hasRegistered" class="full-container" >
             <div class="reg-text">
                 <div class="title">Register as a Tutor</div>
@@ -33,6 +33,14 @@
                         <option value="Prefer Not To Say">Prefer Not To Say</option>
                     </select>
                 </div>
+
+                <div class="input">
+                    <label for="">Currency </label>
+                    <select class="form-control" v-model="teacher.currency" id="">
+                        <option value="USD">USD</option>
+                        <option value="CAD">CAD</option>
+                    </select>
+                </div>
                 <div class=input>
                     <label class="">Timezone:</label>
                     <select v-model="teacher.timezone"   >
@@ -44,15 +52,10 @@
 
 
                 </div>
-
                 <div class="input">
-                    <label for="">Location</label>
-                    <gmap-autocomplete class="form-control" @place_changed="setPlace"></gmap-autocomplete>
-                </div> 
-                <!-- <div class="input">
                     <label for="">Country</label>
                     <Select2 v-model="teacher.country" :options="countries" @change="countrySelected()" />
-                </div> -->
+                </div>
 
 
             </div>
@@ -123,7 +126,7 @@
                     <input type="password" v-model="teacher.password_confirmation" placeholder="Repeat Password">
                 </div>
                 <label for="age" style="display: block" ><input id="age" v-model="teacher.confirm_age" type="checkbox"> &nbsp; I am 18 or older</label>
-                <label for="prv"><input id="prv" v-model="teacher.agree" type="checkbox"> &nbsp; I agree to the  <a :href="'/terms-and-conditions'"  target="_blank">Terms &amp; services</a> &amp; <a :href="'/privacy-policy'"  target="_blank">Privacy policy</a></label>
+                <label for="prv"><input id="prv" v-model="teacher.agree" type="checkbox"> &nbsp; I agree to the  <a :href="'https://tutors-hub.com/terms-and-conditions'"  target="_blank">Terms &amp; services</a> &amp; <a :href="'https://tutors-hub.com/privacy-policy'"  target="_blank">Privacy policy</a></label>
             </div>
             <div v-if="error" class="error-bar">{{error}}</div>
             <div class="options">
@@ -137,7 +140,7 @@
                 <div class="suc">Done!</div>
                 <div class="txt">Your account has successfully been created</div>
                 <div class="btns">
-                    <a :href="'/login'" class="btn btn-log">Login Now</a>
+                    <a :href="'https://tutors-hub.com/login'" class="btn btn-log">Login Now</a>
                 </div>
             </div>
         </div>
@@ -167,9 +170,6 @@
                 cities: [],
                 neighborhoods: [],
                 type: 'teacher',
-                lat: 40.7831,
-                lng: -73.9712,
-                address: '',
                 student: {
                     name: '',
                     email: '',
@@ -213,12 +213,6 @@
             },
         components: {Select2},
         methods: {
-            setPlace(place)
-            {
-                this.lat = place.geometry.location.lat();
-                this.lng = place.geometry.location.lng();
-                this.address = place.formatted_address
-            },
             isEmail(email)
             {
                 var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,5})+$/;
@@ -235,18 +229,18 @@
             },
             postTeacher()
             {
-                axios.post('/post/teacher', {
+                axios.post('https://tutors-hub.com/post/teacher', {
                     name: this.teacher.name,
                     email: this.teacher.email,
                     password: this.teacher.password,
                     phone: this.teacher.phone,
                     country: this.teacher.country,
                     gender: this.teacher.gender,
+                    currency: this.teacher.currency,
                     state: '333',
                     timezone: this.teacher.timezone,
-                    lat: this.lat,
-                    lng: this.lng,
-                    address: this.address,
+                    // lat: this.lat,
+                    // lng: this.lng,
                     city: '333',
                     neighborhood: '333',
                     new_neighborhood: '333',
@@ -322,7 +316,7 @@
             canContinue()
             {
                 if(this.step == 2){
-                    if(this.teacher.phone && this.teacher.name && this.teacher.email && this.teacher.gender)
+                    if(this.teacher.phone && this.teacher.name && this.teacher.email && this.teacher.gender && this.teacher.country)
                     {
                         if(this.isEmail(this.teacher.email))
                         {
@@ -391,7 +385,7 @@
             },
             getLevels()
             {
-                axios.post('/get/levels')
+                axios.post('https://tutors-hub.com/get/levels')
                     .then(response => {
                         this.levels = response.data.levels
                     })
@@ -401,7 +395,7 @@
             },
             getDisciplines()
             {
-                axios.post('/get/disciplines')
+                axios.post('https://tutors-hub.com/get/disciplines')
                     .then(response => {
                         this.disciplines = response.data.disciplines
                     })
@@ -414,7 +408,7 @@
                 this.states = []
                 this.cities = []
                 this.neighborhoods = []
-                axios.post('/get/countries')
+                axios.post('https://tutors-hub.com/get/countries')
                     .then(response => {
                         this.countries = response.data.countries
                         this.countries.map(function (obj) {
@@ -429,7 +423,7 @@
             getStates()
             {
 
-                axios.post('/get/states', {country: this.teacher.country})
+                axios.post('https://tutors-hub.com/get/states', {country: this.teacher.country})
                     .then(response => {
                         console.log(response)
                         this.states = response.data.states
@@ -443,7 +437,7 @@
             },
             getCities()
             {
-                axios.post('/get/cities', {state: this.teacher.state})
+                axios.post('https://tutors-hub.com/get/cities', {state: this.teacher.state})
                     .then(response => {
                         this.cities = response.data.cities
                         this.cities.map(function (obj) {
@@ -456,7 +450,7 @@
             },
             getNeighborhoods()
             {
-                axios.post('/get/neighborhoods', {city: this.teacher.city})
+                axios.post('https://tutors-hub.com/get/neighborhoods', {city: this.teacher.city})
                     .then(response => {
                         this.neighborhoods = response.data.neighborhoods
                         this.neighborhoods.map(function (obj) {

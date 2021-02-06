@@ -72,6 +72,7 @@ class TeacherController extends Controller
                 'email' => $request['email'],
                 'phone' => $request['phone'],
                 'gender' => $request['gender'],
+                'currency' => $request['currency'],
                 'type' => 'teacher',
                 'country_id' => $request['country'],
                 'password' => bcrypt($request['password']),
@@ -79,7 +80,6 @@ class TeacherController extends Controller
                 'state_id' => $request['state'],
                 'latitude' => $request['lat'],
                 'longitude' => $request['lng'],
-                'address' => $request['address'],
                 'timezone' => $request['timezone'],
                 'neighborhood_id' => $neighborhood,
             ]);
@@ -101,50 +101,57 @@ class TeacherController extends Controller
 
         $lat = auth()->user()->latitude;
         $lng = auth()->user()->longitude;
-        /*
+        $av = '';
+
+        if ($request->availability && $request->availability!='Both') {
+            $av = "AND users.availability='". $request->availability."'";
+        }
+//        dd($av);
         if($request->level && $request->subject)
         {
-            $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) *
+            $string = "SELECT users.id, ( 6371 * acos( cos( radians(?) ) *
                 cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) )
-                AS distance FROM users WHERE sector_id = ? And type= 'teacher' AND type = ? HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
+                AS distance
+                 FROM users JOIN teachers ON users.id=teachers.user_id JOIN plans ON  teachers.id=plans.teacher_id WHERE plans.level_id = ? And type= 'teacher' AND plans.discipline_id = ?  ".$av." HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
             $args = [$lat,$lng, $lat, $request->level, $request->subject, $request->radius];
         }
         elseif($request->level)
         {
-            $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) *
+            $string = "SELECT users.id, ( 6371 * acos( cos( radians(?) ) *
                 cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) )
-                AS distance FROM users WHERE type = ?  And type= 'teacher' HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
+                AS distance FROM users JOIN teachers ON users.id=teachers.user_id JOIN plans ON  teachers.id=plans.teacher_id WHERE plans.level_id = ?  And type= 'teacher' ".$av."  HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
             $args = [$lat,$lng, $lat, $request->level, $request->radius];
         }
         elseif($request->subject)
         {
-            $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) *
+            $string = "SELECT users.id, ( 6371 * acos( cos( radians(?) ) *
                 cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) )
-                AS distance FROM users WHERE sector_id = ? And type= 'teacher' HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
+                AS distance FROM users JOIN teachers ON users.id=teachers.user_id JOIN plans ON  teachers.id=plans.teacher_id WHERE plans.discipline_id = ? And type= 'teacher' ".$av."  HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
             $args = [$lat,$lng, $lat, $request->subject, $request->radius];
         }
         else{
             $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) *
                 cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) )
-                AS distance FROM users WHERE type= 'teacher' HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
+                AS distance FROM users WHERE type= 'teacher' ".$av." HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
             $args = [$lat,$lng, $lat, $request->radius];
 
-        } */
-
-        if($request->radius)
-        {
-            $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) *
-                cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) )
-                AS distance FROM users WHERE type= 'teacher' HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
-            $args = [$lat, $lng, $lat, $request->radius];
         }
-        else{
-            $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) *
-                cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) )
-                AS distance FROM users WHERE type= 'teacher' HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
-            $args = [$lat,$lng, $lat, 1000];
+//        dd($string);
 
-        }
+//        if($request->radius)
+//        {
+//            $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) *
+//                cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) )
+//                AS distance FROM users WHERE type= 'teacher' HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
+//            $args = [$lat, $lng, $lat, $request->radius];
+//        }
+//        else{
+//            $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) *
+//                cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) )
+//                AS distance FROM users WHERE type= 'teacher' HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
+//            $args = [$lat,$lng, $lat, 10];
+//
+//        }
 
         $ids = DB::select($string, $args);
         $ids = Arr::pluck($ids, "id");

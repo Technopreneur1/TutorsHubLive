@@ -136,7 +136,7 @@
             deletePlan(plan)
             {
                 this.success = ""
-                axios.post(this.url +'/delete/plan', 
+                axios.post(this.url +'/delete/plan',
                     {
                         id: plan.id
                     })
@@ -154,10 +154,10 @@
                 this.success = ""
                 if(this.rate && this.discipline && this.level)
                 {
-                    if(this.rate > 19)
+                    if(this.rate > 0)
                     {
                         this.error = ''
-                        axios.post(this.url +'/post/plan', 
+                        axios.post(this.url +'/post/plan',
                         {
                             discipline: this.discipline,
                             level: this.level,
@@ -175,7 +175,7 @@
                             console.log(error);
                         })
                     }else{
-                        this.error = "Hourly rate must be at-least $20"
+                        this.error = "Hourly rate must be at-least $1"
                     }
                 }else{
                     this.error = "Please Complete The Form To Save"
@@ -187,7 +187,7 @@
                 if(this.editPlan.rate && this.editPlan.discipline && this.editPlan.level)
                 {
                     this.error = ''
-                    axios.post(this.url +'/update/plan', 
+                    axios.post(this.url +'/update/plan',
                     {
                         discipline: this.editPlan.discipline_id,
                         level: this.editPlan.level_id,
