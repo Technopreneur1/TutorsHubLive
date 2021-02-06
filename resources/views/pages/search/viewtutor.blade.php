@@ -48,6 +48,9 @@
                 border-top-color: #d9dfe5 !important;
                 border-top-style: dashed !important;
             }
+            .nm{
+                margin-top: 24px!important;
+            }
         </style>
 
         <link rel='stylesheet' id='vc_extensions_cqbundle_adminicon-css'  href='{{url('wp-content/plugins/vc-extensions-bundle/css/admin_icon.css')}}' type='text/css' media='all' />
@@ -257,7 +260,17 @@
 
                         <div class="tp-single-wrap">
 
-                            <div class="tp-featured"><img width="964" height="996" src="https://tutors-hub.com/storage/images/{{$data['avatar']}}" class="attachment-tutor-single size-tutor-single wp-post-image" alt="Josh Summers" itemprop="image" /></div><div class="tp-info">
+                            <div class="tp-featured">
+                                @if(isset($data->avatar))
+                                    <img width="300" height="300" src="https://tutors-hub.com/storage/images/{{$data['avatar']}}" class="attachment-tutor-single size-tutor-single wp-post-image" alt="Josh Summers" itemprop="image" />
+                                        @else
+                                    <img width="300" height="300" src="https://tutors-hub.com/wp-content/uploads/2016/11/tutor7-740x792.jpg" class="attachment-tutor-single size-tutor-single wp-post-image" alt="Josh Summers" itemprop="image" />
+
+                                                @endif
+
+
+
+                            </div><div class="tp-info">
                                 <h2 class="tp-single-title">{{$data['name']}}</h2><div class="tp-price">
                                     <span class="tp-present-price"><span class="small">$</span>{{$data['rate']}}                        </span>
                                     <span class="tp-period-price">hour                        </span>
@@ -288,6 +301,6 @@
 
                 </div><!-- </.content_wrap> -->			</div><!-- </.page_content_wrap> -->
 
-            <script src="{{asset('js/app.js')}}"></script>
+            <script src="{{asset('js/app.js')}}?v=132131214ss4w1s32s122ssa4"></script>
 
 @endsection

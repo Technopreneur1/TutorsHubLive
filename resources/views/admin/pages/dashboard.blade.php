@@ -5,14 +5,14 @@ Dashboard
 @section('content')
 
     <div class="container">
-        
+
         <div class="row">
             <div class="col-md-4 col-lg-3">
                 <div class="info-box">
                     <a href="{{route('admin.tutors')}}">
                         <span class="info-box-icon bg-aqua"><i class="fa fa-chalkboard-teacher"></i></span>
                         <div class="info-box-content">
-                            <span class="info-box-text">Total Teachers</span>
+                            <span class="info-box-text">Total Tutors</span>
                             <span class="info-box-number">{{App\User::where('type', 'teacher')->count()}}</span>
                         </div>
                     </a>
@@ -79,7 +79,7 @@ Dashboard
                     <!-- /.info-box-content -->
                 </div>
             </div>
-            
+
         </div>
     </div>
 

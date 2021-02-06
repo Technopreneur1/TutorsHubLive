@@ -12668,6 +12668,7 @@ a.text-dark:focus {
 
   .hero .tcol .nm,
   .hero .scol .nm {
+    margin-top: 24px !important;
     font-size: 38px;
     font-weight: bold;
   }
@@ -12714,6 +12715,7 @@ a.text-dark:focus {
 
   .hero .tcol .nm,
   .hero .scol .nm {
+    margin-top: 24px !important;
     font-size: 45px;
     font-weight: bold;
   }
@@ -12731,6 +12733,7 @@ a.text-dark:focus {
 
   .hero .tcol .nm,
   .hero .scol .nm {
+    margin-top: 24px !important;
     font-size: 55px;
   }
 

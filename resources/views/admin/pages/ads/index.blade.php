@@ -77,6 +77,7 @@ Ads
             </thead>
             <tbody>
             @foreach ($ads as $ad)
+                @continue(!$ad->user)
             <tr>
                 <td>{{$ad->id}}</td>
                 <td>{{$ad->title}}</td>

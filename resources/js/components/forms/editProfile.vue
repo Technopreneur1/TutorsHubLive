@@ -4,7 +4,7 @@
         <!-- <transition  name="easy-appear" enter-active-class="animated slideInLeft" leave-active-class="animated slideOutLeft"> -->
         <div v-if="editLocation" class="full-container">
             <edit-location :user='user' @cancel="editLocation = false" :url="url"></edit-location>
-
+0.
         </div>
         <div v-if="editPlans" class="full-container">
             <edit-plans :user='user' @cancel="editPlans = false" :url="url"></edit-plans>
@@ -23,7 +23,7 @@
                 <button @click="editPlans = true"  v-if="user.type == 'teacher'" class="btn">Manage Plans</button>
                 <a :href="url+ '/settings'" class="btn">Change Address</a>
                 <button @click="editPassword = true" class="btn">Change Password</button>
-                <a :href="url+ '/my-files'" class="btn">Manage Files</a>
+                <a v-if="user.type == 'teacher'"  :href="url+ '/my-files'" class="btn">Manage Files</a>
             </div>
             <div class="name">
                 <div class="input">
@@ -49,6 +49,18 @@
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                         <option value="Prefer Not To Say">Prefer Not To Say</option>
+                    </select>
+                </div>
+            </div>
+
+                <div class="field">
+                <div class="input">
+                    <label for="">Availability</label>
+                    <select v-model="user.availability" >
+                        <option value="">-- Select Availability --</option>
+                        <option value="Both">Both</option>
+                        <option value="In-Person">In-Person</option>
+                        <option value="Both">Both</option>
                     </select>
                 </div>
             </div>
@@ -78,6 +90,17 @@
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                         <option value="Prefer Not To Say">Prefer Not To Say</option>
+                    </select>
+                </div>
+            </div>
+
+                <div class="field" v-if="!user.currency && user.type == 'teacher'">
+                <div class="input">
+                    <label for="">Currency</label>
+                    <select v-model="user.currency" id="">
+                        <option value="">Currency Preference</option>
+                        <option value="USD">USD</option>
+                        <option value="CAD">CAD</option>
                     </select>
                 </div>
             </div>
@@ -165,7 +188,9 @@
                     phone: this.user.phone,
                     timezone: this.user.timezone,
                     gender: this.user.gender,
+                    availability: this.user.availability,
                     gender_preference: this.user.profile.gender_preference,
+                    currency: this.user.profile.currency,
                     can_contact: this.user.can_contact,
                     is_hidden: this.user.is_hidden,
                     paypal: this.user.paypal,

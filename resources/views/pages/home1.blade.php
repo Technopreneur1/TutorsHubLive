@@ -38,7 +38,7 @@
                                             <li id="menu-item-548" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-548"><a href="https://tutors-hub.com/student-registration"><span>Find a Tutor</span></a></li>
                                             <li id="menu-item-164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164"><a href="https://tutors-hub.com/teacher-registration"><span>Become a Tutor</span></a></li>
                                             <li id="menu-item-119" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-119"><a href="#news"><span>News</span></a></li>
-                                            <li id="menu-item-165" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-165"><a href="https://tutors-hub.com/contact"><span>Contacts</span></a></li></ul>
+                                            <li id="menu-item-165" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-165"><a href="https://tutors-hub.com/contact"><span>Contact Us</span></a></li></ul>
 
                                     </nav>
                                     <div class="sc_layouts_iconed_text sc_layouts_menu_mobile_button">
@@ -335,7 +335,7 @@
                                                     </rs-module-wrap>
                                                     <!-- END REVOLUTION SLIDER -->
                                                 </div><div class="vc_row wpb_row vc_inner vc_row-fluid special_class_2"><div class="wpb_column vc_column_container vc_col-sm-12 sc_layouts_column_icons_position_left"><div class="vc_column-inner"><div class="wpb_wrapper">        <div class="tp-form-shortcode-wrap">
-                                                                    <!-- <div class="tp-form-header">
+                                                                    <div class="tp-form-header">
                                                                         <h6 class="tp-form-title">Find Your</h6>
                                                                         <h4 class="tp-form-title">Tutor</h4>
                                                                     </div>
@@ -368,12 +368,12 @@
                                                                             </div>
                                                                         </form>
                                                                         <div id="demo"></div>
-                                                                    </div> -->
+                                                                    </div>
                                                                 </div>
-                                                            </div></div></div>!></div></div></div></div></div><div class="vc_row-full-width vc_clearfix"></div><div data-vc-full-width="true" data-vc-full-width-init="false" class="vc_row wpb_row vc_row-fluid vc_custom_1485445777014 vc_row-has-fill"><div class="wpb_column vc_column_container vc_col-sm-12 sc_layouts_column_icons_position_left"><div class="vc_column-inner"><div class="wpb_wrapper"><div id="sc_title_2054305088"
+                                                            </div></div></div></div></div></div></div></div><div class="vc_row-full-width vc_clearfix"></div><div data-vc-full-width="true" data-vc-full-width-init="false" class="vc_row wpb_row vc_row-fluid vc_custom_1485445777014 vc_row-has-fill"><div class="wpb_column vc_column_container vc_col-sm-12 sc_layouts_column_icons_position_left"><div class="vc_column-inner"><div class="wpb_wrapper"><div id="sc_title_2054305088"
                                                                                                                                                                                                                                                                                                                                                                                                                                                                   class="sc_title sc_title_default  vc_custom_1484220986265"><h6 class="sc_item_subtitle sc_title_subtitle sc_align_default sc_item_title_style_default clr-green">Find the best tutors around you</h6><h2 class="sc_item_title sc_title_title sc_align_default sc_item_title_style_default">Find tutors and message them directly
                                                     </h2></div><!-- /.sc_title --><div  id="sc_promo_1988157650"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              class="sc_promo sc_promo_default sc_promo_size_normal sc_promo_no_paddings sc_promo_image_position_right"><div class="sc_promo_image" style="background-image:url(https://smarthead.ancorathemes.com/wp-content/uploads/2016/12/photo11.jpg);width:51%;right: 0;"></div><a href="https://vimeo.com/10638339" class="sc_promo_link_on_image" target="_blank">View Our Video Presentation<span class="icon-play"></span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              class="sc_promo sc_promo_default sc_promo_size_normal sc_promo_no_paddings sc_promo_image_position_right"><div class="sc_promo_image" style="background-image:url(https://smarthead.ancorathemes.com/wp-content/uploads/2016/12/photo11.jpg);width:51%;right: 0;"></div><a href="https://www.youtube.com/watch?v=-vlI4aNhmoA&ab_channel=Tutors-Hub" class="sc_promo_link_on_image" target="_blank">View Our Video Presentation<span class="icon-play"></span>
                                                     </a><div class="sc_promo_text" style="width: 49%;float: left;">
                                                         <div class="sc_promo_text_inner" style=""><h6 class="sc_item_subtitle sc_promo_subtitle sc_align_left sc_item_title_style_default">Most Popular</h6><h3 class="sc_item_title sc_promo_title sc_align_left sc_item_title_style_default">Trending Subjects</h3><div class="sc_promo_content sc_item_content"><div  class="vc_wp_custommenu wpb_content_element columns-2"><div class="widget widget_nav_menu"><div class="menu-subjects-container"><ul id="menu-subjects" class="menu"><li id="menu-item-174" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-174"><a href="/student-registration/">Mathematics</a></li>
                                                                                 <?php $count = 1; ?>
@@ -397,7 +397,7 @@
                                                                        class="sc_services_item_icon icon-prof"
                                                                     ></a>	</div>
                                                                 <div class="sc_services_item_content">
-                                                                    <a href="#"><h6 class="sc_services_item_title">Professional Tutors</h6> </a>
+                                                                    <h6 class="sc_services_item_title">Professional Tutors</h6>
                                                                     <div class="sc_services_item_subtitle"><a href="#" title="View all posts in Guarantee">Guarantee</a></div>
                                                                     <div class="sc_services_item_text"><p>We screen and interview our tutors. We strive to provide a safe, friendly and professional environment.
                                                                         </p>
@@ -412,7 +412,7 @@
                                                                        class="sc_services_item_icon icon-real-results"
                                                                     ></a>	</div>
                                                                 <div class="sc_services_item_content">
-                                                                    <a href="#"><h6 class="sc_services_item_title">Talent and Expertise</h6> </a>
+                                                                   <h6 class="sc_services_item_title">Talent and Expertise</h6>
                                                                     <div class="sc_services_item_subtitle"><a href="#" title="View all posts in Guarantee">Guarantee</a></div>
                                                                     <div class="sc_services_item_text"><p>Native speakers and experienced teachers at your service to help you improve your language skills and
                                                                             succeed in you exams (Math, MCAT...).
@@ -428,7 +428,7 @@
                                                                        class="sc_services_item_icon icon-university"
                                                                     ></a>	</div>
                                                                 <div class="sc_services_item_content">
-                                                                    <a href="#"><h6 class="sc_services_item_title">Flexible & No Commitment</h6> </a>
+                                                                   <h6 class="sc_services_item_title">Flexible & No Commitment</h6>
                                                                     <div class="sc_services_item_subtitle"><a href="#" title="View all posts in Guarantee">Guarantee</a></div>
                                                                     <div class="sc_services_item_text"><p>Chose the right tutor for you, who will work according to your pace and your schedule.
                                                                         </p>
@@ -809,7 +809,21 @@ There are more than 5,000 tutors in this area" data-arrowposition="top"><i class
 
                 </div>
             </div>
-        </div></div>
+        </div>
+    </div>
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/600a4610a9a34e36b96f0ec0/1esk23cdf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
 
     <script>(function() {function maybePrefixUrlField() {
             if (this.value.trim() !== '' && this.value.indexOf('http') !== 0) {

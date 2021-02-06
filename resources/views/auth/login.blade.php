@@ -88,7 +88,7 @@
                             {{ __('Sign Up Student') }}
                         </a>
                         <a class="btn btn-link" href="https://tutors-hub.com/teacher-registration">
-                            {{ __('Sign Up Teacher') }}
+                            Sign Up Tutor
                         </a>
                     </form>
                 </div>

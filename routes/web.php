@@ -42,7 +42,6 @@ Route::get('/my-files', 'PagesController@myFiles')->name('myfiles');
 Route::post('/contact', 'PagesController@postContact')->name('contact.post');
 Route::get('/privacy-policy', 'PagesController@privacy')->name('privacy');
 Route::get('/terms-and-conditions', 'PagesController@terms')->name('terms');
-Route::get('/about-us', 'PagesController@about')->name('about');
 Route::get('/ads', 'AdController@index')->name('ads')->middleware('auth', 'verified', 'CheckBanned');
 Route::get('/create/ad', 'AdController@create')->name('createAd')->middleware('auth', 'verified', 'CheckBanned');
 // Route::get('/find', 'TeacherController@find')->name('find');
@@ -337,6 +336,7 @@ Route::prefix('adminpanel')->middleware(['admin'])->group(function () {
     Route::get('/export/ads', 'ExportController@ads')->name('export.ads');
     Route::get('/tutors', 'AdminController@teachers')->name('admin.tutors');
     Route::get('/tutors/banned', 'AdminController@bannedTutors')->name('admin.tutors.banned');
+    Route::get('/tutors/featured', 'AdminController@featuredTutors')->name('admin.tutors.featured');
     Route::get('/students', 'AdminController@students')->name('admin.students');
     Route::get('/students/banned', 'AdminController@bannedStudents')->name('admin.students.banned');
     Route::get('/user/{id}', 'AdminController@getUser')->name('admin.user');
@@ -361,8 +361,7 @@ Route::prefix('adminpanel')->middleware(['admin'])->group(function () {
 
     Route::get('/levels', 'AdminController@levels')->name('admin.levels');
     Route::get('/admins', 'AdminController@admins')->name('admin.admins');
-    Route::get('/sessions/new', 'AdminController@sessions')->name('admin.sessions');
-    Route::get('/sessions/completed', 'AdminController@sessions1')->name('admin.sessions1');
+    Route::get('/sessions', 'AdminController@sessions')->name('admin.sessions');
     Route::get('/sessions/{id}', 'AdminController@viewSession')->name('admin.session.view');
     Route::get('/ads', 'AdminController@ads')->name('admin.ads');
     Route::get('/ads/{id}', 'AdminController@viewAd')->name('admin.ad.view');
@@ -400,10 +399,20 @@ Route::prefix('adminpanel')->middleware(['admin'])->group(function () {
 
     Route::post('/login-as', 'AdminController@adminLoginAs')->name('admin.loginas');
 
+
+    Route::get('/cms', 'AdminController@cms')->name('admin.cms');
+    Route::get('/add-cms', 'AdminController@addCms')->name('admin.cms.create');
+    Route::post('/add-cms', 'CmsController@post')->name('admin.cms.post');
+    Route::get('/cms/{id}', 'AdminController@showCms')->name('admin.cms.view');
+    Route::get('/edit-cms/{id}', 'AdminController@editCms')->name('admin.cms.edit');
+    Route::post('/edit-cms/{id}', 'CmsController@Update')->name('admin.cms.update');
+
+
 });
 
 Route::get('/start-online-class/{id}', 'MeetingController@startMeeting')->name('start online class');
 Route::get('/getrecording/{id}', 'MeetingController@getRecordings')->name('get recording');
+Route::get('/endSession/{id}', 'MeetingController@endSession')->name('endSession');
 
 
 Auth::routes(['verify' => true]);

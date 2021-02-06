@@ -27,7 +27,7 @@
     @yield('content')
 
     @include('partials/_footer')
-    <script src="{{asset('js/app.js')}}"></script>
+    <script src="{{asset('js/app.js')}}?v=1321312214ss4we1s32s122sswas4"></script>
     @yield('scripts')
 </body>
 </html>

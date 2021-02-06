@@ -109,7 +109,7 @@
             <div class="options">
                 <button v-if="step != 2" @click="back()" class="btn btn-back">Back</button>
                 <button v-if="step != 4" @click="next()" class="btn btn-next">Next</button>
-                <button v-else @click="next()" class="btn btn-next">Complete Registeration</button>
+                <button v-else @click="next()" class="btn btn-next">Complete Registration</button>
             </div>
         </div>
         <div v-else class="full-container">
@@ -117,7 +117,7 @@
                 <div class="suc">Done!</div>
                 <div class="txt">Your account has successfully been created</div>
                 <div class="btns">
-                    <a :href="'http://localhost:8000/login'" class="btn btn-log">Login Now</a>
+                    <a :href="'login'" class="btn btn-log">Login Now</a>
                 </div>
             </div>
         </div>

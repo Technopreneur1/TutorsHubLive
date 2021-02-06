@@ -49,7 +49,8 @@ class PagesController extends Controller
                 ->groupBy('users.id')
                 ->get();
 
-            //dd($teachers);                                                                                                                                                                                                class="sc_title sc_title_default  vc_custom_1484220999465"><h6 class="sc_item_subtitle sc_title_subtitle sc_align_default sc_item_title_style_default">Find the Right Tutor for You</h6><h2 class="sc_item_title sc_title_title sc_align_default sc_item_title_style_default">Featured Tutors</h2></div><!-- /.sc_title -->
+//            dd($teachers);
+            //                                                                                                                                                                                                class="sc_title sc_title_default  vc_custom_1484220999465"><h6 class="sc_item_subtitle sc_title_subtitle sc_align_default sc_item_title_style_default">Find the Right Tutor for You</h6><h2 class="sc_item_title sc_title_title sc_align_default sc_item_title_style_default">Featured Tutors</h2></div><!-- /.sc_title -->
 
             $subjects = json_decode($subject);
             //dd($teachers);
@@ -84,12 +85,6 @@ class PagesController extends Controller
         $title = "Terms & Conditions";
 
         return view('pages.privacy', ['title' => $title]);
-    }
-    public function about()
-    {
-        $title = "About US";
-
-        return view('pages.about', ['title' => $title]);
     }
 
     public function contact()

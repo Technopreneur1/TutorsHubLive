@@ -162,6 +162,9 @@
                 <li class="nav-item">
                     <a class="nav-link" id="completed-tab" data-toggle="tab" href="#completed" role="tab" aria-controls="contact" aria-selected="false">Completed</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="cancelled-tab" data-toggle="tab" href="#cancelled" role="tab" aria-controls="contact" aria-selected="false">Cancelled</a>
+                </li>
             </ul>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="requested" role="tabpanel" aria-labelledby="home-tab">
@@ -197,9 +200,15 @@
                                     <span class="dt">Hours: {{ses.hours}}</span>
                                 </div>
                                 <div class="actions">
-                                    <div v-if="ses.payment_status != 1 && ses.accept != '1' && ses.class_status == 0" class="status">Requested</div>
+                                    <div v-if="ses.payment_status != 1 && ses.accept != '1' && ses.class_status == 0" class="status">
+                                        <div v-if="!ses.cancel_request" class="status">
+                                        Requested</div>
+
+                                        <div v-if="ses.cancel_request" class="status">
+                                        Cancelled</div>
+                                    </div>
                                     <div v-if="ses.payment_status != 1 && ses.accept == '1' && ses.class_status == 0" class="status">Pending</div>
-                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.class_status == 0"  class="status">Upcoming</div>
+
                                     <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.class_status == 1"  class="status">Completed</div>
 
                                     <button @click="showSession(ses)" class="btn btn-gradient">Open</button>
@@ -294,9 +303,18 @@
                                     <span class="dt">Hours: {{ses.hours}}</span>
                                 </div>
                                 <div class="actions">
+
                                     <div v-if="ses.payment_status != 1 && ses.accept != '1' && ses.class_status == 0" class="status">Requested</div>
                                     <div v-if="ses.payment_status != 1 && ses.accept == '1' && ses.class_status == 0" class="status">Pending</div>
-                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.class_status == 0"  class="status">Upcoming</div>
+<!--                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.class_status == 0"  class="status">Upcoming</div>-->
+                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.class_status == 0"  class="status">
+                                        <div v-if="!ses.cancel_request" class="status">
+                                            Upcoming</div>
+                                        <div v-if="ses.cancel_request" class="status">
+                                            <div class="status" >Cancelled</div>
+                                            <div style="font-size: 10px">Please rise a ticket in <br> Support Center for refund!.</div>
+                                        </div>
+                                    </div>
                                     <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.class_status == 1"  class="status">Completed</div>
 
                                     <button @click="showSession(ses)" class="btn btn-gradient">Open</button>
@@ -357,6 +375,64 @@
                         No Session
                     </div>
                 </div>
+                <div class="tab-pane fade" id="cancelled" role="tabpanel" aria-labelledby="contact-tab">
+                    <div v-if="cancelledsessions.length" class="sessionsList">
+                        <div v-for="ses in cancelledsessions" :key="ses.id" class="session">
+                            <a v-if="authuser.type == 'student'" :href="url + '/user/' + ses.teacher.user.id" class="with">
+                                <div class="avatar">
+                                    <img :src="avatar(ses.teacher.user)" alt="">
+                                </div>
+                                <div class="info">
+                                    <div class="name">{{ses.teacher.user.name}}</div>
+                                </div>
+                            </a>
+                            <a v-if="authuser.type == 'teacher'" :href="url + '/user/' + ses.student.user.id" class="with">
+                                <div class="avatar">
+                                    <img :src="avatar(ses.student.user)" alt="">
+                                </div>
+                                <div class="info">
+                                    <div class="name">{{ses.student.user.name}}</div>
+                                </div>
+                            </a>
+                            <div class="info">
+                                <span class="dt">{{ses.date | moment('DD MMM, YYYY')}}</span>
+                                <div class="val"><span>{{ses.level}}</span></div>
+                                <div class="val"><span>{{ses.subject}}</span></div>
+                            </div>
+                            <div class="info">
+                                <span class="dt">Session Type{{ses.sessiontype}}</span>
+                                <div class="val"><span>Start Session: {{ses.startsession}}</span></div>
+                                <div class="val"><span>End Session: {{ses.endsession}}</span></div>
+                            </div>
+                            <div class="info">
+                                <span class="dt">Hours: {{ses.hours}}</span>
+                            </div>
+                            <div class="actions">
+
+                                <div v-if="ses.payment_status != 1 && ses.accept != '1' && ses.class_status == 0" class="status">Requested</div>
+                                <div v-if="ses.payment_status != 1 && ses.accept == '1' && ses.class_status == 0" class="status">Pending</div>
+                                <!--                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.class_status == 0"  class="status">Upcoming</div>-->
+                                <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.class_status == 0"  class="status">
+                                    <div v-if="!ses.cancel_request" class="status">
+                                        Upcoming</div>
+                                    <div v-if="ses.cancel_request" class="status">
+                                        <div class="status" >Cancelled</div>
+                                        <div style="font-size: 10px">Please rise a ticket in Support Center for refund!.</div>
+                                    </div>
+                                </div>
+                                <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.class_status == 1"  class="status">Completed</div>
+
+                                <button @click="showSession(ses)" class="btn btn-gradient">Open</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div v-else class="nothing">
+                        No Session
+                    </div>
+                </div>
+
             </div>
 
         </div>
@@ -591,7 +667,6 @@ export default {
     },
     data()
     {
-        console.log(this.sessions)
         return{
             showThanks: false,
             reviewing: false,
@@ -608,7 +683,7 @@ export default {
             var requests = [];
             for (var i = 0; i < this.sessions.length; i++) {
                 session = this.sessions[i];
-                if (session.payment_status != 1 && session.accept != '1' && session.class_status == 0) {
+                if (session.cancel_request==''&& session.payment_status != 1 && session.accept != '1' && session.class_status == 0) {
                     requests.push(session);
                 }
             }
@@ -619,27 +694,42 @@ export default {
             var requests = [];
             for (var i = 0; i < this.sessions.length; i++) {
                 session = this.sessions[i];
-                if (session.payment_status != 1 && session.accept == '1' && session.class_status == 0) {
+                if (session.cancel_request==''&& session.payment_status != 1 && session.accept == '1' && session.class_status == 0) {
                     requests.push(session);
                 }
             }
             return requests;
-        }, upcomingSessions(){
+        },
+
+        upcomingSessions(){
             var session;
             var requests = [];
             for (var i = 0; i < this.sessions.length; i++) {
                 session = this.sessions[i];
-                if (session.payment_status == 1 && session.accept == '1' && session.class_status == 0) {
+                if (session.cancel_request==''&& session.payment_status == 1 && session.accept == '1' && session.class_status == 0) {
                     requests.push(session);
                 }
             }
             return requests;
-        }, completedsessions(){
+        },
+
+        completedsessions(){
             var session;
             var requests = [];
             for (var i = 0; i < this.sessions.length; i++) {
                 session = this.sessions[i];
-                if (session.payment_status == 1 && session.accept == '1' && session.class_status == 1) {
+                if (session.cancel_request==''&& session.payment_status == 1 && session.accept == '1' && session.class_status == 1) {
+                    requests.push(session);
+
+                }
+            }
+            return requests;
+        }, cancelledsessions(){
+            var session;
+            var requests = [];
+            for (var i = 0; i < this.sessions.length; i++) {
+                session = this.sessions[i];
+                if (session.cancel_request ) {
                     requests.push(session);
 
                 }
@@ -648,11 +738,17 @@ export default {
         },
         currency()
         {
-            if (this.authuser.country == 1) {
-                return "USD"
-            } else {
-                return "CAD"
+            if (this.viewSession.teacher.user.currency) {
+                return this.viewSession.teacher.user.currency;
+            }else {
+                return "USD";
             }
+            //
+            // if (this.authuser.country == 1) {
+            //     return "USD";
+            // } else {
+            //     return "CAD";
+            // }
         },
         is_ready()
         {
@@ -890,6 +986,7 @@ export default {
         const script = document.createElement("script");
         //script.src = "https://www.paypal.com/sdk/js?client-id=AYSq3RDGsmBLJE-otTkBtM-jBRd1TCQwFf9RGfwddNXWz0uFU9ztymylOhRS&currency=" + this.currency;
         script.src = "https://www.paypal.com/sdk/js?client-id=AU1qSrl-VvM9r15F6lhSITnPRtJvJwFJfd__J5cMP8FvpXCDcEloTOysg8exK1DZN8rMCsgBXCOUbPFd&currency=" + this.currency;
+        // script.src = "https://www.paypal.com/sdk/js?client-id=AVAo9E3s-xN1GwGOPf7WuRsfUz67-urBxeAwRp_3xYboyF0_oW9E4MnLh0mgcbBqAYzmD3LoGD7a8oRP&currency=" + this.currency;
         script.addEventListener("load", this.setLoaded);
         document.body.appendChild(script);
     }

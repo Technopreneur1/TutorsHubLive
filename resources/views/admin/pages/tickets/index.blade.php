@@ -23,6 +23,7 @@
             </thead>
             <tbody>
             @foreach ($tickets as $ticket)
+                @continue(!$ticket->user)
             <tr>
                 <td>{{$ticket->ticket_id}}</td>
                 @if ($ticket->user_id)
@@ -40,7 +41,7 @@
                 @if (!$ticket->resolved)
                   <form action="{{route('admin.close.ticket', $ticket->id)}}" method="post">
                     @csrf
-                    <button class="btn btn-danger">Close <i class="fas fa-lock"></i></button>                
+                    <button class="btn btn-danger">Close <i class="fas fa-lock"></i></button>
                   </form>
                 @endif
               </td>
