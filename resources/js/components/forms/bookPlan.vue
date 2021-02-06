@@ -26,7 +26,7 @@
                         </tr>
                         <tr>
                             <td>Hourly Rate: </td>
-                            <td>${{plan.rate}}</td>
+                            <td>${{plan.rate}} {{currency}}</td>
                         </tr>
                     </table>
                 </div>
@@ -57,7 +57,7 @@
                 <div class="sessiontype">
                     <div class="input">
                         <label for="">Select Type</label>
-                        <select v-model="sessiontype">
+                        <select v-model="sessiontype">Please Pay to confirm this Session
                             <option value="Online">Online</option>
                             <option value="In Person">In Person</option>
 
@@ -67,6 +67,8 @@
                 <div class="total"> <span class="name">= </span> <span>${{total}} <small>{{currency}}</small></span></div>
                 <div v-show="!loading" class="btns" style="width: 300px; max-with: 90%; margin: 0 auto">
 <!--                              <div  ref="paypal"></div>-->
+                    <div v-if="error" class="error">{{error}}</div>
+
                     <button @click="requestSession()" class="btn-book">Request Session</button>
 
                 </div>
@@ -175,14 +177,21 @@
         computed: {
             currency()
             {
-                if(this.user.country.name == "United States")
-                {
-                    return "USD"
+
+                if (this.user.currency) {
+                    return this.user.currency;
+                }else {
+                    return "USD";
+
                 }
-                else if(this.user.country.name == "Canada")
-                {
-                    return "CAD"
-                }
+                // if(this.user.country.name == "United States")
+                // {
+                //     return "USD";
+                // }
+                // else if(this.user.country.name == "Canada")
+                // {
+                //     return "CAD";
+                // }
             },
             total()
             {
@@ -248,7 +257,11 @@
                 }).render(this.$refs.paypal)
             },
             requestSession(){
-                this.loading = true
+                if (!this.dte) {
+                    this.error = "Please select your preferred date & time"
+                    return false
+                }
+                this.loading = true;
                 axios.post(this.url +'/complete/sessionrequest',
                     {
                         subject: this.plan.discipline.name,

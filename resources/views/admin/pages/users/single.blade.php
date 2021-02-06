@@ -14,7 +14,7 @@
                         <!-- Add the bg color to the header using any of the bg-* classes -->
                         <div class="widget-user-header bg-info">
                             <h3 class="widget-user-username">{{$user->name}}</h3>
-                             <p>{{$user->type == 'Tutors' ? 'Tutor' : 'Student'}}</p>
+                             <p>{{$user->type == 'teacher' ? 'Tutor' : 'Student'}}</p>
                         </div>
                         <div class="widget-user-image">
                             @if ($user->avatar)
@@ -166,7 +166,7 @@
                                     <td>{{$user->gender}}</td>
                                 </tr>
                                 <tr>
-                                    <td>Address</td>
+                                    <td>Location</td>
                                     <td>{{$user->address}}</td>
                                 </tr>
                                 <!-- <tr>

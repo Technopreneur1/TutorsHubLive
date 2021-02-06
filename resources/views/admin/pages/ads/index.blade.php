@@ -77,15 +77,11 @@ Ads
             </thead>
             <tbody>
             @foreach ($ads as $ad)
+                @continue(!$ad->user)
             <tr>
                 <td>{{$ad->id}}</td>
                 <td>{{$ad->title}}</td>
-                @if(isset($ad->user->id))
                 <td><a href="{{route('admin.user', $ad->user->id)}}">{{$ad->user->name}}</a></td>
-                @else
-                <td>N/A</td>
-                @endif
-                
                 <td>{{$ad->created_at->format("Y-m-d")}}</td>
                 <td>
                     {{-- {{-- <a href="{{route('admin.ad', $ad->id)}}" class="btn btn-success">Open</a> --}}

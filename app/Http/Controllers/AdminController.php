@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Cms;
 use auth;
 use App\Ad;
 use App\Meta;
-use App\Cms;
 use App\Blog;
 use App\User;
 use App\Level;
@@ -69,7 +69,6 @@ class AdminController extends Controller
         $sessions = Session::where('completed',0)->orderBy('created_at', 'desc')->get();
         return view('admin.pages.sessions.index', ['sessions' => $sessions]);
     }
-
     public function sessions1()
     {
         $sessions = Session::where('completed',1)->orderBy('created_at', 'desc')->get();
@@ -100,28 +99,14 @@ class AdminController extends Controller
         // dd($blogs);
         return view('admin.pages.blogs.index', ['blogs' => $blogs]);
     }
-    public function cms()
-    {
-        $cmsArray = Cms::orderBy('created_at', 'desc')->get();
-        return view('admin.pages.cms.index', ['cmsArray' => $cmsArray]);
-    }
     public function addBlog()
     {
         return view('admin.pages.blogs.add');
-    }
-    public function addCms()
-    {
-        return view('admin.pages.cms.add');
     }
     public function editBlog($id)
     {
         $blog = Blog::findOrFail($id);
         return view('admin.pages.blogs.edit', ['blog' => $blog]);
-    }
-    public function editCms($id)
-    {
-        $cms = Cms::findOrFail($id);
-        return view('admin.pages.cms.edit', ['cms' => $cms]);
     }
     public function showBlog($id)
     {
@@ -302,6 +287,10 @@ class AdminController extends Controller
     {
         $users = User::where('type', 'teacher')->where('is_banned', 1)->get();
         return view('admin.pages.users.index', ['users' => $users, 'type' => 'Banned Tutors']);
+    }public function featuredTutors()
+    {
+        $users = User::where('type', 'teacher')->where('is_featured', 1)->get();
+        return view('admin.pages.users.index', ['users' => $users, 'type' => 'Featured Tutors']);
     }
 
     // Return Single Tutor Page
@@ -358,4 +347,18 @@ class AdminController extends Controller
 
     // }
 
+    public function cms()
+    {
+        $cmsArray = Cms::orderBy('created_at', 'desc')->get();
+        return view('admin.pages.cms.index', ['cmsArray' => $cmsArray]);
+    }
+    public function addCms()
+    {
+        return view('admin.pages.cms.add');
+    }
+    public function editCms($id)
+    {
+        $cms = Cms::findOrFail($id);
+        return view('admin.pages.cms.edit', ['cms' => $cms]);
+    }
 }
