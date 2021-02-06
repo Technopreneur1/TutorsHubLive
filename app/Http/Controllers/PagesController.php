@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Blog;
 use App\Discipline;
 use App\Plan;
+use App\Cms;
 use App\Testimonial;
 use App\User;
 use App\Ticket;
@@ -49,8 +50,7 @@ class PagesController extends Controller
                 ->groupBy('users.id')
                 ->get();
 
-//            dd($teachers);
-            //                                                                                                                                                                                                class="sc_title sc_title_default  vc_custom_1484220999465"><h6 class="sc_item_subtitle sc_title_subtitle sc_align_default sc_item_title_style_default">Find the Right Tutor for You</h6><h2 class="sc_item_title sc_title_title sc_align_default sc_item_title_style_default">Featured Tutors</h2></div><!-- /.sc_title -->
+            //dd($teachers);                                                                                                                                                                                                class="sc_title sc_title_default  vc_custom_1484220999465"><h6 class="sc_item_subtitle sc_title_subtitle sc_align_default sc_item_title_style_default">Find the Right Tutor for You</h6><h2 class="sc_item_title sc_title_title sc_align_default sc_item_title_style_default">Featured Tutors</h2></div><!-- /.sc_title -->
 
             $subjects = json_decode($subject);
             //dd($teachers);
@@ -71,20 +71,27 @@ class PagesController extends Controller
     {
         return view('pages.files');
     }
-    public function privacy()
-    {
-        $title = "Privacy Policy";
-        return view('pages.privacy', ['title' => $title]);
-    }
     public function settings()
     {
         return view('pages.settings');
     }
+    public function about()
+    {
+        $content = Cms::whereId(3)->get(['title','description'])->first();
+
+        return view('pages.privacy', ['content' => $content]);
+    }
+    public function privacy()
+    {
+        $content = Cms::whereId(1)->get(['title','description'])->first();
+
+        return view('pages.privacy', ['content' => $content]);
+    }
     public function terms()
     {
-        $title = "Terms & Conditions";
+        $content = Cms::whereId(2)->get(['title','description'])->first();
 
-        return view('pages.privacy', ['title' => $title]);
+        return view('pages.privacy', ['content' => $content]);
     }
 
     public function contact()

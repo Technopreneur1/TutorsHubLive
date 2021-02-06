@@ -48,9 +48,6 @@
                 border-top-color: #d9dfe5 !important;
                 border-top-style: dashed !important;
             }
-            .nm{
-                margin-top: 24px!important;
-            }
         </style>
 
         <link rel='stylesheet' id='vc_extensions_cqbundle_adminicon-css'  href='{{url('wp-content/plugins/vc-extensions-bundle/css/admin_icon.css')}}' type='text/css' media='all' />
@@ -205,7 +202,7 @@
                                             <li id="menu-item-548" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-548"><a href="https://tutors-hub.com/student-registration"><span>Find a Tutor</span></a></li>
                                             <li id="menu-item-164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164"><a href="https://tutors-hub.com/teacher-registration"><span>Become a Tutor</span></a></li>
                                             <li id="menu-item-119" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-119"><a href="#"><span>News</span></a></li>
-                                            <li id="menu-item-165" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-165"><a href="https://tutors-hub.com/contact"><span>Contacts</span></a></li></ul>
+                                            <li id="menu-item-165" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-165"><a href="https://tutors-hub.com/contact"><span>Contact Us</span></a></li></ul>
 
                                     </nav>
                                     <div class="sc_layouts_iconed_text sc_layouts_menu_mobile_button">
@@ -244,7 +241,7 @@
                             <li id="menu_mobile-item-105" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-105"><a href="https://tutors-hub.com/"><span>Home</span></a>
                             <li id="menu_mobile-item-548" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-548"><a href="https://tutors-hub.com/student-registration"><span>Find a Tutor</span></a></li>
                             <li id="menu_mobile-item-164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164"><a href="https://tutors-hub.com/teacher-registration"><span>Become a Tutor</span></a></li>
-                            <li id="menu_mobile-item-165" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-165"><a href="https://tutors-hub.com/contacts/"><span>Contacts</span></a></li>
+                            <li id="menu_mobile-item-165" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-165"><a href="https://tutors-hub.com/contacts/"><span>Contact Us</span></a></li>
                         </ul>
                     </nav>
                     <div class="socials_mobile"><span class="social_item"><a href="{{('twitter.com/ancora_themes')}}" target="_blank" class="social_icons social_twitter"><span class="trx_addons_icon-twitter"></span></a></span><span class="social_item"><a href="https://www.facebook.com/AncoraThemes/" target="_blank" class="social_icons social_facebook"><span class="trx_addons_icon-facebook"></span></a></span><span class="social_item"><a href="https://www.instagram.com/ancora_themes/" target="_blank" class="social_icons social_instagram"><span class="trx_addons_icon-instagram"></span></a></span><span class="social_item"><a href="https://dribbble.com/AncoraThemes" target="_blank" class="social_icons social_dribbble"><span class="trx_addons_icon-dribbble"></span></a></span></div>	</div>
@@ -260,17 +257,7 @@
 
                         <div class="tp-single-wrap">
 
-                            <div class="tp-featured">
-                                @if(isset($data->avatar))
-                                    <img width="300" height="300" src="https://tutors-hub.com/storage/images/{{$data['avatar']}}" class="attachment-tutor-single size-tutor-single wp-post-image" alt="Josh Summers" itemprop="image" />
-                                        @else
-                                    <img width="300" height="300" src="https://tutors-hub.com/wp-content/uploads/2016/11/tutor7-740x792.jpg" class="attachment-tutor-single size-tutor-single wp-post-image" alt="Josh Summers" itemprop="image" />
-
-                                                @endif
-
-
-
-                            </div><div class="tp-info">
+                            <div class="tp-featured"><img width="964" height="996" src="https://tutors-hub.com/storage/images/{{$data['avatar']}}" class="attachment-tutor-single size-tutor-single wp-post-image" alt="Josh Summers" itemprop="image" /></div><div class="tp-info">
                                 <h2 class="tp-single-title">{{$data['name']}}</h2><div class="tp-price">
                                     <span class="tp-present-price"><span class="small">$</span>{{$data['rate']}}                        </span>
                                     <span class="tp-period-price">hour                        </span>
@@ -301,6 +288,6 @@
 
                 </div><!-- </.content_wrap> -->			</div><!-- </.page_content_wrap> -->
 
-            <script src="{{asset('js/app.js')}}?v=132131214ss4w1s32s122ssa4"></script>
+            <script src="{{asset('js/app.js')}}"></script>
 
 @endsection

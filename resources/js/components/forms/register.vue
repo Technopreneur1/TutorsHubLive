@@ -2,7 +2,7 @@
     <div class="hero">
         <div @click="openRegForm('teacher')" class="col tcol">
             <div class="lbl">Register As</div>
-            <div  class="nm" >Tutor</div>
+            <div  class="nm">Tutor</div>
         </div>
         <div @click="openRegForm('student')" class="col scol">
             <div class="lbl">Register As</div>
@@ -24,7 +24,7 @@
             <student-register v-show="openForm == 'student'" :lat="lat" :lng="lng" @closeForm="openForm = ''" :url="url"></student-register>
         </transition>
     </div>
-
+    
 </template>
 <style lang="sass" scoped>
     .locPop
@@ -65,7 +65,7 @@
                     &:hover
                         background: #7df48c
                         color: #000
-
+                        
                 .btn-anyway
                     color: #fff
 </style>
@@ -83,37 +83,30 @@
                books: []
            }
         },
-
+        
         methods: {
-
+            
             reload()
             {
                 location.reload()
             },
             openRegForm(type)
             {
-                if (type == 'teacher') {
-                    window.location = 'teacher-registration'
-                }else {
-                    window.location = 'student-registration'
-
+                this.showLocationAlert = false
+                console.log(this.lat)
+                console.log(this.lng)
+                if(!this.lat && !this.lat)
+                {
+                    // console.log(this.lat)
+                    this.selected = type
+                    this.showLocationAlert = true
+                    
                 }
-
-                // this.showLocationAlert = false;
-                // console.log(this.lat)
-                // console.log(this.lng)
-                // if(!this.lat && !this.lat)
-                // {
-                //     // console.log(this.lat)
-                //     this.selected = type
-                //     this.showLocationAlert = true
-                //
-                // }
-                // else
-                // {
-                //     this.openForm = type;
-                //     this.showLocationAlert = false
-                // }
+                else
+                {
+                    this.openForm = type;
+                    this.showLocationAlert = false
+                }
             },
             continueAnyway()
             {
@@ -122,7 +115,7 @@
             getLocation() {
                 if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(this.setLocation)
-                }
+                } 
             },
            setLocation(position) {
             this.lat = position.coords.latitude

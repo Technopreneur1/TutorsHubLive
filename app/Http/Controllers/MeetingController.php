@@ -38,23 +38,13 @@ class MeetingController extends Controller
         return redirect()->away($this->joinClass($session));
 
     }
-
-    public function endSession($id)
-    {
-        $session=Session::find($id);
-
-        $session->class_status = 1;
-        $session->completed = 1;
-        $session->save();
-        return redirect(route('home'));
-    }
     public function createOnlineClass($session)
     {
 
         $meetingID = $session->id;
 
         $duration = $session->hours * 60;
-        $urlLogout = route('endSession',$session->id);
+        $urlLogout = route('home');
         $isRecordingTrue = true;
         $bbb = new BigBlueButton();
 

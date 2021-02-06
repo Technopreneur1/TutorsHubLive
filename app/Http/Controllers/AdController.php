@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 class AdController extends Controller
 {
 
-
+    
 
     //
     public function myAds()
@@ -27,10 +27,6 @@ class AdController extends Controller
     public function getMyAds()
     {
         $ads = auth()->user()->ads()->paginate(30);
-//        foreach ($ads as $ad) {
-//            dd($ad->user);
-//        }
-////        dd($ads);
         return response()->json(['ads' => $ads]);
     }
     //
@@ -57,7 +53,7 @@ class AdController extends Controller
                                         ->where('type', 'neighborhood')
                                         ->where('parent_id', $request['city'])
                                         ->get()->first();
-
+            
                 if(!$existing)
                 {
                     $existing = Location::where('name', 'like', '%' . $request->new_neighborhood . '%')
@@ -85,8 +81,8 @@ class AdController extends Controller
             }else {
                 $neighborhood = 0;
             }
-
-
+            
+            
         }else {
             $neighborhood = $request->neighborhood;
         }
@@ -101,7 +97,7 @@ class AdController extends Controller
             'discipline_id' => $request['discipline'],
             'level_id' => $request['level'],
         ]);
-
+        
         return response()->json(['ad' => $ad]);
     }
     public function post(Request $request)
@@ -115,7 +111,7 @@ class AdController extends Controller
                                         ->where('type', 'neighborhood')
                                         ->where('parent_id', $request['city'])
                                         ->get()->first();
-
+            
                 if(!$existing)
                 {
                     $existing = Location::where('name', 'like', '%' . $request->new_neighborhood . '%')
@@ -143,8 +139,8 @@ class AdController extends Controller
             }else {
                 $neighborhood = 0;
             }
-
-
+            
+            
         }else {
             $neighborhood = $request->neighborhood;
         }
@@ -157,59 +153,72 @@ class AdController extends Controller
             'state_id' => $request['state'],
             'city_id' => $request['city'],
             'neighborhood_id' => $neighborhood,
+            'longitude' => $request['lng'],
+            'latitude' => $request['lat'],
+            'address' => $request['address'],
             'discipline_id' => $request['discipline'],
             'level_id' => $request['level'],
         ]);
-
+        
         return response()->json(['ad' => $ad]);
     }
-    public function search_(Request $request)
+    public function search(Request $request)
     {
         // $requests = Req::with('user')->get();
 
         $lat = auth()->user()->latitude;
         $lng = auth()->user()->longitude;
-        if ($request->availability && $request->availability!='Both') {
-            $av = "AND users.availability='". $request->availability."'";
-        }
-        if($request->level && $request->subject)
+        
+        // if($request->level && $request->subject)
+        // {
+        //     // return response()->json(['requests' => "os"]);
+        //     $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) * 
+        //         cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) ) 
+        //         AS distance FROM users WHERE sector_id = ? And is_banned = 0 AND type= 'student' AND type = ? HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
+        //     $args = [$lat,$lng, $lat, $request->level, $request->subject, $request->radius];
+        // }
+        // elseif($request->level)
+        // {
+        //     // return response()->json(['requests' => "os"]);
+        //     $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) * 
+        //         cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) ) 
+        //         AS distance FROM users WHERE type = ?  And is_banned = 0 AND type= 'student' HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
+        //     $args = [$lat,$lng, $lat, $request->level, $request->radius];
+        // }
+        // elseif($request->subject)
+        // {
+        //     // return response()->json(['requests' => "os"]);
+        //     $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) * 
+        //         cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) ) 
+        //         AS distance FROM users WHERE sector_id = ? And is_banned = 0 AND type= 'student' HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
+        //     $args = [$lat,$lng, $lat, $request->subject, $request->radius];
+        // }
+        // else{
+        //     $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) * 
+        //         cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) ) 
+        //         AS distance FROM users WHERE is_banned = 0 AND type= 'student' HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
+        //     $args = [$lat,$lng, $lat, $request->radius];
+
+        // }
+        if($request->radius)
         {
-            // return response()->json(['requests' => "os"]);
             $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) *
                 cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) )
-                AS distance FROM users JOIN students ON users.id=students.user_id WHERE level_id = ? And is_banned = 0 AND type= 'student' AND discipline_id = ? HAVING  ".$av."distance < ? ORDER BY distance LIMIT 0 , 20;";
-            $args = [$lat,$lng, $lat, $request->level, $request->subject, $request->radius];
-        }
-        elseif($request->level)
-        {
-            // return response()->json(['requests' => "os"]);
-            $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) *
-                cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) )
-                AS distance FROM users WHERE type = ?  And is_banned = 0 AND type= 'student' HAVING ".$av." distance < ? ORDER BY distance LIMIT 0 , 20;";
-            $args = [$lat,$lng, $lat, $request->level, $request->radius];
-        }
-        elseif($request->subject)
-        {
-            // return response()->json(['requests' => "os"]);
-            $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) *
-                cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) )
-                AS distance FROM users WHERE sector_id = ? And is_banned = 0 AND type= 'student' HAVING ".$av." distance < ? ORDER BY distance LIMIT 0 , 20;";
-            $args = [$lat,$lng, $lat, $request->subject, $request->radius];
+                AS distance FROM users WHERE type= 'student' HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
+            $args = [$lat, $lng, $lat, $request->radius];
         }
         else{
             $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) *
                 cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) )
-                AS distance FROM users WHERE is_banned = 0 AND type= 'student' HAVING ".$av." distance < ? ORDER BY distance LIMIT 0 , 20;";
-            $args = [$lat,$lng, $lat, $request->radius];
+                AS distance FROM users WHERE type= 'student' HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
+            $args = [$lat,$lng, $lat, 10];
 
         }
-//        dd($string);
 
         $ids = DB::select($string, $args);
         $ids = Arr::pluck($ids, "id");
-        array_push($ids, 11);
 
-        $ads = User::with(['city', 'state', 'neighborhood', 'country', 'profile'])
+        $ads = User::with(['city', 'state', 'neighborhood', 'country', 'profile','ad_detail'])
                     ->where('is_hidden', 0)
                     ->where('is_banned', 0)
                     ->where('type', 'student')
@@ -218,7 +227,7 @@ class AdController extends Controller
 
         return response()->json(['ads' => $ads]);
     }
-    public function search1(Request $request)
+    public function search_(Request $request)
     {
         if($request['neighborhood'])
         {

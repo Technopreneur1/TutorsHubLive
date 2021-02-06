@@ -8,7 +8,7 @@
         <transition  name="easy-appear" enter-active-class="animated slideInLeft" leave-active-class="animated slideOutLeft">
             <ad-view @contact="contact" @cancel="viewAd = null" v-if="viewAd" :url="url" :vad="viewAd"></ad-view>
         </transition>
-
+        
 
         <div class="mbar">
             <div @click="showSearchForm = true" class="mopt">
@@ -24,7 +24,7 @@
                 <i class="fas fa-list-ul"></i> <span>List</span>
             </div>
         </div>
-
+         
          <div class="container-fluid">
             <div  v-if="showSearchForm"  class="searchBox">
                 <span @click="showSearchForm = false" class="clo"><i class="fas fa-times"></i></span>
@@ -42,21 +42,12 @@
                         <option v-for="discipline in disciplines" :value="discipline.id" :key="discipline.id">{{discipline.name}}</option>
                     </select>
                 </div>
-                <div class="input">
-                    <label for="">Availability</label>
-                    <select v-model="availability" name="availability" id="">
-                        <option value="">-- Availability --</option>
-                        <option value="Online">Online</option>
-                        <option value="In-Person">In-Person</option>
-                        <option value="Both">Both</option>
-                    </select>
-                </div>
                 <div class="newrow">
                     <span>Location</span>
                 </div>
                 <div class="input">
                     <label for="">Radius</label>
-                    <input type="range" min="1" max="1000" name="radius" id="">
+                    <input type="range" min="1" max="1000" name="radius" value="1000" id="">
                     <!-- <input type="number" v-model="radius" id=""> -->
                 </div>
                  <!-- <div class="input">
@@ -81,7 +72,7 @@
                 </div>
             </div>
          </div>
-
+     
                  <div  v-if="viewmode == 'map' || viewmode == 'all'" >
                      <div id="map">
                         <GmapMap :center="centerLoc" :map-type-id="mapTypeId" :zoom="theZoom">
@@ -94,7 +85,7 @@
                         </GmapMap>
                     </div>
                 </div>
-
+             
         <div v-if="viewmode == 'list' || viewmode == 'all'"  class="full-container">
             <div v-if="ads.length" class="ad-results">
                 <ad v-for="ad in ads" @startConversation="startConversation(ad.id)" :url="url" :ad="ad" :key="ad.id"></ad>
@@ -104,10 +95,10 @@
             </div>
         </div>
     </div>
-
+    
 </template>
 <style lang="sass" scoped>
-    .view-ad
+    .view-ad    
         background: linear-gradient(45deg, white, #f9f9f9)
         position: fixed
         left: 0
@@ -131,7 +122,7 @@
             cursor: pointer
             color: #2575bc
         .avatar
-            width: 100px
+            width: 100px 
             height: 100px
             img
                 max-width: 100%
@@ -139,12 +130,12 @@
         .data
             a
                 color: #000
-
+        
     #map
         display: flex
         justify-content: flex-end
-        margin: 0
-        .vue-map-container
+        margin: 0 
+        .vue-map-container 
             height: 450px
             width: 100%
             max-width: 100% !important
@@ -203,7 +194,7 @@ import Select2 from 'v-select2-component';
                     // { position: { lat: -0.48585, lng: 117.1466 } },
                     // { position: { lat: -6.9127778, lng: 107.6205556 } }
                 ]
-
+               
            }
         },
         computed:
@@ -305,7 +296,6 @@ import Select2 from 'v-select2-component';
                 axios.post(this.url +'/search/ads', {
                     'radius': this.radius,
                     'level': this.level,
-                    'availability': this.availability,
                     'subject': this.subject,
                 })
                 .then(response => {
@@ -340,7 +330,7 @@ import Select2 from 'v-select2-component';
             },
             update()
             {
-                axios.post(this.url +'/update/location',
+                axios.post(this.url +'/update/location', 
                 {
                     country: this.country,
                     state: this.state,
@@ -356,7 +346,7 @@ import Select2 from 'v-select2-component';
                     console.log(error);
                 })
             },
-
+            
              getStates()
             {
                 axios.post(this.url +'/get/states', {country: this.country})

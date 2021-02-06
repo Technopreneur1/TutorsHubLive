@@ -3,7 +3,7 @@
         <transition  name="easy-appear" enter-active-class="animated slideInLeft" leave-active-class="animated slideOutLeft">
             <start-chat v-if="chatWith" :url="url" :to="chatWith" @cancelChat="chatWith = null"></start-chat>
         </transition>
-
+        
         <transition  name="easy-appear" enter-active-class="animated slideInLeft" leave-active-class="animated slideOutLeft">
             <tutor-view @contact="contact" @cancel="viewTutor = null" v-if="viewTutor" :url="url" :vtutor="viewTutor"></tutor-view>
         </transition>
@@ -44,21 +44,13 @@
                             <option value="">-- Subject --</option>
                             <option v-for="discipline in disciplines" :value="discipline.id" :key="discipline.id">{{discipline.name}}</option>
                         </select>
-                    </div>    <div class="input">
-                        <label for="">Availability</label>
-                        <select v-model="availability" name="availability" id="">
-                            <option value="">-- Availability --</option>
-                            <option value="Online">Online</option>
-                            <option value="In-Person">In-Person</option>
-                            <option value="Both">Both</option>
-                        </select>
                     </div>
                     <div class="newrow">
                         <span>Location</span>
                     </div>
                     <div class="input">
                         <label for="">Radius</label>
-                        <input type="range" min="1" max="1000" name="radius" id="">
+                        <input type="range" min="1" max="1000" name="radius" value="1000" id="">
                         <!-- <input type="number" v-model="radius" id=""> -->
                     </div>
                     <!-- <div class="input">
@@ -115,9 +107,9 @@
         display: flex
         justify-content: flex-end
         margin: 0
-        .vue-map-container
+        .vue-map-container 
             max-width: 100% !important
-
+    
 
     .btns
         display: flex
@@ -184,7 +176,7 @@
                     // { position: { lat: -0.48585, lng: 117.1466 } },
                     // { position: { lat: -6.9127778, lng: 107.6205556 } }
                 ]
-
+               
            }
         },
         computed:
@@ -257,7 +249,7 @@
                     document.getElementById('map'), {zoom: 4, center: uluru});
                 // The marker, positioned at Uluru
                 var marker = new google.maps.Marker({position: uluru, map: map});
-                }
+                }  
             },
             reset()
             {
@@ -284,7 +276,7 @@
                     response.data.tutors.data.forEach(tutor => {
                         this.tutors.push(tutor)
                     });
-
+                    
                     this.nextPage = response.data.tutors.next_page_url
                     this.showSearchForm = false
                 })
@@ -299,7 +291,6 @@
                     'radius': this.radius,
                     'level': this.level,
                     'subject': this.subject,
-                    'availability': this.availability,
                 })
                 .then(response => {
                     this.tutors = response.data.tutors.data
@@ -362,7 +353,7 @@
             },
             update()
             {
-                axios.post(this.url +'/update/location',
+                axios.post(this.url +'/update/location', 
                 {
                     country: this.country,
                     state: this.state,
@@ -440,7 +431,7 @@
                 this.cities = []
                 this.neighborhoods = []
                 if(this.country)
-                {
+                { 
                     this.state = ''
                     this.city = ''
                     this.neighborhood = ''

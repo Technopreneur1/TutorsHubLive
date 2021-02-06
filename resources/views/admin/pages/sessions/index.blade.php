@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 @section('title')
-Sessions
+Sessions 
 @endsection()
 @section('content')
     <div style="margin: 10px 0" >
@@ -28,13 +28,18 @@ Sessions
             </thead>
             <tbody>
             @foreach ($sessions as $session)
-                @continue(!$session->student->user)
-
-
-                <tr>
+            <tr>
                 <td>{{$session->id}}</td>
+                @if(isset($session->student->user->id))
                 <td><a href="{{route('admin.user', $session->student->user->id)}}">{{$session->student->user->name}}</a></td>
+                @else
+                <td>N/A</td>
+                @endif
+                @if(isset($session->teacher->user->id))
                 <td><a href="{{route('admin.user', $session->teacher->user->id)}}">{{$session->teacher->user->name}}</a></td>
+                @else
+                <td>N/A</td>
+                @endif
                 <td>${{$session->rate}} </td>
                 <td>{{$session->hours}} </td>
                 <td>${{$session->fee}} </td>
