@@ -362,7 +362,8 @@ Route::prefix('adminpanel')->middleware(['admin'])->group(function () {
 
     Route::get('/levels', 'AdminController@levels')->name('admin.levels');
     Route::get('/admins', 'AdminController@admins')->name('admin.admins');
-    Route::get('/sessions', 'AdminController@sessions')->name('admin.sessions');
+    Route::get('/sessions/new', 'AdminController@sessions')->name('admin.sessions');
+    Route::get('/sessions/completed', 'AdminController@sessions1')->name('admin.sessions1');
     Route::get('/sessions/{id}', 'AdminController@viewSession')->name('admin.session.view');
     Route::get('/ads', 'AdminController@ads')->name('admin.ads');
     Route::get('/ads/{id}', 'AdminController@viewAd')->name('admin.ad.view');
