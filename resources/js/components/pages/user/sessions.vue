@@ -679,11 +679,12 @@ export default {
     },
     computed: {
         requestedSessions(){
+            
             var session;
             var requests = [];
             for (var i = 0; i < this.sessions.length; i++) {
                 session = this.sessions[i];
-                if (session.cancel_request==''&& session.payment_status != 1 && session.accept != '1' && session.class_status == 0) {
+                if (session.cancel_request == null && session.payment_status != 1 && session.accept != '1' && session.class_status == 0) {
                     requests.push(session);
                 }
             }
@@ -694,8 +695,9 @@ export default {
             var requests = [];
             for (var i = 0; i < this.sessions.length; i++) {
                 session = this.sessions[i];
-                if (session.cancel_request==''&& session.payment_status != 1 && session.accept == '1' && session.class_status == 0) {
-                    requests.push(session);
+                console.log((session.class_status))
+                if (session.cancel_request== null && session.payment_status != 1 && session.accept == '1' && session.class_status == 0) { 
+                        requests.push(session);
                 }
             }
             return requests;
@@ -706,7 +708,8 @@ export default {
             var requests = [];
             for (var i = 0; i < this.sessions.length; i++) {
                 session = this.sessions[i];
-                if (session.cancel_request==''&& session.payment_status == 1 && session.accept == '1' && session.class_status == 0) {
+                if (session.cancel_request== null && session.payment_status == 1 && session.accept == '1' && session.class_status == 0) 
+                {
                     requests.push(session);
                 }
             }
@@ -718,7 +721,7 @@ export default {
             var requests = [];
             for (var i = 0; i < this.sessions.length; i++) {
                 session = this.sessions[i];
-                if (session.cancel_request==''&& session.payment_status == 1 && session.accept == '1' && session.class_status == 1) {
+                if (session.cancel_request== null && session.payment_status == 1 && session.accept == '1' && session.class_status == 1) {
                     requests.push(session);
 
                 }
