@@ -139,6 +139,7 @@
                                                                         data-frame_999="o:0;tp:600;st:w;sR:4230;"
                                                                         style="z-index:7;font-family:Open Sans;"
                                                                     ><div class="sc_item_button sc_button_wrap"><a href="https://tutors-hub.com/student-registration" id="sc_button_212681052" class="sc_button sc_button_default sc_button_size_large sc_button_icon_left"><span class="sc_button_text"><span class="sc_button_title">FIND A TUTOR NOW
+</span></span><!-- /.sc_button_text --></a><a href="https://tutors-hub.com/teacher-registration" id="sc_button_212681052" class="sc_button sc_button_default sc_button_size_large sc_button_icon_left"><span class="sc_button_text"><span class="sc_button_title">BECOME A TUTOR NOW
 </span></span><!-- /.sc_button_text --></a><!-- /.sc_button --></div><!-- /.sc_item_button -->
                                                                     </rs-layer><!--
 -->						</rs-slide>
@@ -195,6 +196,7 @@
                                                                         data-frame_999="o:0;tp:600;st:w;sR:4230;"
                                                                         style="z-index:7;font-family:Open Sans;"
                                                                     ><div class="sc_item_button sc_button_wrap"><a href="/tutors/" id="sc_button_398409179" class="sc_button sc_button_default sc_button_size_large sc_button_icon_left"><span class="sc_button_text"><span class="sc_button_title">FIND A TUTOR NOW
+</span></span><!-- /.sc_button_text --></a><a href="https://tutors-hub.com/teacher-registration" id="sc_button_212681052" class="sc_button sc_button_default sc_button_size_large sc_button_icon_left"><span class="sc_button_text"><span class="sc_button_title">BECOME A TUTOR NOW
 </span></span><!-- /.sc_button_text --></a><!-- /.sc_button --></div><!-- /.sc_item_button -->
                                                                     </rs-layer><!--
 -->						</rs-slide>
@@ -251,6 +253,7 @@
                             data-frame_999="o:0;tp:600;st:w;sR:4230;"
                             style="z-index:7;font-family:Open Sans;"
                         ><div class="sc_item_button sc_button_wrap"><a href="https://tutors-hub.com/student-registration" id="sc_button_212681052" class="sc_button sc_button_default sc_button_size_large sc_button_icon_left"><span class="sc_button_text"><span class="sc_button_title">FIND A TUTOR NOW
+</span></span><!-- /.sc_button_text --></a><a href="https://tutors-hub.com/teacher-registration" id="sc_button_212681052" class="sc_button sc_button_default sc_button_size_large sc_button_icon_left"><span class="sc_button_text"><span class="sc_button_title">BECOME A TUTOR NOW
 </span></span><!-- /.sc_button_text --></a><!-- /.sc_button --></div><!-- /.sc_item_button -->
                         </rs-layer><!--
 -->						</rs-slide>

@@ -57,8 +57,8 @@
                         <span>Location</span>
                     </div>
                     <div class="input">
-                        <label for="">Radius</label>
-                        <input type="range" min="1" max="1000" name="radius" value="1000" id="">
+                        <label for="">Radius - <span id="r_v">1000</span></label>
+                        <input type="range" min="1" max="1000" id="radius" name="radius" value="1000" @change="updateRadiusValue()">
 
                         <!-- <input type="number" v-model="radius" id=""> -->
                     </div>
@@ -171,6 +171,7 @@
                 cities: [],
                 neighborhoods: [],
                 country: '',
+                availability: 'Both',
                 state: '',
                 city: '',
                 neighborhood: '',
@@ -190,6 +191,7 @@
         },
         computed:
         {
+            
             centerLoc(){
                 if(this.country)
                 {
@@ -216,6 +218,9 @@
             }
         },
         methods: {
+            updateRadiusValue(){
+                $("#r_v").html($("#radius").val());
+            },
             myChangeEvent(val){
             console.log(val);
             },
@@ -294,8 +299,9 @@
                 })
             },
             getTutors()
-            {
-                this.radius = $("input[name=radius]").val();
+            { 
+                this.radius = $("input[name=radius]").val() == undefined ? '1000' : $("input[name=radius]").val();
+                ;
                 axios.post(this.url +'/search/tutors', {
                     'radius': this.radius,
                     'level': this.level,

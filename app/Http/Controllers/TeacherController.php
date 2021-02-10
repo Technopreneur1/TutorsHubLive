@@ -108,6 +108,7 @@ class TeacherController extends Controller
             $av = "AND users.availability='". $request->availability."'";
         }
 //        dd($av);
+// dd($request);
         if($request->level && $request->subject)
         {
             $string = "SELECT users.id, ( 6371 * acos( cos( radians(?) ) *
@@ -134,10 +135,10 @@ class TeacherController extends Controller
             $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) *
                 cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) )
                 AS distance FROM users WHERE type= 'teacher' ".$av." HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
-            $args = [$lat,$lng, $lat, $request->radius];
+            $args = [$lat, $lng, $lat, $request->radius];
 
         }
-//        dd($string);
+    //    dd($string);
 
 //        if($request->radius)
 //        {

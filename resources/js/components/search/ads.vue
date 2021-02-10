@@ -55,8 +55,8 @@
                     <span>Location</span>
                 </div>
                 <div class="input">
-                    <label for="">Radius</label>
-                    <input type="range" min="1" max="1000" name="radius" value="1000" id="">
+                    <label for="">Radius - <span id="r_v">1000</span></label>
+                    <input type="range" min="1" max="1000" name="radius" value="1000" id="radius" @change="updateRadiusValue()">
                     <!-- <input type="number" v-model="radius" id=""> -->
                 </div>
                  <!-- <div class="input">
@@ -97,7 +97,7 @@
 
         <div v-if="viewmode == 'list' || viewmode == 'all'"  class="full-container">
             <div v-if="ads.length" class="ad-results">
-                <ad v-for="ad in ads" @startConversation="startConversation(ad.id)" :url="url" :ad="ad" :key="ad.id"></ad>
+                <ad v-for="ad in ads" @startConversation="startConversation(ad.id)" :url="url" :ad="ad" :key="ad.id" :authid="authid"></ad>
             </div>
             <div v-else class="nothing">
                 <p>No Ad Found</p>
@@ -177,10 +177,11 @@ import Select2 from 'v-select2-component';
         },
         components: {Select2},
         data()
-        {
+        {  
            return{
                chatWith: null,
                viewmode: 'all',
+                authid: this.authuser.id,
                 ads: [],
                 success: '',
                 levels: [],
@@ -192,6 +193,7 @@ import Select2 from 'v-select2-component';
                 country: '',
                 state: '',
                 city: '',
+                availability:'Both',
                 neighborhood: '',
                 showSearchForm: true,
                 viewAd: null,
@@ -234,6 +236,9 @@ import Select2 from 'v-select2-component';
             }
         },
         methods: {
+            updateRadiusValue(){
+                $("#r_v").html($("#radius").val());
+            },
             contact(id)
             {
                     axios.post(this.url +'/check/hasConversation', {
@@ -262,13 +267,16 @@ import Select2 from 'v-select2-component';
             {
                 this.markers = []
                 this.ads.forEach(ad => {
-                    let ulat = ad.latitude
-                    let ulng =  ad.longitude
-                    if(ulat && ulng)
-                    {
-                        this.markers.push({ position: { lat: ulat, lng: ulng }, ad: ad })
-                        // this.center = { lat: ulat, lng: ulng }
+                    if(ad.ad_detail) {
+                        let ulat = ad.latitude
+                        let ulng =  ad.longitude
+                        if(ulat && ulng)
+                        {
+                            this.markers.push({ position: { lat: ulat, lng: ulng }, ad: ad })
+                            // this.center = { lat: ulat, lng: ulng }
+                        }
                     }
+                    
                 })
             },
             startConversation(id)
@@ -443,6 +451,7 @@ import Select2 from 'v-select2-component';
         },
         mounted()
         {
+            // this.authid = this.authuser.id,
             // this.getCountries()
             // this.getStates()
             // this.getCities()

@@ -36,23 +36,23 @@ class AdminController extends Controller
     }
     public function ads()
     {
-        if(request()->country)
-        {
-            $ads = Ad::where('country_id', request()->country)->get();
-        }
-        elseif(request()->state)
-        {
-            $ads = Ad::where('state_id', request()->state)->get();
-        }
-        elseif(request()->city)
-        {
-            $ads = Ad::where('city_id', request()->city)->get();
-        }
-        elseif(request()->neighborhood)
-        {
-            $ads = Ad::where('neighborhood_id', request()->city)->get();
-        }
-        else
+        // if(request()->country)
+        // {
+        //     $ads = Ad::where('country_id', request()->country)->get();
+        // }
+        // elseif(request()->state)
+        // {
+        //     $ads = Ad::where('state_id', request()->state)->get();
+        // }
+        // elseif(request()->city)
+        // {
+        //     $ads = Ad::where('city_id', request()->city)->get();
+        // }
+        // elseif(request()->neighborhood)
+        // {
+        //     $ads = Ad::where('neighborhood_id', request()->city)->get();
+        // }
+        // else
         {
             $ads = Ad::orderBy('created_at', 'desc')->get();
         }

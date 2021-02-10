@@ -66,12 +66,12 @@
                             </a>
                         </div>
                     @endif
-                    <div class="item">
+                    <!-- <div class="item">
                         <a href="{{route('favorites')}}">
                             <i class="fas fa-star"></i>
                             <span>Saved Profiles</span>
                         </a>
-                    </div>
+                    </div> -->
                     <div class="item">
                         <a href="{{route('sessions')}}">
                             <i class="fas fa-calendar-alt"></i>

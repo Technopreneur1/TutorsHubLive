@@ -3,7 +3,7 @@
         <div v-if="loading" class="loader">
             <i class="fas fa-spinner fa-spin"></i>
         </div>
-        <div class="ad">
+        <div class="ad" v-if="ad.ad_detail">
             <div class="title">{{ad.title}}</div>
             <div class="student">
                 <a v-if="ad.user_id != undefined" :href="url + '/user/' + ad.user_id" class="avatar">
@@ -26,9 +26,8 @@
                         <button  @click="deleteMyAd(ad.id)" class="btn btn-gradient">Delete</button>
                     </div>
                     <div v-else class="contactbtn">
-
                         <div v-if="ad.type == 'teacher'" @click="addToFav" class="btn-t" ><i class="far fa-heart" :class="{fas: is_fav}"></i></div>
-                        <div v-if="ad.user.can_contact" @click="contact(ad.user_id)" class="btn-t"><i class="fas fa-envelope"></i></div>
+                        <div v-if="ad.can_contact" @click="contact(ad.user_id)" class="btn-t"><i class="fas fa-envelope"></i></div>
 <!--                        <div  @click="addToFav" class="btn-t" ><i class="far fa-heart" :class="{fas: is_fav}"></i></div>-->
 <!--                        <div v-if="ad.can_contact" @click="contact(ad.id)" class="btn-t"><i class="fas fa-envelope"></i></div>-->
                     </div>
@@ -49,6 +48,7 @@
         props: ['url', 'ad', 'authid'],
         data()
         {
+            // console.log('Auth ID:' + authid)
            return{
                 is_fav: false,
                 loading: false,

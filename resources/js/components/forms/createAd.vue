@@ -65,6 +65,7 @@
                         <div v-if="!editingLocation" class="locations">
                             <span class="current">
                                 {{user.address}}
+                                <input type="hidden" name="address_" :value="user.address" />
                             </span>
                             <span @click="editingLocation = true" class="change">Change <i class="fas fa-cog"></i></span>
                         </div>
@@ -107,7 +108,7 @@
 
 <script>
     export default {
-        props: ['url', 'city',],
+        props: ['url', 'city'],
         data(){
             return {
                 error: '',
@@ -122,7 +123,7 @@
                 cities: [],
                 lat: 40.7831,
                 lng: -73.9712,
-                address: '',
+                address: $("input[name=address_]").val(),
                 neighborhoods: [],
                 ad: {
                     title: '',
@@ -148,14 +149,15 @@
                         {
                             if(this.ad.discipline)
                             {
-                                if(this.ad.city && this.ad.state && this.ad.country)
+                                if(this.address)
                                 {
                                     return true
                                 }else
                                 {
-                                    this.error = "Country State and City are required"
+                                    this.error = "Address is required"
                                     return false
                                 }
+                                
 
                             }else
                             {
