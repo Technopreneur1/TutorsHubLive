@@ -88,6 +88,15 @@
                                 <option v-for="discipline in disciplines" :value="discipline.id" :key="discipline.id">{{discipline.name}}</option>
                             </select>
                         </div>
+                        <div class="input">
+                            <label for="">Availability</label>
+                            <select v-model="ad.availability" name="availability" id="availability">
+                                <option value="">-- Select Availability --</option>
+                                <option value="Online">Online</option>
+                                <option value="In-Person">In-Person</option>
+                                <option value="Both" selected>Both</option>
+                            </select>
+                        </div>
                         
                         <div class="input">
                             <label for="">Description</label>
@@ -134,13 +143,14 @@
                     new_neighborhood: '',
                     city: '',
                     state: '',
-                    country: ''
+                    country: '',
+                    availability: '',
                 }
             }
         },
         methods: {
             isReady()
-            {
+            { 
                 if(this.ad.title.length > 4)
                 {
                     if(this.ad.description)
@@ -148,13 +158,14 @@
                         if(this.ad.level)
                         {
                             if(this.ad.discipline)
-                            {
-                                if(this.address)
+                            {   
+                                if(this.ad.availabilty != '')
                                 {
+                                    
                                     return true
                                 }else
                                 {
-                                    this.error = "Address is required"
+                                    this.error = "Availabilty is required"
                                     return false
                                 }
                                 
@@ -192,16 +203,17 @@
                 if(!this.isReady())
                 {
                     return false
-                }else
+                } else
                 {
                     this.posting = true
                     axios.post(this.url +'/post/ad', {
                         title: this.ad.title,
                         description: this.ad.description,
                         level: this.ad.level,
+                        availability: $("#availability").val(),
                         lat: this.lat,
                         lng: this.lng,
-                        address: this.address,
+                        address: this.address ? this.address : $("input[name=address_]").val(),
                         discipline: this.ad.discipline,
                         neighborhood: this.ad.neighborhood,
                         country: this.ad.country,
@@ -259,6 +271,9 @@
                         console.log(error);
                     })
             },
+            // setAvailability (){
+            //     alert(this.ad.availability)
+            // },
             getStates()
             {
                 console.log("Get States")

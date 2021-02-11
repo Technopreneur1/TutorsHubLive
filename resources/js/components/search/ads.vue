@@ -43,7 +43,7 @@
                     </select>
                 </div>
                 <div class="input">
-                    <label for="">In Person/Online</label>
+                    <label for="">Availability</label>
                     <select v-model="availability" name="availability" id="">
                         <option value="">-- Availability --</option>
                         <option value="Online">Online</option>

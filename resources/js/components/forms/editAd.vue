@@ -65,6 +65,7 @@
                         <div v-if="!editingLocation" class="locations">
                             <span class="current">
                                 {{thead.address}}
+                                <input type="hidden" name="address_" :value="thead.address" />
                                 </span>
                             <span @click="editingLocation = true" class="change">Change <i class="fas fa-cog"></i></span>
                         </div>
@@ -87,7 +88,15 @@
                                 <option v-for="discipline in disciplines" :value="discipline.id" :key="discipline.id">{{discipline.name}}</option>
                             </select>
                         </div>
-                        
+                        <div class="input">
+                            <label for="">Availability</label>
+                            <select v-model="ad.availability" name="availability" id="availability">
+                                <option value="">-- Select Availability --</option>
+                                <option value="Online">Online</option>
+                                <option value="In-Person">In-Person</option>
+                                <option value="Both" selected>Both</option>
+                            </select>
+                        </div>
                         <div class="input">
                             <label for="">Description</label>
                             <textarea class="form-control" v-model="ad.description" rows="4" placeholder="Describe your requirements (optional)"></textarea>
@@ -145,6 +154,7 @@
                 states: [],
                 cities: [],
                 neighborhoods: [],
+                address: $("input[name=address_]").val(),
                 lat: 40.7831,
                 lng: -73.9712,
                 address: '',
@@ -157,7 +167,8 @@
                     new_neighborhood: '',
                     city: this.thead.city_id,
                     state: this.thead.state_id,
-                    country: this.thead.country_id
+                    country: this.thead.country_id,
+                    availability: '',
                 }
             }
         },
@@ -172,12 +183,19 @@
                         {
                             if(this.ad.discipline)
                             {
-                                if(this.ad.city && this.ad.state && this.ad.country)
+                                if(this.address)
                                 {
-                                    return true
+                                    if(this.ad.availabilty)
+                                    {
+                                        return true
+                                    }else
+                                    {
+                                        this.error = "Availabilty is required"
+                                        return false
+                                    }
                                 }else
                                 {
-                                    this.error = "Country State and City are required"
+                                    this.error = "Address is required"
                                     return false
                                 }
 
@@ -225,6 +243,7 @@
                         discipline: this.ad.discipline,
                         neighborhood: this.ad.neighborhood,
                         country: this.ad.country,
+                        availability: $("#availability").val(),
                         city: this.ad.city,
                         lat: this.lat,
                         lng: this.lng,

@@ -27,10 +27,10 @@ class AdController extends Controller
     public function getMyAds()
     {
         $ads = auth()->user()->ads()->paginate(30);
-//        foreach ($ads as $ad) {
-//            dd($ad->user);
-//        }
-////        dd($ads);
+    //    foreach ($ads as $ad) {
+    //        dd($ad);
+    //    }
+    //    dd($ads);
         return response()->json(['ads' => $ads]);
     }
     //
@@ -96,6 +96,7 @@ class AdController extends Controller
             'description' => $request['description'],
             'country_id' => $request['country'],
             'state_id' => $request['state'],
+            'availability' => $request['availability'],
             'city_id' => $request['city'],
             'neighborhood_id' => $neighborhood,
             'discipline_id' => $request['discipline'],
@@ -106,6 +107,7 @@ class AdController extends Controller
     }
     public function post(Request $request)
     {
+        // dd($request);
         $request->validate(['title' => 'required', 'description' => 'required', 'discipline' => 'required', 'level' => 'required']);
         if($request->neighborhood < 1)
         {
@@ -162,6 +164,8 @@ class AdController extends Controller
             'address' => $request['address'],
             'discipline_id' => $request['discipline'],
             'level_id' => $request['level'],
+            'availability' => $request['availability'],
+            
         ]);
 
         return response()->json(['ad' => $ad]);
@@ -172,11 +176,8 @@ class AdController extends Controller
 
         $lat = auth()->user()->latitude;
         $lng = auth()->user()->longitude;
-        if ($request->availability && $request->availability!='Both') {
-            $av = "AND users.availability='". $request->availability."'";
-        } else {
-            $av = "";
-        }
+        $av = "";
+
         if($request->level && $request->subject)
         {
             // return response()->json(['requests' => "os"]);
@@ -214,12 +215,32 @@ class AdController extends Controller
         $ids = Arr::pluck($ids, "id");
         // array_push($ids, 11);
 
-        $ads = User::with(['city', 'state', 'neighborhood', 'country', 'profile','ad_detail'])
-                    ->where('is_hidden', 0)
-                    ->where('is_banned', 0)
-                    ->where('type', 'student')
-                    ->whereIn('id', $ids)
-                    ->paginate(30);
+        if ($request->availability && $request->availability!='Both') {
+            $ads = User::with(['city', 'state', 'neighborhood', 'country', 'profile','ad_detail'])
+            ->select('users.*','ads.*')
+            ->join('ads', 'users.id', '=', 'ads.user_id')
+            ->where('ads.availability', $request->availability)
+            ->where('is_hidden', 0)
+            ->where('is_banned', 0)
+            ->where('type', 'student')
+            ->whereIn('users.id', $ids)
+            ->paginate(30);
+        } else {
+            $ads = User::with(['city', 'state', 'neighborhood', 'country', 'profile','ad_detail'])
+            ->where('is_hidden', 0)
+            ->where('is_banned', 0)
+            ->where('type', 'student')
+            ->whereIn('users.id', $ids)
+            ->paginate(30);
+        }
+
+        // $adsArray = [];
+        
+        // foreach($ads as $ad) {
+        //     if($ad->ad_detail != null) {
+        //         array_push($adsArray,$ad);
+        //     }
+        // }
 
         return response()->json(['ads' => $ads]);
     }
