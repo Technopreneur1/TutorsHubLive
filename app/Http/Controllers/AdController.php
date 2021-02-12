@@ -185,44 +185,45 @@ class AdController extends Controller
 
         $lat = auth()->user()->latitude;
         $lng = auth()->user()->longitude;
-        $av = "";
 
-        if($request->level && $request->subject)
+        if($request->level)
         {
-            // return response()->json(['requests' => "os"]);
-            $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) *
-                cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) )
-                AS distance FROM users JOIN students ON users.id=students.user_id WHERE level_id = ? And is_banned = 0 AND type= 'student' AND discipline_id = ? HAVING  ".$av."distance < ? ORDER BY distance LIMIT 0 , 20;";
-            $args = [$lat,$lng, $lat, $request->level, $request->subject, $request->radius];
-        }
-        elseif($request->level)
-        {
-            // return response()->json(['requests' => "os"]);
-            $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) *
-                cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) )
-                AS distance FROM users WHERE type = ?  And is_banned = 0 AND type= 'student' ".$av." HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
+            // echo 'level'; exit;
+            $string = "SELECT users.id, ( 6371 * acos( cos( radians(?) ) *
+                cos( radians( ads.latitude ) ) * cos( radians( ads.longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( ads.latitude ) ) ) )
+                AS distance FROM users INNER JOIN ads ON users.id=ads.user_id WHERE level_id = ? HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
             $args = [$lat,$lng, $lat, $request->level, $request->radius];
         }
-        elseif($request->subject)
+        if($request->subject)
         {
-            // return response()->json(['requests' => "os"]);
-            $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) *
-                cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) )
-                AS distance FROM users WHERE sector_id = ? And is_banned = 0 AND type= 'student' ".$av." HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
+            // echo 'subject'; exit;
+            $string = "SELECT users.id, ( 6371 * acos( cos( radians(?) ) *
+                cos( radians( ads.latitude ) ) * cos( radians( ads.longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( ads.latitude ) ) ) )
+                AS distance FROM users INNER JOIN ads ON users.id=ads.user_id WHERE discipline_id = ? HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
             $args = [$lat,$lng, $lat, $request->subject, $request->radius];
         }
-        else{
-            $string = "SELECT id, ( 6371 * acos( cos( radians(?) ) *
-                cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) )
-                AS distance FROM users WHERE is_banned = 0 AND type= 'student' ".$av." HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
+        if($request->level && $request->subject)
+        {
+            // echo 'level & subject'; exit;
+            $string = "SELECT users.id, ( 6371 * acos( cos( radians(?) ) *
+                cos( radians( ads.latitude ) ) * cos( radians( ads.longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( ads.latitude ) ) ) )
+                AS distance FROM users INNER JOIN ads ON users.id=ads.user_id WHERE level_id = ? AND discipline_id = ? HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
+            $args = [$lat,$lng, $lat, $request->level, $request->subject, $request->radius];
+        }
+
+        if($request->level == null && $request->subject == null)
+        {
+            $string = "SELECT users.id, ( 6371 * acos( cos( radians(?) ) *
+                cos( radians( ads.latitude ) ) * cos( radians( ads.longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( ads.latitude ) ) ) )
+                AS distance FROM users INNER JOIN ads ON users.id=ads.user_id HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
             $args = [$lat,$lng, $lat, $request->radius];
 
         }
-//        dd($string);
+    //    dd($string);
 
         $ids = DB::select($string, $args);
         $ids = Arr::pluck($ids, "id");
-        // array_push($ids, 11);
+        // dd($ids);
 
         if ($request->availability && $request->availability!='Both') {
             $ads = User::with(['city', 'state', 'neighborhood', 'country', 'profile','ad_detail'])
@@ -246,7 +247,7 @@ class AdController extends Controller
         // $adsArray = [];
         
         // foreach($ads as $ad) {
-        //     if($ad->ad_detail != null) {
+        //     if($ad->ad_detail) {
         //         array_push($adsArray,$ad);
         //     }
         // }
