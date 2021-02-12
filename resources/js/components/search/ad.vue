@@ -1,5 +1,5 @@
 <template>
-    <div class="ad-result">
+    <div class="ad-result" v-if="ad.ad_detail">
         <div v-if="loading" class="loader">
             <i class="fas fa-spinner fa-spin"></i>
         </div>

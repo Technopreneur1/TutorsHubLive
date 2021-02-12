@@ -459,4 +459,8 @@ class UserController extends Controller
         return view('pages.search.teacherregistration',compact('timezones'));
 
     }
+    function deleteResume() {
+        
+    }
+
 }

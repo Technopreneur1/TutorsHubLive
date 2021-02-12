@@ -78,6 +78,7 @@ Vue.component('tutor-view', require('./components/search/tutorView.vue').default
 Vue.component('ad-view', require('./components/search/adView.vue').default);
 Vue.component('ads', require('./components/search/ads.vue').default);
 Vue.component('ad', require('./components/search/ad.vue').default);
+Vue.component('ad-student', require('./components/search/ad-student.vue').default);
 Vue.component('my-ads', require('./components/ad/my.vue').default);
 Vue.component('change-password', require('./components/forms/changePassword.vue').default);
 Vue.component('start-chat', require('./components/forms/startChat.vue').default);

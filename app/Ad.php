@@ -38,4 +38,7 @@ class Ad extends Model
     {
         return $this->belongsTo('App\Discipline');
     }
+    public function ad_detail() {
+      return $this->belongsTo('App\Discipline');
+    }
 }

@@ -31,6 +31,15 @@ class AdController extends Controller
     //        dd($ad);
     //    }
     //    dd($ads);
+
+        // $user_id = auth()->user()->id;
+        // $ads = User::with(['ad_detail'])
+        //     ->where('is_hidden', 0)
+        //     ->where('is_banned', 0)
+        //     ->where('type', 'student')
+        //     ->where('users.id', $user_id)
+        //     ->paginate(30);
+
         return response()->json(['ads' => $ads]);
     }
     //

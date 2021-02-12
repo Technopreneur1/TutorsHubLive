@@ -138,8 +138,8 @@
                                                                         data-frame_1="tp:600;e:Power4.easeOut;st:3770;sp:1000;sR:3770;"
                                                                         data-frame_999="o:0;tp:600;st:w;sR:4230;"
                                                                         style="z-index:7;font-family:Open Sans;"
-                                                                    ><div class="sc_item_button sc_button_wrap"><a href="https://tutors-hub.com/student-registration" id="sc_button_212681052" class="sc_button sc_button_default sc_button_size_large sc_button_icon_left"><span class="sc_button_text"><span class="sc_button_title">FIND A TUTOR NOW
-</span></span><!-- /.sc_button_text --></a><a href="https://tutors-hub.com/teacher-registration" id="sc_button_212681052" class="sc_button sc_button_default sc_button_size_large sc_button_icon_left"><span class="sc_button_text"><span class="sc_button_title">BECOME A TUTOR NOW
+                                                                    ><div class="sc_item_button sc_button_wrap"><a href="https://tutors-hub.com/student-registration" id="sc_button_212681052" class="sc_button sc_button_default sc_button_icon_left"><span class="sc_button_text"><span class="sc_button_title">FIND A TUTOR NOW
+</span></span><!-- /.sc_button_text --></a><a href="https://tutors-hub.com/teacher-registration" id="sc_button_212681052" class="sc_button sc_button_default sc_button_icon_left"><span class="sc_button_text"><span class="sc_button_title">BECOME A TUTOR NOW
 </span></span><!-- /.sc_button_text --></a><!-- /.sc_button --></div><!-- /.sc_item_button -->
                                                                     </rs-layer><!--
 -->						</rs-slide>
@@ -195,8 +195,8 @@
                                                                         data-frame_1="tp:600;e:Power4.easeOut;st:3770;sp:1000;sR:3770;"
                                                                         data-frame_999="o:0;tp:600;st:w;sR:4230;"
                                                                         style="z-index:7;font-family:Open Sans;"
-                                                                    ><div class="sc_item_button sc_button_wrap"><a href="/tutors/" id="sc_button_398409179" class="sc_button sc_button_default sc_button_size_large sc_button_icon_left"><span class="sc_button_text"><span class="sc_button_title">FIND A TUTOR NOW
-</span></span><!-- /.sc_button_text --></a><a href="https://tutors-hub.com/teacher-registration" id="sc_button_212681052" class="sc_button sc_button_default sc_button_size_large sc_button_icon_left"><span class="sc_button_text"><span class="sc_button_title">BECOME A TUTOR NOW
+                                                                    ><div class="sc_item_button sc_button_wrap"><a href="/tutors/" id="sc_button_398409179" class="sc_button sc_button_default sc_button_icon_left"><span class="sc_button_text"><span class="sc_button_title">FIND A TUTOR NOW
+</span></span><!-- /.sc_button_text --></a><a href="https://tutors-hub.com/teacher-registration" id="sc_button_212681052" class="sc_button sc_button_default sc_button_icon_left"><span class="sc_button_text"><span class="sc_button_title">BECOME A TUTOR NOW
 </span></span><!-- /.sc_button_text --></a><!-- /.sc_button --></div><!-- /.sc_item_button -->
                                                                     </rs-layer><!--
 -->						</rs-slide>
@@ -252,8 +252,8 @@
                             data-frame_1="tp:600;e:Power4.easeOut;st:3770;sp:1000;sR:3770;"
                             data-frame_999="o:0;tp:600;st:w;sR:4230;"
                             style="z-index:7;font-family:Open Sans;"
-                        ><div class="sc_item_button sc_button_wrap"><a href="https://tutors-hub.com/student-registration" id="sc_button_212681052" class="sc_button sc_button_default sc_button_size_large sc_button_icon_left"><span class="sc_button_text"><span class="sc_button_title">FIND A TUTOR NOW
-</span></span><!-- /.sc_button_text --></a><a href="https://tutors-hub.com/teacher-registration" id="sc_button_212681052" class="sc_button sc_button_default sc_button_size_large sc_button_icon_left"><span class="sc_button_text"><span class="sc_button_title">BECOME A TUTOR NOW
+                        ><div class="sc_item_button sc_button_wrap"><a href="https://tutors-hub.com/student-registration" id="sc_button_212681052" class="sc_button sc_button_default sc_button_icon_left"><span class="sc_button_text"><span class="sc_button_title">FIND A TUTOR NOW
+</span></span><!-- /.sc_button_text --></a><a href="https://tutors-hub.com/teacher-registration" id="sc_button_212681052" class="sc_button sc_button_default sc_button_icon_left"><span class="sc_button_text"><span class="sc_button_title">BECOME A TUTOR NOW
 </span></span><!-- /.sc_button_text --></a><!-- /.sc_button --></div><!-- /.sc_item_button -->
                         </rs-layer><!--
 -->						</rs-slide>
@@ -379,7 +379,7 @@
                                                     </h2></div><!-- /.sc_title --><div  id="sc_promo_1988157650"
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               class="sc_promo sc_promo_default sc_promo_size_normal sc_promo_no_paddings sc_promo_image_position_right"><div class="sc_promo_image" style="background-image:url(https://smarthead.ancorathemes.com/wp-content/uploads/2016/12/photo11.jpg);width:51%;right: 0;"></div><a href="https://www.youtube.com/watch?v=-vlI4aNhmoA&ab_channel=Tutors-Hub" class="sc_promo_link_on_image" target="_blank">View Our Video Presentation<span class="icon-play"></span>
                                                     </a><div class="sc_promo_text" style="width: 49%;float: left;">
-                                                        <div class="sc_promo_text_inner" style=""><h6 class="sc_item_subtitle sc_promo_subtitle sc_align_left sc_item_title_style_default">Most Popular</h6><h3 class="sc_item_title sc_promo_title sc_align_left sc_item_title_style_default">Trending Subjects</h3><div class="sc_promo_content sc_item_content"><div  class="vc_wp_custommenu wpb_content_element columns-2"><div class="widget widget_nav_menu"><div class="menu-subjects-container"><ul id="menu-subjects" class="menu"><li id="menu-item-174" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-174"><a href="/student-registration/">Mathematics</a></li>
+                                                        <div class="sc_promo_text_inner" style=""><h6 class="sc_item_subtitle sc_promo_subtitle sc_align_left sc_item_title_style_default">Most Popular</h6><h3 class="sc_item_title sc_promo_title sc_align_left sc_item_title_style_default">Trending Subjects</h3><div class="sc_promo_content sc_item_content"><div  class="vc_wp_custommenu wpb_content_element columns-2"><div class="widget widget_nav_menu"><div class="menu-subjects-container"><ul id="menu-subjects" class="menu"><li id="menu-item-174" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-174">Mathematics</li>
                                                                                 <?php $count = 1; ?>
                                                                                 @foreach ($subjects as $records)
                                                                                     <?php if($count == 14) break; ?>

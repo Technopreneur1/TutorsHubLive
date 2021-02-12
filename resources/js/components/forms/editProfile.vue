@@ -94,7 +94,7 @@
                 </div>
             </div>
 
-                <div class="field" v-if="!user.currency && user.type == 'teacher'">
+                <div class="field" v-if="user.currency == null && user.type == 'teacher'">
                 <div class="input">
                     <label for="">Currency</label>
                     <select v-model="user.currency" id="">
@@ -190,7 +190,7 @@
                     gender: this.user.gender,
                     availability: this.user.availability,
                     gender_preference: this.user.profile.gender_preference,
-                    currency: this.user.profile.currency,
+                    currency: this.user.currency,
                     can_contact: this.user.can_contact,
                     is_hidden: this.user.is_hidden,
                     paypal: this.user.paypal,

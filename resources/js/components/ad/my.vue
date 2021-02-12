@@ -4,7 +4,7 @@
         <div v-else class="else">
             <div class="ttl">My <span>Ads</span></div>
             <div v-if="ads.length" class="ad-results">
-                <ad v-for="ad in ads"  @editAd="editAd = ad" :url="url" :ad="ad" :authid="authid" :key="ad.id"></ad>
+                <ad-student v-for="ad in ads"  @editAd="editAd = ad" :url="url" :ad="ad" :authid="authid" :key="ad.id"></ad-student>
             </div>
             <div v-else class="nothing">
                 <p>You have no active ad</p>

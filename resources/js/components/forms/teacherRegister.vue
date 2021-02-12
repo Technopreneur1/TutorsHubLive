@@ -33,6 +33,13 @@
                         <option value="Prefer Not To Say">Prefer Not To Say</option>
                     </select>
                 </div>
+                <div class="input">
+                    <label for="">Currency </label>
+                    <select class="form-control" v-model="teacher.currency" id="">
+                        <option value="USD">USD</option>
+                        <option value="CAD">CAD</option>
+                    </select>
+                </div>
                 <div class=input>
                     <label class="">Timezone:</label>
                     <select v-model="teacher.timezone"   >
@@ -242,6 +249,7 @@
                     phone: this.teacher.phone,
                     country: this.teacher.country,
                     gender: this.teacher.gender,
+                    currency: this.teacher.currency,
                     state: '333',
                     timezone: this.teacher.timezone,
                     lat: this.lat,
