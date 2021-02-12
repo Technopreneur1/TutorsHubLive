@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use auth;
 use App\User;
+use App\Teacher;
 use App\Plan;
 use App\Location;
 use App\Discipline;
@@ -402,10 +403,10 @@ class UserController extends Controller
 
         $data = $users->save();
         if (!empty($data)) {
-            return Redirect()->back()->with('message','Record has been updated successfully!');
+            return redirect()->back()->with('message','Record has been updated successfully!');
         }else
         {
-            return Redirect()->back()->with('message','Failed! Try Again');
+            return redirect()->back()->with('message','Failed! Try Again');
         }
 
     }
@@ -459,8 +460,26 @@ class UserController extends Controller
         return view('pages.search.teacherregistration',compact('timezones'));
 
     }
-    function deleteResume() {
-        
+    function deleteResume($user_id) {
+        Teacher::where('user_id', $user_id)
+            ->update(['resume' => null]);
+
+        session()->flash('message','Resume has been Deleted');
+        return back();
+    }
+    function deleteBackgroundCheck($user_id) {
+        Teacher::where('user_id', $user_id)
+            ->update(['background_check' => null]);
+
+        session()->flash('message','Background Check has been Deleted');
+        return back();
+    }
+    function deleteIdentity($user_id) {
+        Teacher::where('user_id', $user_id)
+            ->update(['identity' => null]);
+
+        session()->flash('message','Identity has been Deleted');
+        return back();
     }
 
 }

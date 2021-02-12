@@ -331,6 +331,11 @@ Route::prefix('adminpanel')->middleware(['admin'])->group(function () {
     Route::get('/', 'AdminController@adminpanel')->name('adminpanel');
     Route::get('/contact/{id}/{ticket}', 'AdminController@contact')->name('admin.contact');
 
+    Route::get('/user/deleteResume/{user_id}', 'UserController@deleteResume')->name('deleteResume');
+    Route::get('/user/deleteBackgroundCheck/{user_id}', 'UserController@deleteBackgroundCheck')->name('deleteBackgroundCheck');
+    Route::get('/user/deleteIdentity/{user_id}', 'UserController@deleteIdentity')->name('deleteIdentity');
+
+
     Route::get('/export/tutors', 'ExportController@tutors')->name('export.tutors');
     Route::get('/export/students', 'ExportController@students')->name('export.students');
     Route::get('/export/sessions', 'ExportController@sessions')->name('export.sessions');
