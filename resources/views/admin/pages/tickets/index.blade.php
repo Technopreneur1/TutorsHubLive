@@ -16,7 +16,7 @@
             <th>ID</th>
             <th>User </th>
             <th>Email</th>
-            <th>query</th>
+            <th>Query</th>
             <th>Posted</th>
             <th>Action</th>
             </tr>
@@ -64,17 +64,19 @@
 <script src="{{asset('admin/js/jquery.dataTables.min.js')}}" charset="utf-8"></script>
 <script src="{{asset('admin/js/dataTables.bootstrap.min.js')}}" charset="utf-8"></script>
 <script>
-  $(function () {
+ $(function () {
     $('table').DataTable({
       'paging'      : true,
       'lengthChange': false,
       'searching'   : true,
       'ordering'    : true,
       'info'        : true,
+      'select'      : true,
       'autoWidth'   : false
     });
   })
+ 
 
-</script>
+
 </script>
 @endsection

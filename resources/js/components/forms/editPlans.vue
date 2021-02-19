@@ -56,7 +56,7 @@
                     </div>
                     <div class="input">
                         <label for="">Hourly Rate - $$</label>
-                        <input type="number" v-model="editPlan.rate" placeholder="Rate">
+                        <input type="number" min="20" v-model="editPlan.rate" placeholder="Rate">
                     </div>
                     <div v-if="error" class="error">{{error}}</div>
                     <div class="text-right">

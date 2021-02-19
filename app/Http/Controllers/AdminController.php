@@ -66,7 +66,7 @@ class AdminController extends Controller
     }
     public function sessions()
     {
-        $sessions = Session::where('completed',0)->orderBy('created_at', 'desc')->get();
+        $sessions = Session::where('seen',0)->orderBy('created_at', 'desc')->get();
         return view('admin.pages.sessions.index', ['sessions' => $sessions]);
     }
     public function sessions1()

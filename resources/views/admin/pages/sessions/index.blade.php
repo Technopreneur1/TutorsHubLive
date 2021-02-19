@@ -8,7 +8,7 @@ Sessions
     </div>
     <div class="box">
         <div class="box-header">
-        <h3 class="box-title">All Sessions</h3>
+        <h3 class="box-title">New Sessions</h3>
         </div>
         <!-- /.box-header -->
         <div class="box-body">
@@ -29,8 +29,6 @@ Sessions
             <tbody>
             @foreach ($sessions as $session)
                 @continue(!$session->student->user)
-
-
                 <tr>
                 <td>{{$session->id}}</td>
                 <td><a href="{{route('admin.user', $session->student->user->id)}}">{{$session->student->user->name}}</a></td>
@@ -68,8 +66,9 @@ Sessions
       'paging'      : true,
       'lengthChange': false,
       'searching'   : true,
-      'ordering'    : false,
+      'ordering'    : true,
       'info'        : true,
+      'select'      : true,
       'autoWidth'   : false
     });
   })

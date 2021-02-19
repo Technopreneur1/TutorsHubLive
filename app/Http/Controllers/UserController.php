@@ -369,7 +369,7 @@ class UserController extends Controller
     function viewtutor(Request $request)
     {
 
-        $res = array('id' => $request->id, 'name' =>$request->name, 'subject' => $request->subject,'bio' => $request->bio,'rate' => $request->rate,'avatar' => $request->avatar,'created_at' => $request->created_at);
+        $res = array('availability' => $request->availability, 'id' => $request->id, 'name' =>$request->name, 'subject' => $request->subject,'bio' => $request->bio,'rate' => $request->rate,'avatar' => $request->avatar,'created_at' => $request->created_at);
 
         //dd($res);
         return view('pages.search.viewtutor')->with('data', $res);

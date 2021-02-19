@@ -8,7 +8,7 @@ Sessions
     </div>
     <div class="box">
         <div class="box-header">
-        <h3 class="box-title">All Sessions</h3>
+        <h3 class="box-title">Completed Sessions</h3>
         </div>
         <!-- /.box-header -->
         <div class="box-body">
@@ -68,17 +68,19 @@ Sessions
 <script src="{{asset('admin/js/jquery.dataTables.min.js')}}" charset="utf-8"></script>
 <script src="{{asset('admin/js/dataTables.bootstrap.min.js')}}" charset="utf-8"></script>
 <script>
+  
+
   $(function () {
     $('table').DataTable({
       'paging'      : true,
       'lengthChange': false,
       'searching'   : true,
-      'ordering'    : false,
+      'ordering'    : true,
       'info'        : true,
+      'select'      : true,
       'autoWidth'   : false
     });
   })
 
-</script>
 </script>
 @endsection
