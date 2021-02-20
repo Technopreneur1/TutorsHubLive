@@ -260,7 +260,7 @@
                         <div class="tp-single-wrap">
 
                             <div class="tp-featured">
-                                @if(isset($data->avatar))
+                                @if(isset($data['avatar']))
                                     <img width="300" height="300" src="https://tutors-hub.com/storage/images/{{$data['avatar']}}" class="attachment-tutor-single size-tutor-single wp-post-image" alt="Josh Summers" itemprop="image" />
                                         @else
                                     <img width="300" height="300" src="https://tutors-hub.com/wp-content/uploads/2016/11/tutor7-740x792.jpg" class="attachment-tutor-single size-tutor-single wp-post-image" alt="Josh Summers" itemprop="image" />
