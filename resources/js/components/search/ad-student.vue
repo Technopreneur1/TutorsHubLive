@@ -33,12 +33,15 @@
                     </div>
                 </div>
             </div>
-            <div class="meta" v-if="ad.ad_detail">
-                <span class="subject">{{ad.ad_detail? ad.ad_detail.discipline.name : ''}}</span>
-                <span class="level">{{ad.ad_detail? ad.ad_detail.level.name : ''}}</span>
+            <div class="meta">
+                <span class="subject">{{ad.discipline? ad.discipline.name : ''}}</span>
+                <span class="level">{{ad.level? ad.level.name : ''}}</span>
             </div>
             <div class="ad-info">
-                {{ ad.ad_detail ? ad.ad_detail.description : '' }}
+                Description: {{ ad.description ? ad.description : 'N/A' }}
+            </div>
+            <div class="ad-info">
+                Availability: {{ ad.availability ? ad.availability : 'N/A' }}
             </div>
         </div>
     </div>

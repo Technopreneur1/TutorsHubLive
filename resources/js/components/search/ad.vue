@@ -26,9 +26,9 @@
                         <button  @click="deleteMyAd(ad.id)" class="btn btn-gradient">Delete</button>
                     </div>
                     <div v-else class="contactbtn">
-                        <div v-if="ad.type == 'teacher'" @click="addToFav" class="btn-t" ><i class="far fa-heart" :class="{fas: is_fav}"></i></div>
+                        <div @click="addToFav" class="btn-t" ><i class="far fa-heart" :class="{fas: is_fav}"></i></div>
                         <div v-if="ad.can_contact" @click="contact(ad.user_id)" class="btn-t"><i class="fas fa-envelope"></i></div>
-<!--                        <div  @click="addToFav" class="btn-t" ><i class="far fa-heart" :class="{fas: is_fav}"></i></div>-->
+                       <!-- <div  @click="addToFavAd" class="btn-t" ><i class="far fa-heart" :class="{fas: is_fav}"></i></div> -->
 <!--                        <div v-if="ad.can_contact" @click="contact(ad.id)" class="btn-t"><i class="fas fa-envelope"></i></div>-->
                     </div>
                 </div>
@@ -38,7 +38,10 @@
                 <span class="level">{{ad.ad_detail? ad.ad_detail.level.name : ''}}</span>
             </div>
             <div class="ad-info">
-                {{ ad.ad_detail ? ad.ad_detail.description : '' }}
+                Description: {{ ad.ad_detail.description ? ad.ad_detail.description : 'N/A' }}
+            </div>
+            <div class="ad-info">
+                Availability: {{ ad.ad_detail.availability ? ad.ad_detail.availability : 'N/A' }}
             </div>
         </div>
     </div>
