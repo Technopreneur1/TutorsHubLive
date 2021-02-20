@@ -74,13 +74,12 @@ class PaymentController extends Controller
             }else{
                 $currency = "CAD";
             }
-            //dd($currency);
+            
             $paypal_conf = \Config::get('paypal');
             $this->_api_context = new ApiContext(new OAuthTokenCredential(
                     $paypal_conf['client_id'],
                     $paypal_conf['secret'])
             );
-
             $this->_api_context->setConfig($paypal_conf['settings']);
 
             $payouts = new Payout();
@@ -108,8 +107,9 @@ class PaymentController extends Controller
             try {
                 $output = $payouts->createSynchronous($this->_api_context);
             } catch (Exception $ex) {
-
-                printError("Created Single Synchronous Payout", "Payout", null, $request, $ex);
+                // dd($request);
+                dd($ex);
+                // print("Created Single Synchronous Payout", "Payout", null, $request, $ex);
                 exit(1);
             }
 
