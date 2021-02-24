@@ -69,7 +69,7 @@
             <div v-if="viewSession.payment_status != 1  && viewSession.accept == '1' && authuser.type == 'student'" class="rates" >
                 Please Pay to confirm this Session
             </div>
-            <div  v-if="viewSession.payment_status != 1  && viewSession.accept == '1' && authuser.type == 'student'" ref="paypal"></div>
+            <div  v-if="viewSession.payment_status != 1  && viewSession.accept == '1' && authuser.type == 'student'" ref="paypal">PayPal</div>
             <div v-if="viewSession.payment_status == 1 && viewSession.accept == '1' && viewSession.class_status == 1"  class="status">
                 <div id="record" ></div>
             </div>
