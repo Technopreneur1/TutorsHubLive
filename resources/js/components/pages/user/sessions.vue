@@ -64,8 +64,9 @@
             <button v-if="!viewSession.cancel_request && !viewSession.completed" @click="requestCancel" class="btn btn-danger" style="border-radius: 30px;     text-align: center;
     display: block;">Request To Cancel Session</button>
             <button v-if="viewSession.accept != '1' && !viewSession.completed && authuser.type != 'student'" @click="requestaccept" class="btn btn-success" style="border-radius: 30px">Accept Session Request</button>
-            <button v-if="viewSession.payment_status == '1' && viewSession.accept == '1' && viewSession.class_status == '0' && !viewSession.cancel_request && authuser.type != 'student'" @click="startsession" class="btn btn-success" style="border-radius: 30px">Start Session</button>
-            <button v-if="viewSession.payment_status == 1 && viewSession.accept == '1' && viewSession.class_status == 0 && !viewSession.cancel_request && authuser.type == 'student'" @click="startsession" class="btn btn-success" style="border-radius: 30px">Join Session</button>
+            <button v-if="viewSession.sessiontype == 'In Person' && viewSession.payment_status == '1' && viewSession.accept == '1' && viewSession.class_status == '0' && !viewSession.cancel_request && authuser.type != 'student'" @click="markComplete" class="btn btn-gradientb">Mark as completed</button>
+            <button v-if="viewSession.sessiontype == 'Online' && viewSession.payment_status == '1' && viewSession.accept == '1' && viewSession.class_status == '0' && !viewSession.cancel_request && authuser.type != 'student'" @click="startsession" class="btn btn-success" style="border-radius: 30px">Start Session</button>
+            <button v-if="viewSession.sessiontype == 'Online' && viewSession.accept == '1' && viewSession.class_status == 0 && !viewSession.cancel_request && authuser.type == 'student'" @click="startsession" class="btn btn-success" style="border-radius: 30px">Join Session</button>
             <div v-if="viewSession.payment_status != 1  && viewSession.accept == '1' && authuser.type == 'student'" class="rates" >
                 Please Pay to confirm this Session
             </div>
@@ -415,14 +416,13 @@
                                 <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.class_status == 0"  class="status">
                                     <div v-if="!ses.cancel_request" class="status">
                                         Upcoming</div>
-                                    <div v-if="ses.cancel_request" class="status">
+                                    <div v-if="ses.cancel_request == NULL && authuser.type == 'student'" class="status">
                                         <div class="status" >Cancelled</div>
-                                        <div style="font-size: 10px">Please rise a ticket in Support Center for refund!.</div>
+                                        <div style="font-size: 10px">Please rise a ticket in support center for refund!</div>
                                     </div>
                                 </div>
                                 <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.class_status == 1"  class="status">Completed</div>
-
-                                <button @click="showSession(ses)" class="btn btn-gradient">Open</button>
+                                <!-- <button @click="showSession(ses)" class="btn btn-gradient">Open</button> -->
                             </div>
                         </div>
 
