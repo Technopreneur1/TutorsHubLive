@@ -30,7 +30,7 @@
                     </div>
                     <div class="input">
                         <label for="">Hourly Rate - $$</label>
-                        <input type="number" min="20" v-model="rate" placeholder="Rate">
+                        <input type="number" min="20" max="1000" value="20" v-model="rate" placeholder="Rate">
                     </div>
                     <div v-if="error" class="error">{{error}}</div>
                     <div class="text-right">
@@ -56,7 +56,7 @@
                     </div>
                     <div class="input">
                         <label for="">Hourly Rate - $$</label>
-                        <input type="number" min="20" v-model="editPlan.rate" placeholder="Rate">
+                        <input type="number" min="20" max="1000" value="20" v-model="editPlan.rate" placeholder="Rate">
                     </div>
                     <div v-if="error" class="error">{{error}}</div>
                     <div class="text-right">
@@ -154,7 +154,7 @@
                 this.success = ""
                 if(this.rate && this.discipline && this.level)
                 {
-                    if(this.rate > 0)
+                    if(this.rate >= 20)
                     {
                         this.error = ''
                         axios.post(this.url +'/post/plan',
@@ -174,8 +174,8 @@
                         .catch(error => {
                             console.log(error);
                         })
-                    }else{
-                        this.error = "Hourly rate must be at-least $1"
+                    } else{
+                        this.error = "Hourly rate must be at-least $20"
                     }
                 }else{
                     this.error = "Please Complete The Form To Save"
