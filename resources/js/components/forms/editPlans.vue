@@ -177,7 +177,7 @@
                     } else{
                         this.error = "Hourly rate must be at-least $20"
                     }
-                }else{
+                } else{
                     this.error = "Please Complete The Form To Save"
                 }
             },
@@ -187,21 +187,28 @@
                 if(this.editPlan.rate && this.editPlan.discipline && this.editPlan.level)
                 {
                     this.error = ''
-                    axios.post(this.url +'/update/plan',
+                    if(this.rate >= 20)
                     {
-                        discipline: this.editPlan.discipline_id,
-                        level: this.editPlan.level_id,
-                        rate: this.editPlan.rate,
-                        id: this.editPlan.id,
-                    })
-                    .then(response => {
-                        console.log(response)
-                        this.success  = "Plan Updated"
-                        this.editPlan = ''
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    })
+                        this.error = ''
+                        axios.post(this.url +'/update/plan',
+                        {
+                            discipline: this.editPlan.discipline_id,
+                            level: this.editPlan.level_id,
+                            rate: this.editPlan.rate,
+                            id: this.editPlan.id,
+                        })
+                        .then(response => {
+                            console.log(response)
+                            this.success  = "Plan Updated"
+                            this.editPlan = ''
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        })
+                    } else{
+                        this.error = "Hourly rate must be at-least $20"
+                    }
+                    
                 }else{
                     this.error = "Please Complete The Form To Update"
                 }
