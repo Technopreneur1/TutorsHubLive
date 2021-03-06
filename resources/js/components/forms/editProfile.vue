@@ -58,9 +58,9 @@
                     <label for="">Online/In-Person</label>
                     <select v-model="user.availability" >
                         <option value="">-- Select Availability --</option>
-                        <option value="Both">Both</option>
-                        <option value="In-Person">In-Person</option>
-                        <option value="Both" selected>Both</option>
+                            <option value="Online">Online</option>
+                            <option value="In-Person">In-Person</option>
+                            <option value="Both" selected>Both</option>
                     </select>
                 </div>
             </div>
