@@ -22,11 +22,10 @@ class PaymentController extends Controller
 
     public function requestBank()
     {
-        if(auth()->user()->country->name == 'United States')
-        {
-                $currency = "USD";
-        }else{
-                 $currency = "CAD";
+        if (strpos(auth()->user()->country->name, 'USA') !== false) {
+            $currency = "USD";
+        } else{
+            $currency = "CAD";
         }
         Mail::to('info@tutors-hub.com')->send(new PaymentRequest(auth()->user(), Earning::balance(auth()->user()->profile), $currency));
         Mail::to(auth()->user()->email)->send(new PaymentRequestConfirmation(auth()->user(), Earning::balance(auth()->user()->profile), $currency));
@@ -67,11 +66,9 @@ class PaymentController extends Controller
         }else{
 
             //dd(auth()->user()->country->name);
-
-            if(auth()->user()->country->name == 'United States')
-            {
+            if (strpos(auth()->user()->country->name, 'USA') !== false) {
                 $currency = "USD";
-            }else{
+            } else{
                 $currency = "CAD";
             }
             
