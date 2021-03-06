@@ -66,7 +66,7 @@ class SessionController extends Controller
             'rate' => $request->rate,
             'hours' => $request->hours,
             'total' => $request->total,
-            'fee' => ($request->total * Earning::currentFee())/100,
+            'fee' => floatval(($request->total * Earning::currentFee())/100),
 
         ]);
         return response()->json(['session' => $session]);
