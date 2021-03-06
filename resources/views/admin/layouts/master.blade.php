@@ -110,7 +110,7 @@
             <li {{{ (Request::is('adminpanel/tickets/closed') ? 'active' : '') }}}"><a href="{{route('admin.tickets.closed')}}"><i class="fa fa-circle-o"></i>Closed</a></li>
           </ul>
         </li>
-        <li class="treeview  {{{ (Request::is('adminpanel/tickets') ? 'active' : '') }}}">
+        <li class="treeview  {{{ (Request::is('adminpanel/blogs') || Request::is('adminpanel/add-blog') ? 'active' : '') }}}">
           <a href="#">
             <i class="fa fa-file-alt"></i> <span>Blogs</span>
             {{-- <span class="badge bg-aqua pull-right">{{App\Ticket::where('resolved', 0)->count()}}</span></a> --}}
@@ -119,8 +119,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="{{{ (Request::is('adminpanel/tickets') ? 'active' : '') }}}"><a href="{{route('admin.blogs')}}"><i class="fa fa-circle-o"></i>All</a></li>
-            <li {{{ (Request::is('adminpanel/tickets/closed') ? 'active' : '') }}}"><a href="{{route('admin.blogs.create')}}"><i class="fa fa-circle-o"></i>Add New</a></li>
+            <li class="{{{ (Request::is('adminpanel/blogs') ? 'active' : '') }}}"><a href="{{route('admin.blogs')}}"><i class="fa fa-circle-o"></i>All</a></li>
+            <li {{{ (Request::is('adminpanel/add-blog') ? 'active' : '') }}}"><a href="{{route('admin.blogs.create')}}"><i class="fa fa-circle-o"></i>Add New</a></li>
           </ul>
         </li>
           <li class="treeview  {{ (Request::is('adminpanel/cms') ? 'active' : '') }}">
