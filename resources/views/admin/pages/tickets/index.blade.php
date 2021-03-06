@@ -23,10 +23,9 @@
             </thead>
             <tbody>
             @foreach ($tickets as $ticket)
-                @continue(!$ticket->user)
             <tr>
                 <td>{{$ticket->ticket_id}}</td>
-                @if ($ticket->user_id)
+                @if ($ticket->user_id != 0)
                   <td><a href="{{route("admin.user", $ticket->user_id)}}">{{$ticket->user->name}}</a></td>
                 @else
                   <td>{{$ticket->user_type}}</td>
@@ -35,7 +34,7 @@
               <td>{{$ticket->query}} </td>
               <td>{{$ticket->created_at->format("Y-m-d")}}</td>
               <td>
-                @if ($ticket->user_id)
+                @if ($ticket->user_id != 0)
                   <a href="{{route("admin.contact",[ $ticket->user->id, $ticket->ticket_id])}}" style="margin-bottom: 2px" class="btn btn-success">Message User</a>
                 @endif
                 @if (!$ticket->resolved)
