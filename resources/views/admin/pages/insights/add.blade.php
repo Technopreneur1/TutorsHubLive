@@ -62,7 +62,7 @@ Add Insight
 
 @endsection
 @section('scripts')
-<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js"></script>
+<script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
 
 <script>
   var editor_config = {
