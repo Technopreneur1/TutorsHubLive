@@ -97,8 +97,7 @@ class SessionController extends Controller
             'sessiontype' => $request->sessiontype,
             'total' => $request->total,
             'accept' => '0',
-            // 'fee' => $request->total * (Earning::currentFee()/100),
-            'fee' => 12,
+            'fee' => $request->total * (Earning::currentFee()/100),
 
             'startsession' => $date->toDateTimeString(),
 
