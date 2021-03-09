@@ -193,7 +193,7 @@
                                     <div class="val"><span>{{ses.subject}}</span></div>
                                 </div>
                                 <div class="info">
-                                    <span class="dt">Session Type{{ses.sessiontype}}</span>
+                                    <span class="dt">Session Type: {{ses.sessiontype}}</span>
                                     <div class="val"><span>Start Session: {{ses.startsession}}</span></div>
                                     <div class="val"><span>End Session: {{ses.endsession}}</span></div>
                                 </div>
@@ -248,7 +248,7 @@
                                     <div class="val"><span>{{ses.subject}}</span></div>
                                 </div>
                                 <div class="info">
-                                    <span class="dt">Session Type{{ses.sessiontype}}</span>
+                                    <span class="dt">Session Type: {{ses.sessiontype}}</span>
                                     <div class="val"><span>Start Session: {{ses.startsession}}</span></div>
                                     <div class="val"><span>End Session: {{ses.endsession}}</span></div>
                                 </div>
@@ -296,7 +296,7 @@
                                     <div class="val"><span>{{ses.subject}}</span></div>
                                 </div>
                                 <div class="info">
-                                    <span class="dt">Session Type{{ses.sessiontype}}</span>
+                                    <span class="dt">Session Type: {{ses.sessiontype}}</span>
                                     <div class="val"><span>Start Session: {{ses.startsession}}</span></div>
                                     <div class="val"><span>End Session: {{ses.endsession}}</span></div>
                                 </div>
@@ -353,7 +353,7 @@
                                     <div class="val"><span>{{ses.subject}}</span></div>
                                 </div>
                                 <div class="info">
-                                    <span class="dt">Session Type{{ses.sessiontype}}</span>
+                                    <span class="dt">Session Type: {{ses.sessiontype}}</span>
                                     <div class="val"><span>Start Session: {{ses.startsession}}</span></div>
                                     <div class="val"><span>End Session: {{ses.endsession}}</span></div>
                                 </div>
@@ -401,7 +401,7 @@
                                 <div class="val"><span>{{ses.subject}}</span></div>
                             </div>
                             <div class="info">
-                                <span class="dt">Session Type{{ses.sessiontype}}</span>
+                                <span class="dt">Session Type: {{ses.sessiontype}}</span>
                                 <div class="val"><span>Start Session: {{ses.startsession}}</span></div>
                                 <div class="val"><span>End Session: {{ses.endsession}}</span></div>
                             </div>
@@ -708,7 +708,7 @@ export default {
             var requests = [];
             for (var i = 0; i < this.sessions.length; i++) {
                 session = this.sessions[i];
-                if (session.cancel_request== null && session.payment_status == 1 && session.accept == '1' && session.class_status == 0) 
+                if (session.cancel_request== null && session.payment_status == 1 && session.accept == '1' && session.completed == 0) 
                 {
                     requests.push(session);
                 }
@@ -721,7 +721,7 @@ export default {
             var requests = [];
             for (var i = 0; i < this.sessions.length; i++) {
                 session = this.sessions[i];
-                if (session.cancel_request== null && session.payment_status == 1 && session.accept == '1' && session.class_status == 1) {
+                if (session.cancel_request== null && session.payment_status == 1 && session.accept == '1' && session.completed == 1) {
                     requests.push(session);
 
                 }
