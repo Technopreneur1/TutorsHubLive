@@ -130,14 +130,14 @@ class PaymentController extends Controller
                     'type' => 'Paypal'
                 ]);
 
-            //     return redirect()->back()->with(['message' => ' Transaction Successful .. ! Payment has been sent to your PayPal Account.']);
+                return redirect()->back()->with(['message' => ' Transaction Successful .. ! Payment has been sent to your PayPal Account.']);
 
 
-            // } else{
+            } else{
 
-            //     return redirect()->back()->with(['error' => 'Failed! Try Again Later After 24 Hours']);
+                return redirect()->back()->with(['error' => 'Failed! Try Again Later After 24 Hours']);
 
-            // }
+            }
 
         }
 
