@@ -62,7 +62,7 @@ class PaymentController extends Controller
         if(!$paypal_id)
         {
 
-            return redirect()->back()->with(['error' => 'Transaction Failed.. ! Please try again in 24 hours and if still issue occurs please contact support center.']);
+            return redirect()->back()->with(['error' => 'Transaction Failed.. ! Please add your paypal email in your account settings.']);
 
         }else{
 
@@ -130,14 +130,14 @@ class PaymentController extends Controller
                     'type' => 'Paypal'
                 ]);
 
-                return redirect()->back()->with(['message' => ' Transaction Successful .. ! Payment has been sent to your PayPal Account.']);
+            //     return redirect()->back()->with(['message' => ' Transaction Successful .. ! Payment has been sent to your PayPal Account.']);
 
 
-            } else{
+            // } else{
 
-                return redirect()->back()->with(['error' => 'Failed! Try Again Later After 24 Hours']);
+            //     return redirect()->back()->with(['error' => 'Failed! Try Again Later After 24 Hours']);
 
-            }
+            // }
 
         }
 
