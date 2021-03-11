@@ -105,6 +105,7 @@ class PaymentController extends Controller
             try {
                 $output = $payouts->createSynchronous($this->_api_context);
             } catch (Exception $ex) {
+                return redirect()->back()->with(['error' => 'Failed! Try Again Later After 24 Hours']);
                 // dd($request);
                 dd($ex);
                 // print("Created Single Synchronous Payout", "Payout", null, $request, $ex);
@@ -113,31 +114,31 @@ class PaymentController extends Controller
 
             $transcation_id = $output->getBatchHeader()->getPayoutBatchId();
             $payout_status = $output->getBatchHeader()->getBatchStatus();
-            $payoutItems = $output->getItems();
-            $payoutItem = $payoutItems[0];
-            $payoutId = $payoutItem->getPayoutItemId();
-            $transactionid = $payoutItem->getTransactionId();
-            $activityid = $payoutItem->activity_id;
-            $transactionstatus = $payoutItem->getTransactionStatus();
+            // $payoutItems = $output->getItems();
+            // $payoutItem = $payoutItems[0];
+            // $payoutId = $payoutItem->getPayoutItemId();
+            // $transactionid = $payoutItem->getTransactionId();
+            // $activityid = $payoutItem->activity_id;
+            // $transactionstatus = $payoutItem->getTransactionStatus();
 
 
-            if($payout_status == 'SUCCESS'){
+            // if($payout_status == 'PENDING'){
 
                 Payment::create([
                     'teacher_id' => $id,
                     'amount' => $balance,
-                    'proff' => $activityid,
+                    'proff' => $transcation_id,
                     'type' => 'Paypal'
                 ]);
 
                 return redirect()->back()->with(['message' => ' Transaction Successful .. ! Payment has been sent to your PayPal Account.']);
 
 
-            } else{
+            // } else{
 
-                return redirect()->back()->with(['error' => 'Failed! Try Again Later After 24 Hours']);
+            //     return redirect()->back()->with(['error' => 'Failed! Try Again Later After 24 Hours']);
 
-            }
+            // }
 
         }
 
