@@ -139,9 +139,9 @@
                 <div class="option" v-if="user.type == 'teacher'">
                     <span class="key del"><a :href="url+ '/my-files'">Manage Files</a></span>
                 </div>
-                <div class="option">
+                <!-- <div class="option">
                     <span @click="deleteProfile()" class="key del">Delete Profile</span>
-                </div>
+                </div> -->
             </div>
 
             <div class="reviews-section">
