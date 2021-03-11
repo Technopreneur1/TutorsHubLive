@@ -409,7 +409,7 @@
                                 <span class="dt">Hours: {{ses.hours}}</span>
                             </div>
                             <div class="actions">
-                                <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.completed == 0 && ses.cancel_request != NULL"  class="status">
+                                <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.completed == 0"  class="status">
                                     <div v-if="authuser.type == 'teacher'" class="status">Cancelled</div>
                                     <div v-if="authuser.type == 'student'" class="status">
                                         <div class="status" >Cancelled</div>
