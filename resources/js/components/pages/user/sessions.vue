@@ -201,16 +201,16 @@
                                     <span class="dt">Hours: {{ses.hours}}</span>
                                 </div>
                                 <div class="actions">
-                                    <div v-if="ses.payment_status != 1 && ses.accept != '1' && ses.class_status == 0" class="status">
+                                    <div v-if="ses.payment_status != 1 && ses.accept != '1' && ses.completed == 0" class="status">
                                         <div v-if="!ses.cancel_request" class="status">
                                         Requested</div>
 
                                         <div v-if="ses.cancel_request" class="status">
                                         Cancelled</div>
                                     </div>
-                                    <div v-if="ses.payment_status != 1 && ses.accept == '1' && ses.class_status == 0" class="status">Pending</div>
+                                    <div v-if="ses.payment_status != 1 && ses.accept == '1' && ses.completed == 0" class="status">Pending</div>
 
-                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.class_status == 1"  class="status">Completed</div>
+                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.completed == 1"  class="status">Completed</div>
 
                                     <button @click="showSession(ses)" class="btn btn-gradient">Open</button>
                                 </div>
@@ -256,10 +256,10 @@
                                     <span class="dt">Hours: {{ses.hours}}</span>
                                 </div>
                                 <div class="actions">
-                                    <div v-if="ses.payment_status != 1 && ses.accept != '1' && ses.class_status == 0" class="status">Requested</div>
-                                    <div v-if="ses.payment_status != 1 && ses.accept == '1' && ses.class_status == 0" class="status">Pending</div>
-                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.class_status == 0"  class="status">Upcoming</div>
-                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.class_status == 1"  class="status">Completed</div>
+                                    <div v-if="ses.payment_status != 1 && ses.accept != '1' && ses.completed == 0" class="status">Requested</div>
+                                    <div v-if="ses.payment_status != 1 && ses.accept == '1' && ses.completed == 0" class="status">Pending</div>
+                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.completed == 0"  class="status">Upcoming</div>
+                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.completed == 1"  class="status">Completed</div>
 
                                     <button @click="showSession(ses)" class="btn btn-gradient">Open</button>
                                 </div>
@@ -305,10 +305,10 @@
                                 </div>
                                 <div class="actions">
 
-                                    <div v-if="ses.payment_status != 1 && ses.accept != '1' && ses.class_status == 0" class="status">Requested</div>
-                                    <div v-if="ses.payment_status != 1 && ses.accept == '1' && ses.class_status == 0" class="status">Pending</div>
-<!--                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.class_status == 0"  class="status">Upcoming</div>-->
-                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.class_status == 0"  class="status">
+                                    <div v-if="ses.payment_status != 1 && ses.accept != '1' && ses.completed == 0" class="status">Requested</div>
+                                    <div v-if="ses.payment_status != 1 && ses.accept == '1' && ses.completed == 0" class="status">Pending</div>
+<!--                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.completed == 0"  class="status">Upcoming</div>-->
+                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.completed == 0"  class="status">
                                         <div v-if="!ses.cancel_request" class="status">
                                             Upcoming</div>
                                         <div v-if="ses.cancel_request" class="status">
@@ -316,7 +316,7 @@
                                             <div style="font-size: 10px">Please rise a ticket in <br> Support Center for refund!.</div>
                                         </div>
                                     </div>
-                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.class_status == 1"  class="status">Completed</div>
+                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.completed == 1"  class="status">Completed</div>
 
                                     <button @click="showSession(ses)" class="btn btn-gradient">Open</button>
                                 </div>
@@ -361,10 +361,10 @@
                                     <span class="dt">Hours: {{ses.hours}}</span>
                                 </div>
                                 <div class="actions">
-                                    <div v-if="ses.payment_status != 1 && ses.accept != '1' && ses.class_status == 0" class="status">Requested</div>
-                                    <div v-if="ses.payment_status != 1 && ses.accept == '1' && ses.class_status == 0" class="status">Pending</div>
-                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.class_status == 0"  class="status">Upcoming</div>
-                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.class_status == 1"  class="status">Completed</div>
+                                    <div v-if="ses.payment_status != 1 && ses.accept != '1' && ses.completed == 0" class="status">Requested</div>
+                                    <div v-if="ses.payment_status != 1 && ses.accept == '1' && ses.completed == 0" class="status">Pending</div>
+                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.completed == 0"  class="status">Upcoming</div>
+                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.completed == 1"  class="status">Completed</div>
 
                                     <button @click="showSession(ses)" class="btn btn-gradient">Open</button>
                                 </div>
@@ -410,18 +410,18 @@
                             </div>
                             <div class="actions">
 
-                                <div v-if="ses.payment_status != 1 && ses.accept != '1' && ses.class_status == 0" class="status">Requested</div>
-                                <div v-if="ses.payment_status != 1 && ses.accept == '1' && ses.class_status == 0" class="status">Pending</div>
-                                <!--                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.class_status == 0"  class="status">Upcoming</div>-->
-                                <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.class_status == 0"  class="status">
+                                <div v-if="ses.payment_status != 1 && ses.accept != '1' && ses.completed == 0" class="status">Requested</div>
+                                <div v-if="ses.payment_status != 1 && ses.accept == '1' && ses.completed == 0" class="status">Pending</div>
+                                <!--                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.completed == 0"  class="status">Upcoming</div>-->
+                                <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.completed == 0"  class="status">
                                     <div v-if="!ses.cancel_request" class="status">
-                                        Upcoming</div>
+                                        Cancelled</div>
                                     <div v-if="ses.cancel_request == NULL && authuser.type == 'student'" class="status">
                                         <div class="status" >Cancelled</div>
                                         <div style="font-size: 10px">Please rise a ticket in support center for refund!</div>
                                     </div>
                                 </div>
-                                <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.class_status == 1"  class="status">Completed</div>
+                                <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.completed == 1"  class="status">Completed</div>
                                 <!-- <button @click="showSession(ses)" class="btn btn-gradient">Open</button> -->
                             </div>
                         </div>
@@ -988,7 +988,7 @@ export default {
 
         const script = document.createElement("script");
         //script.src = "https://www.paypal.com/sdk/js?client-id=AYSq3RDGsmBLJE-otTkBtM-jBRd1TCQwFf9RGfwddNXWz0uFU9ztymylOhRS&currency=" + this.currency;
-        script.src = "https://www.paypal.com/sdk/js?client-id=AVFwGL9zZBOvXXI-5fXKpcqWOnd2GqobVOea8jUASQXy7eqtnTiQZxAxt2iaOt_nDSVHMShjxdt3fOrE&currency=" + this.currency;
+        script.src = "https://www.paypal.com/sdk/js?client-id=AQJBgbxwGJkhuDwcblLfVwPq6TnDpAliMv5_HllIFnJ5l-Im6Sv5VK30SV8j7TSLUEYKYBCdTcamB-2K&currency=" + this.currency;
         // script.src = "https://www.paypal.com/sdk/js?client-id=AVAo9E3s-xN1GwGOPf7WuRsfUz67-urBxeAwRp_3xYboyF0_oW9E4MnLh0mgcbBqAYzmD3LoGD7a8oRP&currency=" + this.currency;
         script.addEventListener("load", this.setLoaded);
         document.body.appendChild(script);
