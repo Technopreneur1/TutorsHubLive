@@ -30,10 +30,10 @@
                     </div>
                 </a>
                 <div class="sess-info">
-                    <div v-if="viewSession.payment_status != 1 && viewSession.accept != '1' && viewSession.class_status == 0" class="status"><span>Requested</span></div>
-                    <div v-if="viewSession.payment_status != 1 && viewSession.accept == '1' && viewSession.class_status == 0" class="status"><span>Pending</span></div>
-                    <div v-if="viewSession.payment_status == 1 && viewSession.accept == '1' && viewSession.class_status == 0"  class="status"><span>Upcoming</span></div>
-                    <div v-if="viewSession.payment_status == 1 && viewSession.accept == '1' && viewSession.class_status == 1"  class="status"><span>Completed</span></div>
+                    <div v-if="viewSession.payment_status != 1 && viewSession.accept != '1' && viewSession.completed == 0" class="status"><span>Requested</span></div>
+                    <div v-if="viewSession.payment_status != 1 && viewSession.accept == '1' && viewSession.completed == 0" class="status"><span>Pending</span></div>
+                    <div v-if="viewSession.payment_status == 1 && viewSession.accept == '1' && viewSession.completed == 0"  class="status"><span>Upcoming</span></div>
+                    <div v-if="viewSession.payment_status == 1 && viewSession.accept == '1' && viewSession.completed == 1"  class="status"><span>Completed</span></div>
                     <span class="dt">{{viewSession.created_at | moment('DD MMM, YYYY')}}</span>
                     <div class="val"><span>Start Session: {{viewSession.startsession}}</span></div>
                     <div class="val"><span>End Session: {{viewSession.endsession}}</span></div>
@@ -56,7 +56,7 @@
                 </div>
             </div>
 
-            <div v-if="authuser.type == 'student' && !viewSession.completed && viewSession.class_status == 1" class="statusbar">
+            <div v-if="authuser.type == 'student' && !viewSession.completed && viewSession.completed == 1" class="statusbar">
                 <span class="val">Pending</span>
                 <span class="txt">Please mark session as <b>completed</b> after it has taken place</span>
                 <button @click="markComplete" class="btn btn-gradientb">Mark as completed</button> &nbsp; OR &nbsp;
@@ -64,14 +64,14 @@
             <button v-if="!viewSession.cancel_request && !viewSession.completed" @click="requestCancel" class="btn btn-danger" style="border-radius: 30px;     text-align: center;
     display: block;">Request To Cancel Session</button>
             <button v-if="viewSession.accept != '1' && !viewSession.completed && authuser.type != 'student'" @click="requestaccept" class="btn btn-success" style="border-radius: 30px">Accept Session Request</button>
-            <button v-if="viewSession.sessiontype == 'In Person' && viewSession.payment_status == '1' && viewSession.accept == '1' && viewSession.class_status == '0' && viewSession.completed == 0 && !viewSession.cancel_request && authuser.type != 'student'" @click="markComplete" class="btn btn-gradientb">Mark as completed</button>
-            <button v-if="viewSession.sessiontype == 'Online' && viewSession.payment_status == '1' && viewSession.accept == '1' && viewSession.class_status == '0' && !viewSession.cancel_request && authuser.type != 'student'" @click="startsession" class="btn btn-success" style="border-radius: 30px">Start Session</button>
-            <button v-if="viewSession.sessiontype == 'Online' && viewSession.accept == '1' && viewSession.class_status == 0 && !viewSession.cancel_request && authuser.type == 'student'" @click="startsession" class="btn btn-success" style="border-radius: 30px">Join Session</button>
+            <button v-if="viewSession.sessiontype == 'In Person' && viewSession.payment_status == '1' && viewSession.accept == '1' && viewSession.completed == '0' && viewSession.completed == 0 && !viewSession.cancel_request && authuser.type != 'student'" @click="markComplete" class="btn btn-gradientb">Mark as completed</button>
+            <button v-if="viewSession.sessiontype == 'Online' && viewSession.payment_status == '1' && viewSession.accept == '1' && viewSession.completed == '0' && !viewSession.cancel_request && authuser.type != 'student'" @click="startsession" class="btn btn-success" style="border-radius: 30px">Start Session</button>
+            <button v-if="viewSession.sessiontype == 'Online' && viewSession.accept == '1' && viewSession.completed == 0 && !viewSession.cancel_request && authuser.type == 'student'" @click="startsession" class="btn btn-success" style="border-radius: 30px">Join Session</button>
             <div v-if="viewSession.payment_status != 1  && viewSession.accept == '1' && authuser.type == 'student'" class="rates" >
                 Please Pay to confirm this Session
             </div>
             <div  v-if="viewSession.payment_status != 1  && viewSession.accept == '1' && authuser.type == 'student'" ref="paypal"></div>
-            <div v-if="viewSession.payment_status == 1 && viewSession.accept == '1' && viewSession.class_status == 1"  class="status">
+            <div v-if="viewSession.payment_status == 1 && viewSession.accept == '1' && viewSession.completed == 1"  class="status">
                 <div id="record" ></div>
             </div>
 <!--            <button @click="requestpayment()" value="add task" class="btn btn-gradient">PayPal</button>-->
