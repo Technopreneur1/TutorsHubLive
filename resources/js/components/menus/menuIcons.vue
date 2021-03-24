@@ -3,10 +3,10 @@
         <div class="link user menuser">
             <a :href="url + '/profile'">
                 <img :src="avatar" alt="">
-                <span>{{user.name}}</span>
+                <span>{{user.name}} {{ !user.is_active ? "( DeActivated )" : ''}}</span>
             </a>
         </div>
-        
+
         <a :href="url + '/sessions'" class="link sessions">
             <i class="fas fa-calendar-alt"></i>
             <span v-if="csessions" class="count">{{csessions}}</span>
@@ -15,9 +15,9 @@
             <i class="fas fa-envelope"></i>
             <span v-if="cmessages" class="count">{{cmessages}}</span>
         </a>
-        
+
         <slide-menu :messages="messages" :sessions="sessions" :url="url" :user="user"></slide-menu>
-        
+
     </div>
 </template>
 <style lang="sass" scoped>
@@ -84,7 +84,7 @@
             },
         },
         methods: {
-          
+
             logout()
             {
                 this.loading = true
@@ -103,7 +103,7 @@
                 {
                     if(this.user.latitude && this.user.longitude)
                     {
-                        
+
                     }else{
                         this.getLocation()
                     }
@@ -112,7 +112,7 @@
             getLocation() {
                 if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(this.setLocation)
-                } 
+                }
             },
            setLocation(position) {
             this.lat = position.coords.latitude
@@ -135,7 +135,7 @@
             this.$store.commit('setMessages', this.messages)
             this.locate()
         }
-        
+
     }
 </script>
 

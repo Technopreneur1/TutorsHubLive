@@ -48,7 +48,13 @@
                         <div class="item">
                             <a href="{{route('ads')}}">
                                 <i class="fas fa-search"></i>
-                                <span>Find Students</span>
+                                <span>Find Ads</span>
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="#">
+                                <i class="fas fa-star"></i>
+                                <span>Saved Ads</span>
                             </a>
                         </div>
                     @endif
@@ -65,13 +71,13 @@
                                 <span>My Ads</span>
                             </a>
                         </div>
+                        <div class="item">
+                            <a href="{{route('favorites')}}">
+                                <i class="fas fa-star"></i>
+                                <span>Saved Profiles</span>
+                            </a>
+                        </div>
                     @endif
-                    <div class="item">
-                        <a href="{{route('favorites')}}">
-                            <i class="fas fa-star"></i>
-                            <span>Saved Profiles</span>
-                        </a>
-                    </div>
                     <div class="item">
                         <a href="{{route('sessions')}}">
                             <i class="fas fa-calendar-alt"></i>

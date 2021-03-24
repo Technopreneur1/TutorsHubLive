@@ -15,7 +15,7 @@ class AddSesstionToSession extends Migration
     {
         Schema::table('sessions', function (Blueprint $table) {
             if (!Schema::hasColumn('sessions','session_created_at')) {
-                $table->timestamp('session_created_at')->nullable();
+                $table->timestamp('session_created_at');
             }
         });
     }

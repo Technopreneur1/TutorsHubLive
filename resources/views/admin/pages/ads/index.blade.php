@@ -110,17 +110,18 @@ Ads
 <script src="{{asset('admin/js/jquery.dataTables.min.js')}}" charset="utf-8"></script>
 <script src="{{asset('admin/js/dataTables.bootstrap.min.js')}}" charset="utf-8"></script>
 <script>
+
   $(function () {
     $('table').DataTable({
       'paging'      : true,
       'lengthChange': false,
       'searching'   : true,
-      'ordering'    : false,
+      'ordering'    : true,
       'info'        : true,
+      'select'      : true,
       'autoWidth'   : false
     });
   })
 
-</script>
 </script>
 @endsection

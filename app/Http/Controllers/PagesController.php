@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Blog;
 use App\Discipline;
 use App\Plan;
+use App\Cms;
 use App\Testimonial;
 use App\User;
 use App\Ticket;
@@ -71,20 +72,28 @@ class PagesController extends Controller
     {
         return view('pages.files');
     }
-    public function privacy()
-    {
-        $title = "Privacy Policy";
-        return view('pages.privacy', ['title' => $title]);
-    }
     public function settings()
     {
         return view('pages.settings');
     }
+    public function about()
+    {
+        $content = Cms::whereId(3)->get(['title','description'])->first();
+
+        return view('pages.privacy', ['content' => $content]);
+    }
+
+    public function privacy()
+    {
+        $content = Cms::whereId(1)->get(['title','description'])->first();
+
+        return view('pages.privacy', ['content' => $content]);
+    }
     public function terms()
     {
-        $title = "Terms & Conditions";
+        $content = Cms::whereId(2)->get(['title','description'])->first();
 
-        return view('pages.privacy', ['title' => $title]);
+        return view('pages.privacy', ['content' => $content]);
     }
 
     public function contact()

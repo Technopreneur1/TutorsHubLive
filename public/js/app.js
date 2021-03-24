@@ -2619,9 +2619,11 @@ __webpack_require__.r(__webpack_exports__);
       showThanks: false,
       success: '',
       hours: 1,
+      dte: '',
       sessiontype: 'Online',
       loaded: false,
       paidFor: false,
+      error: false,
       product: {
         price: 777.77
       }
@@ -2700,11 +2702,22 @@ __webpack_require__.r(__webpack_exports__);
     requestSession: function requestSession() {
       var _this2 = this;
 
+<<<<<<< HEAD
+=======
+      // console.log(typeof(this.dte))
+      // console.log((this.dte))
+>>>>>>> f469c43464c781266261300383d31d25d8d7d0c3
       if (!this.dte) {
         this.error = "Please select your preferred date & time";
         return false;
       }
 
+<<<<<<< HEAD
+=======
+      this.error = ""; // console.log('else');
+      // return false;
+
+>>>>>>> f469c43464c781266261300383d31d25d8d7d0c3
       this.loading = true;
       axios.post(this.url + '/complete/sessionrequest', {
         subject: this.plan.discipline.name,
@@ -2936,6 +2949,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['url', 'city'],
   data: function data() {
@@ -2950,6 +2974,9 @@ __webpack_require__.r(__webpack_exports__);
       countries: [],
       states: [],
       cities: [],
+      lat: 40.7831,
+      lng: -73.9712,
+      address: $("input[name=address_]").val(),
       neighborhoods: [],
       ad: {
         title: '',
@@ -2960,7 +2987,8 @@ __webpack_require__.r(__webpack_exports__);
         new_neighborhood: '',
         city: '',
         state: '',
-        country: ''
+        country: '',
+        availability: ''
       }
     };
   },
@@ -2970,10 +2998,10 @@ __webpack_require__.r(__webpack_exports__);
         if (this.ad.description) {
           if (this.ad.level) {
             if (this.ad.discipline) {
-              if (this.ad.city && this.ad.state && this.ad.country) {
+              if (this.ad.availabilty != '') {
                 return true;
               } else {
-                this.error = "Country State and City are required";
+                this.error = "Availabilty is required";
                 return false;
               }
             } else {
@@ -2993,6 +3021,11 @@ __webpack_require__.r(__webpack_exports__);
         return false;
       }
     },
+    setPlace: function setPlace(place) {
+      this.lat = place.geometry.location.lat();
+      this.lng = place.geometry.location.lng();
+      this.address = place.formatted_address;
+    },
     postAd: function postAd() {
       var _this = this;
 
@@ -3005,6 +3038,10 @@ __webpack_require__.r(__webpack_exports__);
           title: this.ad.title,
           description: this.ad.description,
           level: this.ad.level,
+          availability: $("#availability").val(),
+          lat: this.lat,
+          lng: this.lng,
+          address: this.address ? this.address : $("input[name=address_]").val(),
           discipline: this.ad.discipline,
           neighborhood: this.ad.neighborhood,
           country: this.ad.country,
@@ -3068,6 +3105,9 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
       });
     },
+    // setAvailability (){
+    //     alert(this.ad.availability)
+    // },
     getStates: function getStates() {
       var _this3 = this;
 
@@ -3154,6 +3194,18 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3286,7 +3338,9 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   data: function data() {
-    return {
+    var _ref;
+
+    return _ref = {
       success: '',
       error: '',
       show: false,
@@ -3299,18 +3353,21 @@ __webpack_require__.r(__webpack_exports__);
       states: [],
       cities: [],
       neighborhoods: [],
-      ad: {
-        title: this.thead.title,
-        description: this.thead.description,
-        level: this.thead.level_id,
-        discipline: this.thead.discipline_id,
-        neighborhood: this.thead.neighborhood_id,
-        new_neighborhood: '',
-        city: this.thead.city_id,
-        state: this.thead.state_id,
-        country: this.thead.country_id
-      }
-    };
+      address: $("input[name=address_]").val(),
+      lat: 40.7831,
+      lng: -73.9712
+    }, _defineProperty(_ref, "address", ''), _defineProperty(_ref, "ad", {
+      title: this.thead.title,
+      description: this.thead.description,
+      level: this.thead.level_id,
+      discipline: this.thead.discipline_id,
+      neighborhood: this.thead.neighborhood_id,
+      new_neighborhood: '',
+      city: this.thead.city_id,
+      state: this.thead.state_id,
+      country: this.thead.country_id,
+      availability: ''
+    }), _ref;
   },
   methods: {
     isReady: function isReady() {
@@ -3318,10 +3375,15 @@ __webpack_require__.r(__webpack_exports__);
         if (this.ad.description) {
           if (this.ad.level) {
             if (this.ad.discipline) {
-              if (this.ad.city && this.ad.state && this.ad.country) {
-                return true;
+              if (this.address) {
+                if (this.ad.availabilty) {
+                  return true;
+                } else {
+                  this.error = "Availabilty is required";
+                  return false;
+                }
               } else {
-                this.error = "Country State and City are required";
+                this.error = "Address is required";
                 return false;
               }
             } else {
@@ -3341,6 +3403,11 @@ __webpack_require__.r(__webpack_exports__);
         return false;
       }
     },
+    setPlace: function setPlace(place) {
+      this.lat = place.geometry.location.lat();
+      this.lng = place.geometry.location.lng();
+      this.address = place.formatted_address;
+    },
     updateAd: function updateAd() {
       var _this = this;
 
@@ -3357,7 +3424,11 @@ __webpack_require__.r(__webpack_exports__);
           discipline: this.ad.discipline,
           neighborhood: this.ad.neighborhood,
           country: this.ad.country,
+          availability: $("#availability").val(),
           city: this.ad.city,
+          lat: this.lat,
+          lng: this.lng,
+          address: this.address,
           state: this.ad.state,
           new_neighborhood: this.ad.new_neighborhood
         }).then(function (response) {
@@ -3952,7 +4023,11 @@ __webpack_require__.r(__webpack_exports__);
       this.success = "";
 
       if (this.rate && this.discipline && this.level) {
+<<<<<<< HEAD
         if (this.rate > 0) {
+=======
+        if (this.rate >= 20) {
+>>>>>>> f469c43464c781266261300383d31d25d8d7d0c3
           this.error = '';
           axios.post(this.url + '/post/plan', {
             discipline: this.discipline,
@@ -3982,18 +4057,24 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.editPlan.rate && this.editPlan.discipline && this.editPlan.level) {
         this.error = '';
-        axios.post(this.url + '/update/plan', {
-          discipline: this.editPlan.discipline_id,
-          level: this.editPlan.level_id,
-          rate: this.editPlan.rate,
-          id: this.editPlan.id
-        }).then(function (response) {
-          console.log(response);
-          _this3.success = "Plan Updated";
-          _this3.editPlan = '';
-        })["catch"](function (error) {
-          console.log(error);
-        });
+
+        if (this.rate >= 20) {
+          this.error = '';
+          axios.post(this.url + '/update/plan', {
+            discipline: this.editPlan.discipline_id,
+            level: this.editPlan.level_id,
+            rate: this.editPlan.rate,
+            id: this.editPlan.id
+          }).then(function (response) {
+            console.log(response);
+            _this3.success = "Plan Updated";
+            _this3.editPlan = '';
+          })["catch"](function (error) {
+            console.log(error);
+          });
+        } else {
+          this.error = "Hourly rate must be at-least $20";
+        }
       } else {
         this.error = "Please Complete The Form To Update";
       }
@@ -4235,7 +4316,11 @@ __webpack_require__.r(__webpack_exports__);
         gender: this.user.gender,
         availability: this.user.availability,
         gender_preference: this.user.profile.gender_preference,
+<<<<<<< HEAD
         currency: this.user.profile.currency,
+=======
+        currency: this.user.currency,
+>>>>>>> f469c43464c781266261300383d31d25d8d7d0c3
         can_contact: this.user.can_contact,
         is_hidden: this.user.is_hidden,
         paypal: this.user.paypal,
@@ -4604,6 +4689,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['url', 'lat', 'lng', 'tz'],
@@ -4620,6 +4709,9 @@ __webpack_require__.r(__webpack_exports__);
       cities: [],
       neighborhoods: [],
       type: 'student',
+      lat: 40.7831,
+      lng: -73.9712,
+      address: '',
       student: {
         name: '',
         email: '',
@@ -4648,6 +4740,11 @@ __webpack_require__.r(__webpack_exports__);
     Select2: v_select2_component__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   methods: {
+    setPlace: function setPlace(place) {
+      this.lat = place.geometry.location.lat();
+      this.lng = place.geometry.location.lng();
+      this.address = place.formatted_address;
+    },
     isEmail: function isEmail(email) {
       var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,5})+$/;
 
@@ -4664,15 +4761,16 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.loading = true;
-      axios.post('https://tutors-hub.com/post/student', {
+      axios.post('/post/student', {
         name: this.student.name,
         email: this.student.email,
         password: this.student.password,
         phone: this.student.phone,
         country: this.student.country,
         level: this.student.level,
-        // lat: this.lat,
-        //lng: this.lng,
+        lat: this.lat,
+        lng: this.lng,
+        address: this.address,
         discipline: this.student.discipline,
         gender: this.student.gender,
         timezone: this.student.timezone,
@@ -4806,7 +4904,7 @@ __webpack_require__.r(__webpack_exports__);
     getLevels: function getLevels() {
       var _this2 = this;
 
-      axios.post('https://tutors-hub.com/get/levels').then(function (response) {
+      axios.post('/get/levels').then(function (response) {
         _this2.levels = response.data.levels;
       })["catch"](function (error) {
         console.log(error);
@@ -4815,7 +4913,7 @@ __webpack_require__.r(__webpack_exports__);
     getDisciplines: function getDisciplines() {
       var _this3 = this;
 
-      axios.post('https://tutors-hub.com/get/disciplines').then(function (response) {
+      axios.post('/get/disciplines').then(function (response) {
         _this3.disciplines = response.data.disciplines;
       })["catch"](function (error) {
         console.log(error);
@@ -4827,7 +4925,7 @@ __webpack_require__.r(__webpack_exports__);
       this.states = [];
       this.cities = [];
       this.neighborhoods = [];
-      axios.post('https://tutors-hub.com/get/countries').then(function (response) {
+      axios.post('/get/countries').then(function (response) {
         _this4.countries = response.data.countries;
 
         _this4.countries.map(function (obj) {
@@ -4840,7 +4938,7 @@ __webpack_require__.r(__webpack_exports__);
     getStates: function getStates() {
       var _this5 = this;
 
-      axios.post('https://tutors-hub.com/get/states', {
+      axios.post('/get/states', {
         country: this.student.country
       }).then(function (response) {
         console.log(response);
@@ -4856,7 +4954,7 @@ __webpack_require__.r(__webpack_exports__);
     getCities: function getCities() {
       var _this6 = this;
 
-      axios.post('https://tutors-hub.com/get/cities', {
+      axios.post('/get/cities', {
         state: this.student.state
       }).then(function (response) {
         _this6.cities = response.data.cities;
@@ -4871,7 +4969,7 @@ __webpack_require__.r(__webpack_exports__);
     getNeighborhoods: function getNeighborhoods() {
       var _this7 = this;
 
-      axios.post('https://tutors-hub.com/get/neighborhoods', {
+      axios.post('/get/neighborhoods', {
         city: this.student.city
       }).then(function (response) {
         _this7.neighborhoods = response.data.neighborhoods;
@@ -5060,6 +5158,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+<<<<<<< HEAD
+=======
+//
+//
+//
+//
+>>>>>>> f469c43464c781266261300383d31d25d8d7d0c3
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['url', 'lat', 'lng', 'tz'],
@@ -5077,6 +5182,9 @@ __webpack_require__.r(__webpack_exports__);
       cities: [],
       neighborhoods: [],
       type: 'teacher',
+      lat: 40.7831,
+      lng: -73.9712,
+      address: '',
       student: {
         name: '',
         email: '',
@@ -5119,6 +5227,11 @@ __webpack_require__.r(__webpack_exports__);
     Select2: v_select2_component__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   methods: {
+    setPlace: function setPlace(place) {
+      this.lat = place.geometry.location.lat();
+      this.lng = place.geometry.location.lng();
+      this.address = place.formatted_address;
+    },
     isEmail: function isEmail(email) {
       var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,5})+$/;
 
@@ -5134,7 +5247,7 @@ __webpack_require__.r(__webpack_exports__);
     postTeacher: function postTeacher() {
       var _this = this;
 
-      axios.post('https://tutors-hub.com/post/teacher', {
+      axios.post('/post/teacher', {
         name: this.teacher.name,
         email: this.teacher.email,
         password: this.teacher.password,
@@ -5144,8 +5257,9 @@ __webpack_require__.r(__webpack_exports__);
         currency: this.teacher.currency,
         state: '333',
         timezone: this.teacher.timezone,
-        // lat: this.lat,
-        // lng: this.lng,
+        lat: this.lat,
+        lng: this.lng,
+        address: this.address,
         city: '333',
         neighborhood: '333',
         new_neighborhood: '333'
@@ -5205,7 +5319,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     canContinue: function canContinue() {
       if (this.step == 2) {
-        if (this.teacher.phone && this.teacher.name && this.teacher.email && this.teacher.gender && this.teacher.country) {
+        if (this.teacher.phone && this.teacher.name && this.teacher.email && this.teacher.gender) {
           if (this.isEmail(this.teacher.email)) {
             return true;
           } else {
@@ -5266,7 +5380,7 @@ __webpack_require__.r(__webpack_exports__);
     getLevels: function getLevels() {
       var _this2 = this;
 
-      axios.post('https://tutors-hub.com/get/levels').then(function (response) {
+      axios.post('/get/levels').then(function (response) {
         _this2.levels = response.data.levels;
       })["catch"](function (error) {
         console.log(error);
@@ -5275,7 +5389,7 @@ __webpack_require__.r(__webpack_exports__);
     getDisciplines: function getDisciplines() {
       var _this3 = this;
 
-      axios.post('https://tutors-hub.com/get/disciplines').then(function (response) {
+      axios.post('/get/disciplines').then(function (response) {
         _this3.disciplines = response.data.disciplines;
       })["catch"](function (error) {
         console.log(error);
@@ -5287,7 +5401,7 @@ __webpack_require__.r(__webpack_exports__);
       this.states = [];
       this.cities = [];
       this.neighborhoods = [];
-      axios.post('https://tutors-hub.com/get/countries').then(function (response) {
+      axios.post('/get/countries').then(function (response) {
         _this4.countries = response.data.countries;
 
         _this4.countries.map(function (obj) {
@@ -5300,7 +5414,7 @@ __webpack_require__.r(__webpack_exports__);
     getStates: function getStates() {
       var _this5 = this;
 
-      axios.post('https://tutors-hub.com/get/states', {
+      axios.post('/get/states', {
         country: this.teacher.country
       }).then(function (response) {
         console.log(response);
@@ -5316,7 +5430,7 @@ __webpack_require__.r(__webpack_exports__);
     getCities: function getCities() {
       var _this6 = this;
 
-      axios.post('https://tutors-hub.com/get/cities', {
+      axios.post('/get/cities', {
         state: this.teacher.state
       }).then(function (response) {
         _this6.cities = response.data.cities;
@@ -5331,7 +5445,7 @@ __webpack_require__.r(__webpack_exports__);
     getNeighborhoods: function getNeighborhoods() {
       var _this7 = this;
 
-      axios.post('https://tutors-hub.com/get/neighborhoods', {
+      axios.post('/get/neighborhoods', {
         city: this.teacher.city
       }).then(function (response) {
         _this7.neighborhoods = response.data.neighborhoods;
@@ -6558,7 +6672,17 @@ __webpack_require__.r(__webpack_exports__);
     //         })
     //     },
     deleteProfile: function deleteProfile() {
-      alert("You will able to delete profile when website is public");
+      var _this4 = this;
+
+      if (confirm("Are you sure you want to Delete your Profile?")) {
+        this.loading = true;
+        axios.post(this.url + '/user/delete/' + this.user.id).then(function (response) {
+          _this4.loading = false;
+          location.reload();
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      }
     }
   },
   mounted: function mounted() {// this.getUserInfo()
@@ -7223,12 +7347,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+<<<<<<< HEAD
 //
 //
 //
 //
 //
 //
+=======
+>>>>>>> f469c43464c781266261300383d31d25d8d7d0c3
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     url: {
@@ -7260,7 +7387,11 @@ __webpack_require__.r(__webpack_exports__);
       for (var i = 0; i < this.sessions.length; i++) {
         session = this.sessions[i];
 
+<<<<<<< HEAD
         if (session.cancel_request == '' && session.payment_status != 1 && session.accept != '1' && session.class_status == 0) {
+=======
+        if (session.cancel_request == null && session.payment_status != 1 && session.accept != '1' && session.class_status == 0) {
+>>>>>>> f469c43464c781266261300383d31d25d8d7d0c3
           requests.push(session);
         }
       }
@@ -7273,8 +7404,13 @@ __webpack_require__.r(__webpack_exports__);
 
       for (var i = 0; i < this.sessions.length; i++) {
         session = this.sessions[i];
+        console.log(session.class_status);
 
+<<<<<<< HEAD
         if (session.cancel_request == '' && session.payment_status != 1 && session.accept == '1' && session.class_status == 0) {
+=======
+        if (session.cancel_request == null && session.payment_status != 1 && session.accept == '1' && session.class_status == 0) {
+>>>>>>> f469c43464c781266261300383d31d25d8d7d0c3
           requests.push(session);
         }
       }
@@ -7288,7 +7424,11 @@ __webpack_require__.r(__webpack_exports__);
       for (var i = 0; i < this.sessions.length; i++) {
         session = this.sessions[i];
 
+<<<<<<< HEAD
         if (session.cancel_request == '' && session.payment_status == 1 && session.accept == '1' && session.class_status == 0) {
+=======
+        if (session.cancel_request == null && session.payment_status == 1 && session.accept == '1' && session.completed == 0) {
+>>>>>>> f469c43464c781266261300383d31d25d8d7d0c3
           requests.push(session);
         }
       }
@@ -7302,7 +7442,11 @@ __webpack_require__.r(__webpack_exports__);
       for (var i = 0; i < this.sessions.length; i++) {
         session = this.sessions[i];
 
+<<<<<<< HEAD
         if (session.cancel_request == '' && session.payment_status == 1 && session.accept == '1' && session.class_status == 1) {
+=======
+        if (session.cancel_request == null && session.payment_status == 1 && session.accept == '1' && session.completed == 1) {
+>>>>>>> f469c43464c781266261300383d31d25d8d7d0c3
           requests.push(session);
         }
       }
@@ -7532,7 +7676,11 @@ __webpack_require__.r(__webpack_exports__);
   updated: function updated() {
     var script = document.createElement("script"); //script.src = "https://www.paypal.com/sdk/js?client-id=AYSq3RDGsmBLJE-otTkBtM-jBRd1TCQwFf9RGfwddNXWz0uFU9ztymylOhRS&currency=" + this.currency;
 
+<<<<<<< HEAD
     script.src = "https://www.paypal.com/sdk/js?client-id=AU1qSrl-VvM9r15F6lhSITnPRtJvJwFJfd__J5cMP8FvpXCDcEloTOysg8exK1DZN8rMCsgBXCOUbPFd&currency=" + this.currency; // script.src = "https://www.paypal.com/sdk/js?client-id=AVAo9E3s-xN1GwGOPf7WuRsfUz67-urBxeAwRp_3xYboyF0_oW9E4MnLh0mgcbBqAYzmD3LoGD7a8oRP&currency=" + this.currency;
+=======
+    script.src = "https://www.paypal.com/sdk/js?client-id=AQJBgbxwGJkhuDwcblLfVwPq6TnDpAliMv5_HllIFnJ5l-Im6Sv5VK30SV8j7TSLUEYKYBCdTcamB-2K&currency=" + this.currency; // script.src = "https://www.paypal.com/sdk/js?client-id=AVAo9E3s-xN1GwGOPf7WuRsfUz67-urBxeAwRp_3xYboyF0_oW9E4MnLh0mgcbBqAYzmD3LoGD7a8oRP&currency=" + this.currency;
+>>>>>>> f469c43464c781266261300383d31d25d8d7d0c3
 
     script.addEventListener("load", this.setLoaded);
     document.body.appendChild(script);
@@ -7660,6 +7808,141 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/search/ad-student.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/search/ad-student.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+<<<<<<< HEAD
+=======
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+>>>>>>> f469c43464c781266261300383d31d25d8d7d0c3
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['url', 'ad', 'authid'],
+  data: function data() {
+    // console.log('Auth ID:' + authid)
+    return {
+      is_fav: false,
+      loading: false
+    };
+  },
+  methods: {
+    editAd: function editAd() {
+      this.$emit("editAd");
+    },
+    avatar: function avatar(user) {
+      if (user.avatar) {
+        return this.url + '/storage/images/' + user.avatar;
+      } else {
+        if (user.gender) {
+          return this.url + '/img/' + user.gender.toLowerCase() + '.jpg';
+        } else {
+          return this.url + '/img/male.jpg';
+        }
+      }
+    },
+    contact: function contact(id) {
+      var _this = this;
+
+      axios.post(this.url + '/check/hasConversation', {
+        id: id
+      }).then(function (response) {
+        if (response.data.has) {
+          window.location = _this.url + "/messages?u=" + id;
+        } else {
+          _this.$emit('startConversation');
+        }
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    deleteMyAd: function deleteMyAd(id) {
+      var _this2 = this;
+
+      axios.post(this.url + '/delete/my-ad', {
+        'id': id
+      }).then(function (response) {
+        console.log(response.data);
+        window.location = _this2.url + '/my-ads';
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    addToFav: function addToFav() {
+      var _this3 = this;
+
+      this.loading = true;
+      axios.post(this.url + '/post/favorite', {
+        id: this.ad.id
+      }).then(function (response) {
+        if (response.data.status == 'liked') {
+          _this3.is_fav = true;
+        } else {
+          _this3.is_fav = false;
+        }
+
+        _this3.loading = false;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    }
+  },
+  mounted: function mounted() {}
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/search/ad.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/search/ad.vue?vue&type=script&lang=js& ***!
@@ -7707,9 +7990,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['url', 'ad', 'authid'],
   data: function data() {
+    // console.log('Auth ID:' + authid)
     return {
       is_fav: false,
       loading: false
@@ -8192,6 +8486,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       chatWith: null,
       viewmode: 'all',
+      authid: this.authuser.id,
       ads: [],
       success: '',
       levels: [],
@@ -8203,6 +8498,7 @@ __webpack_require__.r(__webpack_exports__);
       country: '',
       state: '',
       city: '',
+      availability: 'Both',
       neighborhood: '',
       showSearchForm: true,
       viewAd: null,
@@ -8248,6 +8544,9 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    updateRadiusValue: function updateRadiusValue() {
+      $("#r_v").html($("#radius").val());
+    },
     contact: function contact(id) {
       var _this = this;
 
@@ -8275,18 +8574,20 @@ __webpack_require__.r(__webpack_exports__);
 
       this.markers = [];
       this.ads.forEach(function (ad) {
-        var ulat = ad.latitude;
-        var ulng = ad.longitude;
+        if (ad.ad_detail) {
+          var ulat = ad.latitude;
+          var ulng = ad.longitude;
 
-        if (ulat && ulng) {
-          _this2.markers.push({
-            position: {
-              lat: ulat,
-              lng: ulng
-            },
-            ad: ad
-          }); // this.center = { lat: ulat, lng: ulng }
+          if (ulat && ulng) {
+            _this2.markers.push({
+              position: {
+                lat: ulat,
+                lng: ulng
+              },
+              ad: ad
+            }); // this.center = { lat: ulat, lng: ulng }
 
+          }
         }
       });
     },
@@ -8455,6 +8756,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
+    // this.authid = this.authuser.id,
     // this.getCountries()
     // this.getStates()
     // this.getCities()
@@ -8754,6 +9056,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+<<<<<<< HEAD
+=======
+//
+>>>>>>> f469c43464c781266261300383d31d25d8d7d0c3
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -8789,6 +9095,7 @@ __webpack_require__.r(__webpack_exports__);
       cities: [],
       neighborhoods: [],
       country: '',
+      availability: 'Both',
       state: '',
       city: '',
       neighborhood: '',
@@ -8837,6 +9144,9 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    updateRadiusValue: function updateRadiusValue() {
+      $("#r_v").html($("#radius").val());
+    },
     myChangeEvent: function myChangeEvent(val) {
       console.log(val);
     },
@@ -8920,7 +9230,8 @@ __webpack_require__.r(__webpack_exports__);
     getTutors: function getTutors() {
       var _this3 = this;
 
-      this.radius = $("input[name=radius]").val();
+      this.radius = $("input[name=radius]").val() == undefined ? '1000' : $("input[name=radius]").val();
+      ;
       axios.post(this.url + '/search/tutors', {
         'radius': this.radius,
         'level': this.level,
@@ -76799,7 +77110,7 @@ var render = function() {
                   "div",
                   { staticClass: "ad-results" },
                   _vm._l(_vm.ads, function(ad) {
-                    return _c("ad", {
+                    return _c("ad-student", {
                       key: ad.id,
                       attrs: { url: _vm.url, ad: ad, authid: _vm.authid },
                       on: {
@@ -77388,7 +77699,11 @@ var render = function() {
                 },
                 [
                   _vm.error
+<<<<<<< HEAD
                     ? _c("div", { staticClass: "error" }, [
+=======
+                    ? _c("div", { staticClass: "error-bar" }, [
+>>>>>>> f469c43464c781266261300383d31d25d8d7d0c3
                         _vm._v(_vm._s(_vm.error))
                       ])
                     : _vm._e(),
@@ -77667,321 +77982,21 @@ var render = function() {
                     [
                       _vm.editingLocation
                         ? _c("div", { staticClass: "addlocations" }, [
-                            _c("div", { staticClass: "input" }, [
-                              _c("label", { attrs: { for: "" } }, [
-                                _vm._v("Country")
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "select",
-                                {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.ad.country,
-                                      expression: "ad.country"
-                                    }
-                                  ],
-                                  on: {
-                                    change: [
-                                      function($event) {
-                                        var $$selectedVal = Array.prototype.filter
-                                          .call($event.target.options, function(
-                                            o
-                                          ) {
-                                            return o.selected
-                                          })
-                                          .map(function(o) {
-                                            var val =
-                                              "_value" in o ? o._value : o.value
-                                            return val
-                                          })
-                                        _vm.$set(
-                                          _vm.ad,
-                                          "country",
-                                          $event.target.multiple
-                                            ? $$selectedVal
-                                            : $$selectedVal[0]
-                                        )
-                                      },
-                                      function($event) {
-                                        return _vm.getStates()
-                                      }
-                                    ]
-                                  }
-                                },
-                                [
-                                  _c("option", { attrs: { value: "" } }, [
-                                    _vm._v("-- Select Country --")
-                                  ]),
-                                  _vm._v(" "),
-                                  _vm._l(_vm.countries, function(country) {
-                                    return _c(
-                                      "option",
-                                      {
-                                        key: country.id,
-                                        domProps: { value: country.id }
-                                      },
-                                      [_vm._v(_vm._s(country.name))]
-                                    )
-                                  })
-                                ],
-                                2
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _vm.states.length
-                              ? _c("div", { staticClass: "input" }, [
-                                  _c("label", { attrs: { for: "" } }, [
-                                    _vm._v("State / Province")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "select",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.ad.state,
-                                          expression: "ad.state"
-                                        }
-                                      ],
-                                      on: {
-                                        change: [
-                                          function($event) {
-                                            var $$selectedVal = Array.prototype.filter
-                                              .call(
-                                                $event.target.options,
-                                                function(o) {
-                                                  return o.selected
-                                                }
-                                              )
-                                              .map(function(o) {
-                                                var val =
-                                                  "_value" in o
-                                                    ? o._value
-                                                    : o.value
-                                                return val
-                                              })
-                                            _vm.$set(
-                                              _vm.ad,
-                                              "state",
-                                              $event.target.multiple
-                                                ? $$selectedVal
-                                                : $$selectedVal[0]
-                                            )
-                                          },
-                                          function($event) {
-                                            return _vm.getCities()
-                                          }
-                                        ]
-                                      }
-                                    },
-                                    [
-                                      _c("option", { attrs: { value: "" } }, [
-                                        _vm._v("-- Select State --")
-                                      ]),
-                                      _vm._v(" "),
-                                      _vm._l(_vm.states, function(state) {
-                                        return _c(
-                                          "option",
-                                          {
-                                            key: state.id,
-                                            domProps: { value: state.id }
-                                          },
-                                          [_vm._v(_vm._s(state.name))]
-                                        )
-                                      })
-                                    ],
-                                    2
-                                  )
-                                ])
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _vm.cities.length
-                              ? _c("div", { staticClass: "input" }, [
-                                  _c("label", { attrs: { for: "" } }, [
-                                    _vm._v("City")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "select",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.ad.city,
-                                          expression: "ad.city"
-                                        }
-                                      ],
-                                      on: {
-                                        change: [
-                                          function($event) {
-                                            var $$selectedVal = Array.prototype.filter
-                                              .call(
-                                                $event.target.options,
-                                                function(o) {
-                                                  return o.selected
-                                                }
-                                              )
-                                              .map(function(o) {
-                                                var val =
-                                                  "_value" in o
-                                                    ? o._value
-                                                    : o.value
-                                                return val
-                                              })
-                                            _vm.$set(
-                                              _vm.ad,
-                                              "city",
-                                              $event.target.multiple
-                                                ? $$selectedVal
-                                                : $$selectedVal[0]
-                                            )
-                                          },
-                                          function($event) {
-                                            return _vm.getNeighborhoods()
-                                          }
-                                        ]
-                                      }
-                                    },
-                                    [
-                                      _c("option", { attrs: { value: "" } }, [
-                                        _vm._v("-- Select City --")
-                                      ]),
-                                      _vm._v(" "),
-                                      _vm._l(_vm.cities, function(city) {
-                                        return _c(
-                                          "option",
-                                          {
-                                            key: city.id,
-                                            domProps: { value: city.id }
-                                          },
-                                          [_vm._v(_vm._s(city.name))]
-                                        )
-                                      })
-                                    ],
-                                    2
-                                  )
-                                ])
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _vm.neighborhoods.length
-                              ? _c("div", { staticClass: "input" }, [
-                                  _c("label", { attrs: { for: "" } }, [
-                                    _vm._v("Neighborhood")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "select",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.ad.neighborhood,
-                                          expression: "ad.neighborhood"
-                                        }
-                                      ],
-                                      on: {
-                                        change: function($event) {
-                                          var $$selectedVal = Array.prototype.filter
-                                            .call(
-                                              $event.target.options,
-                                              function(o) {
-                                                return o.selected
-                                              }
-                                            )
-                                            .map(function(o) {
-                                              var val =
-                                                "_value" in o
-                                                  ? o._value
-                                                  : o.value
-                                              return val
-                                            })
-                                          _vm.$set(
-                                            _vm.ad,
-                                            "neighborhood",
-                                            $event.target.multiple
-                                              ? $$selectedVal
-                                              : $$selectedVal[0]
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _c("option", { attrs: { value: "" } }, [
-                                        _vm._v("-- Select Neighborhood --")
-                                      ]),
-                                      _vm._v(" "),
-                                      _vm._l(_vm.neighborhoods, function(
-                                        neighborhood
-                                      ) {
-                                        return _c(
-                                          "option",
-                                          {
-                                            key: neighborhood.id,
-                                            domProps: { value: neighborhood.id }
-                                          },
-                                          [_vm._v(_vm._s(neighborhood.name))]
-                                        )
-                                      }),
-                                      _vm._v(" "),
-                                      _c("option", { attrs: { value: "-1" } }, [
-                                        _vm._v("Other")
-                                      ])
-                                    ],
-                                    2
-                                  )
-                                ])
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _vm.ad.neighborhood == -1
-                              ? _c("div", { staticClass: "input" }, [
-                                  _c("label", { attrs: { for: "" } }, [
-                                    _vm._v("Neighborhood Name   "),
-                                    _c("small", [
-                                      _vm._v(
-                                        "Make sure neighborhood name is correct and avoid spellings mistakes"
-                                      )
-                                    ])
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("input", {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.ad.new_neighborhood,
-                                        expression: "ad.new_neighborhood"
-                                      }
-                                    ],
-                                    staticClass: "input",
-                                    attrs: {
-                                      type: "text",
-                                      placeholder: "Neighborhood"
-                                    },
-                                    domProps: {
-                                      value: _vm.ad.new_neighborhood
-                                    },
-                                    on: {
-                                      input: function($event) {
-                                        if ($event.target.composing) {
-                                          return
-                                        }
-                                        _vm.$set(
-                                          _vm.ad,
-                                          "new_neighborhood",
-                                          $event.target.value
-                                        )
-                                      }
-                                    }
-                                  })
-                                ])
-                              : _vm._e()
+                            _c(
+                              "div",
+                              { staticClass: "input" },
+                              [
+                                _c("label", { attrs: { for: "" } }, [
+                                  _vm._v("Address")
+                                ]),
+                                _vm._v(" "),
+                                _c("gmap-autocomplete", {
+                                  staticClass: "form-control",
+                                  on: { place_changed: _vm.setPlace }
+                                })
+                              ],
+                              1
+                            )
                           ])
                         : _vm._e()
                     ]
@@ -77992,27 +78007,13 @@ var render = function() {
                         _c("span", { staticClass: "current" }, [
                           _vm._v(
                             "\n                            " +
-                              _vm._s(
-                                _vm.user.neighborhood
-                                  ? _vm.user.neighborhood.name
-                                  : ""
-                              ) +
-                              "\n                            " +
-                              _vm._s(
-                                _vm.user.city ? ", " + _vm.user.city.name : ""
-                              ) +
-                              "\n                            " +
-                              _vm._s(
-                                _vm.user.state ? ", " + _vm.user.state.name : ""
-                              ) +
-                              "\n                            " +
-                              _vm._s(
-                                _vm.user.country
-                                  ? ", " + _vm.user.country.name
-                                  : ""
-                              ) +
+                              _vm._s(_vm.user.address) +
                               "\n                            "
-                          )
+                          ),
+                          _c("input", {
+                            attrs: { type: "hidden", name: "address_" },
+                            domProps: { value: _vm.user.address }
+                          })
                         ]),
                         _vm._v(" "),
                         _c(
@@ -78141,6 +78142,65 @@ var render = function() {
                         })
                       ],
                       2
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input" }, [
+                    _c("label", { attrs: { for: "" } }, [
+                      _vm._v("Online/In-Person")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.ad.availability,
+                            expression: "ad.availability"
+                          }
+                        ],
+                        attrs: { name: "availability", id: "availability" },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.ad,
+                              "availability",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { value: "" } }, [
+                          _vm._v("-- Select Availability --")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "Online" } }, [
+                          _vm._v("Online")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "In-Person" } }, [
+                          _vm._v("In-Person")
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "option",
+                          { attrs: { value: "Both", selected: "" } },
+                          [_vm._v("Both")]
+                        )
+                      ]
                     )
                   ]),
                   _vm._v(" "),
@@ -78321,321 +78381,21 @@ var render = function() {
                     [
                       _vm.editingLocation
                         ? _c("div", { staticClass: "addlocations" }, [
-                            _c("div", { staticClass: "input" }, [
-                              _c("label", { attrs: { for: "" } }, [
-                                _vm._v("Country")
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "select",
-                                {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.ad.country,
-                                      expression: "ad.country"
-                                    }
-                                  ],
-                                  on: {
-                                    change: [
-                                      function($event) {
-                                        var $$selectedVal = Array.prototype.filter
-                                          .call($event.target.options, function(
-                                            o
-                                          ) {
-                                            return o.selected
-                                          })
-                                          .map(function(o) {
-                                            var val =
-                                              "_value" in o ? o._value : o.value
-                                            return val
-                                          })
-                                        _vm.$set(
-                                          _vm.ad,
-                                          "country",
-                                          $event.target.multiple
-                                            ? $$selectedVal
-                                            : $$selectedVal[0]
-                                        )
-                                      },
-                                      function($event) {
-                                        return _vm.getStates()
-                                      }
-                                    ]
-                                  }
-                                },
-                                [
-                                  _c("option", { attrs: { value: "" } }, [
-                                    _vm._v("-- Select Country --")
-                                  ]),
-                                  _vm._v(" "),
-                                  _vm._l(_vm.countries, function(country) {
-                                    return _c(
-                                      "option",
-                                      {
-                                        key: country.id,
-                                        domProps: { value: country.id }
-                                      },
-                                      [_vm._v(_vm._s(country.name))]
-                                    )
-                                  })
-                                ],
-                                2
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _vm.states.length
-                              ? _c("div", { staticClass: "input" }, [
-                                  _c("label", { attrs: { for: "" } }, [
-                                    _vm._v("State / Province")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "select",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.ad.state,
-                                          expression: "ad.state"
-                                        }
-                                      ],
-                                      on: {
-                                        change: [
-                                          function($event) {
-                                            var $$selectedVal = Array.prototype.filter
-                                              .call(
-                                                $event.target.options,
-                                                function(o) {
-                                                  return o.selected
-                                                }
-                                              )
-                                              .map(function(o) {
-                                                var val =
-                                                  "_value" in o
-                                                    ? o._value
-                                                    : o.value
-                                                return val
-                                              })
-                                            _vm.$set(
-                                              _vm.ad,
-                                              "state",
-                                              $event.target.multiple
-                                                ? $$selectedVal
-                                                : $$selectedVal[0]
-                                            )
-                                          },
-                                          function($event) {
-                                            return _vm.getCities()
-                                          }
-                                        ]
-                                      }
-                                    },
-                                    [
-                                      _c("option", { attrs: { value: "" } }, [
-                                        _vm._v("-- Select State --")
-                                      ]),
-                                      _vm._v(" "),
-                                      _vm._l(_vm.states, function(state) {
-                                        return _c(
-                                          "option",
-                                          {
-                                            key: state.id,
-                                            domProps: { value: state.id }
-                                          },
-                                          [_vm._v(_vm._s(state.name))]
-                                        )
-                                      })
-                                    ],
-                                    2
-                                  )
-                                ])
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _vm.cities.length
-                              ? _c("div", { staticClass: "input" }, [
-                                  _c("label", { attrs: { for: "" } }, [
-                                    _vm._v("City")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "select",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.ad.city,
-                                          expression: "ad.city"
-                                        }
-                                      ],
-                                      on: {
-                                        change: [
-                                          function($event) {
-                                            var $$selectedVal = Array.prototype.filter
-                                              .call(
-                                                $event.target.options,
-                                                function(o) {
-                                                  return o.selected
-                                                }
-                                              )
-                                              .map(function(o) {
-                                                var val =
-                                                  "_value" in o
-                                                    ? o._value
-                                                    : o.value
-                                                return val
-                                              })
-                                            _vm.$set(
-                                              _vm.ad,
-                                              "city",
-                                              $event.target.multiple
-                                                ? $$selectedVal
-                                                : $$selectedVal[0]
-                                            )
-                                          },
-                                          function($event) {
-                                            return _vm.getNeighborhoods()
-                                          }
-                                        ]
-                                      }
-                                    },
-                                    [
-                                      _c("option", { attrs: { value: "" } }, [
-                                        _vm._v("-- Select City --")
-                                      ]),
-                                      _vm._v(" "),
-                                      _vm._l(_vm.cities, function(city) {
-                                        return _c(
-                                          "option",
-                                          {
-                                            key: city.id,
-                                            domProps: { value: city.id }
-                                          },
-                                          [_vm._v(_vm._s(city.name))]
-                                        )
-                                      })
-                                    ],
-                                    2
-                                  )
-                                ])
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _vm.neighborhoods.length
-                              ? _c("div", { staticClass: "input" }, [
-                                  _c("label", { attrs: { for: "" } }, [
-                                    _vm._v("Neighborhood")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "select",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.ad.neighborhood,
-                                          expression: "ad.neighborhood"
-                                        }
-                                      ],
-                                      on: {
-                                        change: function($event) {
-                                          var $$selectedVal = Array.prototype.filter
-                                            .call(
-                                              $event.target.options,
-                                              function(o) {
-                                                return o.selected
-                                              }
-                                            )
-                                            .map(function(o) {
-                                              var val =
-                                                "_value" in o
-                                                  ? o._value
-                                                  : o.value
-                                              return val
-                                            })
-                                          _vm.$set(
-                                            _vm.ad,
-                                            "neighborhood",
-                                            $event.target.multiple
-                                              ? $$selectedVal
-                                              : $$selectedVal[0]
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _c("option", { attrs: { value: "" } }, [
-                                        _vm._v("-- Select Neighborhood --")
-                                      ]),
-                                      _vm._v(" "),
-                                      _vm._l(_vm.neighborhoods, function(
-                                        neighborhood
-                                      ) {
-                                        return _c(
-                                          "option",
-                                          {
-                                            key: neighborhood.id,
-                                            domProps: { value: neighborhood.id }
-                                          },
-                                          [_vm._v(_vm._s(neighborhood.name))]
-                                        )
-                                      }),
-                                      _vm._v(" "),
-                                      _c("option", { attrs: { value: "-1" } }, [
-                                        _vm._v("Other")
-                                      ])
-                                    ],
-                                    2
-                                  )
-                                ])
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _vm.ad.neighborhood == -1
-                              ? _c("div", { staticClass: "input" }, [
-                                  _c("label", { attrs: { for: "" } }, [
-                                    _vm._v("Neighborhood Name   "),
-                                    _c("small", [
-                                      _vm._v(
-                                        "Make sure neighborhood name is correct and avoid spellings mistakes"
-                                      )
-                                    ])
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("input", {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.ad.new_neighborhood,
-                                        expression: "ad.new_neighborhood"
-                                      }
-                                    ],
-                                    staticClass: "input",
-                                    attrs: {
-                                      type: "text",
-                                      placeholder: "Neighborhood"
-                                    },
-                                    domProps: {
-                                      value: _vm.ad.new_neighborhood
-                                    },
-                                    on: {
-                                      input: function($event) {
-                                        if ($event.target.composing) {
-                                          return
-                                        }
-                                        _vm.$set(
-                                          _vm.ad,
-                                          "new_neighborhood",
-                                          $event.target.value
-                                        )
-                                      }
-                                    }
-                                  })
-                                ])
-                              : _vm._e()
+                            _c(
+                              "div",
+                              { staticClass: "input" },
+                              [
+                                _c("label", { attrs: { for: "" } }, [
+                                  _vm._v("Address")
+                                ]),
+                                _vm._v(" "),
+                                _c("gmap-autocomplete", {
+                                  staticClass: "form-control",
+                                  on: { place_changed: _vm.setPlace }
+                                })
+                              ],
+                              1
+                            )
                           ])
                         : _vm._e()
                     ]
@@ -78646,29 +78406,13 @@ var render = function() {
                         _c("span", { staticClass: "current" }, [
                           _vm._v(
                             "\n                            " +
-                              _vm._s(
-                                _vm.thead.neighborhood
-                                  ? _vm.thead.neighborhood.name
-                                  : ""
-                              ) +
-                              "\n                            " +
-                              _vm._s(
-                                _vm.thead.city ? ", " + _vm.thead.city.name : ""
-                              ) +
-                              "\n                            " +
-                              _vm._s(
-                                _vm.thead.state
-                                  ? ", " + _vm.thead.state.name
-                                  : ""
-                              ) +
-                              "\n                            " +
-                              _vm._s(
-                                _vm.thead.country
-                                  ? ", " + _vm.thead.country.name
-                                  : ""
-                              ) +
+                              _vm._s(_vm.thead.address) +
                               "\n                            "
-                          )
+                          ),
+                          _c("input", {
+                            attrs: { type: "hidden", name: "address_" },
+                            domProps: { value: _vm.thead.address }
+                          })
                         ]),
                         _vm._v(" "),
                         _c(
@@ -78797,6 +78541,65 @@ var render = function() {
                         })
                       ],
                       2
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input" }, [
+                    _c("label", { attrs: { for: "" } }, [
+                      _vm._v("Online/In-Person")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.ad.availability,
+                            expression: "ad.availability"
+                          }
+                        ],
+                        attrs: { name: "availability", id: "availability" },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.ad,
+                              "availability",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { value: "" } }, [
+                          _vm._v("-- Select Availability --")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "Online" } }, [
+                          _vm._v("Online")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "In-Person" } }, [
+                          _vm._v("In-Person")
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "option",
+                          { attrs: { value: "Both", selected: "" } },
+                          [_vm._v("Both")]
+                        )
+                      ]
                     )
                   ]),
                   _vm._v(" "),
@@ -79487,7 +79290,13 @@ var render = function() {
                           expression: "rate"
                         }
                       ],
-                      attrs: { type: "number", min: "20", placeholder: "Rate" },
+                      attrs: {
+                        type: "number",
+                        min: "20",
+                        max: "1000",
+                        value: "20",
+                        placeholder: "Rate"
+                      },
                       domProps: { value: _vm.rate },
                       on: {
                         input: function($event) {
@@ -79654,7 +79463,13 @@ var render = function() {
                           expression: "editPlan.rate"
                         }
                       ],
-                      attrs: { type: "number", placeholder: "Rate" },
+                      attrs: {
+                        type: "number",
+                        min: "20",
+                        max: "1000",
+                        value: "20",
+                        placeholder: "Rate"
+                      },
                       domProps: { value: _vm.editPlan.rate },
                       on: {
                         input: function($event) {
@@ -80079,7 +79894,11 @@ var render = function() {
                 _c("div", { staticClass: "field" }, [
                   _c("div", { staticClass: "input" }, [
                     _c("label", { attrs: { for: "" } }, [
+<<<<<<< HEAD
                       _vm._v("Availability")
+=======
+                      _vm._v("Online/In-Person")
+>>>>>>> f469c43464c781266261300383d31d25d8d7d0c3
                     ]),
                     _vm._v(" "),
                     _c(
@@ -80118,17 +79937,30 @@ var render = function() {
                           _vm._v("-- Select Availability --")
                         ]),
                         _vm._v(" "),
+<<<<<<< HEAD
                         _c("option", { attrs: { value: "Both" } }, [
                           _vm._v("Both")
+=======
+                        _c("option", { attrs: { value: "Online" } }, [
+                          _vm._v("Online")
+>>>>>>> f469c43464c781266261300383d31d25d8d7d0c3
                         ]),
                         _vm._v(" "),
                         _c("option", { attrs: { value: "In-Person" } }, [
                           _vm._v("In-Person")
                         ]),
                         _vm._v(" "),
+<<<<<<< HEAD
                         _c("option", { attrs: { value: "Both" } }, [
                           _vm._v("Both")
                         ])
+=======
+                        _c(
+                          "option",
+                          { attrs: { value: "Both", selected: "" } },
+                          [_vm._v("Both")]
+                        )
+>>>>>>> f469c43464c781266261300383d31d25d8d7d0c3
                       ]
                     )
                   ])
@@ -80278,7 +80110,11 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
+<<<<<<< HEAD
                 !_vm.user.currency && _vm.user.type == "teacher"
+=======
+                _vm.user.currency == null && _vm.user.type == "teacher"
+>>>>>>> f469c43464c781266261300383d31d25d8d7d0c3
                   ? _c("div", { staticClass: "field" }, [
                       _c("div", { staticClass: "input" }, [
                         _c("label", { attrs: { for: "" } }, [
@@ -81066,22 +80902,11 @@ var render = function() {
                     "div",
                     { staticClass: "input" },
                     [
-                      _c("label", { attrs: { for: "" } }, [_vm._v("Country")]),
+                      _c("label", { attrs: { for: "" } }, [_vm._v("Location")]),
                       _vm._v(" "),
-                      _c("Select2", {
-                        attrs: { options: _vm.countries },
-                        on: {
-                          change: function($event) {
-                            return _vm.countrySelected()
-                          }
-                        },
-                        model: {
-                          value: _vm.student.country,
-                          callback: function($$v) {
-                            _vm.$set(_vm.student, "country", $$v)
-                          },
-                          expression: "student.country"
-                        }
+                      _c("gmap-autocomplete", {
+                        staticClass: "form-control",
+                        on: { place_changed: _vm.setPlace }
                       })
                     ],
                     1
@@ -81380,7 +81205,7 @@ var render = function() {
                         "a",
                         {
                           attrs: {
-                            href: "https://tutors-hub.com/terms-and-conditions",
+                            href: "/terms-and-conditions",
                             target: "_blank"
                           }
                         },
@@ -81390,10 +81215,7 @@ var render = function() {
                       _c(
                         "a",
                         {
-                          attrs: {
-                            href: "https://tutors-hub.com/privacy-policy",
-                            target: "_blank"
-                          }
+                          attrs: { href: "/privacy-policy", target: "_blank" }
                         },
                         [_vm._v("Privacy policy")]
                       )
@@ -81462,7 +81284,11 @@ var render = function() {
               _c("div", { staticClass: "btns" }, [
                 _c(
                   "a",
+<<<<<<< HEAD
                   { staticClass: "btn btn-log", attrs: { href: "login" } },
+=======
+                  { staticClass: "btn btn-log", attrs: { href: "/login" } },
+>>>>>>> f469c43464c781266261300383d31d25d8d7d0c3
                   [_vm._v("Login Now")]
                 )
               ])
@@ -81477,11 +81303,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      { staticClass: "btn-cancel", attrs: { href: "https://tutors-hub.com/" } },
-      [_c("i", { staticClass: "fas fa-long-arrow-alt-left" })]
-    )
+    return _c("a", { staticClass: "btn-cancel", attrs: { href: "/" } }, [
+      _c("i", { staticClass: "fas fa-long-arrow-alt-left" })
+    ])
   },
   function() {
     var _vm = this
@@ -81779,22 +81603,11 @@ var render = function() {
                     "div",
                     { staticClass: "input" },
                     [
-                      _c("label", { attrs: { for: "" } }, [_vm._v("Country")]),
+                      _c("label", { attrs: { for: "" } }, [_vm._v("Location")]),
                       _vm._v(" "),
-                      _c("Select2", {
-                        attrs: { options: _vm.countries },
-                        on: {
-                          change: function($event) {
-                            return _vm.countrySelected()
-                          }
-                        },
-                        model: {
-                          value: _vm.teacher.country,
-                          callback: function($$v) {
-                            _vm.$set(_vm.teacher, "country", $$v)
-                          },
-                          expression: "teacher.country"
-                        }
+                      _c("gmap-autocomplete", {
+                        staticClass: "form-control",
+                        on: { place_changed: _vm.setPlace }
                       })
                     ],
                     1
@@ -81968,7 +81781,7 @@ var render = function() {
                       "a",
                       {
                         attrs: {
-                          href: "https://tutors-hub.com/terms-and-conditions",
+                          href: "/terms-and-conditions",
                           target: "_blank"
                         }
                       },
@@ -81977,12 +81790,7 @@ var render = function() {
                     _vm._v(" & "),
                     _c(
                       "a",
-                      {
-                        attrs: {
-                          href: "https://tutors-hub.com/privacy-policy",
-                          target: "_blank"
-                        }
-                      },
+                      { attrs: { href: "/privacy-policy", target: "_blank" } },
                       [_vm._v("Privacy policy")]
                     )
                   ])
@@ -82049,10 +81857,7 @@ var render = function() {
               _c("div", { staticClass: "btns" }, [
                 _c(
                   "a",
-                  {
-                    staticClass: "btn btn-log",
-                    attrs: { href: "https://tutors-hub.com/login" }
-                  },
+                  { staticClass: "btn btn-log", attrs: { href: "/login" } },
                   [_vm._v("Login Now")]
                 )
               ])
@@ -82067,11 +81872,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      { staticClass: "btn-cancel", attrs: { href: "https://tutors-hub.com/" } },
-      [_c("i", { staticClass: "fas fa-long-arrow-alt-left" })]
-    )
+    return _c("a", { staticClass: "btn-cancel", attrs: { href: "/" } }, [
+      _c("i", { staticClass: "fas fa-long-arrow-alt-left" })
+    ])
   },
   function() {
     var _vm = this
@@ -82115,7 +81918,13 @@ var render = function() {
         _c("a", { attrs: { href: _vm.url + "/profile" } }, [
           _c("img", { attrs: { src: _vm.avatar, alt: "" } }),
           _vm._v(" "),
-          _c("span", [_vm._v(_vm._s(_vm.user.name))])
+          _c("span", [
+            _vm._v(
+              _vm._s(_vm.user.name) +
+                " " +
+                _vm._s(!_vm.user.is_active ? "( DeActivated )" : "")
+            )
+          ])
         ])
       ]),
       _vm._v(" "),
@@ -82230,7 +82039,13 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("p", { staticClass: "name" }, [
-                    _vm._v(_vm._s(_vm.user.name))
+                    _vm._v(
+                      _vm._s(_vm.user.name) +
+                        " " +
+                        _vm._s(
+                          !_vm.user.is_active ? "( DeActivated Profile )" : ""
+                        )
+                    )
                   ])
                 ]),
                 _vm._v(" "),
@@ -82315,9 +82130,11 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("li", [
-                  _c("a", { attrs: { href: _vm.url + "/favorites" } }, [
-                    _vm._v("Saved Profiles")
-                  ])
+                  _vm.user.type == "student"
+                    ? _c("a", { attrs: { href: _vm.url + "/favorites" } }, [
+                        _vm._v("Saved Profiles")
+                      ])
+                    : _vm._e()
                 ]),
                 _vm._v(" "),
                 _c("li", [
@@ -83326,27 +83143,31 @@ var render = function() {
                   : _c("span", { staticClass: "nval" }, [_vm._v("Yes")])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "option" }, [
-                _c("span", { staticClass: "key del" }, [
-                  _c("a", { attrs: { href: _vm.url + "/my-files" } }, [
-                    _vm._v("Manage Files")
+              _vm.user.type == "teacher"
+                ? _c("div", { staticClass: "option" }, [
+                    _c("span", { staticClass: "key del" }, [
+                      _c("a", { attrs: { href: _vm.url + "/my-files" } }, [
+                        _vm._v("Manage Files")
+                      ])
+                    ])
                   ])
-                ])
-              ]),
+                : _vm._e(),
               _vm._v(" "),
               _c("div", { staticClass: "option" }, [
-                _c(
-                  "span",
-                  {
-                    staticClass: "key del",
-                    on: {
-                      click: function($event) {
-                        return _vm.deleteProfile()
-                      }
-                    }
-                  },
-                  [_vm._v("Delete Profile")]
-                )
+                _vm.user.is_active
+                  ? _c(
+                      "span",
+                      {
+                        staticClass: "key del",
+                        on: {
+                          click: function($event) {
+                            return _vm.deleteProfile()
+                          }
+                        }
+                      },
+                      [_vm._v("DeActivate Profile")]
+                    )
+                  : _vm._e()
               ])
             ])
           : _vm._e(),
@@ -83713,7 +83534,7 @@ var render = function() {
               _c("div", { staticClass: "sess-info" }, [
                 _vm.viewSession.payment_status != 1 &&
                 _vm.viewSession.accept != "1" &&
-                _vm.viewSession.class_status == 0
+                _vm.viewSession.completed == 0
                   ? _c("div", { staticClass: "status" }, [
                       _c("span", [_vm._v("Requested")])
                     ])
@@ -83721,7 +83542,7 @@ var render = function() {
                 _vm._v(" "),
                 _vm.viewSession.payment_status != 1 &&
                 _vm.viewSession.accept == "1" &&
-                _vm.viewSession.class_status == 0
+                _vm.viewSession.completed == 0
                   ? _c("div", { staticClass: "status" }, [
                       _c("span", [_vm._v("Pending")])
                     ])
@@ -83729,7 +83550,7 @@ var render = function() {
                 _vm._v(" "),
                 _vm.viewSession.payment_status == 1 &&
                 _vm.viewSession.accept == "1" &&
-                _vm.viewSession.class_status == 0
+                _vm.viewSession.completed == 0
                   ? _c("div", { staticClass: "status" }, [
                       _c("span", [_vm._v("Upcoming")])
                     ])
@@ -83737,7 +83558,7 @@ var render = function() {
                 _vm._v(" "),
                 _vm.viewSession.payment_status == 1 &&
                 _vm.viewSession.accept == "1" &&
-                _vm.viewSession.class_status == 1
+                _vm.viewSession.completed == 1
                   ? _c("div", { staticClass: "status" }, [
                       _c("span", [_vm._v("Completed")])
                     ])
@@ -83813,7 +83634,7 @@ var render = function() {
             _vm._v(" "),
             _vm.authuser.type == "student" &&
             !_vm.viewSession.completed &&
-            _vm.viewSession.class_status == 1
+            _vm.viewSession.completed == 1
               ? _c("div", { staticClass: "statusbar" }, [
                   _c("span", { staticClass: "val" }, [_vm._v("Pending")]),
                   _vm._v(" "),
@@ -83861,9 +83682,27 @@ var render = function() {
                 )
               : _vm._e(),
             _vm._v(" "),
+            _vm.viewSession.sessiontype == "In Person" &&
             _vm.viewSession.payment_status == "1" &&
             _vm.viewSession.accept == "1" &&
-            _vm.viewSession.class_status == "0" &&
+            _vm.viewSession.completed == "0" &&
+            _vm.viewSession.completed == 0 &&
+            !_vm.viewSession.cancel_request &&
+            _vm.authuser.type != "student"
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-gradientb",
+                    on: { click: _vm.markComplete }
+                  },
+                  [_vm._v("Mark as completed")]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.viewSession.sessiontype == "Online" &&
+            _vm.viewSession.payment_status == "1" &&
+            _vm.viewSession.accept == "1" &&
+            _vm.viewSession.completed == "0" &&
             !_vm.viewSession.cancel_request &&
             _vm.authuser.type != "student"
               ? _c(
@@ -83877,9 +83716,9 @@ var render = function() {
                 )
               : _vm._e(),
             _vm._v(" "),
-            _vm.viewSession.payment_status == 1 &&
+            _vm.viewSession.sessiontype == "Online" &&
             _vm.viewSession.accept == "1" &&
-            _vm.viewSession.class_status == 0 &&
+            _vm.viewSession.completed == 0 &&
             !_vm.viewSession.cancel_request &&
             _vm.authuser.type == "student"
               ? _c(
@@ -83911,7 +83750,7 @@ var render = function() {
             _vm._v(" "),
             _vm.viewSession.payment_status == 1 &&
             _vm.viewSession.accept == "1" &&
-            _vm.viewSession.class_status == 1
+            _vm.viewSession.completed == 1
               ? _c("div", { staticClass: "status" }, [
                   _c("div", { attrs: { id: "record" } })
                 ])
@@ -84302,7 +84141,7 @@ var render = function() {
                                 _c("div", { staticClass: "info" }, [
                                   _c("span", { staticClass: "dt" }, [
                                     _vm._v(
-                                      "Session Type" + _vm._s(ses.sessiontype)
+                                      "Session Type: " + _vm._s(ses.sessiontype)
                                     )
                                   ]),
                                   _vm._v(" "),
@@ -84333,7 +84172,7 @@ var render = function() {
                                 _c("div", { staticClass: "actions" }, [
                                   ses.payment_status != 1 &&
                                   ses.accept != "1" &&
-                                  ses.class_status == 0
+                                  ses.completed == 0
                                     ? _c("div", { staticClass: "status" }, [
                                         !ses.cancel_request
                                           ? _c(
@@ -84363,7 +84202,7 @@ var render = function() {
                                   _vm._v(" "),
                                   ses.payment_status != 1 &&
                                   ses.accept == "1" &&
-                                  ses.class_status == 0
+                                  ses.completed == 0
                                     ? _c("div", { staticClass: "status" }, [
                                         _vm._v("Pending")
                                       ])
@@ -84371,7 +84210,11 @@ var render = function() {
                                   _vm._v(" "),
                                   ses.payment_status == 1 &&
                                   ses.accept == "1" &&
+<<<<<<< HEAD
                                   ses.class_status == 1
+=======
+                                  ses.completed == 1
+>>>>>>> f469c43464c781266261300383d31d25d8d7d0c3
                                     ? _c("div", { staticClass: "status" }, [
                                         _vm._v("Completed")
                                       ])
@@ -84513,7 +84356,7 @@ var render = function() {
                                 _c("div", { staticClass: "info" }, [
                                   _c("span", { staticClass: "dt" }, [
                                     _vm._v(
-                                      "Session Type" + _vm._s(ses.sessiontype)
+                                      "Session Type: " + _vm._s(ses.sessiontype)
                                     )
                                   ]),
                                   _vm._v(" "),
@@ -84544,7 +84387,7 @@ var render = function() {
                                 _c("div", { staticClass: "actions" }, [
                                   ses.payment_status != 1 &&
                                   ses.accept != "1" &&
-                                  ses.class_status == 0
+                                  ses.completed == 0
                                     ? _c("div", { staticClass: "status" }, [
                                         _vm._v("Requested")
                                       ])
@@ -84552,7 +84395,7 @@ var render = function() {
                                   _vm._v(" "),
                                   ses.payment_status != 1 &&
                                   ses.accept == "1" &&
-                                  ses.class_status == 0
+                                  ses.completed == 0
                                     ? _c("div", { staticClass: "status" }, [
                                         _vm._v("Pending")
                                       ])
@@ -84560,7 +84403,7 @@ var render = function() {
                                   _vm._v(" "),
                                   ses.payment_status == 1 &&
                                   ses.accept == "1" &&
-                                  ses.class_status == 0
+                                  ses.completed == 0
                                     ? _c("div", { staticClass: "status" }, [
                                         _vm._v("Upcoming")
                                       ])
@@ -84568,7 +84411,7 @@ var render = function() {
                                   _vm._v(" "),
                                   ses.payment_status == 1 &&
                                   ses.accept == "1" &&
-                                  ses.class_status == 1
+                                  ses.completed == 1
                                     ? _c("div", { staticClass: "status" }, [
                                         _vm._v("Completed")
                                       ])
@@ -84710,7 +84553,7 @@ var render = function() {
                                 _c("div", { staticClass: "info" }, [
                                   _c("span", { staticClass: "dt" }, [
                                     _vm._v(
-                                      "Session Type" + _vm._s(ses.sessiontype)
+                                      "Session Type: " + _vm._s(ses.sessiontype)
                                     )
                                   ]),
                                   _vm._v(" "),
@@ -84741,7 +84584,7 @@ var render = function() {
                                 _c("div", { staticClass: "actions" }, [
                                   ses.payment_status != 1 &&
                                   ses.accept != "1" &&
-                                  ses.class_status == 0
+                                  ses.completed == 0
                                     ? _c("div", { staticClass: "status" }, [
                                         _vm._v("Requested")
                                       ])
@@ -84749,7 +84592,7 @@ var render = function() {
                                   _vm._v(" "),
                                   ses.payment_status != 1 &&
                                   ses.accept == "1" &&
-                                  ses.class_status == 0
+                                  ses.completed == 0
                                     ? _c("div", { staticClass: "status" }, [
                                         _vm._v("Pending")
                                       ])
@@ -84757,7 +84600,7 @@ var render = function() {
                                   _vm._v(" "),
                                   ses.payment_status == 1 &&
                                   ses.accept == "1" &&
-                                  ses.class_status == 0
+                                  ses.completed == 0
                                     ? _c("div", { staticClass: "status" }, [
                                         !ses.cancel_request
                                           ? _c(
@@ -84791,7 +84634,7 @@ var render = function() {
                                   _vm._v(" "),
                                   ses.payment_status == 1 &&
                                   ses.accept == "1" &&
-                                  ses.class_status == 1
+                                  ses.completed == 1
                                     ? _c("div", { staticClass: "status" }, [
                                         _vm._v("Completed")
                                       ])
@@ -84933,7 +84776,7 @@ var render = function() {
                                 _c("div", { staticClass: "info" }, [
                                   _c("span", { staticClass: "dt" }, [
                                     _vm._v(
-                                      "Session Type" + _vm._s(ses.sessiontype)
+                                      "Session Type: " + _vm._s(ses.sessiontype)
                                     )
                                   ]),
                                   _vm._v(" "),
@@ -84964,7 +84807,7 @@ var render = function() {
                                 _c("div", { staticClass: "actions" }, [
                                   ses.payment_status != 1 &&
                                   ses.accept != "1" &&
-                                  ses.class_status == 0
+                                  ses.completed == 0
                                     ? _c("div", { staticClass: "status" }, [
                                         _vm._v("Requested")
                                       ])
@@ -84972,7 +84815,7 @@ var render = function() {
                                   _vm._v(" "),
                                   ses.payment_status != 1 &&
                                   ses.accept == "1" &&
-                                  ses.class_status == 0
+                                  ses.completed == 0
                                     ? _c("div", { staticClass: "status" }, [
                                         _vm._v("Pending")
                                       ])
@@ -84980,7 +84823,7 @@ var render = function() {
                                   _vm._v(" "),
                                   ses.payment_status == 1 &&
                                   ses.accept == "1" &&
-                                  ses.class_status == 0
+                                  ses.completed == 0
                                     ? _c("div", { staticClass: "status" }, [
                                         _vm._v("Upcoming")
                                       ])
@@ -84988,7 +84831,7 @@ var render = function() {
                                   _vm._v(" "),
                                   ses.payment_status == 1 &&
                                   ses.accept == "1" &&
-                                  ses.class_status == 1
+                                  ses.completed == 1
                                     ? _c("div", { staticClass: "status" }, [
                                         _vm._v("Completed")
                                       ])
@@ -85130,7 +84973,11 @@ var render = function() {
                                 _c("div", { staticClass: "info" }, [
                                   _c("span", { staticClass: "dt" }, [
                                     _vm._v(
+<<<<<<< HEAD
                                       "Session Type" + _vm._s(ses.sessiontype)
+=======
+                                      "Session Type: " + _vm._s(ses.sessiontype)
+>>>>>>> f469c43464c781266261300383d31d25d8d7d0c3
                                     )
                                   ]),
                                   _vm._v(" "),
@@ -85159,6 +85006,7 @@ var render = function() {
                                 ]),
                                 _vm._v(" "),
                                 _c("div", { staticClass: "actions" }, [
+<<<<<<< HEAD
                                   ses.payment_status != 1 &&
                                   ses.accept != "1" &&
                                   ses.class_status == 0
@@ -85192,6 +85040,19 @@ var render = function() {
                                           : _vm._e(),
                                         _vm._v(" "),
                                         ses.cancel_request
+=======
+                                  ses.cancel_request != _vm.NULL
+                                    ? _c("div", { staticClass: "status" }, [
+                                        _vm.authuser.type == "teacher"
+                                          ? _c(
+                                              "div",
+                                              { staticClass: "status" },
+                                              [_vm._v("Cancelled")]
+                                            )
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        _vm.authuser.type == "student"
+>>>>>>> f469c43464c781266261300383d31d25d8d7d0c3
                                           ? _c(
                                               "div",
                                               { staticClass: "status" },
@@ -85211,7 +85072,11 @@ var render = function() {
                                                   },
                                                   [
                                                     _vm._v(
+<<<<<<< HEAD
                                                       "Please rise a ticket in Support Center for refund!."
+=======
+                                                      "Please rise a ticket in support center for refund!"
+>>>>>>> f469c43464c781266261300383d31d25d8d7d0c3
                                                     )
                                                   ]
                                                 )
@@ -85223,6 +85088,7 @@ var render = function() {
                                   _vm._v(" "),
                                   ses.payment_status == 1 &&
                                   ses.accept == "1" &&
+<<<<<<< HEAD
                                   ses.class_status == 1
                                     ? _c("div", { staticClass: "status" }, [
                                         _vm._v("Completed")
@@ -85241,6 +85107,13 @@ var render = function() {
                                     },
                                     [_vm._v("Open")]
                                   )
+=======
+                                  ses.completed == 1
+                                    ? _c("div", { staticClass: "status" }, [
+                                        _vm._v("Completed")
+                                      ])
+                                    : _vm._e()
+>>>>>>> f469c43464c781266261300383d31d25d8d7d0c3
                                 ])
                               ]
                             )
@@ -85480,10 +85353,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/search/ad.vue?vue&type=template&id=4acf0b2f&":
-/*!************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/search/ad.vue?vue&type=template&id=4acf0b2f& ***!
-  \************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/search/ad-student.vue?vue&type=template&id=1888fac6&":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/search/ad-student.vue?vue&type=template&id=1888fac6& ***!
+  \********************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -85506,6 +85379,7 @@ var render = function() {
       _c("div", { staticClass: "title" }, [_vm._v(_vm._s(_vm.ad.title))]),
       _vm._v(" "),
       _c("div", { staticClass: "student" }, [
+<<<<<<< HEAD
         _c(
           "a",
           {
@@ -85514,37 +85388,80 @@ var render = function() {
           },
           [_c("img", { attrs: { src: _vm.avatar(_vm.ad), alt: "" } })]
         ),
+=======
+        _vm.ad.user_id != undefined
+          ? _c(
+              "a",
+              {
+                staticClass: "avatar",
+                attrs: { href: _vm.url + "/user/" + _vm.ad.user_id }
+              },
+              [_c("img", { attrs: { src: _vm.avatar(_vm.ad), alt: "" } })]
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.ad.user_id == undefined
+          ? _c(
+              "a",
+              {
+                staticClass: "avatar",
+                attrs: { href: _vm.url + "/user/" + _vm.ad.id }
+              },
+              [_c("img", { attrs: { src: _vm.avatar(_vm.ad), alt: "" } })]
+            )
+          : _vm._e(),
+>>>>>>> f469c43464c781266261300383d31d25d8d7d0c3
         _vm._v(" "),
         _c("div", { staticClass: "data" }, [
-          _c(
-            "a",
-            {
-              staticClass: "info",
-              attrs: { href: _vm.url + "/user/" + _vm.ad.user_id }
-            },
-            [
-              _c("div", { staticClass: "name" }, [
-                _vm._v(_vm._s(_vm.ad.name) + " "),
-                _vm.ad.verified
-                  ? _c("span", { staticClass: "verified" }, [
-                      _c("i", { staticClass: "fas fa-check" })
-                    ])
-                  : _vm._e()
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "location" }, [
-                _c("i", { staticClass: "fas fa-map-marker-alt" }),
-                _vm._v(
-                  " " +
-                    _vm._s(
-                      _vm.ad.neighborhood ? _vm.ad.neighborhood.name + ", " : ""
-                    ) +
-                    _vm._s(_vm.ad.city ? _vm.ad.city.name + ", " : "") +
-                    _vm._s(_vm.ad.state ? _vm.ad.state.name + ", " : "")
-                )
-              ])
-            ]
-          ),
+          _vm.ad.user_id != undefined
+            ? _c(
+                "a",
+                {
+                  staticClass: "info",
+                  attrs: { href: _vm.url + "/user/" + _vm.ad.user_id }
+                },
+                [
+                  _c("div", { staticClass: "name" }, [
+                    _vm._v(_vm._s(_vm.ad.name) + " "),
+                    _vm.ad.verified
+                      ? _c("span", { staticClass: "verified" }, [
+                          _c("i", { staticClass: "fas fa-check" })
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "location" }, [
+                    _c("i", { staticClass: "fas fa-map-marker-alt" }),
+                    _vm._v(" " + _vm._s(_vm.ad.address))
+                  ])
+                ]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.ad.user_id == undefined
+            ? _c(
+                "a",
+                {
+                  staticClass: "info",
+                  attrs: { href: _vm.url + "/user/" + _vm.ad.id }
+                },
+                [
+                  _c("div", { staticClass: "name" }, [
+                    _vm._v(_vm._s(_vm.ad.name) + " "),
+                    _vm.ad.verified
+                      ? _c("span", { staticClass: "verified" }, [
+                          _c("i", { staticClass: "fas fa-check" })
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "location" }, [
+                    _c("i", { staticClass: "fas fa-map-marker-alt" }),
+                    _vm._v(" " + _vm._s(_vm.ad.address))
+                  ])
+                ]
+              )
+            : _vm._e(),
           _vm._v(" "),
           _vm.authid == _vm.ad.id
             ? _c("div", { staticClass: "contactbtn" }, [
@@ -85593,31 +85510,235 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _vm.ad.ad_detail
-        ? _c("div", { staticClass: "meta" }, [
-            _c("span", { staticClass: "subject" }, [
-              _vm._v(
-                _vm._s(_vm.ad.ad_detail ? _vm.ad.ad_detail.discipline.name : "")
-              )
-            ]),
-            _vm._v(" "),
-            _c("span", { staticClass: "level" }, [
-              _vm._v(
-                _vm._s(_vm.ad.ad_detail ? _vm.ad.ad_detail.level.name : "")
-              )
-            ])
-          ])
-        : _vm._e(),
+      _c("div", { staticClass: "meta" }, [
+        _c("span", { staticClass: "subject" }, [
+          _vm._v(_vm._s(_vm.ad.discipline ? _vm.ad.discipline.name : ""))
+        ]),
+        _vm._v(" "),
+        _c("span", { staticClass: "level" }, [
+          _vm._v(_vm._s(_vm.ad.level ? _vm.ad.level.name : ""))
+        ])
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "ad-info" }, [
         _vm._v(
+          "\n                Description: " +
+            _vm._s(_vm.ad.description ? _vm.ad.description : "N/A") +
+            "\n            "
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "ad-info" }, [
+        _vm._v(
+<<<<<<< HEAD
           "\n                " +
             _vm._s(_vm.ad.ad_detail ? _vm.ad.ad_detail.description : "") +
+=======
+          "\n                Availability: " +
+            _vm._s(_vm.ad.availability ? _vm.ad.availability : "N/A") +
+>>>>>>> f469c43464c781266261300383d31d25d8d7d0c3
             "\n            "
         )
       ])
     ])
   ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/search/ad.vue?vue&type=template&id=4acf0b2f&":
+/*!************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/search/ad.vue?vue&type=template&id=4acf0b2f& ***!
+  \************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.ad.ad_detail
+    ? _c("div", { staticClass: "ad-result" }, [
+        _vm.loading
+          ? _c("div", { staticClass: "loader" }, [
+              _c("i", { staticClass: "fas fa-spinner fa-spin" })
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _c("div", { staticClass: "ad" }, [
+          _c("div", { staticClass: "title" }, [_vm._v(_vm._s(_vm.ad.title))]),
+          _vm._v(" "),
+          _c("div", { staticClass: "student" }, [
+            _vm.ad.user_id != undefined
+              ? _c(
+                  "a",
+                  {
+                    staticClass: "avatar",
+                    attrs: { href: _vm.url + "/user/" + _vm.ad.user_id }
+                  },
+                  [_c("img", { attrs: { src: _vm.avatar(_vm.ad), alt: "" } })]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.ad.user_id == undefined
+              ? _c(
+                  "a",
+                  {
+                    staticClass: "avatar",
+                    attrs: { href: _vm.url + "/user/" + _vm.ad.id }
+                  },
+                  [_c("img", { attrs: { src: _vm.avatar(_vm.ad), alt: "" } })]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _c("div", { staticClass: "data" }, [
+              _vm.ad.user_id != undefined
+                ? _c(
+                    "a",
+                    {
+                      staticClass: "info",
+                      attrs: { href: _vm.url + "/user/" + _vm.ad.user_id }
+                    },
+                    [
+                      _c("div", { staticClass: "name" }, [
+                        _vm._v(_vm._s(_vm.ad.name) + " "),
+                        _vm.ad.verified
+                          ? _c("span", { staticClass: "verified" }, [
+                              _c("i", { staticClass: "fas fa-check" })
+                            ])
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "location" }, [
+                        _c("i", { staticClass: "fas fa-map-marker-alt" }),
+                        _vm._v(" " + _vm._s(_vm.ad.address))
+                      ])
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.ad.user_id == undefined
+                ? _c(
+                    "a",
+                    {
+                      staticClass: "info",
+                      attrs: { href: _vm.url + "/user/" + _vm.ad.id }
+                    },
+                    [
+                      _c("div", { staticClass: "name" }, [
+                        _vm._v(_vm._s(_vm.ad.name) + " "),
+                        _vm.ad.verified
+                          ? _c("span", { staticClass: "verified" }, [
+                              _c("i", { staticClass: "fas fa-check" })
+                            ])
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "location" }, [
+                        _c("i", { staticClass: "fas fa-map-marker-alt" }),
+                        _vm._v(" " + _vm._s(_vm.ad.address))
+                      ])
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.authid == _vm.ad.user_id
+                ? _c("div", { staticClass: "contactbtn" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-gradient",
+                        on: {
+                          click: function($event) {
+                            return _vm.deleteMyAd(_vm.ad.id)
+                          }
+                        }
+                      },
+                      [_vm._v("Delete")]
+                    )
+                  ])
+                : _c("div", { staticClass: "contactbtn" }, [
+                    _c(
+                      "div",
+                      { staticClass: "btn-t", on: { click: _vm.addToFav } },
+                      [
+                        _c("i", {
+                          staticClass: "far fa-heart",
+                          class: { fas: _vm.is_fav }
+                        })
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm.ad.can_contact
+                      ? _c(
+                          "div",
+                          {
+                            staticClass: "btn-t",
+                            on: {
+                              click: function($event) {
+                                return _vm.contact(_vm.ad.user_id)
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "fas fa-envelope" })]
+                        )
+                      : _vm._e()
+                  ])
+            ])
+          ]),
+          _vm._v(" "),
+          _vm.ad.ad_detail
+            ? _c("div", { staticClass: "meta" }, [
+                _c("span", { staticClass: "subject" }, [
+                  _vm._v(
+                    _vm._s(
+                      _vm.ad.ad_detail ? _vm.ad.ad_detail.discipline.name : ""
+                    )
+                  )
+                ]),
+                _vm._v(" "),
+                _c("span", { staticClass: "level" }, [
+                  _vm._v(
+                    _vm._s(_vm.ad.ad_detail ? _vm.ad.ad_detail.level.name : "")
+                  )
+                ])
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("div", { staticClass: "ad-info" }, [
+            _vm._v(
+              "\n                Description: " +
+                _vm._s(
+                  _vm.ad.ad_detail.description
+                    ? _vm.ad.ad_detail.description
+                    : "N/A"
+                ) +
+                "\n            "
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "ad-info" }, [
+            _vm._v(
+              "\n                Availability: " +
+                _vm._s(
+                  _vm.ad.ad_detail.availability
+                    ? _vm.ad.ad_detail.availability
+                    : "N/A"
+                ) +
+                "\n            "
+            )
+          ])
+        ])
+      ])
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -85682,14 +85803,7 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "location" }, [
             _c("i", { staticClass: "fas fa-map-marker-alt" }),
-            _vm._v(
-              " " +
-                _vm._s(
-                  _vm.ad.neighborhood ? _vm.ad.neighborhood.name + ", " : ""
-                ) +
-                _vm._s(_vm.ad.city ? _vm.ad.city.name + ", " : "") +
-                _vm._s(_vm.ad.state ? _vm.ad.state.name + ", " : "")
-            )
+            _vm._v(" " + _vm._s(_vm.ad.address))
           ])
         ]
       ),
@@ -85994,7 +86108,13 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "input" }, [
+<<<<<<< HEAD
                 _c("label", { attrs: { for: "" } }, [_vm._v("Availability")]),
+=======
+                _c("label", { attrs: { for: "" } }, [
+                  _vm._v("Online/In-Person")
+                ]),
+>>>>>>> f469c43464c781266261300383d31d25d8d7d0c3
                 _vm._v(" "),
                 _c(
                   "select",
@@ -86037,14 +86157,38 @@ var render = function() {
                       _vm._v("In-Person")
                     ]),
                     _vm._v(" "),
+<<<<<<< HEAD
                     _c("option", { attrs: { value: "Both" } }, [_vm._v("Both")])
+=======
+                    _c("option", { attrs: { value: "Both", selected: "" } }, [
+                      _vm._v("Both")
+                    ])
+>>>>>>> f469c43464c781266261300383d31d25d8d7d0c3
                   ]
                 )
               ]),
               _vm._v(" "),
               _vm._m(0),
               _vm._v(" "),
-              _vm._m(1),
+              _c("div", { staticClass: "input" }, [
+                _vm._m(1),
+                _vm._v(" "),
+                _c("input", {
+                  attrs: {
+                    type: "range",
+                    min: "1",
+                    max: "1000",
+                    name: "radius",
+                    value: "1000",
+                    id: "radius"
+                  },
+                  on: {
+                    change: function($event) {
+                      return _vm.updateRadiusValue()
+                    }
+                  }
+                })
+              ]),
               _vm._v(" "),
               _c("div", { staticClass: "btns" }, [
                 _c(
@@ -86120,7 +86264,7 @@ var render = function() {
                   _vm._l(_vm.ads, function(ad) {
                     return _c("ad", {
                       key: ad.id,
-                      attrs: { url: _vm.url, ad: ad },
+                      attrs: { url: _vm.url, ad: ad, authid: _vm.authid },
                       on: {
                         startConversation: function($event) {
                           return _vm.startConversation(ad.id)
@@ -86152,12 +86296,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+<<<<<<< HEAD
     return _c("div", { staticClass: "input" }, [
       _c("label", { attrs: { for: "" } }, [_vm._v("Radius")]),
       _vm._v(" "),
       _c("input", {
         attrs: { type: "range", min: "1", max: "1000", name: "radius", id: "" }
       })
+=======
+    return _c("label", { attrs: { for: "" } }, [
+      _vm._v("Radius - "),
+      _c("span", { attrs: { id: "r_v" } }, [_vm._v("1000")])
+>>>>>>> f469c43464c781266261300383d31d25d8d7d0c3
     ])
   }
 ]
@@ -86218,16 +86368,7 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "location" }, [
               _c("i", { staticClass: "fas fa-map-marker-alt" }),
-              _vm._v(
-                " " +
-                  _vm._s(
-                    _vm.tutor.neighborhood
-                      ? _vm.tutor.neighborhood.name + ", "
-                      : ""
-                  ) +
-                  _vm._s(_vm.tutor.city ? _vm.tutor.city.name + ", " : "") +
-                  _vm._s(_vm.tutor.state ? _vm.tutor.state.name + ", " : "")
-              )
+              _vm._v(" " + _vm._s(_vm.tutor.address))
             ])
           ]
         ),
@@ -86544,7 +86685,11 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", { staticClass: "input" }, [
                       _c("label", { attrs: { for: "" } }, [
+<<<<<<< HEAD
                         _vm._v("Availability")
+=======
+                        _vm._v("Online/In-Person")
+>>>>>>> f469c43464c781266261300383d31d25d8d7d0c3
                       ]),
                       _vm._v(" "),
                       _c(
@@ -86588,9 +86733,17 @@ var render = function() {
                             _vm._v("In-Person")
                           ]),
                           _vm._v(" "),
+<<<<<<< HEAD
                           _c("option", { attrs: { value: "Both" } }, [
                             _vm._v("Both")
                           ])
+=======
+                          _c(
+                            "option",
+                            { attrs: { value: "Both", selected: "" } },
+                            [_vm._v("Both")]
+                          )
+>>>>>>> f469c43464c781266261300383d31d25d8d7d0c3
                         ]
                       )
                     ]),
@@ -86600,15 +86753,28 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "input" }, [
-                      _c("label", { attrs: { for: "" } }, [_vm._v("Radius")]),
+                      _c("label", { attrs: { for: "" } }, [
+                        _vm._v("Radius - "),
+                        _c("span", { attrs: { id: "r_v" } }, [_vm._v("1000")])
+                      ]),
                       _vm._v(" "),
                       _c("input", {
                         attrs: {
                           type: "range",
                           min: "1",
                           max: "1000",
+                          id: "radius",
                           name: "radius",
+<<<<<<< HEAD
                           id: ""
+=======
+                          value: "1000"
+                        },
+                        on: {
+                          change: function($event) {
+                            return _vm.updateRadiusValue()
+                          }
+>>>>>>> f469c43464c781266261300383d31d25d8d7d0c3
                         }
                       })
                     ]),
@@ -86790,16 +86956,7 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "location" }, [
             _c("i", { staticClass: "fas fa-map-marker-alt" }),
-            _vm._v(
-              " " +
-                _vm._s(
-                  _vm.tutor.neighborhood
-                    ? _vm.tutor.neighborhood.name + ", "
-                    : ""
-                ) +
-                _vm._s(_vm.tutor.city ? _vm.tutor.city.name + ", " : "") +
-                _vm._s(_vm.tutor.state ? _vm.tutor.state.name + ", " : "")
-            )
+            _vm._v(" " + _vm._s(_vm.tutor.address))
           ])
         ]
       ),
@@ -108129,7 +108286,11 @@ var regionDayMap = {
 /*! exports provided: _args, _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _spec, _where, author, bugs, description, devDependencies, homepage, keywords, license, main, module, name, repository, scripts, types, umd:main, version, default */
 /***/ (function(module) {
 
+<<<<<<< HEAD
 module.exports = JSON.parse("{\"_args\":[[\"weekstart@1.0.1\",\"F:\\\\Workspace\\\\telloapps\\\\TutorsHubLive\"]],\"_from\":\"weekstart@1.0.1\",\"_id\":\"weekstart@1.0.1\",\"_inBundle\":false,\"_integrity\":\"sha512-h6B1HSJxg7sZEXqIpDqAtwiDBp3x5y2jY8WYcUSBhLTcTCy7laQzBmamqMuQM5fpvo1pgpma0OCRpE2W8xrA9A==\",\"_location\":\"/weekstart\",\"_phantomChildren\":{},\"_requested\":{\"type\":\"version\",\"registry\":true,\"raw\":\"weekstart@1.0.1\",\"name\":\"weekstart\",\"escapedName\":\"weekstart\",\"rawSpec\":\"1.0.1\",\"saveSpec\":null,\"fetchSpec\":\"1.0.1\"},\"_requiredBy\":[\"/\"],\"_resolved\":\"https://registry.npmjs.org/weekstart/-/weekstart-1.0.1.tgz\",\"_spec\":\"1.0.1\",\"_where\":\"F:\\\\Workspace\\\\telloapps\\\\TutorsHubLive\",\"author\":{\"name\":\"Denis Sikuler\"},\"bugs\":{\"url\":\"https://github.com/gamtiq/weekstart/issues\"},\"description\":\"Library to get first day of week.\",\"devDependencies\":{\"@babel/preset-env\":\"7.6.3\",\"eslint\":\"6.5.1\",\"eslint-config-guard\":\"1.0.3\",\"ink-docstrap\":\"1.3.2\",\"jest\":\"24.9.0\",\"jsdoc\":\"3.6.3\",\"microbundle\":\"0.4.4\",\"version-bump-prompt\":\"5.0.5\"},\"homepage\":\"https://github.com/gamtiq/weekstart\",\"keywords\":[\"week\",\"start\",\"first\",\"day\",\"locale\",\"country\",\"region\"],\"license\":\"MIT\",\"main\":\"dist/commonjs/main.js\",\"module\":\"dist/es-module/main.js\",\"name\":\"weekstart\",\"repository\":{\"type\":\"git\",\"url\":\"git://github.com/gamtiq/weekstart.git\"},\"scripts\":{\"all\":\"npm run check-all && npm run doc && npm run build\",\"build\":\"npm run build-umd && npm run build-commonjs && npm run build-esm && npm run build-umd-min\",\"build-commonjs\":\"microbundle build \\\"src/!(*.test).js\\\" --output dist/commonjs --format cjs --strict --no-compress\",\"build-esm\":\"microbundle build \\\"src/!(*.test).js\\\" --output dist/es-module --format es --no-compress\",\"build-umd\":\"microbundle build src/main.js src/full.js --output dist --format umd --strict --no-compress\",\"build-umd-min\":\"microbundle build src/main.js src/full.js --output dist/min --format umd --strict\",\"check\":\"npm run lint && npm test\",\"check-all\":\"npm run lint-all && npm test\",\"doc\":\"jsdoc -c jsdoc-conf.json\",\"lint\":\"eslint --cache --max-warnings 0 \\\"**/*.js\\\"\",\"lint-all\":\"eslint --max-warnings 0 \\\"**/*.js\\\"\",\"lint-all-error\":\"eslint \\\"**/*.js\\\"\",\"lint-error\":\"eslint --cache \\\"**/*.js\\\"\",\"release\":\"bump patch --commit --tag --all --push package.json package-lock.json bower.json component.json\",\"release-major\":\"bump major --commit --tag --all --push package.json package-lock.json bower.json component.json\",\"release-minor\":\"bump minor --commit --tag --all --push package.json package-lock.json bower.json component.json\",\"test\":\"jest\"},\"types\":\"./index.d.ts\",\"umd:main\":\"dist/main.js\",\"version\":\"1.0.1\"}");
+=======
+module.exports = JSON.parse("{\"_args\":[[\"weekstart@1.0.1\",\"/Users/hesannaveed/LaravelProjects/TutorsHubLive\"]],\"_from\":\"weekstart@1.0.1\",\"_id\":\"weekstart@1.0.1\",\"_inBundle\":false,\"_integrity\":\"sha512-h6B1HSJxg7sZEXqIpDqAtwiDBp3x5y2jY8WYcUSBhLTcTCy7laQzBmamqMuQM5fpvo1pgpma0OCRpE2W8xrA9A==\",\"_location\":\"/weekstart\",\"_phantomChildren\":{},\"_requested\":{\"type\":\"version\",\"registry\":true,\"raw\":\"weekstart@1.0.1\",\"name\":\"weekstart\",\"escapedName\":\"weekstart\",\"rawSpec\":\"1.0.1\",\"saveSpec\":null,\"fetchSpec\":\"1.0.1\"},\"_requiredBy\":[\"/\"],\"_resolved\":\"https://registry.npmjs.org/weekstart/-/weekstart-1.0.1.tgz\",\"_spec\":\"1.0.1\",\"_where\":\"/Users/hesannaveed/LaravelProjects/TutorsHubLive\",\"author\":{\"name\":\"Denis Sikuler\"},\"bugs\":{\"url\":\"https://github.com/gamtiq/weekstart/issues\"},\"description\":\"Library to get first day of week.\",\"devDependencies\":{\"@babel/preset-env\":\"7.6.3\",\"eslint\":\"6.5.1\",\"eslint-config-guard\":\"1.0.3\",\"ink-docstrap\":\"1.3.2\",\"jest\":\"24.9.0\",\"jsdoc\":\"3.6.3\",\"microbundle\":\"0.4.4\",\"version-bump-prompt\":\"5.0.5\"},\"homepage\":\"https://github.com/gamtiq/weekstart\",\"keywords\":[\"week\",\"start\",\"first\",\"day\",\"locale\",\"country\",\"region\"],\"license\":\"MIT\",\"main\":\"dist/commonjs/main.js\",\"module\":\"dist/es-module/main.js\",\"name\":\"weekstart\",\"repository\":{\"type\":\"git\",\"url\":\"git://github.com/gamtiq/weekstart.git\"},\"scripts\":{\"all\":\"npm run check-all && npm run doc && npm run build\",\"build\":\"npm run build-umd && npm run build-commonjs && npm run build-esm && npm run build-umd-min\",\"build-commonjs\":\"microbundle build \\\"src/!(*.test).js\\\" --output dist/commonjs --format cjs --strict --no-compress\",\"build-esm\":\"microbundle build \\\"src/!(*.test).js\\\" --output dist/es-module --format es --no-compress\",\"build-umd\":\"microbundle build src/main.js src/full.js --output dist --format umd --strict --no-compress\",\"build-umd-min\":\"microbundle build src/main.js src/full.js --output dist/min --format umd --strict\",\"check\":\"npm run lint && npm test\",\"check-all\":\"npm run lint-all && npm test\",\"doc\":\"jsdoc -c jsdoc-conf.json\",\"lint\":\"eslint --cache --max-warnings 0 \\\"**/*.js\\\"\",\"lint-all\":\"eslint --max-warnings 0 \\\"**/*.js\\\"\",\"lint-all-error\":\"eslint \\\"**/*.js\\\"\",\"lint-error\":\"eslint --cache \\\"**/*.js\\\"\",\"release\":\"bump patch --commit --tag --all --push package.json package-lock.json bower.json component.json\",\"release-major\":\"bump major --commit --tag --all --push package.json package-lock.json bower.json component.json\",\"release-minor\":\"bump minor --commit --tag --all --push package.json package-lock.json bower.json component.json\",\"test\":\"jest\"},\"types\":\"./index.d.ts\",\"umd:main\":\"dist/main.js\",\"version\":\"1.0.1\"}");
+>>>>>>> f469c43464c781266261300383d31d25d8d7d0c3
 
 /***/ }),
 
@@ -108218,6 +108379,7 @@ Vue.component('tutor-view', __webpack_require__(/*! ./components/search/tutorVie
 Vue.component('ad-view', __webpack_require__(/*! ./components/search/adView.vue */ "./resources/js/components/search/adView.vue")["default"]);
 Vue.component('ads', __webpack_require__(/*! ./components/search/ads.vue */ "./resources/js/components/search/ads.vue")["default"]);
 Vue.component('ad', __webpack_require__(/*! ./components/search/ad.vue */ "./resources/js/components/search/ad.vue")["default"]);
+Vue.component('ad-student', __webpack_require__(/*! ./components/search/ad-student.vue */ "./resources/js/components/search/ad-student.vue")["default"]);
 Vue.component('my-ads', __webpack_require__(/*! ./components/ad/my.vue */ "./resources/js/components/ad/my.vue")["default"]);
 Vue.component('change-password', __webpack_require__(/*! ./components/forms/changePassword.vue */ "./resources/js/components/forms/changePassword.vue")["default"]);
 Vue.component('start-chat', __webpack_require__(/*! ./components/forms/startChat.vue */ "./resources/js/components/forms/startChat.vue")["default"]);
@@ -110555,6 +110717,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/search/ad-student.vue":
+/*!*******************************************************!*\
+  !*** ./resources/js/components/search/ad-student.vue ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ad_student_vue_vue_type_template_id_1888fac6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ad-student.vue?vue&type=template&id=1888fac6& */ "./resources/js/components/search/ad-student.vue?vue&type=template&id=1888fac6&");
+/* harmony import */ var _ad_student_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ad-student.vue?vue&type=script&lang=js& */ "./resources/js/components/search/ad-student.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ad_student_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ad_student_vue_vue_type_template_id_1888fac6___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ad_student_vue_vue_type_template_id_1888fac6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/search/ad-student.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/search/ad-student.vue?vue&type=script&lang=js&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/search/ad-student.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ad_student_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ad-student.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/search/ad-student.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ad_student_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/search/ad-student.vue?vue&type=template&id=1888fac6&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/search/ad-student.vue?vue&type=template&id=1888fac6& ***!
+  \**************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ad_student_vue_vue_type_template_id_1888fac6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ad-student.vue?vue&type=template&id=1888fac6& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/search/ad-student.vue?vue&type=template&id=1888fac6&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ad_student_vue_vue_type_template_id_1888fac6___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ad_student_vue_vue_type_template_id_1888fac6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/search/ad.vue":
 /*!***********************************************!*\
   !*** ./resources/js/components/search/ad.vue ***!
@@ -111216,8 +111447,13 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 __webpack_require__(/*! F:\Workspace\telloapps\TutorsHubLive\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! F:\Workspace\telloapps\TutorsHubLive\resources\sass\app.scss */"./resources/sass/app.scss");
+=======
+__webpack_require__(/*! /Users/hesannaveed/LaravelProjects/TutorsHubLive/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/hesannaveed/LaravelProjects/TutorsHubLive/resources/sass/app.scss */"./resources/sass/app.scss");
+>>>>>>> f469c43464c781266261300383d31d25d8d7d0c3
 
 
 /***/ })

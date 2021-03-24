@@ -16,7 +16,7 @@
             <th>ID</th>
             <th>User </th>
             <th>Email</th>
-            <th>query</th>
+            <th>Query</th>
             <th>Posted</th>
             <th>Action</th>
             </tr>
@@ -26,7 +26,7 @@
                 @continue(!$ticket->user)
             <tr>
                 <td>{{$ticket->ticket_id}}</td>
-                @if ($ticket->user_id)
+                @if ($ticket->user_id != 0)
                   <td><a href="{{route("admin.user", $ticket->user_id)}}">{{$ticket->user->name}}</a></td>
                 @else
                   <td>{{$ticket->user_type}}</td>
@@ -35,7 +35,7 @@
               <td>{{$ticket->query}} </td>
               <td>{{$ticket->created_at->format("Y-m-d")}}</td>
               <td>
-                @if ($ticket->user_id)
+                @if ($ticket->user_id != 0)
                   <a href="{{route("admin.contact",[ $ticket->user->id, $ticket->ticket_id])}}" style="margin-bottom: 2px" class="btn btn-success">Message User</a>
                 @endif
                 @if (!$ticket->resolved)
@@ -64,17 +64,19 @@
 <script src="{{asset('admin/js/jquery.dataTables.min.js')}}" charset="utf-8"></script>
 <script src="{{asset('admin/js/dataTables.bootstrap.min.js')}}" charset="utf-8"></script>
 <script>
-  $(function () {
+ $(function () {
     $('table').DataTable({
       'paging'      : true,
       'lengthChange': false,
       'searching'   : true,
       'ordering'    : true,
       'info'        : true,
+      'select'      : true,
       'autoWidth'   : false
     });
   })
+ 
 
-</script>
+
 </script>
 @endsection

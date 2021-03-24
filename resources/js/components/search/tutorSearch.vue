@@ -45,20 +45,21 @@
                             <option v-for="discipline in disciplines" :value="discipline.id" :key="discipline.id">{{discipline.name}}</option>
                         </select>
                     </div>    <div class="input">
-                        <label for="">Availability</label>
+                        <label for="">Online/In-Person</label>
                         <select v-model="availability" name="availability" id="">
                             <option value="">-- Availability --</option>
                             <option value="Online">Online</option>
                             <option value="In-Person">In-Person</option>
-                            <option value="Both">Both</option>
+                            <option value="Both" selected>Both</option>
                         </select>
                     </div>
                     <div class="newrow">
                         <span>Location</span>
                     </div>
                     <div class="input">
-                        <label for="">Radius</label>
-                        <input type="range" min="1" max="1000" name="radius" id="">
+                        <label for="">Radius - <span id="r_v">1000</span></label>
+                        <input type="range" min="1" max="1000" id="radius" name="radius" value="1000" @change="updateRadiusValue()">
+
                         <!-- <input type="number" v-model="radius" id=""> -->
                     </div>
                     <!-- <div class="input">
@@ -170,6 +171,7 @@
                 cities: [],
                 neighborhoods: [],
                 country: '',
+                availability: 'Both',
                 state: '',
                 city: '',
                 neighborhood: '',
@@ -189,6 +191,7 @@
         },
         computed:
         {
+
             centerLoc(){
                 if(this.country)
                 {
@@ -215,6 +218,9 @@
             }
         },
         methods: {
+            updateRadiusValue(){
+                $("#r_v").html($("#radius").val());
+            },
             myChangeEvent(val){
             console.log(val);
             },
@@ -294,7 +300,8 @@
             },
             getTutors()
             {
-                this.radius = $("input[name=radius]").val();
+                this.radius = $("input[name=radius]").val() == undefined ? '1000' : $("input[name=radius]").val();
+                ;
                 axios.post(this.url +'/search/tutors', {
                     'radius': this.radius,
                     'level': this.level,

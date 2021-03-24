@@ -166,6 +166,10 @@
                                     <td>{{$user->gender}}</td>
                                 </tr>
                                 <tr>
+                                    <td>Location</td>
+                                    <td>{{$user->address}}</td>
+                                </tr>
+                                <!-- <tr>
                                     <td>Country</td>
                                     <td>{{$user->country ? $user->country->name : ''}}</td>
                                 </tr>
@@ -180,13 +184,13 @@
                                 <tr>
                                     <td>Neighborhood</td>
                                     <td>{{$user->neighborhood ? $user->neighborhood->name : ''}}</td>
-                                </tr>
+                                </tr> -->
                                 {{-- {{dd($user->profile)}} --}}
                                 @if ($user->type == 'teacher')
                                     <tr>
                                         <td>Resume</td>
                                         @if (!is_null($user->profile->resume))
-                                            <td><a href="{{asset('storage/files') . '/'. $user->profile->resume}}"  target="_blank" class="btn btn-primary"><i class="fas fa-eye"></i></a></td>
+                                            <td><a href="{{asset('storage/files') . '/'. $user->profile->resume}}"  target="_blank" class="btn btn-primary"><i class="fas fa-eye"></i></a> <a href="deleteResume/{{$user->id}}" class="btn btn-danger"><i class="fa fa-times"></i></a></td>
                                         @else
                                              <td>No File Available</td>
                                         @endif
@@ -195,7 +199,7 @@
                                         <td>Background Check</td>
                                        {{-- {{ dd($user->profile)}} --}}
                                         @if ($user->profile->background_check)
-                                            <td><a href="{{asset('storage/files') . '/'. $user->profile->background_check}}"  target="_blank" class="btn btn-primary"><i class="fas fa-eye"></i></a></td>
+                                            <td><a href="{{asset('storage/files') . '/'. $user->profile->background_check}}"  target="_blank" class="btn btn-primary"><i class="fas fa-eye"></i></a> <a href="deleteBackgroundCheck/{{$user->id}}" class="btn btn-danger"><i class="fa fa-times"></i></a></td>
                                         @else
                                             <td>No File Available</td>
                                         @endif
@@ -204,7 +208,7 @@
                                         <td>ID FIle</td>
                                        {{-- {{ dd($user->profile)}} --}}
                                         @if ($user->profile->identity)
-                                            <td><a href="{{asset('storage/files') . '/'. $user->profile->identity}}"  target="_blank" class="btn btn-primary"><i class="fas fa-eye"></i></a></td>
+                                            <td><a href="{{asset('storage/files') . '/'. $user->profile->identity}}"  target="_blank" class="btn btn-primary"><i class="fas fa-eye"></i></a> <a href="deleteIdentity/{{$user->id}}" class="btn btn-danger"><i class="fa fa-times"></i></a></td>
                                         @else
                                              <td>No File Available</td>
                                         @endif

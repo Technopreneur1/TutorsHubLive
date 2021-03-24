@@ -10,7 +10,7 @@
             <div class="data">
                 <a  :href="url+ '/user/' +tutor.id" class="info">
                     <div class="name">{{firstname(tutor.name)}}  <span v-if="tutor.verified" class="verified"><i class="fas fa-check"></i></span></div>
-                    <div class="location"><i class="fas fa-map-marker-alt"></i> {{tutor.neighborhood ? tutor.neighborhood.name + ', ' : ''}}{{tutor.city ? tutor.city.name + ', ' : ''}}{{tutor.state ? tutor.state.name + ', ' : ''}}</div>
+                     <div class="location"><i class="fas fa-map-marker-alt"></i> {{tutor.address}}</div>
                 </a>
                 <div class="rightinfo">
                     <div class="price">

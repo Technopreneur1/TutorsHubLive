@@ -24,6 +24,10 @@
                         <transition name="custom-classes-transition" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
                         <div v-if="editingLocation" class="addlocations">
                             <div class="input">
+                                <label for="">Address</label>
+                                <gmap-autocomplete class="form-control" @place_changed="setPlace"></gmap-autocomplete>
+                            </div> 
+                            <!-- <div class="input">
                                 <label for="">Country</label>
                                 <select @change="getStates()" v-model="ad.country" >
                                     <option value="">-- Select Country --</option>
@@ -55,16 +59,14 @@
                             <div v-if="ad.neighborhood == -1" class="input">
                                 <label for="">Neighborhood Name &nbsp; <small>Make sure neighborhood name is correct and avoid spellings mistakes</small></label>
                                 <input type="text" class="input" v-model="ad.new_neighborhood" placeholder="Neighborhood">
-                            </div>
+                            </div> -->
                         </div>
                         </transition>
                         <div v-if="!editingLocation" class="locations">
                             <span class="current">
-                                {{user.neighborhood ? user.neighborhood.name : ''}}
-                                {{user.city ? ', '+user.city.name : ''}}
-                                {{user.state ? ', '+user.state.name : ''}}
-                                {{user.country ? ', '+user.country.name : ''}}
-                                </span>
+                                {{user.address}}
+                                <input type="hidden" name="address_" :value="user.address" />
+                            </span>
                             <span @click="editingLocation = true" class="change">Change <i class="fas fa-cog"></i></span>
                         </div>
 
@@ -84,6 +86,15 @@
                             <select v-model="ad.discipline" >
                                 <option value="">-- Select Subject --</option>
                                 <option v-for="discipline in disciplines" :value="discipline.id" :key="discipline.id">{{discipline.name}}</option>
+                            </select>
+                        </div>
+                        <div class="input">
+                            <label for="">Online/In-Person</label>
+                            <select v-model="ad.availability" name="availability" id="availability">
+                                <option value="">-- Select Availability --</option>
+                                <option value="Online">Online</option>
+                                <option value="In-Person">In-Person</option>
+                                <option value="Both" selected>Both</option>
                             </select>
                         </div>
                         
@@ -106,7 +117,7 @@
 
 <script>
     export default {
-        props: ['url', 'city',],
+        props: ['url', 'city'],
         data(){
             return {
                 error: '',
@@ -119,6 +130,9 @@
                 countries: [],
                 states: [],
                 cities: [],
+                lat: 40.7831,
+                lng: -73.9712,
+                address: $("input[name=address_]").val(),
                 neighborhoods: [],
                 ad: {
                     title: '',
@@ -129,13 +143,14 @@
                     new_neighborhood: '',
                     city: '',
                     state: '',
-                    country: ''
+                    country: '',
+                    availability: '',
                 }
             }
         },
         methods: {
             isReady()
-            {
+            { 
                 if(this.ad.title.length > 4)
                 {
                     if(this.ad.description)
@@ -143,15 +158,17 @@
                         if(this.ad.level)
                         {
                             if(this.ad.discipline)
-                            {
-                                if(this.ad.city && this.ad.state && this.ad.country)
+                            {   
+                                if(this.ad.availabilty != '')
                                 {
+                                    
                                     return true
                                 }else
                                 {
-                                    this.error = "Country State and City are required"
+                                    this.error = "Availabilty is required"
                                     return false
                                 }
+                                
 
                             }else
                             {
@@ -174,19 +191,29 @@
                     return false
                 }
             },
+            setPlace(place)
+            {
+                this.lat = place.geometry.location.lat();
+                this.lng = place.geometry.location.lng();
+                this.address = place.formatted_address
+            },
             postAd()
             {
                 // console.log('ok')
                 if(!this.isReady())
                 {
                     return false
-                }else
+                } else
                 {
                     this.posting = true
                     axios.post(this.url +'/post/ad', {
                         title: this.ad.title,
                         description: this.ad.description,
                         level: this.ad.level,
+                        availability: $("#availability").val(),
+                        lat: this.lat,
+                        lng: this.lng,
+                        address: this.address ? this.address : $("input[name=address_]").val(),
                         discipline: this.ad.discipline,
                         neighborhood: this.ad.neighborhood,
                         country: this.ad.country,
@@ -244,6 +271,9 @@
                         console.log(error);
                     })
             },
+            // setAvailability (){
+            //     alert(this.ad.availability)
+            // },
             getStates()
             {
                 console.log("Get States")

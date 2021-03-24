@@ -8,7 +8,7 @@ Sessions
     </div>
     <div class="box">
         <div class="box-header">
-        <h3 class="box-title">All Sessions</h3>
+        <h3 class="box-title">Completed Sessions</h3>
         </div>
         <!-- /.box-header -->
         <div class="box-body">
@@ -30,8 +30,16 @@ Sessions
             @foreach ($sessions as $session)
             <tr>
                 <td>{{$session->id}}</td>
+                @if(isset($session->student->user->id))
                 <td><a href="{{route('admin.user', $session->student->user->id)}}">{{$session->student->user->name}}</a></td>
+                @else
+                <td>N/A</td>
+                @endif
+                @if(isset($session->teacher->user->id))
                 <td><a href="{{route('admin.user', $session->teacher->user->id)}}">{{$session->teacher->user->name}}</a></td>
+                @else
+                <td>N/A</td>
+                @endif
                 <td>${{$session->rate}} </td>
                 <td>{{$session->hours}} </td>
                 <td>${{$session->fee}} </td>
@@ -60,17 +68,19 @@ Sessions
 <script src="{{asset('admin/js/jquery.dataTables.min.js')}}" charset="utf-8"></script>
 <script src="{{asset('admin/js/dataTables.bootstrap.min.js')}}" charset="utf-8"></script>
 <script>
+  
+
   $(function () {
     $('table').DataTable({
       'paging'      : true,
       'lengthChange': false,
       'searching'   : true,
-      'ordering'    : false,
+      'ordering'    : true,
       'info'        : true,
+      'select'      : true,
       'autoWidth'   : false
     });
   })
 
-</script>
 </script>
 @endsection

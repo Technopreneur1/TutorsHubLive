@@ -223,11 +223,10 @@
                             <div class="sc_layouts_item">
                                 <div class="sc_layouts_title">
                                     <div class="sc_layouts_title_meta"><div class="post_meta">
-{{--                                            {{dd($data)}}--}}
-                                            <span class="post_meta_item post_date date updated" itemprop="datePublished"><a href="#">{{$data['created_at']}}</a></span>
+                                            <span class="post_meta_item post_date date updated" itemprop="datePublished"><a href="#">{{date('d-m-Y', strtotime($data['created_at']))}}</a></span>
 
                                         </div><!-- .post_meta --></div><div class="sc_layouts_title_title">							<h1 class="sc_layouts_title_caption">{{$data['name']}}</h1>
-                                    </div><div class="sc_layouts_title_breadcrumbs"><div class="breadcrumbs"><a class="breadcrumbs_item home" href="https://tutors-hub.com/">Home</a><span class="breadcrumbs_delimiter"></span><a href="#">All Tutors</a><span class="breadcrumbs_delimiter"></span><a class="breadcrumbs_item cat_post" href="#">Details</a><span class="breadcrumbs_delimiter"></span><span class="breadcrumbs_item current">{{$data['name']}}</span></div></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -261,7 +260,7 @@
                         <div class="tp-single-wrap">
 
                             <div class="tp-featured">
-                                @if(isset($data->avatar))
+                                @if(isset($data['avatar']))
                                     <img width="300" height="300" src="https://tutors-hub.com/storage/images/{{$data['avatar']}}" class="attachment-tutor-single size-tutor-single wp-post-image" alt="Josh Summers" itemprop="image" />
                                         @else
                                     <img width="300" height="300" src="https://tutors-hub.com/wp-content/uploads/2016/11/tutor7-740x792.jpg" class="attachment-tutor-single size-tutor-single wp-post-image" alt="Josh Summers" itemprop="image" />
@@ -282,7 +281,7 @@
 {{--                                    <span class="tp-rating-star tutor-icon-bookmark-star"></span>--}}
 {{--                                    <span class="tp-rating-star tutor-icon-bookmark-star"></span>--}}
 {{--                                </div>--}}
-                                <div class="tp-biography">{{$data['bio']}}</div><div class="tp-subjects"><span class="label">Subjects: </span>{{$data['subject']}}</div><div class="tp-single-contact-form">
+                                <div class="tp-biography">{{$data['bio']}}</div><div class="tp-subjects"><span class="label">Subjects: </span>{{$data['subject']}}<br/> <span class="label">Availability:</span> {{$data['availability'] == null ? 'N/A' : $data['availability']}}</div><div class="tp-single-contact-form">
 
 
                                 </div>

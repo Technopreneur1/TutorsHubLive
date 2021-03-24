@@ -67,7 +67,7 @@
                 <div class="total"> <span class="name">= </span> <span>${{total}} <small>{{currency}}</small></span></div>
                 <div v-show="!loading" class="btns" style="width: 300px; max-with: 90%; margin: 0 auto">
 <!--                              <div  ref="paypal"></div>-->
-                    <div v-if="error" class="error">{{error}}</div>
+                    <div v-if="error" class="error-bar">{{error}}</div>
 
                     <button @click="requestSession()" class="btn-book">Request Session</button>
 
@@ -165,9 +165,11 @@
                 showThanks: false,
                 success: '',
                 hours: 1,
+                dte:'',
                 sessiontype:'Online',
                 loaded: false,
                 paidFor: false,
+                error:false,
                 product: {
                     price: 777.77
                 },
@@ -257,10 +259,16 @@
                 }).render(this.$refs.paypal)
             },
             requestSession(){
+                // console.log(typeof(this.dte))
+                // console.log((this.dte))
                 if (!this.dte) {
                     this.error = "Please select your preferred date & time"
-                    return false
+                    return false;
                 }
+
+                this.error = "";
+                // console.log('else');
+                // return false;
                 this.loading = true;
                 axios.post(this.url +'/complete/sessionrequest',
                     {

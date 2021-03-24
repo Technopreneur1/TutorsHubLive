@@ -12,7 +12,7 @@
         <div class="data">
             <a  :href="url+ '/user/' +ad.id" class="info">
                 <div class="name">{{firstname(ad.name)}} <span v-if="ad.verified" class="verified"><i class="fas fa-check"></i></span></div>
-                <div class="location"><i class="fas fa-map-marker-alt"></i> {{ad.neighborhood ? ad.neighborhood.name + ', ' : ''}}{{ad.city ? ad.city.name + ', ' : ''}}{{ad.state ? ad.state.name + ', ' : ''}}</div>
+                                <div class="location"><i class="fas fa-map-marker-alt"></i> {{ ad.address }}</div>
             </a>
             <div class="contactbtn">
                 <div @click="addToFav" class="btn-t" ><i class="far fa-heart" :class="{fas: is_fav}"></i></div>

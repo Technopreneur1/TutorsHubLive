@@ -30,10 +30,10 @@
                     </div>
                 </a>
                 <div class="sess-info">
-                    <div v-if="viewSession.payment_status != 1 && viewSession.accept != '1' && viewSession.class_status == 0" class="status"><span>Requested</span></div>
-                    <div v-if="viewSession.payment_status != 1 && viewSession.accept == '1' && viewSession.class_status == 0" class="status"><span>Pending</span></div>
-                    <div v-if="viewSession.payment_status == 1 && viewSession.accept == '1' && viewSession.class_status == 0"  class="status"><span>Upcoming</span></div>
-                    <div v-if="viewSession.payment_status == 1 && viewSession.accept == '1' && viewSession.class_status == 1"  class="status"><span>Completed</span></div>
+                    <div v-if="viewSession.payment_status != 1 && viewSession.accept != '1' && viewSession.completed == 0" class="status"><span>Requested</span></div>
+                    <div v-if="viewSession.payment_status != 1 && viewSession.accept == '1' && viewSession.completed == 0" class="status"><span>Pending</span></div>
+                    <div v-if="viewSession.payment_status == 1 && viewSession.accept == '1' && viewSession.completed == 0"  class="status"><span>Upcoming</span></div>
+                    <div v-if="viewSession.payment_status == 1 && viewSession.accept == '1' && viewSession.completed == 1"  class="status"><span>Completed</span></div>
                     <span class="dt">{{viewSession.created_at | moment('DD MMM, YYYY')}}</span>
                     <div class="val"><span>Start Session: {{viewSession.startsession}}</span></div>
                     <div class="val"><span>End Session: {{viewSession.endsession}}</span></div>
@@ -56,7 +56,7 @@
                 </div>
             </div>
 
-            <div v-if="authuser.type == 'student' && !viewSession.completed && viewSession.class_status == 1" class="statusbar">
+            <div v-if="authuser.type == 'student' && !viewSession.completed && viewSession.completed == 1" class="statusbar">
                 <span class="val">Pending</span>
                 <span class="txt">Please mark session as <b>completed</b> after it has taken place</span>
                 <button @click="markComplete" class="btn btn-gradientb">Mark as completed</button> &nbsp; OR &nbsp;
@@ -64,13 +64,14 @@
             <button v-if="!viewSession.cancel_request && !viewSession.completed" @click="requestCancel" class="btn btn-danger" style="border-radius: 30px;     text-align: center;
     display: block;">Request To Cancel Session</button>
             <button v-if="viewSession.accept != '1' && !viewSession.completed && authuser.type != 'student'" @click="requestaccept" class="btn btn-success" style="border-radius: 30px">Accept Session Request</button>
-            <button v-if="viewSession.payment_status == '1' && viewSession.accept == '1' && viewSession.class_status == '0' && !viewSession.cancel_request && authuser.type != 'student'" @click="startsession" class="btn btn-success" style="border-radius: 30px">Start Session</button>
-            <button v-if="viewSession.payment_status == 1 && viewSession.accept == '1' && viewSession.class_status == 0 && !viewSession.cancel_request && authuser.type == 'student'" @click="startsession" class="btn btn-success" style="border-radius: 30px">Join Session</button>
+            <button v-if="viewSession.sessiontype == 'In Person' && viewSession.payment_status == '1' && viewSession.accept == '1' && viewSession.completed == '0' && viewSession.completed == 0 && !viewSession.cancel_request && authuser.type != 'student'" @click="markComplete" class="btn btn-gradientb">Mark as completed</button>
+            <button v-if="viewSession.sessiontype == 'Online' && viewSession.payment_status == '1' && viewSession.accept == '1' && viewSession.completed == '0' && !viewSession.cancel_request && authuser.type != 'student'" @click="startsession" class="btn btn-success" style="border-radius: 30px">Start Session</button>
+            <button v-if="viewSession.sessiontype == 'Online' && viewSession.accept == '1' && viewSession.completed == 0 && !viewSession.cancel_request && authuser.type == 'student'" @click="startsession" class="btn btn-success" style="border-radius: 30px">Join Session</button>
             <div v-if="viewSession.payment_status != 1  && viewSession.accept == '1' && authuser.type == 'student'" class="rates" >
                 Please Pay to confirm this Session
             </div>
             <div  v-if="viewSession.payment_status != 1  && viewSession.accept == '1' && authuser.type == 'student'" ref="paypal"></div>
-            <div v-if="viewSession.payment_status == 1 && viewSession.accept == '1' && viewSession.class_status == 1"  class="status">
+            <div v-if="viewSession.payment_status == 1 && viewSession.accept == '1' && viewSession.completed == 1"  class="status">
                 <div id="record" ></div>
             </div>
 <!--            <button @click="requestpayment()" value="add task" class="btn btn-gradient">PayPal</button>-->
@@ -192,7 +193,7 @@
                                     <div class="val"><span>{{ses.subject}}</span></div>
                                 </div>
                                 <div class="info">
-                                    <span class="dt">Session Type{{ses.sessiontype}}</span>
+                                    <span class="dt">Session Type: {{ses.sessiontype}}</span>
                                     <div class="val"><span>Start Session: {{ses.startsession}}</span></div>
                                     <div class="val"><span>End Session: {{ses.endsession}}</span></div>
                                 </div>
@@ -200,16 +201,16 @@
                                     <span class="dt">Hours: {{ses.hours}}</span>
                                 </div>
                                 <div class="actions">
-                                    <div v-if="ses.payment_status != 1 && ses.accept != '1' && ses.class_status == 0" class="status">
+                                    <div v-if="ses.payment_status != 1 && ses.accept != '1' && ses.completed == 0" class="status">
                                         <div v-if="!ses.cancel_request" class="status">
                                         Requested</div>
 
                                         <div v-if="ses.cancel_request" class="status">
                                         Cancelled</div>
                                     </div>
-                                    <div v-if="ses.payment_status != 1 && ses.accept == '1' && ses.class_status == 0" class="status">Pending</div>
+                                    <div v-if="ses.payment_status != 1 && ses.accept == '1' && ses.completed == 0" class="status">Pending</div>
 
-                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.class_status == 1"  class="status">Completed</div>
+                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.completed == 1"  class="status">Completed</div>
 
                                     <button @click="showSession(ses)" class="btn btn-gradient">Open</button>
                                 </div>
@@ -247,7 +248,7 @@
                                     <div class="val"><span>{{ses.subject}}</span></div>
                                 </div>
                                 <div class="info">
-                                    <span class="dt">Session Type{{ses.sessiontype}}</span>
+                                    <span class="dt">Session Type: {{ses.sessiontype}}</span>
                                     <div class="val"><span>Start Session: {{ses.startsession}}</span></div>
                                     <div class="val"><span>End Session: {{ses.endsession}}</span></div>
                                 </div>
@@ -255,10 +256,10 @@
                                     <span class="dt">Hours: {{ses.hours}}</span>
                                 </div>
                                 <div class="actions">
-                                    <div v-if="ses.payment_status != 1 && ses.accept != '1' && ses.class_status == 0" class="status">Requested</div>
-                                    <div v-if="ses.payment_status != 1 && ses.accept == '1' && ses.class_status == 0" class="status">Pending</div>
-                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.class_status == 0"  class="status">Upcoming</div>
-                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.class_status == 1"  class="status">Completed</div>
+                                    <div v-if="ses.payment_status != 1 && ses.accept != '1' && ses.completed == 0" class="status">Requested</div>
+                                    <div v-if="ses.payment_status != 1 && ses.accept == '1' && ses.completed == 0" class="status">Pending</div>
+                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.completed == 0"  class="status">Upcoming</div>
+                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.completed == 1"  class="status">Completed</div>
 
                                     <button @click="showSession(ses)" class="btn btn-gradient">Open</button>
                                 </div>
@@ -295,7 +296,7 @@
                                     <div class="val"><span>{{ses.subject}}</span></div>
                                 </div>
                                 <div class="info">
-                                    <span class="dt">Session Type{{ses.sessiontype}}</span>
+                                    <span class="dt">Session Type: {{ses.sessiontype}}</span>
                                     <div class="val"><span>Start Session: {{ses.startsession}}</span></div>
                                     <div class="val"><span>End Session: {{ses.endsession}}</span></div>
                                 </div>
@@ -304,10 +305,10 @@
                                 </div>
                                 <div class="actions">
 
-                                    <div v-if="ses.payment_status != 1 && ses.accept != '1' && ses.class_status == 0" class="status">Requested</div>
-                                    <div v-if="ses.payment_status != 1 && ses.accept == '1' && ses.class_status == 0" class="status">Pending</div>
-<!--                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.class_status == 0"  class="status">Upcoming</div>-->
-                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.class_status == 0"  class="status">
+                                    <div v-if="ses.payment_status != 1 && ses.accept != '1' && ses.completed == 0" class="status">Requested</div>
+                                    <div v-if="ses.payment_status != 1 && ses.accept == '1' && ses.completed == 0" class="status">Pending</div>
+<!--                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.completed == 0"  class="status">Upcoming</div>-->
+                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.completed == 0"  class="status">
                                         <div v-if="!ses.cancel_request" class="status">
                                             Upcoming</div>
                                         <div v-if="ses.cancel_request" class="status">
@@ -315,7 +316,7 @@
                                             <div style="font-size: 10px">Please rise a ticket in <br> Support Center for refund!.</div>
                                         </div>
                                     </div>
-                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.class_status == 1"  class="status">Completed</div>
+                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.completed == 1"  class="status">Completed</div>
 
                                     <button @click="showSession(ses)" class="btn btn-gradient">Open</button>
                                 </div>
@@ -352,7 +353,7 @@
                                     <div class="val"><span>{{ses.subject}}</span></div>
                                 </div>
                                 <div class="info">
-                                    <span class="dt">Session Type{{ses.sessiontype}}</span>
+                                    <span class="dt">Session Type: {{ses.sessiontype}}</span>
                                     <div class="val"><span>Start Session: {{ses.startsession}}</span></div>
                                     <div class="val"><span>End Session: {{ses.endsession}}</span></div>
                                 </div>
@@ -360,10 +361,10 @@
                                     <span class="dt">Hours: {{ses.hours}}</span>
                                 </div>
                                 <div class="actions">
-                                    <div v-if="ses.payment_status != 1 && ses.accept != '1' && ses.class_status == 0" class="status">Requested</div>
-                                    <div v-if="ses.payment_status != 1 && ses.accept == '1' && ses.class_status == 0" class="status">Pending</div>
-                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.class_status == 0"  class="status">Upcoming</div>
-                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.class_status == 1"  class="status">Completed</div>
+                                    <div v-if="ses.payment_status != 1 && ses.accept != '1' && ses.completed == 0" class="status">Requested</div>
+                                    <div v-if="ses.payment_status != 1 && ses.accept == '1' && ses.completed == 0" class="status">Pending</div>
+                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.completed == 0"  class="status">Upcoming</div>
+                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.completed == 1"  class="status">Completed</div>
 
                                     <button @click="showSession(ses)" class="btn btn-gradient">Open</button>
                                 </div>
@@ -400,7 +401,7 @@
                                 <div class="val"><span>{{ses.subject}}</span></div>
                             </div>
                             <div class="info">
-                                <span class="dt">Session Type{{ses.sessiontype}}</span>
+                                <span class="dt">Session Type: {{ses.sessiontype}}</span>
                                 <div class="val"><span>Start Session: {{ses.startsession}}</span></div>
                                 <div class="val"><span>End Session: {{ses.endsession}}</span></div>
                             </div>
@@ -408,21 +409,14 @@
                                 <span class="dt">Hours: {{ses.hours}}</span>
                             </div>
                             <div class="actions">
-
-                                <div v-if="ses.payment_status != 1 && ses.accept != '1' && ses.class_status == 0" class="status">Requested</div>
-                                <div v-if="ses.payment_status != 1 && ses.accept == '1' && ses.class_status == 0" class="status">Pending</div>
-                                <!--                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.class_status == 0"  class="status">Upcoming</div>-->
-                                <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.class_status == 0"  class="status">
-                                    <div v-if="!ses.cancel_request" class="status">
-                                        Upcoming</div>
-                                    <div v-if="ses.cancel_request" class="status">
+                                <div v-if="ses.cancel_request != NULL"  class="status">
+                                    <div v-if="authuser.type == 'teacher'" class="status">Cancelled</div>
+                                    <div v-if="authuser.type == 'student'" class="status">
                                         <div class="status" >Cancelled</div>
-                                        <div style="font-size: 10px">Please rise a ticket in Support Center for refund!.</div>
+                                        <div style="font-size: 10px">Please rise a ticket in support center for refund!</div>
                                     </div>
                                 </div>
-                                <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.class_status == 1"  class="status">Completed</div>
-
-                                <button @click="showSession(ses)" class="btn btn-gradient">Open</button>
+                                <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.completed == 1"  class="status">Completed</div>
                             </div>
                         </div>
 
@@ -679,11 +673,12 @@ export default {
     },
     computed: {
         requestedSessions(){
+
             var session;
             var requests = [];
             for (var i = 0; i < this.sessions.length; i++) {
                 session = this.sessions[i];
-                if (session.cancel_request==''&& session.payment_status != 1 && session.accept != '1' && session.class_status == 0) {
+                if (session.cancel_request == null && session.payment_status != 1 && session.accept != '1' && session.class_status == 0) {
                     requests.push(session);
                 }
             }
@@ -694,8 +689,9 @@ export default {
             var requests = [];
             for (var i = 0; i < this.sessions.length; i++) {
                 session = this.sessions[i];
-                if (session.cancel_request==''&& session.payment_status != 1 && session.accept == '1' && session.class_status == 0) {
-                    requests.push(session);
+                console.log((session.class_status))
+                if (session.cancel_request== null && session.payment_status != 1 && session.accept == '1' && session.class_status == 0) {
+                        requests.push(session);
                 }
             }
             return requests;
@@ -706,7 +702,8 @@ export default {
             var requests = [];
             for (var i = 0; i < this.sessions.length; i++) {
                 session = this.sessions[i];
-                if (session.cancel_request==''&& session.payment_status == 1 && session.accept == '1' && session.class_status == 0) {
+                if (session.cancel_request== null && session.payment_status == 1 && session.accept == '1' && session.completed == 0)
+                {
                     requests.push(session);
                 }
             }
@@ -718,7 +715,7 @@ export default {
             var requests = [];
             for (var i = 0; i < this.sessions.length; i++) {
                 session = this.sessions[i];
-                if (session.cancel_request==''&& session.payment_status == 1 && session.accept == '1' && session.class_status == 1) {
+                if (session.cancel_request== null && session.payment_status == 1 && session.accept == '1' && session.completed == 1) {
                     requests.push(session);
 
                 }
@@ -985,7 +982,7 @@ export default {
 
         const script = document.createElement("script");
         //script.src = "https://www.paypal.com/sdk/js?client-id=AYSq3RDGsmBLJE-otTkBtM-jBRd1TCQwFf9RGfwddNXWz0uFU9ztymylOhRS&currency=" + this.currency;
-        script.src = "https://www.paypal.com/sdk/js?client-id=AU1qSrl-VvM9r15F6lhSITnPRtJvJwFJfd__J5cMP8FvpXCDcEloTOysg8exK1DZN8rMCsgBXCOUbPFd&currency=" + this.currency;
+        script.src = "https://www.paypal.com/sdk/js?client-id=AQJBgbxwGJkhuDwcblLfVwPq6TnDpAliMv5_HllIFnJ5l-Im6Sv5VK30SV8j7TSLUEYKYBCdTcamB-2K&currency=" + this.currency;
         // script.src = "https://www.paypal.com/sdk/js?client-id=AVAo9E3s-xN1GwGOPf7WuRsfUz67-urBxeAwRp_3xYboyF0_oW9E4MnLh0mgcbBqAYzmD3LoGD7a8oRP&currency=" + this.currency;
         script.addEventListener("load", this.setLoaded);
         document.body.appendChild(script);

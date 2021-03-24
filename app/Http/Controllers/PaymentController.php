@@ -22,12 +22,12 @@ class PaymentController extends Controller
 
     public function requestBank()
     {
-        if(auth()->user()->country->name == 'United States')
-        {
-                $currency = "USD";
-        }else{
-                 $currency = "CAD";
+        if (auth()->user()->currency == "USD") {
+            $currency = "USD";
+        } else{
+            $currency = "CAD";
         }
+        
         Mail::to('info@tutors-hub.com')->send(new PaymentRequest(auth()->user(), Earning::balance(auth()->user()->profile), $currency));
         Mail::to(auth()->user()->email)->send(new PaymentRequestConfirmation(auth()->user(), Earning::balance(auth()->user()->profile), $currency));
         return response()->json(['msg' => 'success']);
@@ -62,25 +62,22 @@ class PaymentController extends Controller
         if(!$paypal_id)
         {
 
-            return redirect()->back()->with(['error' => 'Transaction Failed.. ! Please try again in 24 hours and if still issue occurs please contact support center.']);
+            return redirect()->back()->with(['error' => 'Transaction Failed.. ! Please add your paypal email in your account settings.']);
 
         }else{
 
             //dd(auth()->user()->country->name);
-
-            if(auth()->user()->country->name == 'United States')
-            {
+            if (auth()->user()->currency == "USD") {
                 $currency = "USD";
-            }else{
+            } else{
                 $currency = "CAD";
             }
-            //dd($currency);
+            
             $paypal_conf = \Config::get('paypal');
             $this->_api_context = new ApiContext(new OAuthTokenCredential(
                     $paypal_conf['client_id'],
                     $paypal_conf['secret'])
             );
-
             $this->_api_context->setConfig($paypal_conf['settings']);
 
             $payouts = new Payout();
@@ -108,38 +105,40 @@ class PaymentController extends Controller
             try {
                 $output = $payouts->createSynchronous($this->_api_context);
             } catch (Exception $ex) {
-
-                printError("Created Single Synchronous Payout", "Payout", null, $request, $ex);
+                return redirect()->back()->with(['error' => 'Failed! Try Again Later After 24 Hours']);
+                // dd($request);
+                dd($ex);
+                // print("Created Single Synchronous Payout", "Payout", null, $request, $ex);
                 exit(1);
             }
 
             $transcation_id = $output->getBatchHeader()->getPayoutBatchId();
             $payout_status = $output->getBatchHeader()->getBatchStatus();
-            $payoutItems = $output->getItems();
-            $payoutItem = $payoutItems[0];
-            $payoutId = $payoutItem->getPayoutItemId();
-            $transactionid = $payoutItem->getTransactionId();
-            $activityid = $payoutItem->activity_id;
-            $transactionstatus = $payoutItem->getTransactionStatus();
+            // $payoutItems = $output->getItems();
+            // $payoutItem = $payoutItems[0];
+            // $payoutId = $payoutItem->getPayoutItemId();
+            // $transactionid = $payoutItem->getTransactionId();
+            // $activityid = $payoutItem->activity_id;
+            // $transactionstatus = $payoutItem->getTransactionStatus();
 
 
-            if($payout_status == 'SUCCESS'){
+            // if($payout_status == 'PENDING'){
 
                 Payment::create([
                     'teacher_id' => $id,
                     'amount' => $balance,
-                    'proff' => $activityid,
+                    'proff' => $transcation_id,
                     'type' => 'Paypal'
                 ]);
 
                 return redirect()->back()->with(['message' => ' Transaction Successful .. ! Payment has been sent to your PayPal Account.']);
 
 
-            }else{
+            // } else{
 
-                return redirect()->back()->with(['error' => 'Failed! Try Again Later After 24 Hours']);
+            //     return redirect()->back()->with(['error' => 'Failed! Try Again Later After 24 Hours']);
 
-            }
+            // }
 
         }
 

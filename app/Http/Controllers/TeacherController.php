@@ -73,6 +73,7 @@ class TeacherController extends Controller
                 'phone' => $request['phone'],
                 'gender' => $request['gender'],
                 'currency' => $request['currency'],
+                'address' => $request['address'],
                 'type' => 'teacher',
                 'country_id' => $request['country'],
                 'password' => bcrypt($request['password']),
@@ -107,6 +108,7 @@ class TeacherController extends Controller
             $av = "AND users.availability='". $request->availability."'";
         }
 //        dd($av);
+// dd($request);
         if($request->level && $request->subject)
         {
             $string = "SELECT users.id, ( 6371 * acos( cos( radians(?) ) *
@@ -137,6 +139,10 @@ class TeacherController extends Controller
 
         }
 //        dd($string);
+//            $args = [$lat, $lng, $lat, $request->radius];
+
+//        }
+    //    dd($string);
 
 //        if($request->radius)
 //        {
@@ -158,6 +164,7 @@ class TeacherController extends Controller
 
         $tutors = User::with(['city', 'state', 'neighborhood', 'country', 'profile'])
                     ->where('is_hidden', 0)
+                    ->where('is_active', 1)
                     ->where('is_banned', 0)
                     ->where('type', 'teacher')
                     ->whereIn('id', $ids)

@@ -4,6 +4,14 @@
 @endsection
 @section('styles')
 <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style>
+@media screen and (max-width: 600px) {
+    .top_panel_top{
+        display: none;
+    }
+}
+
+</style>
 @endsection
 @section('content')
 
@@ -16,7 +24,7 @@
         <div class="page_wrap">
 
             <header class="top_panel top_panel_default without_bg_image header-dark scheme_default">    <div class="top_panel_top">
-                    <div class="content_wrap">
+                    <div class="content_wrap" style="padding:10px;">
                         <div class="custom_button_language">
                         </div>
                         <a href="{{route('login')}}" class=" trx_addons_login_link ">
@@ -61,7 +69,8 @@
                             <li id="menu_mobile-item-105" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-105"><a href="https://tutors-hub.com/"><span>Home</span></a>
                             <li id="menu_mobile-item-548" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-548"><a href="https://tutors-hub.com/student-registration"><span>Find a Tutor</span></a></li>
                             <li id="menu_mobile-item-164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164"><a href="https://tutors-hub.com/teacher-registration"><span>Become a Tutor</span></a></li>
-                            <li id="menu_mobile-item-165" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-165"><a href="https://tutors-hub.com/contacts/"><span>Contacts</span></a></li>
+                            <li id="menu_mobile-item-164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164"><a href="{{route('login')}}"><span>Login</span></a></li>
+                            <li id="menu_mobile-item-165" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-165"><a href="https://tutors-hub.com/contacts/"><span>Contact Us</span></a></li>
                         </ul>
                     </nav>
                    <div class="socials_mobile"><span class="social_item"><a href="twitter.com" target="_blank" class="social_icons social_twitter"><span class="trx_addons_icon-twitter"></span></a></span><span class="social_item"><a href="https://www.facebook.com/AncoraThemes/" target="_blank" class="social_icons social_facebook"><span class="trx_addons_icon-facebook"></span></a></span><span class="social_item"><a href="https://www.instagram.com/ancora_themes/" target="_blank" class="social_icons social_instagram"><span class="trx_addons_icon-instagram"></span></a></span><span class="social_item"><a href="https://dribbble.com/AncoraThemes" target="_blank" class="social_icons social_dribbble"><span class="trx_addons_icon-dribbble"></span></a></span></div>	</div>
@@ -138,7 +147,8 @@
                                                                         data-frame_1="tp:600;e:Power4.easeOut;st:3770;sp:1000;sR:3770;"
                                                                         data-frame_999="o:0;tp:600;st:w;sR:4230;"
                                                                         style="z-index:7;font-family:Open Sans;"
-                                                                    ><div class="sc_item_button sc_button_wrap"><a href="https://tutors-hub.com/student-registration" id="sc_button_212681052" class="sc_button sc_button_default sc_button_size_large sc_button_icon_left"><span class="sc_button_text"><span class="sc_button_title">FIND A TUTOR NOW
+                                                                    ><div class="sc_item_button sc_button_wrap"><a href="https://tutors-hub.com/student-registration" id="sc_button_212681052" class="sc_button sc_button_default sc_button_icon_left"><span class="sc_button_text"><span class="sc_button_title">FIND A TUTOR
+</span></span><!-- /.sc_button_text --></a><a href="https://tutors-hub.com/teacher-registration" id="sc_button_212681052" class="sc_button sc_button_default sc_button_icon_left"><span class="sc_button_text"><span class="sc_button_title">BECOME A TUTOR
 </span></span><!-- /.sc_button_text --></a><!-- /.sc_button --></div><!-- /.sc_item_button -->
                                                                     </rs-layer><!--
 -->						</rs-slide>
@@ -194,7 +204,8 @@
                                                                         data-frame_1="tp:600;e:Power4.easeOut;st:3770;sp:1000;sR:3770;"
                                                                         data-frame_999="o:0;tp:600;st:w;sR:4230;"
                                                                         style="z-index:7;font-family:Open Sans;"
-                                                                    ><div class="sc_item_button sc_button_wrap"><a href="/tutors/" id="sc_button_398409179" class="sc_button sc_button_default sc_button_size_large sc_button_icon_left"><span class="sc_button_text"><span class="sc_button_title">FIND A TUTOR NOW
+                                                                    ><div class="sc_item_button sc_button_wrap"><a href="/tutors/" id="sc_button_398409179" class="sc_button sc_button_default sc_button_icon_left"><span class="sc_button_text"><span class="sc_button_title">FIND A TUTOR
+</span></span><!-- /.sc_button_text --></a><a href="https://tutors-hub.com/teacher-registration" id="sc_button_212681052" class="sc_button sc_button_default sc_button_icon_left"><span class="sc_button_text"><span class="sc_button_title">BECOME A TUTOR
 </span></span><!-- /.sc_button_text --></a><!-- /.sc_button --></div><!-- /.sc_item_button -->
                                                                     </rs-layer><!--
 -->						</rs-slide>
@@ -250,7 +261,8 @@
                             data-frame_1="tp:600;e:Power4.easeOut;st:3770;sp:1000;sR:3770;"
                             data-frame_999="o:0;tp:600;st:w;sR:4230;"
                             style="z-index:7;font-family:Open Sans;"
-                        ><div class="sc_item_button sc_button_wrap"><a href="https://tutors-hub.com/student-registration" id="sc_button_212681052" class="sc_button sc_button_default sc_button_size_large sc_button_icon_left"><span class="sc_button_text"><span class="sc_button_title">FIND A TUTOR NOW
+                        ><div class="sc_item_button sc_button_wrap"><a href="https://tutors-hub.com/student-registration" id="sc_button_212681052" class="sc_button sc_button_default sc_button_icon_left"><span class="sc_button_text"><span class="sc_button_title">FIND A TUTOR
+</span></span><!-- /.sc_button_text --></a><a href="https://tutors-hub.com/teacher-registration" id="sc_button_212681052" class="sc_button sc_button_default sc_button_icon_left"><span class="sc_button_text"><span class="sc_button_title">BECOME A TUTOR
 </span></span><!-- /.sc_button_text --></a><!-- /.sc_button --></div><!-- /.sc_item_button -->
                         </rs-layer><!--
 -->						</rs-slide>
@@ -370,16 +382,17 @@
                                                                         <div id="demo"></div>
                                                                     </div>
                                                                 </div>
-                                                            </div></div></div></div></div></div></div></div><div class="vc_row-full-width vc_clearfix"></div><div data-vc-full-width="true" data-vc-full-width-init="false" class="vc_row wpb_row vc_row-fluid vc_custom_1485445777014 vc_row-has-fill"><div class="wpb_column vc_column_container vc_col-sm-12 sc_layouts_column_icons_position_left"><div class="vc_column-inner"><div class="wpb_wrapper"><div id="sc_title_2054305088"
+                                                                </div></div></div></div></div></div></div></div><div class="vc_row-full-width vc_clearfix"></div><div data-vc-full-width="true" data-vc-full-width-init="false" class="vc_row wpb_row vc_row-fluid vc_custom_1485445777014 vc_row-has-fill"><div class="wpb_column vc_column_container vc_col-sm-12 sc_layouts_column_icons_position_left"><div class="vc_column-inner"><div class="wpb_wrapper"><div id="sc_title_2054305088"
+
                                                                                                                                                                                                                                                                                                                                                                                                                                                                   class="sc_title sc_title_default  vc_custom_1484220986265"><h6 class="sc_item_subtitle sc_title_subtitle sc_align_default sc_item_title_style_default clr-green">Find the best tutors around you</h6><h2 class="sc_item_title sc_title_title sc_align_default sc_item_title_style_default">Find tutors and message them directly
                                                     </h2></div><!-- /.sc_title --><div  id="sc_promo_1988157650"
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               class="sc_promo sc_promo_default sc_promo_size_normal sc_promo_no_paddings sc_promo_image_position_right"><div class="sc_promo_image" style="background-image:url(https://smarthead.ancorathemes.com/wp-content/uploads/2016/12/photo11.jpg);width:51%;right: 0;"></div><a href="https://www.youtube.com/watch?v=-vlI4aNhmoA&ab_channel=Tutors-Hub" class="sc_promo_link_on_image" target="_blank">View Our Video Presentation<span class="icon-play"></span>
                                                     </a><div class="sc_promo_text" style="width: 49%;float: left;">
-                                                        <div class="sc_promo_text_inner" style=""><h6 class="sc_item_subtitle sc_promo_subtitle sc_align_left sc_item_title_style_default">Most Popular</h6><h3 class="sc_item_title sc_promo_title sc_align_left sc_item_title_style_default">Trending Subjects</h3><div class="sc_promo_content sc_item_content"><div  class="vc_wp_custommenu wpb_content_element columns-2"><div class="widget widget_nav_menu"><div class="menu-subjects-container"><ul id="menu-subjects" class="menu"><li id="menu-item-174" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-174"><a href="/student-registration/">Mathematics</a></li>
+                                                        <div class="sc_promo_text_inner" style=""><h6 class="sc_item_subtitle sc_promo_subtitle sc_align_left sc_item_title_style_default">Most Popular</h6><h3 class="sc_item_title sc_promo_title sc_align_left sc_item_title_style_default">Trending Subjects</h3><div class="sc_promo_content sc_item_content"><div  class="vc_wp_custommenu wpb_content_element columns-2"><div class="widget widget_nav_menu"><div class="menu-subjects-container"><ul id="menu-subjects" class="menu"><li id="menu-item-174" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-174">Mathematics</li>
                                                                                 <?php $count = 1; ?>
                                                                                 @foreach ($subjects as $records)
                                                                                     <?php if($count == 14) break; ?>
-                                                                                    <li id="menu-item-175" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-175"><a href="/student-registration/">{{$records->name}}</a></li>
+                                                                                    <li id="menu-item-175" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-175">{{$records->name}}</li>
                                                                                         <?php $count++; ?>
                                                                                 @endforeach
                                                                              </ul></div></div></div></div>
@@ -392,9 +405,8 @@
                                                     <div class="sc_services_columns sc_item_columns sc_item_columns_3 trx_addons_columns_wrap columns_padding_bottom">
                                                         <div class="trx_addons_column-1_3 "><div class="sc_services_item with_content with_icon sc_services_item_featured_top">
                                                                 <div class="sc_services_item_header">
-                                                                    <a href=
-                                                                       id="sc_services_192864280_icon-prof"
-                                                                       class="sc_services_item_icon icon-prof"
+                                                                    <a href="#"
+                                                                        class="sc_services_item_icon icon-prof"
                                                                     ></a>	</div>
                                                                 <div class="sc_services_item_content">
                                                                     <h6 class="sc_services_item_title">Professional Tutors</h6>
@@ -407,8 +419,7 @@
                                                             </div>
                                                         </div><div class="trx_addons_column-1_3 "><div class="sc_services_item with_content with_icon sc_services_item_featured_top">
                                                                 <div class="sc_services_item_header">
-                                                                    <a href=
-                                                                       id="sc_services_192864280_icon-real-results"
+                                                                    <a href="#"
                                                                        class="sc_services_item_icon icon-real-results"
                                                                     ></a>	</div>
                                                                 <div class="sc_services_item_content">
@@ -423,8 +434,7 @@
                                                             </div>
                                                         </div><div class="trx_addons_column-1_3 "><div class="sc_services_item with_content with_icon sc_services_item_featured_top">
                                                                 <div class="sc_services_item_header">
-                                                                    <a href=
-                                                                       id="sc_services_192864280_icon-university"
+                                                                    <a href="#"
                                                                        class="sc_services_item_icon icon-university"
                                                                     ></a>	</div>
                                                                 <div class="sc_services_item_content">
@@ -458,12 +468,13 @@
                                                     <div class="tp-columns-container">
                                                         <?php $count = 0; ?>
                                                     @foreach($teachers as $teacher)
+
                                                                 <?php if($count == 3) break; ?>
                                                                 <div class="tutor-plugin column-1-3" style="float: left;">
                                                             <div id="post-572" class="post-572 tutor type-tutor status-publish has-post-thumbnail hentry tutor_group-personal tutor_tag-chemistry tutor_tag-coding tutor_tag-communication">
                                                                 <div class="tp-single tp-post">
                                                                     <div class="tp-featured">
-                                                                        @if(isset($record->avatar))
+                                                                        @if(isset($teacher->avatar))
                                                                         <img width="740" height="792" src="https://tutors-hub.com/storage/images/{{$teacher->avatar}}" class="attachment-tutor-archive size-tutor-archive wp-post-image" alt="" srcset="https://tutors-hub.com/storage/images/{{$teacher->avatar}} 740w, https://tutors-hub.com/storage/images/{{$teacher->avatar}} 280w, https://tutors-hub.com/storage/images/{{$teacher->avatar}} 370w" sizes="(max-width: 740px) 100vw, 740px" />                            <div class="tp-featured-overlay">
                                                                          @else
                                                                                     <img width="740" height="792" src="https://tutors-hub.com/wp-content/uploads/2016/11/tutor7-740x792.jpg" class="attachment-tutor-archive size-tutor-archive wp-post-image" alt="" srcset="https://tutors-hub.com/wp-content/uploads/2016/11/tutor7-740x792.jpg 740w, https://tutors-hub.com/wp-content/uploads/2016/11/tutor7-280x300.jpg 280w, https://tutors-hub.com/wp-content/uploads/2016/11/tutor7-370x397.jpg 370w" sizes="(max-width: 740px) 100vw, 740px" />                        <div class="tp-featured-overlay">
@@ -474,14 +485,15 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="tp-content"><div class="tp-subjects"><a href="#" class="tp-tutor-subjects">{{$teacher->subject_name}}</a> </div>
+                                                                    <div class="tp-content"><div class="tp-subjects"><p class="tp-tutor-subjects">{{$teacher->subject_name}}</p> </div>
                                                                         <div class="tp-title">
-                                                                            <a class="tp-title-link" href="#">{{$teacher->name}}</a>
+                                                                            <p class="tp-title-link">{{$teacher->name}}</p>
                                                                         </div>
                                                                         <div class="tp-read-more">
                                                                             <form   action="{{route('viewtutor')}}"  method="POST" >
                                                                                 @csrf
 
+                                                                                <input type="hidden" name="availability" value="{{$teacher->availability}}">
                                                                                 <input type="hidden" name="id" value="{{$teacher->id}}">
                                                                                 <input type="hidden" name="name" value="{{$teacher->name}}">
                                                                                 <input type="hidden" name="subject" value="{{$teacher->subject_name}}">

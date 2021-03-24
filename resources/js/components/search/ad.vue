@@ -1,27 +1,34 @@
 <template>
-    <div class="ad-result">
+    <div class="ad-result" v-if="ad.ad_detail">
         <div v-if="loading" class="loader">
             <i class="fas fa-spinner fa-spin"></i>
         </div>
         <div class="ad">
             <div class="title">{{ad.title}}</div>
             <div class="student">
-                <a :href="url + '/user/' + ad.id" class="avatar">
+                <a v-if="ad.user_id != undefined" :href="url + '/user/' + ad.user_id" class="avatar">
+                    <img :src="avatar(ad)" alt="">
+                </a>
+                <a v-if="ad.user_id == undefined" :href="url + '/user/' + ad.id" class="avatar">
+
                     <img :src="avatar(ad)" alt="">
                 </a>
                 <div class="data">
-                    <a :href="url + '/user/' + ad.user_id" class="info">
+                    <a v-if="ad.user_id != undefined" :href="url + '/user/' + ad.user_id" class="info">
                         <div class="name">{{ad.name}} <span v-if="ad.verified" class="verified"><i class="fas fa-check"></i></span></div>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> {{ad.neighborhood ? ad.neighborhood.name + ', ' : ''}}{{ad.city ? ad.city.name + ', ' : ''}}{{ad.state ? ad.state.name + ', ' : ''}}</div>
+                        <div class="location"><i class="fas fa-map-marker-alt"></i> {{ ad.address }}</div>
+                    </a>
+                    <a v-if="ad.user_id == undefined" :href="url + '/user/' + ad.id" class="info">
+                        <div class="name">{{ad.name}} <span v-if="ad.verified" class="verified"><i class="fas fa-check"></i></span></div>
+                        <div class="location"><i class="fas fa-map-marker-alt"></i> {{ ad.address }}</div>
                     </a>
                     <div v-if="authid == ad.id" class="contactbtn">
                         <button  @click="deleteMyAd(ad.id)" class="btn btn-gradient">Delete</button>
                     </div>
                     <div v-else class="contactbtn">
-
-                        <div v-if="ad.type == 'teacher'" @click="addToFav" class="btn-t" ><i class="far fa-heart" :class="{fas: is_fav}"></i></div>
-                        <div v-if="ad.user.can_contact" @click="contact(ad.user_id)" class="btn-t"><i class="fas fa-envelope"></i></div>
-<!--                        <div  @click="addToFav" class="btn-t" ><i class="far fa-heart" :class="{fas: is_fav}"></i></div>-->
+                        <div @click="addToFav" class="btn-t" ><i class="far fa-heart" :class="{fas: is_fav}"></i></div>
+                        <div v-if="ad.can_contact" @click="contact(ad.user_id)" class="btn-t"><i class="fas fa-envelope"></i></div>
+                       <!-- <div  @click="addToFavAd" class="btn-t" ><i class="far fa-heart" :class="{fas: is_fav}"></i></div> -->
 <!--                        <div v-if="ad.can_contact" @click="contact(ad.id)" class="btn-t"><i class="fas fa-envelope"></i></div>-->
                     </div>
                 </div>
@@ -31,7 +38,10 @@
                 <span class="level">{{ad.ad_detail? ad.ad_detail.level.name : ''}}</span>
             </div>
             <div class="ad-info">
-                {{ ad.ad_detail ? ad.ad_detail.description : '' }}
+                Description: {{ ad.ad_detail.description ? ad.ad_detail.description : 'N/A' }}
+            </div>
+            <div class="ad-info">
+                Availability: {{ ad.ad_detail.availability ? ad.ad_detail.availability : 'N/A' }}
             </div>
         </div>
     </div>
@@ -41,6 +51,7 @@
         props: ['url', 'ad', 'authid'],
         data()
         {
+            // console.log('Auth ID:' + authid)
            return{
                 is_fav: false,
                 loading: false,

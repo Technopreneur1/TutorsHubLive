@@ -66,8 +66,7 @@ class SessionController extends Controller
             'rate' => $request->rate,
             'hours' => $request->hours,
             'total' => $request->total,
-            'fee' => ($request->total * Earning::currentFee())/100,
-
+            'fee' => $request->total * (Earning::currentFee()/100)
         ]);
         return response()->json(['session' => $session]);
     }
@@ -98,7 +97,7 @@ class SessionController extends Controller
             'sessiontype' => $request->sessiontype,
             'total' => $request->total,
             'accept' => '0',
-            'fee' => ($request->total * Earning::currentFee())/100,
+            'fee' => $request->total * (Earning::currentFee()/100),
 
             'startsession' => $date->toDateTimeString(),
 

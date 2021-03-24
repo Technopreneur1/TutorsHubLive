@@ -36,23 +36,23 @@ class AdminController extends Controller
     }
     public function ads()
     {
-        if(request()->country)
-        {
-            $ads = Ad::where('country_id', request()->country)->get();
-        }
-        elseif(request()->state)
-        {
-            $ads = Ad::where('state_id', request()->state)->get();
-        }
-        elseif(request()->city)
-        {
-            $ads = Ad::where('city_id', request()->city)->get();
-        }
-        elseif(request()->neighborhood)
-        {
-            $ads = Ad::where('neighborhood_id', request()->city)->get();
-        }
-        else
+        // if(request()->country)
+        // {
+        //     $ads = Ad::where('country_id', request()->country)->get();
+        // }
+        // elseif(request()->state)
+        // {
+        //     $ads = Ad::where('state_id', request()->state)->get();
+        // }
+        // elseif(request()->city)
+        // {
+        //     $ads = Ad::where('city_id', request()->city)->get();
+        // }
+        // elseif(request()->neighborhood)
+        // {
+        //     $ads = Ad::where('neighborhood_id', request()->city)->get();
+        // }
+        // else
         {
             $ads = Ad::orderBy('created_at', 'desc')->get();
         }
@@ -66,9 +66,16 @@ class AdminController extends Controller
     }
     public function sessions()
     {
-        $sessions = Session::orderBy('created_at', 'desc')->get();
+
+        $sessions = Session::where('seen',0)->orderBy('created_at', 'desc')->get();
         return view('admin.pages.sessions.index', ['sessions' => $sessions]);
     }
+    public function sessions1()
+    {
+        $sessions = Session::where('completed',1)->orderBy('created_at', 'desc')->get();
+        return view('admin.pages.sessions.index1', ['sessions' => $sessions]);
+    }
+
     public function viewSession($id)
     {
         $session = Session::findOrFail($id);

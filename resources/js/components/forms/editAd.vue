@@ -24,6 +24,10 @@
                         <transition name="custom-classes-transition" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
                         <div v-if="editingLocation" class="addlocations">
                             <div class="input">
+                                <label for="">Address</label>
+                                <gmap-autocomplete class="form-control" @place_changed="setPlace"></gmap-autocomplete>
+                            </div> 
+                            <!-- <div class="input">
                                 <label for="">Country</label>
                                 <select @change="getStates()" v-model="ad.country" >
                                     <option value="">-- Select Country --</option>
@@ -55,15 +59,13 @@
                             <div v-if="ad.neighborhood == -1" class="input">
                                 <label for="">Neighborhood Name &nbsp; <small>Make sure neighborhood name is correct and avoid spellings mistakes</small></label>
                                 <input type="text" class="input" v-model="ad.new_neighborhood" placeholder="Neighborhood">
-                            </div>
+                            </div> -->
                         </div>
                         </transition>
                         <div v-if="!editingLocation" class="locations">
                             <span class="current">
-                                {{thead.neighborhood ? thead.neighborhood.name : ''}}
-                                {{thead.city ? ', '+thead.city.name : ''}}
-                                {{thead.state ? ', '+thead.state.name : ''}}
-                                {{thead.country ? ', '+thead.country.name : ''}}
+                                {{thead.address}}
+                                <input type="hidden" name="address_" :value="thead.address" />
                                 </span>
                             <span @click="editingLocation = true" class="change">Change <i class="fas fa-cog"></i></span>
                         </div>
@@ -86,7 +88,15 @@
                                 <option v-for="discipline in disciplines" :value="discipline.id" :key="discipline.id">{{discipline.name}}</option>
                             </select>
                         </div>
-                        
+                        <div class="input">
+                            <label for="">Online/In-Person</label>
+                            <select v-model="ad.availability" name="availability" id="availability">
+                                <option value="">-- Select Availability --</option>
+                                <option value="Online">Online</option>
+                                <option value="In-Person">In-Person</option>
+                                <option value="Both" selected>Both</option>
+                            </select>
+                        </div>
                         <div class="input">
                             <label for="">Description</label>
                             <textarea class="form-control" v-model="ad.description" rows="4" placeholder="Describe your requirements (optional)"></textarea>
@@ -144,6 +154,10 @@
                 states: [],
                 cities: [],
                 neighborhoods: [],
+                address: $("input[name=address_]").val(),
+                lat: 40.7831,
+                lng: -73.9712,
+                address: '',
                 ad: {
                     title: this.thead.title,
                     description: this.thead.description,
@@ -153,7 +167,8 @@
                     new_neighborhood: '',
                     city: this.thead.city_id,
                     state: this.thead.state_id,
-                    country: this.thead.country_id
+                    country: this.thead.country_id,
+                    availability: '',
                 }
             }
         },
@@ -168,12 +183,19 @@
                         {
                             if(this.ad.discipline)
                             {
-                                if(this.ad.city && this.ad.state && this.ad.country)
+                                if(this.address)
                                 {
-                                    return true
+                                    if(this.ad.availabilty)
+                                    {
+                                        return true
+                                    }else
+                                    {
+                                        this.error = "Availabilty is required"
+                                        return false
+                                    }
                                 }else
                                 {
-                                    this.error = "Country State and City are required"
+                                    this.error = "Address is required"
                                     return false
                                 }
 
@@ -198,6 +220,12 @@
                     return false
                 }
             },
+            setPlace(place)
+            {
+                this.lat = place.geometry.location.lat();
+                this.lng = place.geometry.location.lng();
+                this.address = place.formatted_address
+            },
             updateAd()
             {
                 // console.log('ok')
@@ -215,7 +243,11 @@
                         discipline: this.ad.discipline,
                         neighborhood: this.ad.neighborhood,
                         country: this.ad.country,
+                        availability: $("#availability").val(),
                         city: this.ad.city,
+                        lat: this.lat,
+                        lng: this.lng,
+                        address: this.address,
                         state: this.ad.state,
                         new_neighborhood: this.ad.new_neighborhood
                     })

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Ad;
 use auth;
 use App\User;
+use App\Teacher;
 use App\Plan;
 use App\Location;
 use App\Discipline;
@@ -209,25 +211,31 @@ class UserController extends Controller
     public function userProfile($id)
     {
         $user = User::with(['state', 'city', 'neighborhood', 'country'])->find($id);
-        if($user->is_hidden || $user->is_banned)
-        {
+            if($user) {
+                if($user->is_hidden || $user->is_banned)
+            {
+                return view("pages.user.unavailable");
+            }
+            $profile = $user->profile;
+            if($user->type == 'teacher')
+            {
+                $type = 'tutor_rating';
+            }
+            elseif($user->type == 'student')
+            {
+                $type = 'student_rating';
+            }
+            $user->profile->sessions = $profile->sessions->where('completed', 1)->where($type, '!=', null);
+            // dd($user->profile->sessions);
+            $likes = Favorite::where('user_id', auth()->id())->where('target_id', $user->id)->count();
+            $timezones = $this->timezones;
+
+            return view('pages.user.profile',  ['user' => $user, 'profile' => $profile, 'likes' => $likes,'timezones'=>$timezones]);
+
+        } else {
             return view("pages.user.unavailable");
         }
-        $profile = $user->profile;
-        if($user->type == 'teacher')
-        {
-            $type = 'tutor_rating';
-        }
-        elseif($user->type == 'student')
-        {
-            $type = 'student_rating';
-        }
-        $user->profile->sessions = $profile->sessions->where('completed', 1)->where($type, '!=', null);
-        // dd($user->profile->sessions);
-        $likes = Favorite::where('user_id', auth()->id())->where('target_id', $user->id)->count();
-        $timezones = $this->timezones;
 
-        return view('pages.user.profile',  ['user' => $user, 'profile' => $profile, 'likes' => $likes,'timezones'=>$timezones]);
     }
 
     public function doILike(Request $request)
@@ -361,7 +369,7 @@ class UserController extends Controller
     function viewtutor(Request $request)
     {
 
-        $res = array('id' => $request->id, 'name' =>$request->name, 'subject' => $request->subject,'bio' => $request->bio,'rate' => $request->rate,'avatar' => $request->avatar,'created_at' => $request->created_at);
+        $res = array('availability' => $request->availability, 'id' => $request->id, 'name' =>$request->name, 'subject' => $request->subject,'bio' => $request->bio,'rate' => $request->rate,'avatar' => $request->avatar,'created_at' => $request->created_at);
 
         //dd($res);
         return view('pages.search.viewtutor')->with('data', $res);
@@ -395,10 +403,10 @@ class UserController extends Controller
 
         $data = $users->save();
         if (!empty($data)) {
-            return Redirect()->back()->with('message','Record has been updated successfully!');
+            return redirect()->back()->with('message','Record has been updated successfully!');
         }else
         {
-            return Redirect()->back()->with('message','Failed! Try Again');
+            return redirect()->back()->with('message','Failed! Try Again');
         }
 
     }
@@ -452,4 +460,44 @@ class UserController extends Controller
         return view('pages.search.teacherregistration',compact('timezones'));
 
     }
+    function deleteResume($user_id) {
+        Teacher::where('user_id', $user_id)
+            ->update(['resume' => null]);
+
+        session()->flash('message','Resume has been Deleted');
+        return back();
+    }
+    function deleteBackgroundCheck($user_id) {
+        Teacher::where('user_id', $user_id)
+            ->update(['background_check' => null]);
+
+        session()->flash('message','Background Check has been Deleted');
+        return back();
+    }
+    function deleteIdentity($user_id) {
+        Teacher::where('user_id', $user_id)
+            ->update(['identity' => null]);
+
+        session()->flash('message','Identity has been Deleted');
+        return back();
+    }
+
+    public function deActivateProfile(Request $request, $id){
+        $user = User::findOrFail($id);
+
+        $user->is_active = false;
+        $user->save();
+
+        $ads = Ad::where('user_id', $id)->get();
+
+        if(count($ads)){
+            foreach ($ads as $ad) {
+                $ad->delete();
+            }
+        }
+
+        session()->flash('message','Profile De-Activated');
+        return redirect()->back();
+    }
+
 }
