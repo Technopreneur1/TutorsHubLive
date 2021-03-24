@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddSesstionToSession extends Migration
+class AddFeaturedToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class AddSesstionToSession extends Migration
      */
     public function up()
     {
-        Schema::table('sessions', function (Blueprint $table) {
-            if (!Schema::hasColumn('sessions','session_created_at')) {
-                $table->timestamp('session_created_at');
-            }
+        Schema::table('users', function (Blueprint $table) {
+
+            $table->boolean('is_featured')->default(0)->nullable();
+
         });
     }
 
@@ -27,8 +27,9 @@ class AddSesstionToSession extends Migration
      */
     public function down()
     {
-        Schema::table('sessions', function (Blueprint $table) {
-            //
+        Schema::table('users', function (Blueprint $table) {
+            Schema::dropIfExists('is_featured');
         });
     }
+
 }

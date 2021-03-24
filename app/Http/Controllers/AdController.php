@@ -174,7 +174,7 @@ class AdController extends Controller
             'discipline_id' => $request['discipline'],
             'level_id' => $request['level'],
             'availability' => $request['availability'],
-            
+
         ]);
 
         return response()->json(['ad' => $ad]);
@@ -229,6 +229,7 @@ class AdController extends Controller
             $ads = User::with(['city', 'state', 'neighborhood', 'country', 'profile','ad_detail'])
             ->select('users.*','ads.*')
             ->join('ads', 'users.id', '=', 'ads.user_id')
+            ->where('is_active', 1)
             ->where('ads.availability', $request->availability)
             ->where('is_hidden', 0)
             ->where('is_banned', 0)
@@ -238,6 +239,7 @@ class AdController extends Controller
         } else {
             $ads = User::with(['city', 'state', 'neighborhood', 'country', 'profile','ad_detail'])
             ->where('is_hidden', 0)
+            ->where('is_active', 1)
             ->where('is_banned', 0)
             ->where('type', 'student')
             ->whereIn('users.id', $ids)
@@ -245,7 +247,7 @@ class AdController extends Controller
         }
 
         // $adsArray = [];
-        
+
         // foreach($ads as $ad) {
         //     if($ad->ad_detail) {
         //         array_push($adsArray,$ad);

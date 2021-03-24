@@ -160,6 +160,7 @@ class TeacherController extends Controller
 
         $tutors = User::with(['city', 'state', 'neighborhood', 'country', 'profile'])
                     ->where('is_hidden', 0)
+                    ->where('is_active', 1)
                     ->where('is_banned', 0)
                     ->where('type', 'teacher')
                     ->whereIn('id', $ids)

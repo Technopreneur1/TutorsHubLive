@@ -115,6 +115,7 @@ Route::post('post/accept-payment', 'SessionController@payment');
 
 Route::post('update/location', 'LocationController@updateUserLocation');
 Route::post('update/user', 'UserController@updateUserProfile');
+Route::post('user/delete/{id}', 'UserController@deActivateProfile');
 Route::post('update/password', 'UserController@updatePassword');
 Route::post('update/payment-info', 'TeacherController@updatePayment');
 Route::post('/update/plan', 'PlanController@update');
@@ -323,10 +324,10 @@ Auth::routes();
 
 
 
-// Route::get('/adminpanel', 'AdminController@adminpanel')->name('adminpanel');
+//Route::get('/adminpanel', 'AdminController@adminpanel')->name('adminpanel');
 
 Route::get('/export/payments/{id}', 'ExportController@userPayments')->name('export.userPayments')->middleware('auth');
-Route::prefix('adminpanel')->middleware(['admin'])->group(function () {
+Route::prefix('adminpanel')->middleware('admin')->group(function () {
 
     Route::get('/', 'AdminController@adminpanel')->name('adminpanel');
     Route::get('/contact/{id}/{ticket}', 'AdminController@contact')->name('admin.contact');

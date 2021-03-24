@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Ad;
 use auth;
 use App\User;
 use App\Teacher;
@@ -480,6 +481,24 @@ class UserController extends Controller
 
         session()->flash('message','Identity has been Deleted');
         return back();
+    }
+
+    public function deActivateProfile(Request $request, $id){
+        $user = User::findOrFail($id);
+
+        $user->is_active = false;
+        $user->save();
+
+        $ads = Ad::where('user_id', $id)->get();
+
+        if(count($ads)){
+            foreach ($ads as $ad) {
+                $ad->delete();
+            }
+        }
+
+        session()->flash('message','Profile De-Activated');
+        return redirect()->back();
     }
 
 }

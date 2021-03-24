@@ -9,7 +9,7 @@
                             <div class="avatar">
                                 <img :src="avatar" alt="">
                             </div>
-                            <p class="name">{{user.name}}</p>
+                            <p class="name">{{user.name}} {{ !user.is_active ? "( DeActivated Profile )" : ''}}</p>
                         </a>
                         <span @click="logout" class="logout">Logout</span>
                     </div>
@@ -82,8 +82,8 @@
             margin: 10px 0
             padding: 0
             font-size: 17px
-            
-            
+
+
             li
                 a
                     display: block
@@ -92,15 +92,15 @@
                     padding: 3px 15px
                     text-decoration: none
                     margin: 1px 0
-                    .tag 
+                    .tag
                         background: linear-gradient(30deg, #d22f2a, #f3963d)
                         padding: 3px 10px
                         border-radius: 4px
-                    &:hover   
+                    &:hover
                         background: rgba(0, 0, 0, 0.6862745098039217)
 
 
-    
+
     @media screen and (max-width: 425px)
         .slideMenu
             width: 100%
@@ -166,7 +166,7 @@
                 })
             }
         },
-        
+
         created()
         {
             let self = this
@@ -174,7 +174,7 @@
                 // close dropdown when clicked outside
                 if (!self.$el.contains(e.target)){
                 self.show = false
-                } 
+                }
             })
 
         }

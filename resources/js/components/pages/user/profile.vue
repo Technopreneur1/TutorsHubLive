@@ -139,9 +139,9 @@
                 <div class="option" v-if="user.type == 'teacher'">
                     <span class="key del"><a :href="url+ '/my-files'">Manage Files</a></span>
                 </div>
-                <!-- <div class="option">
-                    <span @click="deleteProfile()" class="key del">Delete Profile</span>
-                </div> -->
+                <div class="option">
+                    <span v-if="user.is_active" @click="deleteProfile()" class="key del">DeActivate Profile</span>
+                </div>
             </div>
 
             <div class="reviews-section">
@@ -440,8 +440,18 @@ import { type } from 'os'
         //     },
             deleteProfile()
             {
-                alert("You will able to delete profile when website is public")
-            }
+                if(confirm("Are you sure you want to Delete your Profile?")){
+                    this.loading = true
+                    axios.post(this.url +'/user/delete/'+this.user.id)
+                        .then(response => {
+                            this.loading = false
+                            location.reload()
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        })
+                    }
+                }
         },
 
         mounted()
