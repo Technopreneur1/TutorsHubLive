@@ -5,6 +5,11 @@
 @section('content')
     <div class="user-home">
         <div class="full-container">
+            @if(Session::has('reActivation'))
+                <div class="alert alert-success" role="alert">
+                    Your profile has been Re-Activated!
+                </div>
+            @endif
             @if (auth()->user()->latitude  == null || auth()->user()->latitude == null)
                 <div class="alert alert-primary" role="alert">
                     Your profile is hidden. Please set your location now to show in search results. <a href="{{route('settings')}}">Click Here</a>
@@ -89,4 +94,16 @@
 
         </div>
     </div>
+@endsection
+
+
+@section('scripts')
+    <script>
+        let isActive = {{ auth()->user()->is_active }}
+        if(!isActive){
+            if(!confirm("This is a deActivated Account. Continuing will ReActivate the Account. Are you sure you want to continue?")){
+                document.location.href={{ route('logout') }};
+            }
+        }
+    </script>
 @endsection
