@@ -7330,6 +7330,155 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     url: {
@@ -83382,74 +83531,148 @@ var render = function() {
       _vm.viewSession
         ? _c("section", { staticClass: "view-session" }, [
             _c("div", { staticClass: "sess-header" }, [
-              _vm.authuser.type == "student"
-                ? _c(
-                    "a",
-                    {
-                      staticClass: "with",
-                      attrs: {
-                        href:
-                          _vm.url + "/user/" + _vm.viewSession.teacher.user.id
-                      }
-                    },
-                    [
-                      _c("div", { staticClass: "avatar" }, [
-                        _c("img", {
-                          attrs: {
-                            src: _vm.avatar(_vm.viewSession.teacher.user),
-                            alt: ""
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "info" }, [
-                        _c("div", { staticClass: "name" }, [
-                          _vm._v(_vm._s(_vm.viewSession.teacher.user.name))
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "status" }, [
-                          _vm._v(
-                            _vm._s(
-                              _vm.viewSession.completed
-                                ? "Completed"
-                                : "Pending"
-                            )
-                          )
+              _vm.authuser.type === "student"
+                ? _c("span", [
+                    _vm.viewSession.teacher.user.is_active
+                      ? _c(
+                          "a",
+                          {
+                            staticClass: "with",
+                            attrs: {
+                              href:
+                                _vm.url +
+                                "/user/" +
+                                _vm.viewSession.teacher.user.id
+                            }
+                          },
+                          [
+                            _c("div", { staticClass: "avatar" }, [
+                              _c("img", {
+                                attrs: {
+                                  src: _vm.avatar(_vm.viewSession.teacher.user),
+                                  alt: ""
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "info" }, [
+                              _c("div", { staticClass: "name" }, [
+                                _vm._v(
+                                  _vm._s(_vm.viewSession.teacher.user.name)
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "status" }, [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.viewSession.completed
+                                      ? "Completed"
+                                      : "Pending"
+                                  )
+                                )
+                              ])
+                            ])
+                          ]
+                        )
+                      : _c("a", { staticClass: "with" }, [
+                          _c("div", { staticClass: "avatar" }, [
+                            _c("img", {
+                              attrs: {
+                                src: _vm.avatar(_vm.viewSession.teacher.user),
+                                alt: ""
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "info" }, [
+                            _c("div", { staticClass: "name" }, [
+                              _vm._v("(Deleted Profile)")
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "status" }, [
+                              _vm._v(
+                                _vm._s(
+                                  _vm.viewSession.completed
+                                    ? "Completed"
+                                    : "Pending"
+                                )
+                              )
+                            ])
+                          ])
                         ])
-                      ])
-                    ]
-                  )
+                  ])
                 : _vm._e(),
               _vm._v(" "),
-              _vm.authuser.type == "teacher"
-                ? _c(
-                    "a",
-                    {
-                      staticClass: "with",
-                      attrs: {
-                        href:
-                          _vm.url + "/user/" + _vm.viewSession.student.user.id
-                      }
-                    },
-                    [
-                      _c("span", { staticClass: "t" }, [_vm._v("With")]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "avatar" }, [
-                        _c("img", {
-                          attrs: {
-                            src: _vm.avatar(_vm.viewSession.student.user),
-                            alt: ""
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "info" }, [
-                        _c("div", { staticClass: "name" }, [
-                          _vm._v(_vm._s(_vm.viewSession.student.user.name))
+              _vm.authuser.type === "teacher"
+                ? _c("span", [
+                    _vm.viewSession.student.user.is_active
+                      ? _c(
+                          "a",
+                          {
+                            staticClass: "with",
+                            attrs: {
+                              href:
+                                _vm.url +
+                                "/user/" +
+                                _vm.viewSession.student.user.id
+                            }
+                          },
+                          [
+                            _c("div", { staticClass: "avatar" }, [
+                              _c("img", {
+                                attrs: {
+                                  src: _vm.avatar(_vm.viewSession.student.user),
+                                  alt: ""
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "info" }, [
+                              _c("div", { staticClass: "name" }, [
+                                _vm._v(
+                                  _vm._s(_vm.viewSession.student.user.name)
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "status" }, [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.viewSession.completed
+                                      ? "Completed"
+                                      : "Pending"
+                                  )
+                                )
+                              ])
+                            ])
+                          ]
+                        )
+                      : _c("button", { staticClass: "with" }, [
+                          _c("div", { staticClass: "avatar" }, [
+                            _c("img", {
+                              attrs: {
+                                src: _vm.avatar(_vm.viewSession.student.user),
+                                alt: ""
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "info" }, [
+                            _c("div", { staticClass: "name" }, [
+                              _vm._v("(Deleted Profile)")
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "status" }, [
+                              _vm._v(
+                                _vm._s(
+                                  _vm.viewSession.completed
+                                    ? "Completed"
+                                    : "Pending"
+                                )
+                              )
+                            ])
+                          ])
                         ])
-                      ])
-                    ]
-                  )
+                  ])
                 : _vm._e(),
               _vm._v(" "),
               _c("div", { staticClass: "sess-info" }, [
@@ -83972,70 +84195,144 @@ var render = function() {
                               "div",
                               { key: ses.id, staticClass: "session" },
                               [
-                                _vm.authuser.type == "student"
-                                  ? _c(
-                                      "a",
-                                      {
-                                        staticClass: "with",
-                                        attrs: {
-                                          href:
-                                            _vm.url +
-                                            "/user/" +
-                                            ses.teacher.user.id
-                                        }
-                                      },
-                                      [
-                                        _c("div", { staticClass: "avatar" }, [
-                                          _c("img", {
-                                            attrs: {
-                                              src: _vm.avatar(ses.teacher.user),
-                                              alt: ""
-                                            }
-                                          })
-                                        ]),
-                                        _vm._v(" "),
-                                        _c("div", { staticClass: "info" }, [
-                                          _c("div", { staticClass: "name" }, [
-                                            _vm._v(
-                                              _vm._s(ses.teacher.user.name)
-                                            )
+                                _vm.authuser.type === "student"
+                                  ? _c("span", [
+                                      ses.teacher.user.is_active
+                                        ? _c(
+                                            "a",
+                                            {
+                                              staticClass: "with",
+                                              attrs: {
+                                                href:
+                                                  _vm.url +
+                                                  "/user/" +
+                                                  ses.teacher.user.id
+                                              }
+                                            },
+                                            [
+                                              _c(
+                                                "div",
+                                                { staticClass: "avatar" },
+                                                [
+                                                  _c("img", {
+                                                    attrs: {
+                                                      src: _vm.avatar(
+                                                        ses.teacher.user
+                                                      ),
+                                                      alt: ""
+                                                    }
+                                                  })
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                { staticClass: "info" },
+                                                [
+                                                  _c(
+                                                    "div",
+                                                    { staticClass: "name" },
+                                                    [
+                                                      _vm._v(
+                                                        _vm._s(
+                                                          ses.teacher.user.name
+                                                        )
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        : _c("a", { staticClass: "with" }, [
+                                            _c(
+                                              "div",
+                                              { staticClass: "avatar" },
+                                              [
+                                                _c("img", {
+                                                  attrs: {
+                                                    src: _vm.avatar(
+                                                      ses.teacher.user
+                                                    ),
+                                                    alt: ""
+                                                  }
+                                                })
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _vm._m(2, true)
                                           ])
-                                        ])
-                                      ]
-                                    )
+                                    ])
                                   : _vm._e(),
                                 _vm._v(" "),
-                                _vm.authuser.type == "teacher"
-                                  ? _c(
-                                      "a",
-                                      {
-                                        staticClass: "with",
-                                        attrs: {
-                                          href:
-                                            _vm.url +
-                                            "/user/" +
-                                            ses.student.user.id
-                                        }
-                                      },
-                                      [
-                                        _c("div", { staticClass: "avatar" }, [
-                                          _c("img", {
-                                            attrs: {
-                                              src: _vm.avatar(ses.student.user),
-                                              alt: ""
-                                            }
-                                          })
-                                        ]),
-                                        _vm._v(" "),
-                                        _c("div", { staticClass: "info" }, [
-                                          _c("div", { staticClass: "name" }, [
-                                            _vm._v(
-                                              _vm._s(ses.student.user.name)
-                                            )
+                                _vm.authuser.type === "teacher"
+                                  ? _c("span", [
+                                      ses.student.user.is_active
+                                        ? _c(
+                                            "a",
+                                            {
+                                              staticClass: "with",
+                                              attrs: {
+                                                href:
+                                                  _vm.url +
+                                                  "/user/" +
+                                                  ses.student.user.id
+                                              }
+                                            },
+                                            [
+                                              _c(
+                                                "div",
+                                                { staticClass: "avatar" },
+                                                [
+                                                  _c("img", {
+                                                    attrs: {
+                                                      src: _vm.avatar(
+                                                        ses.student.user
+                                                      ),
+                                                      alt: ""
+                                                    }
+                                                  })
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                { staticClass: "info" },
+                                                [
+                                                  _c(
+                                                    "div",
+                                                    { staticClass: "name" },
+                                                    [
+                                                      _vm._v(
+                                                        _vm._s(
+                                                          ses.student.user.name
+                                                        )
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        : _c("a", { staticClass: "with" }, [
+                                            _c(
+                                              "div",
+                                              { staticClass: "avatar" },
+                                              [
+                                                _c("img", {
+                                                  attrs: {
+                                                    src: _vm.avatar(
+                                                      ses.student.user
+                                                    ),
+                                                    alt: ""
+                                                  }
+                                                })
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _vm._m(3, true)
                                           ])
-                                        ])
-                                      ]
-                                    )
+                                    ])
                                   : _vm._e(),
                                 _vm._v(" "),
                                 _c("div", { staticClass: "info" }, [
@@ -84101,7 +84398,7 @@ var render = function() {
                                               { staticClass: "status" },
                                               [
                                                 _vm._v(
-                                                  "\n                                        Requested"
+                                                  "\n                                    Requested"
                                                 )
                                               ]
                                             )
@@ -84113,7 +84410,7 @@ var render = function() {
                                               { staticClass: "status" },
                                               [
                                                 _vm._v(
-                                                  "\n                                        Cancelled"
+                                                  "\n                                    Cancelled"
                                                 )
                                               ]
                                             )
@@ -84183,70 +84480,144 @@ var render = function() {
                               "div",
                               { key: ses.id, staticClass: "session" },
                               [
-                                _vm.authuser.type == "student"
-                                  ? _c(
-                                      "a",
-                                      {
-                                        staticClass: "with",
-                                        attrs: {
-                                          href:
-                                            _vm.url +
-                                            "/user/" +
-                                            ses.teacher.user.id
-                                        }
-                                      },
-                                      [
-                                        _c("div", { staticClass: "avatar" }, [
-                                          _c("img", {
-                                            attrs: {
-                                              src: _vm.avatar(ses.teacher.user),
-                                              alt: ""
-                                            }
-                                          })
-                                        ]),
-                                        _vm._v(" "),
-                                        _c("div", { staticClass: "info" }, [
-                                          _c("div", { staticClass: "name" }, [
-                                            _vm._v(
-                                              _vm._s(ses.teacher.user.name)
-                                            )
+                                _vm.authuser.type === "student"
+                                  ? _c("span", [
+                                      ses.teacher.user.is_active
+                                        ? _c(
+                                            "a",
+                                            {
+                                              staticClass: "with",
+                                              attrs: {
+                                                href:
+                                                  _vm.url +
+                                                  "/user/" +
+                                                  ses.teacher.user.id
+                                              }
+                                            },
+                                            [
+                                              _c(
+                                                "div",
+                                                { staticClass: "avatar" },
+                                                [
+                                                  _c("img", {
+                                                    attrs: {
+                                                      src: _vm.avatar(
+                                                        ses.teacher.user
+                                                      ),
+                                                      alt: ""
+                                                    }
+                                                  })
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                { staticClass: "info" },
+                                                [
+                                                  _c(
+                                                    "div",
+                                                    { staticClass: "name" },
+                                                    [
+                                                      _vm._v(
+                                                        _vm._s(
+                                                          ses.teacher.user.name
+                                                        )
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        : _c("a", { staticClass: "with" }, [
+                                            _c(
+                                              "div",
+                                              { staticClass: "avatar" },
+                                              [
+                                                _c("img", {
+                                                  attrs: {
+                                                    src: _vm.avatar(
+                                                      ses.teacher.user
+                                                    ),
+                                                    alt: ""
+                                                  }
+                                                })
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _vm._m(4, true)
                                           ])
-                                        ])
-                                      ]
-                                    )
+                                    ])
                                   : _vm._e(),
                                 _vm._v(" "),
-                                _vm.authuser.type == "teacher"
-                                  ? _c(
-                                      "a",
-                                      {
-                                        staticClass: "with",
-                                        attrs: {
-                                          href:
-                                            _vm.url +
-                                            "/user/" +
-                                            ses.student.user.id
-                                        }
-                                      },
-                                      [
-                                        _c("div", { staticClass: "avatar" }, [
-                                          _c("img", {
-                                            attrs: {
-                                              src: _vm.avatar(ses.student.user),
-                                              alt: ""
-                                            }
-                                          })
-                                        ]),
-                                        _vm._v(" "),
-                                        _c("div", { staticClass: "info" }, [
-                                          _c("div", { staticClass: "name" }, [
-                                            _vm._v(
-                                              _vm._s(ses.student.user.name)
-                                            )
+                                _vm.authuser.type === "teacher"
+                                  ? _c("span", [
+                                      ses.student.user.is_active
+                                        ? _c(
+                                            "a",
+                                            {
+                                              staticClass: "with",
+                                              attrs: {
+                                                href:
+                                                  _vm.url +
+                                                  "/user/" +
+                                                  ses.student.user.id
+                                              }
+                                            },
+                                            [
+                                              _c(
+                                                "div",
+                                                { staticClass: "avatar" },
+                                                [
+                                                  _c("img", {
+                                                    attrs: {
+                                                      src: _vm.avatar(
+                                                        ses.student.user
+                                                      ),
+                                                      alt: ""
+                                                    }
+                                                  })
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                { staticClass: "info" },
+                                                [
+                                                  _c(
+                                                    "div",
+                                                    { staticClass: "name" },
+                                                    [
+                                                      _vm._v(
+                                                        _vm._s(
+                                                          ses.student.user.name
+                                                        )
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        : _c("a", { staticClass: "with" }, [
+                                            _c(
+                                              "div",
+                                              { staticClass: "avatar" },
+                                              [
+                                                _c("img", {
+                                                  attrs: {
+                                                    src: _vm.avatar(
+                                                      ses.student.user
+                                                    ),
+                                                    alt: ""
+                                                  }
+                                                })
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _vm._m(5, true)
                                           ])
-                                        ])
-                                      ]
-                                    )
+                                    ])
                                   : _vm._e(),
                                 _vm._v(" "),
                                 _c("div", { staticClass: "info" }, [
@@ -84380,70 +84751,144 @@ var render = function() {
                               "div",
                               { key: ses.id, staticClass: "session" },
                               [
-                                _vm.authuser.type == "student"
-                                  ? _c(
-                                      "a",
-                                      {
-                                        staticClass: "with",
-                                        attrs: {
-                                          href:
-                                            _vm.url +
-                                            "/user/" +
-                                            ses.teacher.user.id
-                                        }
-                                      },
-                                      [
-                                        _c("div", { staticClass: "avatar" }, [
-                                          _c("img", {
-                                            attrs: {
-                                              src: _vm.avatar(ses.teacher.user),
-                                              alt: ""
-                                            }
-                                          })
-                                        ]),
-                                        _vm._v(" "),
-                                        _c("div", { staticClass: "info" }, [
-                                          _c("div", { staticClass: "name" }, [
-                                            _vm._v(
-                                              _vm._s(ses.teacher.user.name)
-                                            )
+                                _vm.authuser.type === "student"
+                                  ? _c("span", [
+                                      ses.teacher.user.is_active
+                                        ? _c(
+                                            "a",
+                                            {
+                                              staticClass: "with",
+                                              attrs: {
+                                                href:
+                                                  _vm.url +
+                                                  "/user/" +
+                                                  ses.teacher.user.id
+                                              }
+                                            },
+                                            [
+                                              _c(
+                                                "div",
+                                                { staticClass: "avatar" },
+                                                [
+                                                  _c("img", {
+                                                    attrs: {
+                                                      src: _vm.avatar(
+                                                        ses.teacher.user
+                                                      ),
+                                                      alt: ""
+                                                    }
+                                                  })
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                { staticClass: "info" },
+                                                [
+                                                  _c(
+                                                    "div",
+                                                    { staticClass: "name" },
+                                                    [
+                                                      _vm._v(
+                                                        _vm._s(
+                                                          ses.teacher.user.name
+                                                        )
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        : _c("a", { staticClass: "with" }, [
+                                            _c(
+                                              "div",
+                                              { staticClass: "avatar" },
+                                              [
+                                                _c("img", {
+                                                  attrs: {
+                                                    src: _vm.avatar(
+                                                      ses.teacher.user
+                                                    ),
+                                                    alt: ""
+                                                  }
+                                                })
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _vm._m(6, true)
                                           ])
-                                        ])
-                                      ]
-                                    )
+                                    ])
                                   : _vm._e(),
                                 _vm._v(" "),
-                                _vm.authuser.type == "teacher"
-                                  ? _c(
-                                      "a",
-                                      {
-                                        staticClass: "with",
-                                        attrs: {
-                                          href:
-                                            _vm.url +
-                                            "/user/" +
-                                            ses.student.user.id
-                                        }
-                                      },
-                                      [
-                                        _c("div", { staticClass: "avatar" }, [
-                                          _c("img", {
-                                            attrs: {
-                                              src: _vm.avatar(ses.student.user),
-                                              alt: ""
-                                            }
-                                          })
-                                        ]),
-                                        _vm._v(" "),
-                                        _c("div", { staticClass: "info" }, [
-                                          _c("div", { staticClass: "name" }, [
-                                            _vm._v(
-                                              _vm._s(ses.student.user.name)
-                                            )
+                                _vm.authuser.type === "teacher"
+                                  ? _c("span", [
+                                      ses.student.user.is_active
+                                        ? _c(
+                                            "a",
+                                            {
+                                              staticClass: "with",
+                                              attrs: {
+                                                href:
+                                                  _vm.url +
+                                                  "/user/" +
+                                                  ses.student.user.id
+                                              }
+                                            },
+                                            [
+                                              _c(
+                                                "div",
+                                                { staticClass: "avatar" },
+                                                [
+                                                  _c("img", {
+                                                    attrs: {
+                                                      src: _vm.avatar(
+                                                        ses.student.user
+                                                      ),
+                                                      alt: ""
+                                                    }
+                                                  })
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                { staticClass: "info" },
+                                                [
+                                                  _c(
+                                                    "div",
+                                                    { staticClass: "name" },
+                                                    [
+                                                      _vm._v(
+                                                        _vm._s(
+                                                          ses.student.user.name
+                                                        )
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        : _c("a", { staticClass: "with" }, [
+                                            _c(
+                                              "div",
+                                              { staticClass: "avatar" },
+                                              [
+                                                _c("img", {
+                                                  attrs: {
+                                                    src: _vm.avatar(
+                                                      ses.student.user
+                                                    ),
+                                                    alt: ""
+                                                  }
+                                                })
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _vm._m(7, true)
                                           ])
-                                        ])
-                                      ]
-                                    )
+                                    ])
                                   : _vm._e(),
                                 _vm._v(" "),
                                 _c("div", { staticClass: "info" }, [
@@ -84525,7 +84970,7 @@ var render = function() {
                                               { staticClass: "status" },
                                               [
                                                 _vm._v(
-                                                  "\n                                            Upcoming"
+                                                  "\n                                        Upcoming"
                                                 )
                                               ]
                                             )
@@ -84542,7 +84987,7 @@ var render = function() {
                                                   [_vm._v("Cancelled")]
                                                 ),
                                                 _vm._v(" "),
-                                                _vm._m(2, true)
+                                                _vm._m(8, true)
                                               ]
                                             )
                                           : _vm._e()
@@ -84603,70 +85048,144 @@ var render = function() {
                               "div",
                               { key: ses.id, staticClass: "session" },
                               [
-                                _vm.authuser.type == "student"
-                                  ? _c(
-                                      "a",
-                                      {
-                                        staticClass: "with",
-                                        attrs: {
-                                          href:
-                                            _vm.url +
-                                            "/user/" +
-                                            ses.teacher.user.id
-                                        }
-                                      },
-                                      [
-                                        _c("div", { staticClass: "avatar" }, [
-                                          _c("img", {
-                                            attrs: {
-                                              src: _vm.avatar(ses.teacher.user),
-                                              alt: ""
-                                            }
-                                          })
-                                        ]),
-                                        _vm._v(" "),
-                                        _c("div", { staticClass: "info" }, [
-                                          _c("div", { staticClass: "name" }, [
-                                            _vm._v(
-                                              _vm._s(ses.teacher.user.name)
-                                            )
+                                _vm.authuser.type === "student"
+                                  ? _c("span", [
+                                      ses.teacher.user.is_active
+                                        ? _c(
+                                            "a",
+                                            {
+                                              staticClass: "with",
+                                              attrs: {
+                                                href:
+                                                  _vm.url +
+                                                  "/user/" +
+                                                  ses.teacher.user.id
+                                              }
+                                            },
+                                            [
+                                              _c(
+                                                "div",
+                                                { staticClass: "avatar" },
+                                                [
+                                                  _c("img", {
+                                                    attrs: {
+                                                      src: _vm.avatar(
+                                                        ses.teacher.user
+                                                      ),
+                                                      alt: ""
+                                                    }
+                                                  })
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                { staticClass: "info" },
+                                                [
+                                                  _c(
+                                                    "div",
+                                                    { staticClass: "name" },
+                                                    [
+                                                      _vm._v(
+                                                        _vm._s(
+                                                          ses.teacher.user.name
+                                                        )
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        : _c("a", { staticClass: "with" }, [
+                                            _c(
+                                              "div",
+                                              { staticClass: "avatar" },
+                                              [
+                                                _c("img", {
+                                                  attrs: {
+                                                    src: _vm.avatar(
+                                                      ses.teacher.user
+                                                    ),
+                                                    alt: ""
+                                                  }
+                                                })
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _vm._m(9, true)
                                           ])
-                                        ])
-                                      ]
-                                    )
+                                    ])
                                   : _vm._e(),
                                 _vm._v(" "),
-                                _vm.authuser.type == "teacher"
-                                  ? _c(
-                                      "a",
-                                      {
-                                        staticClass: "with",
-                                        attrs: {
-                                          href:
-                                            _vm.url +
-                                            "/user/" +
-                                            ses.student.user.id
-                                        }
-                                      },
-                                      [
-                                        _c("div", { staticClass: "avatar" }, [
-                                          _c("img", {
-                                            attrs: {
-                                              src: _vm.avatar(ses.student.user),
-                                              alt: ""
-                                            }
-                                          })
-                                        ]),
-                                        _vm._v(" "),
-                                        _c("div", { staticClass: "info" }, [
-                                          _c("div", { staticClass: "name" }, [
-                                            _vm._v(
-                                              _vm._s(ses.student.user.name)
-                                            )
+                                _vm.authuser.type === "teacher"
+                                  ? _c("span", [
+                                      ses.student.user.is_active
+                                        ? _c(
+                                            "a",
+                                            {
+                                              staticClass: "with",
+                                              attrs: {
+                                                href:
+                                                  _vm.url +
+                                                  "/user/" +
+                                                  ses.student.user.id
+                                              }
+                                            },
+                                            [
+                                              _c(
+                                                "div",
+                                                { staticClass: "avatar" },
+                                                [
+                                                  _c("img", {
+                                                    attrs: {
+                                                      src: _vm.avatar(
+                                                        ses.student.user
+                                                      ),
+                                                      alt: ""
+                                                    }
+                                                  })
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                { staticClass: "info" },
+                                                [
+                                                  _c(
+                                                    "div",
+                                                    { staticClass: "name" },
+                                                    [
+                                                      _vm._v(
+                                                        _vm._s(
+                                                          ses.student.user.name
+                                                        )
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        : _c("a", { staticClass: "with" }, [
+                                            _c(
+                                              "div",
+                                              { staticClass: "avatar" },
+                                              [
+                                                _c("img", {
+                                                  attrs: {
+                                                    src: _vm.avatar(
+                                                      ses.student.user
+                                                    ),
+                                                    alt: ""
+                                                  }
+                                                })
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _vm._m(10, true)
                                           ])
-                                        ])
-                                      ]
-                                    )
+                                    ])
                                   : _vm._e(),
                                 _vm._v(" "),
                                 _c("div", { staticClass: "info" }, [
@@ -84800,70 +85319,152 @@ var render = function() {
                               "div",
                               { key: ses.id, staticClass: "session" },
                               [
-                                _vm.authuser.type == "student"
-                                  ? _c(
-                                      "a",
-                                      {
-                                        staticClass: "with",
-                                        attrs: {
-                                          href:
-                                            _vm.url +
-                                            "/user/" +
-                                            ses.teacher.user.id
-                                        }
-                                      },
-                                      [
-                                        _c("div", { staticClass: "avatar" }, [
-                                          _c("img", {
-                                            attrs: {
-                                              src: _vm.avatar(ses.teacher.user),
-                                              alt: ""
-                                            }
-                                          })
-                                        ]),
-                                        _vm._v(" "),
-                                        _c("div", { staticClass: "info" }, [
-                                          _c("div", { staticClass: "name" }, [
-                                            _vm._v(
-                                              _vm._s(ses.teacher.user.name)
-                                            )
-                                          ])
-                                        ])
-                                      ]
-                                    )
+                                _vm.authuser.type === "student"
+                                  ? _c("span", [
+                                      ses.teacher.user.is_active
+                                        ? _c(
+                                            "a",
+                                            {
+                                              staticClass: "with",
+                                              attrs: {
+                                                href:
+                                                  _vm.url +
+                                                  "/user/" +
+                                                  ses.teacher.user.id
+                                              }
+                                            },
+                                            [
+                                              _c(
+                                                "div",
+                                                { staticClass: "avatar" },
+                                                [
+                                                  _c("img", {
+                                                    attrs: {
+                                                      src: _vm.avatar(
+                                                        ses.teacher.user
+                                                      ),
+                                                      alt: ""
+                                                    }
+                                                  })
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                { staticClass: "info" },
+                                                [
+                                                  _c(
+                                                    "div",
+                                                    { staticClass: "name" },
+                                                    [
+                                                      _vm._v(
+                                                        _vm._s(
+                                                          ses.teacher.user.name
+                                                        )
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        : _c(
+                                            "button",
+                                            { staticClass: "with" },
+                                            [
+                                              _c(
+                                                "div",
+                                                { staticClass: "avatar" },
+                                                [
+                                                  _c("img", {
+                                                    attrs: {
+                                                      src: _vm.avatar(
+                                                        ses.teacher.user
+                                                      ),
+                                                      alt: ""
+                                                    }
+                                                  })
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _vm._m(11, true)
+                                            ]
+                                          )
+                                    ])
                                   : _vm._e(),
                                 _vm._v(" "),
-                                _vm.authuser.type == "teacher"
-                                  ? _c(
-                                      "a",
-                                      {
-                                        staticClass: "with",
-                                        attrs: {
-                                          href:
-                                            _vm.url +
-                                            "/user/" +
-                                            ses.student.user.id
-                                        }
-                                      },
-                                      [
-                                        _c("div", { staticClass: "avatar" }, [
-                                          _c("img", {
-                                            attrs: {
-                                              src: _vm.avatar(ses.student.user),
-                                              alt: ""
-                                            }
-                                          })
-                                        ]),
-                                        _vm._v(" "),
-                                        _c("div", { staticClass: "info" }, [
-                                          _c("div", { staticClass: "name" }, [
-                                            _vm._v(
-                                              _vm._s(ses.student.user.name)
-                                            )
-                                          ])
-                                        ])
-                                      ]
-                                    )
+                                _vm.authuser.type === "teacher"
+                                  ? _c("span", [
+                                      ses.student.user.is_active
+                                        ? _c(
+                                            "a",
+                                            {
+                                              staticClass: "with",
+                                              attrs: {
+                                                href:
+                                                  _vm.url +
+                                                  "/user/" +
+                                                  ses.student.user.id
+                                              }
+                                            },
+                                            [
+                                              _c(
+                                                "div",
+                                                { staticClass: "avatar" },
+                                                [
+                                                  _c("img", {
+                                                    attrs: {
+                                                      src: _vm.avatar(
+                                                        ses.student.user
+                                                      ),
+                                                      alt: ""
+                                                    }
+                                                  })
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                { staticClass: "info" },
+                                                [
+                                                  _c(
+                                                    "div",
+                                                    { staticClass: "name" },
+                                                    [
+                                                      _vm._v(
+                                                        _vm._s(
+                                                          ses.student.user.name
+                                                        )
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        : _c(
+                                            "button",
+                                            { staticClass: "with" },
+                                            [
+                                              _c(
+                                                "div",
+                                                { staticClass: "avatar" },
+                                                [
+                                                  _c("img", {
+                                                    attrs: {
+                                                      src: _vm.avatar(
+                                                        ses.student.user
+                                                      ),
+                                                      alt: ""
+                                                    }
+                                                  })
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _vm._m(12, true)
+                                            ]
+                                          )
+                                    ])
                                   : _vm._e(),
                                 _vm._v(" "),
                                 _c("div", { staticClass: "info" }, [
@@ -85105,10 +85706,90 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "info" }, [
+      _c("div", { staticClass: "name" }, [_vm._v("(Deleted Profile)")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "info" }, [
+      _c("div", { staticClass: "name" }, [_vm._v("(Deleted Profile)")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "info" }, [
+      _c("div", { staticClass: "name" }, [_vm._v("(Deleted Profile)")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "info" }, [
+      _c("div", { staticClass: "name" }, [_vm._v("(Deleted Profile)")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "info" }, [
+      _c("div", { staticClass: "name" }, [_vm._v("(Deleted Profile)")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "info" }, [
+      _c("div", { staticClass: "name" }, [_vm._v("(Deleted Profile)")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("div", { staticStyle: { "font-size": "10px" } }, [
       _vm._v("Please rise a ticket in "),
       _c("br"),
       _vm._v(" Support Center for refund!.")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "info" }, [
+      _c("div", { staticClass: "name" }, [_vm._v("(Deleted Profile)")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "info" }, [
+      _c("div", { staticClass: "name" }, [_vm._v("(Deleted Profile)")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "info" }, [
+      _c("div", { staticClass: "name" }, [_vm._v("(Deleted Profile)")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "info" }, [
+      _c("div", { staticClass: "name" }, [_vm._v("(Deleted Profile)")])
     ])
   }
 ]

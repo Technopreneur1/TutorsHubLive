@@ -9,26 +9,53 @@
                 <div class="gradient-btn"><a :href="sessions"><i class="fas fa-Home"></i> Back To Session</a></div>
             </div>
         </div>
+<!--        Details of a Session (View Session)-->
         <section v-if="viewSession" class="view-session">
             <div class="sess-header">
-                <a v-if="authuser.type == 'student'" :href="url + '/user/' + viewSession.teacher.user.id" class="with">
-                    <div class="avatar">
-                        <img :src="avatar(viewSession.teacher.user)" alt="">
-                    </div>
-                    <div class="info">
-                        <div class="name">{{viewSession.teacher.user.name}}</div>
-                        <div class="status">{{viewSession.completed ? 'Completed' : 'Pending'}}</div>
-                    </div>
-                </a>
-                <a v-if="authuser.type == 'teacher'" :href="url + '/user/' + viewSession.student.user.id" class="with">
-                    <span class="t">With</span>
-                    <div class="avatar">
-                        <img :src="avatar(viewSession.student.user)" alt="">
-                    </div>
-                    <div class="info">
-                        <div class="name">{{viewSession.student.user.name}}</div>
-                    </div>
-                </a>
+                <span v-if="authuser.type === 'student'" >
+                    <a v-if="viewSession.teacher.user.is_active" :href="url + '/user/' + viewSession.teacher.user.id" class="with">
+                        <div class="avatar">
+                            <img :src="avatar(viewSession.teacher.user)" alt="">
+                        </div>
+                        <div class="info">
+                            <div class="name">{{viewSession.teacher.user.name}}</div>
+                            <div class="status">{{viewSession.completed ? 'Completed' : 'Pending'}}</div>
+                        </div>
+                    </a>
+
+                    <a v-else class="with">
+                        <div class="avatar">
+                            <img :src="avatar(viewSession.teacher.user)" alt="">
+                        </div>
+                        <div class="info">
+                            <div class="name">(Deleted Profile)</div>
+                            <div class="status">{{viewSession.completed ? 'Completed' : 'Pending'}}</div>
+                        </div>
+                    </a>
+                </span>
+
+                <span v-if="authuser.type === 'teacher'" >
+                    <a v-if="viewSession.student.user.is_active" :href="url + '/user/' + viewSession.student.user.id" class="with">
+                        <div class="avatar">
+                            <img :src="avatar(viewSession.student.user)" alt="">
+                        </div>
+                        <div class="info">
+                            <div class="name">{{viewSession.student.user.name}}</div>
+                            <div class="status">{{viewSession.completed ? 'Completed' : 'Pending'}}</div>
+                        </div>
+                    </a>
+
+                    <button v-else class="with">
+                        <div class="avatar">
+                            <img :src="avatar(viewSession.student.user)" alt="">
+                        </div>
+                        <div class="info">
+                            <div class="name">(Deleted Profile)</div>
+                            <div class="status">{{viewSession.completed ? 'Completed' : 'Pending'}}</div>
+                        </div>
+                    </button>
+                </span>
+
                 <div class="sess-info">
                     <div v-if="viewSession.payment_status != 1 && viewSession.accept != '1' && viewSession.completed == 0" class="status"><span>Requested</span></div>
                     <div v-if="viewSession.payment_status != 1 && viewSession.accept == '1' && viewSession.completed == 0" class="status"><span>Pending</span></div>
@@ -146,6 +173,7 @@
 
         </section>
 
+<!--        if not on details page than show-->
         <div v-else class="else">
             <div class="title">My Sessions</div>
 
@@ -169,9 +197,11 @@
             </ul>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="requested" role="tabpanel" aria-labelledby="home-tab">
+<!--                    If Requested Sessions-->
                     <div v-if="requestedSessions.length" class="sessionsList">
                         <div v-for="ses in requestedSessions" :key="ses.id" class="session">
-                                <a v-if="authuser.type == 'student'" :href="url + '/user/' + ses.teacher.user.id" class="with">
+                            <span v-if="authuser.type === 'student'" >
+                                <a v-if="ses.teacher.user.is_active" :href="url + '/user/' + ses.teacher.user.id" class="with">
                                     <div class="avatar">
                                         <img :src="avatar(ses.teacher.user)" alt="">
                                     </div>
@@ -179,7 +209,19 @@
                                         <div class="name">{{ses.teacher.user.name}}</div>
                                     </div>
                                 </a>
-                                <a v-if="authuser.type == 'teacher'" :href="url + '/user/' + ses.student.user.id" class="with">
+
+                                <a v-else class="with">
+                                    <div class="avatar">
+                                        <img :src="avatar(ses.teacher.user)" alt="">
+                                    </div>
+                                    <div class="info">
+                                        <div class="name">(Deleted Profile)</div>
+                                    </div>
+                                </a>
+                            </span>
+
+                            <span v-if="authuser.type === 'teacher'" >
+                                <a v-if="ses.student.user.is_active" :href="url + '/user/' + ses.student.user.id" class="with">
                                     <div class="avatar">
                                         <img :src="avatar(ses.student.user)" alt="">
                                     </div>
@@ -187,33 +229,43 @@
                                         <div class="name">{{ses.student.user.name}}</div>
                                     </div>
                                 </a>
-                                <div class="info">
-                                    <span class="dt">{{ses.date | moment('DD MMM, YYYY')}}</span>
-                                    <div class="val"><span>{{ses.level}}</span></div>
-                                    <div class="val"><span>{{ses.subject}}</span></div>
-                                </div>
-                                <div class="info">
-                                    <span class="dt">Session Type: {{ses.sessiontype}}</span>
-                                    <div class="val"><span>Start Session: {{ses.startsession}}</span></div>
-                                    <div class="val"><span>End Session: {{ses.endsession}}</span></div>
-                                </div>
-                                <div class="info">
-                                    <span class="dt">Hours: {{ses.hours}}</span>
-                                </div>
-                                <div class="actions">
-                                    <div v-if="ses.payment_status != 1 && ses.accept != '1' && ses.completed == 0" class="status">
-                                        <div v-if="!ses.cancel_request" class="status">
-                                        Requested</div>
 
-                                        <div v-if="ses.cancel_request" class="status">
-                                        Cancelled</div>
+                                <a v-else class="with">
+                                    <div class="avatar">
+                                        <img :src="avatar(ses.student.user)" alt="">
                                     </div>
-                                    <div v-if="ses.payment_status != 1 && ses.accept == '1' && ses.completed == 0" class="status">Pending</div>
+                                    <div class="info">
+                                        <div class="name">(Deleted Profile)</div>
+                                    </div>
+                                </a>
+                            </span>
+                            <div class="info">
+                                <span class="dt">{{ses.date | moment('DD MMM, YYYY')}}</span>
+                                <div class="val"><span>{{ses.level}}</span></div>
+                                <div class="val"><span>{{ses.subject}}</span></div>
+                            </div>
+                            <div class="info">
+                                <span class="dt">Session Type: {{ses.sessiontype}}</span>
+                                <div class="val"><span>Start Session: {{ses.startsession}}</span></div>
+                                <div class="val"><span>End Session: {{ses.endsession}}</span></div>
+                            </div>
+                            <div class="info">
+                                <span class="dt">Hours: {{ses.hours}}</span>
+                            </div>
+                            <div class="actions">
+                                <div v-if="ses.payment_status != 1 && ses.accept != '1' && ses.completed == 0" class="status">
+                                    <div v-if="!ses.cancel_request" class="status">
+                                    Requested</div>
 
-                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.completed == 1"  class="status">Completed</div>
-
-                                    <button @click="showSession(ses)" class="btn btn-gradient">Open</button>
+                                    <div v-if="ses.cancel_request" class="status">
+                                    Cancelled</div>
                                 </div>
+                                <div v-if="ses.payment_status != 1 && ses.accept == '1' && ses.completed == 0" class="status">Pending</div>
+
+                                <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.completed == 1"  class="status">Completed</div>
+
+                                <button @click="showSession(ses)" class="btn btn-gradient">Open</button>
+                            </div>
 
                         </div>
 
@@ -223,10 +275,12 @@
                         No Session
                     </div>
                 </div>
+<!--                Pending Sessions-->
                 <div class="tab-pane fade" id="pending" role="tabpanel" aria-labelledby="profile-tab">
                     <div v-if="pendingSessions.length" class="sessionsList">
                         <div v-for="ses in pendingSessions" :key="ses.id" class="session">
-                                <a v-if="authuser.type == 'student'" :href="url + '/user/' + ses.teacher.user.id" class="with">
+                            <span v-if="authuser.type === 'student'" >
+                                <a v-if="ses.teacher.user.is_active" :href="url + '/user/' + ses.teacher.user.id" class="with">
                                     <div class="avatar">
                                         <img :src="avatar(ses.teacher.user)" alt="">
                                     </div>
@@ -234,7 +288,19 @@
                                         <div class="name">{{ses.teacher.user.name}}</div>
                                     </div>
                                 </a>
-                                <a v-if="authuser.type == 'teacher'" :href="url + '/user/' + ses.student.user.id" class="with">
+
+                                <a v-else class="with">
+                                    <div class="avatar">
+                                        <img :src="avatar(ses.teacher.user)" alt="">
+                                    </div>
+                                    <div class="info">
+                                        <div class="name">(Deleted Profile)</div>
+                                    </div>
+                                </a>
+                            </span>
+
+                            <span v-if="authuser.type === 'teacher'" >
+                                <a v-if="ses.student.user.is_active" :href="url + '/user/' + ses.student.user.id" class="with">
                                     <div class="avatar">
                                         <img :src="avatar(ses.student.user)" alt="">
                                     </div>
@@ -242,6 +308,16 @@
                                         <div class="name">{{ses.student.user.name}}</div>
                                     </div>
                                 </a>
+
+                                <a v-else class="with">
+                                    <div class="avatar">
+                                        <img :src="avatar(ses.student.user)" alt="">
+                                    </div>
+                                    <div class="info">
+                                        <div class="name">(Deleted Profile)</div>
+                                    </div>
+                                </a>
+                            </span>
                                 <div class="info">
                                     <span class="dt">{{ses.date | moment('DD MMM, YYYY')}}</span>
                                     <div class="val"><span>{{ses.level}}</span></div>
@@ -271,10 +347,12 @@
                         No Session
                     </div>
                 </div>
+<!--                Upcoming Sessions-->
                 <div class="tab-pane fade" id="upcoming" role="tabpanel" aria-labelledby="contact-tab">
                     <div v-if="upcomingSessions.length" class="sessionsList">
                         <div v-for="ses in upcomingSessions" :key="ses.id" class="session">
-                                <a v-if="authuser.type == 'student'" :href="url + '/user/' + ses.teacher.user.id" class="with">
+                                <span v-if="authuser.type === 'student'" >
+                                <a v-if="ses.teacher.user.is_active" :href="url + '/user/' + ses.teacher.user.id" class="with">
                                     <div class="avatar">
                                         <img :src="avatar(ses.teacher.user)" alt="">
                                     </div>
@@ -282,7 +360,19 @@
                                         <div class="name">{{ses.teacher.user.name}}</div>
                                     </div>
                                 </a>
-                                <a v-if="authuser.type == 'teacher'" :href="url + '/user/' + ses.student.user.id" class="with">
+
+                                <a v-else class="with">
+                                    <div class="avatar">
+                                        <img :src="avatar(ses.teacher.user)" alt="">
+                                    </div>
+                                    <div class="info">
+                                        <div class="name">(Deleted Profile)</div>
+                                    </div>
+                                </a>
+                            </span>
+
+                            <span v-if="authuser.type === 'teacher'" >
+                                <a v-if="ses.student.user.is_active" :href="url + '/user/' + ses.student.user.id" class="with">
                                     <div class="avatar">
                                         <img :src="avatar(ses.student.user)" alt="">
                                     </div>
@@ -290,111 +380,170 @@
                                         <div class="name">{{ses.student.user.name}}</div>
                                     </div>
                                 </a>
-                                <div class="info">
-                                    <span class="dt">{{ses.date | moment('DD MMM, YYYY')}}</span>
-                                    <div class="val"><span>{{ses.level}}</span></div>
-                                    <div class="val"><span>{{ses.subject}}</span></div>
-                                </div>
-                                <div class="info">
-                                    <span class="dt">Session Type: {{ses.sessiontype}}</span>
-                                    <div class="val"><span>Start Session: {{ses.startsession}}</span></div>
-                                    <div class="val"><span>End Session: {{ses.endsession}}</span></div>
-                                </div>
-                                <div class="info">
-                                    <span class="dt">Hours: {{ses.hours}}</span>
-                                </div>
-                                <div class="actions">
 
-                                    <div v-if="ses.payment_status != 1 && ses.accept != '1' && ses.completed == 0" class="status">Requested</div>
-                                    <div v-if="ses.payment_status != 1 && ses.accept == '1' && ses.completed == 0" class="status">Pending</div>
-<!--                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.completed == 0"  class="status">Upcoming</div>-->
-                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.completed == 0"  class="status">
-                                        <div v-if="!ses.cancel_request" class="status">
-                                            Upcoming</div>
-                                        <div v-if="ses.cancel_request" class="status">
-                                            <div class="status" >Cancelled</div>
-                                            <div style="font-size: 10px">Please rise a ticket in <br> Support Center for refund!.</div>
-                                        </div>
+                                <a v-else class="with">
+                                    <div class="avatar">
+                                        <img :src="avatar(ses.student.user)" alt="">
                                     </div>
-                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.completed == 1"  class="status">Completed</div>
-
-                                    <button @click="showSession(ses)" class="btn btn-gradient">Open</button>
-                                </div>
+                                    <div class="info">
+                                        <div class="name">(Deleted Profile)</div>
+                                    </div>
+                                </a>
+                            </span>
+                            <div class="info">
+                                <span class="dt">{{ses.date | moment('DD MMM, YYYY')}}</span>
+                                <div class="val"><span>{{ses.level}}</span></div>
+                                <div class="val"><span>{{ses.subject}}</span></div>
                             </div>
+                            <div class="info">
+                                <span class="dt">Session Type: {{ses.sessiontype}}</span>
+                                <div class="val"><span>Start Session: {{ses.startsession}}</span></div>
+                                <div class="val"><span>End Session: {{ses.endsession}}</span></div>
+                            </div>
+                            <div class="info">
+                                <span class="dt">Hours: {{ses.hours}}</span>
+                            </div>
+                            <div class="actions">
 
-                    </div>
+                                <div v-if="ses.payment_status != 1 && ses.accept != '1' && ses.completed == 0" class="status">Requested</div>
+                                <div v-if="ses.payment_status != 1 && ses.accept == '1' && ses.completed == 0" class="status">Pending</div>
+<!--                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.completed == 0"  class="status">Upcoming</div>-->
+                                <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.completed == 0"  class="status">
+                                    <div v-if="!ses.cancel_request" class="status">
+                                        Upcoming</div>
+                                    <div v-if="ses.cancel_request" class="status">
+                                        <div class="status" >Cancelled</div>
+                                        <div style="font-size: 10px">Please rise a ticket in <br> Support Center for refund!.</div>
+                                    </div>
+                                </div>
+                                <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.completed == 1"  class="status">Completed</div>
 
-                    <div v-else class="nothing">
-                        No Session
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="completed" role="tabpanel" aria-labelledby="contact-tab">
-                    <div v-if="completedsessions.length " class="sessionsList">
-                        <div v-for="ses in completedsessions" :key="ses.id" class="session" >
-                                <a v-if="authuser.type == 'student'" :href="url + '/user/' + ses.teacher.user.id" class="with">
-                                    <div class="avatar">
-                                        <img :src="avatar(ses.teacher.user)" alt="">
-                                    </div>
-                                    <div class="info">
-                                        <div class="name">{{ses.teacher.user.name}}</div>
-                                    </div>
-                                </a>
-                                <a v-if="authuser.type == 'teacher'" :href="url + '/user/' + ses.student.user.id" class="with">
-                                    <div class="avatar">
-                                        <img :src="avatar(ses.student.user)" alt="">
-                                    </div>
-                                    <div class="info">
-                                        <div class="name">{{ses.student.user.name}}</div>
-                                    </div>
-                                </a>
-                                <div class="info">
-                                    <span class="dt">{{ses.date | moment('DD MMM, YYYY')}}</span>
-                                    <div class="val"><span>{{ses.level}}</span></div>
-                                    <div class="val"><span>{{ses.subject}}</span></div>
-                                </div>
-                                <div class="info">
-                                    <span class="dt">Session Type: {{ses.sessiontype}}</span>
-                                    <div class="val"><span>Start Session: {{ses.startsession}}</span></div>
-                                    <div class="val"><span>End Session: {{ses.endsession}}</span></div>
-                                </div>
-                                <div class="info">
-                                    <span class="dt">Hours: {{ses.hours}}</span>
-                                </div>
-                                <div class="actions">
-                                    <div v-if="ses.payment_status != 1 && ses.accept != '1' && ses.completed == 0" class="status">Requested</div>
-                                    <div v-if="ses.payment_status != 1 && ses.accept == '1' && ses.completed == 0" class="status">Pending</div>
-                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.completed == 0"  class="status">Upcoming</div>
-                                    <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.completed == 1"  class="status">Completed</div>
-
-                                    <button @click="showSession(ses)" class="btn btn-gradient">Open</button>
-                                </div>
+                                <button @click="showSession(ses)" class="btn btn-gradient">Open</button>
                             </div>
                         </div>
 
+                    </div>
 
                     <div v-else class="nothing">
                         No Session
                     </div>
                 </div>
+<!--                Completed Sessions-->
+                <div class="tab-pane fade" id="completed" role="tabpanel" aria-labelledby="contact-tab">
+                    <div v-if="completedsessions.length " class="sessionsList">
+                        <div v-for="ses in completedsessions" :key="ses.id" class="session" >
+                            <span v-if="authuser.type === 'student'" >
+                                <a v-if="ses.teacher.user.is_active" :href="url + '/user/' + ses.teacher.user.id" class="with">
+                                    <div class="avatar">
+                                        <img :src="avatar(ses.teacher.user)" alt="">
+                                    </div>
+                                    <div class="info">
+                                        <div class="name">{{ses.teacher.user.name}}</div>
+                                    </div>
+                                </a>
+
+                                <a v-else class="with">
+                                    <div class="avatar">
+                                        <img :src="avatar(ses.teacher.user)" alt="">
+                                    </div>
+                                    <div class="info">
+                                        <div class="name">(Deleted Profile)</div>
+                                    </div>
+                                </a>
+                            </span>
+
+                            <span v-if="authuser.type === 'teacher'" >
+                                <a v-if="ses.student.user.is_active" :href="url + '/user/' + ses.student.user.id" class="with">
+                                    <div class="avatar">
+                                        <img :src="avatar(ses.student.user)" alt="">
+                                    </div>
+                                    <div class="info">
+                                        <div class="name">{{ses.student.user.name}}</div>
+                                    </div>
+                                </a>
+
+                                <a v-else class="with">
+                                    <div class="avatar">
+                                        <img :src="avatar(ses.student.user)" alt="">
+                                    </div>
+                                    <div class="info">
+                                        <div class="name">(Deleted Profile)</div>
+                                    </div>
+                                </a>
+                            </span>
+                            <div class="info">
+                                <span class="dt">{{ses.date | moment('DD MMM, YYYY')}}</span>
+                                <div class="val"><span>{{ses.level}}</span></div>
+                                <div class="val"><span>{{ses.subject}}</span></div>
+                            </div>
+                            <div class="info">
+                                <span class="dt">Session Type: {{ses.sessiontype}}</span>
+                                <div class="val"><span>Start Session: {{ses.startsession}}</span></div>
+                                <div class="val"><span>End Session: {{ses.endsession}}</span></div>
+                            </div>
+                            <div class="info">
+                                <span class="dt">Hours: {{ses.hours}}</span>
+                            </div>
+                            <div class="actions">
+                                <div v-if="ses.payment_status != 1 && ses.accept != '1' && ses.completed == 0" class="status">Requested</div>
+                                <div v-if="ses.payment_status != 1 && ses.accept == '1' && ses.completed == 0" class="status">Pending</div>
+                                <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.completed == 0"  class="status">Upcoming</div>
+                                <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.completed == 1"  class="status">Completed</div>
+
+                                <button @click="showSession(ses)" class="btn btn-gradient">Open</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div v-else class="nothing">
+                        No Session
+                    </div>
+                </div>
+
+<!--                Cancelled Sessions-->
                 <div class="tab-pane fade" id="cancelled" role="tabpanel" aria-labelledby="contact-tab">
                     <div v-if="cancelledsessions.length" class="sessionsList">
                         <div v-for="ses in cancelledsessions" :key="ses.id" class="session">
-                            <a v-if="authuser.type == 'student'" :href="url + '/user/' + ses.teacher.user.id" class="with">
-                                <div class="avatar">
-                                    <img :src="avatar(ses.teacher.user)" alt="">
-                                </div>
-                                <div class="info">
-                                    <div class="name">{{ses.teacher.user.name}}</div>
-                                </div>
-                            </a>
-                            <a v-if="authuser.type == 'teacher'" :href="url + '/user/' + ses.student.user.id" class="with">
-                                <div class="avatar">
-                                    <img :src="avatar(ses.student.user)" alt="">
-                                </div>
-                                <div class="info">
-                                    <div class="name">{{ses.student.user.name}}</div>
-                                </div>
-                            </a>
+                            <span v-if="authuser.type === 'student'" >
+                                <a v-if="ses.teacher.user.is_active" :href="url + '/user/' + ses.teacher.user.id" class="with">
+                                    <div class="avatar">
+                                        <img :src="avatar(ses.teacher.user)" alt="">
+                                    </div>
+                                    <div class="info">
+                                        <div class="name">{{ses.teacher.user.name}}</div>
+                                    </div>
+                                </a>
+
+                                <button v-else class="with">
+                                    <div class="avatar">
+                                        <img :src="avatar(ses.teacher.user)" alt="">
+                                    </div>
+                                    <div class="info">
+                                        <div class="name">(Deleted Profile)</div>
+                                    </div>
+                                </button>
+                            </span>
+
+                            <span v-if="authuser.type === 'teacher'" >
+                                <a v-if="ses.student.user.is_active" :href="url + '/user/' + ses.student.user.id" class="with">
+                                    <div class="avatar">
+                                        <img :src="avatar(ses.student.user)" alt="">
+                                    </div>
+                                    <div class="info">
+                                        <div class="name">{{ses.student.user.name}}</div>
+                                    </div>
+                                </a>
+
+                                <button v-else class="with">
+                                    <div class="avatar">
+                                        <img :src="avatar(ses.student.user)" alt="">
+                                    </div>
+                                    <div class="info">
+                                        <div class="name">(Deleted Profile)</div>
+                                    </div>
+                                </button>
+                            </span>
                             <div class="info">
                                 <span class="dt">{{ses.date | moment('DD MMM, YYYY')}}</span>
                                 <div class="val"><span>{{ses.level}}</span></div>
@@ -673,7 +822,7 @@ export default {
     },
     computed: {
         requestedSessions(){
-            
+
             var session;
             var requests = [];
             for (var i = 0; i < this.sessions.length; i++) {
@@ -690,7 +839,7 @@ export default {
             for (var i = 0; i < this.sessions.length; i++) {
                 session = this.sessions[i];
                 console.log((session.class_status))
-                if (session.cancel_request== null && session.payment_status != 1 && session.accept == '1' && session.class_status == 0) { 
+                if (session.cancel_request== null && session.payment_status != 1 && session.accept == '1' && session.class_status == 0) {
                         requests.push(session);
                 }
             }
@@ -702,7 +851,7 @@ export default {
             var requests = [];
             for (var i = 0; i < this.sessions.length; i++) {
                 session = this.sessions[i];
-                if (session.cancel_request== null && session.payment_status == 1 && session.accept == '1' && session.completed == 0) 
+                if (session.cancel_request== null && session.payment_status == 1 && session.accept == '1' && session.completed == 0)
                 {
                     requests.push(session);
                 }
