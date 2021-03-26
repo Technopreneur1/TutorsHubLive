@@ -2,10 +2,10 @@
 namespace App;
 class Earning{
 
-    
+
     public static function gross($profile)
     {
-        return $profile->sessions->sum('total');
+        return $profile->sessions->where('completed', true)->sum('total');
     }
     public static function fee($profile)
     {
@@ -23,13 +23,13 @@ class Earning{
     {
         return self::total($profile) - self::paid($profile);
     }
-   
+
     public static function currentFee()
     {
         return Meta::where('key', 'fee')->pluck('value')->first();
     }
 
-        
+
 
 }
 ?>

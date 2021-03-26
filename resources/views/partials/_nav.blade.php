@@ -16,17 +16,17 @@
     </div>
 @else
 
-<div class="topnav" id="navapp">
-    <div class="logo">
-        <a href="{{route('home')}}">
-            <img src="{{asset('img/logotext.png')}}" alt="">
-        </a>
-    </div>
-    <menu-icons url="{{route('home')}}"
-        :user="{{auth()->check() ? auth()->user() : null}}"
-        messages="{{auth()->user()->unreadMessages()->count()}}"
-        sessions="{{auth()->user()->profile ? auth()->user()->profile->unseenSessions()->count() : 0}}
+    <div class="topnav" id="navapp">
+        <div class="logo">
+            <a href="{{route('home')}}">
+                <img src="{{asset('img/logotext.png')}}" alt="">
+            </a>
+        </div>
+        <menu-icons url="{{route('home')}}"
+                :user="{{auth()->check() ? auth()->user() : null}}"
+                messages="{{auth()->user()->unreadMessages()->count()}}"
+                sessions="{{auth()->user()->profile ? auth()->user()->profile->unseenSessions()->count() : 0}}"
         ></menu-icons>
-</div>
+    </div>
 
 @endif
