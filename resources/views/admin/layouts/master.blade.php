@@ -70,6 +70,7 @@
             <li class="{{ (Request::is('adminpanel/tutors') ? 'active' : '') }}"><a href="{{route('admin.tutors')}}"><i class="fa fa-circle-o"></i>All</a></li>
             <li class="{{ (Request::is('adminpanel/tutors/banned') ? 'active' : '') }}"><a href="{{route('admin.tutors.banned')}}"><i class="fa fa-circle-o"></i>Banned</a></li>
             <li class="{{ (Request::is('adminpanel/tutors/featured') ? 'active' : '') }}"><a href="{{route('admin.tutors.featured')}}"><i class="fa fa-circle-o"></i>Featured</a></li>
+            <li class="{{ (Request::is('adminpanel/tutors/deactivated') ? 'active' : '') }}"><a href="{{route('admin.tutors.deactivated')}}"><i class="fa fa-circle-o"></i>DeActivated</a></li>
           </ul>
         </li>
         <li class="treeview  {{{ (Request::is('adminpanel/students') ? 'active' : '') }}}">
@@ -82,6 +83,8 @@
           <ul class="treeview-menu">
             <li class="{{ (Request::is('adminpanel/students') ? 'active' : '') }}"><a href="{{route('admin.students')}}"><i class="fa fa-circle-o"></i>All</a></li>
             <li class="{{ (Request::is('adminpanel/students/banned') ? 'active' : '') }}"><a href="{{route('admin.students.banned')}}"><i class="fa fa-circle-o"></i>Banned</a></li>
+            <li class="{{ (Request::is('adminpanel/students/deactivated') ? 'active' : '') }}"><a href="{{route('admin.students.deactivated')}}"><i class="fa fa-circle-o"></i>DeActivated</a></li>
+
           </ul>
         </li>
         <li class="{{{ (Request::is('adminpanel/sessions') ? 'active' : '') }}}"><a href="{{route('admin.sessions')}}"><i class="fa fa-copy"></i> <span>Sessions</span> <span class="badge bg-aqua pull-right">{{App\Session::where('seen', 0)->count()}}</span></a></li>

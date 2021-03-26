@@ -340,11 +340,16 @@ Route::prefix('adminpanel')->middleware('admin')->group(function () {
     Route::get('/export/students', 'ExportController@students')->name('export.students');
     Route::get('/export/sessions', 'ExportController@sessions')->name('export.sessions');
     Route::get('/export/ads', 'ExportController@ads')->name('export.ads');
+
     Route::get('/tutors', 'AdminController@teachers')->name('admin.tutors');
     Route::get('/tutors/banned', 'AdminController@bannedTutors')->name('admin.tutors.banned');
     Route::get('/tutors/featured', 'AdminController@featuredTutors')->name('admin.tutors.featured');
+    Route::get('/tutors/deactivated', 'AdminController@deActivatedTutors')->name('admin.tutors.deactivated');
+
     Route::get('/students', 'AdminController@students')->name('admin.students');
     Route::get('/students/banned', 'AdminController@bannedStudents')->name('admin.students.banned');
+    Route::get('/students/deactivated', 'AdminController@deActivatedStudents')->name('admin.students.deactivated');
+
     Route::get('/user/{id}', 'AdminController@getUser')->name('admin.user');
     Route::get('/countries', 'AdminController@countries')->name('admin.countries');
     Route::get('/testimonials', 'AdminController@testimonials')->name('admin.testimonials');

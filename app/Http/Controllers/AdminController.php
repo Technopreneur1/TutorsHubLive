@@ -289,10 +289,22 @@ class AdminController extends Controller
     {
         $users = User::where('type', 'teacher')->where('is_banned', 1)->get();
         return view('admin.pages.users.index', ['users' => $users, 'type' => 'Banned Tutors']);
-    }public function featuredTutors()
+    }
+    public function featuredTutors()
     {
         $users = User::where('type', 'teacher')->where('is_featured', 1)->get();
         return view('admin.pages.users.index', ['users' => $users, 'type' => 'Featured Tutors']);
+    }
+
+    public function deActivatedTutors()
+    {
+        $users = User::where('type', 'teacher')->where('is_active', 0)->get();
+        return view('admin.pages.users.index', ['users' => $users, 'type' => 'DeActivated Tutors']);
+    }
+    public function deActivatedStudents()
+    {
+        $users = User::where('type', 'student')->where('is_active', 0)->get();
+        return view('admin.pages.users.index', ['users' => $users, 'type' => 'DeActivated Tutors']);
     }
 
     // Return Single Tutor Page

@@ -9,7 +9,7 @@
             @if (auth()->check())
                 <a href="{{route('profile')}}" class="btn-join">Profile</a>
             @else
-            
+
                 <a href="{{route('login')}}" class="btn-join">Login</a>
             @endif
         </div>
@@ -22,11 +22,11 @@
             <img src="{{asset('img/logotext.png')}}" alt="">
         </a>
     </div>
-    <menu-icons url="{{route('home')}}" 
-        :user="{{auth()->check() ? auth()->user() : null}}" 
+    <menu-icons url="{{route('home')}}"
+        :user="{{auth()->check() ? auth()->user() : null}}"
         messages="{{auth()->user()->unreadMessages()->count()}}"
-        sessions="{{auth()->user()->profile->unseenSessions()->count()}}"
+        sessions="{{auth()->user()->profile ? auth()->user()->profile->unseenSessions()->count() : 0}}
         ></menu-icons>
 </div>
-    
+
 @endif
