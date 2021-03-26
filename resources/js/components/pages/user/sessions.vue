@@ -93,7 +93,7 @@
             <button v-if="viewSession.accept != '1' && !viewSession.completed && authuser.type != 'student'" @click="requestaccept" class="btn btn-success" style="border-radius: 30px">Accept Session Request</button>
             <button v-if="viewSession.sessiontype == 'In Person' && viewSession.payment_status == '1' && viewSession.accept == '1' && viewSession.completed == '0' && viewSession.completed == 0 && !viewSession.cancel_request && authuser.type != 'student'" @click="markComplete" class="btn btn-gradientb">Mark as completed</button>
             <button v-if="viewSession.sessiontype == 'Online' && viewSession.payment_status == '1' && viewSession.accept == '1' && viewSession.completed == '0' && !viewSession.cancel_request && authuser.type != 'student'" @click="startsession" class="btn btn-success" style="border-radius: 30px">Start Session</button>
-            <button v-if="viewSession.sessiontype == 'Online' && viewSession.accept == '1' && viewSession.completed == 0 && !viewSession.cancel_request && authuser.type == 'student'" @click="startsession" class="btn btn-success" style="border-radius: 30px">Join Session</button>
+            <button v-if="viewSession.sessiontype == 'Online' && viewSession.accept == '1' && viewSession.completed == 0 && !viewSession.cancel_request && authuser.type == 'student' && viewSession.payment_status == 1" @click="startsession" class="btn btn-success" style="border-radius: 30px">Join Session</button>
             <div v-if="viewSession.payment_status != 1  && viewSession.accept == '1' && authuser.type == 'student'" class="rates" >
                 Please Pay to confirm this Session
             </div>

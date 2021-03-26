@@ -83864,7 +83864,8 @@ var render = function() {
             _vm.viewSession.accept == "1" &&
             _vm.viewSession.completed == 0 &&
             !_vm.viewSession.cancel_request &&
-            _vm.authuser.type == "student"
+            _vm.authuser.type == "student" &&
+            _vm.viewSession.payment_status == 1
               ? _c(
                   "button",
                   {
