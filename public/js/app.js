@@ -2620,6 +2620,7 @@ __webpack_require__.r(__webpack_exports__);
       success: '',
       hours: 1,
       dte: '',
+      nowDateTime: new Date().toISOString(),
       sessiontype: 'Online',
       loaded: false,
       paidFor: false,
@@ -77705,6 +77706,7 @@ var render = function() {
                     _c("datetime", {
                       attrs: {
                         type: "datetime",
+                        "min-datetime": _vm.nowDateTime,
                         format: "yyyy-MM-dd HH:mm:ss"
                       },
                       model: {

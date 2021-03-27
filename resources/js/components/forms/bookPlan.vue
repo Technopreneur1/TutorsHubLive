@@ -50,7 +50,7 @@
                 <div class="dte">
                     <div class="input">
                         <label for="">Select Date & Time</label>
-                        <datetime type="datetime" v-model="dte" format="yyyy-MM-dd HH:mm:ss"></datetime>
+                        <datetime type="datetime" v-model="dte" :min-datetime="nowDateTime" format="yyyy-MM-dd HH:mm:ss"></datetime>
 
                     </div>
                 </div>
@@ -166,6 +166,7 @@
                 success: '',
                 hours: 1,
                 dte:'',
+                nowDateTime: new Date().toISOString(),
                 sessiontype:'Online',
                 loaded: false,
                 paidFor: false,
