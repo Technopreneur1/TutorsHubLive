@@ -41,12 +41,12 @@ Settings
                     <form action="{{route('admin.update.settings')}}" method="post">
                         <div class="form-group">
                             <label for="name">Copyright Text</label>
-                            <input type="text" class="form-control" name="copyrightText" placeholder="2021 All rights reserved" value="{{$settings ? ($settings->copyrightText ? : '') : ''}}">
+                            <input type="text" required class="form-control" name="copyrightText" placeholder="2021 All rights reserved" value="{{$settings ? ($settings->copyrightText ? : '') : ''}}">
                         </div>
 
                         <div class="form-group">
                             <label for="name">Presentation Video URL</label>
-                            <input type="text" class="form-control" name="videoURL" placeholder="https://www.youtube.com...." value="{{$settings? ($settings->videoURL ? : '') : ''}}">
+                            <input type="text" required class="form-control" name="videoURL" placeholder="https://www.youtube.com...." value="{{$settings? ($settings->videoURL ? : '') : ''}}">
                         </div>
                         <div class="form-group text-right">
                             {{ csrf_field() }}

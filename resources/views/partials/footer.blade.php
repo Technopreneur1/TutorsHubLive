@@ -24,7 +24,7 @@ Canada
     <div class="footer_copyright_wrap scheme_">
         <div class="footer_copyright_inner">
             <div class="content_wrap">
-                <div class="copyright_text"><a target="_blank" href="#">Tutors-hub.com </a> © {{ $settings ? ($settings->copyrightText ? : '') : '' }}</div>
+                <div class="copyright_text"><a target="_blank" href="#">Tutors-hub.com </a> © {{ $settings ? ($settings->copyrightText ? : now()->year.' All Rights Reserved') : now()->year.' All Rights Reserved' }}</div>
             </div>
         </div>
     </div>

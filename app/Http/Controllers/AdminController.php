@@ -104,8 +104,8 @@ class AdminController extends Controller
 
         if($settings){
             $settings->update([
-                'copyrightText' => $request->copyrightText,
-                'videoURL' => $request->videoURL
+                'copyrightText' => $request->copyrightText ? : $settings->copyrightText,
+                'videoURL' => $request->videoURL ? : $settings->videoURL
             ]);
 
             session()->flash('message' ,'Settings Updated');
