@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\AdminSetting;
 use App\Blog;
 use App\Discipline;
 use App\Plan;
@@ -54,8 +55,9 @@ class PagesController extends Controller
             //                                                                                                                                                                                                class="sc_title sc_title_default  vc_custom_1484220999465"><h6 class="sc_item_subtitle sc_title_subtitle sc_align_default sc_item_title_style_default">Find the Right Tutor for You</h6><h2 class="sc_item_title sc_title_title sc_align_default sc_item_title_style_default">Featured Tutors</h2></div><!-- /.sc_title -->
 
             $subjects = json_decode($subject);
+            $settings = AdminSetting::first();
             //dd($teachers);
-            return view("pages.home1")->with('subjects',$subjects)->with('testimonials',$testimonials)->with('teachers',$teachers);
+            return view("pages.home1", compact('subjects', 'testimonials', 'teachers', 'settings'));
         }
     }
     public function blog()

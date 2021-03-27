@@ -396,6 +396,7 @@ Route::prefix('adminpanel')->middleware('admin')->group(function () {
     Route::post('/levels', 'LevelController@post')->name('admin.add.level');
     Route::post('/disciplines', 'DisciplineController@post')->name('admin.add.discipline');
     Route::post('/update-fee', 'MetaController@updateFee')->name('admin.update.fee');
+    Route::post('/update-settings', 'AdminController@updateSettings')->name('admin.update.settings');
     Route::post('/location-hide/{id}', 'LocationController@hide')->name('admin.hide.location');
 
     Route::get('/levels/{id}', 'AdminController@editlevels')->name('admin.level.edit');

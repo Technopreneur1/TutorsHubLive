@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\AdminSetting;
 use App\Cms;
 use auth;
 use App\Ad;
@@ -93,7 +94,32 @@ class AdminController extends Controller
     public function settings()
     {
         $fee = Meta::where('key', 'fee')->first();
-        return view('admin.pages.settings', ['fee' => $fee]);
+        $settings = AdminSetting::first();
+
+        return view('admin.pages.settings', compact('fee', 'settings'));
+    }
+
+    public function updateSettings(Request $request){
+        $settings = AdminSetting::first();
+
+        if($settings){
+            $settings->update([
+                'copyrightText' => $request->copyrightText,
+                'videoURL' => $request->videoURL
+            ]);
+
+            session()->flash('message' ,'Settings Updated');
+            return back();
+
+        }else{
+            AdminSetting::create([
+                'copyrightText' => $request->copyrightText,
+                'videoURL' => $request->videoURL
+            ]);
+
+            session()->flash('message' ,'Settings Updated');
+            return back();
+        }
     }
     public function blogs()
     {
