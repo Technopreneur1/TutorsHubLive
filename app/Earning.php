@@ -9,7 +9,7 @@ class Earning{
     }
     public static function fee($profile)
     {
-        return $profile->sessions->sum('fee');
+        return $profile->sessions->where('completed', true)->sum('fee');
     }
     public static function paid($profile)
     {
