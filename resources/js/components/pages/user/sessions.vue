@@ -179,20 +179,20 @@
 
             <ul class="nav nav-tabs green-bg flex justify-content-around bg-gray session-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="requested-tab" data-toggle="tab" href="#requested" role="tab" aria-controls="home" aria-selected="true">Requested</a>
+                    <a class="nav-link active" id="requested-tab" data-toggle="tab" href="#requested" role="tab" aria-controls="home" aria-selected="true">Requested ({{ requestedSessions.length }})</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="pending-tab" data-toggle="tab" href="#pending" role="tab" aria-controls="profile" aria-selected="false">Pending</a>
+                    <a class="nav-link" id="pending-tab" data-toggle="tab" href="#pending" role="tab" aria-controls="profile" aria-selected="false">Pending ({{ pendingSessions.length }})</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="upcoming-tab" data-toggle="tab" href="#upcoming" role="tab" aria-controls="contact" aria-selected="false">Upcoming</a>
+                    <a class="nav-link" id="upcoming-tab" data-toggle="tab" href="#upcoming" role="tab" aria-controls="contact" aria-selected="false">Upcoming ({{ upcomingSessions.length }})</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" id="completed-tab" data-toggle="tab" href="#completed" role="tab" aria-controls="contact" aria-selected="false">Completed</a>
+                    <a class="nav-link" id="completed-tab" data-toggle="tab" href="#completed" role="tab" aria-controls="contact" aria-selected="false">Completed ({{ completedsessions.length }})</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="cancelled-tab" data-toggle="tab" href="#cancelled" role="tab" aria-controls="contact" aria-selected="false">Cancelled</a>
+                    <a class="nav-link" id="cancelled-tab" data-toggle="tab" href="#cancelled" role="tab" aria-controls="contact" aria-selected="false">Cancelled ({{ cancelledsessions.length }})</a>
                 </li>
             </ul>
             <div class="tab-content" id="myTabContent">

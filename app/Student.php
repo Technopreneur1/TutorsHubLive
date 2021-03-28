@@ -20,7 +20,7 @@ class Student extends Model
     }
     public function sessions()
     {
-        return $this->hasMany("App\Session", 'student_id')->with('teacher');
+        return $this->hasMany("App\Session", 'student_id')->latest()->with('teacher');
     }
     public function completedSessions()
     {

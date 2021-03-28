@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Teacher extends Model
 {
-    
+
     protected $guarded = [
     ];
 
@@ -16,7 +16,7 @@ class Teacher extends Model
     }
     public function sessions()
     {
-        return $this->hasMany("App\Session", "teacher_id")->with('student');
+        return $this->hasMany("App\Session", "teacher_id")->latest()->with('student');
     }
     public function completedSessions()
     {
@@ -39,5 +39,5 @@ class Teacher extends Model
     {
         return $this->belongsTo('App\User');
     }
-    
+
 }

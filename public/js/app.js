@@ -84172,7 +84172,131 @@ var render = function() {
         : _c("div", { staticClass: "else" }, [
             _c("div", { staticClass: "title" }, [_vm._v("My Sessions")]),
             _vm._v(" "),
-            _vm._m(1),
+            _c(
+              "ul",
+              {
+                staticClass:
+                  "nav nav-tabs green-bg flex justify-content-around bg-gray session-tabs",
+                attrs: { id: "myTab", role: "tablist" }
+              },
+              [
+                _c("li", { staticClass: "nav-item" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "nav-link active",
+                      attrs: {
+                        id: "requested-tab",
+                        "data-toggle": "tab",
+                        href: "#requested",
+                        role: "tab",
+                        "aria-controls": "home",
+                        "aria-selected": "true"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "Requested (" +
+                          _vm._s(_vm.requestedSessions.length) +
+                          ")"
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "nav-item" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "nav-link",
+                      attrs: {
+                        id: "pending-tab",
+                        "data-toggle": "tab",
+                        href: "#pending",
+                        role: "tab",
+                        "aria-controls": "profile",
+                        "aria-selected": "false"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "Pending (" + _vm._s(_vm.pendingSessions.length) + ")"
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "nav-item" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "nav-link",
+                      attrs: {
+                        id: "upcoming-tab",
+                        "data-toggle": "tab",
+                        href: "#upcoming",
+                        role: "tab",
+                        "aria-controls": "contact",
+                        "aria-selected": "false"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "Upcoming (" + _vm._s(_vm.upcomingSessions.length) + ")"
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "nav-item" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "nav-link",
+                      attrs: {
+                        id: "completed-tab",
+                        "data-toggle": "tab",
+                        href: "#completed",
+                        role: "tab",
+                        "aria-controls": "contact",
+                        "aria-selected": "false"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "Completed (" +
+                          _vm._s(_vm.completedsessions.length) +
+                          ")"
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "nav-item" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "nav-link",
+                      attrs: {
+                        id: "cancelled-tab",
+                        "data-toggle": "tab",
+                        href: "#cancelled",
+                        role: "tab",
+                        "aria-controls": "contact",
+                        "aria-selected": "false"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "Cancelled (" +
+                          _vm._s(_vm.cancelledsessions.length) +
+                          ")"
+                      )
+                    ]
+                  )
+                ])
+              ]
+            ),
             _vm._v(" "),
             _c(
               "div",
@@ -84263,7 +84387,7 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(" "),
-                                            _vm._m(2, true)
+                                            _vm._m(1, true)
                                           ])
                                     ])
                                   : _vm._e(),
@@ -84333,7 +84457,7 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(" "),
-                                            _vm._m(3, true)
+                                            _vm._m(2, true)
                                           ])
                                     ])
                                   : _vm._e(),
@@ -84548,7 +84672,7 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(" "),
-                                            _vm._m(4, true)
+                                            _vm._m(3, true)
                                           ])
                                     ])
                                   : _vm._e(),
@@ -84618,7 +84742,7 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(" "),
-                                            _vm._m(5, true)
+                                            _vm._m(4, true)
                                           ])
                                     ])
                                   : _vm._e(),
@@ -84819,7 +84943,7 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(" "),
-                                            _vm._m(6, true)
+                                            _vm._m(5, true)
                                           ])
                                     ])
                                   : _vm._e(),
@@ -84889,7 +85013,7 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(" "),
-                                            _vm._m(7, true)
+                                            _vm._m(6, true)
                                           ])
                                     ])
                                   : _vm._e(),
@@ -84990,7 +85114,7 @@ var render = function() {
                                                   [_vm._v("Cancelled")]
                                                 ),
                                                 _vm._v(" "),
-                                                _vm._m(8, true)
+                                                _vm._m(7, true)
                                               ]
                                             )
                                           : _vm._e()
@@ -85116,7 +85240,7 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(" "),
-                                            _vm._m(9, true)
+                                            _vm._m(8, true)
                                           ])
                                     ])
                                   : _vm._e(),
@@ -85186,7 +85310,7 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(" "),
-                                            _vm._m(10, true)
+                                            _vm._m(9, true)
                                           ])
                                     ])
                                   : _vm._e(),
@@ -85390,7 +85514,7 @@ var render = function() {
                                                 ]
                                               ),
                                               _vm._v(" "),
-                                              _vm._m(11, true)
+                                              _vm._m(10, true)
                                             ]
                                           )
                                     ])
@@ -85464,7 +85588,7 @@ var render = function() {
                                                 ]
                                               ),
                                               _vm._v(" "),
-                                              _vm._m(12, true)
+                                              _vm._m(11, true)
                                             ]
                                           )
                                     ])
@@ -85600,110 +85724,6 @@ var staticRenderFns = [
       _c("b", [_vm._v("completed")]),
       _vm._v(" after it has taken place")
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "ul",
-      {
-        staticClass:
-          "nav nav-tabs green-bg flex justify-content-around bg-gray session-tabs",
-        attrs: { id: "myTab", role: "tablist" }
-      },
-      [
-        _c("li", { staticClass: "nav-item" }, [
-          _c(
-            "a",
-            {
-              staticClass: "nav-link active",
-              attrs: {
-                id: "requested-tab",
-                "data-toggle": "tab",
-                href: "#requested",
-                role: "tab",
-                "aria-controls": "home",
-                "aria-selected": "true"
-              }
-            },
-            [_vm._v("Requested")]
-          )
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "nav-item" }, [
-          _c(
-            "a",
-            {
-              staticClass: "nav-link",
-              attrs: {
-                id: "pending-tab",
-                "data-toggle": "tab",
-                href: "#pending",
-                role: "tab",
-                "aria-controls": "profile",
-                "aria-selected": "false"
-              }
-            },
-            [_vm._v("Pending")]
-          )
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "nav-item" }, [
-          _c(
-            "a",
-            {
-              staticClass: "nav-link",
-              attrs: {
-                id: "upcoming-tab",
-                "data-toggle": "tab",
-                href: "#upcoming",
-                role: "tab",
-                "aria-controls": "contact",
-                "aria-selected": "false"
-              }
-            },
-            [_vm._v("Upcoming")]
-          )
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "nav-item" }, [
-          _c(
-            "a",
-            {
-              staticClass: "nav-link",
-              attrs: {
-                id: "completed-tab",
-                "data-toggle": "tab",
-                href: "#completed",
-                role: "tab",
-                "aria-controls": "contact",
-                "aria-selected": "false"
-              }
-            },
-            [_vm._v("Completed")]
-          )
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "nav-item" }, [
-          _c(
-            "a",
-            {
-              staticClass: "nav-link",
-              attrs: {
-                id: "cancelled-tab",
-                "data-toggle": "tab",
-                href: "#cancelled",
-                role: "tab",
-                "aria-controls": "contact",
-                "aria-selected": "false"
-              }
-            },
-            [_vm._v("Cancelled")]
-          )
-        ])
-      ]
-    )
   },
   function() {
     var _vm = this
