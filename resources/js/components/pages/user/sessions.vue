@@ -562,7 +562,9 @@
                                     <div v-if="authuser.type == 'teacher'" class="status">Cancelled</div>
                                     <div v-if="authuser.type == 'student'" class="status">
                                         <div class="status" >Cancelled</div>
-                                        <div style="font-size: 10px">Please rise a ticket in support center for refund!</div>
+                                        <div v-if="ses.cancel_request && ses.accept &&ses.payment_status">
+                                            <div style="font-size: 10px">Please open a ticket at support center for a refund!</div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div v-if="ses.payment_status == 1 && ses.accept == '1' && ses.completed == 1"  class="status">Completed</div>

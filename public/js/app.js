@@ -7480,6 +7480,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     url: {
@@ -85668,19 +85670,25 @@ var render = function() {
                                                   [_vm._v("Cancelled")]
                                                 ),
                                                 _vm._v(" "),
-                                                _c(
-                                                  "div",
-                                                  {
-                                                    staticStyle: {
-                                                      "font-size": "10px"
-                                                    }
-                                                  },
-                                                  [
-                                                    _vm._v(
-                                                      "Please rise a ticket in support center for refund!"
-                                                    )
-                                                  ]
-                                                )
+                                                ses.cancel_request &&
+                                                ses.accept &&
+                                                ses.payment_status
+                                                  ? _c("div", [
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticStyle: {
+                                                            "font-size": "10px"
+                                                          }
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            "Please open a ticket at support center for a refund!"
+                                                          )
+                                                        ]
+                                                      )
+                                                    ])
+                                                  : _vm._e()
                                               ]
                                             )
                                           : _vm._e()

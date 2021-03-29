@@ -21,7 +21,7 @@
                 <td>{{$session->rate}}</td>
                 <td>{{$session->hours}}</td>
                 <td>${{$session->total}}</td>
-                <td>{{$session->complete ?  "Complete" : "Incomplete"}}</td>
+                <td>{{$session->accept && !$session->cancel_request ? ($session->payment_status ? ($session->completed ? 'Completed' : ($session->seen_canel ? 'Cancelled' : 'Upcoming')) : 'Pending') : 'Requested'}}</td>
             </tr>
         @endforeach
 

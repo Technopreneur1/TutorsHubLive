@@ -48,6 +48,22 @@ Settings
                             <label for="name">Presentation Video URL</label>
                             <input type="text" required class="form-control" name="videoURL" placeholder="https://www.youtube.com...." value="{{$settings? ($settings->videoURL ? : '') : ''}}">
                         </div>
+
+                        <div class="form-group">
+                            <label for="name">Contact Number</label>
+                            <input type="text" required class="form-control" name="contact_number" placeholder="Contact Number" value="{{$settings? ($settings->contact_number ? : '') : ''}}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name">Email Address</label>
+                            <input type="text" required class="form-control" name="email" placeholder="Email Address" value="{{$settings? ($settings->email ? : '') : ''}}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name">Address</label>
+                            <textarea class="form-control" name="address" id="address" cols="20" rows="5" placeholder="Address" required >{{$settings? ($settings->address ? : '') : ''}}</textarea>
+                        </div>
+
                         <div class="form-group text-right">
                             {{ csrf_field() }}
                             <button type="submit" class="btn btn-info">Update</button>

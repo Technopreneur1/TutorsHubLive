@@ -10,7 +10,9 @@ Session  | Admin Panel
                 <form action="{{route('admin.cancel.session')}}" method="post">
                     <input type="hidden" name="id" value="{{$session->id}}">
                     @csrf
-                    <button class="btn btn-danger">Cancel Session</button>
+                    @if(!$session->cancel_request)
+                        <button class="btn btn-danger">Cancel Session</button>
+                    @endif
                 </form>
             @endif
             <div class="box">
@@ -22,10 +24,10 @@ Session  | Admin Panel
                     <div class="box-body">
                         <table class="table table-hover" style="background: #fff">
                             <tbody>
-                                
+
                                 <tr>
                                     <td>Status</td>
-                                    <td>{{$session->completed ? "Completed" : "Incomplete"}}</td>
+                                    <td>{{$session->accept ? ($session->payment_status ? ($session->completed ? 'Completed' : ($session->cancel_request ? 'Cancelled' : 'Upcoming')) : 'Pending') : ($session->cancel_request ? 'Cancelled' : 'Requested')}}</td>
                                 </tr>
                                 <tr>
                                     <td>Student</td>
@@ -58,16 +60,16 @@ Session  | Admin Panel
                                     <td>Total</td>
                                     <td>${{$session->total}}</td>
                                 </tr>
-                                
-                                
-                                
+
+
+
                             </tbody>
                         </table>
 
                     </div>
                 </div>
             </div>
-            
+
             @if ($session->completed)
                 <div class="box">
                     <div class="box-header">
@@ -78,7 +80,7 @@ Session  | Admin Panel
                         <div class="box-body">
                             <table class="table table-hover" style="background: #fff">
                                 <tbody>
-                                    
+
                                     <tr>
                                         <td>Tutor Rating (By Student)</td>
                                         <td>{{$session->tutor_rating}}</td>
@@ -87,7 +89,7 @@ Session  | Admin Panel
                                         <td>Tutor Review (By Student)</td>
                                         <td>{{$session->tutor_review}}</td>
                                     </tr>
-                                    
+
                                     <tr>
                                         <td>Student Rating (By Tutor)</td>
                                         <td>{{$session->student_rating}}</td>
@@ -96,7 +98,7 @@ Session  | Admin Panel
                                         <td>Student Review (By Student)</td>
                                         <td>{{$session->student_review}}</td>
                                     </tr>
-                                    
+
                                 </tbody>
                             </table>
 
@@ -104,12 +106,14 @@ Session  | Admin Panel
                     </div>
                 </div>
             @endif
-            
 
-            
-
+            @if($session->cancel_request)
+                <div class="alert alert-danger">
+                    Cancelled By: {{ $session->cancel_request }}
+                </div>
+            @endif
 
         </div>
-       
+
     </div>
 @endsection

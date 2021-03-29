@@ -37,7 +37,7 @@ Sessions
                 <td>{{$session->hours}} </td>
                 <td>${{$session->fee}} </td>
                 <td>{{$session->created_at->format("Y-m-d")}}</td>
-                <td>{{$session->accept ? ($session->payment_status ? ($session->completed ? 'Completed' : ($session->seen_canel ? 'Cancelled' : 'Upcoming')) : 'Pending') : 'Requested'}} </td>
+                <td>{{$session->accept ? ($session->payment_status ? ($session->completed ? 'Completed' : ($session->cancel_request ? 'Cancelled' : 'Upcoming')) : 'Pending') : ($session->cancel_request ? 'Cancelled' : 'Requested')}} </td>
                 <td>
                     {{-- {{-- <a href="{{route('admin.session', $session->id)}}" class="btn btn-success">Open</a> --}}
                     <a href="{{route('admin.session.view', $session->id)}}" class="btn btn-info">View</a>

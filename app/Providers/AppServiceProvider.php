@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
     {
         view()->composer('admin.layouts.master', function($view) {
             $sessionsCount = Session::count();
-            $requestedSessionsCount = Session::where('accept', 0)->count();
+            $requestedSessionsCount = Session::where('accept', 0)->whereNull('cancel_request')->count();
             $pendingSessionsCount = Session::where('accept', 1)
                                         ->where('completed', 0)
                                         ->count();
@@ -36,7 +36,7 @@ class AppServiceProvider extends ServiceProvider
                                     ->where('payment_status', 1)
                                     ->count();
             $completedSessionsCount = Session::where('payment_status', 1)->where('completed', 1)->count();
-            $cancelledSessionsCount = Session::where('seen_canel', 1)->count();
+            $cancelledSessionsCount = Session::whereNotNull('cancel_request')->count();
             $view->with(compact('sessionsCount', 'requestedSessionsCount', 'pendingSessionsCount', 'upcomingSessionsCount', 'completedSessionsCount', 'cancelledSessionsCount'));
         });
     }

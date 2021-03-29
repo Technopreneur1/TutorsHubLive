@@ -76,6 +76,7 @@ class AdminController extends Controller
     {
         $sessionTitle = 'Requested Sessions';
         $sessions = Session::where('accept', 0)
+                        ->whereNull('cancel_request')
                         ->latest()
                         ->get();
         return view('admin.pages.sessions.index', ['sessions' => $sessions, 'sessionTitle' => $sessionTitle]);
@@ -113,7 +114,7 @@ class AdminController extends Controller
     public function cancelledSessions()
     {
         $sessionTitle = 'Cancelled Sessions';
-        $sessions = Session::where('seen_canel', 1)->latest()->get();
+        $sessions = Session::whereNotNull('cancel_request')->latest()->get();
         return view('admin.pages.sessions.index', ['sessions' => $sessions, 'sessionTitle' => $sessionTitle]);
     }
 
@@ -151,7 +152,10 @@ class AdminController extends Controller
         if($settings){
             $settings->update([
                 'copyrightText' => $request->copyrightText ? : $settings->copyrightText,
-                'videoURL' => $request->videoURL ? : $settings->videoURL
+                'videoURL' => $request->videoURL ? : $settings->videoURL,
+                'contact_number' => $request->contact_number ? : $settings->contact_number,
+                'email' => $request->email ? : $settings->email,
+                'address' => $request->address ? : $settings->address,
             ]);
 
             session()->flash('message' ,'Settings Updated');
@@ -160,7 +164,10 @@ class AdminController extends Controller
         }else{
             AdminSetting::create([
                 'copyrightText' => $request->copyrightText,
-                'videoURL' => $request->videoURL
+                'videoURL' => $request->videoURL,
+                'contact_number' => $request->contact_number ,
+                'email' => $request->email,
+                'address' => $request->address
             ]);
 
             session()->flash('message' ,'Settings Updated');
