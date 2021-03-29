@@ -67,10 +67,56 @@ class AdminController extends Controller
     }
     public function sessions()
     {
-
-        $sessions = Session::where('seen',0)->latest()->get();
-        return view('admin.pages.sessions.index', ['sessions' => $sessions]);
+        $sessionTitle = 'All Sessions';
+        $sessions = Session::latest()->get();
+        return view('admin.pages.sessions.index', ['sessions' => $sessions, 'sessionTitle' => $sessionTitle]);
     }
+
+    public function requestedSessions()
+    {
+        $sessionTitle = 'Requested Sessions';
+        $sessions = Session::where('accept', 0)
+                        ->latest()
+                        ->get();
+        return view('admin.pages.sessions.index', ['sessions' => $sessions, 'sessionTitle' => $sessionTitle]);
+    }
+
+    public function pendingSessions()
+    {
+        $sessionTitle = 'Pending Sessions';
+        $sessions = Session::where('accept', 1)
+            ->where('completed', 0)
+            ->latest()
+            ->get();
+
+        return view('admin.pages.sessions.index', ['sessions' => $sessions, 'sessionTitle' => $sessionTitle]);
+    }
+
+    public function upcomingSessions()
+    {
+        $sessionTitle = 'Upcoming Sessions';
+        $sessions = Session::where('accept', 1)
+            ->where('completed', 0)
+            ->where('payment_status', 1)
+            ->latest()
+            ->get();
+        return view('admin.pages.sessions.index', ['sessions' => $sessions, 'sessionTitle' => $sessionTitle]);
+    }
+
+    public function completedSessions()
+    {
+        $sessionTitle = 'Completed Sessions';
+        $sessions = Session::where('payment_status', 1)->where('completed', 1)->latest()->get();
+        return view('admin.pages.sessions.index', ['sessions' => $sessions, 'sessionTitle' => $sessionTitle]);
+    }
+
+    public function cancelledSessions()
+    {
+        $sessionTitle = 'Cancelled Sessions';
+        $sessions = Session::where('seen_canel', 1)->latest()->get();
+        return view('admin.pages.sessions.index', ['sessions' => $sessions, 'sessionTitle' => $sessionTitle]);
+    }
+
     public function sessions1()
     {
         $sessions = Session::where('completed',1)->orderBy('created_at', 'desc')->get();

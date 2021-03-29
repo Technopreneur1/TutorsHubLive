@@ -8,7 +8,7 @@ Sessions
     </div>
     <div class="box">
         <div class="box-header">
-        <h3 class="box-title">New Sessions</h3>
+        <h3 class="box-title">{{$sessionTitle ? : ''}}</h3>
         </div>
         <!-- /.box-header -->
         <div class="box-body">
@@ -37,7 +37,7 @@ Sessions
                 <td>{{$session->hours}} </td>
                 <td>${{$session->fee}} </td>
                 <td>{{$session->created_at->format("Y-m-d")}}</td>
-                <td>{{$session->accept ? ($session->payment_status ? ($session->completed ? 'Completed' : 'Upcoming') : 'Pending') : 'Requested'}} </td>
+                <td>{{$session->accept ? ($session->payment_status ? ($session->completed ? 'Completed' : ($session->seen_canel ? 'Cancelled' : 'Upcoming')) : 'Pending') : 'Requested'}} </td>
                 <td>
                     {{-- {{-- <a href="{{route('admin.session', $session->id)}}" class="btn btn-success">Open</a> --}}
                     <a href="{{route('admin.session.view', $session->id)}}" class="btn btn-info">View</a>

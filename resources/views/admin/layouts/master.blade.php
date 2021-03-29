@@ -87,7 +87,54 @@
 
           </ul>
         </li>
-        <li class="{{{ (Request::is('adminpanel/sessions') ? 'active' : '') }}}"><a href="{{route('admin.sessions')}}"><i class="fa fa-copy"></i> <span>Sessions</span> <span class="badge bg-aqua pull-right">{{App\Session::where('seen', 0)->count()}}</span></a></li>
+
+          <li class="treeview {{ ( Request::is('adminpanel/sessions') || Request::is('adminpanel/sessions/*') ? 'active' : '') }}">
+              <a href="#">
+                  <i class="fa fa-user"></i> <span>Sessions</span>
+                  <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+              </a>
+              <ul class="treeview-menu">
+                  <li class="{{{ (Request::is('adminpanel/sessions') ? 'active' : '') }}}">
+                      <a href="{{route('admin.sessions')}}">
+                          <i class="fa fa-circle-o"></i>
+                          <span>All</span> <span class="badge bg-aqua pull-right">{{ $sessionsCount }}</span>
+                      </a>
+                  </li>
+
+                  <li class="{{{ (Request::is('adminpanel/sessions/requested') ? 'active' : '') }}}">
+                      <a href="{{route('admin.sessions.requested')}}">
+                          <i class="fa fa-circle-o"></i>
+                          <span>Requested</span> <span class="badge bg-aqua pull-right">{{ $requestedSessionsCount }}</span>
+                      </a>
+                  </li>
+                  <li class="{{{ (Request::is('adminpanel/sessions/pending') ? 'active' : '') }}}">
+                      <a href="{{route('admin.sessions.pending')}}">
+                          <i class="fa fa-circle-o"></i>
+                          <span>Pending</span> <span class="badge bg-aqua pull-right">{{ $pendingSessionsCount }}</span>
+                      </a>
+                  </li>
+                  <li class="{{{ (Request::is('adminpanel/sessions/upcoming') ? 'active' : '') }}}">
+                      <a href="{{route('admin.sessions.upcoming')}}">
+                          <i class="fa fa-circle-o"></i>
+                          <span>Upcoming</span> <span class="badge bg-aqua pull-right">{{ $upcomingSessionsCount }}</span>
+                      </a>
+                  </li>
+                  <li class="{{{ (Request::is('adminpanel/sessions/completed') ? 'active' : '') }}}">
+                      <a href="{{route('admin.sessions.completed')}}">
+                          <i class="fa fa-circle-o"></i>
+                          <span>Completed</span> <span class="badge bg-aqua pull-right">{{ $completedSessionsCount }}</span>
+                      </a>
+                  </li>
+                  <li class="{{{ (Request::is('adminpanel/sessions/cancelled') ? 'active' : '') }}}">
+                      <a href="{{route('admin.sessions.cancelled')}}">
+                          <i class="fa fa-circle-o"></i>
+                          <span>Cancelled</span> <span class="badge bg-aqua pull-right">{{ $cancelledSessionsCount }}</span>
+                      </a>
+                  </li>
+              </ul>
+          </li>
         <li class="{{{ (Request::is('adminpanel/ads') ? 'active' : '') }}}"><a href="{{route('admin.ads')}}"><i class="fa fa-ad"></i> <span>Ads</span> </a></li>
         <li class="treeview  {{{ (Request::is('adminpanel/tickets') ? 'active' : '') }}}">
           <a href="#">
