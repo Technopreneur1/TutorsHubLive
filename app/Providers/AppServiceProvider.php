@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\AdminSetting;
 use App\Session;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
@@ -38,6 +39,11 @@ class AppServiceProvider extends ServiceProvider
             $completedSessionsCount = Session::where('payment_status', 1)->where('completed', 1)->count();
             $cancelledSessionsCount = Session::whereNotNull('cancel_request')->count();
             $view->with(compact('sessionsCount', 'requestedSessionsCount', 'pendingSessionsCount', 'upcomingSessionsCount', 'completedSessionsCount', 'cancelledSessionsCount'));
+        });
+
+        view()->composer('partials.footer', function($view) {
+            $settings = AdminSetting::first();
+            $view->with(compact('settings'));
         });
     }
 }
