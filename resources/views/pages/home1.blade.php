@@ -346,41 +346,9 @@
                                                         </script>
                                                     </rs-module-wrap>
                                                     <!-- END REVOLUTION SLIDER -->
-                                                </div><div class="vc_row wpb_row vc_inner vc_row-fluid special_class_2"><div class="wpb_column vc_column_container vc_col-sm-12 sc_layouts_column_icons_position_left"><div class="vc_column-inner"><div class="wpb_wrapper">        <div class="tp-form-shortcode-wrap">
-                                                                    <div class="tp-form-header">
-                                                                        <h6 class="tp-form-title">Find Your</h6>
-                                                                        <h4 class="tp-form-title">Tutor</h4>
-                                                                    </div>
-                                                                    <div class="tp-form">
-                                                                        <form  action="{{url('search_location')}}" method="post"  >
-                                                                            @csrf
-                                                                            <input type="hidden" name="post_type" value="tutor" />
-                                                                            <input type="hidden" name="" value="" />
-                                                                            <select name="subject">
-                                                                                <option value="All" selected>All Subjects</option>
+                                                </div><div class="vc_row wpb_row vc_inner vc_row-fluid special_class_2"><div class="wpb_column vc_column_container vc_col-sm-12 sc_layouts_column_icons_position_left"><div class="vc_column-inner"><div class="wpb_wrapper">
+                                                                <div class="tp-form-shortcode-wrap">
 
-                                                                                @foreach ($subjects as $records)
-                                                                                    <option value="{{$records->id}}" >{{$records->name}}</option>
-                                                                                @endforeach
-
-                                                                            </select>
-
-                                                                            <input id="pac-input" type="text" name="location" placeholder="Enter a location">
-                                                                            <input type="text" id="lat" name="lat" value="" hidden>
-                                                                            <input type="text" id="lng" name="lng" value="" hidden>
-
-
-                                                                            <select name="groups">
-                                                                                <option value="all" selected>All Groups</option>
-                                                                                <option value="online">Online</option><option value="personal">Personal</option>
-                                                                            </select>
-                                                                            <div id="map" hidden></div>
-                                                                            <div class="tp-form-button">
-                                                                                <button type="submit" value="">Find Now</button>
-                                                                            </div>
-                                                                        </form>
-                                                                        <div id="demo"></div>
-                                                                    </div>
                                                                 </div>
                                                                 </div></div></div></div></div></div></div></div><div class="vc_row-full-width vc_clearfix"></div><div data-vc-full-width="true" data-vc-full-width-init="false" class="vc_row wpb_row vc_row-fluid vc_custom_1485445777014 vc_row-has-fill"><div class="wpb_column vc_column_container vc_col-sm-12 sc_layouts_column_icons_position_left"><div class="vc_column-inner"><div class="wpb_wrapper"><div id="sc_title_2054305088"
 

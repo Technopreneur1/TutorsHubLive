@@ -25,9 +25,21 @@ Session  | Admin Panel
                         <table class="table table-hover" style="background: #fff">
                             <tbody>
 
+                            Requested -> Not accepted
+                            Pending -> Accepted but Not paid
+                            Upcoming -> Accepted and Paid but not completed
+                            Completed -> completed
+                            cancelled -> cancel_request
+
                                 <tr>
                                     <td>Status</td>
-                                    <td>{{$session->accept ? ($session->payment_status ? ($session->completed ? 'Completed' : ($session->cancel_request ? 'Cancelled' : 'Upcoming')) : 'Pending') : ($session->cancel_request ? 'Cancelled' : 'Requested')}}</td>
+                                    <td>
+                                        {{ !$session->accept ? 'Requested' : '' }}
+                                        {{ ($session->accept && !$session->payment_status && !$session->completed && !$session->cancel_request) ? 'Pending' : ''  }}
+                                        {{ ($session->accept && $session->payment_status && !$session->completed && !$session->cancel_request) ? 'Upcoming' : ''  }}
+                                        {{ ($session->accept && $session->payment_status && $session->completed && !$session->cancel_request) ? 'Completed' : ''  }}
+                                        {{ ($session->cancel_request) ? 'Cancelled' : ''  }}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Student</td>

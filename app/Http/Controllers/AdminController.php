@@ -86,7 +86,9 @@ class AdminController extends Controller
     {
         $sessionTitle = 'Pending Sessions';
         $sessions = Session::where('accept', 1)
+            ->where('payment_status', 0)
             ->where('completed', 0)
+            ->whereNull('cancel_request')
             ->latest()
             ->get();
 
@@ -99,6 +101,7 @@ class AdminController extends Controller
         $sessions = Session::where('accept', 1)
             ->where('completed', 0)
             ->where('payment_status', 1)
+            ->whereNull('cancel_request')
             ->latest()
             ->get();
         return view('admin.pages.sessions.index', ['sessions' => $sessions, 'sessionTitle' => $sessionTitle]);
