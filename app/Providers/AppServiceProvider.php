@@ -32,6 +32,7 @@ class AppServiceProvider extends ServiceProvider
             $pendingSessionsCount = Session::where('accept', 1)
                                         ->where('payment_status', 0)
                                         ->where('completed', 0)
+                                        ->whereNull('cancel_request')
                                         ->count();
             $upcomingSessionsCount = Session::where('accept', 1)
                                     ->where('completed', 0)
