@@ -38,7 +38,7 @@ Sessions
                 <td>${{$session->fee}} </td>
                 <td>{{$session->created_at->format("Y-m-d")}}</td>
                 <td>
-                    {{ !$session->accept ? 'Requested' : '' }}
+                    {{ !$session->accept && !$session->cancel_request ? 'Requested' : '' }}
                     {{ ($session->accept && !$session->payment_status && !$session->completed && !$session->cancel_request) ? 'Pending' : ''  }}
                     {{ ($session->accept && $session->payment_status && !$session->completed && !$session->cancel_request) ? 'Upcoming' : ''  }}
                     {{ ($session->accept && $session->payment_status && $session->completed && !$session->cancel_request) ? 'Completed' : ''  }}
