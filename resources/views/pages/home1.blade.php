@@ -3,7 +3,7 @@
     Home
 @endsection
 @section('styles')
-<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+{{--<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">--}}
 <style>
 @media screen and (max-width: 600px) {
     .top_panel_top{
@@ -63,7 +63,10 @@
             <div class="menu_mobile_overlay"></div>
             <div class="menu_mobile menu_mobile_fullscreen scheme_dark">
                 <div class="menu_mobile_inner">
-                    <a class="menu_mobile_close icon-cancel"></a><a class="sc_layouts_logo" href="#"><img src="{{url('wp-content/uploads/2016/12/logotxt.png')}}"  width="440" height="90"></a>
+                    <a class="menu_mobile_close icon-cancel"></a>
+                    <a class="sc_layouts_logo" href="#">
+                        <img src="{{url('wp-content/uploads/2016/12/logotxt.png')}}"  width="440" height="90">
+                    </a>
                     <nav class="menu_mobile_nav_area ">
                         <ul id="menu_mobile" class=" menu_mobile_nav">
                             <li id="menu_mobile-item-105" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-105"><a href="https://tutors-hub.com/"><span>Home</span></a>
@@ -79,25 +82,22 @@
             <div class="page_content_wrap scheme_default">
 
                 <div class="content_wrap">
-
-
-
                     <div class="content">
-
-
                         <article id="post-219" class="post_item_single post_type_page post-219 page type-page status-publish hentry">
-
-
                             <div class="post_content entry-content">
-                                <div data-vc-full-width="true" data-vc-full-width-init="false" data-vc-stretch-content="true" class="vc_row wpb_row vc_row-fluid vc_custom_1485445769518 vc_row-has-fill vc_row-no-padding special_class_1"><div class="wpb_column vc_column_container vc_col-sm-12 sc_layouts_column_icons_position_left"><div class="vc_column-inner"><div class="wpb_wrapper"><div class="wpb_revslider_element wpb_content_element">
-                                                    <!-- START Home 1 REVOLUTION SLIDER 6.1.7 --><p class="rs-p-wp-fix"></p>
-                                                    <rs-module-wrap id="rev_slider_1_1_wrapper" data-source="gallery" style="background:transparent;padding:0;margin:0px auto;margin-top:0;margin-bottom:0;max-width:">
-                                                        <rs-module id="rev_slider_1_1" style="display:none;" data-version="6.1.7">
+                                <div data-vc-full-width="true" data-vc-full-width-init="false" data-vc-stretch-content="true" class="vc_row wpb_row vc_row-fluid vc_custom_1485445769518 vc_row-has-fill vc_row-no-padding special_class_1">
+                                    <div class="wpb_column vc_column_container vc_col-md-12 sc_layouts_column_icons_position_left">
+                                        <div class="vc_column-inner">
+                                            <div class="wpb_wrapper">
+                                                <div class="wpb_revslider_element wpb_content_element">
+                                                    <!-- START Home 1 REVOLUTION SLIDER 6.1.7 -->
+                                                    <p class="rs-p-wp-fix"></p>
+                                                    <rs-module-wrap id="rev_slider_1_1_wrapper" data-source="gallery">
+                                                        <rs-module id="rev_slider_1_1"  data-version="6.1.7">
                                                             <rs-slides>
                                                                 <rs-slide data-key="rs-1" data-title="Slide" data-thumb="/wp-content/uploads/2017/01/slide1.jpg" data-anim="ei:d;eo:d;s:600;r:0;t:fade;sl:d;" data-firstanim="t:fade;s:1500;sl:7;">
                                                                     <img src="/wp-content/uploads/2017/01/slide1.jpg" title="Home 1" data-lazyload="/wp-content/uploads/2017/01/slide1.jpg" data-parallax="10" class="rev-slidebg" data-no-retina>
-                                                                    <!--
-                                                                                                --><rs-layer
+                                                                    <rs-layer
                                                                         id="slider-1-slide-1-layer-1"
                                                                         class="slider-small-text"
                                                                         data-type="text"
@@ -115,9 +115,9 @@
                                                                         data-frame_999="o:0;tp:600;st:w;sR:5340;"
                                                                         style="z-index:5;font-family:Sanchez;"
                                                                     >In-Person & Online Tutors
-                                                                    </rs-layer><!--
+                                                                    </rs-layer>
 
-							--><rs-layer
+                                                                    <rs-layer
                                                                         id="slider-1-slide-1-layer-2"
                                                                         data-type="text"
                                                                         data-color="rgba(255, 255, 255, 1)"
@@ -134,10 +134,9 @@
                                                                         data-frame_999="o:0;tp:600;st:w;sR:5990;"
                                                                         style="z-index:6;font-family:Sanchez;"
                                                                     >Find a Tutor Near You
+                                                                    </rs-layer>
 
-                                                                    </rs-layer><!--
-
-							--><rs-layer
+                                                                    <rs-layer
                                                                         id="slider-1-slide-1-layer-3"
                                                                         data-type="text"
                                                                         data-color="rgba(255, 255, 255, 1)"
@@ -147,15 +146,25 @@
                                                                         data-frame_1="tp:600;e:Power4.easeOut;st:3770;sp:1000;sR:3770;"
                                                                         data-frame_999="o:0;tp:600;st:w;sR:4230;"
                                                                         style="z-index:7;font-family:Open Sans;"
-                                                                    ><div class="sc_item_button sc_button_wrap"><a href="https://tutors-hub.com/student-registration" id="sc_button_212681052" class="sc_button sc_button_default sc_button_icon_left"><span class="sc_button_text"><span class="sc_button_title">FIND A TUTOR
-</span></span><!-- /.sc_button_text --></a><a href="https://tutors-hub.com/teacher-registration" id="sc_button_212681052" class="sc_button sc_button_default sc_button_icon_left"><span class="sc_button_text"><span class="sc_button_title">BECOME A TUTOR
-</span></span><!-- /.sc_button_text --></a><!-- /.sc_button --></div><!-- /.sc_item_button -->
-                                                                    </rs-layer><!--
--->						</rs-slide>
+                                                                    >
+                                                                        <div class="sc_item_button sc_button_wrap">
+                                                                            <a href="https://tutors-hub.com/student-registration" id="sc_button_212681052" class="sc_button sc_button_default sc_button_icon_left">
+                                                                                <span class="sc_button_text">
+                                                                                    <span class="sc_button_title">FIND A TUTOR</span>
+                                                                                </span><!-- /.sc_button_text -->
+                                                                            </a>
+                                                                            <a href="https://tutors-hub.com/teacher-registration" id="sc_button_212681052" class="sc_button sc_button_default sc_button_icon_left">
+                                                                                <span class="sc_button_text">
+                                                                                    <span class="sc_button_title">BECOME A TUTOR</span>
+                                                                                </span><!-- /.sc_button_text -->
+                                                                            </a><!-- /.sc_button -->
+                                                                        </div><!-- /.sc_item_button -->
+                                                                    </rs-layer>
+                                                                </rs-slide>
+
                                                                 <rs-slide data-key="rs-4" data-title="Slide" data-thumb="{{url('wp-content/uploads/2017/01/slide3.jpg')}}" data-anim="ei:d;eo:d;s:600;r:0;t:fade;sl:d;">
                                                                     <img src="{{url('wp-content/uploads/2017/01/slide3.jpg')}}" title="Home 1" data-lazyload="{{url('wp-content/uploads/2017/01/slide3.jpg')}}" data-parallax="10" class="rev-slidebg" data-no-retina>
-                                                                    <!--
-                                                                                                --><rs-layer
+                                                                    <rs-layer
                                                                         id="slider-1-slide-4-layer-1"
                                                                         class="slider-small-text"
                                                                         data-type="text"
@@ -173,9 +182,9 @@
                                                                         data-frame_999="o:0;tp:600;st:w;sR:5340;"
                                                                         style="z-index:5;font-family:Sanchez;"
                                                                     >In-Person & Online Tutors
-                                                                    </rs-layer><!--
+                                                                    </rs-layer>
 
-							--><rs-layer
+                                                                    <rs-layer
                                                                         id="slider-1-slide-4-layer-2"
                                                                         data-type="text"
                                                                         data-color="rgba(255, 255, 255, 1)"
@@ -192,9 +201,9 @@
                                                                         data-frame_999="o:0;tp:600;st:w;sR:6490;"
                                                                         style="z-index:6;font-family:Sanchez;"
                                                                     >Find a Tutor Near You
-                                                                    </rs-layer><!--
+                                                                    </rs-layer>
 
-							--><rs-layer
+                                                                    <rs-layer
                                                                         id="slider-1-slide-4-layer-3"
                                                                         data-type="text"
                                                                         data-color="rgba(255, 255, 255, 1)"
@@ -204,11 +213,22 @@
                                                                         data-frame_1="tp:600;e:Power4.easeOut;st:3770;sp:1000;sR:3770;"
                                                                         data-frame_999="o:0;tp:600;st:w;sR:4230;"
                                                                         style="z-index:7;font-family:Open Sans;"
-                                                                    ><div class="sc_item_button sc_button_wrap"><a href="/tutors/" id="sc_button_398409179" class="sc_button sc_button_default sc_button_icon_left"><span class="sc_button_text"><span class="sc_button_title">FIND A TUTOR
-</span></span><!-- /.sc_button_text --></a><a href="https://tutors-hub.com/teacher-registration" id="sc_button_212681052" class="sc_button sc_button_default sc_button_icon_left"><span class="sc_button_text"><span class="sc_button_title">BECOME A TUTOR
-</span></span><!-- /.sc_button_text --></a><!-- /.sc_button --></div><!-- /.sc_item_button -->
-                                                                    </rs-layer><!--
--->						</rs-slide>
+                                                                    >
+                                                                        <div class="sc_item_button sc_button_wrap">
+                                                                            <a href="/tutors/" id="sc_button_398409179" class="sc_button sc_button_default sc_button_icon_left">
+                                                                                <span class="sc_button_text">
+                                                                                    <span class="sc_button_title">FIND A TUTOR</span>
+                                                                                </span><!-- /.sc_button_text -->
+                                                                            </a>
+                                                                            <a href="https://tutors-hub.com/teacher-registration" id="sc_button_212681052" class="sc_button sc_button_default sc_button_icon_left">
+                                                                                <span class="sc_button_text">
+                                                                                    <span class="sc_button_title">BECOME A TUTOR</span>
+                                                                                </span><!-- /.sc_button_text -->
+                                                                            </a><!-- /.sc_button -->
+                                                                        </div><!-- /.sc_item_button -->
+                                                                    </rs-layer>
+                                                                </rs-slide>
+
                                                                 <rs-slide data-key="rs-3" data-title="Slide" data-thumb="wp-content/uploads/2017/01/slide3.jpg" data-anim="ei:d;eo:d;s:600;r:0;t:fade;sl:d;">
                                                                     <img src="{{url('wp-content/uploads/2017/01/slide3.jpg')}}" title="Home 1" data-lazyload="wp-content/uploads/2017/01/slide3.jpg" data-parallax="10" class="rev-slidebg" data-no-retina>
                                                                     <!--
@@ -282,7 +302,7 @@
                                                                         jsFileLocation:"//smarthead.ancorathemes.com/wp-content/plugins/revslider/public/assets/js/",
                                                                         visibilityLevels:"1240,1024,778,480",
                                                                         gridwidth:1900,
-                                                                        gridheight:890,
+                                                                        gridheight:[950, 890, 1200, 1500],
                                                                         hideLayerAtLimit:669,
                                                                         lazyType:"smart",
                                                                         editorheight:"890,690,600,400",

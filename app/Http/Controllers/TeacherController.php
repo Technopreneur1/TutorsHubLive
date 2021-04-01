@@ -107,8 +107,7 @@ class TeacherController extends Controller
         if ($request->availability && $request->availability!='Both') {
             $av = "AND users.availability='". $request->availability."'";
         }
-//        dd($av);
-// dd($request);
+
         if($request->level && $request->subject)
         {
             $string = "SELECT users.id, ( 6371 * acos( cos( radians(?) ) *
