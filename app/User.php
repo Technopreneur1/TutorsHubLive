@@ -51,12 +51,16 @@ class User extends Authenticatable implements MustVerifyEmail
             return $this->hasOne("App\Teacher")->with(['plans', 'sessions', 'completedSessions']);
         }
         else {
-            
+
             return $this->hasOne("App\Student");
         }
 
-        
-        
+
+
+    }
+
+    public function allAds(){
+        return $this->hasMany(Ad::class,'user_id', 'id')->with('discipline','level');
     }
 
     public function ads()
@@ -66,32 +70,32 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function ad_detail()
     {
-        return $this->hasOne('App\Ad', 'user_id')->with('discipline','level');  
+        return $this->hasOne('App\Ad', 'user_id')->with('discipline','level');
     }
 
     public function city()
     {
-       return $this->belongsTo('App\Location', 'city_id')->where('type', 'city');  
+       return $this->belongsTo('App\Location', 'city_id')->where('type', 'city');
     }
     public function neighborhood()
     {
-       return $this->belongsTo('App\Location', 'neighborhood_id')->where('type', 'neighborhood');  
+       return $this->belongsTo('App\Location', 'neighborhood_id')->where('type', 'neighborhood');
     }
     public function state()
     {
-       return $this->belongsTo('App\Location', 'state_id')->where('type', 'state');  
+       return $this->belongsTo('App\Location', 'state_id')->where('type', 'state');
     }
     public function country()
     {
-       return $this->belongsTo('App\Location', 'country_id')->where('type', 'country');  
+       return $this->belongsTo('App\Location', 'country_id')->where('type', 'country');
     }
 
     public function favorites()
     {
         return $this->hasMany('App\Favorite')->with('user');
     }
-    
-    
+
+
     public function messagesToMe()
     {
         return $this->hasMany('App\Message', 'to');
@@ -100,5 +104,5 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany('App\Message', 'to')->where('read', 0);
     }
-    
+
 }

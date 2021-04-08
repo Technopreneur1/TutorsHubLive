@@ -180,7 +180,7 @@ class AdController extends Controller
 
         return response()->json(['ad' => $ad]);
     }
-    public function search_(Request $request)
+    public function search(Request $request)
     {
         // $requests = Req::with('user')->get();
 
@@ -217,33 +217,39 @@ class AdController extends Controller
             $string = "SELECT users.id, ( 6371 * acos( cos( radians(?) ) *
                 cos( radians( ads.latitude ) ) * cos( radians( ads.longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( ads.latitude ) ) ) )
                 AS distance FROM users INNER JOIN ads ON users.id=ads.user_id HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
+//            $string = "SELECT users.id, ( 6371 * acos( cos( radians(?) ) *
+//                cos( radians( ads.latitude ) ) * cos( radians( ads.longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( ads.latitude ) ) ) )
+//                AS distance FROM users JOIN ads ON users.id=ads.user_id  ORDER BY distance < ? LIMIT 0 , 20;";
             $args = [$lat,$lng, $lat, $request->radius];
 
         }
     //    dd($string);
 
         $ids = DB::select($string, $args);
+//        dd($ids);
         $ids = Arr::pluck($ids, "id");
-        // dd($ids);
+//         dd($ids);
 
         if ($request->availability && $request->availability!='Both') {
             $ads = User::with(['city', 'state', 'neighborhood', 'country', 'profile','ad_detail'])
-            ->select('users.*','ads.*')
-            ->join('ads', 'users.id', '=', 'ads.user_id')
-            ->where('is_active', 1)
-            ->where('ads.availability', $request->availability)
+//            ->select('users.*','ads.*')
+//            ->join('ads', 'users.id', '=', 'ads.user_id')
+            ->whereHas('ads', function ($sql) use ($request){
+              $sql->where('availability',  $request->availability);
+            })
             ->where('is_hidden', 0)
+            ->where('is_active', 1)
             ->where('is_banned', 0)
             ->where('type', 'student')
-            ->whereIn('users.id', $ids)
+            ->whereIn('id', $ids)
             ->paginate(30);
         } else {
-            $ads = User::with(['city', 'state', 'neighborhood', 'country', 'profile','ad_detail'])
+            $ads = User::with(['city', 'state', 'neighborhood', 'country', 'profile','allAds'])
             ->where('is_hidden', 0)
             ->where('is_active', 1)
             ->where('is_banned', 0)
             ->where('type', 'student')
-            ->whereIn('users.id', $ids)
+            ->whereIn('id', $ids)
             ->paginate(30);
         }
 

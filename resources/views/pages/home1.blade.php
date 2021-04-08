@@ -302,7 +302,7 @@
                                                                         jsFileLocation:"//smarthead.ancorathemes.com/wp-content/plugins/revslider/public/assets/js/",
                                                                         visibilityLevels:"1240,1024,778,480",
                                                                         gridwidth:1900,
-                                                                        gridheight:[950, 890, 1200, 1500],
+                                                                        gridheight:[950, 890, 1200, 2500],
                                                                         hideLayerAtLimit:669,
                                                                         lazyType:"smart",
                                                                         editorheight:"890,690,600,400",
