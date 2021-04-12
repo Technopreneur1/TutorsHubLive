@@ -96,9 +96,20 @@
                 </div>
 
         <div v-if="viewmode == 'list' || viewmode == 'all'"  class="full-container">
+
             <div v-if="ads.length" class="ad-results">
-                <ad v-for="ad in ads" @startConversation="startConversation(ad.id)" :url="url" :ad="ad" :key="ad.id" :authid="authid"></ad>
+                <div v-for="user in ads">
+                    <div v-if="user.all_ads">
+                        <div v-if="user.all_ads.length">
+                            <ad v-for="ad in user.all_ads" @startConversation="startConversation(ad.id)" :url="url" :ad="ad" :key="ad.id" :authid="authid"></ad>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+<!--            <div v-if="ads.length" class="ad-results">-->
+<!--                <ad v-for="ad in ads" @startConversation="startConversation(ad.id)" :url="url" :ad="ad" :key="ad.id" :authid="authid"></ad>-->
+<!--            </div>-->
             <div v-else class="nothing">
                 <p>No Ad Found</p>
             </div>
@@ -317,7 +328,7 @@ import Select2 from 'v-select2-component';
                     'subject': this.subject,
                 })
                 .then(response => {
-                    // console.log(response.data)
+                    console.log(response.data)
                     this.ads = response.data.ads.data
                     this.updateMap()
                     this.showSearchForm = false

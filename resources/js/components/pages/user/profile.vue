@@ -38,7 +38,7 @@
             <div class="wr">
                 <div v-if="isUser" @click="editing = true" class="editprofilebtn">Edit Profile</div>
                 <div class="who">
-                    <div @click="selectAvatar()" class="avatar">
+                    <div @click="authuser.id === user.id ? selectAvatar() : ''" class="avatar">
                         <div v-if="isUser" class="overlay"><i class="fas fa-camera"></i></div>
                         <img :src="avatar" alt="">
                         <input style="display: none" id="avatarInput" type="file" @change="avatarSelected">
@@ -440,7 +440,7 @@ import { type } from 'os'
         //     },
             deleteProfile()
             {
-                if(confirm("Are you sure you want to Delete your Profile?")){
+                if(confirm("Are you sure you want to De-activate your Profile?()")){
                     this.loading = true
                     axios.post(this.url +'/user/delete/'+this.user.id)
                         .then(response => {

@@ -6658,7 +6658,7 @@ __webpack_require__.r(__webpack_exports__);
     deleteProfile: function deleteProfile() {
       var _this4 = this;
 
-      if (confirm("Are you sure you want to Delete your Profile?")) {
+      if (confirm("Are you sure you want to De-activate your Profile?()")) {
         this.loading = true;
         axios.post(this.url + '/user/delete/' + this.user.id).then(function (response) {
           _this4.loading = false;
@@ -8572,6 +8572,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -8728,7 +8739,7 @@ __webpack_require__.r(__webpack_exports__);
         'availability': this.availability,
         'subject': this.subject
       }).then(function (response) {
-        // console.log(response.data)
+        console.log(response.data);
         _this3.ads = response.data.ads.data;
 
         _this3.updateMap();
@@ -82913,7 +82924,7 @@ var render = function() {
                 staticClass: "avatar",
                 on: {
                   click: function($event) {
-                    return _vm.selectAvatar()
+                    _vm.authuser.id === _vm.user.id ? _vm.selectAvatar() : ""
                   }
                 }
               },
@@ -86113,7 +86124,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.ad.ad_detail
+  return _vm.ad
     ? _c("div", { staticClass: "ad-result" }, [
         _vm.loading
           ? _c("div", { staticClass: "loader" }, [
@@ -86243,20 +86254,14 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _vm.ad.ad_detail
+          _vm.ad
             ? _c("div", { staticClass: "meta" }, [
                 _c("span", { staticClass: "subject" }, [
-                  _vm._v(
-                    _vm._s(
-                      _vm.ad.ad_detail ? _vm.ad.ad_detail.discipline.name : ""
-                    )
-                  )
+                  _vm._v(_vm._s(_vm.ad ? _vm.ad.discipline.name : ""))
                 ]),
                 _vm._v(" "),
                 _c("span", { staticClass: "level" }, [
-                  _vm._v(
-                    _vm._s(_vm.ad.ad_detail ? _vm.ad.ad_detail.level.name : "")
-                  )
+                  _vm._v(_vm._s(_vm.ad ? _vm.ad.level.name : ""))
                 ])
               ])
             : _vm._e(),
@@ -86264,11 +86269,7 @@ var render = function() {
           _c("div", { staticClass: "ad-info" }, [
             _vm._v(
               "\n                Description: " +
-                _vm._s(
-                  _vm.ad.ad_detail.description
-                    ? _vm.ad.ad_detail.description
-                    : "N/A"
-                ) +
+                _vm._s(_vm.ad.description ? _vm.ad.description : "N/A") +
                 "\n            "
             )
           ]),
@@ -86276,11 +86277,7 @@ var render = function() {
           _c("div", { staticClass: "ad-info" }, [
             _vm._v(
               "\n                Availability: " +
-                _vm._s(
-                  _vm.ad.ad_detail.availability
-                    ? _vm.ad.ad_detail.availability
-                    : "N/A"
-                ) +
+                _vm._s(_vm.ad.availability ? _vm.ad.availability : "N/A") +
                 "\n            "
             )
           ])
@@ -86481,7 +86478,7 @@ var render = function() {
           },
           [
             _c("i", { staticClass: "fas fa-filter" }),
-            _vm._v(" Filter\n        ")
+            _vm._v(" Filter\n            ")
           ]
         ),
         _vm._v(" "),
@@ -86801,18 +86798,36 @@ var render = function() {
               ? _c(
                   "div",
                   { staticClass: "ad-results" },
-                  _vm._l(_vm.ads, function(ad) {
-                    return _c("ad", {
-                      key: ad.id,
-                      attrs: { url: _vm.url, ad: ad, authid: _vm.authid },
-                      on: {
-                        startConversation: function($event) {
-                          return _vm.startConversation(ad.id)
-                        }
-                      }
-                    })
+                  _vm._l(_vm.ads, function(user) {
+                    return _c("div", [
+                      user.all_ads
+                        ? _c("div", [
+                            user.all_ads.length
+                              ? _c(
+                                  "div",
+                                  _vm._l(user.all_ads, function(ad) {
+                                    return _c("ad", {
+                                      key: ad.id,
+                                      attrs: {
+                                        url: _vm.url,
+                                        ad: ad,
+                                        authid: _vm.authid
+                                      },
+                                      on: {
+                                        startConversation: function($event) {
+                                          return _vm.startConversation(ad.id)
+                                        }
+                                      }
+                                    })
+                                  }),
+                                  1
+                                )
+                              : _vm._e()
+                          ])
+                        : _vm._e()
+                    ])
                   }),
-                  1
+                  0
                 )
               : _c("div", { staticClass: "nothing" }, [
                   _c("p", [_vm._v("No Ad Found")])

@@ -1,5 +1,5 @@
 <template>
-    <div class="ad-result" v-if="ad.ad_detail">
+    <div class="ad-result" v-if="ad">
         <div v-if="loading" class="loader">
             <i class="fas fa-spinner fa-spin"></i>
         </div>
@@ -33,15 +33,15 @@
                     </div>
                 </div>
             </div>
-            <div class="meta" v-if="ad.ad_detail">
-                <span class="subject">{{ad.ad_detail? ad.ad_detail.discipline.name : ''}}</span>
-                <span class="level">{{ad.ad_detail? ad.ad_detail.level.name : ''}}</span>
+            <div class="meta" v-if="ad">
+                <span class="subject">{{ad? ad.discipline.name : ''}}</span>
+                <span class="level">{{ad? ad.level.name : ''}}</span>
             </div>
             <div class="ad-info">
-                Description: {{ ad.ad_detail.description ? ad.ad_detail.description : 'N/A' }}
+                Description: {{ ad.description ? ad.description : 'N/A' }}
             </div>
             <div class="ad-info">
-                Availability: {{ ad.ad_detail.availability ? ad.ad_detail.availability : 'N/A' }}
+                Availability: {{ ad.availability ? ad.availability : 'N/A' }}
             </div>
         </div>
     </div>

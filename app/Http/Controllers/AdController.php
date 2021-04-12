@@ -223,20 +223,17 @@ class AdController extends Controller
             $args = [$lat,$lng, $lat, $request->radius];
 
         }
-    //    dd($string);
-
         $ids = DB::select($string, $args);
-//        dd($ids);
-        $ids = Arr::pluck($ids, "id");
-//         dd($ids);
 
-        if ($request->availability && $request->availability!='Both') {
-            $ads = User::with(['city', 'state', 'neighborhood', 'country', 'profile','ad_detail'])
-//            ->select('users.*','ads.*')
-//            ->join('ads', 'users.id', '=', 'ads.user_id')
-            ->whereHas('ads', function ($sql) use ($request){
-              $sql->where('availability',  $request->availability);
+        $ids = Arr::pluck($ids, "id");
+
+        if ($request->availability && $request->availability != 'Both') {
+            $ads = User::whereHas('allAds', function ($sql) use ($request){
+                $sql->where('availability',  $request->availability);
             })
+            ->with(['city', 'state', 'neighborhood', 'country', 'profile', 'allAds' => function ($sql) use ($request){
+                $sql->where('availability',  $request->availability);
+            } ])
             ->where('is_hidden', 0)
             ->where('is_active', 1)
             ->where('is_banned', 0)
@@ -252,14 +249,6 @@ class AdController extends Controller
             ->whereIn('id', $ids)
             ->paginate(30);
         }
-
-        // $adsArray = [];
-
-        // foreach($ads as $ad) {
-        //     if($ad->ad_detail) {
-        //         array_push($adsArray,$ad);
-        //     }
-        // }
 
         return response()->json(['ads' => $ads]);
     }
