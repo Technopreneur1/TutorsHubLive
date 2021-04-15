@@ -125,9 +125,19 @@
             </div>
             <div class="field">
 
-            <div class="input">
-                <label for="routing_number">Routing Number</label>
+                <div class="input">
+                    <label for="routing_number">Routing Number ( For USA Only )</label>
                     <input type="text" v-model="user.routing_number" placeholder="Routing Number">
+                </div>
+
+                <div class="input">
+                    <label for="transit_number">Transit Number( For Canada Only)</label>
+                    <input type="text" v-model="user.transit_number" placeholder="Transit Number">
+                </div>
+
+                <div class="input">
+                    <label for="institution_number">Institution Number( For Canada Only)</label>
+                    <input type="text" v-model="user.institution_number" placeholder="Institution Number">
                 </div>
             </div>
             <div class="field">
@@ -197,6 +207,8 @@
                     bank_name: this.user.bank_name,
                     account_number: this.user.account_number,
                     routing_number: this.user.routing_number,
+                    transit_number: this.user.transit_number,
+                    institution_number: this.user.institution_number,
                     bio: this.user.profile.bio,
                 })
                 .then(response => {

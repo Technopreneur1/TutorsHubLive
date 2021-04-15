@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Ad;
+use App\FavoriteAd;
 use App\User;
 use App\Location;
 use Illuminate\Http\Request;
@@ -47,8 +48,21 @@ class AdController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $country = auth()->user()->country;
         return view('pages.ad.index', ['user' => $user]);
+    }
+
+    public function savedAds()
+    {
+        $user = auth()->user();
+        return view('pages.ad.savedAds', ['user' => $user]);
+    }
+
+    public function getSavedAds(Request $request) {
+        $ads = FavoriteAd::where('user_id', auth()->user()->id)
+                        ->with(['user', 'ad.user'])
+                        ->get();
+
+        return response()->json(['ads' => $ads]);
     }
     //
     public function create()

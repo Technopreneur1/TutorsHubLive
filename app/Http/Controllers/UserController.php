@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Ad;
+use App\FavoriteAd;
 use auth;
 use App\User;
 use App\Teacher;
@@ -183,6 +184,31 @@ class UserController extends Controller
         return response()->json(['status' => 'liked']);
 
     }
+
+    public function postAdFavorite(Request $request)
+    {
+
+        $like = FavoriteAd::where('user_id', auth()->id())
+                    ->where('ad_id', $request->id)
+                    ->get();
+
+        if(count($like))
+        {
+            FavoriteAd::where('user_id', auth()->id())
+                    ->where('ad_id', $request->id)
+                    ->delete();
+            return response()->json(['status' => 'Unliked']);
+        }
+
+        FavoriteAd::create([
+            'user_id' => auth()->id(),
+            'ad_id' => $request->id
+        ]);
+
+        return response()->json(['status' => 'liked']);
+
+    }
+
     public function profile()
     {
         if(auth()->check())
@@ -260,6 +286,8 @@ class UserController extends Controller
         $user->paypal = $request->paypal;
         $user->bank_name = $request->bank_name;
         $user->routing_number = $request->routing_number;
+        $user->transit_number = $request->transit_number;
+        $user->institution_number = $request->institution_number;
         $user->account_number = $request->account_number;
         $user->update();
         $profile = auth()->user()->profile;

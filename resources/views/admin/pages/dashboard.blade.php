@@ -73,7 +73,7 @@ Dashboard
                         <span class="info-box-icon bg-red"><i class="fa fa-ticket-alt"></i></span>
                         <div class="info-box-content">
                             <span class="info-box-text">Open Tickets</span>
-                            <span class="info-box-number">{{App\Ticket::where('resolved', 0)->count()}}</span>
+                            <span class="info-box-number">{{App\Ticket::where('resolved', 0)->whereHas('user')->count()}}</span>
                         </div>
                     </a>
                     <!-- /.info-box-content -->

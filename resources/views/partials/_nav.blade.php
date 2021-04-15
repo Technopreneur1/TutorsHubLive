@@ -25,7 +25,7 @@
         <menu-icons url="{{route('home')}}"
                 :user="{{auth()->check() ? auth()->user() : null}}"
                 messages="{{auth()->user()->unreadMessages()->count()}}"
-                sessions="{{auth()->user()->profile ? auth()->user()->profile->unseenSessions()->count() : 0}}"
+                sessions="{{auth()->user()->profile ? auth()->user()->profile->unseenSessions()->where('accept', 0)->orWhere(function ($sql){ $sql->where('accept', 1)->where('payment_status', 0); })->count() : 0}}"
         ></menu-icons>
     </div>
 

@@ -187,7 +187,7 @@
                 if(this.editPlan.rate && this.editPlan.discipline && this.editPlan.level)
                 {
                     this.error = ''
-                    if(this.rate >= 20)
+                    if(this.editPlan.rate >= 20)
                     {
                         this.error = ''
                         axios.post(this.url +'/update/plan',

@@ -48,7 +48,7 @@ class User extends Authenticatable implements MustVerifyEmail
             return $this->hasOne("App\Student")->with(['level', 'discipline', 'sessions', 'completedSessions']);
         }
         elseif($this->type == "teacher") {
-            return $this->hasOne("App\Teacher")->with(['plans', 'sessions', 'completedSessions']);
+            return $this->hasOne("App\Teacher")->with(['plans.teacher.user', 'sessions', 'completedSessions']);
         }
         else {
 
@@ -105,4 +105,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany('App\Message', 'to')->where('read', 0);
     }
 
+    public function favoriteAds (){
+        return $this->hasMany(FavoriteAd::class, 'user_id', 'id');
+    }
 }

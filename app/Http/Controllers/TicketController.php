@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 
 class TicketController extends Controller
 {
- 
+
     public function index()
     {
-        $tickets = Ticket::where('resolved', '0')->orderBy('created_at', 'desc')->get();
+        $tickets = Ticket::where('resolved', '0')->with('user')->orderBy('created_at', 'desc')->get();
         return view("admin.pages.tickets.index", ['tickets' => $tickets, 'page' => 'Open Tickets']);
     }
     public function closed()

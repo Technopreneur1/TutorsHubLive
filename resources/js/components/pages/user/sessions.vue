@@ -179,20 +179,20 @@
 
             <ul class="nav nav-tabs green-bg flex justify-content-around bg-gray session-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="requested-tab" data-toggle="tab" href="#requested" role="tab" aria-controls="home" aria-selected="true">Requested ({{ requestedSessions.length }})</a>
+                    <a class="nav-link active" id="requested-tab" data-toggle="tab" href="#requested" role="tab" aria-controls="home" aria-selected="true">Requested <span class="badge badge-danger">({{ requestedSessions.length }})</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="pending-tab" data-toggle="tab" href="#pending" role="tab" aria-controls="profile" aria-selected="false">Pending ({{ pendingSessions.length }})</a>
+                    <a class="nav-link" id="pending-tab" data-toggle="tab" href="#pending" role="tab" aria-controls="profile" aria-selected="false">Pending <span class="badge badge-danger">({{ pendingSessions.length }})</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="upcoming-tab" data-toggle="tab" href="#upcoming" role="tab" aria-controls="contact" aria-selected="false">Upcoming ({{ upcomingSessions.length }})</a>
+                    <a class="nav-link" id="upcoming-tab" data-toggle="tab" href="#upcoming" role="tab" aria-controls="contact" aria-selected="false">Upcoming <span class="badge badge-danger">({{ upcomingSessions.length }})</span></a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" id="completed-tab" data-toggle="tab" href="#completed" role="tab" aria-controls="contact" aria-selected="false">Completed ({{ completedsessions.length }})</a>
+                    <a class="nav-link" id="completed-tab" data-toggle="tab" href="#completed" role="tab" aria-controls="contact" aria-selected="false">Completed <span class="badge badge-danger">({{ completedsessions.length }})</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="cancelled-tab" data-toggle="tab" href="#cancelled" role="tab" aria-controls="contact" aria-selected="false">Cancelled ({{ cancelledsessions.length }})</a>
+                    <a class="nav-link" id="cancelled-tab" data-toggle="tab" href="#cancelled" role="tab" aria-controls="contact" aria-selected="false">Cancelled <span class="badge badge-danger">({{ cancelledsessions.length }})</span></a>
                 </li>
             </ul>
             <div class="tab-content" id="myTabContent">

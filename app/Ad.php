@@ -12,23 +12,23 @@ class Ad extends Model
 
     public function city()
     {
-       return $this->belongsTo('App\Location', 'city_id')->where('type', 'city');  
+       return $this->belongsTo('App\Location', 'city_id')->where('type', 'city');
     }
     public function user()
     {
-       return $this->belongsTo('App\User');  
+       return $this->belongsTo('App\User');
     }
     public function neighborhood()
     {
-       return $this->belongsTo('App\Location', 'neighborhood_id')->where('type', 'neighborhood');  
+       return $this->belongsTo('App\Location', 'neighborhood_id')->where('type', 'neighborhood');
     }
     public function state()
     {
-       return $this->belongsTo('App\Location', 'state_id')->where('type', 'state');  
+       return $this->belongsTo('App\Location', 'state_id')->where('type', 'state');
     }
     public function country()
     {
-       return $this->belongsTo('App\Location', 'country_id')->where('type', 'country');  
+       return $this->belongsTo('App\Location', 'country_id')->where('type', 'country');
     }
     public function level()
     {
@@ -40,5 +40,9 @@ class Ad extends Model
     }
     public function ad_detail() {
       return $this->belongsTo('App\Discipline');
+    }
+
+    public function favorite () {
+        return $this->hasOne(FavoriteAd::class, 'ad_id', 'id');
     }
 }

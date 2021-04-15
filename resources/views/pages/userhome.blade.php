@@ -57,7 +57,7 @@
                             </a>
                         </div>
                         <div class="item">
-                            <a href="#">
+                            <a href="{{route('saved-ads')}}">
                                 <i class="fas fa-star"></i>
                                 <span>Saved Ads</span>
                             </a>

@@ -10,7 +10,7 @@
                 <div class="info">
                     <div class="name">{{fav.user.name}}</div>
                 </div>
-                
+
                </a>
                <span @click="del(fav)" class="del"><i class="fa fa-times"></i></span>
            </div>
@@ -37,7 +37,7 @@
                 text-decoration: none
             .del
                 position: absolute
-                top: 3px 
+                top: 3px
                 right: 3px
                 font-size: 18px
                 color: #e97438
@@ -102,7 +102,7 @@
         },
         mounted()
         {
-           
+
         }
     }
 </script>

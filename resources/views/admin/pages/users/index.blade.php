@@ -66,7 +66,7 @@
         <div class="box-header">
         <h3 class="box-title">{{$type}}</h3>
         </div>
-       
+
         <!-- /.box-header -->
         <div class="box-body">
         <table id="table" class="table table-bordered table-striped">
@@ -76,6 +76,7 @@
             <th>Email</th>
             <th>Phone</th>
             <th>Gender</th>
+            <th>Status</th>
             <th>Joined <small>Y-M-D</small> </th>
             <th>Action</th>
             </tr>
@@ -87,6 +88,7 @@
                 <td>{{$user->email}}</td>
                 <td>{{$user->phone}} </td>
                 <td>{{$user->gender}} </td>
+                <td>{{$user->is_active ? 'Active' : 'De-Activated'}} </td>
                 <td>{{$user->created_at->format("Y-m-d")}}</td>
                 {{-- <td>{{$user->created_at->diffForHumans()}}</td> --}}
                 <td>

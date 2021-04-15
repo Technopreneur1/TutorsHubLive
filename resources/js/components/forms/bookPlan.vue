@@ -58,8 +58,9 @@
                     <div class="input">
                         <label for="">Select Type</label>
                         <select v-model="sessiontype">Please Pay to confirm this Session
-                            <option value="Online">Online</option>
-                            <option value="In Person">In Person</option>
+
+                            <option v-if="plan.teacher.user.availability === 'Both' || plan.teacher.user.availability === 'Online' " value="Online">Online</option>
+                            <option v-if="plan.teacher.user.availability === 'Both' || plan.teacher.user.availability === 'In-Person' " value="In Person">In Person</option>
 
                         </select>
                     </div>

@@ -14,17 +14,14 @@
                     <img :src="avatar(ad)" alt="">
                 </a>
                 <div class="data">
-                    <a v-if="ad.user_id != undefined" :href="url + '/user/' + ad.user_id" class="info">
-                        <div class="name">{{ad.name}} <span v-if="ad.verified" class="verified"><i class="fas fa-check"></i></span></div>
+                    <a v-if="ad.user_id != undefined" :href="url + '/user/' + ad.ad.user_id" class="info">
+                        <div class="name">{{ad.ad.user.name}} <span v-if="ad.verified" class="verified"><i class="fas fa-check"></i></span></div>
+                        <div class="location"><i class="fas fa-map-marker-alt"></i> {{ ad.ad.address }}</div>
+                    </a>
+                    <a v-if="ad.user_id == undefined" :href="url + '/user/' + ad.ad.id" class="info">
+                        <div class="name">{{ad.ad.user.name}} <span v-if="ad.verified" class="verified"><i class="fas fa-check"></i></span></div>
                         <div class="location"><i class="fas fa-map-marker-alt"></i> {{ ad.address }}</div>
                     </a>
-                    <a v-if="ad.user_id == undefined" :href="url + '/user/' + ad.id" class="info">
-                        <div class="name">{{ad.name}} <span v-if="ad.verified" class="verified"><i class="fas fa-check"></i></span></div>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> {{ ad.address }}</div>
-                    </a>
-                    <div v-if="authid == ad.id" class="contactbtn">
-                        <button  @click="deleteMyAd(ad.id)" class="btn btn-gradient">Delete</button>
-                    </div>
                     <div v-else class="contactbtn">
                         <div @click="addToFav" class="btn-t" ><i class="far fa-heart" :class="{fas: is_fav}"></i></div>
                         <div v-if="ad.can_contact" @click="contact(ad.user_id)" class="btn-t"><i class="fas fa-envelope"></i></div>
@@ -34,14 +31,14 @@
                 </div>
             </div>
             <div class="meta" v-if="ad">
-                <span class="subject">{{ad? ad.discipline.name : ''}}</span>
-                <span class="level">{{ad? ad.level.name : ''}}</span>
+                <span class="subject">{{ad.ad.discipline? ad.ad.discipline.name : ''}}</span>
+                <span class="level">{{ad.ad.level? ad.ad.level.name : ''}}</span>
             </div>
             <div class="ad-info">
-                Description: {{ ad.description ? ad.description : 'N/A' }}
+                Description: {{ ad.ad.description ? ad.ad.description : 'N/A' }}
             </div>
             <div class="ad-info">
-                Availability: {{ ad.availability ? ad.availability : 'N/A' }}
+                Availability: {{ ad.ad.availability ? ad.ad.availability : 'N/A' }}
             </div>
         </div>
     </div>
@@ -51,17 +48,12 @@
         props: ['url', 'ad', 'authid'],
         data()
         {
-            // console.log('Auth ID:' + authid)
            return{
-                is_fav: false,
+                is_fav: true,
                 loading: false,
            }
         },
         methods: {
-            editAd()
-            {
-                this.$emit("editAd")
-            },
             avatar(user)
             {
                 if(user.avatar){
@@ -75,41 +67,11 @@
                 }
                 }
             },
-            contact(id)
-           {
-                axios.post(this.url +'/check/hasConversation', {
-                    id: id
-                })
-                .then(response => {
-                    if(response.data.has)
-                    {
-                        window.location = this.url + "/messages?u=" + id;
-                    }else{
-                        this.$emit('startConversation')
-                    }
-                })
-                .catch(error => {
-                    console.log(error);
-                })
-           },
-           deleteMyAd(id)
-            {
-                axios.post(this.url +'/delete/my-ad', {
-                    'id': id
-                })
-                .then(response => {
-                    console.log(response.data)
-                    window.location = this.url + '/my-ads'
-                })
-                .catch(error => {
-                    console.log(error);
-                })
-            },
              addToFav()
             {
                 this.loading = true
                 axios.post(this.url +'/postAd/favorite', {
-                    id: this.ad.id
+                    id: this.ad.ad.id
                 })
                 .then(response => {
                     if(response.data.status === 'liked')
@@ -119,6 +81,8 @@
                         this.is_fav = false
                     }
                     this.loading = false
+                    this.$emit('getAds')
+
                 })
                 .catch(error => {
                     console.log(error);
@@ -127,7 +91,6 @@
         },
         mounted()
         {
-
 
         }
     }
