@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class cancelRequest extends Mailable implements ShouldQueue
+class sessionCompleted extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
@@ -16,9 +16,6 @@ class cancelRequest extends Mailable implements ShouldQueue
      *
      * @return void
      */
-
-    public $session;
-    public $user;
     public function __construct($session, $user)
     {
         $this->session = $session;
@@ -32,6 +29,6 @@ class cancelRequest extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->subject('Session Cancellation Request')->from('cancel-session@tutors-hub.com')->view('mail.cancelRequest');;
+        return $this->subject('Session Completed')->from('noreply@tutors-hub.com')->view('mail.sessionCompleted');
     }
 }

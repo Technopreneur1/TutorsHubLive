@@ -59,12 +59,12 @@
                 if(user.avatar){
                     return this.url + '/storage/images/' + user.avatar
                 }else{
-                if(user.gender)
-                {
-                    return this.url + '/img/' + user.gender.toLowerCase() + '.jpg'
-                }else{
-                    return this.url + '/img/male.jpg'
-                }
+                    if(user.gender)
+                    {
+                        return this.url + '/img/' + user.gender.toLowerCase() + '.jpg'
+                    }else{
+                        return this.url + '/img/male.jpg'
+                    }
                 }
             },
              addToFav()

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Earning;
 use App\Mail\PaymentReceived;
 use App\Mail\sessionAccepted;
+use App\Mail\sessionBooked;
+use App\Mail\sessionCompleted;
 use App\Mail\sessionRequested;
 use App\Session;
 use Carbon\Carbon;
@@ -74,13 +76,19 @@ class SessionController extends Controller
     {
         $session = Session::findOrFail($request->sessionpid);
         $session->update(['payment_status' => 1]);
+
+        // Here need to add Mail for Session Booked
         Mail::to('info@tutors-hub.com')->send(new PaymentReceived($session, auth()->user()));
+        Mail::to($session->teacher->user->email)->send(new sessionBooked(auth()->user()));
         Mail::to(auth()->user()->email)->send(new PaymentReceived($session, auth()->user()));
 
         //return response()->json(['msg' => 'success']);
         return response()->json(['session' => $session]);
 
     }
+
+    // This below function is called when a Student is booking a Session
+    // Need to send EMail to both tutor and Student regarding the event
     public function sessionrequest(Request $request)
     {
         $hr = json_decode($request->hours);
@@ -98,27 +106,37 @@ class SessionController extends Controller
             'total' => $request->total,
             'accept' => '0',
             'fee' => $request->total * (Earning::currentFee()/100),
-
             'startsession' => $date->toDateTimeString(),
-
             'endsession' => $date->addHour($hr)->toDateTimeString(),
 
 
         ]);
         $smail = $session->student->user->email;
         $tmail = $session->teacher->user->email;
+
         Mail::to('info@tutors-hub.com')->send(new sessionRequested($session, auth()->user()));
         Mail::to($smail)->send(new sessionRequested($session, auth()->user()));
         Mail::to($tmail)->send(new sessionRequested($session, auth()->user()));
 
         return response()->json(['session' => $session]);
     }
+
+    // This below function is called when a Session is marked as Completed
+    // Need to send EMail to both tutor and Student regarding the event
     public function complete(Request $request)
     {
         $session = Session::findOrFail($request->id);
         // if(auth()->user()->profile->id == $session->teacher_id)
         // {
             $session->update(['completed' => true]);
+
+            $smail = $session->student->user->email;
+            $tmail = $session->teacher->user->email;
+
+            Mail::to('info@tutors-hub.com')->send(new sessionCompleted($session, auth()->user()));
+            Mail::to($smail)->send(new sessionCompleted($session, auth()->user()));
+            Mail::to($tmail)->send(new sessionCompleted($session, auth()->user()));
+
             return response()->json(['msg' => 'success']);
         // }else {
         //     return response()->json(['msg' => 'error']);
@@ -140,7 +158,6 @@ class SessionController extends Controller
             return response()->json(['msg' => 'error']);
         }
     }
-
     public function cancel(Request $request)
     {
         $session = Session::findOrFail($request->id);
@@ -165,14 +182,25 @@ class SessionController extends Controller
         $session->delete();
         return redirect()->route('admin.sessions');
     }
+
+    // This below function is called when a Tutor/Student Cancel a Session Request
+    // Need to send EMail to both tutor and Student regarding the event
     public function postCancel(Request $request)
     {
         $session = Session::findOrFail($request->id);
         $session->update(['cancel_request' => auth()->user()->type]);
+        $smail = $session->student->user->email;
+        $tmail = $session->teacher->user->email;
+
         Mail::to('info@tutors-hub.com')->send(new cancelRequest($session, auth()->user()));
+
+        Mail::to($smail)->send(new cancelRequest($session, auth()->user()));
+        Mail::to($tmail)->send(new cancelRequest($session, auth()->user()));
         return  response()->json(['msg' => 'success']);
     }
 
+    // This below function is called when a Tutor Accepts a Session Request
+    // Need to send EMail to both tutor and Student regarding the event
     public function postaccept(Request $request)
     {
         $session = Session::findOrFail($request->id);
@@ -181,6 +209,7 @@ class SessionController extends Controller
         $session->update(['accept' => '1', 'roomname' => $roomname, 'agora_session' => $agorasession]);
         $smail = $session->student->user->email;
         $tmail = $session->teacher->user->email;
+
         Mail::to('info@tutors-hub.com')->send(new sessionAccepted($session, auth()->user()));
         Mail::to($smail)->send(new sessionAccepted($session, auth()->user()));
         Mail::to($tmail)->send(new sessionAccepted($session, auth()->user()));
