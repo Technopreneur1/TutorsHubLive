@@ -22,8 +22,16 @@
                <span>Routing Number: &nbsp;</span>
                {{authuser.routing_number}}
            </div>
+           <div v-if="authuser.transit_number" class="payment">
+               <span>Transit Number: &nbsp;</span>
+               {{authuser.transit_number}}
+           </div>
+           <div v-if="authuser.institution_number" class="payment">
+               <span>Institution Number: &nbsp;</span>
+               {{authuser.institution_number}}
+           </div>
 
-           <div v-if="!authuser.profile.payment && !authuser.profile.paypal" class="paypal">
+           <div v-if="(!authuser.routing_number && (!authuser.transit_number && !authuser.institution_number)) && !authuser.paypal" class="paypal">
                No payment account added. Please add your payment deatils.
            </div>
 
@@ -78,7 +86,7 @@
                         </td>
                         <td v-else></td>
                    </tr>
-                   
+
                    </tbody>
                </table>
            </div>
@@ -104,7 +112,7 @@
                     <td v-if="payment.type == 'Paypal'">{{payment.proff}}</td>
                     <td v-else><a :href="url + '/storage/proffs/' + payment.proff"  class="btn btn-bd" download style="min-width: 40px"><i class="fas fa-download"></i></a></td>
                 </tr>
-               
+
             </table>
        </div>
    </div>
@@ -180,7 +188,7 @@
 
                 }
             }
-        },  
+        },
         created()
         {
             this.$store.commit('setPaypal', this.authuser.profile.paypal)

@@ -457,4 +457,32 @@ class AdminController extends Controller
         $cms = Cms::findOrFail($id);
         return view('admin.pages.cms.edit', ['cms' => $cms]);
     }
+
+    public function addSessionText()
+    {
+        $settings = AdminSetting::first();
+        $sessionText = '';
+
+        if($settings){
+            $sessionText = $settings->session_text;
+        }
+
+        return view('admin.add-sessionText', compact('sessionText'));
+    }
+    public function storeSessionText(Request $request)
+    {
+        $settings = AdminSetting::first();
+        if($settings){
+            $settings->update([
+                'session_text' => $request->text
+            ]);
+        }else{
+            AdminSetting::create([
+                'session_text' => $request->text
+            ]);
+        }
+
+        session()->flash('message', 'Session Text Added!');
+        return redirect()->route('adminpanel');
+    }
 }

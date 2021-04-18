@@ -183,6 +183,7 @@
         <li class="{{ (Request::is('adminpanel/settings') ? 'active' : '') }}"><a href="{{route('admin.settings')}}"><i class="fa fa-copy"></i> <span>Settings</span></a></li>
         <li class="{{ (Request::is('adminpanel/admins') ? 'active' : '') }}"><a href="{{route('admin.admins')}}"><i class="fa fa-copy"></i> <span>Admins</span></a></li>
         <li class="{{ (Request::is('adminpanel/add-admin') ? 'active' : '') }}"><a href="{{route('admin.add.admin')}}"><i class="fa fa-copy"></i> <span>Add Admins</span></a></li>
+        <li class="{{ (Request::is('adminpanel/add-session-text') ? 'active' : '') }}"><a href="{{route('admin.add-sessionText')}}"><i class="fa fa-copy"></i> <span>Add Session Text</span></a></li>
         <li style="padding: 5px 15px">
           <form action="{{route('logout')}}" method="post">
             @csrf

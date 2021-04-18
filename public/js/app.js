@@ -5162,6 +5162,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['url', 'lat', 'lng', 'tz'],
@@ -5205,6 +5212,7 @@ __webpack_require__.r(__webpack_exports__);
         confirm_password: '',
         phone: '',
         neighborhood: '',
+        availability: '',
         city: '',
         state: '',
         country: '',
@@ -5256,6 +5264,7 @@ __webpack_require__.r(__webpack_exports__);
         timezone: this.teacher.timezone,
         lat: this.lat,
         lng: this.lng,
+        availability: this.teacher.availability,
         address: this.address,
         city: '333',
         neighborhood: '333',
@@ -5316,7 +5325,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     canContinue: function canContinue() {
       if (this.step == 2) {
-        if (this.teacher.phone && this.teacher.name && this.teacher.email && this.teacher.gender) {
+        if (this.teacher.phone && this.teacher.name && this.teacher.availability && this.teacher.email && this.teacher.gender) {
           if (this.isEmail(this.teacher.email)) {
             return true;
           } else {
@@ -5858,6 +5867,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -82060,6 +82077,56 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
+                  _c("div", { staticClass: "input" }, [
+                    _c("label", {}, [_vm._v("Availability:")]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.teacher.availability,
+                            expression: "teacher.availability"
+                          }
+                        ],
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.teacher,
+                              "availability",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { value: "Online" } }, [
+                          _vm._v("Online")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "In-Person" } }, [
+                          _vm._v("In-Person")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "Both" } }, [
+                          _vm._v("Both")
+                        ])
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
                   _c(
                     "div",
                     { staticClass: "input" },
@@ -82739,7 +82806,31 @@ var render = function() {
             ])
           : _vm._e(),
         _vm._v(" "),
-        !_vm.authuser.profile.payment && !_vm.authuser.profile.paypal
+        _vm.authuser.transit_number
+          ? _c("div", { staticClass: "payment" }, [
+              _c("span", [_vm._v("Transit Number:  ")]),
+              _vm._v(
+                "\n            " +
+                  _vm._s(_vm.authuser.transit_number) +
+                  "\n        "
+              )
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.authuser.institution_number
+          ? _c("div", { staticClass: "payment" }, [
+              _c("span", [_vm._v("Institution Number:  ")]),
+              _vm._v(
+                "\n            " +
+                  _vm._s(_vm.authuser.institution_number) +
+                  "\n        "
+              )
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        !_vm.authuser.routing_number &&
+        !_vm.authuser.transit_number && !_vm.authuser.institution_number &&
+        !_vm.authuser.paypal
           ? _c("div", { staticClass: "paypal" }, [
               _vm._v(
                 "\n            No payment account added. Please add your payment deatils.\n        "

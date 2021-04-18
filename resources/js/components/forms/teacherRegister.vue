@@ -48,8 +48,15 @@
                         </option>
 
                     </select>
+                </div>
+                <div class=input>
+                    <label class="">Availability:</label>
+                    <select v-model="teacher.availability">
+                        <option value="Online">Online</option>
+                        <option value="In-Person">In-Person</option>
+                        <option value="Both">Both</option>
 
-
+                    </select>
                 </div>
 
                 <div class="input">
@@ -201,7 +208,7 @@
                     confirm_password: '',
                     phone: '',
                     neighborhood: '',
-
+                    availability: '',
                     city: '',
                     state: '',
                     country: '',
@@ -254,6 +261,7 @@
                     timezone: this.teacher.timezone,
                     lat: this.lat,
                     lng: this.lng,
+                    availability: this.teacher.availability,
                     address: this.address,
                     city: '333',
                     neighborhood: '333',
@@ -330,7 +338,7 @@
             canContinue()
             {
                 if(this.step == 2){
-                    if(this.teacher.phone && this.teacher.name && this.teacher.email && this.teacher.gender)
+                    if(this.teacher.phone && this.teacher.name && this.teacher.availability && this.teacher.email && this.teacher.gender)
                     {
                         if(this.isEmail(this.teacher.email))
                         {

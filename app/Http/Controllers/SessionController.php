@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\AdminSetting;
 use App\Earning;
+use App\Http\Middleware\Admin;
 use App\Mail\PaymentReceived;
 use App\Mail\sessionAccepted;
 use App\Mail\sessionBooked;
@@ -45,7 +47,14 @@ class SessionController extends Controller
 //            }
         }
 //        dd($sessions);
-        return view("pages.sessions.index", ['sessions' => $sessions]);
+        $settings = AdminSetting::first();
+        $sessionText = '';
+
+        if($settings){
+            $sessionText = $settings->session_text;
+        }
+
+        return view("pages.sessions.index", compact('sessions', 'sessionText'));
     }
 
     public function book()
