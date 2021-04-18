@@ -152,7 +152,6 @@
         <sessions
             url="{{route('home')}}"
             :sessions="{{$sessions}}"
-            :sessionText="{{ $sessionText }}"
             :authuser="{{auth()->user()}}"></sessions>
 
         @if($sessionText)
