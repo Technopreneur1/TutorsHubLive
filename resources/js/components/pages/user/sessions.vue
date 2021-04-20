@@ -582,6 +582,12 @@
 
         </div>
 
+        <div v-if="viewSession">
+
+        </div>
+        <div v-else class="alert alert-info">
+            {{this.sessionstext}}
+        </div>
 
     </div>
 </template>
@@ -809,6 +815,9 @@ export default {
         authuser: {
             type: Object
         },
+        sessionstext: {
+            type: String
+        }
     },
     data()
     {
@@ -819,7 +828,7 @@ export default {
             review: '',
             loading: false,
             viewSession : null,
-            sess: this.sessions
+            sess: this.sessions,
         }
     },
     computed: {
@@ -1137,6 +1146,12 @@ export default {
         // script.src = "https://www.paypal.com/sdk/js?client-id=AVAo9E3s-xN1GwGOPf7WuRsfUz67-urBxeAwRp_3xYboyF0_oW9E4MnLh0mgcbBqAYzmD3LoGD7a8oRP&currency=" + this.currency;
         script.addEventListener("load", this.setLoaded);
         document.body.appendChild(script);
+    },
+    mounted() {
+        // setTimeout(() => {
+            console.log(this)
+
+        // }, 2000)
     }
 }
 </script>

@@ -5728,6 +5728,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     url: {
@@ -7512,6 +7513,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     url: {
@@ -7522,6 +7529,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     authuser: {
       type: Object
+    },
+    sessionstext: {
+      type: String
     }
   },
   data: function data() {
@@ -7820,6 +7830,10 @@ __webpack_require__.r(__webpack_exports__);
 
     script.addEventListener("load", this.setLoaded);
     document.body.appendChild(script);
+  },
+  mounted: function mounted() {
+    // setTimeout(() => {
+    console.log(this); // }, 2000)
   }
 });
 
@@ -82605,6 +82619,14 @@ var render = function() {
                     ])
                   : _vm._e(),
                 _vm._v(" "),
+                _vm.user.type == "teacher"
+                  ? _c("li", [
+                      _c("a", { attrs: { href: _vm.url + "/saved-ads" } }, [
+                        _vm._v("Saved Ads")
+                      ])
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
                 _vm.user.type == "student"
                   ? _c("li", [
                       _c("a", { attrs: { href: _vm.url + "/find" } }, [
@@ -86194,6 +86216,12 @@ var render = function() {
                 )
               ]
             )
+          ]),
+      _vm._v(" "),
+      _vm.viewSession
+        ? _c("div")
+        : _c("div", { staticClass: "alert alert-info" }, [
+            _vm._v("\n            " + _vm._s(this.sessionstext) + "\n        ")
           ])
     ],
     1
@@ -87353,7 +87381,9 @@ var render = function() {
           : _vm._e(),
         _vm._v(" "),
         _c("div", { staticClass: "ad" }, [
-          _c("div", { staticClass: "title" }, [_vm._v(_vm._s(_vm.ad.title))]),
+          _c("div", { staticClass: "title" }, [
+            _vm._v(_vm._s(_vm.ad.ad.title))
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "student" }, [
             _vm.ad.user_id != undefined

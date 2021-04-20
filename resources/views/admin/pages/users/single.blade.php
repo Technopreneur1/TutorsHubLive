@@ -221,7 +221,7 @@
                     </div>
                 </div>
             </div>
-            @if ($user->type == "teacher")
+{{--            @if ($user->type == "teacher")--}}
                 <div class="box">
                     <div class="box-header">
                         <div class="box-title">
@@ -238,15 +238,25 @@
                                     </tr>
                                     <tr>
                                         <td>Bank Name</td>
-                                        <td>{{$user->bank_name}}</td>
+                                        <td>{{$user->bank_name ?: '-'}}</td>
                                     </tr>
                                     <tr>
                                         <td>Account Number</td>
-                                        <td>{{$user->account_number}}</td>
+                                        <td>{{$user->account_number ?: '-'}}</td>
                                     </tr>
                                     <tr>
                                         <td>Routing Number</td>
-                                        <td>{{$user->routing_number}}</td>
+                                        <td>{{$user->routing_number ?: '-'}}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Transit Number</td>
+                                        <td>{{$user->transit_number ? : '-'}}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Institution Number</td>
+                                        <td>{{$user->institution_number ?: '-'}}</td>
                                     </tr>
 
                                 </tbody>
@@ -255,7 +265,7 @@
                         </div>
                     </div>
                 </div>
-            @endif
+{{--            @endif--}}
             @if ($user->type == "teacher")
                 <div style="margin-bottom: 20px">
                     <a class="btn btn-primary" href="{{route('export.userPayments', $user->profile->id)}}">Export</a>

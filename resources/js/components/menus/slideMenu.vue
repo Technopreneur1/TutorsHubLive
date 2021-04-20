@@ -17,6 +17,7 @@
                         <li><a :href="this.url">Home</a></li>
                         <li v-if="user.type == 'teacher'"><a :href="url + '/payments'">Earnings & Payments</a></li>
                         <li v-if="user.type == 'teacher'"><a :href="url + '/ads'">Find Students</a></li>
+                        <li v-if="user.type == 'teacher'"><a :href="url + '/saved-ads'">Saved Ads</a></li>
                         <li v-if="user.type == 'student'"><a :href="url + '/find'">Find Tutors</a></li>
                         <li v-if="user.type == 'student'"><a :href="url + '/my-ads'">My Ads</a></li>
                         <li v-if="user.type == 'student'"><a :href="url + '/create/ad'">Post New Ad</a></li>

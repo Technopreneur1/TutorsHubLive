@@ -4,7 +4,7 @@
             <i class="fas fa-spinner fa-spin"></i>
         </div>
         <div class="ad">
-            <div class="title">{{ad.title}}</div>
+            <div class="title">{{ad.ad.title}}</div>
             <div class="student">
                 <a v-if="ad.user_id != undefined" :href="url + '/user/' + ad.user_id" class="avatar">
                     <img :src="avatar(ad)" alt="">

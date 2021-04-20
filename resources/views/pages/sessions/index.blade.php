@@ -151,16 +151,19 @@
     <div class="sessionsPage" id="app">
         <sessions
             url="{{route('home')}}"
+            sessionstext="{{$sessionText}}"
             :sessions="{{$sessions}}"
-            :authuser="{{auth()->user()}}"></sessions>
+            :authuser="{{auth()->user()}}">
 
-        @if($sessionText)
-            <div class="container">
-                <div class="d-flex alert alert-info justify-content-st">
-                    ** {{ $sessionText }}
-                </div>
-            </div>
-        @endif
+        </sessions>
+
+{{--        @if($sessionText)--}}
+{{--            <div class="container">--}}
+{{--                <div class="d-flex alert alert-info justify-content-st">--}}
+{{--                    ** {{ $sessionText }}--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        @endif--}}
     </div>
 
 
