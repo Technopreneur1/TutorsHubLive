@@ -14,6 +14,7 @@
                 <div class="col-lg-6 col-md-8 offset-lg-3 offset-md-2">
                     <div class="cform">
                         <form action="{{route('contact.post')}}" method="post">
+                            @csrf
                             @if (!auth()->check())
                                 <div class="input">
                                     <label for="name">Your are: </label>
@@ -31,7 +32,7 @@
                                 <label for="query">Your Query</label>
                                 <textarea name="qry" id="" cols="30" rows="6" placeholder="Explain your query"></textarea>
                             </div>
-                            @csrf 
+                            @csrf
                             <div class="input text-right">
                                 <button type="submit" class="btn btn-gradient">Submit</button>
                             </div>

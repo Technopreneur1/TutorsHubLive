@@ -23,29 +23,28 @@
             </thead>
             <tbody>
             @foreach ($tickets as $ticket)
-                @continue(!$ticket->user)
-            <tr>
-                <td>{{$ticket->ticket_id}}</td>
-                @if ($ticket->user_id != 0)
-                  <td><a href="{{route("admin.user", $ticket->user_id)}}">{{$ticket->user->name}}</a></td>
-                @else
-                  <td>{{$ticket->user_type}}</td>
-                @endif
-              <td>{{$ticket->email}} </td>
-              <td>{{$ticket->query}} </td>
-              <td>{{$ticket->created_at->format("Y-m-d")}}</td>
-              <td>
-                @if ($ticket->user_id != 0)
-                  <a href="{{route("admin.contact",[ $ticket->user->id, $ticket->ticket_id])}}" style="margin-bottom: 2px" class="btn btn-success">Message User</a>
-                @endif
-                @if (!$ticket->resolved)
-                  <form action="{{route('admin.close.ticket', $ticket->id)}}" method="post">
-                    @csrf
-                    <button class="btn btn-danger">Close <i class="fas fa-lock"></i></button>
-                  </form>
-                @endif
-              </td>
-            </tr>
+                <tr>
+                    <td>{{$ticket->ticket_id}}</td>
+                    @if ($ticket->user)
+                      <td><a href="{{route("admin.user", $ticket->user_id)}}">{{$ticket->user ? $ticket->user->name : ''}}</a></td>
+                    @else
+                      <td>{{$ticket->user_type}}</td>
+                    @endif
+                  <td>{{$ticket->email}} </td>
+                  <td>{{$ticket->query}} </td>
+                  <td>{{$ticket->created_at->format("Y-m-d")}}</td>
+                  <td>
+                    @if ($ticket->user)
+                      <a href="{{route("admin.contact",[ $ticket->user->id, $ticket->ticket_id])}}" style="margin-bottom: 2px" class="btn btn-success">Message User</a>
+                    @endif
+                    @if (!$ticket->resolved)
+                      <form action="{{route('admin.close.ticket', $ticket->id)}}" method="post">
+                        @csrf
+                        <button class="btn btn-danger">Close <i class="fas fa-lock"></i></button>
+                      </form>
+                    @endif
+                  </td>
+                </tr>
             @endforeach
 
             </tbody>
@@ -72,7 +71,8 @@
       'ordering'    : true,
       'info'        : true,
       'select'      : true,
-      'autoWidth'   : false
+      'autoWidth'   : false,
+      "order": [[ 4, "desc" ]]
     });
   })
 

@@ -105,7 +105,6 @@ class PagesController extends Controller
 
     public function postContact(Request $request)
     {
-        // dd($request->qry);
         $ticket = "TS" . rand(1000, 99999);
         if(auth()->check())
         {

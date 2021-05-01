@@ -277,18 +277,25 @@ import Select2 from 'v-select2-component';
             updateMap()
             {
                 this.markers = []
-                this.ads.forEach(ad => {
-                    if(ad.ad_detail) {
-                        let ulat = ad.latitude
-                        let ulng =  ad.longitude
-                        if(ulat && ulng)
-                        {
-                            this.markers.push({ position: { lat: ulat, lng: ulng }, ad: ad })
-                            // this.center = { lat: ulat, lng: ulng }
-                        }
-                    }
+                if(this.ads.length){
+                    this.ads.map(user => {
+                        if(user.all_ads.length){
+                            user.all_ads.forEach(ad => {
+                                if(ad) {
+                                    console.log("AD", ad)
+                                    let ulat = ad.latitude
+                                    let ulng =  ad.longitude
+                                    if(ulat && ulng)
+                                    {
+                                        this.markers.push({ position: { lat: ulat, lng: ulng }, ad: ad })
+                                        // this.center = { lat: ulat, lng: ulng }
+                                    }
+                                }
 
-                })
+                            })
+                        }
+                    })
+                }
             },
             startConversation(id)
             {

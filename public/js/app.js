@@ -7831,9 +7831,9 @@ __webpack_require__.r(__webpack_exports__);
     script.addEventListener("load", this.setLoaded);
     document.body.appendChild(script);
   },
-  mounted: function mounted() {
-    // setTimeout(() => {
-    console.log(this); // }, 2000)
+  mounted: function mounted() {// setTimeout(() => {
+    //     console.log(this)
+    // }, 2000)
   }
 });
 
@@ -8731,23 +8731,31 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       this.markers = [];
-      this.ads.forEach(function (ad) {
-        if (ad.ad_detail) {
-          var ulat = ad.latitude;
-          var ulng = ad.longitude;
 
-          if (ulat && ulng) {
-            _this2.markers.push({
-              position: {
-                lat: ulat,
-                lng: ulng
-              },
-              ad: ad
-            }); // this.center = { lat: ulat, lng: ulng }
+      if (this.ads.length) {
+        this.ads.map(function (user) {
+          if (user.all_ads.length) {
+            user.all_ads.forEach(function (ad) {
+              if (ad) {
+                console.log("AD", ad);
+                var ulat = ad.latitude;
+                var ulng = ad.longitude;
 
+                if (ulat && ulng) {
+                  _this2.markers.push({
+                    position: {
+                      lat: ulat,
+                      lng: ulng
+                    },
+                    ad: ad
+                  }); // this.center = { lat: ulat, lng: ulng }
+
+                }
+              }
+            });
           }
-        }
-      });
+        });
+      }
     },
     startConversation: function startConversation(id) {
       this.chatWith = id;
@@ -83480,7 +83488,7 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "actions-bar" }, [
-          !_vm.isUser
+          !_vm.isUser && _vm.authuser.type === "student"
             ? _c(
                 "div",
                 {

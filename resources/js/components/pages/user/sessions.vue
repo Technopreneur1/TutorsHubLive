@@ -1149,7 +1149,7 @@ export default {
     },
     mounted() {
         // setTimeout(() => {
-            console.log(this)
+        //     console.log(this)
 
         // }, 2000)
     }

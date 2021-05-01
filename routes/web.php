@@ -51,7 +51,7 @@ Route::get('/messages', 'PagesController@messages')->name('messages')->middlewar
 
 Route::get('/profile', 'UserController@profile')->name('profile')->middleware('auth', 'verified', 'CheckBanned');
 Route::get('/my-ads', 'AdController@myAds')->name('myAds')->middleware('auth', 'verified', 'CheckBanned');
-Route::get('/favorites', 'FavoriteControllerFavoriteController@index')->name('favorites')->middleware('auth', 'verified', 'CheckBanned');
+Route::get('/favorites', 'FavoriteController@index')->name('favorites')->middleware('auth', 'verified', 'CheckBanned');
 Route::get('/sessions', 'SessionController@index')->name('sessions')->middleware('auth', 'verified', 'CheckBanned');
 Route::get('/request-agora-session/{id}', 'SessionController@requestagorasession');
 Route::get('/request-agora-session-student/{id}', 'SessionController@requestagorasessionstudent');
