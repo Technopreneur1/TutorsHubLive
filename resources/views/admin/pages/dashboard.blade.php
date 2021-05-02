@@ -61,7 +61,7 @@ Dashboard
                         <span class="info-box-icon bg-red"><i class="fa fa-calendar-plus"></i></span>
                         <div class="info-box-content">
                             <span class="info-box-text">New Sessions</span>
-                            <span class="info-box-number">{{App\Session::where('seen', 0)->count()}}</span>
+                            <span class="info-box-number">{{App\Session::where('seen', 0)->whereNull('cancel_request')->count()}}</span>
                         </div>
                     </a>
                     <!-- /.info-box-content -->
