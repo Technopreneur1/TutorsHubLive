@@ -36,7 +36,7 @@ Dashboard
                         <span class="info-box-icon bg-aqua"><i class="fa fa-ad"></i></span>
                         <div class="info-box-content">
                             <span class="info-box-text">Total Ads</span>
-                            <span class="info-box-number">{{App\Ad::all()->count()}}</span>
+                            <span class="info-box-number">{{App\Ad::count()}}</span>
                         </div>
                     </a>
                 </div>
@@ -47,7 +47,7 @@ Dashboard
                         <span class="info-box-icon bg-aqua"><i class="fa fa-calendar"></i></span>
                         <div class="info-box-content">
                             <span class="info-box-text">Total Sessions</span>
-                            <span class="info-box-number">{{App\Session::all()->count()}}</span>
+                            <span class="info-box-number">{{App\Session::count()}}</span>
                         </div>
                     </a>
                 </div>
@@ -73,7 +73,7 @@ Dashboard
                         <span class="info-box-icon bg-red"><i class="fa fa-ticket-alt"></i></span>
                         <div class="info-box-content">
                             <span class="info-box-text">Open Tickets</span>
-                            <span class="info-box-number">{{App\Ticket::where('resolved', 0)->whereHas('user')->count()}}</span>
+                            <span class="info-box-number">{{App\Ticket::where('resolved', 0)->count()}}</span>
                         </div>
                     </a>
                     <!-- /.info-box-content -->
