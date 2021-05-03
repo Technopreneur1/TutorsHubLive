@@ -67,7 +67,7 @@
                                 {{user.address}}
                                 <input type="hidden" name="address_" :value="user.address" />
                             </span>
-                            <span @click="editingLocation = true" class="change">Change <i class="fas fa-cog"></i></span>
+<!--                            <span @click="editingLocation = true" class="change">Change <i class="fas fa-cog"></i></span>-->
                         </div>
 
 

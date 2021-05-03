@@ -78477,31 +78477,15 @@ var render = function() {
                     ? _c("div", { staticClass: "locations" }, [
                         _c("span", { staticClass: "current" }, [
                           _vm._v(
-                            "\n                            " +
+                            "\n                                " +
                               _vm._s(_vm.user.address) +
-                              "\n                            "
+                              "\n                                "
                           ),
                           _c("input", {
                             attrs: { type: "hidden", name: "address_" },
                             domProps: { value: _vm.user.address }
                           })
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "span",
-                          {
-                            staticClass: "change",
-                            on: {
-                              click: function($event) {
-                                _vm.editingLocation = true
-                              }
-                            }
-                          },
-                          [
-                            _vm._v("Change "),
-                            _c("i", { staticClass: "fas fa-cog" })
-                          ]
-                        )
+                        ])
                       ])
                     : _vm._e(),
                   _vm._v(" "),
