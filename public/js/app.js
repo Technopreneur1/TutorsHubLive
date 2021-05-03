@@ -2957,7 +2957,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['url', 'city'],
+  props: {
+    url: {
+      type: String
+    },
+    city: {
+      type: String
+    },
+    authuser: {
+      type: Object
+    }
+  },
   data: function data() {
     return {
       error: '',
@@ -2970,8 +2980,8 @@ __webpack_require__.r(__webpack_exports__);
       countries: [],
       states: [],
       cities: [],
-      lat: 40.7831,
-      lng: -73.9712,
+      lat: this.authuser.latitude,
+      lng: this.authuser.longitude,
       address: $("input[name=address_]").val(),
       neighborhoods: [],
       ad: {

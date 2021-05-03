@@ -16,7 +16,7 @@
                             <label for="">Title</label>
                             <input type="text" v-model="ad.title" placeholder="I am looking for a tutor ....">
                         </div>
-        
+
 
                         <div class="newrow">
                             <span>Location</span>
@@ -26,7 +26,7 @@
                             <div class="input">
                                 <label for="">Address</label>
                                 <gmap-autocomplete class="form-control" @place_changed="setPlace"></gmap-autocomplete>
-                            </div> 
+                            </div>
                             <!-- <div class="input">
                                 <label for="">Country</label>
                                 <select @change="getStates()" v-model="ad.country" >
@@ -97,7 +97,7 @@
                                 <option value="Both" selected>Both</option>
                             </select>
                         </div>
-                        
+
                         <div class="input">
                             <label for="">Description</label>
                             <textarea class="form-control" v-model="ad.description" rows="4" placeholder="Describe your requirements (optional)"></textarea>
@@ -109,7 +109,7 @@
                         </div>
                     </div>
                     </div>
-                    
+
                 </div>
             </transition>
     </div>
@@ -117,7 +117,17 @@
 
 <script>
     export default {
-        props: ['url', 'city'],
+        props: {
+            url : {
+                type: String
+            },
+            city : {
+                type: String
+            },
+            authuser : {
+                type: Object
+            }
+        },
         data(){
             return {
                 error: '',
@@ -130,8 +140,8 @@
                 countries: [],
                 states: [],
                 cities: [],
-                lat: 40.7831,
-                lng: -73.9712,
+                lat: this.authuser.latitude,
+                lng: this.authuser.longitude,
                 address: $("input[name=address_]").val(),
                 neighborhoods: [],
                 ad: {
@@ -150,7 +160,7 @@
         },
         methods: {
             isReady()
-            { 
+            {
                 if(this.ad.title.length > 4)
                 {
                     if(this.ad.description)
@@ -158,17 +168,17 @@
                         if(this.ad.level)
                         {
                             if(this.ad.discipline)
-                            {   
+                            {
                                 if(this.ad.availabilty != '')
                                 {
-                                    
+
                                     return true
                                 }else
                                 {
                                     this.error = "Availabilty is required"
                                     return false
                                 }
-                                
+
 
                             }else
                             {
