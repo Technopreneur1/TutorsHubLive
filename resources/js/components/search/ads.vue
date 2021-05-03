@@ -270,6 +270,7 @@ import Select2 from 'v-select2-component';
             },
             markerClicked(item)
             {
+                event.stopPropagation()
                 this.viewAd = null
                 this.center = item.position
                 this.viewAd = item.ad
@@ -282,7 +283,7 @@ import Select2 from 'v-select2-component';
                         if(user.all_ads.length){
                             user.all_ads.forEach(ad => {
                                 if(ad) {
-                                    console.log("AD", ad)
+                                    // console.log("AD", ad)
                                     let ulat = ad.latitude
                                     let ulng =  ad.longitude
                                     if(ulat && ulng)
@@ -335,7 +336,7 @@ import Select2 from 'v-select2-component';
                     'subject': this.subject,
                 })
                 .then(response => {
-                    console.log(response.data)
+                    // console.log(response.data)
                     this.ads = response.data.ads.data
                     this.updateMap()
                     this.showSearchForm = false

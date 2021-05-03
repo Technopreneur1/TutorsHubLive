@@ -245,9 +245,9 @@ class AdController extends Controller
             $ads = User::whereHas('allAds', function ($sql) use ($request){
                 $sql->where('availability',  $request->availability);
             })
-            ->with(['city', 'state', 'neighborhood', 'country', 'profile', 'allAds' => function ($sql) use ($request){
+            ->with(['city', 'state', 'neighborhood', 'country', 'profile' ,'allAds' => function ($sql) use ($request){
                 $sql->where('availability',  $request->availability);
-            } ])
+            }, 'allAds.user' ])
             ->where('is_hidden', 0)
             ->where('is_active', 1)
             ->where('is_banned', 0)
@@ -255,7 +255,7 @@ class AdController extends Controller
             ->whereIn('id', $ids)
             ->paginate(30);
         } else {
-            $ads = User::with(['city', 'state', 'neighborhood', 'country', 'profile','allAds'])
+            $ads = User::with(['city', 'state', 'neighborhood', 'country', 'profile','allAds.user'])
             ->where('is_hidden', 0)
             ->where('is_active', 1)
             ->where('is_banned', 0)

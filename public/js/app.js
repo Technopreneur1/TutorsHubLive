@@ -8444,7 +8444,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.doILike();
-    console.log("og");
   }
 });
 
@@ -8733,6 +8732,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     markerClicked: function markerClicked(item) {
+      event.stopPropagation();
       this.viewAd = null;
       this.center = item.position;
       this.viewAd = item.ad;
@@ -8747,7 +8747,7 @@ __webpack_require__.r(__webpack_exports__);
           if (user.all_ads.length) {
             user.all_ads.forEach(function (ad) {
               if (ad) {
-                console.log("AD", ad);
+                // console.log("AD", ad)
                 var ulat = ad.latitude;
                 var ulng = ad.longitude;
 
@@ -8801,7 +8801,7 @@ __webpack_require__.r(__webpack_exports__);
         'availability': this.availability,
         'subject': this.subject
       }).then(function (response) {
-        console.log(response.data);
+        // console.log(response.data)
         _this3.ads = response.data.ads.data;
 
         _this3.updateMap();
@@ -86835,7 +86835,7 @@ var render = function() {
         "a",
         {
           staticClass: "info",
-          attrs: { href: _vm.url + "/user/" + _vm.ad.id }
+          attrs: { href: _vm.url + "/user/" + _vm.ad.user.id }
         },
         [_c("img", { attrs: { src: _vm.avatar(_vm.ad), alt: "" } })]
       )
@@ -86846,12 +86846,12 @@ var render = function() {
         "a",
         {
           staticClass: "info",
-          attrs: { href: _vm.url + "/user/" + _vm.ad.id }
+          attrs: { href: _vm.url + "/user/" + _vm.ad.user.id }
         },
         [
           _c("div", { staticClass: "name" }, [
-            _vm._v(_vm._s(_vm.firstname(_vm.ad.name)) + " "),
-            _vm.ad.verified
+            _vm._v(_vm._s(_vm.firstname(_vm.ad.user.name)) + " "),
+            _vm.ad.user.verified
               ? _c("span", { staticClass: "verified" }, [
                   _c("i", { staticClass: "fas fa-check" })
                 ])
@@ -86860,7 +86860,7 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "location" }, [
             _c("i", { staticClass: "fas fa-map-marker-alt" }),
-            _vm._v(" " + _vm._s(_vm.ad.address))
+            _vm._v(" " + _vm._s(_vm.ad.user.address))
           ])
         ]
       ),
@@ -86870,14 +86870,14 @@ var render = function() {
           _c("i", { staticClass: "far fa-heart", class: { fas: _vm.is_fav } })
         ]),
         _vm._v(" "),
-        _vm.ad.can_contact
+        _vm.ad.user.can_contact
           ? _c(
               "div",
               {
                 staticClass: "btn-t",
                 on: {
                   click: function($event) {
-                    return _vm.contact(_vm.ad.id)
+                    return _vm.contact(_vm.ad.user.id)
                   }
                 }
               },
@@ -86890,15 +86890,11 @@ var render = function() {
     _c("hr"),
     _vm._v(" "),
     _c("div", { staticClass: "adData" }, [
-      _c("div", { staticClass: "title" }, [
-        _vm._v(_vm._s(_vm.ad.ad_detail.title))
-      ])
+      _c("div", { staticClass: "title" }, [_vm._v(_vm._s(_vm.ad.title))])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "adDescription" }, [
-      _c("div", { staticClass: "title" }, [
-        _vm._v(_vm._s(_vm.ad.ad_detail.description))
-      ])
+      _c("div", { staticClass: "title" }, [_vm._v(_vm._s(_vm.ad.description))])
     ])
   ])
 }
