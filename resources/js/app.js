@@ -32,7 +32,7 @@ Vue.use(VueGoogleMaps, {
 
     load: {
         //   key: "AIzaSyDZY3cXMHPDhTzmzcCy-jMRpleM8wtRDWo",
-        key: "AIzaSyCxDRV5qVG64KQZSER_Bh6r2Iyg_g8km54",
+        key: "AIzaSyBItJS5EzVJKKHUeqEqlW5zw7LSvzi0IZg",
         libraries: 'places',
     },
 
