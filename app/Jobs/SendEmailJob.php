@@ -1,22 +1,23 @@
 <?php
 
-namespace App\Mail;
+namespace App\Jobs;
 
+use App\Mail\ThreeHoursMail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Mail\Mailable;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class sessionRequested extends Mailable implements ShouldQueue
+class SendEmailJob implements ShouldQueue
 {
-    use Queueable, SerializesModels;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
-     * Create a new message instance.
+     * Create a new job instance.
      *
      * @return void
      */
-
     public $session;
     public $user;
     public $teacher;
@@ -33,12 +34,12 @@ class sessionRequested extends Mailable implements ShouldQueue
     }
 
     /**
-     * Build the message.
+     * Execute the job.
      *
-     * @return $this
+     * @return void
      */
-    public function build()
+    public function handle()
     {
-        return $this->subject('New Session Requested')->from('noreply@tutors-hub.com')->view('mail.sessionRequested');;
+        new ThreeHoursMail($this->session, $this->user, $this->teacher,$this->forTutor, $this->forStudent);
     }
 }

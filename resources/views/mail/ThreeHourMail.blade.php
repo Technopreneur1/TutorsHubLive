@@ -58,7 +58,7 @@
 @if($forTutor)
     <div class="mailbody">
         <div class="logo"><img src="https://tutors-hub.com/img/logotext.png" alt=""></div>
-        <h2>{{$user->name}} booked a session with you for : <strong>{{ \Carbon\Carbon::parse($session->date)->toDateTimeString() }}</strong></h2>
+        <h2>Your session with {{ $student->name }} will start in 3 hours. {{ $session->date }}</strong></h2>
         <table>
             <tr>
                 <td>Session ID</td>
@@ -90,14 +90,13 @@
             </tr>
         </table>
         <div style="display: flex; justify-content: center">
-            <a href="{{ route('sessions') }}" class="btn">Confirm Session</a>
+            <a href="{{ route('sessions') }}" class="btn">Go to Session</a>
         </div>
     </div>
 @elseif($forStudent)
     <div class="mailbody">
         <div class="logo"><img src="https://tutors-hub.com/img/logotext.png" alt=""></div>
-        <h2>You booked a session with {{ $teacher->name }} for : <strong>{{ \Carbon\Carbon::parse($session->date)->toDateTimeString() }}</strong></h2>
-        <h4>Waiting for confirmation from {{ $teacher->name }}</h4>
+        <h2>Your session with {{ $teacher->name }} will start in 3 hours. {{ $session->date }}</strong></h2>
         <table>
             <tr>
                 <td>Session ID</td>
@@ -126,7 +125,11 @@
         </table>
 
         <div style="display: flex; justify-content: center">
-            <a href="{{ route('sessions') }}" class="btn">Go to Session</a>
+            @if($session->payment_status)
+                <a href="{{ route('sessions') }}" class="btn">Go to Session</a>
+            @else
+                <a href="{{ route('sessions') }}" class="btn">Proceed with Payment</a>
+            @endif
         </div>
     </div>
 

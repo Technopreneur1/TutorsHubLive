@@ -17,9 +17,11 @@ class sessionCanceled extends Mailable implements ShouldQueue
      * @return void
      */
     public $student;
-    public function __construct($student)
+    public $session;
+    public function __construct($student, $session)
     {
         $this->student = $student;
+        $this->session = $session;
     }
 
     /**

@@ -64,6 +64,11 @@
                     <td>Session ID</td>
                     <td>{{$session->id}}</td>
                 </tr>
+
+                <tr>
+                    <td>By</td>
+                    <td>{{$student->name}}</td>
+                </tr>
                 <tr>
                     <td>Hours</td>
                     <td>{{$session->hours}}</td>
@@ -75,6 +80,10 @@
                 <tr>
                     <td>Total Charged</td>
                     <td>${{$session->total}}</td>
+                </tr>
+                <tr>
+                    <td>Fee</td>
+                    <td>${{$session->fee}}</td>
                 </tr>
             </table>
         </div>

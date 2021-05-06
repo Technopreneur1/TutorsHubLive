@@ -32,6 +32,6 @@ class PaymentReceived extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->subject('New Payment Received')->from('noreply@tutors-hub.com')->view('mail.PaymentReceived');
+        return $this->subject('Payment Received')->from('noreply@tutors-hub.com')->view('mail.PaymentReceived');
     }
 }

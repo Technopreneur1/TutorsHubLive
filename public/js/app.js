@@ -86732,7 +86732,7 @@ var render = function() {
                       ]
                     ),
                     _vm._v(" "),
-                    _vm.ad.can_contact
+                    _vm.ad.user.can_contact
                       ? _c(
                           "div",
                           {

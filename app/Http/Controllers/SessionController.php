@@ -10,6 +10,7 @@ use App\Mail\sessionAccepted;
 use App\Mail\sessionBooked;
 use App\Mail\sessionCompleted;
 use App\Mail\sessionRequested;
+use App\Mail\ThreeHoursMail;
 use App\Session;
 use Carbon\Carbon;
 use App\Mail\cancelRequest;
@@ -81,6 +82,9 @@ class SessionController extends Controller
         ]);
         return response()->json(['session' => $session]);
     }
+
+    // Session Booked Mail is sent from here
+    // Once Student has paid for the session
     public function paynow(Request $request)
     {
         $session = Session::findOrFail($request->sessionpid);
@@ -88,15 +92,21 @@ class SessionController extends Controller
 
         // Here need to add Mail for Session Booked
         Mail::to('info@tutors-hub.com')->send(new PaymentReceived($session, auth()->user()));
-        Mail::to($session->teacher->user->email)->send(new sessionBooked(auth()->user()));
         Mail::to(auth()->user()->email)->send(new PaymentReceived($session, auth()->user()));
 
-        //return response()->json(['msg' => 'success']);
+        $smail = $session->student->user->email;
+        $tmail = $session->teacher->user->email;
+
+        // Student Mail
+        Mail::to($smail)->send(new sessionBooked($session, auth()->user(), $session->teacher->user, false, true));
+        // Tutor Mail
+        Mail::to($tmail)->send(new sessionBooked($session, auth()->user(), $session->teacher->user, true, false));
+
         return response()->json(['session' => $session]);
 
     }
 
-    // This below function is called when a Student is booking a Session
+    // This below function is called when a Student is requesting a Session
     // Need to send EMail to both tutor and Student regarding the event
     public function sessionrequest(Request $request)
     {
@@ -123,9 +133,11 @@ class SessionController extends Controller
         $smail = $session->student->user->email;
         $tmail = $session->teacher->user->email;
 
-        Mail::to('info@tutors-hub.com')->send(new sessionRequested($session, auth()->user()));
-        Mail::to($smail)->send(new sessionRequested($session, auth()->user()));
-        Mail::to($tmail)->send(new sessionRequested($session, auth()->user()));
+        Mail::to('info@tutors-hub.com')->send(new sessionRequested($session, auth()->user(), $session->teacher->user, false, false));
+        // Student Mail
+        Mail::to($smail)->send(new sessionRequested($session, auth()->user(), $session->teacher->user, false, true));
+        // Tutor Mail
+        Mail::to($tmail)->send(new sessionRequested($session, auth()->user(), $session->teacher->user, true, false));
 
         return response()->json(['session' => $session]);
     }
@@ -144,7 +156,7 @@ class SessionController extends Controller
 
             Mail::to('info@tutors-hub.com')->send(new sessionCompleted($session, auth()->user()));
             Mail::to($smail)->send(new sessionCompleted($session, auth()->user()));
-            Mail::to($tmail)->send(new sessionCompleted($session, auth()->user()));
+//            Mail::to($tmail)->send(new sessionCompleted($session, auth()->user()));
 
             return response()->json(['msg' => 'success']);
         // }else {
@@ -185,8 +197,8 @@ class SessionController extends Controller
         $total = $session->total;
         $fee = $session->fee;
         session()->flash("success", "Session has been canceled and deleted.");
-        Mail::to($tmail)->send(new sessionCanceled($sname));
-        Mail::to($smail)->send(new sessionCanceledToStudent($tname));
+        Mail::to($tmail)->send(new sessionCanceled($sname, $session));
+        Mail::to($smail)->send(new sessionCanceledToStudent($tname, $session));
         Mail::to('info@tutors-hub.com')->send(new sessionCanceledToAdmin($sname, $tname, $smail, $tmail, $total, $hours, $rate, $fee));
         $session->delete();
         return redirect()->route('admin.sessions');
@@ -219,9 +231,11 @@ class SessionController extends Controller
         $smail = $session->student->user->email;
         $tmail = $session->teacher->user->email;
 
-        Mail::to('info@tutors-hub.com')->send(new sessionAccepted($session, auth()->user()));
-        Mail::to($smail)->send(new sessionAccepted($session, auth()->user()));
-        Mail::to($tmail)->send(new sessionAccepted($session, auth()->user()));
+        Mail::to('info@tutors-hub.com')->send(new sessionAccepted($session, auth()->user(), $session->teacher->user, false, false));
+        // Student Mail
+        Mail::to($smail)->send(new sessionAccepted($session, auth()->user(), $session->teacher->user, false, true));
+        // Tutor Mail
+        Mail::to($tmail)->send(new sessionAccepted($session, $session->student->user, auth()->user(), true, false));
 
         return  response()->json(['msg' => 'success']);
     }

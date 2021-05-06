@@ -18,10 +18,13 @@ class sessionCanceledToStudent extends Mailable implements ShouldQueue
      */
 
     public $teacher;
-    public function __construct($teacher)
+    public $session;
+    public function __construct($teacher, $session)
     {
         $this->teacher = $teacher;
+        $this->session = $session;
     }
+
 
     /**
      * Build the message.

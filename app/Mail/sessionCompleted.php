@@ -16,9 +16,13 @@ class sessionCompleted extends Mailable implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($session, $user)
+    public $session;
+    public $user;
+    public $student;
+    public function __construct($session, $user, $student)
     {
         $this->session = $session;
+        $this->student = $student;
         $this->user = $user;
     }
 

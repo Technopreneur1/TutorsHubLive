@@ -19,10 +19,17 @@ class sessionAccepted extends Mailable implements ShouldQueue
 
     public $session;
     public $user;
-    public function __construct($session, $user)
+    public $teacher;
+    public $forTutor;
+    public $forStudent;
+
+    public function __construct($session, $user, $teacher, $forTutor, $forStudent)
     {
         $this->session = $session;
         $this->user = $user;
+        $this->teacher = $teacher;
+        $this->forTutor = $forTutor;
+        $this->forStudent = $forStudent;
     }
 
     /**

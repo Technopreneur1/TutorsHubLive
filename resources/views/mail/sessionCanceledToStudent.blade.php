@@ -22,11 +22,11 @@
                 text-align: center;
                 font-size: 30px;
                 color: #000;
-    
+
             }
             table{
                 width: 100%;
-    
+
             }
             tr{
                 border-bottom: 1px solid rgba(0,0,0,0.4);
@@ -48,18 +48,42 @@
                 font-size: 20px;
                 text-decoration: none;
                 box-shadow: 0 2px 5px 0 #0000006b;
-    
+
             }
-    
+
         </style>
     </head>
     <body>
-        
+
         <div class="mailbody">
             <div class="logo"><img src="https://tutors-hub.com/img/logotext.png" alt=""></div>
-            <h2>Your Session Has Been Cancelled</h2>
-            <p>Your Session with <b>{{$teacher}}</b> has been Cancelled. The amount will be refunded to you soon. Please send us your payment details for refund by going to <a href="{{route('contact')}}">Support center</a> or email us at info@tutors-hub.com. </p>
+            <h2>Your Session with <b>{{$teacher}}</b> has been Cancelled</h2>
+
+            <table>
+                <tr>
+                    <td>Session ID</td>
+                    <td>{{$session->id}}</td>
+                </tr>
+                <tr>
+                    <td>By</td>
+                    <td>{{$teacher->name}}</td>
+                </tr>
+                <tr>
+                    <td>Hours</td>
+                    <td>{{$session->hours}}</td>
+                </tr>
+                <tr>
+                    <td>Hourly Rate</td>
+                    <td>${{$session->rate}}</td>
+                </tr>
+                <tr>
+                    <td>Total Charged</td>
+                    <td>${{$session->total}}</td>
+                </tr>
+            </table>
+
+            <p><a href="{{route('profile')}}">Go to my Account</p>
         </div>
-    
+
     </body>
     </html>

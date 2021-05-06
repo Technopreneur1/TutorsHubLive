@@ -27,7 +27,7 @@
                     </div>
                     <div v-else class="contactbtn">
                         <div @click="addToFav" class="btn-t" ><i class="far fa-heart" :class="{fas: is_fav}"></i></div>
-                        <div v-if="ad.can_contact" @click="contact(ad.user_id)" class="btn-t"><i class="fas fa-envelope"></i></div>
+                        <div v-if="ad.user.can_contact" @click="contact(ad.user_id)" class="btn-t"><i class="fas fa-envelope"></i></div>
                        <!-- <div  @click="addToFavAd" class="btn-t" ><i class="far fa-heart" :class="{fas: is_fav}"></i></div> -->
 <!--                        <div v-if="ad.can_contact" @click="contact(ad.id)" class="btn-t"><i class="fas fa-envelope"></i></div>-->
                     </div>

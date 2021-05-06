@@ -16,10 +16,19 @@ class sessionBooked extends Mailable implements ShouldQueue
      *
      * @return void
      */
-    public $student;
-    public function __construct($student)
+    public $session;
+    public $user;
+    public $teacher;
+    public $forTutor;
+    public $forStudent;
+
+    public function __construct($session, $user, $teacher, $forTutor, $forStudent)
     {
-        $this->student = $student;
+        $this->session = $session;
+        $this->user = $user;
+        $this->teacher = $teacher;
+        $this->forTutor = $forTutor;
+        $this->forStudent = $forStudent;
     }
 
     /**

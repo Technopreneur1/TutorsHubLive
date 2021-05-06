@@ -40,9 +40,9 @@
         }
         .btn{
             border: none;
-            background: #53a221;
+            background: deepskyblue;
             color: #fff;
-            border-radius: 23px;
+            border-radius: 5px;
             text-align: center;
             padding: 7px 30px;
             font-size: 20px;
@@ -55,39 +55,120 @@
 </head>
 <body>
 
-<div class="mailbody">
-    <div class="logo"><img src="https://tutors-hub.com/img/logotext.png" alt=""></div>
-    <h2>Session has been Accepted From {{$user->name}}</h2>
-    <table>
-        <tr>
-            <td>Session ID</td>
-            <td>{{$session->id}}</td>
-        </tr>
-        <tr>
-            <td>By</td>
-            <td><a target="_blank" href="{{route("userProfile", $user->id)}}">{{$user->name}}</a> ({{$user->type == "teacher" ? "Tutor" : "Student"}})</td>
-        </tr>
-        <tr>
-            <td>Hours</td>
-            <td>{{$session->hours}}</td>
-        </tr>
-        <tr>
-            <td>Hourly Rate</td>
-            <td>${{$session->rate}}</td>
-        </tr>
-        <tr>
-            <td>Total Charged</td>
-            <td>${{$session->total}}</td>
-        </tr>
-        <tr>
-            <td>Fee</td>
-            <td>${{$session->fee}}</td>
-        </tr>
+@if($forTutor)
+    <div class="mailbody">
+        <div class="logo"><img src="https://tutors-hub.com/img/logotext.png" alt=""></div>
+        <h2>You have confirmed your Availability with {{$user->name}} for : <strong>{{ \Carbon\Carbon::parse($session->date)->toDateTimeString() }}</strong></h2>
+        <table>
+            <tr>
+                <td>Session ID</td>
+                <td>{{$session->id}}</td>
+            </tr>
+            <tr>
+                <td>By</td>
+                <td><a target="_blank" href="{{route("userProfile", $user->id)}}">{{$user->name}}</a> ({{$user->type == "teacher" ? "Tutor" : "Student"}})</td>
+            </tr>
+            <tr>
+                <td>Online/In-person</td>
+                <td>{{ $session->sessiontype }}</td>
+            </tr>
+            <tr>
+                <td>Hours</td>
+                <td>{{$session->hours}}</td>
+            </tr>
+            <tr>
+                <td>Hourly Rate</td>
+                <td>${{$session->rate}}</td>
+            </tr>
+            <tr>
+                <td>Total Charged</td>
+                <td>${{$session->total}}</td>
+            </tr>
+            <tr>
+                <td>Fee</td>
+                <td>${{$session->fee}}</td>
+            </tr>
+        </table>
+        <div style="display: flex; justify-content: center">
+            <a href="{{ route('sessions') }}" class="btn">Go to Session</a>
+        </div>
+    </div>
+@elseif($forStudent)
+    <div class="mailbody">
+        <div class="logo"><img src="https://tutors-hub.com/img/logotext.png" alt=""></div>
+        <h2>{{ $teacher->name }} has confirmed the session for : <strong>{{ \Carbon\Carbon::parse($session->date)->toDateTimeString() }}</strong></h2>
+        <h4>Waiting for confirmation from {{ $teacher->name }}</h4>
+        <table>
+            <tr>
+                <td>Session ID</td>
+                <td>{{$session->id}}</td>
+            </tr>
+            <tr>
+                <td>By</td>
+                <td><a target="_blank" href="{{route("userProfile", $user->id)}}">{{$user->name}}</a> ({{$user->type == "teacher" ? "Tutor" : "Student"}})</td>
+            </tr>
+            <tr>
+                <td>Online/In-person</td>
+                <td>{{ $session->sessiontype }}</td>
+            </tr>
+            <tr>
+                <td>Hours</td>
+                <td>{{$session->hours}}</td>
+            </tr>
+            <tr>
+                <td>Hourly Rate</td>
+                <td>${{$session->rate}}</td>
+            </tr>
+            <tr>
+                <td>Total Charged</td>
+                <td>${{$session->total}}</td>
+            </tr>
+        </table>
 
-    </table>
+        <div style="display: flex; justify-content: center">
+            <a href="{{ route('sessions') }}" class="btn">Proceed with Payment</a>
+        </div>
+    </div>
+
+@else
+    <div class="mailbody">
+        <div class="logo"><img src="https://tutors-hub.com/img/logotext.png" alt=""></div>
+        <h2>Session Accepted From {{$teacher->name}}</h2>
+        <table>
+            <tr>
+                <td>Session ID</td>
+                <td>{{$session->id}}</td>
+            </tr>
+            <tr>
+                <td>By</td>
+                <td><a target="_blank" href="{{route("userProfile", $user->id)}}">{{$user->name}}</a> ({{$user->type == "teacher" ? "Tutor" : "Student"}})</td>
+            </tr>
+            <tr>
+                <td>With</td>
+                <td><a target="_blank" href="{{route("userProfile", $teacher->id)}}">{{$teacher->name}}</a> ({{$teacher->type == "teacher" ? "Tutor" : "Student"}})</td>
+            </tr>
+            <tr>
+                <td>Hours</td>
+                <td>{{$session->hours}}</td>
+            </tr>
+            <tr>
+                <td>Hourly Rate</td>
+                <td>${{$session->rate}}</td>
+            </tr>
+            <tr>
+                <td>Total Charged</td>
+                <td>${{$session->total}}</td>
+            </tr>
+            <tr>
+                <td>Fee</td>
+                <td>${{$session->fee}}</td>
+            </tr>
+
+        </table>
 
 
-</div>
+    </div>
+@endif
 
 </body>
 </html>

@@ -201,7 +201,7 @@ class AdController extends Controller
         $lat = auth()->user()->latitude;
         $lng = auth()->user()->longitude;
 
-        if($request->level)
+        if($request->level && !$request->subject)
         {
             // echo 'level'; exit;
             $string = "SELECT users.id, ( 6371 * acos( cos( radians(?) ) *
@@ -209,7 +209,7 @@ class AdController extends Controller
                 AS distance FROM users INNER JOIN ads ON users.id=ads.user_id WHERE level_id = ? HAVING distance < ? ORDER BY distance LIMIT 0 , 20;";
             $args = [$lat,$lng, $lat, $request->level, $request->radius];
         }
-        if($request->subject)
+        if($request->subject && !$request->level)
         {
             // echo 'subject'; exit;
             $string = "SELECT users.id, ( 6371 * acos( cos( radians(?) ) *
