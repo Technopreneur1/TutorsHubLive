@@ -22,7 +22,7 @@
                         <div class="name">{{ad.name}} <span v-if="ad.verified" class="verified"><i class="fas fa-check"></i></span></div>
                         <div class="location"><i class="fas fa-map-marker-alt"></i> {{ ad.address }}</div>
                     </a>
-                    <div v-if="authid == ad.id" class="contactbtn">
+                    <div v-if="authid == ad.user.id" class="contactbtn">
                         <button  @click="deleteMyAd(ad.id)" class="btn btn-gradient">Delete</button>
                     </div>
                     <div v-else class="contactbtn">
@@ -127,8 +127,6 @@
         },
         mounted()
         {
-
-
         }
     }
 </script>

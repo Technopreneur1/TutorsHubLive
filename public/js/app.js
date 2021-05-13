@@ -8636,6 +8636,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -86705,7 +86708,7 @@ var render = function() {
                   )
                 : _vm._e(),
               _vm._v(" "),
-              _vm.authid == _vm.ad.id
+              _vm.authid == _vm.ad.user.id
                 ? _c("div", { staticClass: "contactbtn" }, [
                     _c(
                       "button",
@@ -87314,7 +87317,9 @@ var render = function() {
                                   }),
                                   1
                                 )
-                              : _vm._e()
+                              : _c("div", { staticClass: "nothing" }, [
+                                  _c("p", [_vm._v("No Ad Found")])
+                                ])
                           ])
                         : _vm._e()
                     ])
