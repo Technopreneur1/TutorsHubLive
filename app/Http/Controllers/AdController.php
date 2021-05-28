@@ -243,12 +243,24 @@ class AdController extends Controller
 
         if ($request->availability && $request->availability != 'Both') {
             $ads = User::whereHas('allAds', function ($sql) use ($request){
-                $sql->where('availability',  $request->availability);
+                $sql->where('availability',  $request->availability)
+                    ->orWhere('availability', 'Both');
             })
             ->with(['city', 'state', 'neighborhood', 'country', 'profile' ,'allAds' => function ($sql) use ($request){
-                $sql->where('availability',  $request->availability);
-                $sql->where('level_id', $request->level)
-                    ->where('discipline_id', $request->subject);
+                $sql->when($request->availability, function ($qry) use ($request){
+                    $qry->where(function ($query) use ($request){
+                        $query->where('availability', 'Both')
+                            ->orWhere('availability', $request->availability);
+                    });
+                });
+
+                $sql->when($request->level, function ($qry) use ($request){
+                    $qry->where('level_id', $request->level);
+                });
+
+                $sql->when($request->subject, function ($qry) use ($request){
+                    $qry->where('discipline_id', $request->subject);
+                });
             }, 'allAds.user' ])
             ->where('is_hidden', 0)
             ->where('is_active', 1)
