@@ -25,7 +25,7 @@ class TeacherController extends Controller
     //
     public function post(Request $request)
     {
-        dd($request->all());
+//        dd($request->all());
         if(User::where('email', $request->email)->count())
         {
             return response()->json(['error' => 'email']);
