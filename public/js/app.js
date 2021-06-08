@@ -2714,7 +2714,8 @@ __webpack_require__.r(__webpack_exports__);
       this.error = ""; // console.log('else');
       // return false;
 
-      this.loading = true;
+      this.loading = true; // console.log(this.dte)
+
       axios.post(this.url + '/complete/sessionrequest', {
         subject: this.plan.discipline.name,
         level: this.plan.level.name,
@@ -78079,8 +78080,8 @@ var render = function() {
                     _c("datetime", {
                       attrs: {
                         type: "datetime",
-                        "min-datetime": _vm.nowDateTime,
-                        format: "yyyy-MM-dd HH:mm:ss"
+                        "value-zone": "local",
+                        "min-datetime": _vm.nowDateTime
                       },
                       model: {
                         value: _vm.dte,

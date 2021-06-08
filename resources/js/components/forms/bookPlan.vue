@@ -50,7 +50,7 @@
                 <div class="dte">
                     <div class="input">
                         <label for="">Select Date & Time</label>
-                        <datetime type="datetime" v-model="dte" :min-datetime="nowDateTime" format="yyyy-MM-dd HH:mm:ss"></datetime>
+                        <datetime type="datetime" value-zone="local" v-model="dte" :min-datetime="nowDateTime" ></datetime>
 
                     </div>
                 </div>
@@ -272,6 +272,7 @@
                 // console.log('else');
                 // return false;
                 this.loading = true;
+                // console.log(this.dte)
                 axios.post(this.url +'/complete/sessionrequest',
                     {
                         subject: this.plan.discipline.name,

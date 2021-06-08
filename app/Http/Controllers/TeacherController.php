@@ -106,7 +106,7 @@ class TeacherController extends Controller
         $av = '';
 
         if ($request->availability && $request->availability!='Both') {
-            $av = "AND users.availability='". $request->availability."'";
+            $av = "AND (users.availability='". $request->availability."' OR users.availability='Both')";
         }
 
         if($request->level && $request->subject)

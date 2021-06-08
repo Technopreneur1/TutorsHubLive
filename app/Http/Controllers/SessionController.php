@@ -6,6 +6,7 @@ use App\AdminSetting;
 use App\Earning;
 use App\Http\Middleware\Admin;
 use App\Mail\PaymentReceived;
+use App\Mail\PaymentReceivedStudent;
 use App\Mail\sessionAccepted;
 use App\Mail\sessionBooked;
 use App\Mail\sessionCompleted;
@@ -92,7 +93,7 @@ class SessionController extends Controller
 
         // Here need to add Mail for Session Booked
         Mail::to('info@tutors-hub.com')->send(new PaymentReceived($session, auth()->user()));
-        Mail::to(auth()->user()->email)->send(new PaymentReceived($session, auth()->user()));
+        Mail::to(auth()->user()->email)->send(new PaymentReceivedStudent($session, auth()->user()));
 
         $smail = $session->student->user->email;
         $tmail = $session->teacher->user->email;
