@@ -244,10 +244,15 @@
                                 <div class="val"><span>{{ses.level}}</span></div>
                                 <div class="val"><span>{{ses.subject}}</span></div>
                             </div>
-                            <div class="info">
+                            <div class="info" v-if="authuser.type !== 'teacher'">
                                 <span class="dt">Session Type: {{ses.sessiontype}}</span>
-                                <div class="val"><span>Start Session: {{ses.startsession}}</span></div>
-                                <div class="val"><span>End Session: {{ses.endsession}}</span></div>
+                                <div class="val"><span>Start Session: {{ses.startsession | moment("subtract", "6 hours") | moment('MMMM Do YYYY, h:mm:ss a')}}</span></div>
+                                <div class="val"><span>End Session: {{ses.endsession | moment("subtract", "6 hours") | moment('MMMM Do YYYY, h:mm:ss a') }}</span></div>
+                            </div>
+                            <div class="info" v-if="authuser.type === 'teacher'">
+                                <span class="dt">Session Type: {{ses.sessiontype}}</span>
+                                <div class="val"><span>Start Session: {{ses.startsession | moment("subtract", "5 hours") | moment('MMMM Do YYYY, h:mm:ss a')}}</span></div>
+                                <div class="val"><span>End Session: {{ses.endsession | moment("subtract", "5 hours") | moment('MMMM Do YYYY, h:mm:ss a') }}</span></div>
                             </div>
                             <div class="info">
                                 <span class="dt">Hours: {{ses.hours}}</span>
@@ -323,10 +328,15 @@
                                     <div class="val"><span>{{ses.level}}</span></div>
                                     <div class="val"><span>{{ses.subject}}</span></div>
                                 </div>
-                                <div class="info">
+                                <div class="info" v-if="authuser.type !== 'teacher'">
                                     <span class="dt">Session Type: {{ses.sessiontype}}</span>
-                                    <div class="val"><span>Start Session: {{ses.startsession}}</span></div>
-                                    <div class="val"><span>End Session: {{ses.endsession}}</span></div>
+                                    <div class="val"><span>Start Session: {{ses.startsession | moment("subtract", "6 hours") | moment('MMMM Do YYYY, h:mm:ss a')}}</span></div>
+                                    <div class="val"><span>End Session: {{ses.endsession | moment("subtract", "6 hours") | moment('MMMM Do YYYY, h:mm:ss a') }}</span></div>
+                                </div>
+                                <div class="info" v-if="authuser.type === 'teacher'">
+                                    <span class="dt">Session Type: {{ses.sessiontype}}</span>
+                                    <div class="val"><span>Start Session: {{ses.startsession | moment("subtract", "5 hours") | moment('MMMM Do YYYY, h:mm:ss a')}}</span></div>
+                                    <div class="val"><span>End Session: {{ses.endsession | moment("subtract", "5 hours") | moment('MMMM Do YYYY, h:mm:ss a') }}</span></div>
                                 </div>
                                 <div class="info">
                                     <span class="dt">Hours: {{ses.hours}}</span>
@@ -395,10 +405,15 @@
                                 <div class="val"><span>{{ses.level}}</span></div>
                                 <div class="val"><span>{{ses.subject}}</span></div>
                             </div>
-                            <div class="info">
+                            <div class="info" v-if="authuser.type !== 'teacher'">
                                 <span class="dt">Session Type: {{ses.sessiontype}}</span>
-                                <div class="val"><span>Start Session: {{ses.startsession}}</span></div>
-                                <div class="val"><span>End Session: {{ses.endsession}}</span></div>
+                                <div class="val"><span>Start Session: {{ses.startsession | moment("subtract", "6 hours") | moment('MMMM Do YYYY, h:mm:ss a')}}</span></div>
+                                <div class="val"><span>End Session: {{ses.endsession | moment("subtract", "6 hours") | moment('MMMM Do YYYY, h:mm:ss a') }}</span></div>
+                            </div>
+                            <div class="info" v-if="authuser.type === 'teacher'">
+                                <span class="dt">Session Type: {{ses.sessiontype}}</span>
+                                <div class="val"><span>Start Session: {{ses.startsession | moment("subtract", "5 hours") | moment('MMMM Do YYYY, h:mm:ss a')}}</span></div>
+                                <div class="val"><span>End Session: {{ses.endsession | moment("subtract", "5 hours") | moment('MMMM Do YYYY, h:mm:ss a') }}</span></div>
                             </div>
                             <div class="info">
                                 <span class="dt">Hours: {{ses.hours}}</span>
@@ -476,10 +491,15 @@
                                 <div class="val"><span>{{ses.level}}</span></div>
                                 <div class="val"><span>{{ses.subject}}</span></div>
                             </div>
-                            <div class="info">
+                            <div class="info" v-if="authuser.type !== 'teacher'">
                                 <span class="dt">Session Type: {{ses.sessiontype}}</span>
-                                <div class="val"><span>Start Session: {{ses.startsession}}</span></div>
-                                <div class="val"><span>End Session: {{ses.endsession}}</span></div>
+                                <div class="val"><span>Start Session: {{ses.startsession | moment("subtract", "6 hours") | moment('MMMM Do YYYY, h:mm:ss a')}}</span></div>
+                                <div class="val"><span>End Session: {{ses.endsession | moment("subtract", "6 hours") | moment('MMMM Do YYYY, h:mm:ss a') }}</span></div>
+                            </div>
+                            <div class="info" v-if="authuser.type === 'teacher'">
+                                <span class="dt">Session Type: {{ses.sessiontype}}</span>
+                                <div class="val"><span>Start Session: {{ses.startsession | moment("subtract", "5 hours") | moment('MMMM Do YYYY, h:mm:ss a')}}</span></div>
+                                <div class="val"><span>End Session: {{ses.endsession | moment("subtract", "5 hours") | moment('MMMM Do YYYY, h:mm:ss a') }}</span></div>
                             </div>
                             <div class="info">
                                 <span class="dt">Hours: {{ses.hours}}</span>
@@ -549,10 +569,15 @@
                                 <div class="val"><span>{{ses.level}}</span></div>
                                 <div class="val"><span>{{ses.subject}}</span></div>
                             </div>
-                            <div class="info">
+                            <div class="info" v-if="authuser.type !== 'teacher'">
                                 <span class="dt">Session Type: {{ses.sessiontype}}</span>
-                                <div class="val"><span>Start Session: {{ses.startsession}}</span></div>
-                                <div class="val"><span>End Session: {{ses.endsession}}</span></div>
+                                <div class="val"><span>Start Session: {{ses.startsession | moment("subtract", "6 hours") | moment('MMMM Do YYYY, h:mm:ss a')}}</span></div>
+                                <div class="val"><span>End Session: {{ses.endsession | moment("subtract", "6 hours") | moment('MMMM Do YYYY, h:mm:ss a') }}</span></div>
+                            </div>
+                            <div class="info" v-if="authuser.type === 'teacher'">
+                                <span class="dt">Session Type: {{ses.sessiontype}}</span>
+                                <div class="val"><span>Start Session: {{ses.startsession | moment("subtract", "5 hours") | moment('MMMM Do YYYY, h:mm:ss a')}}</span></div>
+                                <div class="val"><span>End Session: {{ses.endsession | moment("subtract", "5 hours") | moment('MMMM Do YYYY, h:mm:ss a') }}</span></div>
                             </div>
                             <div class="info">
                                 <span class="dt">Hours: {{ses.hours}}</span>
@@ -1148,10 +1173,10 @@ export default {
         document.body.appendChild(script);
     },
     mounted() {
-        // setTimeout(() => {
-        //     console.log(this)
+        setTimeout(() => {
+            console.log(this.sess)
 
-        // }, 2000)
+        }, 2000)
     }
 }
 </script>

@@ -7530,6 +7530,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     url: {
@@ -7842,9 +7867,12 @@ __webpack_require__.r(__webpack_exports__);
     script.addEventListener("load", this.setLoaded);
     document.body.appendChild(script);
   },
-  mounted: function mounted() {// setTimeout(() => {
-    //     console.log(this)
-    // }, 2000)
+  mounted: function mounted() {
+    var _this6 = this;
+
+    setTimeout(function () {
+      console.log(_this6.sess);
+    }, 2000);
   }
 });
 
@@ -84990,30 +85018,99 @@ var render = function() {
                                   ])
                                 ]),
                                 _vm._v(" "),
-                                _c("div", { staticClass: "info" }, [
-                                  _c("span", { staticClass: "dt" }, [
-                                    _vm._v(
-                                      "Session Type: " + _vm._s(ses.sessiontype)
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "val" }, [
-                                    _c("span", [
-                                      _vm._v(
-                                        "Start Session: " +
-                                          _vm._s(ses.startsession)
-                                      )
+                                _vm.authuser.type !== "teacher"
+                                  ? _c("div", { staticClass: "info" }, [
+                                      _c("span", { staticClass: "dt" }, [
+                                        _vm._v(
+                                          "Session Type: " +
+                                            _vm._s(ses.sessiontype)
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "val" }, [
+                                        _c("span", [
+                                          _vm._v(
+                                            "Start Session: " +
+                                              _vm._s(
+                                                _vm._f("moment")(
+                                                  _vm._f("moment")(
+                                                    ses.startsession,
+                                                    "subtract",
+                                                    "6 hours"
+                                                  ),
+                                                  "MMMM Do YYYY, h:mm:ss a"
+                                                )
+                                              )
+                                          )
+                                        ])
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "val" }, [
+                                        _c("span", [
+                                          _vm._v(
+                                            "End Session: " +
+                                              _vm._s(
+                                                _vm._f("moment")(
+                                                  _vm._f("moment")(
+                                                    ses.endsession,
+                                                    "subtract",
+                                                    "6 hours"
+                                                  ),
+                                                  "MMMM Do YYYY, h:mm:ss a"
+                                                )
+                                              )
+                                          )
+                                        ])
+                                      ])
                                     ])
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "val" }, [
-                                    _c("span", [
-                                      _vm._v(
-                                        "End Session: " + _vm._s(ses.endsession)
-                                      )
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.authuser.type === "teacher"
+                                  ? _c("div", { staticClass: "info" }, [
+                                      _c("span", { staticClass: "dt" }, [
+                                        _vm._v(
+                                          "Session Type: " +
+                                            _vm._s(ses.sessiontype)
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "val" }, [
+                                        _c("span", [
+                                          _vm._v(
+                                            "Start Session: " +
+                                              _vm._s(
+                                                _vm._f("moment")(
+                                                  _vm._f("moment")(
+                                                    ses.startsession,
+                                                    "subtract",
+                                                    "5 hours"
+                                                  ),
+                                                  "MMMM Do YYYY, h:mm:ss a"
+                                                )
+                                              )
+                                          )
+                                        ])
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "val" }, [
+                                        _c("span", [
+                                          _vm._v(
+                                            "End Session: " +
+                                              _vm._s(
+                                                _vm._f("moment")(
+                                                  _vm._f("moment")(
+                                                    ses.endsession,
+                                                    "subtract",
+                                                    "5 hours"
+                                                  ),
+                                                  "MMMM Do YYYY, h:mm:ss a"
+                                                )
+                                              )
+                                          )
+                                        ])
+                                      ])
                                     ])
-                                  ])
-                                ]),
+                                  : _vm._e(),
                                 _vm._v(" "),
                                 _c("div", { staticClass: "info" }, [
                                   _c("span", { staticClass: "dt" }, [
@@ -85275,30 +85372,99 @@ var render = function() {
                                   ])
                                 ]),
                                 _vm._v(" "),
-                                _c("div", { staticClass: "info" }, [
-                                  _c("span", { staticClass: "dt" }, [
-                                    _vm._v(
-                                      "Session Type: " + _vm._s(ses.sessiontype)
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "val" }, [
-                                    _c("span", [
-                                      _vm._v(
-                                        "Start Session: " +
-                                          _vm._s(ses.startsession)
-                                      )
+                                _vm.authuser.type !== "teacher"
+                                  ? _c("div", { staticClass: "info" }, [
+                                      _c("span", { staticClass: "dt" }, [
+                                        _vm._v(
+                                          "Session Type: " +
+                                            _vm._s(ses.sessiontype)
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "val" }, [
+                                        _c("span", [
+                                          _vm._v(
+                                            "Start Session: " +
+                                              _vm._s(
+                                                _vm._f("moment")(
+                                                  _vm._f("moment")(
+                                                    ses.startsession,
+                                                    "subtract",
+                                                    "6 hours"
+                                                  ),
+                                                  "MMMM Do YYYY, h:mm:ss a"
+                                                )
+                                              )
+                                          )
+                                        ])
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "val" }, [
+                                        _c("span", [
+                                          _vm._v(
+                                            "End Session: " +
+                                              _vm._s(
+                                                _vm._f("moment")(
+                                                  _vm._f("moment")(
+                                                    ses.endsession,
+                                                    "subtract",
+                                                    "6 hours"
+                                                  ),
+                                                  "MMMM Do YYYY, h:mm:ss a"
+                                                )
+                                              )
+                                          )
+                                        ])
+                                      ])
                                     ])
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "val" }, [
-                                    _c("span", [
-                                      _vm._v(
-                                        "End Session: " + _vm._s(ses.endsession)
-                                      )
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.authuser.type === "teacher"
+                                  ? _c("div", { staticClass: "info" }, [
+                                      _c("span", { staticClass: "dt" }, [
+                                        _vm._v(
+                                          "Session Type: " +
+                                            _vm._s(ses.sessiontype)
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "val" }, [
+                                        _c("span", [
+                                          _vm._v(
+                                            "Start Session: " +
+                                              _vm._s(
+                                                _vm._f("moment")(
+                                                  _vm._f("moment")(
+                                                    ses.startsession,
+                                                    "subtract",
+                                                    "5 hours"
+                                                  ),
+                                                  "MMMM Do YYYY, h:mm:ss a"
+                                                )
+                                              )
+                                          )
+                                        ])
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "val" }, [
+                                        _c("span", [
+                                          _vm._v(
+                                            "End Session: " +
+                                              _vm._s(
+                                                _vm._f("moment")(
+                                                  _vm._f("moment")(
+                                                    ses.endsession,
+                                                    "subtract",
+                                                    "5 hours"
+                                                  ),
+                                                  "MMMM Do YYYY, h:mm:ss a"
+                                                )
+                                              )
+                                          )
+                                        ])
+                                      ])
                                     ])
-                                  ])
-                                ]),
+                                  : _vm._e(),
                                 _vm._v(" "),
                                 _c("div", { staticClass: "info" }, [
                                   _c("span", { staticClass: "dt" }, [
@@ -85546,30 +85712,99 @@ var render = function() {
                                   ])
                                 ]),
                                 _vm._v(" "),
-                                _c("div", { staticClass: "info" }, [
-                                  _c("span", { staticClass: "dt" }, [
-                                    _vm._v(
-                                      "Session Type: " + _vm._s(ses.sessiontype)
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "val" }, [
-                                    _c("span", [
-                                      _vm._v(
-                                        "Start Session: " +
-                                          _vm._s(ses.startsession)
-                                      )
+                                _vm.authuser.type !== "teacher"
+                                  ? _c("div", { staticClass: "info" }, [
+                                      _c("span", { staticClass: "dt" }, [
+                                        _vm._v(
+                                          "Session Type: " +
+                                            _vm._s(ses.sessiontype)
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "val" }, [
+                                        _c("span", [
+                                          _vm._v(
+                                            "Start Session: " +
+                                              _vm._s(
+                                                _vm._f("moment")(
+                                                  _vm._f("moment")(
+                                                    ses.startsession,
+                                                    "subtract",
+                                                    "6 hours"
+                                                  ),
+                                                  "MMMM Do YYYY, h:mm:ss a"
+                                                )
+                                              )
+                                          )
+                                        ])
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "val" }, [
+                                        _c("span", [
+                                          _vm._v(
+                                            "End Session: " +
+                                              _vm._s(
+                                                _vm._f("moment")(
+                                                  _vm._f("moment")(
+                                                    ses.endsession,
+                                                    "subtract",
+                                                    "6 hours"
+                                                  ),
+                                                  "MMMM Do YYYY, h:mm:ss a"
+                                                )
+                                              )
+                                          )
+                                        ])
+                                      ])
                                     ])
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "val" }, [
-                                    _c("span", [
-                                      _vm._v(
-                                        "End Session: " + _vm._s(ses.endsession)
-                                      )
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.authuser.type === "teacher"
+                                  ? _c("div", { staticClass: "info" }, [
+                                      _c("span", { staticClass: "dt" }, [
+                                        _vm._v(
+                                          "Session Type: " +
+                                            _vm._s(ses.sessiontype)
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "val" }, [
+                                        _c("span", [
+                                          _vm._v(
+                                            "Start Session: " +
+                                              _vm._s(
+                                                _vm._f("moment")(
+                                                  _vm._f("moment")(
+                                                    ses.startsession,
+                                                    "subtract",
+                                                    "5 hours"
+                                                  ),
+                                                  "MMMM Do YYYY, h:mm:ss a"
+                                                )
+                                              )
+                                          )
+                                        ])
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "val" }, [
+                                        _c("span", [
+                                          _vm._v(
+                                            "End Session: " +
+                                              _vm._s(
+                                                _vm._f("moment")(
+                                                  _vm._f("moment")(
+                                                    ses.endsession,
+                                                    "subtract",
+                                                    "5 hours"
+                                                  ),
+                                                  "MMMM Do YYYY, h:mm:ss a"
+                                                )
+                                              )
+                                          )
+                                        ])
+                                      ])
                                     ])
-                                  ])
-                                ]),
+                                  : _vm._e(),
                                 _vm._v(" "),
                                 _c("div", { staticClass: "info" }, [
                                   _c("span", { staticClass: "dt" }, [
@@ -85843,30 +86078,99 @@ var render = function() {
                                   ])
                                 ]),
                                 _vm._v(" "),
-                                _c("div", { staticClass: "info" }, [
-                                  _c("span", { staticClass: "dt" }, [
-                                    _vm._v(
-                                      "Session Type: " + _vm._s(ses.sessiontype)
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "val" }, [
-                                    _c("span", [
-                                      _vm._v(
-                                        "Start Session: " +
-                                          _vm._s(ses.startsession)
-                                      )
+                                _vm.authuser.type !== "teacher"
+                                  ? _c("div", { staticClass: "info" }, [
+                                      _c("span", { staticClass: "dt" }, [
+                                        _vm._v(
+                                          "Session Type: " +
+                                            _vm._s(ses.sessiontype)
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "val" }, [
+                                        _c("span", [
+                                          _vm._v(
+                                            "Start Session: " +
+                                              _vm._s(
+                                                _vm._f("moment")(
+                                                  _vm._f("moment")(
+                                                    ses.startsession,
+                                                    "subtract",
+                                                    "6 hours"
+                                                  ),
+                                                  "MMMM Do YYYY, h:mm:ss a"
+                                                )
+                                              )
+                                          )
+                                        ])
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "val" }, [
+                                        _c("span", [
+                                          _vm._v(
+                                            "End Session: " +
+                                              _vm._s(
+                                                _vm._f("moment")(
+                                                  _vm._f("moment")(
+                                                    ses.endsession,
+                                                    "subtract",
+                                                    "6 hours"
+                                                  ),
+                                                  "MMMM Do YYYY, h:mm:ss a"
+                                                )
+                                              )
+                                          )
+                                        ])
+                                      ])
                                     ])
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "val" }, [
-                                    _c("span", [
-                                      _vm._v(
-                                        "End Session: " + _vm._s(ses.endsession)
-                                      )
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.authuser.type === "teacher"
+                                  ? _c("div", { staticClass: "info" }, [
+                                      _c("span", { staticClass: "dt" }, [
+                                        _vm._v(
+                                          "Session Type: " +
+                                            _vm._s(ses.sessiontype)
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "val" }, [
+                                        _c("span", [
+                                          _vm._v(
+                                            "Start Session: " +
+                                              _vm._s(
+                                                _vm._f("moment")(
+                                                  _vm._f("moment")(
+                                                    ses.startsession,
+                                                    "subtract",
+                                                    "5 hours"
+                                                  ),
+                                                  "MMMM Do YYYY, h:mm:ss a"
+                                                )
+                                              )
+                                          )
+                                        ])
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "val" }, [
+                                        _c("span", [
+                                          _vm._v(
+                                            "End Session: " +
+                                              _vm._s(
+                                                _vm._f("moment")(
+                                                  _vm._f("moment")(
+                                                    ses.endsession,
+                                                    "subtract",
+                                                    "5 hours"
+                                                  ),
+                                                  "MMMM Do YYYY, h:mm:ss a"
+                                                )
+                                              )
+                                          )
+                                        ])
+                                      ])
                                     ])
-                                  ])
-                                ]),
+                                  : _vm._e(),
                                 _vm._v(" "),
                                 _c("div", { staticClass: "info" }, [
                                   _c("span", { staticClass: "dt" }, [
@@ -86122,30 +86426,99 @@ var render = function() {
                                   ])
                                 ]),
                                 _vm._v(" "),
-                                _c("div", { staticClass: "info" }, [
-                                  _c("span", { staticClass: "dt" }, [
-                                    _vm._v(
-                                      "Session Type: " + _vm._s(ses.sessiontype)
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "val" }, [
-                                    _c("span", [
-                                      _vm._v(
-                                        "Start Session: " +
-                                          _vm._s(ses.startsession)
-                                      )
+                                _vm.authuser.type !== "teacher"
+                                  ? _c("div", { staticClass: "info" }, [
+                                      _c("span", { staticClass: "dt" }, [
+                                        _vm._v(
+                                          "Session Type: " +
+                                            _vm._s(ses.sessiontype)
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "val" }, [
+                                        _c("span", [
+                                          _vm._v(
+                                            "Start Session: " +
+                                              _vm._s(
+                                                _vm._f("moment")(
+                                                  _vm._f("moment")(
+                                                    ses.startsession,
+                                                    "subtract",
+                                                    "6 hours"
+                                                  ),
+                                                  "MMMM Do YYYY, h:mm:ss a"
+                                                )
+                                              )
+                                          )
+                                        ])
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "val" }, [
+                                        _c("span", [
+                                          _vm._v(
+                                            "End Session: " +
+                                              _vm._s(
+                                                _vm._f("moment")(
+                                                  _vm._f("moment")(
+                                                    ses.endsession,
+                                                    "subtract",
+                                                    "6 hours"
+                                                  ),
+                                                  "MMMM Do YYYY, h:mm:ss a"
+                                                )
+                                              )
+                                          )
+                                        ])
+                                      ])
                                     ])
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "val" }, [
-                                    _c("span", [
-                                      _vm._v(
-                                        "End Session: " + _vm._s(ses.endsession)
-                                      )
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.authuser.type === "teacher"
+                                  ? _c("div", { staticClass: "info" }, [
+                                      _c("span", { staticClass: "dt" }, [
+                                        _vm._v(
+                                          "Session Type: " +
+                                            _vm._s(ses.sessiontype)
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "val" }, [
+                                        _c("span", [
+                                          _vm._v(
+                                            "Start Session: " +
+                                              _vm._s(
+                                                _vm._f("moment")(
+                                                  _vm._f("moment")(
+                                                    ses.startsession,
+                                                    "subtract",
+                                                    "5 hours"
+                                                  ),
+                                                  "MMMM Do YYYY, h:mm:ss a"
+                                                )
+                                              )
+                                          )
+                                        ])
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "val" }, [
+                                        _c("span", [
+                                          _vm._v(
+                                            "End Session: " +
+                                              _vm._s(
+                                                _vm._f("moment")(
+                                                  _vm._f("moment")(
+                                                    ses.endsession,
+                                                    "subtract",
+                                                    "5 hours"
+                                                  ),
+                                                  "MMMM Do YYYY, h:mm:ss a"
+                                                )
+                                              )
+                                          )
+                                        ])
+                                      ])
                                     ])
-                                  ])
-                                ]),
+                                  : _vm._e(),
                                 _vm._v(" "),
                                 _c("div", { staticClass: "info" }, [
                                   _c("span", { staticClass: "dt" }, [

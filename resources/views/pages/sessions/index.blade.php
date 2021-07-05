@@ -148,6 +148,7 @@
 
     }
 </style>
+
     <div class="sessionsPage" id="app">
         <sessions
             url="{{route('home')}}"
