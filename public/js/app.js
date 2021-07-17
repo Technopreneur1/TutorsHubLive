@@ -7868,11 +7868,7 @@ __webpack_require__.r(__webpack_exports__);
     document.body.appendChild(script);
   },
   mounted: function mounted() {
-    var _this6 = this;
-
-    setTimeout(function () {
-      console.log(_this6.sess);
-    }, 2000);
+    console.log(this.sessions);
   }
 });
 
@@ -85031,16 +85027,7 @@ var render = function() {
                                         _c("span", [
                                           _vm._v(
                                             "Start Session: " +
-                                              _vm._s(
-                                                _vm._f("moment")(
-                                                  _vm._f("moment")(
-                                                    ses.startsession,
-                                                    "subtract",
-                                                    "6 hours"
-                                                  ),
-                                                  "MMMM Do YYYY, h:mm:ss a"
-                                                )
-                                              )
+                                              _vm._s(ses.startsession)
                                           )
                                         ])
                                       ]),
@@ -85049,16 +85036,7 @@ var render = function() {
                                         _c("span", [
                                           _vm._v(
                                             "End Session: " +
-                                              _vm._s(
-                                                _vm._f("moment")(
-                                                  _vm._f("moment")(
-                                                    ses.endsession,
-                                                    "subtract",
-                                                    "6 hours"
-                                                  ),
-                                                  "MMMM Do YYYY, h:mm:ss a"
-                                                )
-                                              )
+                                              _vm._s(ses.endsession)
                                           )
                                         ])
                                       ])
@@ -85080,11 +85058,7 @@ var render = function() {
                                             "Start Session: " +
                                               _vm._s(
                                                 _vm._f("moment")(
-                                                  _vm._f("moment")(
-                                                    ses.startsession,
-                                                    "subtract",
-                                                    "5 hours"
-                                                  ),
+                                                  ses.startsession,
                                                   "MMMM Do YYYY, h:mm:ss a"
                                                 )
                                               )
@@ -85098,11 +85072,7 @@ var render = function() {
                                             "End Session: " +
                                               _vm._s(
                                                 _vm._f("moment")(
-                                                  _vm._f("moment")(
-                                                    ses.endsession,
-                                                    "subtract",
-                                                    "5 hours"
-                                                  ),
+                                                  ses.endsession,
                                                   "MMMM Do YYYY, h:mm:ss a"
                                                 )
                                               )
@@ -85385,16 +85355,7 @@ var render = function() {
                                         _c("span", [
                                           _vm._v(
                                             "Start Session: " +
-                                              _vm._s(
-                                                _vm._f("moment")(
-                                                  _vm._f("moment")(
-                                                    ses.startsession,
-                                                    "subtract",
-                                                    "6 hours"
-                                                  ),
-                                                  "MMMM Do YYYY, h:mm:ss a"
-                                                )
-                                              )
+                                              _vm._s(ses.startsession)
                                           )
                                         ])
                                       ]),
@@ -85403,16 +85364,7 @@ var render = function() {
                                         _c("span", [
                                           _vm._v(
                                             "End Session: " +
-                                              _vm._s(
-                                                _vm._f("moment")(
-                                                  _vm._f("moment")(
-                                                    ses.endsession,
-                                                    "subtract",
-                                                    "6 hours"
-                                                  ),
-                                                  "MMMM Do YYYY, h:mm:ss a"
-                                                )
-                                              )
+                                              _vm._s(ses.endsession)
                                           )
                                         ])
                                       ])
@@ -85434,11 +85386,7 @@ var render = function() {
                                             "Start Session: " +
                                               _vm._s(
                                                 _vm._f("moment")(
-                                                  _vm._f("moment")(
-                                                    ses.startsession,
-                                                    "subtract",
-                                                    "5 hours"
-                                                  ),
+                                                  ses.startsession,
                                                   "MMMM Do YYYY, h:mm:ss a"
                                                 )
                                               )
@@ -85452,11 +85400,7 @@ var render = function() {
                                             "End Session: " +
                                               _vm._s(
                                                 _vm._f("moment")(
-                                                  _vm._f("moment")(
-                                                    ses.endsession,
-                                                    "subtract",
-                                                    "5 hours"
-                                                  ),
+                                                  ses.endsession,
                                                   "MMMM Do YYYY, h:mm:ss a"
                                                 )
                                               )
@@ -85725,16 +85669,7 @@ var render = function() {
                                         _c("span", [
                                           _vm._v(
                                             "Start Session: " +
-                                              _vm._s(
-                                                _vm._f("moment")(
-                                                  _vm._f("moment")(
-                                                    ses.startsession,
-                                                    "subtract",
-                                                    "6 hours"
-                                                  ),
-                                                  "MMMM Do YYYY, h:mm:ss a"
-                                                )
-                                              )
+                                              _vm._s(ses.startsession)
                                           )
                                         ])
                                       ]),
@@ -85743,16 +85678,7 @@ var render = function() {
                                         _c("span", [
                                           _vm._v(
                                             "End Session: " +
-                                              _vm._s(
-                                                _vm._f("moment")(
-                                                  _vm._f("moment")(
-                                                    ses.endsession,
-                                                    "subtract",
-                                                    "6 hours"
-                                                  ),
-                                                  "MMMM Do YYYY, h:mm:ss a"
-                                                )
-                                              )
+                                              _vm._s(ses.endsession)
                                           )
                                         ])
                                       ])
@@ -85774,11 +85700,7 @@ var render = function() {
                                             "Start Session: " +
                                               _vm._s(
                                                 _vm._f("moment")(
-                                                  _vm._f("moment")(
-                                                    ses.startsession,
-                                                    "subtract",
-                                                    "5 hours"
-                                                  ),
+                                                  ses.startsession,
                                                   "MMMM Do YYYY, h:mm:ss a"
                                                 )
                                               )
@@ -85792,11 +85714,7 @@ var render = function() {
                                             "End Session: " +
                                               _vm._s(
                                                 _vm._f("moment")(
-                                                  _vm._f("moment")(
-                                                    ses.endsession,
-                                                    "subtract",
-                                                    "5 hours"
-                                                  ),
+                                                  ses.endsession,
                                                   "MMMM Do YYYY, h:mm:ss a"
                                                 )
                                               )
@@ -86091,16 +86009,7 @@ var render = function() {
                                         _c("span", [
                                           _vm._v(
                                             "Start Session: " +
-                                              _vm._s(
-                                                _vm._f("moment")(
-                                                  _vm._f("moment")(
-                                                    ses.startsession,
-                                                    "subtract",
-                                                    "6 hours"
-                                                  ),
-                                                  "MMMM Do YYYY, h:mm:ss a"
-                                                )
-                                              )
+                                              _vm._s(ses.startsession)
                                           )
                                         ])
                                       ]),
@@ -86109,16 +86018,7 @@ var render = function() {
                                         _c("span", [
                                           _vm._v(
                                             "End Session: " +
-                                              _vm._s(
-                                                _vm._f("moment")(
-                                                  _vm._f("moment")(
-                                                    ses.endsession,
-                                                    "subtract",
-                                                    "6 hours"
-                                                  ),
-                                                  "MMMM Do YYYY, h:mm:ss a"
-                                                )
-                                              )
+                                              _vm._s(ses.endsession)
                                           )
                                         ])
                                       ])
@@ -86140,11 +86040,7 @@ var render = function() {
                                             "Start Session: " +
                                               _vm._s(
                                                 _vm._f("moment")(
-                                                  _vm._f("moment")(
-                                                    ses.startsession,
-                                                    "subtract",
-                                                    "5 hours"
-                                                  ),
+                                                  ses.startsession,
                                                   "MMMM Do YYYY, h:mm:ss a"
                                                 )
                                               )
@@ -86158,11 +86054,7 @@ var render = function() {
                                             "End Session: " +
                                               _vm._s(
                                                 _vm._f("moment")(
-                                                  _vm._f("moment")(
-                                                    ses.endsession,
-                                                    "subtract",
-                                                    "5 hours"
-                                                  ),
+                                                  ses.endsession,
                                                   "MMMM Do YYYY, h:mm:ss a"
                                                 )
                                               )
@@ -86439,16 +86331,7 @@ var render = function() {
                                         _c("span", [
                                           _vm._v(
                                             "Start Session: " +
-                                              _vm._s(
-                                                _vm._f("moment")(
-                                                  _vm._f("moment")(
-                                                    ses.startsession,
-                                                    "subtract",
-                                                    "6 hours"
-                                                  ),
-                                                  "MMMM Do YYYY, h:mm:ss a"
-                                                )
-                                              )
+                                              _vm._s(ses.startsession)
                                           )
                                         ])
                                       ]),
@@ -86457,16 +86340,7 @@ var render = function() {
                                         _c("span", [
                                           _vm._v(
                                             "End Session: " +
-                                              _vm._s(
-                                                _vm._f("moment")(
-                                                  _vm._f("moment")(
-                                                    ses.endsession,
-                                                    "subtract",
-                                                    "6 hours"
-                                                  ),
-                                                  "MMMM Do YYYY, h:mm:ss a"
-                                                )
-                                              )
+                                              _vm._s(ses.endsession)
                                           )
                                         ])
                                       ])
@@ -86488,11 +86362,7 @@ var render = function() {
                                             "Start Session: " +
                                               _vm._s(
                                                 _vm._f("moment")(
-                                                  _vm._f("moment")(
-                                                    ses.startsession,
-                                                    "subtract",
-                                                    "5 hours"
-                                                  ),
+                                                  ses.startsession,
                                                   "MMMM Do YYYY, h:mm:ss a"
                                                 )
                                               )
@@ -86506,11 +86376,7 @@ var render = function() {
                                             "End Session: " +
                                               _vm._s(
                                                 _vm._f("moment")(
-                                                  _vm._f("moment")(
-                                                    ses.endsession,
-                                                    "subtract",
-                                                    "5 hours"
-                                                  ),
+                                                  ses.endsession,
                                                   "MMMM Do YYYY, h:mm:ss a"
                                                 )
                                               )
