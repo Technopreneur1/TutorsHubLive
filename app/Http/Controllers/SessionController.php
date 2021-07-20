@@ -43,12 +43,14 @@ class SessionController extends Controller
                     $session->save();
                 }
             }
-//            if ($user->timezone) {
-//
-//                $session->startsession=Carbon::parse($session->startsession)->timezone($user->timezone)->toDateTimeString();
-//            }
+            if ($user->timezone) {
+                config(['app.timezone' => $session->student->user->timezone]);
+                date_default_timezone_set($session->student->user->timezone);
+
+                $session->startsession=Carbon::parse($session->startsession)->timezone($user->timezone)->toDateTimeString();
+                $session->endsession=Carbon::parse($session->endsession)->timezone($user->timezone)->toDateTimeString();
+            }
         }
-//        dd($sessions);
         $settings = AdminSetting::first();
         $sessionText = '';
 

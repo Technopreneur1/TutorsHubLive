@@ -289,6 +289,7 @@ class UserController extends Controller
         $user->transit_number = $request->transit_number;
         $user->institution_number = $request->institution_number;
         $user->account_number = $request->account_number;
+        $user->timezone = $request->timezone;
         $user->update();
         $profile = auth()->user()->profile;
         $profile->gender_preference =$request->gender_preference;

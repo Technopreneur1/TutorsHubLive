@@ -57,7 +57,11 @@
 
     <div class="mailbody">
         <div class="logo"><img src="https://tutors-hub.com/img/logotext.png" alt=""></div>
-        <h2>You're all set. Your session will start on : <strong>{{ \Carbon\Carbon::parse($session->date)->toDateTimeString() }}</strong></h2>
+        @if($forTutor)
+            <h2>You're all set. Your session will start on : <strong>{{ \Carbon\Carbon::parse($session->startsession)->timezone($teacher->timezone)->toDateTimeString() }}</strong></h2>
+        @else
+            <h2>You're all set. Your session will start on : <strong>{{ \Carbon\Carbon::parse($session->startsession)->timezone($student->timezone)->toDateTimeString() }}</strong></h2>
+        @endif
         <table>
             <tr>
                 <td>Session ID</td>
