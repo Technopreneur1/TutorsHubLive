@@ -275,6 +275,7 @@ class UserController extends Controller
 
     public function updateUserProfile(Request $request)
     {
+        dd("here");
         $user = auth()->user();
         $user->name =$request->name;
         $user->phone =$request->phone;
