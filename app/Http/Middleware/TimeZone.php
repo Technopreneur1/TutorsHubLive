@@ -17,9 +17,10 @@ class TimeZone
     public function handle($request, Closure $next)
     {
         if(auth()->user()){
-
-            config(['app.timezone' => Auth::user()->timezone]);
-            date_default_timezone_set(Auth::user()->timezone);
+            if(auth()->user()->timezone){
+                config(['app.timezone' => Auth::user()->timezone]);
+                date_default_timezone_set(Auth::user()->timezone);
+            }
         }
         return $next($request);
     }

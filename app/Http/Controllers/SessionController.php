@@ -43,7 +43,7 @@ class SessionController extends Controller
                     $session->save();
                 }
             }
-            if ($user->timezone) {
+            if ($user->timezone && $user->type === 'teacher') {
                 config(['app.timezone' => $session->student->user->timezone]);
                 date_default_timezone_set($session->student->user->timezone);
 

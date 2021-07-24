@@ -41,8 +41,4 @@ class Session extends Model
 //        }
 //        return $value;
 //    }
-
-
-
-
 }
