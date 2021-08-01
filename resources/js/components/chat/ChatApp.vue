@@ -1,6 +1,6 @@
 <template>
     <div class="chat-app">
-        <Conversation :url="url"  :contact="selectedContact" :messages="messages" @new="saveNewMessage"/>
+        <Conversation :url="url"  :contact="selectedContact" :messages="messages" :allowancesettings="allowancesettings ? allowancesettings : ''" :adminsettings="adminsettings ? adminsettings : ''" @new="saveNewMessage"/>
         <ContactsList :url="url" :contacts="contacts" :selectedContact="selectedContact" @selected="startConversationWith"/>
     </div>
 </template>
@@ -20,6 +20,14 @@
             },
             with: {
                 type: Object
+            },
+            adminsettings: {
+                type: Object
+            },
+            allowancesettings: {
+                type: [Object, String],
+                default: ""
+
             }
         },
         data() {

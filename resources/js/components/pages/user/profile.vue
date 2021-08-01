@@ -206,6 +206,12 @@ import { type } from 'os'
                 type: Number
             },tz:{
                 type: Object
+            },
+            adminsettings: {
+                type: Object
+            },
+            allowancesettings: {
+                type: [Object, String]
             }
         },
         data()
@@ -280,28 +286,80 @@ import { type } from 'os'
                     var re = /\b[\+]?[(]?[0-9]{2,6}[)]?[-\s\.]?[-\s\/\.0-9]{3,15}\b/m;;
                     let msg = message
                     let phoneText = []
-                    while(this.checkIfPhoneInString(msg))
-                    {
-                        phoneText = msg.match(re)[0]
-                        msg = msg.replace(phoneText, "*****")
-                        console.log('bio: ' + msg)
+
+                    if(this.allowancesettings) {
+                        if (this.allowancesettings.allow_confidentials_in_bio) {
+                            if (!this.allowancesettings.allow_confidentials_in_bio) {
+                                while (this.checkIfPhoneInString(msg)) {
+                                    phoneText = msg.match(re)[0]
+                                    msg = msg.replace(phoneText, "*****")
+                                    console.log('bio: ' + msg)
+                                }
+                            }
+                        } else {
+                            if (this.adminsettings) {
+                                if (!this.adminsettings.allow_confidentials_in_bio) {
+                                    while (this.checkIfPhoneInString(msg)) {
+                                        phoneText = msg.match(re)[0]
+                                        msg = msg.replace(phoneText, "*****")
+                                        console.log('bio: ' + msg)
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        if (this.adminsettings) {
+                            if (!this.adminsettings.allow_confidentials_in_bio) {
+                                while (this.checkIfPhoneInString(msg)) {
+                                    phoneText = msg.match(re)[0]
+                                    msg = msg.replace(phoneText, "*****")
+                                    console.log('bio: ' + msg)
+                                }
+                            }
+                        }
                     }
+
                     return this.finalBio(msg)
 
             },
-            finalBio(message)
-            {
+            finalBio(message) {
                 // if(this.checkIfEmailInString(msg))
                 // {
-                    var re = /(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
-                    let msg = message
-                    let emailText = []
-                    while(this.checkIfEmailInString(msg))
-                    {
-                        emailText = msg.match(re)[0]
-                        msg = msg.replace(emailText, "*****")
-                        console.log(msg)
+                var re = /(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
+                let msg = message
+                let emailText = []
+
+                if (this.allowancesettings) {
+                    if (this.allowancesettings.allow_confidentials_in_bio) {
+                        if (!this.allowancesettings.allow_confidentials_in_bio) {
+                            while (this.checkIfEmailInString(msg)) {
+                                emailText = msg.match(re)[0]
+                                msg = msg.replace(emailText, "*****")
+                                console.log(msg)
+                            }
+                        }
+                    } else {
+                        if (this.adminsettings) {
+                            if (!this.adminsettings.allow_confidentials_in_bio) {
+                                while (this.checkIfEmailInString(msg)) {
+                                    emailText = msg.match(re)[0]
+                                    msg = msg.replace(emailText, "*****")
+                                    console.log(msg)
+                                }
+                            }
+                        }
                     }
+                } else {
+                    if (this.adminsettings) {
+                        if (!this.adminsettings.allow_confidentials_in_bio) {
+                            while (this.checkIfEmailInString(msg)) {
+                                emailText = msg.match(re)[0]
+                                msg = msg.replace(emailText, "*****")
+                                console.log(msg)
+                            }
+                        }
+                    }
+                }
                     return msg
                     // return "This message contains email"
                     // console.log(this.extractEmails(message))
@@ -457,7 +515,7 @@ import { type } from 'os'
         mounted()
         {
             // this.getUserInfo()
-
+            this.allowancesettings = JSON.parse(this.allowancesettings)
         },
     }
 </script>

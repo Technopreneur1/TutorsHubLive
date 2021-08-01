@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Ad;
+use App\AdminSetting;
 use App\FavoriteAd;
+use App\TutorAllowanceSetting;
 use auth;
 use App\User;
 use App\Teacher;
@@ -228,7 +230,16 @@ class UserController extends Controller
             // dd($sessions);
             $timezones = $this->timezones;
 
-            return view('pages.user.profile',  ['user' => $user, 'likes' => 0,'timezones'=>$timezones]);
+            $admin_settings = AdminSetting::first();
+            $allowanceSettings = TutorAllowanceSetting::where('user_id', auth()->user()->id)->first();
+
+            return view('pages.user.profile',  [
+                'user' => $user,
+                'likes' => 0,
+                'timezones'=>$timezones,
+                'admin_settings' => $admin_settings,
+                'allowanceSettings' => $allowanceSettings
+            ]);
         }
         return abort(404);
 
@@ -255,8 +266,18 @@ class UserController extends Controller
             // dd($user->profile->sessions);
             $likes = Favorite::where('user_id', auth()->id())->where('target_id', $user->id)->count();
             $timezones = $this->timezones;
+            $admin_settings = AdminSetting::first();
 
-            return view('pages.user.profile',  ['user' => $user, 'profile' => $profile, 'likes' => $likes,'timezones'=>$timezones]);
+            $allowanceSettings = TutorAllowanceSetting::where('user_id', auth()->user()->id)->first();
+
+            return view('pages.user.profile',  [
+                'user' => $user,
+                'profile' => $profile,
+                'likes' => $likes,
+                'timezones'=>$timezones,
+                'admin_settings' => $admin_settings,
+                'allowanceSettings' => $allowanceSettings
+            ]);
 
         } else {
             return view("pages.user.unavailable");

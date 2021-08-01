@@ -6,7 +6,7 @@
 
 
         <transition  name="easy-appear" enter-active-class="animated slideInLeft" leave-active-class="animated slideOutLeft">
-            <ad-view @contact="contact" @cancel="viewAd = null" v-if="viewAd" :url="url" :vad="viewAd"></ad-view>
+            <ad-view @contact="contact" @cancel="viewAd = null" v-if="viewAd" :url="url" :vad="viewAd" :allowancesettings="allowancesettings" :adminsettings="adminsettings"></ad-view>
         </transition>
 
 
@@ -101,7 +101,7 @@
                 <div v-for="user in ads">
                     <div v-if="user.all_ads">
                         <div v-if="user.all_ads.length">
-                            <ad v-for="ad in user.all_ads" @startConversation="startConversation(ad.id)" :url="url" :ad="ad" :key="ad.id" :authid="authid"></ad>
+                            <ad v-for="ad in user.all_ads" @startConversation="startConversation(ad.id)" :allowancesettings="allowancesettings" :adminsettings="adminsettings" :url="url" :ad="ad" :key="ad.id" :authid="authid"></ad>
                         </div>
                         <div v-else class="nothing">
                             <p>No Ad Found</p>
@@ -187,6 +187,12 @@ import Select2 from 'v-select2-component';
             },
             authuser : {
                 type: Object
+            },
+            adminsettings: {
+                type: Object
+            },
+            allowancesettings: {
+                type: [Object, String]
             }
         },
         components: {Select2},
@@ -222,6 +228,7 @@ import Select2 from 'v-select2-component';
 
            }
         },
+
         computed:
         {
             centerLoc(){
@@ -249,6 +256,7 @@ import Select2 from 'v-select2-component';
                 }
             }
         },
+
         methods: {
             updateRadiusValue(){
                 $("#r_v").html($("#radius").val());

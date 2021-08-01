@@ -73,7 +73,8 @@
         }
     @endphp
     <div id="app">
-    <profile :tz="{{json_encode($timezones)}}" url="{{route('home')}}" :likes="{{$likes}}" :user="{{$user}}" :authuser="{{auth()->user()}}" rating="{{$user->profile->completedSessions->average($type)}}"></profile>
+{{--        {{ dd($allowanceSettings) }}--}}
+    <profile :tz="{{json_encode($timezones)}}" url="{{route('home')}}" :adminsettings="{{ $admin_settings }}" :allowancesettings="{{ json_encode($allowanceSettings) }}" :likes="{{$likes}}" :user="{{$user}}" :authuser="{{auth()->user()}}" rating="{{$user->profile->completedSessions->average($type)}}"></profile>
     </div>
 
 @endsection

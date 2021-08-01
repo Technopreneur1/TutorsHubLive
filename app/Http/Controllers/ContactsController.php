@@ -6,11 +6,12 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Message;
 use App\Events\NewMessage;
+use Illuminate\Support\Facades\Mail;
 
 class ContactsController extends Controller
 {
 
-    
+
     public function get()
     {
         // get all users except the authenticated one
@@ -32,7 +33,7 @@ class ContactsController extends Controller
                 {
                     array_push($userIds, $msg->to);
                 }
-                
+
             }
         }
         // get a collection of items where sender_id is the user who sent us a message
@@ -56,7 +57,7 @@ class ContactsController extends Controller
 
         return response()->json($contacts);
     }
-    
+
     public function hasConversationWith(Request $request)
     {
         $from = Message::where('from', auth()->id())
@@ -97,17 +98,24 @@ class ContactsController extends Controller
     public function send(Request $request)
     {
         $us = User::find($request->contact_id);
+
         if(!$us->can_contact || $us->is_banned)
         {
             return response()->json(['err' => true]);
         };
+
         $message = Message::create([
             'from' => auth()->id(),
             'to' => $request->contact_id,
             'text' => $request->text
         ]);
 
+        $to = User::find($request->contact_id);
+
         broadcast(new NewMessage($message));
+
+        Mail::to($to)
+            ->send(new \App\Mail\NewMessage(auth()->user()));
 
         return response()->json($message);
     }

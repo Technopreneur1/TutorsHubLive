@@ -357,6 +357,7 @@ Route::prefix('adminpanel')->middleware('admin')->group(function () {
     Route::get('/students/deactivated', 'AdminController@deActivatedStudents')->name('admin.students.deactivated');
 
     Route::get('/user/{id}', 'AdminController@getUser')->name('admin.user');
+    Route::post('/user/save-settings', 'AdminController@saveSettings')->name('admin.save.allowance');
     Route::get('/countries', 'AdminController@countries')->name('admin.countries');
     Route::get('/testimonials', 'AdminController@testimonials')->name('admin.testimonials');
     Route::post('/testimonials', 'TestimonialController@post')->name('admin.add.testimonials');

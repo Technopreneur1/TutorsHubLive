@@ -21,6 +21,13 @@
             messages: {
                 type: Array,
                 required: true
+            },
+            adminsettings: {
+                type: Object
+            },
+            allowancesettings: {
+                type: [Object, String],
+                default: ""
             }
         },
         data(){
@@ -28,56 +35,51 @@
                 showTime: null
             }
         },
+        mounted() {
+            this.allowancesettings = JSON.parse(this.allowancesettings)
+        },
         methods: {
-            // outputMessage(message)
-            // {
-            //     let msg = message
-            //     if(this.checkIfPhoneInString(msg))
-            //     {
-            //         var re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
-                    
-            //         let phoneText = []
-            //         while(this.checkIfPhoneInString(msg))
-            //         {
-            //             phoneText = msg.match(re)[0]
-            //             msg = msg.replace(phoneText, "*****")
-            //             console.log(msg)
-            //         }
-                    
-            //         // return "This message contains email"
-            //         // console.log(this.extractEmails(message))
-            //     }
-            //     if(this.checkIfEmailInString(msg))
-            //     {
-            //         var re = /(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
-            //         let msg = message
-            //         let emailText = []
-            //         while(this.checkIfEmailInString(msg))
-            //         {
-            //             emailText = msg.match(re)[0]
-            //             msg = msg.replace(emailText, "*****")
-            //             console.log(msg)
-            //         }
-            //         return msg
-            //         // return "This message contains email"
-            //         // console.log(this.extractEmails(message))
-            //     }
-            //     return msg
-            // },
             outputMessage(message)
             {
-            
-                    var re = /\b[\+]?[(]?[0-9]{2,6}[)]?[-\s\.]?[-\s\/\.0-9]{3,15}\b/m;;
+
+                    var re = /\b[\+]?[(]?[0-9]{2,6}[)]?[-\s\.]?[-\s\/\.0-9]{3,15}\b/m;
+                    ;
                     let msg = message
                     let phoneText = []
-                    while(this.checkIfPhoneInString(msg))
-                    {
-                        phoneText = msg.match(re)[0]
-                        msg = msg.replace(phoneText, "*****")
-                        console.log('bio: ' + msg)
+                    if(this.allowancesettings) {
+                        if (this.allowancesettings.allow_confidentials_in_messages
+                        ) {
+                            if (!this.allowancesettings.allow_confidentials_in_messages) {
+                                while (this.checkIfPhoneInString(msg)) {
+                                    phoneText = msg.match(re)[0]
+                                    msg = msg.replace(phoneText, "*****")
+                                    console.log('bio: ' + msg)
+                                }
+                            }
+                        } else {
+                            if (this.adminsettings) {
+                                if (!this.adminsettings.allow_confidentials_in_messages) {
+                                    while (this.checkIfPhoneInString(msg)) {
+                                        phoneText = msg.match(re)[0]
+                                        msg = msg.replace(phoneText, "*****")
+                                        console.log('bio: ' + msg)
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        if (this.adminsettings) {
+                            if (!this.adminsettings.allow_confidentials_in_messages) {
+                                while (this.checkIfPhoneInString(msg)) {
+                                    phoneText = msg.match(re)[0]
+                                    msg = msg.replace(phoneText, "*****")
+                                    console.log('bio: ' + msg)
+                                }
+                            }
+                        }
                     }
+
                     return this.finalBio(msg)
-                    
             },
             finalBio(message)
             {
@@ -86,18 +88,44 @@
                     var re = /(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
                     let msg = message
                     let emailText = []
-                    while(this.checkIfEmailInString(msg))
-                    {
-                        emailText = msg.match(re)[0]
-                        msg = msg.replace(emailText, "*****")
-                        console.log(msg)
+                    if (this.allowancesettings) {
+                        if (this.allowancesettings.allow_confidentials_in_messages
+                        ) {
+                            if (!this.allowancesettings.allow_confidentials_in_messages) {
+                                while (this.checkIfEmailInString(msg)) {
+                                    emailText = msg.match(re)[0]
+                                    msg = msg.replace(emailText, "*****")
+                                    console.log(msg)
+                                }
+                            }
+                        } else {
+                            if (this.adminsettings) {
+                                if (!this.adminsettings.allow_confidentials_in_messages) {
+                                    while (this.checkIfEmailInString(msg)) {
+                                        emailText = msg.match(re)[0]
+                                        msg = msg.replace(emailText, "*****")
+                                        console.log(msg)
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        if (this.adminsettings) {
+                            if (!this.adminsettings.allow_confidentials_in_messages) {
+                                while (this.checkIfEmailInString(msg)) {
+                                    emailText = msg.match(re)[0]
+                                    msg = msg.replace(emailText, "*****")
+                                    console.log(msg)
+                                }
+                            }
+                        }
                     }
                     return msg
                     // return "This message contains email"
                     // console.log(this.extractEmails(message))
                 // }
             },
-            
+
             checkIfEmailInString(text)
             {
                 var re = /(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;

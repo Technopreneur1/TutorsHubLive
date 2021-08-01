@@ -1993,6 +1993,13 @@ __webpack_require__.r(__webpack_exports__);
     },
     "with": {
       type: Object
+    },
+    adminsettings: {
+      type: Object
+    },
+    allowancesettings: {
+      type: [Object, String],
+      "default": ""
     }
   },
   data: function data() {
@@ -2215,6 +2222,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2229,6 +2240,13 @@ __webpack_require__.r(__webpack_exports__);
     messages: {
       type: Array,
       "default": []
+    },
+    adminsettings: {
+      type: Object
+    },
+    allowancesettings: {
+      type: [Object, String],
+      "default": ""
     }
   },
   data: function data() {
@@ -2334,6 +2352,13 @@ __webpack_require__.r(__webpack_exports__);
     messages: {
       type: Array,
       required: true
+    },
+    adminsettings: {
+      type: Object
+    },
+    allowancesettings: {
+      type: [Object, String],
+      "default": ""
     }
   },
   data: function data() {
@@ -2341,50 +2366,46 @@ __webpack_require__.r(__webpack_exports__);
       showTime: null
     };
   },
+  mounted: function mounted() {
+    this.allowancesettings = JSON.parse(this.allowancesettings);
+  },
   methods: {
-    // outputMessage(message)
-    // {
-    //     let msg = message
-    //     if(this.checkIfPhoneInString(msg))
-    //     {
-    //         var re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
-    //         let phoneText = []
-    //         while(this.checkIfPhoneInString(msg))
-    //         {
-    //             phoneText = msg.match(re)[0]
-    //             msg = msg.replace(phoneText, "*****")
-    //             console.log(msg)
-    //         }
-    //         // return "This message contains email"
-    //         // console.log(this.extractEmails(message))
-    //     }
-    //     if(this.checkIfEmailInString(msg))
-    //     {
-    //         var re = /(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
-    //         let msg = message
-    //         let emailText = []
-    //         while(this.checkIfEmailInString(msg))
-    //         {
-    //             emailText = msg.match(re)[0]
-    //             msg = msg.replace(emailText, "*****")
-    //             console.log(msg)
-    //         }
-    //         return msg
-    //         // return "This message contains email"
-    //         // console.log(this.extractEmails(message))
-    //     }
-    //     return msg
-    // },
     outputMessage: function outputMessage(message) {
       var re = /\b[\+]?[(]?[0-9]{2,6}[)]?[-\s\.]?[-\s\/\.0-9]{3,15}\b/m;
       ;
       var msg = message;
       var phoneText = [];
 
-      while (this.checkIfPhoneInString(msg)) {
-        phoneText = msg.match(re)[0];
-        msg = msg.replace(phoneText, "*****");
-        console.log('bio: ' + msg);
+      if (this.allowancesettings) {
+        if (this.allowancesettings.allow_confidentials_in_messages) {
+          if (!this.allowancesettings.allow_confidentials_in_messages) {
+            while (this.checkIfPhoneInString(msg)) {
+              phoneText = msg.match(re)[0];
+              msg = msg.replace(phoneText, "*****");
+              console.log('bio: ' + msg);
+            }
+          }
+        } else {
+          if (this.adminsettings) {
+            if (!this.adminsettings.allow_confidentials_in_messages) {
+              while (this.checkIfPhoneInString(msg)) {
+                phoneText = msg.match(re)[0];
+                msg = msg.replace(phoneText, "*****");
+                console.log('bio: ' + msg);
+              }
+            }
+          }
+        }
+      } else {
+        if (this.adminsettings) {
+          if (!this.adminsettings.allow_confidentials_in_messages) {
+            while (this.checkIfPhoneInString(msg)) {
+              phoneText = msg.match(re)[0];
+              msg = msg.replace(phoneText, "*****");
+              console.log('bio: ' + msg);
+            }
+          }
+        }
       }
 
       return this.finalBio(msg);
@@ -2396,10 +2417,36 @@ __webpack_require__.r(__webpack_exports__);
       var msg = message;
       var emailText = [];
 
-      while (this.checkIfEmailInString(msg)) {
-        emailText = msg.match(re)[0];
-        msg = msg.replace(emailText, "*****");
-        console.log(msg);
+      if (this.allowancesettings) {
+        if (this.allowancesettings.allow_confidentials_in_messages) {
+          if (!this.allowancesettings.allow_confidentials_in_messages) {
+            while (this.checkIfEmailInString(msg)) {
+              emailText = msg.match(re)[0];
+              msg = msg.replace(emailText, "*****");
+              console.log(msg);
+            }
+          }
+        } else {
+          if (this.adminsettings) {
+            if (!this.adminsettings.allow_confidentials_in_messages) {
+              while (this.checkIfEmailInString(msg)) {
+                emailText = msg.match(re)[0];
+                msg = msg.replace(emailText, "*****");
+                console.log(msg);
+              }
+            }
+          }
+        }
+      } else {
+        if (this.adminsettings) {
+          if (!this.adminsettings.allow_confidentials_in_messages) {
+            while (this.checkIfEmailInString(msg)) {
+              emailText = msg.match(re)[0];
+              msg = msg.replace(emailText, "*****");
+              console.log(msg);
+            }
+          }
+        }
       }
 
       return msg; // return "This message contains email"
@@ -6489,6 +6536,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     tz: {
       type: Object
+    },
+    adminsettings: {
+      type: Object
+    },
+    allowancesettings: {
+      type: [Object, String]
     }
   },
   data: function data() {
@@ -6553,10 +6606,36 @@ __webpack_require__.r(__webpack_exports__);
       var msg = message;
       var phoneText = [];
 
-      while (this.checkIfPhoneInString(msg)) {
-        phoneText = msg.match(re)[0];
-        msg = msg.replace(phoneText, "*****");
-        console.log('bio: ' + msg);
+      if (this.allowancesettings) {
+        if (this.allowancesettings.allow_confidentials_in_bio) {
+          if (!this.allowancesettings.allow_confidentials_in_bio) {
+            while (this.checkIfPhoneInString(msg)) {
+              phoneText = msg.match(re)[0];
+              msg = msg.replace(phoneText, "*****");
+              console.log('bio: ' + msg);
+            }
+          }
+        } else {
+          if (this.adminsettings) {
+            if (!this.adminsettings.allow_confidentials_in_bio) {
+              while (this.checkIfPhoneInString(msg)) {
+                phoneText = msg.match(re)[0];
+                msg = msg.replace(phoneText, "*****");
+                console.log('bio: ' + msg);
+              }
+            }
+          }
+        }
+      } else {
+        if (this.adminsettings) {
+          if (!this.adminsettings.allow_confidentials_in_bio) {
+            while (this.checkIfPhoneInString(msg)) {
+              phoneText = msg.match(re)[0];
+              msg = msg.replace(phoneText, "*****");
+              console.log('bio: ' + msg);
+            }
+          }
+        }
       }
 
       return this.finalBio(msg);
@@ -6568,10 +6647,36 @@ __webpack_require__.r(__webpack_exports__);
       var msg = message;
       var emailText = [];
 
-      while (this.checkIfEmailInString(msg)) {
-        emailText = msg.match(re)[0];
-        msg = msg.replace(emailText, "*****");
-        console.log(msg);
+      if (this.allowancesettings) {
+        if (this.allowancesettings.allow_confidentials_in_bio) {
+          if (!this.allowancesettings.allow_confidentials_in_bio) {
+            while (this.checkIfEmailInString(msg)) {
+              emailText = msg.match(re)[0];
+              msg = msg.replace(emailText, "*****");
+              console.log(msg);
+            }
+          }
+        } else {
+          if (this.adminsettings) {
+            if (!this.adminsettings.allow_confidentials_in_bio) {
+              while (this.checkIfEmailInString(msg)) {
+                emailText = msg.match(re)[0];
+                msg = msg.replace(emailText, "*****");
+                console.log(msg);
+              }
+            }
+          }
+        }
+      } else {
+        if (this.adminsettings) {
+          if (!this.adminsettings.allow_confidentials_in_bio) {
+            while (this.checkIfEmailInString(msg)) {
+              emailText = msg.match(re)[0];
+              msg = msg.replace(emailText, "*****");
+              console.log(msg);
+            }
+          }
+        }
       }
 
       return msg; // return "This message contains email"
@@ -6711,7 +6816,9 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   },
-  mounted: function mounted() {// this.getUserInfo()
+  mounted: function mounted() {
+    // this.getUserInfo()
+    this.allowancesettings = JSON.parse(this.allowancesettings);
   }
 });
 
@@ -8183,7 +8290,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['url', 'ad', 'authid'],
+  props: {
+    url: {
+      type: String
+    },
+    ad: {
+      type: Object
+    },
+    authid: {
+      type: Number
+    },
+    adminsettings: {
+      type: Object
+    },
+    allowancesettings: {
+      type: [Object, String]
+    }
+  },
   data: function data() {
     // console.log('Auth ID:' + authid)
     return {
@@ -8192,6 +8315,98 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    outputBio: function outputBio(message) {
+      var re = /\b[\+]?[(]?[0-9]{2,6}[)]?[-\s\.]?[-\s\/\.0-9]{3,15}\b/m;
+      ;
+      var msg = message;
+      var phoneText = [];
+
+      if (this.allowancesettings) {
+        if (this.allowancesettings.allow_confidentials_in_ads) {
+          if (!this.allowancesettings.allow_confidentials_in_ads) {
+            while (this.checkIfPhoneInString(msg)) {
+              phoneText = msg.match(re)[0];
+              msg = msg.replace(phoneText, "*****");
+              console.log('bio: ' + msg);
+            }
+          }
+        } else {
+          if (this.adminsettings) {
+            if (!this.adminsettings.allow_confidentials_in_ads) {
+              while (this.checkIfPhoneInString(msg)) {
+                phoneText = msg.match(re)[0];
+                msg = msg.replace(phoneText, "*****");
+                console.log('bio: ' + msg);
+              }
+            }
+          }
+        }
+      } else {
+        if (this.adminsettings) {
+          if (!this.adminsettings.allow_confidentials_in_ads) {
+            while (this.checkIfPhoneInString(msg)) {
+              phoneText = msg.match(re)[0];
+              msg = msg.replace(phoneText, "*****");
+              console.log('bio: ' + msg);
+            }
+          }
+        }
+      }
+
+      return this.finalBio(msg);
+    },
+    finalBio: function finalBio(message) {
+      // if(this.checkIfEmailInString(msg))
+      // {
+      var re = /(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
+      var msg = message;
+      var emailText = [];
+
+      if (this.allowancesettings) {
+        if (this.allowancesettings.allow_confidentials_in_ads) {
+          if (!this.allowancesettings.allow_confidentials_in_ads) {
+            while (this.checkIfEmailInString(msg)) {
+              emailText = msg.match(re)[0];
+              msg = msg.replace(emailText, "*****");
+              console.log(msg);
+            }
+          }
+        } else {
+          if (this.adminsettings) {
+            if (!this.adminsettings.allow_confidentials_in_ads) {
+              while (this.checkIfEmailInString(msg)) {
+                emailText = msg.match(re)[0];
+                msg = msg.replace(emailText, "*****");
+                console.log(msg);
+              }
+            }
+          }
+        }
+      } else {
+        if (this.adminsettings) {
+          if (!this.adminsettings.allow_confidentials_in_ads) {
+            while (this.checkIfEmailInString(msg)) {
+              emailText = msg.match(re)[0];
+              msg = msg.replace(emailText, "*****");
+              console.log(msg);
+            }
+          }
+        }
+      }
+
+      return msg; // return "This message contains email"
+      // console.log(this.extractEmails(message))
+      // }
+    },
+    checkIfEmailInString: function checkIfEmailInString(text) {
+      var re = /(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
+      return re.test(text);
+    },
+    checkIfPhoneInString: function checkIfPhoneInString(text) {
+      var re = /\b[\+]?[(]?[0-9]{2,6}[)]?[-\s\.]?[-\s\/\.0-9]{3,15}\b/m;
+      ;
+      return re.test(text);
+    },
     editAd: function editAd() {
       this.$emit("editAd");
     },
@@ -8252,7 +8467,9 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
   },
-  mounted: function mounted() {}
+  mounted: function mounted() {
+    this.allowancesettings = JSON.parse(this.allowancesettings);
+  }
 });
 
 /***/ }),
@@ -8672,6 +8889,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     authuser: {
       type: Object
+    },
+    adminsettings: {
+      type: Object
+    },
+    allowancesettings: {
+      type: [Object, String]
     }
   },
   components: {
@@ -77656,7 +77879,9 @@ var render = function() {
         attrs: {
           url: _vm.url,
           contact: _vm.selectedContact,
-          messages: _vm.messages
+          messages: _vm.messages,
+          allowancesettings: _vm.allowancesettings ? _vm.allowancesettings : "",
+          adminsettings: _vm.adminsettings ? _vm.adminsettings : ""
         },
         on: { new: _vm.saveNewMessage }
       }),
@@ -77798,7 +78023,12 @@ var render = function() {
         : _c("h1", [_vm._v("\n        Select a contact\n    ")]),
       _vm._v(" "),
       _c("MessagesFeed", {
-        attrs: { contact: _vm.contact, messages: _vm.messages }
+        attrs: {
+          adminsettings: _vm.adminsettings ? _vm.adminsettings : "",
+          allowancesettings: _vm.allowancesettings ? _vm.allowancesettings : "",
+          contact: _vm.contact,
+          messages: _vm.messages
+        }
       }),
       _vm._v(" "),
       _c("MessageComposer", { on: { send: _vm.sendMessage } })
@@ -86872,7 +87102,9 @@ var render = function() {
           : _vm._e(),
         _vm._v(" "),
         _c("div", { staticClass: "ad" }, [
-          _c("div", { staticClass: "title" }, [_vm._v(_vm._s(_vm.ad.title))]),
+          _c("div", { staticClass: "title" }, [
+            _vm._v(_vm._s(_vm.outputBio(_vm.ad.title)))
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "student" }, [
             _vm.ad.user_id != undefined
@@ -87008,7 +87240,9 @@ var render = function() {
           _c("div", { staticClass: "ad-info" }, [
             _vm._v(
               "\n                Description: " +
-                _vm._s(_vm.ad.description ? _vm.ad.description : "N/A") +
+                _vm._s(
+                  _vm.ad.description ? _vm.outputBio(_vm.ad.description) : "N/A"
+                ) +
                 "\n            "
             )
           ]),
@@ -87187,7 +87421,12 @@ var render = function() {
         [
           _vm.viewAd
             ? _c("ad-view", {
-                attrs: { url: _vm.url, vad: _vm.viewAd },
+                attrs: {
+                  url: _vm.url,
+                  vad: _vm.viewAd,
+                  allowancesettings: _vm.allowancesettings,
+                  adminsettings: _vm.adminsettings
+                },
                 on: {
                   contact: _vm.contact,
                   cancel: function($event) {
@@ -87544,6 +87783,9 @@ var render = function() {
                                     return _c("ad", {
                                       key: ad.id,
                                       attrs: {
+                                        allowancesettings:
+                                          _vm.allowancesettings,
+                                        adminsettings: _vm.adminsettings,
                                         url: _vm.url,
                                         ad: ad,
                                         authid: _vm.authid

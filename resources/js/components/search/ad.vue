@@ -4,7 +4,7 @@
             <i class="fas fa-spinner fa-spin"></i>
         </div>
         <div class="ad">
-            <div class="title">{{ad.title}}</div>
+            <div class="title">{{ outputBio(ad.title) }}</div>
             <div class="student">
                 <a v-if="ad.user_id != undefined" :href="url + '/user/' + ad.user_id" class="avatar">
                     <img :src="avatar(ad)" alt="">
@@ -38,7 +38,7 @@
                 <span class="level">{{ad? ad.level.name : ''}}</span>
             </div>
             <div class="ad-info">
-                Description: {{ ad.description ? ad.description : 'N/A' }}
+                Description: {{ ad.description ? outputBio(ad.description) : 'N/A' }}
             </div>
             <div class="ad-info">
                 Availability: {{ ad.availability ? ad.availability : 'N/A' }}
@@ -48,7 +48,26 @@
 </template>
 <script>
     export default {
-        props: ['url', 'ad', 'authid'],
+        props: {
+            url : {
+                type: String
+            },
+
+            ad : {
+                type: Object
+            },
+
+            authid : {
+                type: Number
+            },
+
+            adminsettings : {
+                type: Object
+            },
+            allowancesettings : {
+                type: [Object, String]
+            }
+        },
         data()
         {
             // console.log('Auth ID:' + authid)
@@ -58,6 +77,103 @@
            }
         },
         methods: {
+            outputBio(message)
+            {
+
+                var re = /\b[\+]?[(]?[0-9]{2,6}[)]?[-\s\.]?[-\s\/\.0-9]{3,15}\b/m;;
+                let msg = message
+                let phoneText = []
+
+                if(this.allowancesettings) {
+                    if (this.allowancesettings.allow_confidentials_in_ads) {
+                        if (!this.allowancesettings.allow_confidentials_in_ads) {
+                            while (this.checkIfPhoneInString(msg)) {
+                                phoneText = msg.match(re)[0]
+                                msg = msg.replace(phoneText, "*****")
+                                console.log('bio: ' + msg)
+                            }
+                        }
+                    } else {
+                        if (this.adminsettings) {
+                            if (!this.adminsettings.allow_confidentials_in_ads) {
+                                while (this.checkIfPhoneInString(msg)) {
+                                    phoneText = msg.match(re)[0]
+                                    msg = msg.replace(phoneText, "*****")
+                                    console.log('bio: ' + msg)
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    if (this.adminsettings) {
+                        if (!this.adminsettings.allow_confidentials_in_ads) {
+                            while (this.checkIfPhoneInString(msg)) {
+                                phoneText = msg.match(re)[0]
+                                msg = msg.replace(phoneText, "*****")
+                                console.log('bio: ' + msg)
+                            }
+                        }
+                    }
+                }
+
+                return this.finalBio(msg)
+
+            },
+            finalBio(message)
+            {
+                // if(this.checkIfEmailInString(msg))
+                // {
+                var re = /(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
+                let msg = message
+                let emailText = []
+
+                if (this.allowancesettings) {
+                    if (this.allowancesettings.allow_confidentials_in_ads
+                    ) {
+                        if (!this.allowancesettings.allow_confidentials_in_ads) {
+                            while (this.checkIfEmailInString(msg)) {
+                                emailText = msg.match(re)[0]
+                                msg = msg.replace(emailText, "*****")
+                                console.log(msg)
+                            }
+                        }
+                    } else {
+                        if (this.adminsettings) {
+                            if (!this.adminsettings.allow_confidentials_in_ads) {
+                                while (this.checkIfEmailInString(msg)) {
+                                    emailText = msg.match(re)[0]
+                                    msg = msg.replace(emailText, "*****")
+                                    console.log(msg)
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    if (this.adminsettings) {
+                        if (!this.adminsettings.allow_confidentials_in_ads) {
+                            while (this.checkIfEmailInString(msg)) {
+                                emailText = msg.match(re)[0]
+                                msg = msg.replace(emailText, "*****")
+                                console.log(msg)
+                            }
+                        }
+                    }
+                }
+                return msg
+                // return "This message contains email"
+                // console.log(this.extractEmails(message))
+                // }
+            },
+            checkIfEmailInString(text)
+            {
+                var re = /(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
+                return re.test(text);
+            },
+            checkIfPhoneInString(text)
+            {
+                var re = /\b[\+]?[(]?[0-9]{2,6}[)]?[-\s\.]?[-\s\/\.0-9]{3,15}\b/m;;
+                return re.test(text);
+            },
             editAd()
             {
                 this.$emit("editAd")
@@ -127,6 +243,7 @@
         },
         mounted()
         {
+            this.allowancesettings = JSON.parse(this.allowancesettings)
         }
     }
 </script>

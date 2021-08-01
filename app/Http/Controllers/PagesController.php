@@ -8,6 +8,7 @@ use App\Discipline;
 use App\Plan;
 use App\Cms;
 use App\Testimonial;
+use App\TutorAllowanceSetting;
 use App\User;
 use App\Ticket;
 use App\Mail\ContactEmail;
@@ -143,12 +144,17 @@ class PagesController extends Controller
     public function messages(Request $request)
     {
         $with = null;
+        $admin_settings = AdminSetting::first();
+
         if($request->has('u'))
         {
 
             $with = User::findOrFail($request->u);
         }
-        return view("pages.messages", ['with' => $with]);
+
+        $allowanceSettings = TutorAllowanceSetting::where('user_id', auth()->user()->id)->first();
+
+        return view("pages.messages", ['with' => $with, 'admin_settings' => $admin_settings, 'allowanceSettings' => $allowanceSettings]);
     }
 
 }

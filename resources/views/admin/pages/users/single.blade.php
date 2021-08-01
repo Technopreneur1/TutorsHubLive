@@ -342,13 +342,61 @@
                                         <input type="hidden" name="teacher" value="{{$user->profile->id}}">
                                         {{ csrf_field() }}
                                             <button type="submit" class="btn btn-info">Submit</button>
-                                        </div>
-                                      </form>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-md-5 ">
+                        <div class="box">
+                            <div class="box-header">
+
+                                <div class="box-title">
+                                    Email and Phone Number Settings
+                                </div>
+
+                                <div class="box-body">
+                                    <br>
+                                    <form action="{{route('admin.save.allowance')}}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="tutor_id" value="{{ $user->id }}">
+
+                                        <div class="form-group">
+                                            <label for="allow_confidentials_in_messages">Allow Emails and Phone Numbers in Proposals and Messages?</label>
+                                            <input
+                                                type="checkbox" {{ $settings ? ( $settings->allow_confidentials_in_messages ? 'checked' : '') : ''}}
+                                            name="allow_confidentials_in_messages"
+                                                id="allow_confidentials_in_messages" >
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="allow_confidentials_in_bio">Allow Emails and Phone Numbers in Profile Bio?</label>
+                                            <input
+                                                type="checkbox" {{ $settings ? ( $settings->allow_confidentials_in_bio ? 'checked' : '' ) : '' }}
+                                            name="allow_confidentials_in_bio"
+                                                id="allow_confidentials_in_bio" >
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="allow_confidentials_in_ads">Allow Emails and Phone Numbers in Ads title and text?</label>
+                                            <input
+                                                type="checkbox" {{ $settings ? ($settings->allow_confidentials_in_ads ? 'checked' : '') : ''}}
+                                            name="allow_confidentials_in_ads"
+                                                id="allow_confidentials_in_ads" >
+                                        </div>
+
+                                        <div class="form-group text-right">
+                                            <button type="submit" class="btn btn-info">Update</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
+            </div>
             @endif
 
 

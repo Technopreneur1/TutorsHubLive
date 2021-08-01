@@ -64,6 +64,30 @@ Settings
                             <textarea class="form-control" name="address" id="address" cols="20" rows="5" placeholder="Address" required >{{$settings? ($settings->address ? : '') : ''}}</textarea>
                         </div>
 
+                        <div class="form-group">
+                            <label for="allow_confidentials_in_messages">Allow Emails and Phone Numbers in Proposals and Messages?</label>
+                            <input
+                                type="checkbox" {{ $settings ? ( $settings->allow_confidentials_in_messages ? 'checked' : '') : ''}}
+                                name="allow_confidentials_in_messages"
+                                id="allow_confidentials_in_messages" >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="allow_confidentials_in_bio">Allow Emails and Phone Numbers in Profile Bio?</label>
+                            <input
+                                type="checkbox" {{ $settings ? ( $settings->allow_confidentials_in_bio ? 'checked' : '' ) : '' }}
+                                name="allow_confidentials_in_bio"
+                                id="allow_confidentials_in_bio" >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="allow_confidentials_in_ads">Allow Emails and Phone Numbers in Ads title and Description?</label>
+                            <input
+                                type="checkbox" {{ $settings ? ($settings->allow_confidentials_in_ads ? 'checked' : '') : ''}}
+                                name="allow_confidentials_in_ads"
+                                id="allow_confidentials_in_ads" >
+                        </div>
+
                         <div class="form-group text-right">
                             {{ csrf_field() }}
                             <button type="submit" class="btn btn-info">Update</button>

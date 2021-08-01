@@ -1,9 +1,9 @@
 <template>
     <div class="conversation">
         <div v-if="failed" class="err"><div class="sg">
-            <h2>Unable To Send Message!</h2>    
-            <h3>User is temporarily unavailable</h3> 
-            <button @click="failed  = false" class="btn btn-con">Ok</button>   
+            <h2>Unable To Send Message!</h2>
+            <h3>User is temporarily unavailable</h3>
+            <button @click="failed  = false" class="btn btn-con">Ok</button>
         </div></div>
         <h1 v-if="contact">
             <a :href="url+'/user/'+contact.id">{{contact.name}}</a>
@@ -11,7 +11,11 @@
         <h1 v-else>
             Select a contact
         </h1>
-        <MessagesFeed :contact="contact" :messages="messages"/>
+        <MessagesFeed
+            :adminsettings="adminsettings ? adminsettings : ''"
+            :allowancesettings="allowancesettings ? allowancesettings : ''"
+            :contact="contact"
+            :messages="messages"/>
         <MessageComposer @send="sendMessage"/>
     </div>
 </template>
@@ -73,11 +77,19 @@
             messages: {
                 type: Array,
                 default: []
+            },
+            adminsettings: {
+                type: Object
+            },
+            allowancesettings: {
+                type: [Object, String],
+                default: ""
+
             }
         },
         data(){
             return {
-                failed: false 
+                failed: false
             }
         },
         methods: {
@@ -108,7 +120,7 @@
 {
     .conversation {
         background: #ffffff;
-    
+
         h1 {
             font-size: 16px;
             font-weight: bold;
@@ -129,7 +141,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-        
+
             h1 {
                 font-size: 20px;
                 background: #2575bc;

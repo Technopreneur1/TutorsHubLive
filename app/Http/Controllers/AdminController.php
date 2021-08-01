@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\AdminSetting;
 use App\Cms;
+use App\TutorAllowanceSetting;
 use auth;
 use App\Ad;
 use App\Meta;
@@ -159,6 +160,9 @@ class AdminController extends Controller
                 'contact_number' => $request->contact_number ? : $settings->contact_number,
                 'email' => $request->email ? : $settings->email,
                 'address' => $request->address ? : $settings->address,
+                'allow_confidentials_in_messages' => $request->allow_confidentials_in_messages ? 1 : 0,
+                'allow_confidentials_in_bio' => $request->allow_confidentials_in_bio ? 1 : 0,
+                'allow_confidentials_in_ads' => $request->allow_confidentials_in_ads ? 1 : 0
             ]);
 
             session()->flash('message' ,'Settings Updated');
@@ -170,7 +174,10 @@ class AdminController extends Controller
                 'videoURL' => $request->videoURL,
                 'contact_number' => $request->contact_number ,
                 'email' => $request->email,
-                'address' => $request->address
+                'address' => $request->address,
+                'allow_confidentials_in_messages' => $request->allow_confidentials_in_messages ? 1 : 0,
+                'allow_confidentials_in_bio' => $request->allow_confidentials_in_bio ? 1 : 0,
+                'allow_confidentials_in_ads' => $request->allow_confidentials_in_ads ? 1 : 0
             ]);
 
             session()->flash('message' ,'Settings Updated');
@@ -394,9 +401,35 @@ class AdminController extends Controller
     {
         $user = User::with(['country', 'state', 'city', 'neighborhood'])->findOrFail($id);
         $profile = $user->profile;
+        $settings = $user->allowanceSettings;
 
-        return view('admin.pages.users.single', ['user' => $user, 'type' => 'Tutor']);
+        return view('admin.pages.users.single', ['user' => $user, 'type' => 'Tutor', 'settings' => $settings]);
 
+    }
+
+    public function saveSettings (Request $request) {
+        $setting = TutorAllowanceSetting::where('user_id', $request->tutor_id)->first();
+
+        if($setting){
+
+            $setting->update([
+                'allow_confidentials_in_messages' => $request->allow_confidentials_in_messages ? 1 : 0,
+                'allow_confidentials_in_bio' => $request->allow_confidentials_in_bio ? 1 : 0,
+                'allow_confidentials_in_ads' => $request->allow_confidentials_in_ads ? 1 : 0,
+            ]);
+
+        }else{
+            TutorAllowanceSetting::create([
+                'user_id' => $request->tutor_id,
+                'allow_confidentials_in_messages' => $request->allow_confidentials_in_messages ? 1 : 0,
+                'allow_confidentials_in_bio' => $request->allow_confidentials_in_bio ? 1 : 0,
+                'allow_confidentials_in_ads' => $request->allow_confidentials_in_ads ? 1 : 0,
+            ]);
+        }
+
+        session()->flash('success', 'Settings Updated');
+
+        return back();
     }
 
     public function contact($id, $ticket)

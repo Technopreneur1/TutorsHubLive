@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Ad;
+use App\AdminSetting;
 use App\FavoriteAd;
+use App\TutorAllowanceSetting;
 use App\User;
 use App\Location;
 use Illuminate\Http\Request;
@@ -48,7 +50,11 @@ class AdController extends Controller
     public function index()
     {
         $user = auth()->user();
-        return view('pages.ad.index', ['user' => $user]);
+        $adminsettings = AdminSetting::first();
+
+        $allowanceSettings = TutorAllowanceSetting::where('user_id', $user->id)->first();
+
+        return view('pages.ad.index', ['user' => $user, 'adminSettings' => $adminsettings, 'allowanceSettings' => $allowanceSettings]);
     }
 
     public function savedAds()
