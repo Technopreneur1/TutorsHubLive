@@ -58,7 +58,7 @@ class SessionController extends Controller
             $sessionText = $settings->session_text;
         }
 
-        return view("pages.sessions.index", compact('sessions', 'sessionText'));
+//        return view("pages.sessions.index", compact('sessions', 'sessionText'));
     }
 
     public function book()
