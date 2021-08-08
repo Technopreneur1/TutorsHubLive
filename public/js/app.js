@@ -86590,12 +86590,7 @@ var render = function() {
                                         _c("span", [
                                           _vm._v(
                                             "Start Session: " +
-                                              _vm._s(
-                                                _vm._f("moment")(
-                                                  ses.startsession,
-                                                  "MMMM Do YYYY, h:mm:ss a"
-                                                )
-                                              )
+                                              _vm._s(ses.startsession)
                                           )
                                         ])
                                       ]),
@@ -86604,12 +86599,7 @@ var render = function() {
                                         _c("span", [
                                           _vm._v(
                                             "End Session: " +
-                                              _vm._s(
-                                                _vm._f("moment")(
-                                                  ses.endsession,
-                                                  "MMMM Do YYYY, h:mm:ss a"
-                                                )
-                                              )
+                                              _vm._s(ses.endsession)
                                           )
                                         ])
                                       ])
