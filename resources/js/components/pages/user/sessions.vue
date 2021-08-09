@@ -579,6 +579,7 @@
                                 <div class="val"><span>Start Session: {{ses.startsession }}</span></div>
                                 <div class="val"><span>End Session: {{ses.endsession }}</span></div>
                             </div>
+
                             <div class="info">
                                 <span class="dt">Hours: {{ses.hours}}</span>
                             </div>
