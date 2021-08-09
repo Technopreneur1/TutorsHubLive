@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class sessionRequested extends Mailable implements ShouldQueue
+class sessionRequested extends Mailable
 {
     use Queueable, SerializesModels;
 
