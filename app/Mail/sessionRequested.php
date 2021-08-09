@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class sessionRequested extends Mailable implements ShouldQueue
+class sessionRequested extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -39,6 +39,7 @@ class sessionRequested extends Mailable implements ShouldQueue
      */
     public function build()
     {
+        dd($this->session);
         return $this->subject('New Session Requested')->from('noreply@tutors-hub.com')->view('mail.sessionRequested');;
     }
 }
