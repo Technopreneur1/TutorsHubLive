@@ -140,6 +140,10 @@ class SessionController extends Controller
         Mail::to('info@tutors-hub.com')->send(new sessionRequested($session, auth()->user(), $session->teacher->user, false, false));
         // Student Mail
         Mail::to($smail)->send(new sessionRequested($session, auth()->user(), $session->teacher->user, false, true));
+
+        config(['app.timezone' => Auth::user()->timezone]);
+        date_default_timezone_set(Auth::user()->timezone);
+
         $tempStartTime;
         $tempEndTime;
 
@@ -148,6 +152,7 @@ class SessionController extends Controller
             $tempEndTime = $session->endsession;
             $session->startsession = Carbon::parse($session->startsession)->timezone($session->teacher->user->timezone);
             $session->endsession = Carbon::parse($session->endsession)->timezone($session->teacher->user->timezone);
+            $session->save();
         }
 
         // Tutor Mail
@@ -155,6 +160,7 @@ class SessionController extends Controller
 
         $session->startsession = $tempStartTime;
         $session->endsession = $tempEndTime;
+        $session->save();
 
         return response()->json(['session' => $session]);
     }
