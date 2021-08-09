@@ -152,7 +152,6 @@ class SessionController extends Controller
             $session->endsession = Carbon::parse($session->endsession)->timezone($session->teacher->user->timezone)->toDateTimeString();
         }
 
-        dd($session);
         // Tutor Mail
         Mail::to($tmail)->send(new sessionRequested($session, auth()->user(), $session->teacher->user, true, false));
 
