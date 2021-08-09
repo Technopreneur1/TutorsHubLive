@@ -251,8 +251,8 @@
                             </div>
                             <div class="info" v-if="authuser.type === 'teacher'">
                                 <span class="dt">Session Type: {{ses.sessiontype}}</span>
-                                <div class="val"><span>Start Session: {{ses.startsession | moment('MMMM Do YYYY, h:mm:ss a')}}</span></div>
-                                <div class="val"><span>End Session: {{ses.endsession | moment('MMMM Do YYYY, h:mm:ss a') }}</span></div>
+                                <div class="val"><span>Start Session: {{ses.startsession}}</span></div>
+                                <div class="val"><span>End Session: {{ses.endsession }}</span></div>
                             </div>
                             <div class="info">
                                 <span class="dt">Hours: {{ses.hours}}</span>
@@ -335,8 +335,8 @@
                                 </div>
                                 <div class="info" v-if="authuser.type === 'teacher'">
                                     <span class="dt">Session Type: {{ses.sessiontype}}</span>
-                                    <div class="val"><span>Start Session: {{ses.startsession | moment('MMMM Do YYYY, h:mm:ss a')}}</span></div>
-                                    <div class="val"><span>End Session: {{ses.endsession | moment('MMMM Do YYYY, h:mm:ss a') }}</span></div>
+                                    <div class="val"><span>Start Session: {{ses.startsession}}</span></div>
+                                    <div class="val"><span>End Session: {{ses.endsession }}</span></div>
                                 </div>
                                 <div class="info">
                                     <span class="dt">Hours: {{ses.hours}}</span>
@@ -412,8 +412,8 @@
                             </div>
                             <div class="info" v-if="authuser.type === 'teacher'">
                                 <span class="dt">Session Type: {{ses.sessiontype}}</span>
-                                <div class="val"><span>Start Session: {{ses.startsession | moment('MMMM Do YYYY, h:mm:ss a')}}</span></div>
-                                <div class="val"><span>End Session: {{ses.endsession | moment('MMMM Do YYYY, h:mm:ss a') }}</span></div>
+                                <div class="val"><span>Start Session: {{ses.startsession}}</span></div>
+                                <div class="val"><span>End Session: {{ses.endsession }}</span></div>
                             </div>
                             <div class="info">
                                 <span class="dt">Hours: {{ses.hours}}</span>
@@ -498,8 +498,8 @@
                             </div>
                             <div class="info" v-if="authuser.type === 'teacher'">
                                 <span class="dt">Session Type: {{ses.sessiontype}}</span>
-                                <div class="val"><span>Start Session: {{ses.startsession | moment('MMMM Do YYYY, h:mm:ss a')}}</span></div>
-                                <div class="val"><span>End Session: {{ses.endsession | moment('MMMM Do YYYY, h:mm:ss a') }}</span></div>
+                                <div class="val"><span>Start Session: {{ses.startsession}}</span></div>
+                                <div class="val"><span>End Session: {{ses.endsession }}</span></div>
                             </div>
                             <div class="info">
                                 <span class="dt">Hours: {{ses.hours}}</span>
