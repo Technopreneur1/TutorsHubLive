@@ -136,11 +136,25 @@ class SessionController extends Controller
         $smail = $session->student->user->email;
         $tmail = $session->teacher->user->email;
 
+
         Mail::to('info@tutors-hub.com')->send(new sessionRequested($session, auth()->user(), $session->teacher->user, false, false));
         // Student Mail
         Mail::to($smail)->send(new sessionRequested($session, auth()->user(), $session->teacher->user, false, true));
+        $tempStartTime;
+        $tempEndTime;
+
+        if($session->teacher->user) {
+            $tempStartTime = $session->startsession;
+            $tempEndTime = $session->endsession;
+            $session->startsession = Carbon::parse($session->startsession)->timezone($session->teacher->user->timezone);
+            $session->endsession = Carbon::parse($session->endsession)->timezone($session->teacher->user->timezone);
+        }
+
         // Tutor Mail
         Mail::to($tmail)->send(new sessionRequested($session, auth()->user(), $session->teacher->user, true, false));
+
+        $session->startsession = $tempStartTime;
+        $session->endsession = $tempEndTime;
 
         return response()->json(['session' => $session]);
     }
