@@ -58,7 +58,7 @@
 @if($forTutor)
     <div class="mailbody">
         <div class="logo"><img src="https://tutors-hub.com/img/logotext.png" alt=""></div>
-        <h2>{{$user->name}} booked a session with you for : <strong>{{ \Carbon\Carbon::parse($session->startsession)->toDateTimeString() }}</strong></h2>
+        <h2>{{$user->name}} booked a session with you for : <strong>{{ \Carbon\Carbon::parse($session->startsession)->timezone($teacher->timezone)->toDateTimeString() }}</strong></h2>
         <table>
             <tr>
                 <td>Session ID</td>
